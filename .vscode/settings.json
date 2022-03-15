@@ -1,0 +1,7 @@
+{ "vetur.validation.template": false, "editor.defaultFormatter":
+"esbenp.prettier-vscode", "editor.codeActionsOnSave": { "source.fixAll.eslint":
+true }, "[vue]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
+"[javascript]": { "editor.defaultFormatter":
+"vscode.typescript-language-features" }, "[typescript]": {
+"editor.defaultFormatter": "vscode.typescript-language-features" }, "[scss]": {
+"editor.defaultFormatter": "sibiraj-s.vscode-scss-formatter" } }

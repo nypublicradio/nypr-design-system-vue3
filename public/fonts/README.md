@@ -1,0 +1,1 @@
+Font files referenced by the dynamic themes in production

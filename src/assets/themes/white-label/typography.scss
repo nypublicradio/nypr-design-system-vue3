@@ -1,0 +1,149 @@
+@use "sass:map";
+:root {
+    font-size: var(--font-size);
+}
+
+$h1-config: (
+    "default": (
+        "values": (
+            "font-family": var(--font-family-header),
+            "font-size": var(--font-size-12),
+            "line-height": normal,
+            "font-weight": var(--fontWeight-700),
+            "color": var(--text-color),
+        ),
+    ),
+    $medium: (
+        "values": (
+            "font-size": var(--font-size-10),
+            "line-height": normal,
+        ),
+    ),
+);
+$h2-config: (
+    "default": (
+        "values": (
+            "font-family": var(--font-family-header),
+            "font-size": var(--font-size-9),
+            "line-height": normal,
+            "font-weight": var(--fontWeight-400),
+            "color": var(--text-color),
+        ),
+    ),
+);
+$h3-config: (
+    "default": (
+        "values": (
+            "font-family": var(--font-family) Header,
+            "font-size": var(--font-size-7),
+            "line-height": normal,
+            "font-weight": var(--fontWeight-400),
+            "color": var(--text-color),
+        ),
+    ),
+);
+$h4-config: (
+    "default": (
+        "values": (
+            "font-family": var(--font-family),
+            "font-size": var(--font-size-8),
+            "line-height": normal,
+            "font-weight": var(--fontWeight-700),
+            "color": var(--text-color),
+        ),
+    ),
+);
+
+$h5-config: (
+    "default": (
+        "values": (
+            "font-family": var(--font-family),
+            "font-size": var(--font-size-6),
+            "line-height": normal,
+            "font-weight": var(--fontWeight-700),
+            "text-transform": uppercase,
+            "color": var(--text-color),
+        ),
+    ),
+);
+
+$h6-config: (
+    "default": (
+        "values": (
+            "font-family": var(--font-family),
+            "font-size": var(--font-size-4),
+            "line-height": normal,
+            "font-weight": var(--fontWeight-700),
+            "text-transform": uppercase,
+            "letter-spacing": 0.2rem,
+            "color": var(--text-color),
+        ),
+    ),
+);
+
+$p-config: (
+    "default": (
+        "values": (
+            "font-family": var(--font-family),
+            "font-size": var(--font-size-6),
+            "line-height": normal,
+            "font-weight": var(--fontWeight-400),
+            "color": var(--text-color),
+        ),
+    ),
+);
+
+$footer-config: (
+    "default": (
+        "values": (
+            "font-size": var(--font-size-4),
+            "line-height": normal,
+        ),
+    ),
+);
+
+h1,
+.h1 {
+    @include font-config($h1-config);
+}
+
+h2,
+.h2 {
+    @include font-config($h2-config);
+}
+
+h3,
+.h3 {
+    @include font-config($h3-config);
+}
+
+h4,
+.h4 {
+    @include font-config($h4-config);
+}
+h5,
+.h5 {
+    @include font-config($h5-config);
+}
+h6,
+.h6 {
+    @include font-config($h6-config);
+}
+ul,
+ol {
+    padding-left: 1rem;
+    li {
+        @include font-config($p-config);
+    }
+}
+
+p,
+.p {
+    @include font-config($p-config);
+}
+
+.footer {
+    @include font-config($footer-config);
+}
+
+// special configs below

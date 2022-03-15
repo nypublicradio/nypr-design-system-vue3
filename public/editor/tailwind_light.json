@@ -1,0 +1,247 @@
+{
+    "editor":[
+        {
+            "label": "General",
+            "options": [
+                {
+                    "name": "$fontFamily",
+                    "value": "Source Sans Pro,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"",
+                    "description": "Font Family",
+                    "type": "text"
+                },
+                {
+                    "name": "$shade700",
+                    "value": "#3F3F46",
+                    "description": "Text",
+                    "type": "color"
+                },
+                {
+                    "name": "$shade600",
+                    "value": "#71717A",
+                    "description": "Secondary Text",
+                    "type": "color"
+                },
+                {
+                    "name": "$borderRadius",
+                    "value": "6px",
+                    "description": "Border Radius",
+                    "type": "text",
+                    "size": "5"
+                },
+                {
+                    "name": "$disabledOpacity",
+                    "value": "0.6",
+                    "description": "Disabled Opacity",
+                    "type": "text",
+                    "size": "5"
+                }
+            ]
+        },
+        {
+            "label": "Palette",
+            "options": [
+                {
+                    "name": "$primaryColor",
+                    "value": "#4F46E5",
+                    "description": "Primary",
+                    "type": "color"
+                },
+                {
+                    "name": "$primaryTextColor",
+                    "value": "#ffffff",
+                    "description": "Text on Primary",
+                    "type": "color"
+                },
+                {
+                    "name": "$highlightBg",
+                    "value": "#EEF2FF",
+                    "description": "Highlight Background",
+                    "type": "color"
+                },
+                {
+                    "name": "$highlightTextColor",
+                    "value": "#312E81",
+                    "description": "Text on Highlight",
+                    "type": "color"
+                },
+                {
+                    "name": "$shade200",
+                    "value": "#f4f4f5",
+                    "description": "Hover Background",
+                    "type": "color"
+                },
+                
+                {
+                    "name": "$errorColor",
+                    "value": "#e24c4c",
+                    "description": "Error",
+                    "type": "color"
+                }
+            ]
+        },
+        {
+            "label": "Surfaces",
+            "options": [
+                {
+                    "name": "$shade100",
+                    "value": "#fAfAfA",
+                    "description": "Header",
+                    "type": "color"
+                },
+                {
+                    "name": "$shade000",
+                    "value": "#ffffff",
+                    "description": "Content",
+                    "type": "color"
+                },
+                {
+                    "name": "$shade300",
+                    "value": "#e5e7eb",
+                    "description": "Border",
+                    "type": "color"
+                }
+            ]
+        },
+        {
+            "label": "Forms",
+            "options": [
+                {
+                    "name": "$inputBg",
+                    "value": "#ffffff",
+                    "description": "Background",
+                    "type": "color"
+                },
+                {
+                    "name": "$shade400",
+                    "value": "#d4d4d8",
+                    "description": "Border",
+                    "type": "color"
+                },
+                {
+                    "name": "$inputHoverBorderColor",
+                    "value": "#d4d4d8",
+                    "description": "Hover Border",
+                    "type": "color"
+                },
+                {
+                    "name": "$inputFocusBorderColor",
+                    "value": "#6366F1",
+                    "description": "Focus Border",
+                    "type": "color"
+                },
+                {
+                    "name": "$inputFilledBg",
+                    "value": "#fafafa",
+                    "description": "Filled Background",
+                    "type": "color"
+                }
+            ]
+        },
+        {
+            "label": "Buttons",
+            "options": [
+                {
+                    "name": "$secondaryButtonBg",
+                    "value": "#64748B",
+                    "description": "Secondary Background",
+                    "type": "color"
+                },
+                {
+                    "name": "$secondaryButtonTextColor",
+                    "value": "#ffffff",
+                    "description": "Secondary Text",
+                    "type": "color"
+                },
+                {
+                    "name": "$successButtonBg",
+                    "value": "#22C55E",
+                    "description": "Success Background",
+                    "type": "color"
+                },
+                {
+                    "name": "$successButtonTextColor",
+                    "value": "#ffffff",
+                    "description": "Success Text",
+                    "type": "color"
+                },
+                {
+                    "name": "$infoButtonBg",
+                    "value": "#3B82F6",
+                    "description": "Info Background",
+                    "type": "color"
+                },
+                {
+                    "name": "$infoButtonTextColor",
+                    "value": "#ffffff",
+                    "description": "Info Text",
+                    "type": "color"
+                },
+                {
+                    "name": "$warningButtonBg",
+                    "value": "#F59E0B",
+                    "description": "Warning Background",
+                    "type": "color"
+                },
+                {
+                    "name": "$warningButtonTextColor",
+                    "value": "#212529",
+                    "description": "Warning Text",
+                    "type": "color"
+                },
+                {
+                    "name": "$helpButtonBg",
+                    "value": "#A855F7",
+                    "description": "Help Background",
+                    "type": "color"
+                },
+                {
+                    "name": "$helpButtonTextColor",
+                    "value": "#ffffff",
+                    "description": "Help Text",
+                    "type": "color"
+                },
+                {
+                    "name": "$dangerButtonBg",
+                    "value": "#EF4444",
+                    "description": "Danger Background",
+                    "type": "color"
+                },
+                {
+                    "name": "$dangerButtonTextColor",
+                    "value": "#ffffff",
+                    "description": "Danger Text",
+                    "type": "color"
+                }
+            ]
+        },
+        {
+            "label": "Messages",
+            "options": [
+                {
+                    "name": "$infoMessageBg",
+                    "value": "#EFF6FF",
+                    "description": "Info",
+                    "type": "color"
+                },
+                {
+                    "name": "$successMessageBg",
+                    "value": "#ECFDF5",
+                    "description": "Success",
+                    "type": "color"
+                },
+                {
+                    "name": "$warningMessageBg",
+                    "value": "#FEF3C7",
+                    "description": "Warning",
+                    "type": "color"
+                },
+                {
+                    "name": "$errorMessageBg",
+                    "value": "#FEF3C7",
+                    "description": "Error",
+                    "type": "color"
+                }
+            ]
+        }
+    ]
+}

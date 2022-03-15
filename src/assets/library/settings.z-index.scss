@@ -1,0 +1,43 @@
+$z-index-vanish: -1;
+$z-index-none:    0;
+$z-index-1:       100;
+$z-index-2:       200;
+$z-index-5:       500;
+$z-index-10:      1000;
+$z-index-15:      1500;
+$z-index-30:      3000;
+$z-index-50:      5000;
+$z-index-75:      7500;
+$z-index-100:     10000;
+
+
+$z-index-search-top-vanish: $z-index-vanish;
+
+$z-index-button-outline:  $z-index-none;
+
+$z-index-article-gallery-slide: $z-index-1;
+$z-index-breadcrumb:            $z-index-1;
+$z-index-to-top:                $z-index-1;
+
+$z-index-article-gallery:       $z-index-2;
+
+$z-index-content-overlay:   $z-index-5;
+$z-index-progress-bar:      $z-index-5;
+$z-index-newsletter-inner:  $z-index-5;
+$z-index-newsletter-fields: $z-index-5;
+
+$z-index-header-ad:       $z-index-10;
+$z-index-search-close:    $z-index-10;
+$z-index-search-button:   $z-index-10;
+$z-index-search-top-show: $z-index-10;
+$z-index-donate-tout:     $z-index-10;
+$z-index-heading-logo:    $z-index-10;
+$z-index-menu-toggle:     $z-index-10;
+
+$z-index-side-menu:       $z-index-15;
+
+$z-index-header:             $z-index-50;
+$z-index-floating-header:    $z-index-50;
+$z-index-toggle-box-content: $z-index-50;
+
+$z-index-mq-display:  $z-index-100;

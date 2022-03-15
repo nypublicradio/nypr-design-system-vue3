@@ -1,0 +1,33 @@
+{
+    "editor":[
+        {
+            "label": "Palette",
+            "options": [
+                {
+                    "name": "$primaryColor",
+                    "value": "#5E81AC",
+                    "description": "Primary",
+                    "type": "color"
+                },
+                {
+                    "name": "$primaryColorAlt",
+                    "value": "#81A1C1",
+                    "description": "Primary Alternate",
+                    "type": "color"
+                },
+                {
+                    "name": "$primaryLightColor",
+                    "value": "#C0D0E0",
+                    "description": "Primary Light",
+                    "type": "color"
+                },
+                {
+                    "name": "$primaryTextColor",
+                    "value": "#ffffff",
+                    "description": "Text on Primary",
+                    "type": "color"
+                }
+            ]
+        }
+    ]
+}

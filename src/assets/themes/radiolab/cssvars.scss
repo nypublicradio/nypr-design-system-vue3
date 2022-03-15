@@ -1,0 +1,202 @@
+:root,
+[data-style-mode="default"] {
+    --primary-color: #{$primaryColor};
+    --primary-color-rgb: #{hex2rgb($primaryColor)};
+    --primary-color-alt: #{$primaryColorAlt};
+    --primary-color-alt-rgb: #{hex2rgb($primaryColorAlt)};
+    --primary-light-color: #{$primaryLightColor};
+    --primary-light-color-rgb: #{hex2rgb($primaryLightColor)};
+    --primary-dark-color: #{$primaryDarkColor};
+    --primary-dark-color-rgb: #{hex2rgb($primaryDarkColor)};
+    --primary-darker-color: #{$primaryDarkerColor};
+    --primary-darker-color-rgb: #{hex2rgb($primaryDarkerColor)};
+
+    --link-button-color: #{$linkButtonColor};
+    --link-button-hover-color: #{$linkButtonHoverColor};
+    --link-button-text-hover-decoration: #{$linkButtonTextHoverDecoration};
+
+    --error-color: #{$errorColor};
+    --info-color: #{$infoColor};
+    --info-light-color: #{$infoLightColor};
+    --success-color: #{$successColor};
+    --success-light-color: #{$successLightColor};
+    --warning-color: #{$warningColor};
+    --warning-light-color: #{$warningLightColor};
+    --help-color: #{$helpColor};
+    --help-light-color: #{$helpLightColor};
+    --danger-color: #{$dangerColor};
+    --danger-light-color: #{$dangerLightColor};
+    --yellow-color: #{$yellowColor};
+
+    --text-color: #{$textColor};
+    --text-color-secondary: #{$primaryColorAlt};
+    --font-family: #{$fontFamily};
+    --font-size: #{$fontSize};
+    --font-ratio: #{$fontRatio};
+    --font-ratio-large: #{$fontRatioLarge};
+
+    --font-size-1: calc(var(--font-size-2) / var(--font-ratio));
+    --font-size-2: calc(var(--font-size-3) / var(--font-ratio));
+    --font-size-3: calc(var(--font-size-4) / var(--font-ratio));
+    --font-size-4: calc(var(--font-size-5) / var(--font-ratio));
+    --font-size-5: calc(var(--font-size-6) / var(--font-ratio));
+    --font-size-6: var(--font-size);
+    --font-size-7: calc(var(--font-size-6) * var(--font-ratio));
+    --font-size-8: calc(var(--font-size-7) * var(--font-ratio));
+    --font-size-9: calc(var(--font-size-8) * var(--font-ratio));
+    --font-size-10: calc(var(--font-size-9) * var(--font-ratio));
+    --font-size-11: calc(var(--font-size-10) * var(--font-ratio));
+    --font-size-12: calc(var(--font-size-11) * var(--font-ratio));
+    --font-size-13: calc(var(--font-size-12) * var(--font-ratio));
+    --font-size-14: calc(var(--font-size-13) * var(--font-ratio));
+    --font-size-15: calc(var(--font-size-14) * var(--font-ratio));
+    --font-size-16: calc(var(--font-size-15) * var(--font-ratio));
+    --font-size-17: calc(var(--font-size-16) * var(--font-ratio));
+    --font-size-18: calc(var(--font-size-17) * var(--font-ratio));
+    --font-size-19: calc(var(--font-size-18) * var(--font-ratio));
+    --font-size-20: calc(var(--font-size-19) * var(--font-ratio));
+
+    --primary-text-color: #{$primaryTextColor};
+    --primary-color-text: #{$primaryTextColor};
+    --font-weight: #{$fontWeight};
+    --font-weight-100: #{$fontWeight-100};
+    --font-weight-200: #{$fontWeight-200};
+    --font-weight-300: #{$fontWeight-300};
+    --font-weight-400: #{$fontWeight-400};
+    --font-weight-500: #{$fontWeight-500};
+    --font-weight-600: #{$fontWeight-600};
+    --font-weight-700: #{$fontWeight-700};
+    --font-weight-800: #{$fontWeight-800};
+    --font-weight-900: #{$fontWeight-900};
+    --font-family: #{$fontFamily};
+    --font-family-header: #{$fontFamilyHeader};
+    --font-size: #{$fontSize};
+    --text-secondary-color: #{$textSecondaryColor};
+
+    --border-radius: #{$borderRadius};
+    --transition-duration: #{$transitionDuration};
+    --transition-ease: #{$transitionEase};
+    --form-element-transition: #{$formElementTransition};
+    --action-icon-transition: #{$actionIconTransition};
+    --list-item-transition: #{$listItemTransition};
+    --prime-icon-font: #{$primeIconFont};
+    --prime-icon-font-size: #{$primeIconFontSize};
+    --divider: #{$divider};
+    --inline-spacing: #{$inlineSpacing};
+    --disabled-opacity: #{$disabledOpacity};
+    --mask-bg: #{$maskBg};
+    --loading-icon-font-size: #{$loadingIconFontSize};
+
+    --shadow: #{$shadow};
+    --maskbg: #{$maskBg};
+
+    --transition-duration: #{$transitionDuration};
+
+    --black: #{$black};
+    --black50: #{$black50};
+    --black100: #{$black100};
+    --black200: #{$black200};
+    --black300: #{$black300};
+    --black400: #{$black400};
+    --black500: #{$black500};
+
+    --white: #{$white};
+    --white100: #{$white100};
+    --white200: #{$white200};
+    --white300: #{$white300};
+
+    --gray-50: #{$gray-50};
+    --gray-100: #{$gray-100};
+    --gray-200: #{$gray-200};
+    --gray-300: #{$gray-300};
+    --gray-400: #{$gray-400};
+    --gray-500: #{$gray-500};
+    --gray-600: #{$gray-600};
+    --gray-700: #{$gray-700};
+    --gray-800: #{$gray-800};
+    --gray-900: #{$gray-900};
+
+    --surface-a: #{$white};
+    --surface-b: #{$white100};
+    --surface-c: #{$white300};
+    --surface-d: #{$white200};
+    --surface-e: #{$white};
+    --surface-f: #{$white};
+
+    --surface-0: #{$white};
+    --surface-50: #{$gray-50};
+    --surface-100: #{$gray-100};
+    --surface-200: #{$gray-200};
+    --surface-300: #{$gray-300};
+    --surface-400: #{$gray-400};
+    --surface-500: #{$gray-500};
+    --surface-600: #{$gray-600};
+    --surface-700: #{$gray-700};
+    --surface-800: #{$gray-800};
+    --surface-900: #{$gray-900};
+    --gray-50: #{$gray-50};
+    --gray-100: #{$gray-100};
+    --gray-200: #{$gray-200};
+    --gray-300: #{$gray-300};
+    --gray-400: #{$gray-400};
+    --gray-500: #{$gray-500};
+    --gray-600: #{$gray-600};
+    --gray-700: #{$gray-700};
+    --gray-800: #{$gray-800};
+    --gray-900: #{$gray-900};
+    --black: #{$black};
+
+    --content-padding: #{$panelContentPadding};
+    --inline-spacing: #{$inlineSpacing};
+    --border-radius: #{$borderRadius};
+
+    --surface-ground: #{$surfaceGround};
+    --surface-section: #{$surfaceSection};
+    --surface-card: #{$surfaceCard};
+    --surface-overlay: #{$surfaceOverlay};
+    --surface-border: #{$surfaceBorder};
+    --surface-hover: #{$surfaceHover};
+
+    --focus-ring: #{$focusShadow};
+    --tab-padding: #{$tagPadding};
+    --badge-font-weight: #{$badgeFontWeight};
+    --badge-font-size: #{$badgeFontSize};
+    --badge-letter-spacing: #{$badgeLetterSpacing};
+}
+[data-style-mode="dark"] {
+    /* --primary-color: #{$dangerColor};
+    --primary-color-rgb: #{hex2rgb($dangerColor)}; */
+    //--link-button-color: var(--primary-light-color);
+    --text-color: var(--white100);
+    --text-color-secondary: var(--white300);
+
+    --surface-ground: #{$gray-700};
+    --surface-section: #{$gray-900};
+    --surface-card: #{$gray-900};
+    --surface-overlay: #{$gray-900};
+    --surface-border: #{$gray-800};
+    --surface-hover: #{$gray-700};
+
+    --surface-0: #{$black};
+    --surface-50: #{$gray-950};
+    --surface-100: #{$gray-900};
+    --surface-200: #{$gray-800};
+    --surface-300: #{$gray-700};
+    --surface-400: #{$gray-600};
+    --surface-500: #{$gray-500};
+    --surface-600: #{$gray-400};
+    --surface-700: #{$gray-300};
+    --surface-800: #{$gray-200};
+    --surface-900: #{$gray-100};
+
+    --gray-50: #{$gray-950};
+    --gray-100: #{$gray-900};
+    --gray-200: #{$gray-800};
+    --gray-300: #{$gray-700};
+    --gray-400: #{$gray-600};
+    --gray-500: #{$gray-500};
+    --gray-600: #{$gray-400};
+    --gray-700: #{$gray-300};
+    --gray-800: #{$gray-200};
+    --gray-900: #{$gray-100};
+}

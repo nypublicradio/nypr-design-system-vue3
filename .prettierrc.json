@@ -1,0 +1,9 @@
+{
+    "semi": false,
+    "singleQuote": true,
+    "comma-dangle": false,
+    "parser": "vue",
+    "useTabs": false,
+    "tabWidth": 2,
+    "endOfLine": "lf"
+}

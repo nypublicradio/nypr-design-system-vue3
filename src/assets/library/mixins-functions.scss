@@ -1,0 +1,43 @@
+// font config
+@mixin font-config($config-map) {
+  @each $breakpoint, $values in $config-map {
+    // @debug "breakpoint = #{$breakpoint}";
+    @if $breakpoint == "default" {
+      @each $key, $value in map.get($values, "values") {
+        #{$key}: #{$value};
+      }
+    } @else {
+      @include media("<#{$breakpoint}") {
+        //@media screen and (min-width: $breakpoint) {
+        @each $key, $value in map.get($values, "values") {
+          #{$key}: #{$value};
+        }
+      }
+    }
+  }
+}
+
+//spacing
+$spacing-base: 0.25; //  matches prime-flex
+@function spacing($y) {
+  @return calc($spacing-base * $y) + rem;
+}
+@function spacingXY($x, $y) {
+  @return calc($spacing-base * $x) + rem calc($spacing-base * $y) + rem;
+}
+@function spacingTRBL($t, $r, $b, $l) {
+  @return calc($spacing-base * $t) + rem calc($spacing-base * $r) + rem calc($spacing-base * $b) + rem
+    calc($spacing-base * $l) + rem;
+}
+
+// hex to rgb
+@function hex2rgb($hexColor) {
+  @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
+}
+
+@function strip-unit($number) {
+  @if type-of($number) == "number" and not unitless($number) {
+    @return math.div($number, $number * 0 + 1);
+  }
+  @return $number;
+}

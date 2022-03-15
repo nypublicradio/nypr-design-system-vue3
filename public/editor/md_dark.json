@@ -1,0 +1,33 @@
+{
+    "editor":[
+        {
+            "label": "Palette",
+            "options": [
+                {
+                    "name": "$primaryColor",
+                    "value": "#9FA8DA",
+                    "description": "Primary",
+                    "type": "color"
+                },
+                {
+                    "name": "$primaryTextColor",
+                    "value": "#121212",
+                    "description": "Text on Primary",
+                    "type": "color"
+                },
+                {
+                    "name": "$accentColor",
+                    "value": "#F48FB1",
+                    "description": "Accent",
+                    "type": "color"
+                },
+                {
+                    "name": "$accentTextColor",
+                    "value": "#121212",
+                    "description": "Text on Accent",
+                    "type": "color"
+                }
+            ]
+        }
+    ]
+}

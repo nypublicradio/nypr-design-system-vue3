@@ -1,0 +1,33 @@
+{
+    "editor":[
+        {
+            "label": "Palette",
+            "options": [
+                {
+                    "name": "$themePrimary",
+                    "value": "#0078d4",
+                    "description": "Primary",
+                    "type": "color"
+                },
+                {
+                    "name": "$themeDarkAlt",
+                    "value": "#106ebe",
+                    "description": "Primary Dark",
+                    "type": "color"
+                },
+                {
+                    "name": "$themeDark",
+                    "value": "#005a9e",
+                    "description": "Primary Darker",
+                    "type": "color"
+                },
+                {
+                    "name": "$themeLighter",
+                    "value": "#deecf9",
+                    "description": "Primary Light",
+                    "type": "color"
+                }
+            ]
+        }
+    ]
+}
