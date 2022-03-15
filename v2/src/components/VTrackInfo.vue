@@ -200,7 +200,8 @@ $track-info-image-size: 84px;
       overflow: hidden;
       white-space: nowrap;
       h2 {
-        font-weight: 700;
+        font-weight: 500;
+        font-size: var(--font-size-9);
         line-height: 1;
         text-overflow: ellipsis;
         overflow: hidden;
