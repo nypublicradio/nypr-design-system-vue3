@@ -67,12 +67,12 @@ $colors: (
 // $newColor: scale-color($existingColor, $saturation: 30%, $lightness: -30%, $alpha: -90%) !default;
 // can use any of the following $red, $green, $blue, $saturation, $lightness, $whiteness, $blackness, $alpha
 
-$primaryColor: #0454d6 !default;
+$primaryColor: #f4f2f0 !default;
 $primaryColorAlt: scale-color($primaryColor, $lightness: 15%) !default;
 $primaryLightColor: scale-color($primaryColor, $lightness: 30%) !default;
 $primaryDarkColor: scale-color($primaryColor, $lightness: -10%) !default;
 $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
-$primaryTextColor: #f4f2f0 !default;
+$primaryTextColor: #0a0b0c !default;
 
 $infoColor: #639bb2 !default;
 $infoLightColor: #88c0d0 !default;
