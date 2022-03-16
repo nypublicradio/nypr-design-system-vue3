@@ -14,6 +14,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  rawHover: {
+    type: String,
+    default: 'none',
+  },
 })
 const isExternal = computed(() => {
   var reg = new RegExp('^(?:[a-z]+:)?//', 'i')
@@ -69,6 +73,10 @@ const isExternal = computed(() => {
   }
 }
 .flexible-link.raw {
+  color: inherit;
   text-decoration: none;
+  &:hover {
+    text-decoration: v-bind(rawHover);
+  }
 }
 </style>

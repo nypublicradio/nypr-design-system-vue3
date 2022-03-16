@@ -31,6 +31,13 @@ const TemplateRaw = (args) => ({
     },
     template: '<v-flexible-link v-bind="args" ><Button>button inside flexible-link</Button></v-flexible-link><Button>normal button</Button>',
 })
+const TemplateRawHover = (args) => ({
+    components: { VFlexibleLink, Button },
+    setup() {
+        return { args }
+    },
+    template: '<p>This is an inline <v-flexible-link v-bind="args" >link</v-flexible-link></p>',
+})
 
 export const Default = Template.bind({})
 Default.args = {
@@ -58,5 +65,12 @@ export const NuxtLinkRaw = TemplateRaw.bind({})
 NuxtLinkRaw.args = {
     to: 'news',
     raw: true,
+}
+
+export const NuxtLinkRawHover = TemplateRawHover.bind({})
+NuxtLinkRawHover.args = {
+    to: 'news',
+    raw: true,
+    rawHover: "underline",
 }
 
