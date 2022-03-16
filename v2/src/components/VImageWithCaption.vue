@@ -100,6 +100,21 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  /** * Substring or regex within the urlto be replaced with width values. */
+  widthToken: {
+    type: [String, RegExp],
+    default: '%width%',
+  },
+  /** * Substring or regex within the url to be replaced with height values. */
+  heightToken: {
+    type: [String, RegExp],
+    default: '%height%',
+  },
+  /** * Substring or regex within the url to control jpg compression quality. */
+  qualityToken: {
+    type: [String, RegExp],
+    default: '%quality%',
+  },
 })
 
 const emit = defineEmits(['componentEvent'])
@@ -136,14 +151,21 @@ onMounted(() => {
       : props.defaultWidth
       ? props.defaultWidth
       : window.innerWidth
+  console.log('thisWidth.value = ', thisWidth.value)
 })
 
 const getCurrentDimensions = computed(() => {
   const hRatio = Number(props.ratio[0])
   const vRatio = Number(props.ratio[1])
+  // for low rez images
+  let theWidth = thisWidth.value
+
+  if(props.maxWidth && props.maxWidth < theWidth){
+    theWidth = props.maxWidth
+  }
   return {
-    width: thisWidth.value,
-    height: Math.round((thisWidth.value * vRatio) / hRatio),
+    width: theWidth,
+    height: Math.round((theWidth * vRatio) / hRatio),
   }
 })
 </script>
@@ -174,6 +196,9 @@ const getCurrentDimensions = computed(() => {
             :allow-preview="allowPreview"
             :image-enlarged="imageEnlarged"
             :class="imageUrl && !allowPreview ? 'addPointer' : ''"
+            :width-token="widthToken"
+            :height-token="heightToken"
+            :quality-token="qualityToken"
           />
         </v-flexible-link>
         <transition name="fade">
