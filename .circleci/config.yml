@@ -1,0 +1,76 @@
+version: 2.1
+
+filter_all: &filter_all
+  filters:
+    branches:
+      only: /.*/
+    tags:
+      only: /.*/
+
+filter_demo: &filter_demo
+  filters:
+    branches:
+      only: main
+    tags:
+      only: demo
+
+filter_prod: &filter_prod
+  filters:
+    branches:
+      ignore: /.*/
+    tags:
+      only: /^v[0-9]+\.[0-9]+\.[0-9]+/
+
+worflows:
+  build-and-publish:
+    jobs:
+      - test:
+          <<: *filter_all
+      - build-and-publish:
+          name: Build and publish (demo)
+          tag: demo
+          <<: *filter_demo
+          requires: 
+            - test
+      - build-and-publish:
+          name: Build and publish (prod)
+          <<: *filter_prod
+          requires:
+            - test
+
+jobs:
+  test:
+    executor: default
+    steps:
+      - checkout
+      - run:
+          name: Run unit tests
+          command: |
+            npm install
+            npm run test
+
+  build-and-publish:
+    executor: default
+    parameters:
+      tag:
+        type: string
+        default: ""
+    steps:
+      - checkout
+      - run:
+          name: Build
+          command: |
+            
+      - run:
+          name: Publish
+          TAG: <<parameters.tag>>
+          command: |
+            TAG=${TAG:-${CIRCLE_TAG:1}}
+            sed -i '.old' 's/"version": "0.0.0"/"version": "$TAG"/gi' package.json
+            echo "//npm.pkg.github.com/:_authToken=$PAT" >> .npmrc
+            npm publish
+
+executors:
+  default:
+    docker:
+      - image: cimg/node:14.18

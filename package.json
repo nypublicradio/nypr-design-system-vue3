@@ -1,4 +1,7 @@
 {
+  "name": "@nypublicradio/design-system-vue3",
+  "repository": "git:github.com/nypublicradio/nypr-design-system-vue3",
+  "version": "0.0.0",
   "private": true,
   "config": {
     "theme": "white-label"
