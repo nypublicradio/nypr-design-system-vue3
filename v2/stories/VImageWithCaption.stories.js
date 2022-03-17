@@ -26,7 +26,6 @@ const Template = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -39,7 +38,6 @@ Default.args = {
 
 export const NoText = Template.bind({})
 NoText.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
@@ -48,7 +46,6 @@ NoText.args = {
 
 export const PublisherImageNoText = Template.bind({})
 PublisherImageNoText.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://media.wnyc.org/i/%width%/%height%/c/%quality%/2022/02/RL_Hello_EpisodeImage.png',
     width: 600,
@@ -57,7 +54,6 @@ PublisherImageNoText.args = {
 
 export const Caption = Template.bind({})
 Caption.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -71,7 +67,6 @@ Caption.args = {
 
 export const Enlarge = Template.bind({})
 Enlarge.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -86,7 +81,6 @@ Enlarge.args = {
 
 export const ImageIsLink = Template.bind({})
 ImageIsLink.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -101,7 +95,6 @@ ImageIsLink.args = {
 
 export const ImageIsRoute = Template.bind({})
 ImageIsRoute.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -116,7 +109,6 @@ ImageIsRoute.args = {
 
 export const CaptionAndEnlarge = Template.bind({})
 CaptionAndEnlarge.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -132,7 +124,6 @@ CaptionAndEnlarge.args = {
 
 export const Responsive = Template.bind({})
 Responsive.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -143,7 +134,6 @@ Responsive.args = {
 
 export const ResponsiveCustomRatio = Template.bind({})
 ResponsiveCustomRatio.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -155,7 +145,6 @@ ResponsiveCustomRatio.args = {
 
 export const ResponsiveVerticalEffect = Template.bind({})
 ResponsiveVerticalEffect.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://cms.demo.nypr.digital/images/212136/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
@@ -169,7 +158,6 @@ ResponsiveVerticalEffect.args = {
 
 export const Raw = Template.bind({})
 Raw.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://www.helpguide.org/wp-content/uploads/king-charles-spaniel-resting-head-768.jpg',
     credit: 'Credit Text Here',
@@ -180,7 +168,6 @@ Raw.args = {
 
 export const RawEnlarged = Template.bind({})
 RawEnlarged.args = {
-    // variation: 'gothamist',
     altText: 'Fallback alt text here',
     image: 'https://www.helpguide.org/wp-content/uploads/king-charles-spaniel-resting-head-768.jpg',
     credit: 'Credit Text Here',
@@ -189,4 +176,27 @@ RawEnlarged.args = {
     description: 'Description Text Here',
     allowPreview: true,
     imageEnlarged: 'https://static01.nyt.com/images/2019/06/17/science/17DOGS/17DOGS-mobileMasterAt3x-v2.jpg'
+}
+
+export const PublisherTokens = Template.bind({})
+PublisherTokens.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://media.wnyc.org/i/%width%/%height%/c/%quality%/2022/02/RL_Hello_EpisodeImage.png',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+}
+
+export const PublisherTokensLowRez = Template.bind({})
+PublisherTokensLowRez.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://media.wnyc.org/i/%width%/%height%/c/%quality%/photologue/photos/150430.jpg',
+    maxWidth: 211,
+    maxHeight: 211,
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    ratio: [6, 1],
 }

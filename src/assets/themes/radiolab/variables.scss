@@ -88,7 +88,8 @@ $yellowColor: #ebcb8b !default;
 
 $black: #000000 !default;
 $black50: #707888 !default;
-$black100: #4c566a !default;
+// $black 100 is used for a lot of text color in components
+$black100: #0a0b0c !default;
 $black200: #434c5e !default;
 $black300: #3b4252 !default;
 $black400: #2e3440 !default;
@@ -154,7 +155,7 @@ $primeIconFontSize: 1rem !default;
 $divider: 1px solid $white200 !default;
 $inlineSpacing: 0.5rem !default;
 $disabledOpacity: 0.6 !default;
-$maskBg: rgba($black500, 0.5) !default;
+$maskBg: rgba($black100, 0.5) !default;
 $loadingIconFontSize: 2rem !default;
 $errorColor: $dangerColor !default;
 
@@ -250,7 +251,7 @@ $buttonIconOnlyPadding: 0.5rem 0 !default;
 $buttonBg: $primaryColor !default;
 $buttonTextColor: $primaryTextColor !default;
 $buttonBorder: 2px solid transparent !default;
-$buttonHoverBg: $black500 !default;
+$buttonHoverBg: $black100 !default;
 $buttonTextHoverColor: $primaryColor !default;
 $buttonHoverBorderColor: transparent !default;
 $buttonActiveBg: $black400 !default;

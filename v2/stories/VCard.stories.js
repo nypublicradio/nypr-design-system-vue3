@@ -217,8 +217,6 @@ ResponsiveAlways.args = {
     title: "Title with some <em>HTML</em>",
     titleLink: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
     maxWidth: 1440,
     maxHeight: 2560,
     responsive: true,
