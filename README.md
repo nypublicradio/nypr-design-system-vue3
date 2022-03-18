@@ -1,5 +1,15 @@
 # NODE version 14.19.0 
 
+## How to use in another project
+
+This repository is packaged as an npm package. To use in your project, add the following to the `.npmrc` file in the root directory. Replace `your_personal_access_token` with a github personal access token that has `read:packages` permission.
+
+```bash
+@nypublicradio:registry=https://npm.pkg.github.com
+//npm.pkg.github.com/:_authToken=your_personal_access_token
+```
+Only commit the `.npmrc` file with the first line to git. Your personal access token should *never* be committed to git. If you accidentally commit your personal access token, delete it and genenerate a new personall access token with `read:packages` permission. 
+
 ## Installation
 npm i
 
