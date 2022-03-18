@@ -6,3 +6,6 @@ nuxt.d.ts
 .env
 .nuxt-storybook
 storybook-static
+.vscode
+*.css
+coverage/
