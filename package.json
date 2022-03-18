@@ -61,7 +61,7 @@
     "jest-canvas-mock": "^2.3.1",
     "node-sass": "^7.0.1",
     "nuxt-purgecss": "^1.0.0",
-    "nuxt3": "^3.0.0-27424151.dbab979",
+    "nuxt3": "^3.0.0-27439932.78761c2",
     "postcss": "^8.4.5",
     "prettier": "2.5.1",
     "sass": "^1.49.7",
