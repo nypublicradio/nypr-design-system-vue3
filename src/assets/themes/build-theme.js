@@ -1,32 +1,39 @@
-var fs = require('fs');
-var path = require('path');
-var execSync = require('child_process').execSync;
-var themeName = process.argv[2]
+const fs = require('fs');
+const path = require('path');
+const execSync = require('child_process').execSync;
 
-// Error when no filename argument provided.
-if (!themeName) {
-  console.log('\x1b[31mERR!\x1b[0m Trailing filename arg must be provided.');
-  process.exit(1);
-}
-var themePath = 'src/assets/themes/'+themeName;
-var srcPath = themePath+'/_theme.scss';
+const baseThemePath = 'src/assets/themes';
+const sassPath = path.join('node_modules', '.bin', 'node-sass');
+const themeFileName = '_theme.scss';
 
-// Check source .scss file exists.
-if (!fs.existsSync(srcPath)) {
-  console.log('\x1b[31mERR!\x1b[0m Path cannot be found: %s', srcPath);
-  process.exit(1);
-}
+// Iterate through directories within baseThemePath
+fs.readdir(baseThemePath, (err, files) => {
+  if (err) {
+    console.error(`Error iterating over directory ${baseThemePath}; ${err}`);
+    process.exit(1);
+  }
 
-// Path to node-sass executable in node_modules directory.
-var executablePath = path.join('node_modules', '.bin', 'node-sass');
+  files.forEach((file, i) => {
+    const pathToFile = path.join(baseThemePath, file);
+    fs.stat(pathToFile, (err, stat) => {
+      if (err) {
+        console.error(`Error stating file ${pathToFile}; ${err}`);
+      }
 
-// Destimation path for resultant .css file.
-var destPath = themePath +'/'+themeName+'.min.css';
+      if (stat.isDirectory()) {
+        const themePath = path.join(pathToFile, themeFileName);
+        fs.stat(themePath, (err, stat) => {
+          if (!err && stat.isFile()) {
+            const outputPath = path.join(pathToFile, `${file}.min.css`);
+            console.log(`Compiling theme ${themePath} to ${outputPath}`);
 
-// The command to be invoked.
-var cmd = 'sass --style=compressed' + ' ' + srcPath + ' ' + destPath;
-
-// Execute the command.
-execSync(cmd, {
-  cwd: process.cwd()
+            var cmd = `sass --style=compressed ${themePath} ${outputPath}`;
+            execSync(cmd, {
+              cwd: process.cwd()
+            });
+          }
+        });
+      }
+    });
+  });
 });

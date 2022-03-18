@@ -1,15 +1,17 @@
-@use "sass:map";
-@use "sass:math";
-@use "sass:string";
-@import "../../library/primeflex.min";
+/* Error: expected "{".
+ *   ,
+ * 1 | #!/usr/bin/env node
+ *   |  ^
+ *   '
+ *   node_modules/.bin/node-sass 1:2  root stylesheet */
 
-@import "../../library/_config.imports";
-@import "./variables";
-@import "./cssvars";
-@import "../../designer/_components";
-// @import "./v1-variables";
-@import "./fonts/fonts";
-@import "./base";
-@import "./typography";
-@import "./transitions";
-@import "./extensions";
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: 'Error: expected "{".\a   \2577 \a 1 \2502  #!/usr/bin/env node\a   \2502   ^\a   \2575 \a   node_modules/.bin/node-sass 1:2  root stylesheet';
+}

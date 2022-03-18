@@ -21,14 +21,14 @@ filter_prod: &filter_prod
     tags:
       only: /^v[0-9]+\.[0-9]+\.[0-9]+/
 
-worflows:
+workflows:
   build-and-publish:
     jobs:
       - test:
           <<: *filter_all
       - build-and-publish:
           name: Build and publish (demo)
-          tag: demo
+          tag: "0.0.0"
           <<: *filter_demo
           requires: 
             - test
@@ -60,16 +60,18 @@ jobs:
       - run:
           name: Build
           command: |
-            
+            npm install
+            npm run build-themes
       - run:
           name: Publish
-          TAG: <<parameters.tag>>
+          environment:
+            TAG: <<parameters.tag>>
           command: |
             TAG=${TAG:-${CIRCLE_TAG:1}}
-            sed -i '.old' 's/"version": "0.0.0"/"version": "$TAG"/gi' package.json
+            sed -i 's,"version": "0.0.0","version": "'"$TAG"'",gi' package.json
             echo "//npm.pkg.github.com/:_authToken=$PAT" >> .npmrc
             npm publish
-
+            
 executors:
   default:
     docker:

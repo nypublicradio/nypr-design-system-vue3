@@ -1,8 +1,7 @@
 {
-  "name": "@nypublicradio/design-system-vue3",
-  "repository": "git:github.com/nypublicradio/nypr-design-system-vue3",
+  "name": "@nypublicradio/nypr-design-system-vue3",
+  "repository": "git://github.com/nypublicradio/nypr-design-system-vue3.git",
   "version": "0.0.0",
-  "private": true,
   "config": {
     "theme": "white-label"
   },
@@ -11,7 +10,7 @@
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "build-storybook": "build-storybook",
     "dev": "nuxi dev",
-    "build-theme": "node src/assets/themes/build-theme.js",
+    "build-themes": "node src/assets/themes/build-theme.js",
     "format": "prettier .  --write",
     "prime-build": "vite build",
     "prime-lint": "vite lint",
