@@ -42,6 +42,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  eyebrow: {
+    type: String,
+    default: null,
+  },
   tags: {
     type: Array,
     default: null,
@@ -101,7 +105,7 @@ const props = defineProps({
 const slots = useSlots()
 
 const hasDetails = computed(() => {
-  return !!props.title || !!props.subtitle || !!slots.default || !!slots.blurb
+  return !!props.title || !!props.subtitle || !!slots.default || !!slots.blurb || !!slots.eyebrow
 })
 
 const getMobileImageScale = computed(() => {
@@ -150,6 +154,7 @@ const getMobileImageScale = computed(() => {
         <v-tag v-for="(tag, index) in tags" :key="index" :name="tag.name" :slug="tag.slug" />
         <v-tag v-if="sponsored" name="sponsored" />
       </div>
+      <p v-if="eyebrow" class="card-eyebrow" v-html="eyebrow"/>
       <div v-if="title" class="card-title" role="heading" aria-level="3">
         <v-flexible-link class="card-title-link" :class="{ disabled: !titleLink }" :to="titleLink">
           <h2 v-html="title"></h2>
@@ -158,7 +163,7 @@ const getMobileImageScale = computed(() => {
         </v-flexible-link>
       </div>
       <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
-      <p v-if="blurb" class="card-blurb">{{ blurb }}</p>
+      <p v-if="blurb" class="card-blurb" v-html="blurb"></p>
       <div v-if="$slots.default" class="card-slot">
         <slot />
       </div>
