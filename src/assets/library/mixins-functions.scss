@@ -99,12 +99,12 @@ $spacing-base: 0.25; //  matches prime-flex
 @mixin t4lines() {
   -webkit-line-clamp: 4;
 }
-@mixin t2lines() {
+@mixin t5lines() {
   -webkit-line-clamp: 5;
 }
-@mixin t3lines() {
+@mixin t6lines() {
   -webkit-line-clamp: 6;
 }
-@mixin t4lines() {
+@mixin t7lines() {
   -webkit-line-clamp: 7;
 }
