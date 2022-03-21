@@ -10,7 +10,7 @@ filter_all: &filter_all
 filter_demo: &filter_demo
   filters:
     branches:
-      ignore: /.*/
+      only: main
     tags:
       only: demo
 
@@ -68,7 +68,33 @@ jobs:
             TAG: <<parameters.tag>>
           command: |
             TAG=${TAG:-${CIRCLE_TAG:1}}
-            sed -i 's,"version": "0.0.0","version": "'"$TAG"'",gi' package.json
+
+            if [ $TAG == "0.0.0" ]; then
+              # The delete package mutation in the github graphql api 
+              # requires an id which is unknown at the time of execution
+
+              # Get the first 100 packages that have been released
+              curl -X POST \
+              -H "Accept: application/vnd.github.package-deletes-preview+json" \
+              -H "Authorization: bearer $PAT" \
+              -d '{"query":"query { repository(owner: \"nypublicradio\", name:\"nypr-design-system-vue3\"){packages(names: \"nypr-design-system-vue3\", first: 100) { nodes { versions(first: 100) { nodes{id, version}}} } } }"}' \
+              https://api.github.com/graphql > published-versions.json
+
+              # Get the id of the package with version == 0.0.0
+              export VERSION_ID=$(jq '.data.repository.packages.nodes[0].versions.nodes | .[] | select(.version == "0.0.0").id' published-versions.json | tr -d '"')
+              
+              # Only delete the existing package if it already exists.
+              if [ ! -z $VERSION_ID ]; then
+                curl -X POST \
+                -H "Accept: application/vnd.github.package-deletes-preview+json" \
+                -H "Authorization: bearer $PAT" \
+                -d '{"query":"mutation { deletePackageVersion(input:{packageVersionId:\"'"$VERSION_ID"'\"}) { success }}"}' \
+                https://api.github.com/graphql
+              fi
+            else
+              sed -i 's,"version": "0.0.0","version": "'"$TAG"'",gi' package.json
+            fi
+            
             echo "//npm.pkg.github.com/:_authToken=$PAT" >> .npmrc
             npm publish
             
