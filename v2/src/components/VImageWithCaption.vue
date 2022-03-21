@@ -149,9 +149,9 @@ onMounted(() => {
     refThisImg.value.offsetWidth != 0
       ? refThisImg.value.offsetWidth
       : props.defaultWidth
-      ? props.defaultWidth
-      : window.innerWidth
-  console.log('thisWidth.value = ', thisWidth.value)
+        ? props.defaultWidth
+        : window.innerWidth
+  // console.log('thisWidth.value = ', thisWidth.value)
 })
 
 const getCurrentDimensions = computed(() => {
@@ -160,7 +160,7 @@ const getCurrentDimensions = computed(() => {
   // for low rez images
   let theWidth = thisWidth.value
 
-  if(props.maxWidth && props.maxWidth < theWidth){
+  if (props.maxWidth && props.maxWidth < theWidth) {
     theWidth = props.maxWidth
   }
   return {
@@ -202,10 +202,7 @@ const getCurrentDimensions = computed(() => {
           />
         </v-flexible-link>
         <transition name="fade">
-          <div
-            v-if="caption && captionVisible"
-            class="image-with-caption-caption"
-          >
+          <div v-if="caption && captionVisible" class="image-with-caption-caption">
             <p>{{ caption }}</p>
           </div>
         </transition>
@@ -220,22 +217,16 @@ const getCurrentDimensions = computed(() => {
           icon="pi pi-times p-button-icon"
           class="p-button-sm p-button-secondary p-button-text image-with-caption-icons-close"
         ></Button>
-        <Button
-          v-else
-          icon="pi pi-info"
-          class="p-button-sm image-with-caption-icons-info"
-        ></Button>
+        <Button v-else icon="pi pi-info" class="p-button-sm image-with-caption-icons-info"></Button>
       </div>
     </div>
     <figcaption v-if="credit || (caption && gothamistVariation)" class="mt-1">
       <!--       <gothamist-arrow v-if="caption && gothamistVariation" />
       <div class="image-with-caption-credit">
         <p v-if="caption && gothamistVariation" class="gothamist-caption">{{ caption }}</p>
-      </div> -->
+      </div>-->
       <h4 v-if="title" class="image-with-caption-title">{{ title }}</h4>
-      <p v-if="description" class="footer image-with-caption-description">
-        {{ description }}
-      </p>
+      <p v-if="description" class="footer image-with-caption-description">{{ description }}</p>
       <v-flexible-link
         v-if="creditUrl"
         :to="creditUrl"
@@ -244,9 +235,7 @@ const getCurrentDimensions = computed(() => {
       >
         <span class="footer">{{ credit }}</span>
       </v-flexible-link>
-      <span v-else class="image-with-caption-credit-link footer">
-        {{ credit }}
-      </span>
+      <span v-else class="image-with-caption-credit-link footer">{{ credit }}</span>
     </figcaption>
   </figure>
 </template>
