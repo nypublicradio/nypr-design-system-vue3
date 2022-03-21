@@ -10,7 +10,7 @@ filter_all: &filter_all
 filter_demo: &filter_demo
   filters:
     branches:
-      only: main
+      ignore: /.*/
     tags:
       only: demo
 
