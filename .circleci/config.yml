@@ -101,4 +101,4 @@ jobs:
 executors:
   default:
     docker:
-      - image: cimg/node:14.18
+      - image: cimg/node:14.19
