@@ -3,7 +3,7 @@ import { computed } from 'vue'
 
 const props = defineProps({
   to: {
-    type: [String, Object],
+    type: String,
     default: null,
   },
   target: {
@@ -20,8 +20,8 @@ const props = defineProps({
   },
 })
 const isExternal = computed(() => {
-  var reg = new RegExp('^(?:[a-z]+:)?//', 'i')
-  if (typeof props.to === 'string' && reg.test(props.to) || props.to.includes('tel:') || props.to.includes('mailto:')) {
+  const reg = /^https?:\/\/|mailto:|tel:/i
+  if (typeof props.to === 'string' && reg.test(props.to)) {
     return true
   }
   return false
