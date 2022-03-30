@@ -61,6 +61,7 @@ $caps-header: (
             'font-weight': var(--font - weight - 400),
             'letter-spacing': 0.1em,
             'color': var(--text - color),
+            'text-transform': uppercase,
         ),
     ),
     $medium: (
