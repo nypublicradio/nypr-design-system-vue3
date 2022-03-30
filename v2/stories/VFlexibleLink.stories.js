@@ -44,6 +44,16 @@ Default.args = {
     to: 'https://www.google.com/',
 }
 
+export const Tel = Template.bind({})
+Tel.args = {
+    to: 'tel:12011231234',
+}
+
+export const MailTo = Template.bind({})
+MailTo.args = {
+    to: 'mailto:name@gmail.com',
+}
+
 export const DefaultCustomTarget = Template.bind({})
 DefaultCustomTarget.args = {
     to: 'https://www.google.com/',
