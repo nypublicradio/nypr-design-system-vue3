@@ -196,7 +196,7 @@ const togglePlay = () => {
         </Button>
         <Button
           :title="isPlaying ? 'Pause' : 'Play'"
-          class="play-button p-button-icon-only"          
+          class="play-button p-button-icon-only"
           @click="togglePlay"
         >
           <i v-if="!isPlaying && !isLoading" class="pi pi-play"></i>
@@ -234,7 +234,7 @@ const togglePlay = () => {
   left: 0;
   height: 100px;
   position: fixed;
-  z-index: $z-index-10;
+  z-index: var(--z-index-10);
   width: 100%;
   padding: 8px 16px 8px 8px;
   color: var(--text-color);

@@ -1,5 +1,5 @@
 :root,
-[data-style-mode="default"] {
+[data-style-mode='default'] {
     --primary-color: #{$primaryColor};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
     --primary-color-alt: #{$primaryColorAlt};
@@ -162,8 +162,20 @@
     --badge-font-weight: #{$badgeFontWeight};
     --badge-font-size: #{$badgeFontSize};
     --badge-letter-spacing: #{$badgeLetterSpacing};
+
+    --z-index-vanish: #{$z-index-vanish};
+    --z-index-none: #{$z-index-none};
+    --z-index-1: #{$z-index-1};
+    --z-index-2: #{$z-index-2};
+    --z-index-5: #{$z-index-5};
+    --z-index-10: #{$z-index-10};
+    --z-index-15: #{$z-index-15};
+    --z-index-30: #{$z-index-30};
+    --z-index-50: #{$z-index-50};
+    --z-index-75: #{$z-index-75};
+    --z-index-100: #{$z-index-100};
 }
-[data-style-mode="dark"] {
+[data-style-mode='dark'] {
     /* --primary-color: #{$dangerColor};
     --primary-color-rgb: #{hex2rgb($dangerColor)}; */
     //--link-button-color: var(--primary-light-color);
@@ -200,4 +212,3 @@
     --gray-800: #{$gray-200};
     --gray-900: #{$gray-100};
 }
-
