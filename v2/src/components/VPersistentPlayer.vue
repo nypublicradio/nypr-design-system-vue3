@@ -76,7 +76,9 @@ const props = defineProps({
   },
 })
 let currentSeconds = ref(0)
+let interval = null
 let durationSeconds = ref(0)
+
 let buffered = ref(0)
 let innerLoop = ref(false)
 let loaded = ref(false)
@@ -89,7 +91,7 @@ let playing = ref(props.isPlaying)
 let muted = ref(props.isMuted)
 let currentFile = ref(null)
 
-const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change'])
+const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change'])
 
 onMounted(() => {
   innerLoop.value = props.loop
@@ -134,23 +136,25 @@ const download = () => {
   window.open(props.file, 'download')
 }
 const goAhead15 = () => {
+  emit('ahead-15')
   sound.seek(sound.seek() + 15)
+  updateCurrentSeconds()
 }
 const goBack15 = () => {
-  (sound.seek() > 15) ? sound.seek(sound.seek() - 15) : sound.seek(0)
+  emit('back-15')
+    (sound.seek() > 15) ? sound.seek(sound.seek() - 15) : sound.seek(0)
+  updateCurrentSeconds()
 }
-const seek = (e) => {
-  // emit event so vue-hifi can handle
-  // if (!this.loaded) return
-  // const el = e.target.getBoundingClientRect()
-  // const seekPos = (e.clientX - el.left) / el.width
-  // this.audio.currentTime = (this.audio.duration * seekPos)
+
+const percentComplete = (scrubPercent) => {
+  return (props.currentSeconds / props.durationSeconds) * 100
 }
+
 let sound = null
 const togglePlay = () => {
   emit('togglePlay')
   if (!sound || !currentFile.value === props.file) {
-    // destoy old sound
+    // destoy old sound if one exists
     sound ? sound.unload() : null
     currentFile.value = props.file
     loading.value = true
@@ -159,22 +163,24 @@ const togglePlay = () => {
       html5: true,
       onload: function () {
         loading.value = false
+        durationSeconds.value = sound.duration()
       },
+      onloaderror: function () {
+        emit('load-error')
+      }
     })
   }
   // Play or pause the sound.
   if (sound.playing()) {
     playing.value = false
     sound.pause()
+    clearDurationInterval()
   } else {
     playing.value = true
+    startDurationInterval()
     sound.play()
   }
-
-  //sound.volume(0.1)
-
-
-  // Change global volume.
+  // Change global volume init
   Howler.volume(volume.value)
 }
 
@@ -187,6 +193,24 @@ const volumeToggleMute = (e) => {
 const volumeChange = (e) => {
   emit('volume-change')
   sound.volume(e / 100)
+}
+const updateCurrentSeconds = () => {
+  currentSeconds.value = sound.seek()
+}
+
+const startDurationInterval = () => {
+  interval = setInterval(() => {
+    updateCurrentSeconds()
+  }, 1000)
+}
+const clearDurationInterval = () => {
+  clearInterval(interval)
+}
+
+const scrubTimelineChange = (e) => {
+  const percentUnit = durationSeconds.value / 100
+  // have to check IF the seek destination has been loaded in the stream first
+  sound.seek(e * percentUnit)
 }
 
 </script>
@@ -202,10 +226,10 @@ const volumeChange = (e) => {
         :title-link="props.titleLink"
         :description="props.description"
         :description-link="props.descriptionLink"
-        :buffered="buffered.value"
-        :current-seconds="currentSeconds.value"
-        :duration-seconds="durationSeconds.value"
-        @seek="seek"
+        :buffered="buffered"
+        :current-seconds="currentSeconds"
+        :duration-seconds="durationSeconds"
+        @scrub-timeline-change="scrubTimelineChange"
       />
       <template v-if="props.shouldShowCta">
         <v-volume-control

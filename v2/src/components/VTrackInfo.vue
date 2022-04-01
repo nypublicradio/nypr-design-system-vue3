@@ -2,6 +2,7 @@
 import { computed } from 'vue'
 import VImageWithCaption from './VImageWithCaption'
 import VFlexibleLink from './VFlexibleLink'
+import VProgressScrubber from './VProgressScrubber'
 
 const props = defineProps({
   description: {
@@ -46,6 +47,8 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['scrub-timeline-change'])
+
 const percentBuffered = computed(() => {
   return (props.buffered / props.durationSeconds) * 100
 })
@@ -82,47 +85,46 @@ const convertTime = (val) => {
       </div>
       <div class="track-info-title">
         <h2 v-if="title && titleLink">
-          <v-flexible-link class="track-info-title-link" :to="titleLink">{{
-            title
-          }}</v-flexible-link>
+          <v-flexible-link class="track-info-title-link" :to="titleLink">
+            {{
+              title
+            }}
+          </v-flexible-link>
         </h2>
         <h2 v-if="title && !titleLink">{{ title }}</h2>
       </div>
       <div v-if="description" class="track-info-description">
-        <p
-          v-if="description && !descriptionLink"
-          class="track-info-description"
-        >
-          {{ description }}
-        </p>
+        <p v-if="description && !descriptionLink" class="track-info-description">{{ description }}</p>
 
         <v-flexible-link
           v-if="description && descriptionLink"
           class="track-info-description-link"
           :to="descriptionLink"
-          >{{ description }}</v-flexible-link
-        >
+        >{{ description }}</v-flexible-link>
       </div>
       <template v-if="!livestream">
-        <div class="track-info-progress" @click="$emit('seek', $event)">
-          <div
-            :style="{ width: percentComplete + '%' }"
-            class="track-info-seeker"
-          />
-          <div
-            :style="{ width: percentBuffered + '%' }"
-            class="track-info-buffered"
-          />
-        </div>
-        <div class="track-info-time footer">
-          <span class="track-info-time-current">{{
-            convertTime(currentSeconds)
-          }}</span>
+        <!-- <div class="track-info-progress" @click="$emit('seek', $event)">
+          <div :style="{ width: percentComplete + '%' }" class="track-info-seeker" />
+          <div :style="{ width: percentBuffered + '%' }" class="track-info-buffered" />
+        </div>-->
+        <v-progress-scrubber
+          :progress="percentComplete"
+          @scrub-timeline-change="emit('scrub-timeline-change', $event)"
+        />
+        <div v-if="durationSeconds" class="track-info-time footer">
+          <span class="track-info-time-current">
+            {{
+              convertTime(currentSeconds)
+            }}
+          </span>
           <span class="track-info-time-separator">/</span>
-          <span class="track-info-time-total">{{
-            convertTime(durationSeconds)
-          }}</span>
+          <span class="track-info-time-total">
+            {{
+              convertTime(durationSeconds)
+            }}
+          </span>
         </div>
+        <span v-else class="track-info-time-separator">&nbsp;</span>
       </template>
     </div>
   </div>
@@ -230,63 +232,63 @@ $track-info-image-size: 84px;
         }
       }
     }
-    .track-info-progress {
-      position: absolute;
-      background-color: var(--primary-color);
-      cursor: pointer;
-      min-width: 200px;
-      top: -5px;
-      margin-top: 0;
-      left: 0;
-      right: 0;
-      height: 5px;
-      @media all and (min-width: $md) {
-        top: 0;
-        margin-top: 4px;
-        height: 3px;
-        position: relative;
-      }
-      .player-track-seeker {
-        background-color: var(--primary-dark-color);
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        top: 0;
-        z-index: 20;
-      }
-      .player-track-buffered {
-        background-color: var(--gray-400);
-        bottom: 0;
-        left: 0;
-        position: absolute;
-        top: 0;
-        z-index: 10;
-      }
-      .player-track-playhead {
-        position: absolute;
-        height: 22px;
-        width: 22px;
-        margin: -8px -16px;
-        transform: scale(0, 0);
-        left: 0;
-        opacity: 0;
-        bottom: 0;
-        transition: opacity 0.2s linear, transform 0.2s;
+    // .track-info-progress {
+    //   position: absolute;
+    //   background-color: var(--primary-color);
+    //   cursor: pointer;
+    //   min-width: 200px;
+    //   top: -5px;
+    //   margin-top: 0;
+    //   left: 0;
+    //   right: 0;
+    //   height: 5px;
+    //   @media all and (min-width: $md) {
+    //     top: 0;
+    //     margin-top: 4px;
+    //     height: 3px;
+    //     position: relative;
+    //   }
+    //   .player-track-seeker {
+    //     background-color: var(--primary-dark-color);
+    //     bottom: 0;
+    //     left: 0;
+    //     position: absolute;
+    //     top: 0;
+    //     z-index: 20;
+    //   }
+    //   .player-track-buffered {
+    //     background-color: var(--gray-400);
+    //     bottom: 0;
+    //     left: 0;
+    //     position: absolute;
+    //     top: 0;
+    //     z-index: 10;
+    //   }
+    //   .player-track-playhead {
+    //     position: absolute;
+    //     height: 22px;
+    //     width: 22px;
+    //     margin: -8px -16px;
+    //     transform: scale(0, 0);
+    //     left: 0;
+    //     opacity: 0;
+    //     bottom: 0;
+    //     transition: opacity 0.2s linear, transform 0.2s;
 
-        &::after {
-          content: '';
-          height: 22px;
-          width: 22px;
-          background-color: var(--gray-600);
-          border-radius: 50%;
-          opacity: 1;
-          display: block;
-          position: absolute;
-          left: calc(50% - 11px);
-          top: calc(50% - 11px);
-        }
-      }
-    }
+    //     &::after {
+    //       content: "";
+    //       height: 22px;
+    //       width: 22px;
+    //       background-color: var(--gray-600);
+    //       border-radius: 50%;
+    //       opacity: 1;
+    //       display: block;
+    //       position: absolute;
+    //       left: calc(50% - 11px);
+    //       top: calc(50% - 11px);
+    //     }
+    //   }
+    // }
     .track-info-time {
       // @include font-config($footer-config);
       display: flex;
