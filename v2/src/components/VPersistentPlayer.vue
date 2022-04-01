@@ -3,6 +3,7 @@ import { ref, onMounted } from 'vue'
 import VVolumeControl from './VVolumeControl'
 import VTrackInfo from './VTrackInfo'
 import Button from 'primevue/button'
+import { Howl, Howler } from 'howler'
 
 const props = defineProps({
   autoPlay: {
@@ -81,7 +82,12 @@ let innerLoop = ref(false)
 let loaded = ref(false)
 let previousVolume = ref(35)
 let showVolume = ref(false)
-let volume = ref(100)
+let volume = ref(50)
+
+let loading = ref(props.isLoading)
+let playing = ref(props.isPlaying)
+let muted = ref(props.isMuted)
+let currentFile = ref(null)
 
 const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change'])
 
@@ -125,16 +131,13 @@ const convertTime = (val) => {
   return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
 }
 const download = () => {
-  // this.stop() // emit event so vue-hifi can handle
   window.open(props.file, 'download')
 }
 const goAhead15 = () => {
-  // emit event so vue-hifi can handle
-  // this.audio.currentTime = this.audio.currentTime + 15
+  sound.seek(sound.seek() + 15)
 }
 const goBack15 = () => {
-  // emit event so vue-hifi can handle
-  // this.audio.currentTime = this.audio.currentTime - 15
+  (sound.seek() > 15) ? sound.seek(sound.seek() - 15) : sound.seek(0)
 }
 const seek = (e) => {
   // emit event so vue-hifi can handle
@@ -143,9 +146,49 @@ const seek = (e) => {
   // const seekPos = (e.clientX - el.left) / el.width
   // this.audio.currentTime = (this.audio.duration * seekPos)
 }
+let sound = null
 const togglePlay = () => {
   emit('togglePlay')
+  if (!sound || !currentFile.value === props.file) {
+    // destoy old sound
+    sound ? sound.unload() : null
+    currentFile.value = props.file
+    loading.value = true
+    sound = new Howl({
+      src: [props.file],
+      html5: true,
+      onload: function () {
+        loading.value = false
+      },
+    })
+  }
+  // Play or pause the sound.
+  if (sound.playing()) {
+    playing.value = false
+    sound.pause()
+  } else {
+    playing.value = true
+    sound.play()
+  }
+
+  //sound.volume(0.1)
+
+
+  // Change global volume.
+  Howler.volume(volume.value)
 }
+
+const volumeToggleMute = (e) => {
+  emit('volume-toggle-mute')
+  muted.value = !muted.value
+  sound.mute(muted.value)
+}
+
+const volumeChange = (e) => {
+  emit('volume-change')
+  sound.volume(e / 100)
+}
+
 </script>
 
 <template>
@@ -166,10 +209,10 @@ const togglePlay = () => {
       />
       <template v-if="props.shouldShowCta">
         <v-volume-control
-          :volume="volume.value"
-          :is-muted="props.isMuted"
-          @volume-toggle-mute="emit('volume-toggle-mute')"
-          @volume-change="emit('volume-change', $event)"
+          :volume="volume"
+          :is-muted="muted"
+          @volume-toggle-mute="volumeToggleMute"
+          @volume-change="volumeChange"
         />
         <!-- <button class="button player-cta-play-button" @click="togglePlay">
           <play-simple class="button-icon" />
@@ -184,10 +227,10 @@ const togglePlay = () => {
       </template>
       <template v-else>
         <v-volume-control
-          :volume="volume.value"
-          :is-muted="props.isMuted"
-          @volume-toggle-mute="emit('volume-toggle-mute')"
-          @volume-change="emit('volume-change', $event)"
+          :volume="volume"
+          :is-muted="muted"
+          @volume-toggle-mute="volumeToggleMute"
+          @volume-change="volumeChange"
         />
         <Button
           v-if="props.showSkip && !props.livestream"
@@ -199,13 +242,13 @@ const togglePlay = () => {
           <i class="pi pi-replay"></i>
         </Button>
         <Button
-          :title="isPlaying ? 'Pause' : 'Play'"
+          :title="playing ? 'Pause' : 'Play'"
           class="play-button p-button-icon-only"
           @click="togglePlay"
         >
-          <i v-if="!isPlaying && !isLoading" class="pi pi-play"></i>
-          <i v-if="isPlaying" class="pi pi-pause"></i>
-          <i v-if="isLoading" class="pi pi-spin pi-spinner"></i>
+          <i v-if="!playing && !loading" class="pi pi-play"></i>
+          <i v-if="playing && !loading" class="pi pi-pause"></i>
+          <i v-if="loading" class="pi pi-spin pi-spinner"></i>
         </Button>
         <Button
           v-if="props.showSkip && !props.livestream"

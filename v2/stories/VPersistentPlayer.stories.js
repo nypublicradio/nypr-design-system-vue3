@@ -30,7 +30,7 @@ Default.args = {
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const DescriptionLink = Template.bind({})
@@ -40,7 +40,7 @@ DescriptionLink.args = {
     titleLink: "http://www.google.com",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     descriptionLink: "http://www.bing.com",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const WithImage = Template.bind({})
@@ -50,7 +50,7 @@ WithImage.args = {
     titleLink: "http://www.google.com",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const AutoPlay = Template.bind({})
@@ -62,7 +62,7 @@ AutoPlay.args = {
     titleLink: "http://www.google.com",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const LiveStream = Template.bind({})
@@ -73,7 +73,7 @@ LiveStream.args = {
     titleLink: "http://www.google.com",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const LiveStreamWithoutTitleLink = Template.bind({})
@@ -83,7 +83,7 @@ LiveStreamWithoutTitleLink.args = {
     station: "WNYC 93.9 FM",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const LivestreamWithCTA = Template.bind({})
@@ -95,7 +95,7 @@ LivestreamWithCTA.args = {
     titleLink: "http://www.google.com",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const LivestreamWithoutTitle = Template.bind({})
@@ -105,7 +105,7 @@ LivestreamWithoutTitle.args = {
     titleLink: "http://www.google.com",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const LivestreamWithoutDescription = Template.bind({})
@@ -115,7 +115,7 @@ LivestreamWithoutDescription.args = {
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 export const LivestreamWithoutStation = Template.bind({})
@@ -125,7 +125,7 @@ LivestreamWithoutStation.args = {
     titleLink: "http://www.google.com",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
 
@@ -136,6 +136,6 @@ Download.args = {
     titleLink: "http://www.google.com",
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true
 }
