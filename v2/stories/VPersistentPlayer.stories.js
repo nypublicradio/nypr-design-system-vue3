@@ -48,7 +48,7 @@ WithImage.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
@@ -56,10 +56,11 @@ WithImage.args = {
 export const AutoPlay = Template.bind({})
 AutoPlay.args = {
     autoPlay: true,
+    isPlaying: true,
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
@@ -70,7 +71,7 @@ LiveStream.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
@@ -80,7 +81,7 @@ LiveStreamWithoutTitleLink.args = {
     livestream: true,
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
@@ -92,7 +93,7 @@ LivestreamWithCTA.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
@@ -102,7 +103,7 @@ LivestreamWithoutTitle.args = {
     livestream: true,
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
@@ -113,7 +114,7 @@ LivestreamWithoutDescription.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
 
@@ -122,7 +123,7 @@ LivestreamWithoutStation.args = {
     livestream: true,
     title: "The Takeaway",
     titleLink: "http://www.google.com",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3"
 }
@@ -133,7 +134,7 @@ Download.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "http://www.hochmuth.com/mp3/Haydn_Cello_Concerto_D-1.mp3",
     showDownload: true

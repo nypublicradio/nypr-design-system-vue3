@@ -114,6 +114,10 @@ onMounted(() => {
         break
     }
   })
+
+  // auto play
+  props.autoPlay ? togglePlay() : null
+
 })
 
 const convertTime = (val) => {
@@ -233,7 +237,7 @@ const togglePlay = () => {
   bottom: 0;
   left: 0;
   height: 100px;
-  position: fixed;
+  position: sticky;
   z-index: var(--z-index-10);
   width: 100%;
   padding: 8px 16px 8px 8px;
