@@ -74,22 +74,28 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  canMinimize: {
+    type: Boolean,
+    default: false,
+  },
 })
-let currentSeconds = ref(0)
 let interval = null
-let durationSeconds = ref(0)
+const currentSeconds = ref(0)
+const durationSeconds = ref(0)
 
-let buffered = ref(0)
-let innerLoop = ref(false)
-let loaded = ref(false)
-let previousVolume = ref(35)
-let showVolume = ref(false)
-let volume = ref(50)
+const buffered = ref(0)
+const innerLoop = ref(false)
+const loaded = ref(false)
+const previousVolume = ref(35)
+const showVolume = ref(false)
+const volume = ref(50)
 
-let loading = ref(props.isLoading)
-let playing = ref(props.isPlaying)
-let muted = ref(props.isMuted)
-let currentFile = ref(null)
+const loading = ref(props.isLoading)
+const playing = ref(props.isPlaying)
+const muted = ref(props.isMuted)
+const currentFile = ref(null)
+
+const isMinimized = ref(false)
 
 const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end'])
 
@@ -224,7 +230,33 @@ const scrubTimelineChange = (e) => {
 </script>
 
 <template>
-  <div class="persistent-player u-color-group-dark">
+  <div class="persistent-player" :class="{ 'minimized': isMinimized }">
+    <Button
+      v-if="props.canMinimize"
+      title="Minimize Player"
+      class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
+      aria-label="minimize player"
+      @click="isMinimized = !isMinimized"
+    >
+      <i class="pi pi-chevron-down"></i>
+    </Button>
+    <div class="maximize-btn-holder">
+      <Button
+        v-if="props.canMinimize"
+        title="maximize Player"
+        class="maximize-btn p-button-icon-only"
+        :class="{ 'show': isMinimized }"
+        aria-label="maximize player"
+        @click="isMinimized = !isMinimized"
+      >
+        <img
+          v-if="playing"
+          src="../../../assets-shared/images/audioAnim.gif"
+          alt="sounds wave animation"
+        />
+        <i v-else class="pi pi-chevron-up"></i>
+      </Button>
+    </div>
     <div class="player-controls">
       <v-track-info
         :livestream="props.livestream"
@@ -309,16 +341,68 @@ const scrubTimelineChange = (e) => {
 </template>
 
 <style lang="scss">
+$persistentPlayerHeight: 100px;
 .persistent-player {
   bottom: 0;
   left: 0;
-  height: 100px;
-  position: sticky;
+  height: $persistentPlayerHeight;
+  position: fixed;
   z-index: var(--z-index-10);
   width: 100%;
   padding: 8px 16px 8px 8px;
   color: var(--text-color);
   background-color: var(--gray-100);
+  transition: bottom 0.25s;
+  -webkit-transition: bottom 0.25s;
+  &.minimized {
+    bottom: -$persistentPlayerHeight;
+  }
+  .minimize-btn {
+    position: absolute;
+    right: 12px;
+    top: 2px;
+    padding: 0.4rem 0.2rem !important;
+    .pi {
+      font-size: 0.7rem;
+    }
+  }
+  .maximize-btn-holder {
+    position: absolute;
+    display: block;
+    right: 12px;
+    top: -40px;
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    .maximize-btn.p-button {
+      position: absolute;
+      display: block;
+      right: 0px;
+      top: 44px;
+      padding: 0.4rem 0.2rem !important;
+      width: 40px;
+      height: 40px;
+      border-radius: 4px 4px 0 0;
+      background-color: var(--gray-100);
+      pointer-events: none;
+      transition: top 0.25s;
+      -webkit-transition: top 0.25s;
+      &.show {
+        top: 0px;
+        pointer-events: all;
+      }
+      &:hover {
+        background-color: var(--gray-300);
+      }
+      .pi {
+        font-size: 0.7rem;
+      }
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
   .player-controls {
     display: flex;
     align-items: center;

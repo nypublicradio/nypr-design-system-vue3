@@ -139,3 +139,15 @@ Download.args = {
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true
 }
+
+export const CanMinimize = Template.bind({})
+CanMinimize.args = {
+    title: "The Takeaway",
+    station: "WNYC 93.9 FM",
+    titleLink: "http://www.google.com",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    showDownload: true,
+    canMinimize: true
+}
