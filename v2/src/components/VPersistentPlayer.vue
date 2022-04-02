@@ -91,7 +91,7 @@ let playing = ref(props.isPlaying)
 let muted = ref(props.isMuted)
 let currentFile = ref(null)
 
-const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change'])
+const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end'])
 
 onMounted(() => {
   innerLoop.value = props.loop
@@ -146,10 +146,6 @@ const goBack15 = () => {
   updateCurrentSeconds()
 }
 
-const percentComplete = (scrubPercent) => {
-  return (props.currentSeconds / props.durationSeconds) * 100
-}
-
 let sound = null
 const togglePlay = () => {
   emit('togglePlay')
@@ -161,6 +157,7 @@ const togglePlay = () => {
     sound = new Howl({
       src: [props.file],
       html5: true,
+      preload: true,
       onload: function () {
         loading.value = false
         durationSeconds.value = sound.duration()
@@ -196,6 +193,7 @@ const volumeChange = (e) => {
 }
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
+  //handleLoadBuffer()
 }
 
 const startDurationInterval = () => {
@@ -207,10 +205,20 @@ const clearDurationInterval = () => {
   clearInterval(interval)
 }
 
-const scrubTimelineChange = (e) => {
+let onceFlag = null
+const scrubTimelineEnd = (e) => {
+  emit('scrub-timeline-end')
   const percentUnit = durationSeconds.value / 100
-  // have to check IF the seek destination has been loaded in the stream first
   sound.seek(e * percentUnit)
+  togglePlay()
+  onceFlag = null
+}
+const scrubTimelineChange = (e) => {
+  if (!onceFlag) {
+    emit('scrub-timeline-change')
+    togglePlay()
+    onceFlag = true
+  }
 }
 
 </script>
@@ -230,6 +238,7 @@ const scrubTimelineChange = (e) => {
         :current-seconds="currentSeconds"
         :duration-seconds="durationSeconds"
         @scrub-timeline-change="scrubTimelineChange"
+        @scrub-timeline-end="scrubTimelineEnd"
       />
       <template v-if="props.shouldShowCta">
         <v-volume-control

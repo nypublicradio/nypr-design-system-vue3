@@ -9,7 +9,7 @@ const props = defineProps({
     }
 })
 
-const emit = defineEmits(['scrub-timeline-change'])
+const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end'])
 
 </script>
 
@@ -19,7 +19,8 @@ const emit = defineEmits(['scrub-timeline-change'])
             v-model="progress"
             :min="0"
             :max="100"
-            @slideend="emit('scrub-timeline-change', progress)"
+            @slideend="emit('scrub-timeline-end', progress)"
+            @change="emit('scrub-timeline-change', progress)"
         />
     </div>
 </template>
