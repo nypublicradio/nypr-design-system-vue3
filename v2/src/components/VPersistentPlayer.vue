@@ -342,6 +342,7 @@ const scrubTimelineChange = (e) => {
 
 <style lang="scss">
 $persistentPlayerHeight: 100px;
+$persistentPlayerHeightBuffer: 20px;
 .persistent-player {
   bottom: 0;
   left: 0;
@@ -355,7 +356,7 @@ $persistentPlayerHeight: 100px;
   transition: bottom 0.25s;
   -webkit-transition: bottom 0.25s;
   &.minimized {
-    bottom: -$persistentPlayerHeight;
+    bottom: -$persistentPlayerHeight - $persistentPlayerHeightBuffer;
   }
   .minimize-btn {
     position: absolute;
@@ -370,7 +371,7 @@ $persistentPlayerHeight: 100px;
     position: absolute;
     display: block;
     right: 12px;
-    top: -40px;
+    top: calc(-40px - $persistentPlayerHeightBuffer);
     width: 40px;
     height: 40px;
     overflow: hidden;
@@ -385,9 +386,11 @@ $persistentPlayerHeight: 100px;
       border-radius: 4px 4px 0 0;
       background-color: var(--gray-100);
       pointer-events: none;
-      transition: top 0.25s;
-      -webkit-transition: top 0.25s;
+      transition: top 0.1s;
+      -webkit-transition: top 0.1s;
       &.show {
+        transition: top 0.5s;
+        -webkit-transition: top 0.5s;
         top: 0px;
         pointer-events: all;
       }
