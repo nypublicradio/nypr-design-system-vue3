@@ -212,18 +212,29 @@ const clearDurationInterval = () => {
 }
 
 let onceFlag = null
+let scrubWhenPaused = false
 const scrubTimelineEnd = (e) => {
   emit('scrub-timeline-end')
   const percentUnit = durationSeconds.value / 100
   sound.seek(e * percentUnit)
-  togglePlay()
+  if (!scrubWhenPaused) {
+    togglePlay()
+  } else {
+    // to update the time
+    updateCurrentSeconds()
+  }
   onceFlag = null
 }
 const scrubTimelineChange = (e) => {
   if (!onceFlag) {
     emit('scrub-timeline-change')
-    togglePlay()
     onceFlag = true
+    if (playing.value) {
+      togglePlay()
+      scrubWhenPaused = false
+    } else {
+      scrubWhenPaused = true
+    }
   }
 }
 
