@@ -47,7 +47,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end'])
+const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'image-click', 'title-click', 'description-click'])
 
 const percentBuffered = computed(() => {
   return (props.buffered / props.durationSeconds) * 100
@@ -73,6 +73,7 @@ const convertTime = (val) => {
         :image-url="titleLink ? titleLink : null"
         :ratio="[1, 1]"
         role="presentation"
+        @image-click="$emit('image-click', image)"
       />
     </div>
     <div class="track-info-details">
@@ -85,7 +86,11 @@ const convertTime = (val) => {
       </div>
       <div class="track-info-title">
         <h2 v-if="title && titleLink">
-          <v-flexible-link class="track-info-title-link" :to="titleLink">
+          <v-flexible-link
+            class="track-info-title-link"
+            :to="titleLink"
+            @emit-flexible-link="emit('title-click')"
+          >
             {{
               title
             }}
@@ -100,6 +105,7 @@ const convertTime = (val) => {
           v-if="description && descriptionLink"
           class="track-info-description-link"
           :to="descriptionLink"
+          @emit-flexible-link="emit('description-click')"
         >{{ description }}</v-flexible-link>
       </div>
       <template v-if="!livestream && currentSeconds > 0">

@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+
 import Slider from 'primevue/slider'
 
 const props = defineProps({

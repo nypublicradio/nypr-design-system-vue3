@@ -40,6 +40,7 @@ const isExternal = computed(() => {
     :rel="`noopener ${props.target === '_blank' ? 'noreferrer' : ''}`"
     class="flexible-link external"
     :class="{ ['raw']: raw }"
+    @click="emit('emit-flexible-link')"
   >
     <slot name="default"></slot>
   </a>
@@ -49,6 +50,7 @@ const isExternal = computed(() => {
     :class="{ ['raw']: raw }"
     :to="to"
     v-bind="{ ...$attrs }"
+    @click="emit('emit-flexible-link')"
   >
     <slot name="default"></slot>
   </nuxt-link>

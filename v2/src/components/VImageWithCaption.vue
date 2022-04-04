@@ -117,7 +117,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['componentEvent'])
+const emit = defineEmits(['toggle-caption-expanded', 'toggle-caption-collapsed'])
 
 const refThisImg = ref(null)
 let thisWidth = ref(null)
@@ -132,9 +132,9 @@ const gothamistVariation = computed(() => {
 const toggleCaption = () => {
   captionVisible.value = !captionVisible.value
   if (captionVisible.value) {
-    emit('componentEvent', 'Expanded')
+    emit('toggle-caption-expanded')
   } else {
-    emit('componentEvent', 'Collapsed')
+    emit('toggle-caption-collapsed')
   }
 }
 
@@ -181,7 +181,7 @@ const getCurrentDimensions = computed(() => {
           target="_blank"
           aria-hidden="true"
           @click="
-            imageUrl && !allowPreview ? emit('componentEvent', imageUrl) : null
+            imageUrl && !allowPreview ? emit('image-click', imageUrl) : null
           "
         >
           <v-simple-responsive-image
@@ -232,6 +232,7 @@ const getCurrentDimensions = computed(() => {
         :to="creditUrl"
         rel="noopener"
         class="image-with-caption-credit-link"
+        @click="emit('credit-click', creditUrl)"
       >
         <span class="footer">{{ credit }}</span>
       </v-flexible-link>

@@ -97,7 +97,7 @@ const currentFile = ref(null)
 
 const isMinimized = ref(false)
 
-const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end'])
+const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click'])
 
 onMounted(() => {
   innerLoop.value = props.loop
@@ -139,6 +139,7 @@ const convertTime = (val) => {
   return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
 }
 const download = () => {
+  emit('download')
   window.open(props.file, 'download')
 }
 const goAhead15 = () => {
@@ -199,7 +200,6 @@ const volumeChange = (e) => {
 }
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
-  //handleLoadBuffer()
 }
 
 const startDurationInterval = () => {
@@ -271,6 +271,9 @@ const scrubTimelineChange = (e) => {
         :duration-seconds="durationSeconds"
         @scrub-timeline-change="scrubTimelineChange"
         @scrub-timeline-end="scrubTimelineEnd"
+        @image-click="emit('image-click')"
+        @description-click="emit('description-click')"
+        @title-click="emit('title-click')"
       />
       <template v-if="props.shouldShowCta">
         <v-volume-control
