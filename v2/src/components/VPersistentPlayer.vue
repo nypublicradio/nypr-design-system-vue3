@@ -140,7 +140,7 @@ const convertTime = (val) => {
 }
 const download = () => {
   emit('download')
-  window.open(props.file, 'download')
+  window.open(props.file, '_top')
 }
 const goAhead15 = () => {
   emit('ahead-15')
