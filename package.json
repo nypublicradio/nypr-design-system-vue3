@@ -1,7 +1,7 @@
 {
   "name": "@nypublicradio/nypr-design-system-vue3",
   "repository": "git://github.com/nypublicradio/nypr-design-system-vue3.git",
-  "version": "0.1.4",
+  "version": "0.0.0",
   "config": {
     "theme": "white-label"
   },
@@ -21,18 +21,21 @@
     "test": "jest"
   },
   "dependencies": {
+    "@nuxt/nitro-edge": "^3.0.0-27398533.8edd481",
+    "@vitejs/plugin-vue": "^2.1.0",
+    "@vueblocks/vue-use-vuex": "^0.2.11",
     "axios": "^0.25.0",
     "focus-visible": "^5.2.0",
     "gsap": "^3.9.1",
     "howler": "^2.2.3",
     "primeflex": "^3.1.3",
     "primeicons": "^5.0.0",
-    "primevue": "^3.12.1"
+    "primevue": "^3.12.1",
+    "vite": "^2.7.13",
+    "vue": "^3.2.31",
+    "vue-router": "^4.0.12"
   },
   "devDependencies": {
-    "@nuxt/nitro-edge": "^3.0.0-27398533.8edd481",
-    "@vitejs/plugin-vue": "^2.1.0",
-    "@vueblocks/vue-use-vuex": "^0.2.11",
     "@babel/core": "^7.17.2",
     "@babel/plugin-transform-runtime": "^7.17.0",
     "@babel/preset-env": "^7.16.11",
@@ -67,10 +70,7 @@
     "storybook-dark-mode": "^1.0.9",
     "style-loader": "^3.3.1",
     "ts-jest": "^27.1.3",
-    "vite": "^2.7.13",
-    "vue": "^3.2.31",
     "vue-loader": "^16.8.3",
-    "vue-router": "^4.0.12",
     "webpack": "^5.67.0"
   }
 }
