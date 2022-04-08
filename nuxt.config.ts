@@ -15,7 +15,7 @@ export default defineNuxtConfig({
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  buildModules: ['nuxt-purgecss'],
+  // buildModules: ['nuxt-purgecss'],
   css: [
     '~/src/assets/library/primeflex.min.css',
     '~/src/assets/themes/white-label/white-label.min.css',
