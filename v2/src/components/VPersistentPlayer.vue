@@ -260,11 +260,12 @@ const scrubTimelineChange = (e) => {
         aria-label="maximize player"
         @click="isMinimized = !isMinimized"
       >
-        <img
+        <!-- <img
           v-if="playing"
           src="../../../assets-shared/images/audioAnim.gif"
           alt="sounds wave animation"
-        />
+        /> -->
+        <i v-if="playing" class="pi pi-volume-up"></i>
         <i v-else class="pi pi-chevron-up"></i>
       </Button>
     </div>
