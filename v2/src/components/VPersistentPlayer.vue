@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import VVolumeControl from './VVolumeControl'
 import VTrackInfo from './VTrackInfo'
 import Button from 'primevue/button'
@@ -86,9 +86,6 @@ const durationSeconds = ref(0)
 
 const buffered = ref(0)
 const innerLoop = ref(false)
-const loaded = ref(false)
-const previousVolume = ref(35)
-const showVolume = ref(false)
 const volume = ref(50)
 
 const loading = ref(props.isLoading)
@@ -98,7 +95,7 @@ const currentFile = ref(null)
 
 const isMinimized = ref(false)
 
-const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click'])
+const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click', 'sound-ended', 'sound-loaded'])
 
 onMounted(() => {
   innerLoop.value = props.loop
@@ -135,6 +132,11 @@ onMounted(() => {
 
 })
 
+onBeforeUnmount(() => {
+  // stop the audio
+  sound.unload()
+})
+
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
   return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
@@ -167,11 +169,16 @@ const togglePlay = () => {
       html5: true,
       preload: true,
       onload: function () {
+        emit('sound-loaded')
         loading.value = false
         durationSeconds.value = sound.duration()
       },
       onloaderror: function () {
         emit('load-error')
+      },
+      onend: function () {
+        emit('sound-ended')
+        sound.unload()
       }
     })
   }
@@ -265,7 +272,7 @@ const scrubTimelineChange = (e) => {
           v-if="playing"
           :src="soundAnimGif"
           alt="sounds wave animation"
-        /> -->
+        />-->
         <i v-if="playing" class="pi pi-volume-up"></i>
         <i v-else class="pi pi-chevron-up"></i>
       </Button>
