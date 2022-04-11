@@ -92,7 +92,7 @@ const props = defineProps({
   }
 })
 
-const getServiceComponent = computed(() => defineAsyncComponent(() => import("../assets/icons/" + icons[props.service] + ".vue")))
+const getServiceComponent = computed(() => defineAsyncComponent(() => import("../../../assets-shared/icons/" + icons[props.service] + ".vue")))
 
 const socialLink = computed(() => {
   return SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username || ''

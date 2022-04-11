@@ -1,5 +1,5 @@
 import VCard from '../src/components/VCard.vue'
-import GothamistArrow from '../../assets-shared/icons/gothamist/GothamistArrow.vue'
+import GothamistArrow from '../src/assets/icons/GothamistArrow.vue'
 
 export default {
     title: 'Components-V2/VCard',
