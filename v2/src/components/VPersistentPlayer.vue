@@ -95,22 +95,7 @@ const currentFile = ref(null)
 
 const isMinimized = ref(false)
 
-const emit = defineEmits([
-  'togglePlay',
-  'volume-toggle-mute',
-  'volume-change',
-  'load-error',
-  'ahead-15',
-  'back-15',
-  'scrub-timeline-change',
-  'scrub-timeline-end',
-  'download',
-  'image-click',
-  'description-click',
-  'title-click',
-  'sound-ended',
-  'sound-loaded',
-])
+const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click', 'sound-ended', 'sound-loaded'])
 
 onMounted(() => {
   innerLoop.value = props.loop
@@ -144,6 +129,7 @@ onMounted(() => {
 
   // auto play
   props.autoPlay ? togglePlay() : null
+
 })
 
 onBeforeUnmount(() => {
@@ -165,9 +151,8 @@ const goAhead15 = () => {
   updateCurrentSeconds()
 }
 const goBack15 = () => {
-  emit('back-15')(sound.seek() > 15)
-    ? sound.seek(sound.seek() - 15)
-    : sound.seek(0)
+  emit('back-15')
+    (sound.seek() > 15) ? sound.seek(sound.seek() - 15) : sound.seek(0)
   updateCurrentSeconds()
 }
 
@@ -194,7 +179,7 @@ const togglePlay = () => {
       onend: function () {
         emit('sound-ended')
         sound.unload()
-      },
+      }
     })
   }
   // Play or pause the sound.
@@ -260,10 +245,11 @@ const scrubTimelineChange = (e) => {
     }
   }
 }
+
 </script>
 
 <template>
-  <div class="persistent-player" :class="{ minimized: isMinimized }">
+  <div class="persistent-player" :class="{ 'minimized': isMinimized }">
     <Button
       v-if="props.canMinimize"
       title="Minimize Player"
@@ -278,7 +264,7 @@ const scrubTimelineChange = (e) => {
         v-if="props.canMinimize"
         title="maximize Player"
         class="maximize-btn p-button-icon-only"
-        :class="{ show: isMinimized }"
+        :class="{ 'show': isMinimized }"
         aria-label="maximize player"
         @click="isMinimized = !isMinimized"
       >
