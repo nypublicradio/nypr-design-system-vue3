@@ -1,14 +1,14 @@
 <script setup>
-import Slider from "primevue/slider";
+import Slider from 'primevue/slider'
 
 const props = defineProps({
   progress: {
     type: Number,
     default: 0,
   },
-});
+})
 
-const emit = defineEmits(["scrub-timeline-change", "scrub-timeline-end"]);
+const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end'])
 </script>
 
 <template>

@@ -1,10 +1,10 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
-import VVolumeControl from "./VVolumeControl";
-import VTrackInfo from "./VTrackInfo";
-import Button from "primevue/button";
-import { Howl, Howler } from "howler";
-import soundAnimGif from "../assets/images/audioAnim.gif";
+import { ref, onMounted, onBeforeUnmount } from 'vue'
+import VVolumeControl from './VVolumeControl'
+import VTrackInfo from './VTrackInfo'
+import Button from 'primevue/button'
+import { Howl, Howler } from 'howler'
+import soundAnimGif from '../assets/images/audioAnim.gif'
 
 const props = defineProps({
   autoPlay: {
@@ -79,185 +79,187 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-});
-let interval = null;
-const currentSeconds = ref(0);
-const durationSeconds = ref(0);
+})
+let interval = null
+const currentSeconds = ref(0)
+const durationSeconds = ref(0)
 
-const buffered = ref(0);
-const innerLoop = ref(false);
-const volume = ref(50);
+const buffered = ref(0)
+const innerLoop = ref(false)
+const volume = ref(50)
 
-const loading = ref(props.isLoading);
-const playing = ref(props.isPlaying);
-const muted = ref(props.isMuted);
-const currentFile = ref(null);
+const loading = ref(props.isLoading)
+const playing = ref(props.isPlaying)
+const muted = ref(props.isMuted)
+const currentFile = ref(null)
 
-const isMinimized = ref(false);
+const isMinimized = ref(false)
 
 const emit = defineEmits([
-  "togglePlay",
-  "volume-toggle-mute",
-  "volume-change",
-  "load-error",
-  "ahead-15",
-  "back-15",
-  "scrub-timeline-change",
-  "scrub-timeline-end",
-  "download",
-  "image-click",
-  "description-click",
-  "title-click",
-  "sound-ended",
-  "sound-loaded",
-]);
+  'togglePlay',
+  'volume-toggle-mute',
+  'volume-change',
+  'load-error',
+  'ahead-15',
+  'back-15',
+  'scrub-timeline-change',
+  'scrub-timeline-end',
+  'download',
+  'image-click',
+  'description-click',
+  'title-click',
+  'sound-ended',
+  'sound-loaded',
+])
 
 onMounted(() => {
-  innerLoop.value = props.loop;
+  innerLoop.value = props.loop
   // keyboard accessibility
-  window.addEventListener("keydown", (event) => {
+  window.addEventListener('keydown', (event) => {
     switch (event.code) {
-      case "Space":
-        togglePlay();
-        break;
-      case "Enter":
-        togglePlay();
-        break;
-      case "ArrowUp":
+      case 'Space':
+        togglePlay()
+        break
+      case 'Enter':
+        togglePlay()
+        break
+      case 'ArrowUp':
         if (volume.value < 100) {
-          volume.value++;
+          volume.value++
         }
-        break;
-      case "ArrowDown":
+        break
+      case 'ArrowDown':
         if (volume.value > 0) {
-          volume.value--;
+          volume.value--
         }
-        break;
-      case "ArrowLeft":
-        goBack15();
-        break;
-      case "ArrowRight":
-        goAhead15();
-        break;
+        break
+      case 'ArrowLeft':
+        goBack15()
+        break
+      case 'ArrowRight':
+        goAhead15()
+        break
     }
-  });
+  })
 
   // auto play
-  props.autoPlay ? togglePlay() : null;
-});
+  props.autoPlay ? togglePlay() : null
+})
 
 onBeforeUnmount(() => {
   // stop the audio
-  sound.unload();
-});
+  sound.unload()
+})
 
 const convertTime = (val) => {
-  const hhmmss = new Date(val * 1000).toISOString().substr(11, 8);
-  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss;
-};
+  const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
+  return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
+}
 const download = () => {
-  emit("download");
-  window.open(props.file, "_top");
-};
+  emit('download')
+  window.open(props.file, '_top')
+}
 const goAhead15 = () => {
-  emit("ahead-15");
-  sound.seek(sound.seek() + 15);
-  updateCurrentSeconds();
-};
+  emit('ahead-15')
+  sound.seek(sound.seek() + 15)
+  updateCurrentSeconds()
+}
 const goBack15 = () => {
-  emit("back-15")(sound.seek() > 15) ? sound.seek(sound.seek() - 15) : sound.seek(0);
-  updateCurrentSeconds();
-};
+  emit('back-15')(sound.seek() > 15)
+    ? sound.seek(sound.seek() - 15)
+    : sound.seek(0)
+  updateCurrentSeconds()
+}
 
-let sound = null;
+let sound = null
 const togglePlay = () => {
-  emit("togglePlay");
+  emit('togglePlay')
   if (!sound || !currentFile.value === props.file) {
     // destoy old sound if one exists
-    sound ? sound.unload() : null;
-    currentFile.value = props.file;
-    loading.value = true;
+    sound ? sound.unload() : null
+    currentFile.value = props.file
+    loading.value = true
     sound = new Howl({
       src: [props.file],
       html5: true,
       preload: true,
       onload: function () {
-        emit("sound-loaded");
-        loading.value = false;
-        durationSeconds.value = sound.duration();
+        emit('sound-loaded')
+        loading.value = false
+        durationSeconds.value = sound.duration()
       },
       onloaderror: function () {
-        emit("load-error");
+        emit('load-error')
       },
       onend: function () {
-        emit("sound-ended");
-        sound.unload();
+        emit('sound-ended')
+        sound.unload()
       },
-    });
+    })
   }
   // Play or pause the sound.
   if (sound.playing()) {
-    playing.value = false;
-    sound.pause();
-    clearDurationInterval();
+    playing.value = false
+    sound.pause()
+    clearDurationInterval()
   } else {
-    playing.value = true;
-    startDurationInterval();
-    sound.play();
+    playing.value = true
+    startDurationInterval()
+    sound.play()
   }
   // Change global volume init
-  Howler.volume(volume.value);
-};
+  Howler.volume(volume.value)
+}
 
 const volumeToggleMute = (e) => {
-  emit("volume-toggle-mute");
-  muted.value = !muted.value;
-  sound.mute(muted.value);
-};
+  emit('volume-toggle-mute')
+  muted.value = !muted.value
+  sound.mute(muted.value)
+}
 
 const volumeChange = (e) => {
-  emit("volume-change");
-  sound.volume(e / 100);
-};
+  emit('volume-change')
+  sound.volume(e / 100)
+}
 const updateCurrentSeconds = () => {
-  currentSeconds.value = sound.seek();
-};
+  currentSeconds.value = sound.seek()
+}
 
 const startDurationInterval = () => {
   interval = setInterval(() => {
-    updateCurrentSeconds();
-  }, 1000);
-};
+    updateCurrentSeconds()
+  }, 1000)
+}
 const clearDurationInterval = () => {
-  clearInterval(interval);
-};
+  clearInterval(interval)
+}
 
-let onceFlag = null;
-let scrubWhenPaused = false;
+let onceFlag = null
+let scrubWhenPaused = false
 const scrubTimelineEnd = (e) => {
-  emit("scrub-timeline-end");
-  const percentUnit = durationSeconds.value / 100;
-  sound.seek(e * percentUnit);
+  emit('scrub-timeline-end')
+  const percentUnit = durationSeconds.value / 100
+  sound.seek(e * percentUnit)
   if (!scrubWhenPaused && !playing.value) {
-    togglePlay();
+    togglePlay()
   } else {
     // to update the time
-    updateCurrentSeconds();
+    updateCurrentSeconds()
   }
-  onceFlag = null;
-};
+  onceFlag = null
+}
 const scrubTimelineChange = (e) => {
   if (!onceFlag) {
-    emit("scrub-timeline-change");
-    onceFlag = true;
+    emit('scrub-timeline-change')
+    onceFlag = true
     if (playing.value) {
-      togglePlay();
-      scrubWhenPaused = false;
+      togglePlay()
+      scrubWhenPaused = false
     } else {
-      scrubWhenPaused = true;
+      scrubWhenPaused = true
     }
   }
-};
+}
 </script>
 
 <template>
@@ -281,7 +283,6 @@ const scrubTimelineChange = (e) => {
         @click="isMinimized = !isMinimized"
       >
         <img v-if="playing" :src="soundAnimGif" alt="sounds wave animation" />
-        <!-- <i v-if="playing" class="pi pi-volume-up"></i> -->
         <i v-else class="pi pi-chevron-up"></i>
       </Button>
     </div>
@@ -310,10 +311,6 @@ const scrubTimelineChange = (e) => {
           @volume-toggle-mute="volumeToggleMute"
           @volume-change="volumeChange"
         />
-        <!-- <button class="button player-cta-play-button" @click="togglePlay">
-          <play-simple class="button-icon" />
-          <span class="button-text">Listen Live</span>
-        </button>-->
         <Button
           label="Listen Live"
           icon="pi pi-play"
