@@ -1,6 +1,5 @@
 <script setup>
 import { ref, computed, onBeforeMount, onMounted } from 'vue'
-//import GothamistArrow from '../../../assets-shared/icons/gothamist/GothamistArrow'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage'
 import VFlexibleLink from './VFlexibleLink'
 import Button from 'primevue/button'

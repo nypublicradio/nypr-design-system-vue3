@@ -4,7 +4,7 @@ import VVolumeControl from './VVolumeControl'
 import VTrackInfo from './VTrackInfo'
 import Button from 'primevue/button'
 import { Howl, Howler } from 'howler'
-//import soundAnimGif from '../../../assets-shared/images/audioAnim.gif';
+import soundAnimGif from '../assets/images/audioAnim.gif'
 
 const props = defineProps({
   autoPlay: {
@@ -268,12 +268,8 @@ const scrubTimelineChange = (e) => {
         aria-label="maximize player"
         @click="isMinimized = !isMinimized"
       >
-        <!-- <img
-          v-if="playing"
-          :src="soundAnimGif"
-          alt="sounds wave animation"
-        />-->
-        <i v-if="playing" class="pi pi-volume-up"></i>
+        <img v-if="playing" :src="soundAnimGif" alt="sounds wave animation" />
+        <!-- <i v-if="playing" class="pi pi-volume-up"></i> -->
         <i v-else class="pi pi-chevron-up"></i>
       </Button>
     </div>
