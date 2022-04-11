@@ -225,7 +225,7 @@ const scrubTimelineEnd = (e) => {
   emit('scrub-timeline-end')
   const percentUnit = durationSeconds.value / 100
   sound.seek(e * percentUnit)
-  if (!scrubWhenPaused) {
+  if (!scrubWhenPaused && !playing.value) {
     togglePlay()
   } else {
     // to update the time
@@ -269,7 +269,6 @@ const scrubTimelineChange = (e) => {
         @click="isMinimized = !isMinimized"
       >
         <img v-if="playing" :src="soundAnimGif" alt="sounds wave animation" />
-        <!-- <i v-if="playing" class="pi pi-volume-up"></i> -->
         <i v-else class="pi pi-chevron-up"></i>
       </Button>
     </div>
@@ -298,10 +297,6 @@ const scrubTimelineChange = (e) => {
           @volume-toggle-mute="volumeToggleMute"
           @volume-change="volumeChange"
         />
-        <!-- <button class="button player-cta-play-button" @click="togglePlay">
-          <play-simple class="button-icon" />
-          <span class="button-text">Listen Live</span>
-        </button>-->
         <Button
           label="Listen Live"
           icon="pi pi-play"
@@ -362,6 +357,7 @@ const scrubTimelineChange = (e) => {
 <style lang="scss">
 $persistentPlayerHeight: 100px;
 $persistentPlayerHeightBuffer: 20px;
+
 .persistent-player {
   bottom: 0;
   left: 0;
@@ -374,18 +370,22 @@ $persistentPlayerHeightBuffer: 20px;
   background-color: var(--gray-100);
   transition: bottom 0.25s;
   -webkit-transition: bottom 0.25s;
+
   &.minimized {
     bottom: -$persistentPlayerHeight - $persistentPlayerHeightBuffer;
   }
+
   .minimize-btn {
     position: absolute;
     right: 12px;
     top: 2px;
     padding: 0.4rem 0.2rem !important;
+
     .pi {
       font-size: 0.7rem;
     }
   }
+
   .maximize-btn-holder {
     position: absolute;
     display: block;
@@ -394,6 +394,7 @@ $persistentPlayerHeightBuffer: 20px;
     width: 40px;
     height: 40px;
     overflow: hidden;
+
     .maximize-btn.p-button {
       position: absolute;
       display: block;
@@ -407,36 +408,44 @@ $persistentPlayerHeightBuffer: 20px;
       pointer-events: none;
       transition: top 0.1s;
       -webkit-transition: top 0.1s;
+
       &.show {
         transition: top 0.5s;
         -webkit-transition: top 0.5s;
         top: 0px;
         pointer-events: all;
       }
+
       &:hover {
         background-color: var(--gray-300);
       }
+
       .pi {
         font-size: 0.7rem;
       }
+
       img {
         width: 100%;
         height: auto;
       }
     }
   }
+
   .player-controls {
     display: flex;
     align-items: center;
     height: 100%;
     gap: 16px;
+
     .player-cta-play-button {
       min-width: 150px;
     }
+
     .play-button {
       min-width: 55px;
     }
   }
+
   a,
   a:visited,
   a:active {
