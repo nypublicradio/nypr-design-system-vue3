@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { computed } from 'vue'
 import VImageWithCaption from './VImageWithCaption'
 import VFlexibleLink from './VFlexibleLink'
 import VProgressScrubber from './VProgressScrubber'
@@ -47,9 +47,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'image-click', 'title-click', 'description-click'])
-
-const progress = ref(percentComplete)
+const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'image-click', 'title-click', 'description-click', 'timeline-click'])
 
 const percentBuffered = computed(() => {
   return (props.buffered / props.durationSeconds) * 100
@@ -57,13 +55,6 @@ const percentBuffered = computed(() => {
 const percentComplete = computed(() => {
   return (props.currentSeconds / props.durationSeconds) * 100
 })
-
-const scrubTimelineChange = (e) => {
-  console.log('e -= ', e)
-  console.log('progress.value -= ', progress.value)
-  progress.value = e
-  emit('scrub-timeline-change', e)
-}
 
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
@@ -125,8 +116,9 @@ const convertTime = (val) => {
         <v-progress-scrubber
           class="pl-0 md:pl-1"
           :progress="percentComplete"
-          @scrub-timeline-change="scrubTimelineChange"
+          @scrub-timeline-change="emit('scrub-timeline-change', $event)"
           @scrub-timeline-end="emit('scrub-timeline-end', $event)"
+          @timeline-click="emit('timeline-click', $event)"
         />
         <div v-if="durationSeconds" class="track-info-time footer">
           <span class="track-info-time-current">

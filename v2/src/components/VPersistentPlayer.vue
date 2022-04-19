@@ -105,7 +105,7 @@ const playBtnRef = ref(null)
 
 let sound = null
 
-const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click', 'sound-ended', 'sound-loaded', 'sound-looping'])
+const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click', 'sound-ended', 'sound-loaded', 'sound-looping', 'timeline-click'])
 
 onMounted(() => {
   // keyboard accessibility
@@ -275,6 +275,19 @@ const scrubTimelineChange = (e) => {
   }
 }
 
+const timelineClick = (e) => {
+  emit('timeline-click')
+  console.log('clicked = ', e)
+  const percentUnit = durationSeconds.value / 100
+  sound.seek(e * percentUnit)
+  updateCurrentSeconds()
+  if (!playing.value) {
+    onceFlag = null
+    scrubWhenPaused = false
+    togglePlay()
+  }
+}
+
 </script>
 
 <template>
@@ -306,6 +319,7 @@ const scrubTimelineChange = (e) => {
         :duration-seconds="durationSeconds"
         @scrub-timeline-change="scrubTimelineChange"
         @scrub-timeline-end="scrubTimelineEnd"
+        @timeline-click="timelineClick"
         @image-click="emit('image-click')"
         @description-click="emit('description-click')"
         @title-click="emit('title-click')"

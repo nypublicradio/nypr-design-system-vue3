@@ -18,7 +18,7 @@ const previousProgress = ref(props.progress)
 //   emit('scrub-timeline-change', previousProgress)
 // })
 
-const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end'])
+const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'timeline-click'])
 </script>
 
 <template>
@@ -29,6 +29,7 @@ const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end'])
       :max="100"
       @slideend="emit('scrub-timeline-end', progress)"
       @change="emit('scrub-timeline-change', progress)"
+      @click="emit('timeline-click', progress)"
     />
   </div>
 </template>
