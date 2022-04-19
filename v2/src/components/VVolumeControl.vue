@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onUpdated } from 'vue'
 import Slider from 'primevue/slider'
 
 const props = defineProps({
@@ -14,12 +14,21 @@ const props = defineProps({
   showVolume: {
     type: Boolean,
     default: false
+  },
+  disabled: {
+    type: Boolean,
+    default: false
   }
 })
 
 const emit = defineEmits(['volume-toggle-mute', 'volume-change'])
 
-let previousVolume = ref(props.volume)
+const previousVolume = ref(props.volume)
+
+onUpdated(() => {
+  previousVolume.value = props.volume
+  emit('volume-change', props.volume)
+})
 
 </script>
 
@@ -28,6 +37,7 @@ let previousVolume = ref(props.volume)
     <Slider
       v-show="!props.isMuted"
       v-model="previousVolume"
+      :disabled="disabled"
       class="volume-control-slider"
       :min="0"
       :max="100"
@@ -49,12 +59,6 @@ let previousVolume = ref(props.volume)
 
 <style lang="scss">
 .volume-control {
-  display: none;
-  @media all and (min-width: $md) {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-  }
   &:hover,
   &:focus-within,
   &:focus-visible {
@@ -91,9 +95,11 @@ let previousVolume = ref(props.volume)
     max-width: 36px;
   }
   .volume-control-slider {
-    transition: width var(--transition-duration), opacity var(--transition-duration),
+    transition: width var(--transition-duration),
+      opacity var(--transition-duration),
       margin-right var(--transition-duration);
-    -webkit-transition: width var(--transition-duration), opacity var(--transition-duration),
+    -webkit-transition: width var(--transition-duration),
+      opacity var(--transition-duration),
       margin-right var(--transition-duration);
     margin-right: 0;
     width: 0px;

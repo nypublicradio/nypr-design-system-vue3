@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, computed } from 'vue'
 import VImageWithCaption from './VImageWithCaption'
 import VFlexibleLink from './VFlexibleLink'
 import VProgressScrubber from './VProgressScrubber'
@@ -49,12 +49,21 @@ const props = defineProps({
 
 const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'image-click', 'title-click', 'description-click'])
 
+const progress = ref(percentComplete)
+
 const percentBuffered = computed(() => {
   return (props.buffered / props.durationSeconds) * 100
 })
 const percentComplete = computed(() => {
   return (props.currentSeconds / props.durationSeconds) * 100
 })
+
+const scrubTimelineChange = (e) => {
+  console.log('e -= ', e)
+  console.log('progress.value -= ', progress.value)
+  progress.value = e
+  emit('scrub-timeline-change', e)
+}
 
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
@@ -77,41 +86,46 @@ const convertTime = (val) => {
       />
     </div>
     <div class="track-info-details">
-      <div v-if="livestream" class="track-info-livestream">
-        <div class="track-info-livestream-indicator">
-          <span class="track-info-livestream-indicator-text">Live</span>
-          <span class="track-info-livestream-indicator-dot pulse" />
+      <div class="overflow-hidden">
+        <div v-if="livestream" class="track-info-livestream">
+          <div class="track-info-livestream-indicator">
+            <span class="track-info-livestream-indicator-text">Live</span>
+            <span class="track-info-livestream-indicator-dot pulse" />
+          </div>
+          <div class="track-info-livestream-station">{{ station }}</div>
         </div>
-        <div class="track-info-livestream-station">{{ station }}</div>
-      </div>
-      <div class="track-info-title">
-        <h2 v-if="title && titleLink">
-          <v-flexible-link
-            class="track-info-title-link"
-            :to="titleLink"
-            @emit-flexible-link="emit('title-click')"
-          >
-            {{
-              title
-            }}
-          </v-flexible-link>
-        </h2>
-        <h2 v-if="title && !titleLink">{{ title }}</h2>
-      </div>
-      <div v-if="description" class="track-info-description">
-        <p v-if="description && !descriptionLink" class="track-info-description">{{ description }}</p>
+        <div class="track-info-title">
+          <h2 v-if="title && titleLink">
+            <v-flexible-link
+              class="track-info-title-link"
+              :to="titleLink"
+              @emit-flexible-link="emit('title-click')"
+              v-html="title"
+            />
+          </h2>
+          <h2 v-if="title && !titleLink" v-html="title"></h2>
+        </div>
+        <div v-if="description" class="track-info-description">
+          <p
+            v-if="description && !descriptionLink"
+            class="track-info-description"
+            v-html="description"
+          ></p>
 
-        <v-flexible-link
-          v-if="description && descriptionLink"
-          class="track-info-description-link"
-          :to="descriptionLink"
-          @emit-flexible-link="emit('description-click')"
-        >{{ description }}</v-flexible-link>
+          <v-flexible-link
+            v-if="description && descriptionLink"
+            class="track-info-description-link"
+            :to="descriptionLink"
+            @emit-flexible-link="emit('description-click')"
+            v-html="description"
+          />
+        </div>
       </div>
       <template v-if="!livestream && currentSeconds > 0">
         <v-progress-scrubber
+          class="pl-0 md:pl-1"
           :progress="percentComplete"
-          @scrub-timeline-change="emit('scrub-timeline-change', $event)"
+          @scrub-timeline-change="scrubTimelineChange"
           @scrub-timeline-end="emit('scrub-timeline-end', $event)"
         />
         <div v-if="durationSeconds" class="track-info-time footer">
@@ -142,7 +156,6 @@ $track-info-image-size: 84px;
   height: inherit;
   flex: auto;
   align-self: center;
-  overflow: hidden;
   .track-info-image {
     display: none;
     @media all and (min-width: $md) {
@@ -157,12 +170,12 @@ $track-info-image-size: 84px;
     }
   } // track-info-image
   .track-info-details {
-    overflow: hidden;
-    width: 100%;
+    width: 0;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2px;
+    gap: 6px;
     line-height: normal;
     &* {
       line-height: normal;
