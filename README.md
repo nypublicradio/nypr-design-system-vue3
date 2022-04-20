@@ -26,8 +26,8 @@ src/assets/themes/
 ## global scss location
 src/assets/library/
 
-## build Theme (replace "white-label" with your theme name)
-npm run build-theme white-label 
+## build Themes 
+npm run build-themes
 
 ## font size scale
 --font-size = 16px
