@@ -7,5 +7,4 @@ nuxt.d.ts
 .nuxt-storybook
 storybook-static
 .vscode
-*.css
 coverage/
