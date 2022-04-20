@@ -1,5 +1,4 @@
 <script setup>
-import { ref, onUpdated } from 'vue'
 import Slider from 'primevue/slider'
 
 const props = defineProps({
@@ -8,15 +7,6 @@ const props = defineProps({
     default: 0,
   }
 })
-
-const previousProgress = ref(props.progress)
-
-// onUpdated(() => {
-//   console.log('props.progress -= ', props.progress)
-//   console.log('previousProgress -= ', previousProgress.value)
-//   previousProgress.value = props.progress
-//   emit('scrub-timeline-change', previousProgress)
-// })
 
 const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'timeline-click'])
 </script>

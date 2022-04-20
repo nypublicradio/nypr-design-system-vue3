@@ -251,7 +251,6 @@ const clearDurationInterval = () => {
 let onceFlag = null
 let scrubWhenPaused = false
 const scrubTimelineEnd = (e) => {
-  console.log('end = ', e)
   emit('scrub-timeline-end')
   const percentUnit = durationSeconds.value / 100
   sound.seek(e * percentUnit)
@@ -264,7 +263,6 @@ const scrubTimelineEnd = (e) => {
   onceFlag = null
 }
 const scrubTimelineChange = (e) => {
-  console.log('change = ', e)
   if (!onceFlag) {
     emit('scrub-timeline-change')
     onceFlag = true
