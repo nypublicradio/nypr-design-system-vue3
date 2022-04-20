@@ -33,7 +33,7 @@ onUpdated(() => {
 </script>
 
 <template>
-  <div class="volume-control" :class="{ 'show-volume': props.showVolume }">
+  <div class="volume-control align-items-center" :class="{ 'show-volume': props.showVolume }">
     <Slider
       v-show="!props.isMuted"
       v-model="previousVolume"
@@ -45,6 +45,7 @@ onUpdated(() => {
     />
     <button
       class="volume-control-icon"
+      :disabled="disabled"
       :aria-label="props.isMuted ? 'unmute' : 'mute'"
       @click="emit('volume-toggle-mute')"
       @keypress.space.enter="mute"

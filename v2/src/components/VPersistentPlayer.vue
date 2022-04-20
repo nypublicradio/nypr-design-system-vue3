@@ -251,6 +251,7 @@ const clearDurationInterval = () => {
 let onceFlag = null
 let scrubWhenPaused = false
 const scrubTimelineEnd = (e) => {
+  console.log('end = ', e)
   emit('scrub-timeline-end')
   const percentUnit = durationSeconds.value / 100
   sound.seek(e * percentUnit)
@@ -263,6 +264,7 @@ const scrubTimelineEnd = (e) => {
   onceFlag = null
 }
 const scrubTimelineChange = (e) => {
+  console.log('change = ', e)
   if (!onceFlag) {
     emit('scrub-timeline-change')
     onceFlag = true
@@ -277,15 +279,7 @@ const scrubTimelineChange = (e) => {
 
 const timelineClick = (e) => {
   emit('timeline-click')
-  console.log('clicked = ', e)
-  const percentUnit = durationSeconds.value / 100
-  sound.seek(e * percentUnit)
-  updateCurrentSeconds()
-  if (!playing.value) {
-    onceFlag = null
-    scrubWhenPaused = false
-    togglePlay()
-  }
+  scrubTimelineEnd(e)
 }
 
 </script>
@@ -334,6 +328,7 @@ const timelineClick = (e) => {
           @volume-change="volumeChange"
         />
         <Button
+          :disabled="loading"
           label="Listen Live"
           icon="pi pi-play"
           class="the-play-button player-cta-play-button"
@@ -360,6 +355,7 @@ const timelineClick = (e) => {
           <i class="pi pi-replay"></i>
         </Button>
         <Button
+          :disabled="loading"
           :title="playing ? 'Pause' : 'Play'"
           class="the-play-button play-button p-button-icon-only"
           @click="togglePlay"
