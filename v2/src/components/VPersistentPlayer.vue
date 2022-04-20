@@ -51,6 +51,14 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  hideDownloadMobile: {
+    type: Boolean,
+    default: true,
+  },
+  hideSkipMobile: {
+    type: Boolean,
+    default: true,
+  },
   showTrack: {
     type: Boolean,
     default: true,
@@ -85,7 +93,6 @@ const currentSeconds = ref(0)
 const durationSeconds = ref(0)
 
 const buffered = ref(0)
-const innerLoop = ref(false)
 const volume = ref(50)
 
 const loading = ref(props.isLoading)
@@ -94,27 +101,23 @@ const muted = ref(props.isMuted)
 const currentFile = ref(null)
 
 const isMinimized = ref(false)
+const playBtnRef = ref(null)
 
-const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click', 'sound-ended', 'sound-loaded'])
+let sound = null
+
+const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click', 'sound-ended', 'sound-loaded', 'sound-looping', 'timeline-click'])
 
 onMounted(() => {
-  innerLoop.value = props.loop
   // keyboard accessibility
   window.addEventListener('keydown', (event) => {
     switch (event.code) {
-      case 'Space':
-        togglePlay()
-        break
-      case 'Enter':
-        togglePlay()
-        break
       case 'ArrowUp':
-        if (volume.value < 100) {
+        if (volume.value < 100 && sound) {
           volume.value++
         }
         break
       case 'ArrowDown':
-        if (volume.value > 0) {
+        if (volume.value > 0 && sound) {
           volume.value--
         }
         break
@@ -127,6 +130,21 @@ onMounted(() => {
     }
   })
 
+  window.addEventListener('keyup', (event) => {
+    // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.  
+    var isPlayButtonActive = document.getElementsByClassName('the-play-button')[0] === document.activeElement
+    if (!isPlayButtonActive) {
+      switch (event.code) {
+        case 'Space':
+          togglePlay()
+          break
+        case 'Enter':
+          togglePlay()
+          break
+      }
+    }
+  })
+
   // auto play
   props.autoPlay ? togglePlay() : null
 
@@ -134,7 +152,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   // stop the audio
-  sound.unload()
+  sound ? sound.unload() : null
 })
 
 const convertTime = (val) => {
@@ -146,17 +164,21 @@ const download = () => {
   window.open(props.file, '_top')
 }
 const goAhead15 = () => {
-  emit('ahead-15')
-  sound.seek(sound.seek() + 15)
-  updateCurrentSeconds()
+  if (sound) {
+    emit('ahead-15')
+    sound.seek(sound.seek() + 15)
+    updateCurrentSeconds()
+  }
 }
 const goBack15 = () => {
-  emit('back-15')
-    (sound.seek() > 15) ? sound.seek(sound.seek() - 15) : sound.seek(0)
-  updateCurrentSeconds()
+  if (sound) {
+    emit('back-15')
+    sound.seek() > 15 ? sound.seek(sound.seek() - 15) : sound.seek(0.1)
+    updateCurrentSeconds()
+  }
 }
 
-let sound = null
+
 const togglePlay = () => {
   emit('togglePlay')
   if (!sound || !currentFile.value === props.file) {
@@ -178,12 +200,18 @@ const togglePlay = () => {
       },
       onend: function () {
         emit('sound-ended')
-        sound.unload()
+        if (props.loop) {
+          emit('sound-looping')
+          sound.seek(0.1)
+          sound.play()
+        } else {
+          sound.unload()
+        }
       }
     })
   }
   // Play or pause the sound.
-  if (sound.playing()) {
+  if (sound && sound.playing()) {
     playing.value = false
     sound.pause()
     clearDurationInterval()
@@ -205,6 +233,7 @@ const volumeToggleMute = (e) => {
 const volumeChange = (e) => {
   emit('volume-change')
   sound.volume(e / 100)
+  volume.value = e
 }
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
@@ -246,19 +275,15 @@ const scrubTimelineChange = (e) => {
   }
 }
 
+const timelineClick = (e) => {
+  emit('timeline-click')
+  scrubTimelineEnd(e)
+}
+
 </script>
 
 <template>
   <div class="persistent-player" :class="{ 'minimized': isMinimized }">
-    <Button
-      v-if="props.canMinimize"
-      title="Minimize Player"
-      class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
-      aria-label="minimize player"
-      @click="isMinimized = !isMinimized"
-    >
-      <i class="pi pi-chevron-down"></i>
-    </Button>
     <div class="maximize-btn-holder">
       <Button
         v-if="props.canMinimize"
@@ -286,26 +311,32 @@ const scrubTimelineChange = (e) => {
         :duration-seconds="durationSeconds"
         @scrub-timeline-change="scrubTimelineChange"
         @scrub-timeline-end="scrubTimelineEnd"
+        @timeline-click="timelineClick"
         @image-click="emit('image-click')"
         @description-click="emit('description-click')"
         @title-click="emit('title-click')"
       />
       <template v-if="props.shouldShowCta">
         <v-volume-control
+          class="hidden md:flex"
+          :disabled="!currentFile"
           :volume="volume"
           :is-muted="muted"
           @volume-toggle-mute="volumeToggleMute"
           @volume-change="volumeChange"
         />
         <Button
+          :disabled="loading"
           label="Listen Live"
           icon="pi pi-play"
-          class="player-cta-play-button"
+          class="the-play-button player-cta-play-button"
           @click="togglePlay"
         ></Button>
       </template>
       <template v-else>
         <v-volume-control
+          class="hidden md:flex"
+          :disabled="!currentFile"
           :volume="volume"
           :is-muted="muted"
           @volume-toggle-mute="volumeToggleMute"
@@ -315,14 +346,16 @@ const scrubTimelineChange = (e) => {
           v-if="props.showSkip && !props.livestream"
           title="Go Back 15 Seconds"
           class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
+          :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
           aria-label="go back 15 seconds"
           @click="goBack15"
         >
           <i class="pi pi-replay"></i>
         </Button>
         <Button
+          :disabled="loading"
           :title="playing ? 'Pause' : 'Play'"
-          class="play-button p-button-icon-only"
+          class="the-play-button play-button p-button-icon-only"
           @click="togglePlay"
         >
           <i v-if="!playing && !loading" class="pi pi-play"></i>
@@ -333,6 +366,7 @@ const scrubTimelineChange = (e) => {
           v-if="props.showSkip && !props.livestream"
           title="Go Ahead 15 Seconds"
           class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
+          :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
           aria-label="go ahead 15 seconds"
           @click="goAhead15"
         >
@@ -344,11 +378,21 @@ const scrubTimelineChange = (e) => {
         title="Download"
         tabindex="0"
         class="player-download-icon p-button-icon-only p-button-text p-button-secondary"
+        :class="{ [`hidden md:flex`]: props.hideDownloadMobile }"
         aria-label="download"
         @click="download"
         @keypress.space.enter="download"
       >
         <i class="pi pi-download download-icon"></i>
+      </Button>
+      <Button
+        v-if="props.canMinimize"
+        title="Minimize Player"
+        class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
+        aria-label="minimize player"
+        @click="isMinimized = !isMinimized"
+      >
+        <i class="pi pi-chevron-down"></i>
       </Button>
     </div>
   </div>
@@ -377,8 +421,8 @@ $persistentPlayerHeightBuffer: 20px;
 
   .minimize-btn {
     position: absolute;
-    right: 12px;
-    top: 2px;
+    right: 10px;
+    top: 3px;
     padding: 0.4rem 0.2rem !important;
 
     .pi {

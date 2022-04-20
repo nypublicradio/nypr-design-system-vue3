@@ -178,9 +178,16 @@
 [data-style-mode='dark'] {
     /* --primary-color: #{$dangerColor};
     --primary-color-rgb: #{hex2rgb($dangerColor)}; */
-    //--link-button-color: var(--primary-light-color);
+    --link-button-color: var(--primary-light-color);
     --text-color: var(--white100);
     --text-color-secondary: var(--white300);
+
+    --surface-a: #{$black};
+    --surface-b: #{$gray-900};
+    --surface-c: #{$gray-700};
+    --surface-d: #{$gray-800};
+    --surface-e: #{$black};
+    --surface-f: #{$black};
 
     --surface-ground: #{$gray-700};
     --surface-section: #{$gray-900};
