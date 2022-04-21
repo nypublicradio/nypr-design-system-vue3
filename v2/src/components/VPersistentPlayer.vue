@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { ref, onMounted, onBeforeUnmount, watch, watchEffect, onUpdated, reactive } from 'vue'
 import VVolumeControl from './VVolumeControl'
 import VTrackInfo from './VTrackInfo'
 import Button from 'primevue/button'
@@ -35,7 +35,7 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  isPlaying: {
+  playToggle: {
     type: Boolean,
     default: false,
   },
@@ -96,12 +96,12 @@ const buffered = ref(0)
 const volume = ref(50)
 
 const loading = ref(props.isLoading)
-const playing = ref(props.isPlaying)
+const playing = ref(null)
+const playToggle = ref(props.playToggle)
 const muted = ref(props.isMuted)
 const currentFile = ref(null)
 
 const isMinimized = ref(false)
-const playBtnRef = ref(null)
 
 let sound = null
 
@@ -180,7 +180,6 @@ const goBack15 = () => {
 
 
 const togglePlay = () => {
-  emit('togglePlay')
   if (!sound || !currentFile.value === props.file) {
     // destoy old sound if one exists
     sound ? sound.unload() : null
@@ -195,8 +194,8 @@ const togglePlay = () => {
         loading.value = false
         durationSeconds.value = sound.duration()
       },
-      onloaderror: function () {
-        emit('load-error')
+      onloaderror: function (id, errorCode) {
+        emit('load-error', [id, errorCode])
       },
       onend: function () {
         emit('sound-ended')
@@ -212,11 +211,13 @@ const togglePlay = () => {
   }
   // Play or pause the sound.
   if (sound && sound.playing()) {
+    emit('togglePlay', false)
     playing.value = false
     sound.pause()
     clearDurationInterval()
   } else {
     playing.value = true
+    emit('togglePlay', true)
     startDurationInterval()
     sound.play()
   }
@@ -225,13 +226,13 @@ const togglePlay = () => {
 }
 
 const volumeToggleMute = (e) => {
-  emit('volume-toggle-mute')
+  emit('volume-toggle-mute', e)
   muted.value = !muted.value
   sound.mute(muted.value)
 }
 
 const volumeChange = (e) => {
-  emit('volume-change')
+  emit('volume-change', e)
   sound.volume(e / 100)
   volume.value = e
 }
@@ -251,7 +252,7 @@ const clearDurationInterval = () => {
 let onceFlag = null
 let scrubWhenPaused = false
 const scrubTimelineEnd = (e) => {
-  emit('scrub-timeline-end')
+  emit('scrub-timeline-end', e)
   const percentUnit = durationSeconds.value / 100
   sound.seek(e * percentUnit)
   if (!scrubWhenPaused && !playing.value) {
@@ -264,7 +265,7 @@ const scrubTimelineEnd = (e) => {
 }
 const scrubTimelineChange = (e) => {
   if (!onceFlag) {
-    emit('scrub-timeline-change')
+    emit('scrub-timeline-change', e)
     onceFlag = true
     if (playing.value) {
       togglePlay()
@@ -276,9 +277,15 @@ const scrubTimelineChange = (e) => {
 }
 
 const timelineClick = (e) => {
-  emit('timeline-click')
+  emit('timeline-click', e)
   scrubTimelineEnd(e)
 }
+
+watch(playToggle, () => {
+  if (sound) {
+    togglePlay()
+  }
+}, { immediate: true })
 
 </script>
 
