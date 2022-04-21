@@ -282,7 +282,9 @@ const timelineClick = (e) => {
 }
 
 watch(playToggle, () => {
+  console.log('playToggle')
   if (sound) {
+    console.log('playToggle has sound')
     togglePlay()
   }
 }, { immediate: true })
