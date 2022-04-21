@@ -56,7 +56,6 @@ WithImage.args = {
 export const AutoPlay = Template.bind({})
 AutoPlay.args = {
     autoPlay: true,
-    isPlaying: true,
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
@@ -149,5 +148,5 @@ CanMinimize.args = {
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true,
-    canMinimize: true
+    canMinimize: true,
 }

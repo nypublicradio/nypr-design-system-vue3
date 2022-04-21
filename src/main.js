@@ -50,7 +50,8 @@ import InlineMessage from 'primevue/inlinemessage'
 
 // also imported in Home.vue styles area because @functions were not compiling for some reason.
 //if (import.meta.env.VITE_VUE_APP_EDITOR === 'code') {
-import './assets/themes/white-label/_theme.scss'
+//import './assets/themes/white-label/_theme.scss'
+import './assets/themes/radiolab/_theme.scss'
 //}
 import 'primevue/resources/primevue.min.css'
 import 'primeflex/primeflex.css'
