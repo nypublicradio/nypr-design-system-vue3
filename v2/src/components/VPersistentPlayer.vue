@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, defineExpose } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import VVolumeControl from './VVolumeControl'
 import VTrackInfo from './VTrackInfo'
 import Button from 'primevue/button'
