@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch, watchEffect, onUpdated, reactive } from 'vue'
+import { ref, onMounted, onBeforeUnmount, defineExpose } from 'vue'
 import VVolumeControl from './VVolumeControl'
 import VTrackInfo from './VTrackInfo'
 import Button from 'primevue/button'
@@ -32,10 +32,6 @@ const props = defineProps({
     default: false,
   },
   isLoading: {
-    type: Boolean,
-    default: false,
-  },
-  playToggle: {
     type: Boolean,
     default: false,
   },
@@ -97,7 +93,6 @@ const volume = ref(50)
 
 const loading = ref(props.isLoading)
 const playing = ref(null)
-const playToggle = ref(props.playToggle)
 const muted = ref(props.isMuted)
 const currentFile = ref(null)
 
@@ -281,11 +276,9 @@ const timelineClick = (e) => {
   scrubTimelineEnd(e)
 }
 
-watch(playToggle, () => {
-  if (sound) {
-    togglePlay()
-  }
-}, { immediate: true })
+defineExpose({
+  togglePlay
+})
 
 </script>
 
