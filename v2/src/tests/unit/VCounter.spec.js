@@ -1,7 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import { describe, test, expect } from '@jest/globals'
 import { toHaveNoViolations } from 'jest-axe'
-import VCounter from '../components/VCounter'
+import VCounter from '../../components/VCounter'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)

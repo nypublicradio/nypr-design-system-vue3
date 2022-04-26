@@ -18,7 +18,7 @@
     "prime-test:unit": "vite test:unit",
     "start": "node .output/server/index.mjs",
     "storybook": "start-storybook -p 6006",
-    "test": "jest"
+    "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "axios": "^0.25.0",
@@ -43,7 +43,8 @@
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/vue3": "^6.4.18",
     "@vitejs/plugin-vue": "^2.1.0",
-    "@vue/test-utils": "^2.0.0-rc.17",
+    "@vue/cli-plugin-unit-jest": "^5.0.4",
+    "@vue/test-utils": "^2.0.0-rc.21",
     "@vue/vue3-jest": "^27.0.0-alpha.4",
     "@vueblocks/vue-use-vuex": "^0.2.11",
     "babel-jest": "^27.5.1",

@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import { describe, test, expect, jest } from '@jest/globals'
 import { toHaveNoViolations } from 'jest-axe'
-import VPerson from '../components/VPerson'
+import VPerson from '../../components/VPerson'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
@@ -80,18 +80,18 @@ describe('VPerson', () => {
     const blurbProp = wrapper.find('.blurbHolder')
     const truncateProp = wrapper.find('.truncate').exists()
     const socialProp = wrapper.find('.social').exists()
-    setTimeout(() => {
-      //expect(imageHolder.getAttribute('class').includes('responsive').toBe(true))
-      expect(circleProp).toBe(true)
-      //expect(imageProp.attributes('src')).toBe(image)
-      expect(nameLinkProp.text()).toContain(fullName)
-      expect(nameLinkProp.attributes('href')).toBe(nameLink)
-      expect(imageLinkProp.attributes('href')).toBe(nameLink)
-      expect(roleProp.text()).toContain(role)
-      expect(blurbProp.text()).toContain(blurb)
-      expect(truncateProp).toBe(true)
-      expect(socialProp).toBe(true)
-    },200)
+    ////setTimeout(() => {
+    //expect(imageHolder.getAttribute('class').includes('responsive').toBe(true))
+    expect(circleProp).toBe(true)
+    //expect(imageProp.attributes('src')).toBe(image)
+    expect(nameLinkProp.text()).toContain(fullName)
+    expect(nameLinkProp.attributes('href')).toBe(nameLink)
+    expect(imageLinkProp.attributes('href')).toBe(nameLink)
+    expect(roleProp.text()).toContain(role)
+    expect(blurbProp.text()).toContain(blurb)
+    expect(truncateProp).toBe(true)
+    expect(socialProp).toBe(true)
+    ////}, 200)
   })
 
   test('it has image only', () => {
@@ -103,18 +103,18 @@ describe('VPerson', () => {
       const hasDetails = wrapper.find('.person-details').exists()
       expect(imageProp.attributes('src')).toBe(image)
       expect(hasDetails).toBe(false)
-    },200)
+    }, 200)
   })
 
   test('image is GIF', () => {
     const wrapper = mount(VPerson, {
       propsData: { image: imageGIF }
     })
-    setTimeout(() => {
-      const imageProp = wrapper.find('.person-image-img')
-      expect(imageProp.attributes('src')).toBe(imageGIF)
-      expect(wrapper.vm.isGIF(imageGIF)).toBeTruthy()
-    },200)
+    //setTimeout(() => {
+    const imageProp = wrapper.find('.person-image-img')
+    expect(imageProp.attributes('src')).toBe(imageGIF)
+    expect(wrapper.vm.isGIF(imageGIF)).toBeTruthy()
+    //}, 200)
   })
 
   test('it has image only with link', () => {
@@ -128,7 +128,7 @@ describe('VPerson', () => {
       expect(imageLinkProp.attributes('to')).toBe(nameLink)
       expect(imageProp.attributes('src')).toBe(image)
       expect(hasDetails).toBe(false)
-    },200)
+    }, 200)
   })
 
   test('it has details', () => {

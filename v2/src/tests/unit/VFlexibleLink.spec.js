@@ -1,6 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
 import { describe, expect } from '@jest/globals'
-import FlexibleLink from '../components/VFlexibleLink.vue'
+import FlexibleLink from '../../components/VFlexibleLink.vue'
 
 describe('FlexibleLink', () => {
   let wrapper = {}
