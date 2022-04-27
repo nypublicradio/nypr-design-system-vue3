@@ -21,6 +21,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@vue/cli-service": "^5.0.4",
     "axios": "^0.25.0",
     "focus-visible": "^5.2.0",
     "gsap": "^3.9.1",
