@@ -21,7 +21,7 @@ module.exports = {
 
   // An array of glob patterns indicating a set of files for which coverage information should be collected
   collectCoverageFrom: [
-    'stories/*.vue'
+    'v2/src/components/*.vue'
   ],
 
   // The directory where Jest should output its coverage files
