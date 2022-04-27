@@ -32,8 +32,8 @@ describe('VPersistentPlayer', () => {
   const isMuted = true
   const autoPlay = true
   const loop = true
-  const hideSkipMobile = true
-  const hideDownloadMobile = true
+  const hideSkipMobile = false
+  const hideDownloadMobile = false
 
   test('it renders base props', () => {
     const wrapper = mount(VPersistentPlayer, {
@@ -72,7 +72,7 @@ describe('VPersistentPlayer', () => {
     const wrapper = mount(VPersistentPlayer, {
       propsData: { title, station, image, description, file, isLoading }
     })
-    const spinner = wrapper.find('.pi-spinner')
+    const spinner = wrapper.find('.the-play-button .pi-spinner')
     expect(spinner.exists()).toBe(true)
   })
 
@@ -120,5 +120,40 @@ describe('VPersistentPlayer', () => {
     expect(icon.attributes().class).toContain('pi-volume-off')
   })
 
+  test('will auto play on load', async () => {
+    const wrapper = mount(VPersistentPlayer, {
+      propsData: { title, station, image, description, file, autoPlay }
+    })
+    expect(wrapper.vm.playing).toBe(true)
+  })
+
+  test('show/hide skip buttons on mobile', async () => {
+    const wrapper = mount(VPersistentPlayer, {
+      propsData: { title, station, image, description, file, hideSkipMobile }
+    })
+
+    const back = wrapper.find('.player-back-15-icon')
+    const ahead = wrapper.find('.player-ahead-15-icon')
+
+    expect(back.attributes().class).not.toContain('hidden md:flex')
+    expect(ahead.attributes().class).not.toContain('hidden md:flex')
+
+    await wrapper.setProps({ hideSkipMobile: true })
+    expect(back.attributes().class).toContain('hidden md:flex')
+    expect(ahead.attributes().class).toContain('hidden md:flex')
+  })
+
+  test('show/hide download button on mobile', async () => {
+    const wrapper = mount(VPersistentPlayer, {
+      propsData: { title, station, image, description, file, showDownload, hideDownloadMobile }
+    })
+
+    const downloadBtn = wrapper.find('.player-download-icon')
+
+    expect(downloadBtn.attributes().class).not.toContain('hidden md:flex')
+
+    await wrapper.setProps({ hideDownloadMobile: true })
+    expect(downloadBtn.attributes().class).toContain('hidden md:flex')
+  })
 
 })
