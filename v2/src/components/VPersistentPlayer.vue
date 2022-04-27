@@ -35,10 +35,6 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  shouldShowCta: {
-    type: Boolean,
-    default: false,
-  },
   showDownload: {
     type: Boolean,
     default: false,
@@ -100,7 +96,24 @@ const isMinimized = ref(false)
 
 let sound = null
 
-const emit = defineEmits(['togglePlay', 'volume-toggle-mute', 'volume-change', 'load-error', 'ahead-15', 'back-15', 'scrub-timeline-change', 'scrub-timeline-end', 'download', 'image-click', 'description-click', 'title-click', 'sound-ended', 'sound-loaded', 'sound-looping', 'timeline-click'])
+const emit = defineEmits([
+  'togglePlay',
+  'volume-toggle-mute',
+  'volume-change',
+  'load-error',
+  'ahead-15',
+  'back-15',
+  'scrub-timeline-change',
+  'scrub-timeline-end',
+  'download',
+  'image-click',
+  'description-click',
+  'title-click',
+  'sound-ended',
+  'sound-loaded',
+  'sound-looping',
+  'timeline-click',
+])
 
 onMounted(() => {
   // keyboard accessibility
@@ -126,8 +139,10 @@ onMounted(() => {
   })
 
   window.addEventListener('keyup', (event) => {
-    // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.  
-    var isPlayButtonActive = document.getElementsByClassName('the-play-button')[0] === document.activeElement
+    // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.
+    var isPlayButtonActive =
+      document.getElementsByClassName('the-play-button')[0] ===
+      document.activeElement
     if (!isPlayButtonActive) {
       switch (event.code) {
         case 'Space':
@@ -142,7 +157,6 @@ onMounted(() => {
 
   // auto play
   props.autoPlay ? togglePlay() : null
-
 })
 
 onBeforeUnmount(() => {
@@ -173,7 +187,6 @@ const goBack15 = () => {
   }
 }
 
-
 const togglePlay = () => {
   if (!sound || !currentFile.value === props.file) {
     // destoy old sound if one exists
@@ -201,7 +214,7 @@ const togglePlay = () => {
         } else {
           sound.unload()
         }
-      }
+      },
     })
   }
   // Play or pause the sound.
@@ -277,19 +290,18 @@ const timelineClick = (e) => {
 }
 
 defineExpose({
-  togglePlay
+  togglePlay,
 })
-
 </script>
 
 <template>
-  <div class="persistent-player" :class="{ 'minimized': isMinimized }">
+  <div class="persistent-player" :class="{ minimized: isMinimized }">
     <div class="maximize-btn-holder">
       <Button
         v-if="props.canMinimize"
         title="maximize Player"
         class="maximize-btn p-button-icon-only"
-        :class="{ 'show': isMinimized }"
+        :class="{ show: isMinimized }"
         aria-label="maximize player"
         @click="isMinimized = !isMinimized"
       >
@@ -316,63 +328,45 @@ defineExpose({
         @description-click="emit('description-click')"
         @title-click="emit('title-click')"
       />
-      <template v-if="props.shouldShowCta">
-        <v-volume-control
-          class="hidden md:flex"
-          :disabled="!currentFile"
-          :volume="volume"
-          :is-muted="muted"
-          @volume-toggle-mute="volumeToggleMute"
-          @volume-change="volumeChange"
-        />
-        <Button
-          :disabled="loading"
-          label="Listen Live"
-          icon="pi pi-play"
-          class="the-play-button player-cta-play-button"
-          @click="togglePlay"
-        ></Button>
-      </template>
-      <template v-else>
-        <v-volume-control
-          class="hidden md:flex"
-          :disabled="!currentFile"
-          :volume="volume"
-          :is-muted="muted"
-          @volume-toggle-mute="volumeToggleMute"
-          @volume-change="volumeChange"
-        />
-        <Button
-          v-if="props.showSkip && !props.livestream"
-          title="Go Back 15 Seconds"
-          class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
-          :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
-          aria-label="go back 15 seconds"
-          @click="goBack15"
-        >
-          <i class="pi pi-replay"></i>
-        </Button>
-        <Button
-          :disabled="loading"
-          :title="playing ? 'Pause' : 'Play'"
-          class="the-play-button play-button p-button-icon-only"
-          @click="togglePlay"
-        >
-          <i v-if="!playing && !loading" class="pi pi-play"></i>
-          <i v-if="playing && !loading" class="pi pi-pause"></i>
-          <i v-if="loading" class="pi pi-spin pi-spinner"></i>
-        </Button>
-        <Button
-          v-if="props.showSkip && !props.livestream"
-          title="Go Ahead 15 Seconds"
-          class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
-          :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
-          aria-label="go ahead 15 seconds"
-          @click="goAhead15"
-        >
-          <i class="pi pi-refresh"></i>
-        </Button>
-      </template>
+      <v-volume-control
+        class="hidden md:flex"
+        :disabled="!currentFile"
+        :volume="volume"
+        :is-muted="muted"
+        @volume-toggle-mute="volumeToggleMute"
+        @volume-change="volumeChange"
+      />
+      <Button
+        v-if="props.showSkip && !props.livestream"
+        title="Go Back 15 Seconds"
+        class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
+        :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
+        aria-label="go back 15 seconds"
+        @click="goBack15"
+      >
+        <i class="pi pi-replay"></i>
+      </Button>
+      <Button
+        :disabled="loading"
+        :title="playing ? 'Pause' : props.livestream ? 'Listen Live' : 'Play'"
+        class="the-play-button play-button p-button-icon-only"
+        @click="togglePlay"
+      >
+        <i v-if="!playing && !loading" class="pi pi-play"></i>
+        <i v-if="playing && !loading" class="pi pi-pause"></i>
+        <i v-if="loading" class="pi pi-spin pi-spinner"></i>
+      </Button>
+      <Button
+        v-if="props.showSkip && !props.livestream"
+        title="Go Ahead 15 Seconds"
+        class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
+        :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
+        aria-label="go ahead 15 seconds"
+        @click="goAhead15"
+      >
+        <i class="pi pi-refresh"></i>
+      </Button>
+
       <Button
         v-if="props.showDownload && !props.livestream"
         title="Download"
