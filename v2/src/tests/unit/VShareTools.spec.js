@@ -1,8 +1,8 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import { describe, test, expect } from '@jest/globals'
 import { toHaveNoViolations } from 'jest-axe'
-import VShareTools from '../components/VShareTools'
-import AudioIcon from '../assets/icons/AudioIcon'
+import VShareTools from '../../components/VShareTools'
+import AudioIcon from '../../assets/icons/AudioIcon'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)

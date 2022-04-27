@@ -5,20 +5,20 @@ import Slider from 'primevue/slider'
 const props = defineProps({
   volume: {
     type: Number,
-    default: 50
+    default: 50,
   },
   isMuted: {
     type: Boolean,
-    default: false
+    default: false,
   },
   showVolume: {
     type: Boolean,
-    default: false
+    default: false,
   },
   disabled: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const emit = defineEmits(['volume-toggle-mute', 'volume-change'])
@@ -29,13 +29,15 @@ onUpdated(() => {
   previousVolume.value = props.volume
   emit('volume-change', props.volume)
 })
-
 </script>
 
 <template>
-  <div class="volume-control align-items-center" :class="{ 'show-volume': props.showVolume }">
+  <div
+    class="volume-control align-items-center"
+    :class="{ 'show-volume': props.showVolume }"
+  >
     <Slider
-      v-show="!props.isMuted"
+      v-if="!props.isMuted"
       v-model="previousVolume"
       :disabled="disabled"
       class="volume-control-slider"
@@ -55,8 +57,6 @@ onUpdated(() => {
     </button>
   </div>
 </template>
-
-
 
 <style lang="scss">
 .volume-control {

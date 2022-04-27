@@ -4,95 +4,98 @@ import { computed, defineAsyncComponent } from 'vue'
 const emit = defineEmits(['share', 'follow'])
 
 const icons = {
-  email: "EmailIcon",
-  phone: "PhoneIcon",
-  facebook: "FacebookIcon",
-  instagram: "InstagramIcon",
-  linkedin: "LinkedinIcon",
-  newsletter: "EmailIcon",
-  reddit: "RedditIcon",
-  spotify: "SpotifyIcon",
-  twitter: "TwitterIcon",
-  youtube: "YoutubeIcon",
+  email: 'EmailIcon',
+  phone: 'PhoneIcon',
+  facebook: 'FacebookIcon',
+  instagram: 'InstagramIcon',
+  linkedin: 'LinkedinIcon',
+  newsletter: 'EmailIcon',
+  reddit: 'RedditIcon',
+  spotify: 'SpotifyIcon',
+  twitter: 'TwitterIcon',
+  youtube: 'YoutubeIcon',
 }
-
 
 const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
 const SOCIAL_SERVICE_MAP = {
   spotify: {
-    profileBase: 'https://open.spotify.com/playlist/'
+    profileBase: 'https://open.spotify.com/playlist/',
   },
   facebook: {
     profileBase: 'https://www.facebook.com/',
     shareBase: 'https://www.facebook.com/sharer.php',
-    urlKey: 'u'
+    urlKey: 'u',
   },
   linkedin: {
     profileBase: 'https://www.linkedin.com/in/',
-    shareBase: 'https://www.linkedin.com/sharing/share-offsite/'
+    shareBase: 'https://www.linkedin.com/sharing/share-offsite/',
   },
   twitter: {
     profileBase: 'https://twitter.com/',
-    shareBase: 'https://twitter.com/intent/tweet'
+    shareBase: 'https://twitter.com/intent/tweet',
   },
   reddit: {
     profileBase: 'https://www.reddit.com/r/',
-    shareBase: 'https://www.reddit.com/submit'
+    shareBase: 'https://www.reddit.com/submit',
   },
   instagram: {
-    profileBase: 'https://www.instagram.com/'
+    profileBase: 'https://www.instagram.com/',
   },
   youtube: {
-    profileBase: 'https://www.youtube.com/channel/'
+    profileBase: 'https://www.youtube.com/channel/',
   },
   email: {
     profileBase: 'mailto:',
     shareBase: 'mailto:',
-    omitUrl: true
+    omitUrl: true,
   },
   phone: {
     profileBase: 'tel:',
     shareBase: 'tel:',
-    omitUrl: true
-  }
+    omitUrl: true,
+  },
 }
 
 const props = defineProps({
   action: {
     type: String,
-    default: 'follow'
+    default: 'follow',
   },
   service: {
     type: String,
-    default: ''
+    default: '',
   },
   username: {
     type: String,
-    default: null
+    default: null,
   },
   label: {
     type: String,
-    default: null
+    default: null,
   },
   link: {
     type: String,
-    default: null
+    default: null,
   },
   url: {
     type: String,
-    default: null
+    default: null,
   },
   shareParameters: {
     type: Object,
-    default: () => ({})
+    default: () => ({}),
   },
   utmParameters: {
     type: Object,
-    default: () => ({})
-  }
+    default: () => ({}),
+  },
 })
 
-const getServiceComponent = computed(() => defineAsyncComponent(() => import("../assets/icons/" + icons[props.service] + ".vue")))
+const getServiceComponent = computed(() =>
+  defineAsyncComponent(() =>
+    import('../assets/icons/' + icons[props.service] + '.vue')
+  )
+)
 
 const socialLink = computed(() => {
   return SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username || ''
@@ -101,11 +104,9 @@ const shareBase = computed(() => {
   return SOCIAL_SERVICE_MAP[props.service]?.shareBase || ''
 })
 const shareUrl = computed(() => {
-  const utmParams = Object.entries(props.utmParameters).map(
-    ([key, value]) => {
-      return 'utm_' + key + '=' + encodeURIComponent(value)
-    }
-  )
+  const utmParams = Object.entries(props.utmParameters).map(([key, value]) => {
+    return 'utm_' + key + '=' + encodeURIComponent(value)
+  })
   let url = props.url
   if (utmParams.length > 0) {
     url = url + '?' + utmParams.join('&')
@@ -150,7 +151,7 @@ const share = () => {
 
   emit('share', props.service)
 
-  // get the position of the popup window   
+  // get the position of the popup window
   function getPopupPosition() {
     const screenLeft = screen.availLeft
     const screenTop = screen.availTop
@@ -183,8 +184,6 @@ const share = () => {
     newWindow.focus()
   }
 }
-
-
 </script>
 
 <template>
@@ -208,9 +207,7 @@ const share = () => {
   </button>
 </template>
 
-
-
-<style lang="scss" >
+<style lang="scss">
 .share-button,
 .follow-link,
 .follow-link svg,
@@ -218,7 +215,7 @@ const share = () => {
   width: 24px;
   height: 24px;
 
-  @include media("<sm") {
+  @include media('<sm') {
     width: 30px;
     height: 30px;
   }
