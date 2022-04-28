@@ -7,7 +7,8 @@ module.exports = {
     // "plugin:storybook/recommended",
     // "eslint:recommended",
     "plugin:vue/vue3-recommended",
-    "prettier"
+    "prettier",
+    "plugin:@peeky/recommended"
   ],
   "parserOptions": {
     "ecmaVersion": "latest",

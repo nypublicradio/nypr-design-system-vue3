@@ -1,19 +1,16 @@
-import { shallowMount } from '@vue/test-utils'
-import { describe, expect } from '@jest/globals'
-import FlexibleLink from '../../components/VFlexibleLink.vue'
+import { mount } from '@vue/test-utils'
+import VFlexibleLink from '../components/VFlexibleLink.vue'
 
-describe('FlexibleLink', () => {
+describe('VFlexibleLink testing', () => {
   let wrapper = {}
-
-  // find NuxtLink 
+  const toLink = '/abc'
+  const urlLink = 'https://example.com'
   const findNuxtLink = () => wrapper.find('.internal')
-  // find an 'a' tag
   const findAnchor = () => wrapper.find('a')
   const findNullDiv = () => wrapper.find('.null')
 
-  //component factory
   const createComponent = ({ propsData = {} } = {}) => {
-    wrapper = shallowMount(FlexibleLink, {
+    wrapper = mount(VFlexibleLink, {
       propsData,
       global: {
         stubs: {
@@ -34,13 +31,12 @@ describe('FlexibleLink', () => {
   it('should render with a relative link', () => {
     createComponent({
       propsData: {
-        to: '/abc'
+        to: toLink
       }
     })
-    // expect(findNuxtLink().exists()).toBe(true)
-    expect(findNuxtLink().attributes('to')).toBe('/abc')
+    expect(findNuxtLink().exists()).toBe(true)
+    expect(findNuxtLink().attributes('to')).toBe(toLink)
   })
-
 
   it('should render with null link', () => {
     createComponent({
@@ -54,14 +50,13 @@ describe('FlexibleLink', () => {
   it('should render with an external link', () => {
     createComponent({
       propsData: {
-        to: 'https://example.com'
+        to: urlLink
       }
     })
     expect(findAnchor().exists()).toBe(true)
-    expect(findAnchor().attributes('href')).toBe('https://example.com')
+    expect(findAnchor().attributes('href')).toBe(urlLink)
     expect(findAnchor().attributes('target')).toBe('_blank')
     expect(findAnchor().attributes('rel')).toBe('noopener noreferrer')
     expect(findAnchor().attributes('class')).toBe('flexible-link external')
   })
-
 })
