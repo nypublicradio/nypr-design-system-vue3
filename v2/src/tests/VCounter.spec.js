@@ -24,13 +24,12 @@ describe('VCounter', () => {
   }
 
   afterEach(() => {
-    if (wrapper.destroy) {
+    if (wrapper && wrapper.destroy) {
       wrapper.destroy()
     } else {
       wrapper = null
     }
   })
-
 
   test('props work', () => {
     createComponent({
@@ -66,23 +65,10 @@ describe('VCounter', () => {
   })
 
 
-  // test('it passes basic accessibility tests', async () => {
-  //   // await createComponent({
-  //   //   props: {
-  //   //     value,
-  //   //     icon,
-  //   //     text,
-  //   //     href
-  //   //   }
-  //   // })
-  //   const wrapper = mount(VCounter)
-  //   console.log('wrapper = ', wrapper.__app._instance)
-
-  //   const html = wrapper.__app._instance
-
-
-  //   const results = axe('<div>' + 'hello' + '</div>')
-  //   expect(results).toHaveNoViolations()
-  // })
+  test('it passes basic accessibility tests', async () => {
+    const axeWrapper = mount(VCounter)
+    const results = await axe(axeWrapper.element)
+    expect(results).toHaveNoViolations()
+  })
 
 })

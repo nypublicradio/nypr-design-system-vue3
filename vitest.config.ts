@@ -11,4 +11,14 @@ export default defineConfig({
     globals: true,
     environment: 'jsdom',
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: `@import "src/assets/themes/radiolab/variables.scss"; @import "src/assets/themes/radiolab/_mixins.scss";`,
+      },
+    },
+  },
 })
+
+
+

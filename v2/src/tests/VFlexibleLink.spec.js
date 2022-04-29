@@ -21,7 +21,7 @@ describe('VFlexibleLink', () => {
   }
 
   afterEach(() => {
-    if (wrapper.destroy) {
+    if (wrapper && wrapper.destroy) {
       wrapper.destroy()
     } else {
       wrapper = null
