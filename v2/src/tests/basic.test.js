@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
-import Hello from '../../components/Hello.vue'
+import Hello from '../components/Hello.vue'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
