@@ -34,7 +34,7 @@ Comments.args = {
 
 export const Gallery = Template.bind({})
 Gallery.args = {
-    icon: "gallery",
+    icon: "images",
     text: "Photos",
     value: 25,
     href: "http://www.google.com"

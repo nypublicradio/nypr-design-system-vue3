@@ -1,7 +1,7 @@
 import { mount } from '@vue/test-utils'
 import VFlexibleLink from '../components/VFlexibleLink.vue'
 
-describe('VFlexibleLink testing', () => {
+describe('VFlexibleLink', () => {
   let wrapper = {}
   const toLink = '/abc'
   const urlLink = 'https://example.com'
@@ -9,9 +9,9 @@ describe('VFlexibleLink testing', () => {
   const findAnchor = () => wrapper.find('a')
   const findNullDiv = () => wrapper.find('.null')
 
-  const createComponent = ({ propsData = {} } = {}) => {
+  const createComponent = ({ props = {} } = {}) => {
     wrapper = mount(VFlexibleLink, {
-      propsData,
+      props,
       global: {
         stubs: {
           'nuxt-link': true
@@ -30,7 +30,7 @@ describe('VFlexibleLink testing', () => {
 
   it('should render with a relative link', () => {
     createComponent({
-      propsData: {
+      props: {
         to: toLink
       }
     })
@@ -40,7 +40,7 @@ describe('VFlexibleLink testing', () => {
 
   it('should render with null link', () => {
     createComponent({
-      propsData: {
+      props: {
         to: null
       }
     })
@@ -49,7 +49,7 @@ describe('VFlexibleLink testing', () => {
 
   it('should render with an external link', () => {
     createComponent({
-      propsData: {
+      props: {
         to: urlLink
       }
     })

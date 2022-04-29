@@ -3,6 +3,7 @@ import Vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
   runtimeEnv: 'dom',
+  collectCoverage: true,
   vite: {
     plugins: [Vue()],
     // vite options here...
