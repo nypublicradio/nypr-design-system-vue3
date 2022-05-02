@@ -1,5 +1,5 @@
 <script setup>
-import VFlexibleLink from './VFlexibleLink'
+import VFlexibleLink from './VFlexibleLink.vue'
 const props = defineProps({
   authors: {
     type: Array,
