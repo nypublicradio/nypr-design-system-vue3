@@ -1,6 +1,6 @@
 import { mount } from '@vue/test-utils'
-const { toHaveNoViolations } = require('jest-axe')
 import VCounter from '../components/VCounter.vue'
+import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
@@ -63,7 +63,6 @@ describe('VCounter', () => {
     const link = wrapper.find('.flexible-link')
     expect(link.attributes('to')).toBe('/news')
   })
-
 
   test('it passes basic accessibility tests', async () => {
     const axeWrapper = mount(VCounter)

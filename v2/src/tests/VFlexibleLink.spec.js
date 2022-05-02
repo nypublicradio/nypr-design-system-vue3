@@ -1,5 +1,9 @@
 import { mount } from '@vue/test-utils'
 import VFlexibleLink from '../components/VFlexibleLink.vue'
+import { toHaveNoViolations } from 'jest-axe'
+import axe from './axe-helper'
+
+expect.extend(toHaveNoViolations)
 
 describe('VFlexibleLink', () => {
   let wrapper = {}
@@ -59,4 +63,11 @@ describe('VFlexibleLink', () => {
     expect(findAnchor().attributes('rel')).toBe('noopener noreferrer')
     expect(findAnchor().attributes('class')).toBe('flexible-link external')
   })
+
+  test('it passes basic accessibility tests', async () => {
+    const axeWrapper = mount(VFlexibleLink)
+    const results = await axe(axeWrapper.element)
+    expect(results).toHaveNoViolations()
+  })
+
 })
