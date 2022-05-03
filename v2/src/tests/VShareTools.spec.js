@@ -9,8 +9,6 @@ expect.extend(toHaveNoViolations)
 
 
 describe('VShareTools', () => {
-
-
   let wrapper = {}
   const vertical = true
   const responsive = true

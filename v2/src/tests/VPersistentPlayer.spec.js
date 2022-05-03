@@ -6,6 +6,7 @@ import axe from './axe-helper'
 expect.extend(toHaveNoViolations)
 
 describe('VPersistentPlayer', () => {
+  let wrapper = {}
   // all props once
   const title = 'The Takeaway'
   const station = 'WNYC 93.9 FM'
@@ -24,6 +25,25 @@ describe('VPersistentPlayer', () => {
   const loop = true
   const hideSkipMobile = false
   const hideDownloadMobile = false
+
+  const createComponent = ({ props = {} } = {}) => {
+    wrapper = mount(VCounter, {
+      props,
+      global: {
+        stubs: {
+          'nuxt-link': true
+        }
+      }
+    })
+  }
+
+  afterEach(() => {
+    if (wrapper && wrapper.destroy) {
+      wrapper.destroy()
+    } else {
+      wrapper = null
+    }
+  })
 
   test('it renders base props', () => {
     const wrapper = mount(VPersistentPlayer, {
@@ -92,15 +112,31 @@ describe('VPersistentPlayer', () => {
     expect(play.exists()).toBe(true)
   })
 
-  test('show minimize button & click it', () => {
+  test('show minimize/maximize buttons & click them', () => {
     const wrapper = mount(VPersistentPlayer, {
       props: { title, station, image, description, file, canMinimize }
     })
     const minimizeBtn = wrapper.find('.minimize-btn')
+    const maximizeBtn = wrapper.find('.maximize-btn')
     expect(minimizeBtn.exists()).toBe(true)
+    expect(maximizeBtn.exists()).toBe(true)
 
     minimizeBtn.trigger('click')
     expect(wrapper.vm.isMinimized).toBe(true)
+
+    maximizeBtn.trigger('click')
+    expect(wrapper.vm.isMinimized).toBe(false)
+
+  })
+
+  test('hide minimize/maximize buttons', () => {
+    const wrapper = mount(VPersistentPlayer, {
+      props: { title, station, image, description, file, canMinimize: false }
+    })
+    const minimizeBtn = wrapper.find('.minimize-btn')
+    const maximizeBtn = wrapper.find('.maximize-btn')
+    expect(minimizeBtn.exists()).toBe(false)
+    expect(maximizeBtn.exists()).toBe(false)
   })
 
   test('is muted & mute clicked', () => {
@@ -160,7 +196,7 @@ describe('VPersistentPlayer', () => {
   // })
 
   /*
-  the axe test above give the following error. Investigating fix. Maybe in future version of primevue
+  the axe test above give the following error involving the Slider component. Investigating fix. Maybe in future version of primevue
   
   Error: expect(received).toHaveNoViolations(expected)
   

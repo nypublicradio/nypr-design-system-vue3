@@ -1501,7 +1501,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-@import '../assets/themes/white-label/_theme.scss';
 .image-text {
   vertical-align: middle;
 }

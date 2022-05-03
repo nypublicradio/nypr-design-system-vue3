@@ -8,7 +8,7 @@ module.exports = {
   },
   staticDirs: ['../assets-shared'],
   webpackFinal: async (config, { configType }) => {
-
+    const envTheme = process.env.STORYBOOK_THEME
     config.module.rules.push({
       test: /\.scss$/,
       use: [
@@ -18,10 +18,7 @@ module.exports = {
         {
           loader: 'sass-loader',
           options: {
-            additionalData: '@import "~/src/assets/themes/radiolab/_theme.scss"; @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css"; body.dark{background-color: #080808 !important;}',
-            // additionalData: '@import "./assets/scss/main.scss";',
-            //@import "primeflex/primeflex.scss";
-            //@import "primevue/resources/themes/lara-light-blue/theme.css";
+            additionalData: `${process.env.STORYBOOK_EDIT === 'true' ? `@import "~/src/assets/themes/${envTheme}/_theme.scss";` : `@import "~/src/assets/themes/${envTheme}/${envTheme}.min.css"; @import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`} @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css"; body.dark{background-color: #080808 !important;}`,
           },
         },
       ],

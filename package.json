@@ -2,9 +2,6 @@
   "name": "@nypublicradio/nypr-design-system-vue3",
   "repository": "git://github.com/nypublicradio/nypr-design-system-vue3.git",
   "version": "0.0.0",
-  "config": {
-    "theme": "white-label"
-  },
   "scripts": {
     "build": "nuxi build",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
@@ -55,15 +52,14 @@
     "eslint-plugin-storybook": "^0.5.6",
     "eslint-plugin-vue": "^8.3.0",
     "node-sass": "^7.0.1",
-    "nuxt-purgecss": "^1.0.0",
-    "nuxt3": "^3.0.0-27491748.3186841",
+    "nuxt": "^3.0.0-rc.2",
     "postcss": "^8.4.5",
     "prettier": "2.5.1",
     "sass": "^1.49.7",
     "sass-loader": "^12.4.0",
     "storybook-dark-mode": "^1.0.9",
     "style-loader": "^3.3.1",
-    "vite": "^2.7.13",
+    "vite": "^2.9.7",
     "vue": "^3.2.33",
     "vue-loader": "^16.8.3",
     "vue-router": "^4.0.12",
