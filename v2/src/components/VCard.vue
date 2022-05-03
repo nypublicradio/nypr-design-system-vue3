@@ -156,34 +156,36 @@ const getMobileImageScale = computed(() => {
       </div>
     </template>
     <div v-if="hasDetails" class="card-details">
-      <div v-if="tags || sponsored" class="card-tags">
-        <v-tag
-          v-for="(tag, index) in tags"
-          :key="index"
-          :name="tag.name"
-          :slug="tag.slug"
-        />
-        <v-tag v-if="sponsored" name="sponsored" />
+      <div>
+        <div v-if="tags || sponsored" class="card-tags">
+          <v-tag
+            v-for="(tag, index) in tags"
+            :key="index"
+            :name="tag.name"
+            :slug="tag.slug"
+          />
+          <v-tag v-if="sponsored" name="sponsored" />
+        </div>
+        <p v-if="eyebrow" class="card-eyebrow" v-html="eyebrow" />
+        <div v-if="title" class="card-title" role="heading" aria-level="3">
+          <v-flexible-link
+            class="card-title-link"
+            :class="{ disabled: !titleLink }"
+            :to="titleLink"
+          >
+            <h2 v-html="title"></h2>
+            <i
+              v-if="icon"
+              :class="`pi pi-${icon}`"
+              role="img"
+              :aria-label="icon + ' icon'"
+            ></i>
+            <slot name="customIcon"></slot>
+          </v-flexible-link>
+        </div>
+        <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
+        <p v-if="blurb" class="card-blurb" v-html="blurb"></p>
       </div>
-      <p v-if="eyebrow" class="card-eyebrow" v-html="eyebrow" />
-      <div v-if="title" class="card-title" role="heading" aria-level="3">
-        <v-flexible-link
-          class="card-title-link"
-          :class="{ disabled: !titleLink }"
-          :to="titleLink"
-        >
-          <h2 v-html="title"></h2>
-          <i
-            v-if="icon"
-            :class="`pi pi-${icon}`"
-            role="img"
-            :aria-label="icon + ' icon'"
-          ></i>
-          <slot name="customIcon"></slot>
-        </v-flexible-link>
-      </div>
-      <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
-      <p v-if="blurb" class="card-blurb" v-html="blurb"></p>
       <div v-if="$slots.default" class="card-slot">
         <slot />
       </div>
