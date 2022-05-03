@@ -1,7 +1,6 @@
 import { mount, shallowMount } from '@vue/test-utils'
-import { describe, test, expect } from '@jest/globals'
 import { toHaveNoViolations } from 'jest-axe'
-import VMediaEmbed from '../../components/VMediaEmbed'
+import VMediaEmbed from '../components/VMediaEmbed.vue'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
@@ -10,7 +9,7 @@ describe('VMediaEmbed', () => {
   const url = 'https://player.vimeo.com/video/90283590'
   test('url prop works', () => {
     const wrapper = shallowMount(VMediaEmbed, {
-      propsData: {
+      props: {
         url
       }
     })
@@ -21,7 +20,7 @@ describe('VMediaEmbed', () => {
 
   test('No controls', () => {
     const wrapper = shallowMount(VMediaEmbed, {
-      propsData: {
+      props: {
         url,
         controls: false
       }
@@ -33,7 +32,7 @@ describe('VMediaEmbed', () => {
 
   test('Auto Play', () => {
     const wrapper = shallowMount(VMediaEmbed, {
-      propsData: {
+      props: {
         url,
         autoPlay: true
       }
@@ -45,7 +44,7 @@ describe('VMediaEmbed', () => {
 
   test('Muted', () => {
     const wrapper = shallowMount(VMediaEmbed, {
-      propsData: {
+      props: {
         url,
         mute: true
       }
@@ -57,7 +56,7 @@ describe('VMediaEmbed', () => {
 
   test('Custom start position', () => {
     const wrapper = shallowMount(VMediaEmbed, {
-      propsData: {
+      props: {
         url,
         startTime: "90"
       }
@@ -69,7 +68,7 @@ describe('VMediaEmbed', () => {
 
   test('it passes basic accessibility tests', async () => {
     const wrapper = mount(VMediaEmbed, {
-      propsData: { url }
+      props: { url }
     })
     const results = await axe(wrapper.element)
     expect(results).toHaveNoViolations()

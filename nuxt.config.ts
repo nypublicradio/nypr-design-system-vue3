@@ -1,4 +1,6 @@
-import { defineNuxtConfig } from 'nuxt3'
+import { defineNuxtConfig } from 'nuxt'
+
+const envTheme = process.env.VITE_VUE_APP_THEME
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default defineNuxtConfig({
@@ -15,10 +17,9 @@ export default defineNuxtConfig({
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }]
   },
-  // buildModules: ['nuxt-purgecss'],
   css: [
     '~/src/assets/library/primeflex.min.css',
-    '~/src/assets/themes/white-label/white-label.min.css',
+    `~/src/assets/themes/${envTheme}/${envTheme}.min.css`,
     'primevue/resources/primevue.min.css',
     'primeicons/primeicons.css'
   ],
@@ -26,9 +27,8 @@ export default defineNuxtConfig({
   vite: {
     css: {
       preprocessorOptions: {
-        scss: {
-          //additionalData: `@import "~/src/assets/library/primeflex.min.css"; @import "~/src/assets/themes/white-label/_theme.scss"; @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css";`,
-          additionalData: `@import "~/src/assets/themes/white-label/variables.scss"; @import "~/src/assets/themes/white-label/_mixins.scss";`,
+        scss: {          
+          additionalData: `@import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`
         },
       },
     },

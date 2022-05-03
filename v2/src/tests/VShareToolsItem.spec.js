@@ -1,33 +1,54 @@
 import { mount, shallowMount } from '@vue/test-utils'
-import { describe, test, expect, jest } from '@jest/globals'
 import { toHaveNoViolations } from 'jest-axe'
-import VShareToolsItem from '../../components/VShareToolsItem'
-import FacebookIcon from '../../assets/icons/FacebookIcon'
-import InstagramIcon from '../../assets/icons/InstagramIcon'
-import SpotifyIcon from '../../assets/icons/SpotifyIcon'
-import RedditIcon from '../../assets/icons/RedditIcon'
-import TwitterIcon from '../../assets/icons/TwitterIcon'
-import YoutubeIcon from '../../assets/icons/YoutubeIcon'
-import EmailIcon from '../../assets/icons/EmailIcon'
+import VShareToolsItem from '../components/VShareToolsItem.vue'
+// import FacebookIcon from '../assets/icons/FacebookIcon.vue'
+// import InstagramIcon from '../assets/icons/InstagramIcon.vue'
+// import SpotifyIcon from '../assets/icons/SpotifyIcon.vue'
+// import RedditIcon from '../assets/icons/RedditIcon.vue'
+// import TwitterIcon from '../assets/icons/TwitterIcon.vue'
+// import YoutubeIcon from '../assets/icons/YoutubeIcon.vue'
+// import EmailIcon from '../assets/icons/EmailIcon.vue'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
 describe('VShareToolsItem', () => {
+
+  let wrapper = {}
+
   const label = 'follow us'
   const username = 'WNYC'
   const link = 'http://www.test.com'
   const windowName = 'share window'
   const windowString = 'location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=NaN,left=NaN'
+
+  const createComponent = ({ props = {} } = {}) => {
+    wrapper = mount(VShareToolsItem, {
+      props,
+      global: {
+        stubs: {
+          'nuxt-link': true
+        }
+      }
+    })
+  }
+
+  afterEach(() => {
+    if (wrapper && wrapper.destroy) {
+      wrapper.destroy()
+    } else {
+      wrapper = null
+    }
+  })
+
   test('username attribute works', () => {
     const service = 'facebook'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         username,
         service
       }
     })
-    // check if prop works and rendered correctly
     expect(wrapper.attributes('href')).toBe(`https://www.facebook.com/${username}`)
   })
 
@@ -40,32 +61,29 @@ describe('VShareToolsItem', () => {
         service
       }
     })
-    // check if prop works and rendered correctly
     expect(wrapper.attributes('aria-label')).toBe(label)
   })
 
   test('aria-label has a default value', () => {
     const service = 'facebook'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         username,
         service
       }
     })
-    // check if prop works and rendered correctly
     expect(wrapper.attributes('aria-label')).toBe(`Follow us on ${service}`)
   })
 
   test('service prop works: site', () => {
     const service = 'site'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         service,
         label,
         link
       }
     })
-    // check if the corresponding component was successfully created
     const linkTag = wrapper.find('.c-share-tools__link')
     const span = wrapper.find('.site span')
     const spanExists = span.exists()
@@ -76,98 +94,119 @@ describe('VShareToolsItem', () => {
 
   test('service prop works: facebook', () => {
     const service = 'facebook'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         username,
         service
       }
     })
-    // check if the corresponding component was successfully created
     expect(wrapper.attributes().class).toContain('facebook')
     expect(wrapper.attributes().href).toBe('https://www.facebook.com/WNYC')
   })
 
   test('service prop works: instagram', () => {
     const service = 'instagram'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         username,
         service
       }
     })
-    // check if the corresponding component was successfully created
     expect(wrapper.attributes().class).toContain('instagram')
     expect(wrapper.attributes().href).toBe('https://www.instagram.com/WNYC')
-
   })
 
   test('service prop works: spotify', () => {
     const service = 'spotify'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         username,
         service
       }
     })
-    // check if the corresponding component was successfully created
     expect(wrapper.attributes().class).toContain('spotify')
     expect(wrapper.attributes().href).toBe('https://open.spotify.com/playlist/WNYC')
-
   })
 
   test('service prop works: twitter', () => {
     const service = 'twitter'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         username,
         service
       }
     })
-    // check if the corresponding component was successfully created
     expect(wrapper.attributes().class).toContain('twitter')
     expect(wrapper.attributes().href).toBe('https://twitter.com/WNYC')
   })
 
   test('service prop works: youtube', () => {
     const service = 'youtube'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         username,
         service
       }
     })
-    // check if the corresponding component was successfully created
     expect(wrapper.attributes().class).toContain('youtube')
     expect(wrapper.attributes().href).toBe('https://www.youtube.com/channel/WNYC')
   })
 
   it('service prop works: email', () => {
     const service = 'email'
-    const wrapper = shallowMount(VShareToolsItem, {
+    createComponent({
       props: {
         service,
         username: 'test@test.com'
       }
     })
-    // check if the corresponding component was successfully created
     expect(wrapper.attributes().class).toContain('email')
     expect(wrapper.attributes().href).toBe('mailto:test@test.com')
-
   })
 
-  test('link prop works with no service prop', () => {
-    const wrapper = shallowMount(VShareToolsItem, {
+  // test('link prop works with no service prop', () => {
+  //   createComponent({
+  //     props: {
+  //       link
+  //     }
+  //   })
+  //   expect(wrapper.attributes().href).toBe(link)
+  //   expect(wrapper.vm.socialLink).toBe('')
+  // })
+
+  it('link prop works with no service prop', () => {
+    createComponent({
       props: {
         link
       }
     })
-    // check if the link was successfully created
     expect(wrapper.attributes().href).toBe(link)
     expect(wrapper.vm.socialLink).toBe('')
   })
 
+
+  //TODO: not sure why this test is failing
+
+  // test('it passes basic accessibility tests', () => {
+  //   const service = 'facebook'
+  //   createComponent({
+  //     props: {
+  //       username,
+  //       service,
+  //       label
+  //     }
+  //   })
+  //   console.log('wrapper', wrapper.element.outerHTML)
+  //   const results = axe(wrapper.element)
+  //   expect(results).toHaveNoViolations()
+  // })
+
+
+  //TODO: have not idea how to get the following test to work
+
+
   // test('sharing works: facebook', () => {
-  //   const wrapper = mount(VShareToolsItem, {
+  //   createComponent({
   //     props: {
   //       action: 'share',
   //       service: 'facebook'
@@ -179,7 +218,7 @@ describe('VShareToolsItem', () => {
   // })
 
   // test('sharing works: twitter', () => {
-  //   const wrapper = shallowMount(VShareToolsItem, {
+  //   createComponent({
   //     props: {
   //       action: 'share',
   //       service: 'twitter',
@@ -195,7 +234,7 @@ describe('VShareToolsItem', () => {
   // })
 
   // test('sharing works: reddit', () => {
-  //   const wrapper = shallowMount(VShareToolsItem, {
+  //   createComponent({
   //     props: {
   //       action: 'share',
   //       service: 'reddit',
@@ -210,7 +249,7 @@ describe('VShareToolsItem', () => {
   // })
 
   // test('sharing works: email', () => {
-  //   const wrapper = shallowMount(VShareToolsItem, {
+  //   createComponent({
   //     props: {
   //       action: 'share',
   //       service: 'email',
@@ -226,7 +265,7 @@ describe('VShareToolsItem', () => {
   // })
 
   // test('utm params works', () => {
-  //   const wrapper = shallowMount(VShareToolsItem, {
+  //   createComponent({
   //     props: {
   //       action: 'share',
   //       service: 'facebook',
@@ -242,7 +281,7 @@ describe('VShareToolsItem', () => {
 
   // test('it passes basic accessibility tests', () => {
   //   const service = 'facebook'
-  //   const wrapper = mount(VShareToolsItem, {
+  //   createComponent({
   //     props: {
   //       username,
   //       service,

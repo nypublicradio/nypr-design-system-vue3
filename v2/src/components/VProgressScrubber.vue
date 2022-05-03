@@ -5,10 +5,14 @@ const props = defineProps({
   progress: {
     type: Number,
     default: 0,
-  }
+  },
 })
 
-const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'timeline-click'])
+const emit = defineEmits([
+  'scrub-timeline-change',
+  'scrub-timeline-end',
+  'timeline-click',
+])
 </script>
 
 <template>
@@ -17,6 +21,9 @@ const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'timeli
       v-model="progress"
       :min="0.1"
       :max="100"
+      aria-label="Volume slider"
+      title="Volume slider"
+      aria-labelledby="Volume slider"
       @slideend="emit('scrub-timeline-end', progress)"
       @change="emit('scrub-timeline-change', progress)"
       @click="emit('timeline-click', progress)"

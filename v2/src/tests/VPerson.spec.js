@@ -1,23 +1,12 @@
 import { mount } from '@vue/test-utils'
-import { describe, test, expect, jest } from '@jest/globals'
+import VPerson from '../components/VPerson.vue'
 import { toHaveNoViolations } from 'jest-axe'
-import VPerson from '../../components/VPerson'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
-expect.extend(toHaveNoViolations)
-
-// need to mock the IntersectionObserver I am using for detecting when entering the viewport
-const mockIntersectionObserver = jest.fn()
-mockIntersectionObserver.mockReturnValue({
-  observe: () => null,
-  unobserve: () => null,
-  disconnect: () => null
-})
-window.IntersectionObserver = mockIntersectionObserver
-
 describe('VPerson', () => {
+  let wrapper = {}
   // all props once
   const orientation = 'responsive'
   const image = 'https://placehold.it/175x175'
@@ -25,7 +14,6 @@ describe('VPerson', () => {
   const video = 'https://www.youtube.com/watch?v=LOS5WB75gkY'
   const imgScale = '70'
   const circle = true
-  const animate = true
   const fullName = 'FirstName LastName'
   const nameLink = 'https://example.com'
   const organization = 'Gothamist'
@@ -65,91 +53,104 @@ describe('VPerson', () => {
       profile_url: 'https://www.google.com'
     }
   ]
+
+  const createComponent = ({ props = {} } = {}) => {
+    wrapper = mount(VPerson, {
+      props,
+      global: {
+        stubs: {
+          'nuxt-link': true,
+          'client-only': true
+        }
+      }
+    })
+  }
+
+  afterEach(() => {
+    if (wrapper && wrapper.destroy) {
+      wrapper.destroy()
+    } else {
+      wrapper = null
+    }
+  })
+
   test('it renders props', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { orientation, image, video, imgScale, circle, animate, fullName, nameLink, organization, organizationLink, role, blurb, truncate, social, bp }
+    createComponent({
+      props: { orientation, image, video, imgScale, circle, fullName, nameLink, organization, organizationLink, role, blurb, truncate, social, bp }
     })
     // check if prop works and was rendered correctly
     // const imageHolder = wrapper.find('.visual-holder')
-    const imageProp = wrapper.find('.prime-img-class')
-    const circleProp = wrapper.find('.circle').exists()
+    const circleProp = wrapper.find('.circle')
     // const animateProp
     const nameLinkProp = wrapper.find('.person-name-link')
     const imageLinkProp = wrapper.find('.image-with-caption-image-link')
     const roleProp = wrapper.find('.person-role')
     const blurbProp = wrapper.find('.blurbHolder')
-    const truncateProp = wrapper.find('.truncate').exists()
-    const socialProp = wrapper.find('.social').exists()
-    ////setTimeout(() => {
-    //expect(imageHolder.getAttribute('class').includes('responsive').toBe(true))
-    expect(circleProp).toBe(true)
-    //expect(imageProp.attributes('src')).toBe(image)
+    const truncateProp = wrapper.find('.truncate')
+    const socialProp = wrapper.find('.social')
+    const imageProp = wrapper.find('.prime-img-class')
+
+    expect(imageProp.attributes('src')).toMatch(image)
+    expect(circleProp.exists()).toBe(true)
     expect(nameLinkProp.text()).toContain(fullName)
     expect(nameLinkProp.attributes('href')).toBe(nameLink)
     expect(imageLinkProp.attributes('href')).toBe(nameLink)
     expect(roleProp.text()).toContain(role)
     expect(blurbProp.text()).toContain(blurb)
-    expect(truncateProp).toBe(true)
-    expect(socialProp).toBe(true)
-    ////}, 200)
+    expect(truncateProp.exists()).toBe(true)
+    expect(socialProp.exists()).toBe(true)
   })
 
   test('it has image only', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { image }
+    createComponent({
+      props: { image }
     })
-    setTimeout(() => {
-      const imageProp = wrapper.find('.prime-img-class')
-      const hasDetails = wrapper.find('.person-details').exists()
-      expect(imageProp.attributes('src')).toBe(image)
-      expect(hasDetails).toBe(false)
-    }, 200)
+    const imageProp = wrapper.find('.prime-img-class')
+    const hasDetails = wrapper.find('.person-details').exists()
+    expect(imageProp.attributes('src')).toBe(image)
+    expect(hasDetails).toBe(false)
   })
 
   test('image is GIF', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { image: imageGIF }
+    createComponent({
+      props: { image: imageGIF }
     })
-    //setTimeout(() => {
     const imageProp = wrapper.find('.person-image-img')
     expect(imageProp.attributes('src')).toBe(imageGIF)
     expect(wrapper.vm.isGIF(imageGIF)).toBeTruthy()
-    //}, 200)
   })
 
   test('it has image only with link', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { image, nameLink }
+    createComponent({
+      props: { image, nameLink }
     })
-    setTimeout(() => {
-      const imageLinkProp = wrapper.find('.image-with-caption-image-link')
-      const imageProp = wrapper.find('.prime-img-class')
-      const hasDetails = wrapper.find('.person-details').exists()
-      expect(imageLinkProp.attributes('to')).toBe(nameLink)
-      expect(imageProp.attributes('src')).toBe(image)
-      expect(hasDetails).toBe(false)
-    }, 200)
+    const imageLinkProp = wrapper.find('.image-with-caption-image-link')
+    const imageProp = wrapper.find('.prime-img-class')
+    const hasDetails = wrapper.find('.person-details').exists()
+    expect(imageLinkProp.attributes('to')).toBe(nameLink)
+    expect(imageProp.attributes('src')).toBe(image)
+    expect(hasDetails).toBe(false)
   })
 
   test('it has details', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { image, fullName, role, blurb, social }
+    createComponent({
+      props: { image, fullName, role, blurb, social }
     })
     const hasDetails = wrapper.find('.person-details').exists()
     expect(hasDetails).toBe(true)
   })
 
   test('it does not have details', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { image, video, circle }
+    createComponent({
+      props: { image, video, circle }
     })
     const hasDetails = wrapper.find('.person-details').exists()
     expect(hasDetails).toBe(false)
   })
 
   test('it has details with organization', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { image, fullName, role, blurb, social, organization, organizationLink }
+    createComponent({
+      props: { image, fullName, role, blurb, social, organization, organizationLink }
     })
     const personRole = wrapper.find('.person-role')
     const hasDetails = wrapper.find('.person-details')
@@ -159,16 +160,16 @@ describe('VPerson', () => {
   })
 
   test('it has circle image', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { image, fullName, role, blurb, circle }
+    createComponent({
+      props: { image, fullName, role, blurb, circle }
     })
     const circleProp = wrapper.find('.circle').exists()
     expect(circleProp).toBe(true)
   })
 
   test('it has detail, but no image', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { fullName, role, blurb, circle }
+    createComponent({
+      props: { fullName, role, blurb, circle }
     })
     const imagePropExists = wrapper.find('.person-image-img').exists()
     const hasDetailsExists = wrapper.find('.person-details').exists()
@@ -177,26 +178,26 @@ describe('VPerson', () => {
   })
 
   test('it has truncated blurb', () => {
-    const wrapper = mount(VPerson, {
-      propsData: { fullName, role, blurb, truncate }
+    createComponent({
+      props: { fullName, role, blurb, truncate }
     })
     const truncateExists = wrapper.find('.truncate').exists()
     expect(truncateExists).toBe(true)
   })
 
-  test('it passes basic accessibility tests', async () => {
-    const wrapper = mount(VPerson, {
-      propsData: { orientation, image, video, imgScale, circle, animate, fullName, nameLink, organization, organizationLink, role, blurb, truncate }
-    })
-    const results = await axe(wrapper.element)
-    expect(results).toHaveNoViolations()
-  })
-
   test('it extracts youtube ID from url', async () => {
-    const wrapper = mount(VPerson, {
-      propsData: { fullName, role, blurb }
+    createComponent({
+      props: { fullName, role, blurb }
     })
     const id = await wrapper.vm.getYoutubeId('https://www.youtube.com/watch?v=LOS5WB75gkY')
     expect(id).toMatch('LOS5WB75gkY')
+  })
+
+  test('it passes basic accessibility tests', async () => {
+    createComponent({
+      props: { orientation, image, video, imgScale, circle, fullName, nameLink, organization, organizationLink, role, blurb, truncate }
+    })
+    const results = await axe(wrapper.element)
+    expect(results).toHaveNoViolations()
   })
 })

@@ -1,12 +1,13 @@
-import { mount, shallowMount } from '@vue/test-utils'
-import { describe, test, expect } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import VByline from '../components/VByline.vue'
 import { toHaveNoViolations } from 'jest-axe'
-import VByline from '../../components/VByline'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
 describe('VByline', () => {
+
+  let wrapper = {}
   const authors = [
     {
       firstName: 'Shumita',
@@ -16,13 +17,34 @@ describe('VByline', () => {
       organizationUrl: 'http://www.wnyc.org'
     }
   ]
-  test('authors prop works', () => {
-    const wrapper = mount(VByline, {
-      propsData: {
-        authors
+  const prefix = 'By'
+
+  const createComponent = ({ props = {} } = {}) => {
+    wrapper = mount(VByline, {
+      props,
+      global: {
+        stubs: {
+          'nuxt-link': true
+        }
       }
     })
-    // check if prop works
+  }
+
+  afterEach(() => {
+    if (wrapper && wrapper.destroy) {
+      wrapper.destroy()
+    } else {
+      wrapper = null
+    }
+  })
+
+  test('authors prop works', () => {
+    createComponent({
+      props: {
+        authors,
+        prefix
+      }
+    })
     expect(wrapper.text()).toContain(authors[0].lastName)
     expect(wrapper.text()).toContain(authors[0].firstName)
     expect(wrapper.text()).toContain(authors[0].organization)
@@ -32,12 +54,8 @@ describe('VByline', () => {
   })
 
   test('it passes basic accessibility tests', async () => {
-    const wrapper = mount(VByline, {
-      propsData: {
-        authors
-      }
-    })
-    const results = await axe(wrapper.element)
+    const axeWrapper = mount(VByline)
+    const results = await axe(axeWrapper.element)
     expect(results).toHaveNoViolations()
   })
 })

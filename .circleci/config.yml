@@ -47,7 +47,7 @@ jobs:
           name: Run unit tests
           command: |
             npm install
-            npm run test:unit
+            npm run test
 
   build-and-publish:
     executor: default

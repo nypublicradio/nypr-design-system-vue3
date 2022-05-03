@@ -48,6 +48,8 @@
               role="presentation"
               loading="lazy"
               decoding="async"
+              width="400"
+              height="400"
             />
           </div>
           <Button
@@ -180,9 +182,9 @@
 <script>
 import { gsap } from 'gsap'
 import { isInViewport } from '../mixins/helpers.js'
-import VShareTools from './VShareTools'
-import VShareToolsItem from './VShareToolsItem'
-import VImageWithCaption from './VImageWithCaption'
+import VShareTools from './VShareTools.vue'
+import VShareToolsItem from './VShareToolsItem.vue'
+import VImageWithCaption from './VImageWithCaption.vue'
 import Button from 'primevue/button'
 
 function initResizeListener(binding) {
@@ -242,10 +244,10 @@ export default {
     /**
      *  adds a basic animation to the component when it enters the viewport once. If an image and details are present, it will animate them individually. If either is missing, it will animate the entire component.
      */
-    animate: {
-      type: Boolean,
-      default: false,
-    },
+    // animate: {
+    //   type: Boolean,
+    //   default: false,
+    // },
     /**
      *  youtube link to promo video
      */
@@ -405,28 +407,28 @@ export default {
       this.handleResize()
     }
 
-    if (this.animate) {
-      thisPerson.classList.add('animate')
-    }
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // console.log('in viewport')
-          // stop GIF
-          if (this.image && this.isGIF(this.image)) {
-            this.handleGifInViewPort()
-          }
+    // if (this.animate) {
+    //   thisPerson.classList.add('animate')
+    // }
+    // const observer = new IntersectionObserver((entries) => {
+    //   entries.forEach((entry) => {
+    //     if (entry.isIntersecting) {
+    //       // console.log('in viewport')
+    //       // stop GIF
+    //       if (this.image && this.isGIF(this.image)) {
+    //         this.handleGifInViewPort()
+    //       }
 
-          // animate
-          if (this.animate) {
-            thisPerson.classList.remove('animate')
-          }
-          observer.disconnect()
-        }
-      })
-    })
+    //       // animate
+    //       if (this.animate) {
+    //         thisPerson.classList.remove('animate')
+    //       }
+    //       observer.disconnect()
+    //     }
+    //   })
+    // })
 
-    observer.observe(thisPerson)
+    // observer.observe(thisPerson)
 
     // running the resize code in a debounce and controlled by a watch method looking at a data var windowSize, which is updarted by the onResize method with the screen is resized
     this.runHandleOnResizeDebounce = this.debounce(() => {

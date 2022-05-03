@@ -1,6 +1,6 @@
 <script setup>
 import Button from 'primevue/button'
-import VFlexibleLink from './VFlexibleLink'
+import VFlexibleLink from './VFlexibleLink.vue'
 const emit = defineEmits(['tagClick'])
 const props = defineProps({
   slug: {

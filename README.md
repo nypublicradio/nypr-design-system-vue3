@@ -11,14 +11,31 @@ This repository is packaged as an npm package. To use in your project, add the f
 Only commit the `.npmrc` file with the first line to git. Your personal access token should *never* be committed to git. If you accidentally commit your personal access token, delete it and genenerate a new personall access token with `read:packages` permission. 
 
 ## Installation
+```
 npm i
+```
 
 ## Storybook
+if STORYBOOK_EDIT is set to false (default = ture), it will use the compiled minified theme and not provide real time updates as you develop. This is useful when you just want to refernce the storybook instance quickly because it builds way faster, and to test the mionified theme build
+```
 npm run storybook
+```
 
-## Nuxt instance
-npm run dev
+# TESTING 
+VSCode users, install the test helper plugin: `https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer`
 
+Vitest config found in this file: `./vitest.config.js`
+## run Vitest tests
+update THEME env var with the name of the theme you want to use: `.env` line 1
+```
+npm run test
+```
+
+## run Vitest tests with coverage
+update THEME env var with the name of the theme you want to use: `.env` line 1
+```
+npm run coverage
+```
 
 ## Themes location
 src/assets/themes/
@@ -27,9 +44,28 @@ src/assets/themes/
 src/assets/library/
 
 ## build Themes 
+```
 npm run build-themes
+```
 
-## font size scale
+## Prime Theme View
+first, rename config file to `vite.config.js`
+file being rendered: `src/components/Home.vue`
+add/select the theme you want import here: `\src\main.js` line 51
+```
+npm run prime-serve
+```
+
+
+
+## Nuxt instance
+first, rename config file to `--vite.config.js` to avoid conflict with nuxt.config.js
+update THEME env var with the name of the theme you want to use: `.env` line 1
+```
+npm run dev
+```
+
+## font size scale reference helper
 --font-size = 16px
 --font-ratio = 1.125
 --font-size-20 = 5.202rem/83.23px	
@@ -53,7 +89,3 @@ npm run build-themes
 --font-size-2 = 0.624rem/9.99px	
 --font-size-1 = 0.555rem/8.88px	
 --font-size-0 = 0.493rem/7.89px	
-
-## Prime Theme View
-first, rename config file to "vite.config.js" 
-npm run prime-serve

@@ -1,8 +1,8 @@
 <script setup>
 import { computed } from 'vue'
-import VImageWithCaption from './VImageWithCaption'
-import VFlexibleLink from './VFlexibleLink'
-import VProgressScrubber from './VProgressScrubber'
+import VImageWithCaption from './VImageWithCaption.vue'
+import VFlexibleLink from './VFlexibleLink.vue'
+import VProgressScrubber from './VProgressScrubber.vue'
 
 const props = defineProps({
   description: {
@@ -47,7 +47,14 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['scrub-timeline-change', 'scrub-timeline-end', 'image-click', 'title-click', 'description-click', 'timeline-click'])
+const emit = defineEmits([
+  'scrub-timeline-change',
+  'scrub-timeline-end',
+  'image-click',
+  'title-click',
+  'description-click',
+  'timeline-click',
+])
 
 const percentBuffered = computed(() => {
   return (props.buffered / props.durationSeconds) * 100
@@ -122,15 +129,11 @@ const convertTime = (val) => {
         />
         <div v-if="durationSeconds" class="track-info-time footer">
           <span class="track-info-time-current">
-            {{
-              convertTime(currentSeconds)
-            }}
+            {{ convertTime(currentSeconds) }}
           </span>
           <span class="track-info-time-separator">/</span>
           <span class="track-info-time-total">
-            {{
-              convertTime(durationSeconds)
-            }}
+            {{ convertTime(durationSeconds) }}
           </span>
         </div>
         <span v-else class="track-info-time-separator">&nbsp;</span>

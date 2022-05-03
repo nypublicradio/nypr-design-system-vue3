@@ -1,21 +1,12 @@
-import { mount, shallowMount } from '@vue/test-utils'
-import { describe, test, expect, jest } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import VPersistentPlayer from '../components/VPersistentPlayer.vue'
 import { toHaveNoViolations } from 'jest-axe'
-import VPersistentPlayer from '../../components/VPersistentPlayer'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
-// need to mock the IntersectionObserver I am using for detecting when entering the viewport
-const mockIntersectionObserver = jest.fn()
-mockIntersectionObserver.mockReturnValue({
-  observe: () => null,
-  unobserve: () => null,
-  disconnect: () => null
-})
-window.IntersectionObserver = mockIntersectionObserver
-
 describe('VPersistentPlayer', () => {
+  let wrapper = {}
   // all props once
   const title = 'The Takeaway'
   const station = 'WNYC 93.9 FM'
@@ -35,9 +26,28 @@ describe('VPersistentPlayer', () => {
   const hideSkipMobile = false
   const hideDownloadMobile = false
 
+  const createComponent = ({ props = {} } = {}) => {
+    wrapper = mount(VCounter, {
+      props,
+      global: {
+        stubs: {
+          'nuxt-link': true
+        }
+      }
+    })
+  }
+
+  afterEach(() => {
+    if (wrapper && wrapper.destroy) {
+      wrapper.destroy()
+    } else {
+      wrapper = null
+    }
+  })
+
   test('it renders base props', () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file }
+      props: { title, station, image, description, file }
     })
     const imageElm = wrapper.find('.simple-responsive-image-holder .image')
     const titleElm = wrapper.find('.track-info-title')
@@ -50,7 +60,7 @@ describe('VPersistentPlayer', () => {
 
   test('title & image & descriptionLink has a link', () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, titleLink, descriptionLink }
+      props: { title, station, image, description, file, titleLink, descriptionLink }
     })
     const titleElm = wrapper.find('.track-info-title a')
     const imageLinkElm = wrapper.find('.image-with-caption-image .image-with-caption-image-link')
@@ -62,7 +72,7 @@ describe('VPersistentPlayer', () => {
 
   test('show download button', () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, showDownload }
+      props: { title, station, image, description, file, showDownload }
     })
     const downloadBtn = wrapper.find('.player-download-icon')
     expect(downloadBtn.exists()).toBe(true)
@@ -70,7 +80,7 @@ describe('VPersistentPlayer', () => {
 
   test('show loading indicator', () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, isLoading }
+      props: { title, station, image, description, file, isLoading }
     })
     const spinner = wrapper.find('.the-play-button .pi-spinner')
     expect(spinner.exists()).toBe(true)
@@ -78,7 +88,7 @@ describe('VPersistentPlayer', () => {
 
   test('show skip ahead and skip back buttons', () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, showSkip }
+      props: { title, station, image, description, file, showSkip }
     })
     const back = wrapper.find('.player-back-15-icon')
     const ahead = wrapper.find('.player-ahead-15-icon')
@@ -88,7 +98,7 @@ describe('VPersistentPlayer', () => {
 
   test('is in live stream mode', () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, livestream }
+      props: { title, station, image, description, file, livestream }
     })
     const back = wrapper.find('.player-back-15-icon')
     const ahead = wrapper.find('.player-ahead-15-icon')
@@ -102,34 +112,57 @@ describe('VPersistentPlayer', () => {
     expect(play.exists()).toBe(true)
   })
 
-  test('show minimize button', () => {
+  test('show minimize/maximize buttons & click them', () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, canMinimize }
+      props: { title, station, image, description, file, canMinimize }
     })
     const minimizeBtn = wrapper.find('.minimize-btn')
+    const maximizeBtn = wrapper.find('.maximize-btn')
     expect(minimizeBtn.exists()).toBe(true)
+    expect(maximizeBtn.exists()).toBe(true)
+
+    minimizeBtn.trigger('click')
+    expect(wrapper.vm.isMinimized).toBe(true)
+
+    maximizeBtn.trigger('click')
+    expect(wrapper.vm.isMinimized).toBe(false)
+
   })
 
-  test('is muted', () => {
+  test('hide minimize/maximize buttons', () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, isMuted }
+      props: { title, station, image, description, file, canMinimize: false }
+    })
+    const minimizeBtn = wrapper.find('.minimize-btn')
+    const maximizeBtn = wrapper.find('.maximize-btn')
+    expect(minimizeBtn.exists()).toBe(false)
+    expect(maximizeBtn.exists()).toBe(false)
+  })
+
+  test('is muted & mute clicked', () => {
+    const wrapper = mount(VPersistentPlayer, {
+      props: { title, station, image, description, file, isMuted }
     })
     const slider = wrapper.find('.volume-control .p-slider')
+    const btn = wrapper.find('.volume-control .volume-control-icon')
     const icon = wrapper.find('.volume-control .volume-control-icon .pi')
     expect(slider.exists()).toBe(false)
     expect(icon.attributes().class).toContain('pi-volume-off')
+
+    btn.trigger('click')
+    expect(wrapper.vm.muted).toBe(true)
   })
 
   test('will auto play on load', async () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, autoPlay }
+      props: { title, station, image, description, file, autoPlay }
     })
     expect(wrapper.vm.playing).toBe(true)
   })
 
   test('show/hide skip buttons on mobile', async () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, hideSkipMobile }
+      props: { title, station, image, description, file, hideSkipMobile }
     })
 
     const back = wrapper.find('.player-back-15-icon')
@@ -145,7 +178,7 @@ describe('VPersistentPlayer', () => {
 
   test('show/hide download button on mobile', async () => {
     const wrapper = mount(VPersistentPlayer, {
-      propsData: { title, station, image, description, file, showDownload, hideDownloadMobile }
+      props: { title, station, image, description, file, showDownload, hideDownloadMobile }
     })
 
     const downloadBtn = wrapper.find('.player-download-icon')
@@ -155,5 +188,30 @@ describe('VPersistentPlayer', () => {
     await wrapper.setProps({ hideDownloadMobile: true })
     expect(downloadBtn.attributes().class).toContain('hidden md:flex')
   })
+
+  // test('it passes basic accessibility tests', async () => {
+  //   const axeWrapper = mount(VPersistentPlayer)
+  //   const results = await axe(axeWrapper.element)
+  //   expect(results).toHaveNoViolations()
+  // })
+
+  /*
+  the axe test above give the following error involving the Slider component. Investigating fix. Maybe in future version of primevue
+  
+  Error: expect(received).toHaveNoViolations(expected)
+  
+  Expected the HTML found at $('.p-slider-handle') to have no violations:
+  
+  <span class="p-slider-handle" style="left: 50%;" tabindex="0" role="slider" aria-valuemin="0" aria-valuenow="50" aria-valuemax="100"></span>    
+  
+  Received:
+  
+  "ARIA input fields must have an accessible name (aria-input-field-name)"
+  Fix any of the following:
+    aria-label attribute does not exist or is empty
+    aria-labelledby attribute does not exist, references elements that do 
+  not exist or references elements that are empty
+    Element has no title attribute
+  */
 
 })

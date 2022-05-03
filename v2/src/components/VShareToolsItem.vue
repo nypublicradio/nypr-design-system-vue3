@@ -63,7 +63,7 @@ const props = defineProps({
   },
   service: {
     type: String,
-    default: '',
+    default: 'site',
   },
   username: {
     type: String,
