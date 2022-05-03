@@ -43,6 +43,9 @@ onUpdated(() => {
       class="volume-control-slider"
       :min="0"
       :max="100"
+      aria-label="Volume slider"
+      title="Volume slider"
+      aria-labelledby="Volume slider"
       @change="emit('volume-change', previousVolume)"
     />
     <button

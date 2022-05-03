@@ -6,43 +6,71 @@ import axe from './axe-helper'
 expect.extend(toHaveNoViolations)
 
 describe('VTag', () => {
+  let wrapper = {}
+
   const name = 'news'
   const slug = 'news'
   // const radius = 10
 
-  test('text prop works: null', () => {
-    const wrapper = mount(VTag, {
+  const createComponent = ({ props = {} } = {}) => {
+    wrapper = mount(VTag, {
+      props,
+      // cant user stub here because then the button will not render inside the VFlexibleLink component (nuxt-link)
+      // global: {
+      //   stubs: {
+      //     'nuxt-link': true
+      //   }
+      // }
+    })
+  }
+
+  afterEach(() => {
+    if (wrapper && wrapper.destroy) {
+      wrapper.destroy()
+    } else {
+      wrapper = null
+    }
+  })
+
+  test('text prop works: null', async () => {
+    createComponent({
       props: {
         name,
-        slug,
-        stubs: ['nuxt-link']
+        slug
       }
     })
-    // check if prop works
     const button = wrapper.find('.flexible-link .p-button .p-button-label')
     expect(button.text()).toBe(name)
   })
 
-  // this is using nuxt-link, so we need to find the "to" attribute instead of "href"
-  test('link attribute works', () => {
-    const wrapper = mount(VTag, {
+  test('url link attribute works', () => {
+    createComponent({
       props: {
         name,
-        slug,
-        stubs: ['nuxt-link']
+        slug: 'https://example.com'
       }
     })
-    // check if prop works and rendered correctly
+    const div = wrapper.find('.flexible-link')
+    expect(div.attributes().href).toBe('https://example.com')
+  })
+
+  //this is using nuxt - link, so we need to find the "to" attribute instead of "href"
+  test('route link attribute works', () => {
+    createComponent({
+      props: {
+        name,
+        slug
+      }
+    })
     const div = wrapper.find('.flexible-link')
     expect(div.attributes().to).toBe(slug)
   })
 
   test('it passes basic accessibility tests', async () => {
-    const wrapper = mount(VTag, {
+    createComponent({
       props: {
         name,
-        slug,
-        stubs: ['nuxt-link']
+        slug
       }
     })
     const results = await axe(wrapper.element)

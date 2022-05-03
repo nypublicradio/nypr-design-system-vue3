@@ -16,6 +16,9 @@ describe('VFlexibleLink', () => {
   const createComponent = ({ props = {} } = {}) => {
     wrapper = mount(VFlexibleLink, {
       props,
+      slots: {
+        default: 'link text',
+      },
       global: {
         stubs: {
           'nuxt-link': true
@@ -65,8 +68,12 @@ describe('VFlexibleLink', () => {
   })
 
   test('it passes basic accessibility tests', async () => {
-    const axeWrapper = mount(VFlexibleLink)
-    const results = await axe(axeWrapper.element)
+    createComponent({
+      props: {
+        to: urlLink
+      }
+    })
+    const results = await axe(wrapper.element)
     expect(results).toHaveNoViolations()
   })
 

@@ -1,9 +1,9 @@
 <script setup>
 import { computed, useSlots } from 'vue'
 import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
-import VTag from './VTag'
-import VFlexibleLink from './VFlexibleLink'
-import VImageWithCaption from './VImageWithCaption'
+import VTag from './VTag.vue'
+import VFlexibleLink from './VFlexibleLink.vue'
+import VImageWithCaption from './VImageWithCaption.vue'
 
 const props = defineProps({
   alt: {
@@ -105,7 +105,13 @@ const props = defineProps({
 const slots = useSlots()
 
 const hasDetails = computed(() => {
-  return !!props.title || !!props.subtitle || !!slots.default || !!slots.blurb || !!slots.eyebrow
+  return (
+    !!props.title ||
+    !!props.subtitle ||
+    !!slots.default ||
+    !!slots.blurb ||
+    !!slots.eyebrow
+  )
 })
 
 const getMobileImageScale = computed(() => {
@@ -151,14 +157,28 @@ const getMobileImageScale = computed(() => {
     </template>
     <div v-if="hasDetails" class="card-details">
       <div v-if="tags || sponsored" class="card-tags">
-        <v-tag v-for="(tag, index) in tags" :key="index" :name="tag.name" :slug="tag.slug" />
+        <v-tag
+          v-for="(tag, index) in tags"
+          :key="index"
+          :name="tag.name"
+          :slug="tag.slug"
+        />
         <v-tag v-if="sponsored" name="sponsored" />
       </div>
-      <p v-if="eyebrow" class="card-eyebrow" v-html="eyebrow"/>
+      <p v-if="eyebrow" class="card-eyebrow" v-html="eyebrow" />
       <div v-if="title" class="card-title" role="heading" aria-level="3">
-        <v-flexible-link class="card-title-link" :class="{ disabled: !titleLink }" :to="titleLink">
+        <v-flexible-link
+          class="card-title-link"
+          :class="{ disabled: !titleLink }"
+          :to="titleLink"
+        >
           <h2 v-html="title"></h2>
-          <i v-if="icon" :class="`pi pi-${icon}`" role="img" :aria-label="icon + ' icon'"></i>
+          <i
+            v-if="icon"
+            :class="`pi pi-${icon}`"
+            role="img"
+            :aria-label="icon + ' icon'"
+          ></i>
           <slot name="customIcon"></slot>
         </v-flexible-link>
       </div>

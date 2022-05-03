@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import VVolumeControl from './VVolumeControl'
-import VTrackInfo from './VTrackInfo'
+import VVolumeControl from './VVolumeControl.vue'
+import VTrackInfo from './VTrackInfo.vue'
 import Button from 'primevue/button'
 import { Howl, Howler } from 'howler'
 import soundAnimGif from '../assets/images/audioAnim.gif'

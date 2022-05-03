@@ -65,8 +65,15 @@ describe('VCounter', () => {
   })
 
   test('it passes basic accessibility tests', async () => {
-    const axeWrapper = mount(VCounter)
-    const results = await axe(axeWrapper.element)
+    createComponent({
+      props: {
+        value,
+        icon,
+        text,
+        href
+      }
+    })
+    const results = await axe(wrapper.element)
     expect(results).toHaveNoViolations()
   })
 
