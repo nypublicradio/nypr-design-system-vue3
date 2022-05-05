@@ -1,0 +1,64 @@
+//fade
+.fade-enter-active {
+    transition: opacity $transitionDuration ease-out;
+}
+.fade-leave-active {
+    transition: opacity $transitionDuration ease-in;
+}
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+}
+
+//zoom
+.zoom-enter-active {
+    transition: opacity $transitionDuration, transform $transitionDuration;
+}
+.zoom-leave-active {
+    transition: opacity $transitionDuration, transform $transitionDuration;
+}
+.zoom-enter-from,
+.zoom-leave-to {
+    transform: scale(0.7);
+    opacity: 0;
+}
+
+// slide in from left to right
+
+.slide-right-enter-active,
+.slide-right-leave-active {
+    transition: all $transitionDuration ease;
+}
+
+.slide-right-enter,
+.slide-right-leave-to {
+    transform: translateX(-100%);
+    transition: all $transitionDuration ease-in 0s;
+}
+
+// slide in from right to left
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+    transition: all $transitionDuration ease-out;
+}
+
+.slide-left-enter,
+.slide-left-leave-to {
+    transform: translateX(100%);
+    transition: all $transitionDuration ease-in 0s;
+}
+
+// slide in from right to left
+
+.slide-down-enter-active,
+.slide-down-leave-active {
+    transition: all $transitionDuration ease-out;
+}
+
+.slide-down-enter,
+.slide-down-leave-to {
+    opacity: 0;
+    transform: translateY(100%);
+    transition: all $transitionDuration ease-in 0s;
+}

@@ -50,7 +50,8 @@ import InlineMessage from 'primevue/inlinemessage'
 
 /*CHANGE YOUR THEME*/
 //import './assets/themes/white-label/_theme.scss'
-import './assets/themes/radiolab/_theme.scss'
+//import './assets/themes/radiolab/_theme.scss'
+import './assets/themes/gothamist/_theme.scss'
 
 import 'primevue/resources/primevue.min.css'
 import 'primeflex/primeflex.css'
