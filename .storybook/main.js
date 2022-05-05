@@ -18,22 +18,12 @@ module.exports = {
         {
           loader: 'sass-loader',
           options: {
-            additionalData: `${process.env.STORYBOOK_EDIT === 'true' ? `@import "~/src/assets/themes/${envTheme}/_theme.scss";` : `@import "~/src/assets/themes/${envTheme}/${envTheme}.min.css"; @import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`} @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css"; body.dark{background-color: #080808 !important;}`,
+            additionalData: `${process.env.STORYBOOK_EDIT === 'true' ? `@import "~/src/assets/themes/${envTheme}/_theme.scss";` : `@import "~/src/assets/themes/${envTheme}/${envTheme}.min.css"; @import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`} @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css";`,
           },
         },
       ],
       // include: path.resolve(__dirname, '../'),
     })
-    // config.module.rules.push({
-    //   test: /\.css$/,
-    //   use: [
-    //     'style-loader',
-    //     'css-loader',
-    //     {
-    //       loader: 'css-loader',
-    //     },
-    //   ],
-    // })
     return config
   },
 }

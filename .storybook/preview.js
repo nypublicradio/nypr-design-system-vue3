@@ -1,8 +1,9 @@
 import { app, addParameters } from '@storybook/vue3'
-// import './storybook-styles.scss'
 import { action } from '@storybook/addon-actions'
-
 import addons from '@storybook/addons'
+
+// darkmose styles
+import './darkmode.css'
 
 // get an instance to the communication channel for the manager and preview
 const channel = addons.getChannel()

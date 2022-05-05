@@ -89,3 +89,13 @@ npm run dev
 --font-size-2 = 0.624rem/9.99px	
 --font-size-1 = 0.555rem/8.88px	
 --font-size-0 = 0.493rem/7.89px	
+
+
+## Creating a new theme
+Navigate to nypr-design-system-vue3\src\assets\themes
+Duplicate “radiolab” folder and rename it (no spaces in name)
+Delete .min.css and .min.css.map in the new folder
+In .env file, change THEME to equal the new name
+Navigate to nypr-design-system-vue3\src\main.js  line:51
+Add a new import for the new theme
+import './assets/themes/newthemename/_theme.scss'
