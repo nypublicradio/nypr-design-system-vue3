@@ -65,9 +65,9 @@
 // }
 
 @font-face {
-    font-family: "Matter";
-    src: local("Matter-Medium.woff2") format("woff2"), local("Matter-Medium.woff") format("woff"),
-        local("Matter-Medium.ttf") format("truetype");
+    font-family: 'Matter';
+    src: local('Matter-Medium.woff2') format('woff2'), local('Matter-Medium.woff') format('woff'),
+        local('Matter-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
@@ -100,9 +100,9 @@
 } */
 
 @font-face {
-    font-family: "Matter";
-    src: local("Matter-Regular.woff2") format("woff2"), local("Matter-Regular.woff") format("woff"),
-        local("Matter-Regular.ttf") format("truetype");
+    font-family: 'Matter';
+    src: local('Matter-Regular.woff2') format('woff2'), local('Matter-Regular.woff') format('woff'),
+        local('Matter-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
