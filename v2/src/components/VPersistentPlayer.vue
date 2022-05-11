@@ -350,6 +350,7 @@ defineExpose({
         :disabled="loading"
         :title="playing ? 'Pause' : props.livestream ? 'Listen Live' : 'Play'"
         class="the-play-button play-button p-button-icon-only"
+        :aria-label="playing ? 'Pause button' : 'Play button'"
         @click="togglePlay"
         :aria-label="playing ? 'Pause button' : 'Play button'"
       >
