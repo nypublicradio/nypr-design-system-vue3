@@ -351,6 +351,7 @@ defineExpose({
         :title="playing ? 'Pause' : props.livestream ? 'Listen Live' : 'Play'"
         class="the-play-button play-button p-button-icon-only"
         @click="togglePlay"
+        :aria-label="playing ? 'Pause button' : 'Play button'"
       >
         <i v-if="!playing && !loading" class="pi pi-play"></i>
         <i v-if="playing && !loading" class="pi pi-pause"></i>
