@@ -352,7 +352,6 @@ defineExpose({
         class="the-play-button play-button p-button-icon-only"
         :aria-label="playing ? 'Pause button' : 'Play button'"
         @click="togglePlay"
-        :aria-label="playing ? 'Pause button' : 'Play button'"
       >
         <i v-if="!playing && !loading" class="pi pi-play"></i>
         <i v-if="playing && !loading" class="pi pi-pause"></i>
