@@ -114,11 +114,11 @@ const hasDetails = computed(() => {
   )
 })
 
-const getMobileImageScale = computed(() => {
-  // console.log('window.innerWidth = ', window.innerWidth)
-  // console.log('breakpoint[props.bp] = ', breakpoint[props.bp])
-  return window.innerWidth < breakpoint[props.bp] ? props.mobileImageScale : 1
-})
+// const getMobileImageScale = computed(() => {
+//   // console.log('window.innerWidth = ', window.innerWidth)
+//   // console.log('breakpoint[props.bp] = ', breakpoint[props.bp])
+//   return window.innerWidth < breakpoint[props.bp] ? props.mobileImageScale : 1
+// })
 </script>
 
 <template>
@@ -135,6 +135,8 @@ const getMobileImageScale = computed(() => {
           :image="image"
           :alt-text="title"
           :image-url="titleLink"
+          :width="Math.round(width * props.mobileImageScale)"
+          :height="Math.round(height * props.mobileImageScale)"
           :max-width="maxWidth"
           :max-height="maxHeight"
           :allow-vertical-effect="allowVerticalEffect"
@@ -147,8 +149,10 @@ const getMobileImageScale = computed(() => {
           class="card-image w-full"
           :class="{ [`hidden ${bp}:w-max ${bp}:block`]: responsive }"
           :image="image"
-          :width="Math.round(width * getMobileImageScale)"
-          :height="Math.round(height * getMobileImageScale)"
+          :width="Math.round(width * props.mobileImageScale)"
+          :height="Math.round(height * props.mobileImageScale)"
+          :max-width="maxWidth"
+          :max-height="maxHeight"
           :alt-text="title"
           role="presentation"
           :image-url="titleLink"
@@ -166,14 +170,18 @@ const getMobileImageScale = computed(() => {
           />
           <v-tag v-if="sponsored" name="sponsored" />
         </div>
-        <p v-if="eyebrow" class="card-eyebrow" v-html="eyebrow" />
+        <div
+          v-if="eyebrow"
+          class="card-eyebrow type-body"
+          v-html="eyebrow"
+        ></div>
         <div v-if="title" class="card-title" role="heading" aria-level="3">
           <v-flexible-link
             class="card-title-link"
             :class="{ disabled: !titleLink }"
             :to="titleLink"
           >
-            <h2 v-html="title"></h2>
+            <div class="h2" v-html="title"></div>
             <i
               v-if="icon"
               :class="`pi pi-${icon}`"
@@ -184,7 +192,7 @@ const getMobileImageScale = computed(() => {
           </v-flexible-link>
         </div>
         <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
-        <p v-if="blurb" class="card-blurb" v-html="blurb"></p>
+        <div v-if="blurb" class="card-blurb" v-html="blurb"></div>
       </div>
       <div v-if="$slots.default" class="card-slot">
         <slot />

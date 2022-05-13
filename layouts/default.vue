@@ -1,14 +1,14 @@
 <template>
   <div :class="$route.name">
     <div>header</div>
-    <!-- <ul>
+    <ul>
       <li>
         <nuxt-link to="/">Home</nuxt-link>
       </li>
       <li>
         <nuxt-link to="/other">Other</nuxt-link>
       </li>
-    </ul>-->
+    </ul>
     <!-- <v-audio-player-system persistent always /> -->
     <main>
       <slot></slot>
@@ -40,7 +40,7 @@ export default {
     this.handleNewPage()
   },
   methods: {
-    handleNewPage() { },
+    handleNewPage() {},
   },
 }
 </script>

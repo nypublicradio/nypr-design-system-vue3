@@ -23,11 +23,10 @@ export default defineNuxtConfig({
     'primevue/resources/primevue.min.css',
     'primeicons/primeicons.css'
   ],
-  ssr: true,
   vite: {
     css: {
       preprocessorOptions: {
-        scss: {          
+        scss: {
           additionalData: `@import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`
         },
       },

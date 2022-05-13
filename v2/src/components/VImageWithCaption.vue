@@ -119,6 +119,8 @@ const props = defineProps({
 const emit = defineEmits([
   'toggle-caption-expanded',
   'toggle-caption-collapsed',
+  'image-click',
+  'credit-click',
 ])
 
 const refThisImg = ref(null)
