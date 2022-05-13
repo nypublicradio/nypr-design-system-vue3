@@ -1,6 +1,7 @@
 <script setup>
 import { onBeforeMount, ref } from 'vue'
 //import axios from 'axios'
+import breakpoint from '../src/assets/library/breakpoints.module.scss'
 import VCard from '../v2/src/components/VCard.vue'
 
 //const dataLoaded = ref(false)
@@ -31,6 +32,11 @@ totalCount.value = apiData.value.data.attributes['total-count']
 //       dataLoaded.value = true
 //     })
 // })
+
+const bpSizes = (bp, m, d) => {
+  if (typeof window === 'undefined') return d
+  return window.innerWidth < breakpoint[bp] ? m : d
+}
 </script>
 
 <template>
@@ -77,8 +83,8 @@ totalCount.value = apiData.value.data.attributes['total-count']
               :blurb="
                 person.attributes.person.lede || person.attributes.person.bio
               "
-              :width="391"
-              :height="293"
+              :width="bpSizes('md', null, 391)"
+              :height="bpSizes('md', null, 293)"
               :max-width="person.attributes.person.image.w"
               :max-height="person.attributes.person.image.h"
               responsive

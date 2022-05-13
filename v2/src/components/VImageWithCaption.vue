@@ -154,8 +154,10 @@ onMounted(() => {
       ? refThisImg.value.offsetWidth
       : props.defaultWidth
       ? props.defaultWidth
+      : typeof window === 'undefined'
+      ? props.defaultWidth
       : window.innerWidth
-  // console.log('thisWidth.value = ', thisWidth.value)
+  //console.log('thisWidth.value = ', thisWidth.value)
 })
 
 const getCurrentDimensions = computed(() => {
