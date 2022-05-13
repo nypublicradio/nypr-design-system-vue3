@@ -101,14 +101,14 @@ const convertTime = (val) => {
               v-html="title"
             />
           </h2>
-          <h2 v-if="title && !titleLink" v-html="title"></h2>
+          <div v-if="title && !titleLink" class="h2" v-html="title"></div>
         </div>
         <div v-if="description" class="track-info-description">
-          <p
+          <div
             v-if="description && !descriptionLink"
-            class="track-info-description"
+            class="track-info-description type-body"
             v-html="description"
-          ></p>
+          ></div>
 
           <v-flexible-link
             v-if="description && descriptionLink"

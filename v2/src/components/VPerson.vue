@@ -92,7 +92,7 @@
             :class="!nameLink || onAuthorPage ? 'disabled' : ''"
             :href="nameLink ? nameLink : null"
           >
-            <h2><span v-html="fullName" /></h2>
+            <div class="h2" v-html="fullName"></div>
           </a>
         </div>
         <div v-if="role" class="person-role footer">
