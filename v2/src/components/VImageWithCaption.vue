@@ -114,6 +114,17 @@ const props = defineProps({
     type: [String, RegExp],
     default: '%quality%',
   },
+  /** * jpg compression quality */
+  quality: {
+    type: Number,
+    default: 85,
+  },
+  sizes: {
+    type: Array,
+    default() {
+      return [2, 3, 3.5, 4]
+    },
+  },
 })
 
 const emit = defineEmits([
@@ -205,6 +216,9 @@ const getCurrentDimensions = computed(() => {
             :width-token="widthToken"
             :height-token="heightToken"
             :quality-token="qualityToken"
+            :quality="quality"
+            :sizes="sizes"
+            :ratio="ratio"
           />
         </v-flexible-link>
         <transition name="fade">

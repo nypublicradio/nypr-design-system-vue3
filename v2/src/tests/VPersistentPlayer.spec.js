@@ -53,7 +53,7 @@ describe('VPersistentPlayer', () => {
     const titleElm = wrapper.find('.track-info-title')
     const descriptionElm = wrapper.find('.track-info-description')
 
-    expect(imageElm.attributes('src')).toBe('https://cms.prod.nypr.digital/images/329534/fill-84x84|format-jpeg|jpegquality-80/')
+    expect(imageElm.attributes('src')).toBe('https://cms.prod.nypr.digital/images/329534/fill-84x84|format-jpeg|jpegquality-85/')
     expect(titleElm.text()).toMatch(title)
     expect(descriptionElm.text()).toContain(description)
   })

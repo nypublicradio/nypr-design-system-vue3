@@ -44,6 +44,23 @@ NoText.args = {
     height: 400,
 }
 
+export const quality = Template.bind({})
+quality.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    quality: 30,
+}
+export const Srcset = Template.bind({})
+Srcset.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 300,
+    height: 200,
+    sizes: [2, 3],
+}
+
 export const PublisherImageNoText = Template.bind({})
 PublisherImageNoText.args = {
     altText: 'Fallback alt text here',

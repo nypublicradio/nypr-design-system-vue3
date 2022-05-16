@@ -69,7 +69,7 @@ const props = defineProps({
   /** * jpg compression quality */
   quality: {
     type: Number,
-    default: 80,
+    default: 85,
   },
   /** * allow the vertical effect to happen */
   allowVerticalEffect: {
@@ -85,6 +85,13 @@ const props = defineProps({
   imageEnlarged: {
     type: String,
     default: null,
+  },
+  /**
+   * desired ratio of the image if responsive
+   */
+  ratio: {
+    type: Array,
+    default: () => [3, 2],
   },
 })
 const emit = defineEmits(['click', 'keypress'])
@@ -175,7 +182,8 @@ onBeforeMount(() => {
 })
 
 const calcQuality = (quality, size) => {
-  return size >= 2 ? quality - Math.round(size * 5) : quality
+  const qual = size >= 2 ? quality - Math.round(size * 5) : quality
+  return qual >= 15 ? qual : 15
 }
 
 const enlarge = () => {
@@ -200,7 +208,10 @@ const closeEnlarge = () => {
 </script>
 
 <template>
-  <div class="simple-responsive-image-holder">
+  <div
+    class="simple-responsive-image-holder"
+    :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`"
+  >
     <div v-if="isVertical" class="bg">
       <img
         :src="computedSrcBg"
@@ -275,12 +286,13 @@ const closeEnlarge = () => {
 .simple-responsive-image-holder {
   line-height: 0;
   position: relative;
+  overflow: hidden;
   .image {
     position: relative;
     width: 100%;
-    height: auto;
+    height: 100%;
     top: 0;
-
+    object-fit: cover;
     &.is-vertical {
       margin: auto;
       display: block;

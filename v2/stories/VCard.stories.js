@@ -256,11 +256,36 @@ CustomImageRatio.args = {
     title: "Title with some <em>HTML</em>",
     titleLink: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
     maxWidth: 1440,
     maxHeight: 2560,
     responsive: true,
-    bp: 'md',
-    ratio: [3, 1]
+    bp: 'max',
+    ratio: [4, 1]
 }
+
+export const quality = Template.bind({})
+quality.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    maxWidth: 1440,
+    maxHeight: 2560,
+    responsive: true,
+    bp: 'max',
+    quality: 30
+}
+
+export const srcsetSizes = Template.bind({})
+srcsetSizes.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    maxWidth: 1440,
+    maxHeight: 2560,
+    responsive: true,
+    bp: 'max',
+    sizes: [2, 2.5]
+}
+

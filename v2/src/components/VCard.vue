@@ -101,6 +101,17 @@ const props = defineProps({
     type: Array,
     default: () => [3, 2],
   },
+  /** * jpg compression quality */
+  quality: {
+    type: Number,
+    default: 85,
+  },
+  sizes: {
+    type: Array,
+    default() {
+      return [2, 3, 3.5, 4]
+    },
+  },
 })
 const slots = useSlots()
 
@@ -141,6 +152,8 @@ const hasDetails = computed(() => {
           :max-height="maxHeight"
           :allow-vertical-effect="allowVerticalEffect"
           :ratio="ratio"
+          :quality="quality"
+          :sizes="sizes"
           role="presentation"
         />
         <!-- desktop, uses width and height props -->
@@ -153,6 +166,8 @@ const hasDetails = computed(() => {
           :max-width="maxWidth"
           :max-height="maxHeight"
           :alt-text="title"
+          :quality="quality"
+          :sizes="sizes"
           role="presentation"
           :image-url="titleLink"
         />
