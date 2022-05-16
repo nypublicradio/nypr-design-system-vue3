@@ -53,6 +53,13 @@ RawImageEnlarge.args = {
     allowPreview: true,
 }
 
+export const RawImageRatio = Template.bind({})
+RawImageRatio.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
+    ratio: [4, 1]
+}
+
 export const Vertical = Template.bind({})
 Vertical.args = {
     alt: 'Fallback alt text here',
