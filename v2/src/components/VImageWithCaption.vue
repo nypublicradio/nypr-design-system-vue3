@@ -205,6 +205,7 @@ const getCurrentDimensions = computed(() => {
             :width-token="widthToken"
             :height-token="heightToken"
             :quality-token="qualityToken"
+            :ratio="ratio"
           />
         </v-flexible-link>
         <transition name="fade">

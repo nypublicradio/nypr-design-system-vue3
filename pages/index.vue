@@ -1,37 +1,27 @@
 <script setup>
 import { onBeforeMount, ref } from 'vue'
-//import axios from 'axios'
+import axios from 'axios'
 import breakpoint from '../src/assets/library/breakpoints.module.scss'
 import VCard from '../v2/src/components/VCard.vue'
 
-//const dataLoaded = ref(false)
+const dataLoaded = ref(false)
 const people = ref([])
 const totalCount = ref(null)
 
-const {
-  data: apiData,
-  pending,
-  error,
-  refresh,
-} = await useFetch(
-  `https://api.wnyc.org/api/v3/channel/shows/radiolab/the-team/1?limit=50`
-)
-people.value = apiData.value.included
-//console.log('apiData.value = ', apiData.value.included)
-totalCount.value = apiData.value.data.attributes['total-count']
-
-// onBeforeMount(async () => {
-//   await axios
-//     .get(
-//       `${config.API_URL}/api/v3/channel/shows/radiolab/the-team/1?limit=50`
-//       // `https://private-anon-26d14f4b2b-nyprpublisher.apiary-proxy.com/api/v3/channel/shows/radiolab/the-team/1?limit=50`
-//     )
-//     .then((response) => {
-//       people.value = response.data.included
-//       totalCount.value = response.data.data.attributes['total-count']
-//       dataLoaded.value = true
-//     })
-// })
+onBeforeMount(async () => {
+  await axios
+    .get(
+      `https://api.wnyc.org/api/v3/channel/shows/radiolab/the-team/1?limit=50`
+      // `https://private-anon-26d14f4b2b-nyprpublisher.apiary-proxy.com/api/v3/channel/shows/radiolab/the-team/1?limit=50`
+    )
+    .then((response) => {
+      console.log('response.data = ', response.data)
+      people.value = response.data.included
+      console.log('people.value = ', people.value)
+      //totalCount.value = response.data.data.attributes['total-count']
+      dataLoaded.value = true
+    })
+})
 
 const bpSizes = (bp, m, d) => {
   if (typeof window === 'undefined') return d
@@ -62,37 +52,35 @@ const bpSizes = (bp, m, d) => {
     </section>
     <section>
       <div class="content lg:px-8 cards">
-        <div v-if="!pending" class="grid">
+        <div v-if="dataLoaded" class="grid">
           <div
             v-for="(person, index) in people"
-            :key="`${person.attributes.person.name}-${index}`"
+            :key="index"
             class="col-12 md:col-6 xl:col-4 mb-6"
           >
-            <!-- <client-only> -->
-            <v-card
-              :image="
-                person.attributes.person.image.template.replace(
-                  '%s/%s/%s/%s',
-                  '%width%/%height%/c/%quality%'
-                )
-              "
-              :alt="person.attributes.person.name"
-              :title="person.attributes.person.name"
-              :titleLink="`/team/${person.attributes.person.slug}`"
-              :eyebrow="person.attributes['appearance-type']"
-              :blurb="
-                person.attributes.person.lede || person.attributes.person.bio
-              "
-              :width="bpSizes('md', null, 391)"
-              :height="bpSizes('md', null, 293)"
-              :max-width="person.attributes.person.image.w"
-              :max-height="person.attributes.person.image.h"
-              responsive
-              :ratio="[4, 3]"
-              bp="max"
-              class="radiolab-card team"
-            />
-            <!-- </client-only> -->
+            <client-only>
+              <!-- :image="
+                  person.attributes.person.image.template.replace(
+                    '%s/%s/%s/%s',
+                    '%width%/%height%/c/%quality%'
+                  )
+                "
+              " -->
+              <!-- :width="bpSizes('md', null, 391)"
+              :height="bpSizes('md', null, 220)" -->
+              <!-- :image="person.attributes.person.image.url" -->
+              <v-card
+                :image="person.attributes.person.image.url"
+                :alt="person.attributes.person.name"
+                :title="person.attributes.person.name"
+                :max-width="person.attributes.person.image.w"
+                :max-height="person.attributes.person.image.h"
+                responsive
+                :ratio="[4, 3]"
+                bp="max"
+                class="radiolab-card team"
+              />
+            </client-only>
           </div>
         </div>
         <div v-else>loading...</div>

@@ -86,6 +86,13 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  /**
+   * desired ratio of the image if responsive
+   */
+  ratio: {
+    type: Array,
+    default: () => [3, 2],
+  },
 })
 const emit = defineEmits(['click', 'keypress'])
 
@@ -200,7 +207,10 @@ const closeEnlarge = () => {
 </script>
 
 <template>
-  <div class="simple-responsive-image-holder">
+  <div
+    class="simple-responsive-image-holder"
+    :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`"
+  >
     <div v-if="isVertical" class="bg">
       <img
         :src="computedSrcBg"
@@ -275,12 +285,13 @@ const closeEnlarge = () => {
 .simple-responsive-image-holder {
   line-height: 0;
   position: relative;
+  overflow: hidden;
   .image {
     position: relative;
     width: 100%;
-    height: auto;
+    height: 100%;
     top: 0;
-
+    object-fit: cover;
     &.is-vertical {
       margin: auto;
       display: block;
