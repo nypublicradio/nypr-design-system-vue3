@@ -33,6 +33,25 @@ Default.args = {
     allowVerticalEffect: false,
 }
 
+export const Quality = Template.bind({})
+Quality.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    quality: 30,
+}
+
+export const FlatQuality = Template.bind({})
+FlatQuality.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    quality: 50,
+    flatQuality: true,
+}
+
 export const Enlarge = Template.bind({})
 Enlarge.args = {
     alt: 'Fallback alt text here',
@@ -59,6 +78,7 @@ RawImageRatio.args = {
     src: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
     ratio: [4, 1]
 }
+
 
 export const RawImageNoRatio = Template.bind({})
 RawImageNoRatio.args = {
