@@ -69,7 +69,7 @@ const props = defineProps({
   /** * jpg compression quality */
   quality: {
     type: Number,
-    default: 80,
+    default: 85,
   },
   /** * allow the vertical effect to happen */
   allowVerticalEffect: {
@@ -182,7 +182,8 @@ onBeforeMount(() => {
 })
 
 const calcQuality = (quality, size) => {
-  return size >= 2 ? quality - Math.round(size * 5) : quality
+  const qual = size >= 2 ? quality - Math.round(size * 5) : quality
+  return qual >= 15 ? qual : 15
 }
 
 const enlarge = () => {

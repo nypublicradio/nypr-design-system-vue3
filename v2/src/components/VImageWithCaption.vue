@@ -114,6 +114,11 @@ const props = defineProps({
     type: [String, RegExp],
     default: '%quality%',
   },
+  /** * jpg compression quality */
+  quality: {
+    type: Number,
+    default: 85,
+  },
 })
 
 const emit = defineEmits([
@@ -205,6 +210,7 @@ const getCurrentDimensions = computed(() => {
             :width-token="widthToken"
             :height-token="heightToken"
             :quality-token="qualityToken"
+            :quality="quality"
             :ratio="ratio"
           />
         </v-flexible-link>

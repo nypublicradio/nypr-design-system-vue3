@@ -70,13 +70,21 @@ const bpSizes = (bp, m, d) => {
               :height="bpSizes('md', null, 220)" -->
               <!-- :image="person.attributes.person.image.url" -->
               <v-card
-                :image="person.attributes.person.image.url"
+                :image="
+                  person.attributes.person.image.template.replace(
+                    '%s/%s/%s/%s',
+                    '%width%/%height%/c/%quality%'
+                  )
+                "
+                :width="640"
+                :height="480"
                 :alt="person.attributes.person.name"
                 :title="person.attributes.person.name"
                 :max-width="person.attributes.person.image.w"
                 :max-height="person.attributes.person.image.h"
                 responsive
-                :ratio="[4, 2]"
+                :ratio="[4, 3]"
+                :quality="30"
                 bp="max"
                 class="radiolab-card team"
               />
