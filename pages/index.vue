@@ -76,8 +76,6 @@ const bpSizes = (bp, m, d) => {
                     '%width%/%height%/c/%quality%'
                   )
                 "
-                :width="640"
-                :height="480"
                 :alt="person.attributes.person.name"
                 :title="person.attributes.person.name"
                 :max-width="person.attributes.person.image.w"
@@ -85,6 +83,7 @@ const bpSizes = (bp, m, d) => {
                 responsive
                 :ratio="[4, 3]"
                 :quality="30"
+                :sizes="[2]"
                 bp="max"
                 class="radiolab-card team"
               />

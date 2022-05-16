@@ -67,6 +67,15 @@ RawImageNoRatio.args = {
     ratio: [0, 0]
 }
 
+export const SrcsetSizes = Template.bind({})
+SrcsetSizes.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 200,
+    height: 150,
+    sizes: [2, 2.5, 3]
+}
+
 export const Vertical = Template.bind({})
 Vertical.args = {
     alt: 'Fallback alt text here',

@@ -119,6 +119,12 @@ const props = defineProps({
     type: Number,
     default: 85,
   },
+  sizes: {
+    type: Array,
+    default() {
+      return [2, 3, 3.5, 4]
+    },
+  },
 })
 
 const emit = defineEmits([
@@ -211,6 +217,7 @@ const getCurrentDimensions = computed(() => {
             :height-token="heightToken"
             :quality-token="qualityToken"
             :quality="quality"
+            :sizes="sizes"
             :ratio="ratio"
           />
         </v-flexible-link>
