@@ -119,6 +119,11 @@ const props = defineProps({
     type: Number,
     default: 85,
   },
+  /** * bool to NOT use the variable quality calc based on sizes */
+  flatQuality: {
+    type: Boolean,
+    default: false,
+  },
   sizes: {
     type: Array,
     default() {
@@ -217,6 +222,7 @@ const getCurrentDimensions = computed(() => {
             :height-token="heightToken"
             :quality-token="qualityToken"
             :quality="quality"
+            :flat-quality="flatQuality"
             :sizes="sizes"
             :ratio="ratio"
           />

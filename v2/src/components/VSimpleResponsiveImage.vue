@@ -66,6 +66,11 @@ const props = defineProps({
       return [2, 3, 3.5, 4]
     },
   },
+  /** * bool to NOT use the variable quality calc based on sizes */
+  flatQuality: {
+    type: Boolean,
+    default: false,
+  },
   /** * jpg compression quality */
   quality: {
     type: Number,
@@ -182,8 +187,12 @@ onBeforeMount(() => {
 })
 
 const calcQuality = (quality, size) => {
-  const qual = size >= 2 ? quality - Math.round(size * 5) : quality
-  return qual >= 15 ? qual : 15
+  if (props.flatQuality) {
+    return quality
+  } else {
+    const qual = size >= 2 ? quality - Math.round(size * 5) : quality
+    return qual >= 15 ? qual : 15
+  }
 }
 
 const enlarge = () => {
