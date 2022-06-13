@@ -286,7 +286,7 @@ $tertiaryButtonHoverBorderColor: $red !default;
 $tertiaryButtonActiveBg: $red !default;
 $tertiaryButtonTextActiveColor: $white !default;
 $tertiaryButtonActiveBorderColor: transparent !default;
-$tertiaryButtonFocusShadow: 0 0 0 0.2rem scale-color($secondaryButtonBg, $lightness: 60%) !default;
+$tertiaryButtonFocusShadow: 0 0 0 0.2rem scale-color($tertiaryButtonBg, $lightness: 60%) !default;
 
 $infoButtonBg: $infoColor !default;
 $infoButtonTextColor: #ffffff !default;
