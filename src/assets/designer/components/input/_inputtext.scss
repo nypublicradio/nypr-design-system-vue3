@@ -5,9 +5,9 @@
     background: $inputBg;
     padding: $inputPadding;
     border: $inputBorder;
+    border-radius: $inputBorderRadius;
     transition: $formElementTransition;
     appearance: none;
-    border-radius: $borderRadius;
 
     &:enabled:hover {
         border-color: $inputHoverBorderColor;
