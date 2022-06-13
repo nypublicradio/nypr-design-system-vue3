@@ -31,7 +31,14 @@ body {
 }
 
 a {
-    text-decoration: none;
+    color: var(--link-color);
+    font-weight: bold;
+    transition: var(--transition-duration);
+    text-decoration: var(--link-text-decoration);
+    &:hover {
+        color: var(--link-hover-color);
+        text-decoration: var(--link-hover-text-decoration);
+    }
 }
 
 h1,
