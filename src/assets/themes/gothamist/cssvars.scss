@@ -1,5 +1,8 @@
 :root,
 [data-style-mode='default'] {
+    --soybean: #{$soybean};
+    --soybean200: #{$soybean200};
+
     --primary-color: #{$primaryColor};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
     --primary-color-alt: #{$primaryColorAlt};
@@ -10,6 +13,11 @@
     --primary-dark-color-rgb: #{hex2rgb($primaryDarkColor)};
     --primary-darker-color: #{$primaryDarkerColor};
     --primary-darker-color-rgb: #{hex2rgb($primaryDarkerColor)};
+
+    --link-color: #{$linkColor};
+    --link-hover-color: #{$linkHoverColor};
+    --link-text-decoration: #{$linkTextDecoration};
+    --link-hover-text-decoration: #{$linkHoverTextDecoration};
 
     --link-button-color: #{$linkButtonColor};
     --link-button-hover-color: #{$linkButtonHoverColor};
@@ -159,9 +167,16 @@
 
     --focus-ring: #{$focusShadow};
     --tab-padding: #{$tagPadding};
+    --badge-bg: #{$badgeBg};
+    --badge-text-color: #{$badgeTextColor};
     --badge-font-weight: #{$badgeFontWeight};
     --badge-font-size: #{$badgeFontSize};
     --badge-letter-spacing: #{$badgeLetterSpacing};
+    --badge-border: #{$badgeBorder};
+    --badge-border-radius: #{$badgeBorderRadius};
+    --badge-padding: #{$badgePadding};
+    --badge-hover-bg: #{$badgeHoverBg};
+    --badge-hover-text-color: #{$badgeHoverTextColor};
 
     --z-index-vanish: #{$z-index-vanish};
     --z-index-none: #{$z-index-none};

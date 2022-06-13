@@ -40,13 +40,52 @@ const TemplateCustomIcons = (args) => ({
     template: '<v-card v-bind="args"><code>&lt;template #customIcon&gt; &lt;gothamist-arrow/&gt; &lt;/template&gt;</code><template #customIcon> <gothamist-arrow/> </template></v-card>',
 })
 
-
 const TemplateWithSlot = (args) => ({
     components: { VCard },
     setup() {
         return { args }
     },
     template: '<v-card v-bind="args"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </v-card>',
+})
+
+const GothamistModVertical = (args) => ({
+    components: { VCard },
+    setup() {
+        return { args }
+    },
+    template: `<v-card class="mod-vertical" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
+})
+
+const GothamistModFeatured = (args) => ({
+    components: { VCard },
+    setup() {
+        return { args }
+    },
+    template: `<v-card class="mod-vertical mod-featured" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
+})
+
+const GothamistModHorizontal = (args) => ({
+    components: { VCard },
+    setup() {
+        return { args }
+    },
+    template: `<v-card class="mod-horizontal" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
+})
+
+const GothamistModLarge = (args) => ({
+    components: { VCard },
+    setup() {
+        return { args }
+    },
+    template: `<v-card class="mod-large" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
+})
+
+const GothamistModLeft = (args) => ({
+    components: { VCard },
+    setup() {
+        return { args }
+    },
+    template: `<v-card class="mod-horizontal mod-left" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
 })
 
 
@@ -199,15 +238,13 @@ DefaultWithSlotContent.args = {
 export const ResponsiveWithSlotContent = TemplateWithSlot.bind({})
 ResponsiveWithSlotContent.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
+    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
     titleLink: 'https://www.google.com',
-    subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
+    width: 318,
+    height: 214,
     maxWidth: 1440,
     maxHeight: 2560,
     tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
-    sponsored: true,
     responsive: true,
 }
 
@@ -289,3 +326,80 @@ srcsetSizes.args = {
     sizes: [2, 2.5]
 }
 
+export const GothamistExampleModHorizontal = GothamistModHorizontal.bind({})
+GothamistExampleModHorizontal.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
+    titleLink: 'https://www.google.com',
+    ratio: [4, 3],
+    width: 318,
+    height: 214,
+    maxWidth: 1440,
+    maxHeight: 2560,
+    tags: [{ 'name': 'news', 'slug': 'news' }],
+}
+
+export const GothamistExampleModLarge = GothamistModLarge.bind({})
+GothamistExampleModLarge.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
+    titleLink: 'https://www.google.com',
+    ratio: [4, 3],
+    width: 1053,
+    height: 708,
+    maxWidth: 1440,
+    maxHeight: 2560,
+    tags: [{ 'name': 'news', 'slug': 'news' }],
+}
+
+export const GothamistExampleModLeft = GothamistModLeft.bind({})
+GothamistExampleModLeft.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
+    titleLink: 'https://www.google.com',
+    ratio: [4, 3],
+    width: 318,
+    height: 214,
+    maxWidth: 1440,
+    maxHeight: 2560,
+    tags: [{ 'name': 'news', 'slug': 'news' }],
+}
+
+export const GothamistExampleModVertical = GothamistModVertical.bind({})
+GothamistExampleModVertical.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
+    titleLink: 'https://www.google.com',
+    ratio: [4, 3],
+    maxWidth: 1440,
+    maxHeight: 2560,
+    responsive: true,
+    bp: 'max',
+    tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
+}
+
+export const GothamistExampleModFeatured = GothamistModFeatured.bind({})
+GothamistExampleModFeatured.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
+    titleLink: 'https://www.google.com',
+    ratio: [4, 3],
+    maxWidth: 1440,
+    maxHeight: 2560,
+    responsive: true,
+    bp: 'max',
+    tags: [{ 'name': 'news', 'slug': 'news' }, { 'name': 'food', 'food': '' }],
+}
+
+export const GothamistExampleSponsored = GothamistModVertical.bind({})
+GothamistExampleSponsored.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
+    titleLink: 'https://www.google.com',
+    ratio: [4, 3],
+    maxWidth: 1440,
+    maxHeight: 2560,
+    responsive: true,
+    sponsored: true,
+    bp: 'max'
+}

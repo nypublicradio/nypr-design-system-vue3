@@ -1,8 +1,83 @@
 /* Customizations to the designer theme should be defined here */
-.p-inputtext {
-    border-radius: 2rem;
+
+/* VCard */
+.v-card .card-image-wrapper {
+    margin-right: 30px;
+}
+.v-card.mod-left .card-image-wrapper {
+    margin-left: 30px;
+}
+.v-card .card-details {
+    padding: 0;
+}
+.v-card .card-details .card-title .v-tag {
+    margin-top: 3.5px;
+    @include media('<lg') {
+        margin-top: -1px;
+    }
+}
+.v-card .card-details .card-title,
+.v-card .card-details .card-title .h2 {
+    font-size: var(--font-size-12);
+    line-height: var(--font-size-13);
+    @include media('<lg') {
+        font-size: var(--font-size-10);
+        line-height: var(--font-size-11);
+    }
+}
+.v-card.mod-featured .card-details .card-title,
+.v-card.mod-featured .card-details .card-title .h2 {
+    font-size: var(--font-size-19);
+    line-height: var(--font-size-19);
+    @include media('<lg') {
+        font-size: var(--font-size-10);
+        line-height: var(--font-size-11);
+    }
+}
+.v-card.sponsored {
+    background: var(--soybean200);
+}
+.v-card.sponsored .card-details {
+    padding: 0 30px 30px;
+}
+.v-card.mod-horizontal .card-details .card-title,
+.v-card.mod-horizontal .card-details .card-title .h2 {
+    @include media('<lg') {
+        font-size: var(--font-size-7);
+        line-height: var(--font-size-8);
+    }
 }
 
-.p-button.p-button-text {
-    color: var(--text-color) !important;
+/* tags */
+.v-tag .flexible-link .p-button .p-button-label {
+    @include media('<lg') {
+        font-size: var(--font-size-5);
+    }
+}
+
+/* Sponsored Buttons */
+.p-button.sponsored,
+.v-tag .flexible-link .p-button.sponsored {
+    background: var(--black);
+    color: var(--white100);
+}
+
+/* Article Metadata */
+.article-metadata {
+    font-size: var(--font-size-4);
+    line-height: var(--font-size-4);
+    margin-top: 12px;
+    @include media('<lg') {
+        font-size: var(--font-size-3);
+        line-height: var(--font-size-3);
+    }
+}
+.article-metadata > * {
+    float: left;
+    &:not(:first-child) {
+        border-left: 1px solid var(--black300);
+        margin-left: 12px;
+        padding-left: 12px;
+        height: 12px;
+    }
 }
