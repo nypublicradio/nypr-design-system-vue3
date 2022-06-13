@@ -26,7 +26,8 @@
     &:not(.p-checkbox-disabled) {
         .p-checkbox-box {
             &:hover {
-                border-color: $inputHoverBorderColor;
+                border-color: $checkboxActiveHoverBorderColor;
+                background: $checkboxActiveHoverBg;
             }
 
             &.p-focus {

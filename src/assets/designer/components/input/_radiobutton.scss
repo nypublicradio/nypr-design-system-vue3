@@ -12,7 +12,8 @@
         transition: $formElementTransition;
 
         &:not(.p-disabled):not(.p-highlight):hover {
-            border-color: $inputHoverBorderColor;
+            border-color: $radiobuttonActiveHoverBorderColor;
+            background: $radiobuttonActiveHoverBg;
         }
 
         &:not(.p-disabled).p-focus {
