@@ -4,6 +4,7 @@
     border-top: $inputBorder;
     border-left: $inputBorder;
     border-bottom: $inputBorder;
+    border-radius: $inputBorderRadius;
     padding: $inputPadding;
     min-width: $inputGroupAddOnMinWidth;
 
@@ -16,7 +17,7 @@
     > .p-component,
     > .p-inputwrapper > .p-inputtext,
     > .p-float-label > .p-component {
-        border-radius: 0;
+        border-radius: $inputBorderRadius;
         margin: 0;
 
         + .p-inputgroup-addon {
