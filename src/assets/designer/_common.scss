@@ -16,6 +16,7 @@
 .p-disabled,
 .p-component:disabled {
     opacity: $disabledOpacity;
+    background: $disabledBackground;
 }
 
 .p-error {
