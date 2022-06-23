@@ -138,7 +138,13 @@ const hasDetails = computed(() => {
 </script>
 
 <template>
-  <div class="v-card" :class="{ [`flex-column ${bp}:flex-row`]: responsive }">
+  <div
+    class="v-card"
+    :class="{
+      [`flex-column ${bp}:flex-row`]: responsive,
+      sponsored: sponsored,
+    }"
+  >
     <template v-if="image">
       <div
         class="card-image-link card-image-wrapper"
@@ -181,8 +187,9 @@ const hasDetails = computed(() => {
       </div>
     </template>
     <div v-if="hasDetails" class="card-details">
-      <div>
-        <div v-if="tags || sponsored" class="card-tags">
+      <div v-if="eyebrow" class="card-eyebrow type-body" v-html="eyebrow" />
+      <div v-if="title" class="card-title" role="heading" aria-level="3">
+        <template v-if="tags || sponsored">
           <v-tag
             v-for="(tag, index) in tags"
             :key="index"
@@ -190,31 +197,25 @@ const hasDetails = computed(() => {
             :slug="tag.slug"
           />
           <v-tag v-if="sponsored" name="sponsored" />
-        </div>
-        <div
-          v-if="eyebrow"
-          class="card-eyebrow type-body"
-          v-html="eyebrow"
-        ></div>
-        <div v-if="title" class="card-title" role="heading" aria-level="3">
-          <v-flexible-link
-            class="card-title-link"
-            :class="{ disabled: !titleLink }"
-            :to="titleLink"
-          >
-            <div class="h2" v-html="title"></div>
-            <i
-              v-if="icon"
-              :class="`pi pi-${icon}`"
-              role="img"
-              :aria-label="icon + ' icon'"
-            ></i>
-            <slot name="customIcon"></slot>
-          </v-flexible-link>
-        </div>
-        <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
-        <div v-if="blurb" class="card-blurb" v-html="blurb"></div>
+        </template>
+        <v-flexible-link
+          class="card-title-link"
+          :class="{ disabled: !titleLink }"
+          :to="titleLink"
+        >
+          <div class="h2" v-html="title"></div>
+          <i
+            v-if="icon"
+            :class="`pi pi-${icon}`"
+            role="img"
+            :aria-label="icon + ' icon'"
+          ></i>
+          <slot name="customIcon"></slot>
+        </v-flexible-link>
       </div>
+      <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
+      <div v-if="blurb" class="card-blurb" v-html="blurb"></div>
+
       <div v-if="$slots.default" class="card-slot">
         <slot />
       </div>
@@ -231,7 +232,6 @@ const hasDetails = computed(() => {
   box-shadow: var(--shadow);
   -webkit-box-shadow: var(--shadow);
   border-radius: var(--border-radius);
-  overflow: hidden;
   width: 100%;
   max-width: 100%;
   a.disabled {
@@ -246,18 +246,14 @@ const hasDetails = computed(() => {
     align-self: flex-start;
     flex: 1;
     padding: spacing(3) spacing(6) spacing(6) spacing(3);
-    overflow: hidden;
-    .card-tags {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: spacing(2);
-      margin-bottom: spacing(2);
-    }
     .card-title {
+      line-height: var(--font-size-8);
+      .v-tag {
+        float: left;
+        margin-right: spacing(2);
+        line-height: var(--font-size-8);
+      }
       .card-title-link {
-        display: flex;
-        justify-content: space-between;
         text-decoration: none;
         overflow-wrap: anywhere;
         word-break: break-word;
@@ -277,38 +273,55 @@ const hasDetails = computed(() => {
     word-break: break-word;
     margin-top: spacing(5);
   }
+  .card-slot,
+  .card-slot p {
+    font-size: var(--font-size-6);
+    @include media('<lg') {
+      font-size: var(--font-size-5);
+    }
+  }
 }
 
-// .card.mod-large .o-gallery-icon {
-//   width: 30px;
-//   height: 30px;
-//   margin-bottom: 3px;
-// }
+.v-card.mod-vertical {
+  flex-direction: column;
+}
 
-// .card-subtitle {
-//   font-family: var(--font-family-subheader);
-//   font-size: var(--font-size-4);
-// }
+.v-card.mod-vertical .card-image-wrapper {
+  margin-bottom: spacing(5);
+}
 
-// .card.mod-large {
-//   --card-image-width: 360px;
-//   --card-image-height: 306px;
-// }
+.v-card.mod-horizontal {
+  @include media('<lg') {
+    .image {
+      width: 100px;
+    }
+  }
+}
 
-// .card.mod-large .card-title {
-//   font-size: var(--font-size-10);
-// }
+.v-card.mod-left {
+  flex-direction: row-reverse;
+}
 
-// .card.mod-large .card-subtitle {
-//   font-size: var(--font-size-7);
-// }
-
-// .card.mod-large:not(.mod-vertical) .card-image-wrapper,
-// .card.mod-large:not(.mod-vertical) .card-image .image {
-//   @include media("<medium") {
-//     min-width: 100px;
-//     width: 100px;
-//     height: 100px;
-//   }
-// }
+.v-card.mod-large {
+  @include media('<lg') {
+    flex-direction: column;
+  }
+}
+.v-card.mod-large .card-image-wrapper {
+  flex-basis: 75%;
+  @include media('<lg') {
+    flex-basis: 100%;
+    width: 100%;
+    margin-bottom: spacing(5);
+  }
+}
+.v-card.mod-large .card-image-wrapper .image-with-caption {
+  width: 100% !important;
+}
+.v-card.mod-large .card-details {
+  align-self: flex-end;
+  @include media('<lg') {
+    align-self: flex-start;
+  }
+}
 </style>

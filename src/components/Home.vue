@@ -9,12 +9,12 @@
         <h4>h4: We're Pretty Sure Your Dog Can't Get Coronavirus</h4>
         <h5>h5: We're Pretty Sure Your Dog Can't Get Coronavirus</h5>
         <h6>h6: We're Pretty Sure Your Dog Can't Get Coronavirus</h6>
-        <ul>
+        <ul class="mb-4">
           <li>One</li>
           <li>Two</li>
           <li>Three</li>
         </ul>
-        <ol>
+        <ol class="mb-4">
           <li>One</li>
           <li>Two</li>
           <li>Three</li>
@@ -25,6 +25,9 @@
           boof he made many woofs long doggo dat tungg tho adorable doggo, long
           woofer shoober
           <b>spats</b> super chub.
+        </p>
+        <p>
+          <a href="http://www.google.com">Here is a text link</a>
         </p>
         <p class="footer">
           footer: Blep boofers ur givin me a spook heckin ruff, you are doin me
@@ -42,23 +45,26 @@
       <div class="card">
         <h5>Colors</h5>
         <div class="grid">
-          <div class="col-4 swatch primary">Primary Color</div>
-          <div class="col-4 swatch primary">Primary Color</div>
-          <div class="col-4 swatch primary">Primary Color</div>
-          <div class="col swatch primary">Primary Color</div>
-          <div class="col swatch primary">Primary Color</div>
-          <div class="col swatch primary">Primary Color</div>
-          <div class="col swatch primary">Primary Color</div>
-          <div class="col swatch primary">Primary Color</div>
-          <div class="col swatch primary">Primary Color</div>
-          <div class="col swatch primary">Primary Color</div>
+          <div class="col-2 swatch black">Black</div>
+          <div class="col-2 swatch black100">Black 100</div>
+          <div class="col-2 swatch black200">Black 200</div>
+          <div class="col-2 swatch black300">Black 300</div>
+          <div class="col-2 swatch black400">Black 400</div>
+          <div class="col-2 swatch black500">Black 500</div>
+        </div>
+        <h5>Gothamist Colors (only works if gothamist theme is active)</h5>
+        <div class="grid">
+          <div class="col-4 swatch soybean">Soybean</div>
+          <div class="col-4 swatch soybean200">Soybean 200</div>
+          <div class="col-4 swatch soybean100">Soybean 100</div>
+          <div class="col-12 swatch red">WNYC Red</div>
         </div>
       </div>
     </div>
 
     <div class="col-12 md:col-6 p-fluid">
       <div class="card">
-        <h5>InputText</h5>
+        <h5>Input Text</h5>
         <div class="grid p-formgrid">
           <div class="col-4">
             <InputText type="text" placeholder="Default"></InputText>
@@ -112,7 +118,7 @@
           cols="30"
         />
 
-        <h5>AutoComplete</h5>
+        <h5>Auto Complete</h5>
         <AutoComplete
           id="dd"
           v-model="selectedAutoValue"
@@ -157,7 +163,7 @@
 
     <div class="col-12 md:col-6">
       <div class="card">
-        <h5>RadioButton</h5>
+        <h5>Radio Buttons</h5>
         <div class="grid">
           <div class="col-4 md:p-1">
             <div class="field-radiobutton">
@@ -194,7 +200,7 @@
           </div>
         </div>
 
-        <h5>Checkbox</h5>
+        <h5>Checkboxes</h5>
         <div class="grid">
           <div class="col-4 md:p-1">
             <div class="field-checkbox">
@@ -334,6 +340,10 @@
           class="p-button-rounded p-button-secondary mr-2 mb:p-2"
         />
         <Button
+          label="Tertiary"
+          class="p-button-rounded p-button-tertiary mr-2 mb:p-2"
+        />
+        <Button
           label="Success"
           class="p-button-rounded p-button-success mr-2 mb:p-2"
         />
@@ -417,6 +427,10 @@
           class="p-button-outlined p-button-secondary mr-2 mb:p-2"
         />
         <Button
+          label="White"
+          class="p-button-outlined p-button-white mr-2 mb:p-2"
+        />
+        <Button
           label="Success"
           class="p-button-outlined p-button-success mr-2 mb:p-2"
         />
@@ -443,6 +457,10 @@
         <Button
           icon="pi pi-bookmark"
           class="p-button-rounded p-button-secondary mr-2 mb:p-2"
+        />
+        <Button
+          icon="pi pi-play"
+          class="p-button-rounded p-button-tertiary mr-2 mb:p-2"
         />
         <Button
           icon="pi pi-search"
@@ -601,6 +619,7 @@
           >
             <template #body="{ data }">
               <img
+                alt="placeholder"
                 src="../assets/images/flag_placeholder.png"
                 :class="'flag flag-' + data.country.code"
                 width="30"
@@ -1501,6 +1520,42 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.swatch {
+  height: 100px;
+}
+.black {
+  background: var(--black);
+  color: white;
+}
+.black100 {
+  background: var(--black100);
+  color: white;
+}
+.black200 {
+  background: var(--black200);
+  color: white;
+}
+.black300 {
+  background: var(--black300);
+}
+.black400 {
+  background: var(--black400);
+}
+.black500 {
+  background: var(--black500);
+}
+.red {
+  background: var(--red-500);
+}
+.soybean {
+  background: var(--soybean-500);
+}
+.soybean200 {
+  background: var(--soybean-200);
+}
+.soybean100 {
+  background: var(--soybean-100);
+}
 .image-text {
   vertical-align: middle;
 }

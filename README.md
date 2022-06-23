@@ -8,7 +8,7 @@ This repository is packaged as an npm package. To use in your project, add the f
 @nypublicradio:registry=https://npm.pkg.github.com
 //npm.pkg.github.com/:_authToken=your_personal_access_token
 ```
-Only commit the `.npmrc` file with the first line to git. Your personal access token should *never* be committed to git. If you accidentally commit your personal access token, delete it and genenerate a new personall access token with `read:packages` permission. 
+Only commit the `.npmrc` file with the first line to git. Your personal access token should *never* be committed to git. If you accidentally commit your personal access token, delete it and generate a new personal access token with `read:packages` permission. 
 
 ## Installation
 ```
@@ -16,7 +16,7 @@ npm i
 ```
 
 ## Storybook
-if STORYBOOK_EDIT is set to false (default = ture), it will use the compiled minified theme and not provide real time updates as you develop. This is useful when you just want to refernce the storybook instance quickly because it builds way faster, and to test the mionified theme build
+if STORYBOOK_EDIT is set to false (default = ture), it will use the compiled minified theme and not provide real time updates as you develop. This is useful when you just want to reference the storybook instance quickly because it builds way faster, and to test the minified theme build
 ```
 npm run storybook
 ```
