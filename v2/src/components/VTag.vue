@@ -42,23 +42,23 @@ const props = defineProps({
       pointer-events: none;
     }
     .p-button {
-      padding: var(--badge-padding);
-      border: var(--badge-border);
-      border-radius: var(--badge-border-radius);
+      padding: var(--tag-padding);
+      border: var(--tag-border);
+      border-radius: var(--tag-border-radius);
       text-decoration: none;
       vertical-align: middle;
-      background: var(--badge-bg);
-      color: var(--badge-text-color);
+      background: var(--tag-bg);
+      color: var(--tag-text-color);
       .p-button-label {
-        font-weight: var(--badge-font-weight);
-        font-size: var(--badge-font-size);
-        letter-spacing: var(--badge-letter-spacing);
+        font-weight: var(--tag-font-weight);
+        font-size: var(--tag-font-size);
+        letter-spacing: var(--tag-letter-spacing);
         text-transform: uppercase;
       }
       &:hover {
-        background: var(--badge-hover-bg);
+        background: var(--tag-hover-bg);
         .p-button-label {
-          color: var(--badge-hover-text-color) !important;
+          color: var(--tag-hover-text-color) !important;
           text-decoration: none !important;
         }
       }

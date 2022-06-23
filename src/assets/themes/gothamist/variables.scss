@@ -822,7 +822,7 @@ $horizontalMenuRootMenuitemTextActiveColor: $menuitemTextActiveColor !default;
 $horizontalMenuRootMenuitemIconActiveColor: $menuitemIconActiveColor !default;
 $horizontalMenuRootMenuitemActiveBg: $menuitemActiveBg !default;
 
-//badge and tag
+//badge
 $badgeBg: $white !default;
 $badgeTextColor: $black !default;
 $badgeBorder: solid 1px $black !default;
@@ -836,7 +836,17 @@ $badgeLetterSpacing: 0.03rem !default;
 $badgeHoverBg: $black !default;
 $badgeHoverTextColor: $white !default;
 
-$tagPadding: 0.25rem 0.4rem !default;
+//tag
+$tagBg: $white !default;
+$tagTextColor: $black !default;
+$tagPadding: 1px 6px !default;
+$tagBorder: solid 1px $black !default;
+$tagBorderRadius: 40px !default;
+$tagFontWeight: 500 !default;
+$tagFontSize: 1.2rem !default;
+$tagLetterSpacing: 0.03rem !default;
+$tagHoverBg: $black !default;
+$tagHoverTextColor: $white !default;
 
 //carousel
 $carouselIndicatorsPadding: 1rem !default;
