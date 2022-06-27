@@ -79,13 +79,17 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  volume: {
+    type: Number,
+    default: 100,
+  },
 })
 let interval = null
 const currentSeconds = ref(0)
 const durationSeconds = ref(0)
 
 const buffered = ref(0)
-const volume = ref(50)
+const volume = ref(props.volume)
 
 const loading = ref(props.isLoading)
 const playing = ref(null)

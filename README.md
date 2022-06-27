@@ -92,10 +92,25 @@ npm run dev
 
 
 ## Creating a new theme
-Navigate to nypr-design-system-vue3\src\assets\themes
+Navigate to `nypr-design-system-vue3\src\assets\themes`
 Duplicate “radiolab” folder and rename it (no spaces in name)
-Delete .min.css and .min.css.map in the new folder
-In .env file, change THEME to equal the new name
-Navigate to nypr-design-system-vue3\src\main.js  line:51
+Delete `.min.css` and `.min.css.map` in the new theme folder
+In the root `.env` file, change THEME to equal the new name
+Navigate to `nypr-design-system-vue3\src\main.js`  line:51
 Add a new import for the new theme
 import './assets/themes/newthemename/_theme.scss'
+comments the other theme imports
+
+## Updating the new theme
+Make all variable changes to the `nypr-design-system-vue3/src/assets/themes/newthemename/variables.scss` file.
+Put all your colors into the $colors sass object (this will export a gradient for each color that you can use in your project where the "-500" version is the selected color. Lower values are lighter, higher numbers are darker. eg. --blue-100,--blue-200,--blue-300,--blue-400,--blue-500,--blue-600,--blue-700,--blue-800,--blue-900).
+You can then refer to that object in `variables.scss` when populating the scss variables like this `map-get($colors, "blue");`.
+Add or modify css vars in the `nypr-design-system-vue3/src/assets/themes/newthemename/cssvars.scss` file. 
+Do not remove any css vars, as they may be being used by our custom components in `nypr-design-system-vue3/v2/src/components`.
+Be sure to use the css var font scale located in the `cssvars.scss` file for all font-sizes. Then reference chart above will how you choose.
+When creating/modifying custom components, make sure to use the css vars when styling.
+When modifying/overriding PrimeVue components for your new theme, add the styles to the `nypr-design-system-vue3/src/assets/themes/newthemename/extensions.scss` file. Once again, be sure to use css vars when styling. This will allow for the components to react to data-style-mode changes (dark mode etc).
+
+When updating to a newer versions of Prime Designer in the future, we will create a new root `src_v3.7.1` folder and move all the files into that folder. This will allow you to update to the new version of Prime Designer without breaking your current theme. We'll see what happenes when we get to that point. Likely near the end of the year when PrimeVue has their next major updates complete.
+
+
