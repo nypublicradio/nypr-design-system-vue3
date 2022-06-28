@@ -63,4 +63,4 @@ a newer versions of Prime Designer in the future, we will create a new root
 `src_v3.7.1` folder and move all the files into that folder. This will allow you
 to update to the new version of Prime Designer without breaking your current
 theme. We'll see what happenes when we get to that point. Likely near the end of
-the year when PrimeVue has their next major updates complete.
+the year when PrimeVue has their next major updates complete.test
