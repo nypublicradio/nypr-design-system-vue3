@@ -5,7 +5,7 @@ import Slider from 'primevue/slider'
 const props = defineProps({
   volume: {
     type: Number,
-    default: 50,
+    default: 100,
   },
   isMuted: {
     type: Boolean,
