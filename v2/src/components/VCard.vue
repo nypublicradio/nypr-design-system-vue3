@@ -246,6 +246,7 @@ const hasDetails = computed(() => {
     align-self: flex-start;
     flex: 1;
     padding: spacing(3) spacing(6) spacing(6) spacing(3);
+    overflow: auto;
     .card-title {
       line-height: var(--font-size-8);
       .v-tag {
@@ -254,6 +255,8 @@ const hasDetails = computed(() => {
         line-height: var(--font-size-8);
       }
       .card-title-link {
+        display: inline-block;
+        width: 100%;
         text-decoration: none;
         overflow-wrap: anywhere;
         word-break: break-word;

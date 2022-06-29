@@ -19,7 +19,7 @@ const Template = ( args ) => ( {
             args
         }
     },
-    template: '<div class="article-metadata"><v-byline v-bind="args" /><div class="article-metadata-separator" /><v-counter text="Comments" :value="40" href="http://www.google.com" /></div>'
+    template: '<div class="article-metadata"><v-byline v-bind="args" /><v-counter text="Comments" :value="40" href="http://www.google.com" /></div>'
 } )
 
 const authors = [ {

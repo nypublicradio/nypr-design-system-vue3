@@ -50,17 +50,18 @@ $breakpoints: (
 // add these to the cssvars file as well
 // if you need to use these colors later in this file, use map-get($colors, "red")
 $colors: (
+    "black": #111111,
     "soybean": #D8D7AF,
     "lightsoybean": #F3F3E5,
     "red": #DE1E3D
 );
 
-$primaryColor: #111111 !default;
+$primaryColor: map-get($colors, "black");
 $primaryColorAlt: $primaryColor;
 $primaryLightColor: scale-color($primaryColor, $lightness: 30%) !default;
 $primaryDarkColor: scale-color($primaryColor, $lightness: -10%) !default;
 $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
-$primaryTextColor: #111111 !default;
+$primaryTextColor: map-get($colors, "black") !default;
 
 $infoColor: #639bb2 !default;
 $infoLightColor: #88c0d0 !default;
@@ -74,7 +75,7 @@ $dangerColor: map-get($colors, "red") !default;
 $dangerLightColor: #d88889 !default;
 $yellowColor: #ebcb8b !default;
 
-$black: #111111 !default;
+$black: map-get($colors, "black") !default;
 $black50: #808080 !default;
 // $black 100 is used for a lot of text color in components
 $black100: #555555 !default;
@@ -839,7 +840,7 @@ $badgeHoverTextColor: $white !default;
 //tag
 $tagBg: $white !default;
 $tagTextColor: $black !default;
-$tagPadding: 1px 6px !default;
+$tagPadding: 1px 9px !default;
 $tagBorder: solid 1px $black !default;
 $tagBorderRadius: 40px !default;
 $tagFontWeight: 500 !default;
