@@ -9,6 +9,8 @@
         <h4>h4: We're Pretty Sure Your Dog Can't Get Coronavirus</h4>
         <h5>h5: We're Pretty Sure Your Dog Can't Get Coronavirus</h5>
         <h6>h6: We're Pretty Sure Your Dog Can't Get Coronavirus</h6>
+        <h7>h7: We're Pretty Sure Your Dog Can't Get Coronavirus</h7>
+        <div class="type-title">title: We're Pretty Sure Your Dog Can't Get Coronavirus</div>
         <ul class="mb-4">
           <li>One</li>
           <li>Two</li>
