@@ -134,8 +134,7 @@ a {
     padding: 0;
 }
 .v-card .card-details .card-title .card-title-link {
-    width: auto;
-    display: block;
+    display: block!important;
 }
 .v-card .card-details .card-title .v-tag {
     margin-top: 3.5px;

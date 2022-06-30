@@ -279,8 +279,10 @@ const hasDetails = computed(() => {
   .card-slot,
   .card-slot p {
     font-size: var(--font-size-6);
+    line-height: var(--font-size-9);
     @include media('<lg') {
       font-size: var(--font-size-5);
+      line-height: var(--font-size-8);
     }
   }
 }
