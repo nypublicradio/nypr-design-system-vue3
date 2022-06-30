@@ -1,5 +1,10 @@
 :root,
 [data-style-mode='default'] {
+    --black: #{map-get($colors, "black")};
+    --red: #{map-get($colors, "red")};
+    --soybean: #{map-get($colors, "soybean")};
+    --soybean200: #{map-get($colors, "soybeanlight")};
+
     --primary-color: #{$primaryColor};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
     --primary-color-alt: #{$primaryColorAlt};
@@ -10,6 +15,11 @@
     --primary-dark-color-rgb: #{hex2rgb($primaryDarkColor)};
     --primary-darker-color: #{$primaryDarkerColor};
     --primary-darker-color-rgb: #{hex2rgb($primaryDarkerColor)};
+
+    --link-color: #{$linkColor};
+    --link-hover-color: #{$linkHoverColor};
+    --link-text-decoration: #{$linkTextDecoration};
+    --link-hover-text-decoration: #{$linkHoverTextDecoration};
 
     --link-button-color: #{$linkButtonColor};
     --link-button-hover-color: #{$linkButtonHoverColor};
@@ -34,6 +44,14 @@
     --font-size: #{$fontSize};
     --font-ratio: #{$fontRatio};
     --font-ratio-large: #{$fontRatioLarge};
+
+    --checkbox-active-hover-border-color: #{$checkboxActiveHoverBorderColor};
+    --checkbox-active-hover-bg: #{$checkboxActiveHoverBg};
+
+    --radiobutton-active-hover-border-color: #{$radiobuttonActiveHoverBorderColor};
+    --radiobutton-active-hover-bg: #{$radiobuttonActiveHoverBg};
+
+    --input-border-radius: #{$inputBorderRadius};
 
     --font-size-1: calc(var(--font-size-2) / var(--font-ratio));
     --font-size-2: calc(var(--font-size-3) / var(--font-ratio));
@@ -159,9 +177,27 @@
 
     --focus-ring: #{$focusShadow};
     --tab-padding: #{$tagPadding};
+    --badge-bg: #{$badgeBg};
+    --badge-text-color: #{$badgeTextColor};
     --badge-font-weight: #{$badgeFontWeight};
     --badge-font-size: #{$badgeFontSize};
     --badge-letter-spacing: #{$badgeLetterSpacing};
+    --badge-border: #{$badgeBorder};
+    --badge-border-radius: #{$badgeBorderRadius};
+    --badge-padding: #{$badgePadding};
+    --badge-hover-bg: #{$badgeHoverBg};
+    --badge-hover-text-color: #{$badgeHoverTextColor};
+
+    --tag-bg: #{$tagBg};
+    --tag-text-color: #{$tagTextColor};
+    --tag-font-weight: #{$tagFontWeight};
+    --tag-font-size: #{$tagFontSize};
+    --tag-letter-spacing: #{$tagLetterSpacing};
+    --tag-border: #{$tagBorder};
+    --tag-border-radius: #{$tagBorderRadius};
+    --tag-padding: #{$tagPadding};
+    --tag-hover-bg: #{$tagHoverBg};
+    --tag-hover-text-color: #{$tagHoverTextColor};
 
     --z-index-vanish: #{$z-index-vanish};
     --z-index-none: #{$z-index-none};

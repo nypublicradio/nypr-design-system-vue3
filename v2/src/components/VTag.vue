@@ -42,21 +42,25 @@ const props = defineProps({
       pointer-events: none;
     }
     .p-button {
-      padding: var(--tab-padding);
-      border: none;
+      padding: var(--tag-padding);
+      border: var(--tag-border);
+      border-radius: var(--tag-border-radius);
       text-decoration: none;
       vertical-align: middle;
+      background: var(--tag-bg);
+      color: var(--tag-text-color);
       .p-button-label {
-        font-weight: var(--badge-font-weight);
-        font-size: var(--font-size-2);
-        letter-spacing: var(--badge-letter-spacing);
+        font-weight: var(--tag-font-weight);
+        font-size: var(--tag-font-size);
+        letter-spacing: var(--tag-letter-spacing);
         text-transform: uppercase;
       }
-    }
-    &:hover {
-      .p-button-label {
-        text-decoration: none !important;
-        color: var(--primary-color-text) !important;
+      &:hover {
+        background: var(--tag-hover-bg);
+        .p-button-label {
+          color: var(--tag-hover-text-color) !important;
+          text-decoration: none !important;
+        }
       }
     }
   }

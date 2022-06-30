@@ -1,8 +1,211 @@
 /* Customizations to the designer theme should be defined here */
-.p-inputtext {
-    border-radius: 2rem;
+
+/* Extra Link Styles */
+a {
+    color: var(--link-color);
+    font-weight: bold;
+    transition: var(--transition-duration);
+    text-decoration: var(--link-text-decoration);
+    &:hover {
+        color: var(--link-hover-color);
+        text-decoration: var(--link-hover-text-decoration);
+    }
 }
 
-.p-button.p-button-text {
-    color: var(--text-color) !important;
+/* Disabled Background Color */
+.p-disabled,
+.p-component:disabled {
+    opacity: var(--disabled-opacity);
+    background: var(--disabled-background);
+}
+
+/* Button Styles */
+.p-button {
+    font-size: var(--button-font-size);
+}
+.p-button.p-button-tertiary, .p-buttonset.p-button-tertiary > .p-button, .p-splitbutton.p-button-tertiary > .p-button {
+    color: $tertiaryButtonTextColor;
+    background: $tertiaryButtonBg;
+    border: $tertiaryButtonBorder;
+
+    &:enabled:hover {
+        background: $tertiaryButtonHoverBg;
+        color: $tertiaryButtonTextHoverColor;
+        border-color: $tertiaryButtonHoverBorderColor;
+    }
+
+    &:enabled:focus {
+        box-shadow: $tertiaryButtonFocusShadow;
+    }
+
+    &:enabled:active {
+        background: $tertiaryButtonActiveBg;
+        color: $tertiaryButtonTextActiveColor;
+        border-color: $tertiaryButtonActiveBorderColor;
+    }
+    
+    &.p-button-outlined {
+        background-color: transparent;
+        color: $tertiaryButtonBg;
+        border: $outlinedButtonBorder;
+
+        &:enabled:hover {
+            background: rgba($tertiaryButtonBg, $textButtonHoverBgOpacity);
+            color: $tertiaryButtonBg;
+            border: $outlinedButtonBorder;
+        }
+
+        &:enabled:active {
+            background: rgba($tertiaryButtonBg, $textButtonActiveBgOpacity);
+            color: $tertiaryButtonBg;
+            border: $outlinedButtonBorder;
+        }
+    }
+
+    &.p-button-text {
+        background-color: transparent;
+        color: $tertiaryButtonBg;
+        border-color: transparent;
+
+        &:enabled:hover {
+            background: rgba($tertiaryButtonBg, $textButtonHoverBgOpacity);
+            border-color: transparent;
+            color: $tertiaryButtonBg;
+        }
+
+        &:enabled:active {
+            background: rgba($tertiaryButtonBg, $textButtonActiveBgOpacity);
+            border-color: transparent;
+            color: $tertiaryButtonBg;
+        }
+    }
+
+    .p-button-icon:before {
+        color: $tertiaryButtonTextColor;
+    }
+}
+
+/* Checkbox Styles */
+.p-checkbox {
+    &:not(.p-checkbox-disabled) {
+        .p-checkbox-box {
+            &:hover {
+                border-color: var(--checkbox-active-hover-border-color);
+                background: var(--checkbox-active-hover-bg);
+            }
+        }
+    }
+}
+
+/* Radio Button Styles */
+.p-radiobutton {
+    .p-radiobutton-box {
+        &:not(.p-disabled):not(.p-highlight):hover {
+            border-color: var(--radiobutton-active-hover-border-color);
+            background: var(--radiobutton-active-hover-bg);
+        }
+    }
+}
+
+/* Input Border Radii */
+.p-treeselect,
+.p-multiselect,
+.p-inputtext,
+.p-inputgroup-addon,
+.p-dropdown {
+    border-radius: var(--input-border-radius);
+}
+.p-inputgroup {
+    > .p-component,
+    > .p-inputwrapper > .p-inputtext,
+    > .p-float-label > .p-component {
+        border-radius: var(--input-border-radius);
+    }
+}
+
+/* VCard */
+.v-card .card-image-wrapper {
+    margin-right: 30px;
+}
+.v-card.mod-left .card-image-wrapper {
+    margin-left: 30px;
+}
+.v-card .card-details {
+    padding: 0;
+}
+.v-card .card-details .card-title .card-title-link {
+    width: auto;
+    display: block;
+}
+.v-card .card-details .card-title .v-tag {
+    margin-top: 3.5px;
+    @include media('<lg') {
+        margin-top: -1px;
+    }
+}
+.v-card .card-details .card-title,
+.v-card .card-details .card-title .h2 {
+    font-size: var(--font-size-12);
+    line-height: var(--font-size-13);
+    @include media('<lg') {
+        font-size: var(--font-size-10);
+        line-height: var(--font-size-11);
+    }
+}
+.v-card.mod-featured .card-details .card-title,
+.v-card.mod-featured .card-details .card-title .h2 {
+    font-size: var(--font-size-19);
+    line-height: var(--font-size-19);
+    @include media('<lg') {
+        font-size: var(--font-size-10);
+        line-height: var(--font-size-11);
+    }
+}
+.v-card.sponsored {
+    background: var(--soybean200);
+}
+.v-card.sponsored .card-details {
+    padding: 0 30px 30px;
+}
+.v-card.mod-horizontal .card-details .card-title,
+.v-card.mod-horizontal .card-details .card-title .h2 {
+    @include media('<lg') {
+        font-size: var(--font-size-7);
+        line-height: var(--font-size-8);
+    }
+}
+
+/* tags */
+.v-tag .flexible-link .p-button .p-button-label {
+    font-family: var(--font-family-header);
+    @include media('<lg') {
+        font-size: var(--font-size-5);
+    }
+}
+
+/* Sponsored Buttons */
+.p-button.sponsored,
+.v-tag .flexible-link .p-button.sponsored {
+    background: var(--black);
+    color: var(--white100);
+}
+
+/* Article Metadata */
+.article-metadata {
+    font-size: var(--font-size-4);
+    line-height: var(--font-size-4);
+    margin-top: 12px;
+    @include media('<lg') {
+        font-size: var(--font-size-3);
+        line-height: var(--font-size-3);
+    }
+}
+.article-metadata > * {
+    float: left;
+    &:not(:first-child) {
+        border-left: 1px solid var(--black300);
+        margin-left: 12px;
+        padding-left: 12px;
+        height: 12px;
+    }
 }

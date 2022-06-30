@@ -22,57 +22,46 @@ $xxxl: 1920px;
 $max: 7680px;
 
 $breakpoints: (
-    "phone": $xsmall,
-    "tablet": $medium,
-    "desktop": $xlarge,
-    "xsmall": $xsmall,
-    "xs": $xsmall,
-    "small": $small,
-    "sm": $small,
-    "medium": $medium,
-    "md": $medium,
-    "large": $large,
-    "lg": $large,
-    "xlarge": $xlarge,
-    "xl": $xlarge,
-    "xxlarge": $xxlarge,
-    "xxl": $xxlarge,
-    "xxxlarge": $xxxlarge,
-    "xxxl": $xxxlarge,
-    "max": $max,
-);
-
-//colors
-$colors: (
-    "blue": #0454d6,
-    "lightblue": #90d8fc,
-    "redorange": #ff3500,
-    "orange": #ff6a00,
-    "lightorange": #f79800,
-    "gold": #f5b80c,
-    "pink": #ffb5e0,
-    "lightpink": #ffdfdf,
-    /*     "green": #7fa366,
-    "yellow": #dac57a,
-    "cyan": #71abc2,
-    "pink": #bf616a,
-    "indigo": #4e6aa4,
-    "teal": #5eac90,
-    "orange": #d08770,
-    "bluegray": #7e8d9f,
-    "purple": #9a6796, */
+    'phone': $xsmall,
+    'tablet': $medium,
+    'desktop': $xlarge,
+    'xsmall': $xsmall,
+    'xs': $xsmall,
+    'small': $small,
+    'sm': $small,
+    'medium': $medium,
+    'md': $medium,
+    'large': $large,
+    'lg': $large,
+    'xlarge': $xlarge,
+    'xl': $xlarge,
+    'xxlarge': $xxlarge,
+    'xxl': $xxlarge,
+    'xxxlarge': $xxxlarge,
+    'xxxl': $xxxlarge,
+    'max': $max,
 );
 
 // scale-color example
 // $newColor: scale-color($existingColor, $saturation: 30%, $lightness: -30%, $alpha: -90%) !default;
 // can use any of the following $red, $green, $blue, $saturation, $lightness, $whiteness, $blackness, $alpha
 
-$primaryColor: #f4f2f0 !default;
-$primaryColorAlt: scale-color($primaryColor, $lightness: 15%) !default;
+// colors
+// add these to the cssvars file as well
+// if you need to use these colors later in this file, use map-get($colors, "red")
+$colors: (
+    "black": #111111,
+    "soybean": #D8D7AF,
+    "lightsoybean": #F3F3E5,
+    "red": #DE1E3D
+);
+
+$primaryColor: map-get($colors, "black");
+$primaryColorAlt: $primaryColor;
 $primaryLightColor: scale-color($primaryColor, $lightness: 30%) !default;
 $primaryDarkColor: scale-color($primaryColor, $lightness: -10%) !default;
 $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
-$primaryTextColor: #0a0b0c !default;
+$primaryTextColor: map-get($colors, "black") !default;
 
 $infoColor: #639bb2 !default;
 $infoLightColor: #88c0d0 !default;
@@ -82,18 +71,18 @@ $warningColor: #d08770 !default;
 $warningLightColor: #e2ac94 !default;
 $helpColor: #9a6796 !default;
 $helpLightColor: #b48ead !default;
-$dangerColor: #bf616a !default;
+$dangerColor: map-get($colors, 'red') !default;
 $dangerLightColor: #d88889 !default;
 $yellowColor: #ebcb8b !default;
 
-$black: #000000 !default;
-$black50: #707888 !default;
+$black: map-get($colors, "black") !default;
+$black50: #808080 !default;
 // $black 100 is used for a lot of text color in components
-$black100: #0a0b0c !default;
-$black200: #434c5e !default;
-$black300: #3b4252 !default;
-$black400: #2e3440 !default;
-$black500: #0a0b0c !default;
+$black100: #555555 !default;
+$black200: #333333 !default;
+$black300: #cfcfcf !default;
+$black400: #cfcfcf !default;
+$black500: #cfcfcf !default;
 
 $white: #ffffff !default;
 $white100: #f4f2f0 !default;
@@ -114,21 +103,21 @@ $gray-900: #0f1115 !default;
 $gray-950: #08090c !default;
 
 //labels surfaces
-$surfaceGround: #eceff4 !default;
+$surfaceGround: #ffffff !default;
 $surfaceSection: #ffffff !default;
 $surfaceCard: #ffffff !default;
 $surfaceOverlay: #ffffff !default;
-$surfaceBorder: #e5e9f0 !default;
-$surfaceHover: #d8dee9 !default;
+$surfaceBorder: #ffffff !default;
+$surfaceHover: #ffffff !default;
 
 $fontSize: 1rem !default;
 $fontRatio: 1.125;
 $fontRatioLarge: 1.333;
-$fontFamily: "Matter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$fontFamilyHeader: "Matter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$textColor: red !default;
+$fontFamily: 'Reckless Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+$fontFamilyHeader: 'Haffer SQ XH', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+$textColor: $primaryTextColor !default;
 $textSecondaryColor: $primaryColorAlt !default;
 $fontWeight: normal !default;
 $fontWeight-100: 100 !default;
@@ -141,20 +130,21 @@ $fontWeight-700: 700 !default;
 $fontWeight-800: 800 !default;
 $fontWeight-900: 900 !default;
 
-$shadow: 0 4px 24px 0 rgba(0, 0, 0, 0.05) !default;
+$shadow: none !default;
 
-$borderRadius: 4px !default;
+$borderRadius: 0px !default;
 $transitionDuration: 0.2s !default;
 $transitionEase: ease-in-out !default;
 $formElementTransition: background-color $transitionDuration, color $transitionDuration,
     border-color $transitionDuration, box-shadow $transitionDuration !default;
 $actionIconTransition: background-color $transitionDuration, color $transitionDuration, box-shadow $transitionDuration !default;
 $listItemTransition: none !default;
-$primeIconFont: "primeicons";
+$primeIconFont: 'primeicons';
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $white200 !default;
 $inlineSpacing: 0.5rem !default;
-$disabledOpacity: 0.6 !default;
+$disabledOpacity: 1 !default;
+$disabledBackground: rgba(207, 207, 207, 0.4) !default;
 $maskBg: rgba($black100, 0.5) !default;
 $loadingIconFontSize: 2rem !default;
 $errorColor: $dangerColor !default;
@@ -168,7 +158,7 @@ $scaleSM: 0.875 !default;
 $scaleLG: 1.25 !default;
 
 //focus
-$focusOutlineColor: var(--blue-500) !default;
+$focusOutlineColor: map-get($colors, 'soybean') !default;
 $focusOutline: 0 none !default;
 $focusOutlineOffset: 0 !default;
 $focusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
@@ -186,16 +176,18 @@ $actionIconBorderRadius: 50% !default;
 
 //input field (e.g. inputtext, spinner, inputmask)
 $inputPadding: 0.5rem 0.5rem !default;
-$inputTextFontSize: 1rem !default;
+$inputTextFontSize: 0.88rem !default;
 
 $inputBg: $white !default;
-$inputTextColor: $black100 !default;
+$inputTextColor: $black300 !default;
 $inputIconColor: $primaryColorAlt !default;
-$inputBorder: 1px solid $white300 !default;
-$inputHoverBorderColor: $primaryColorAlt !default;
-$inputFocusBorderColor: $primaryColorAlt !default;
+$inputBorder: 1px solid $black300 !default;
+$inputBorderRadius: 5px !default;
+$inputHoverBorderColor: $black300 !default;
+$inputFocusBorderColor: map-get($colors, 'soybean') !default;
+$inputErrorColor: $errorColor !default;
 $inputErrorBorderColor: $errorColor !default;
-$inputPlaceholderTextColor: $black100 !default;
+$inputPlaceholderTextColor: $black50 !default;
 $inputFilledBg: $white100 !default;
 $inputFilledHoverBg: $inputFilledBg !default;
 $inputFilledFocusBg: $white !default;
@@ -239,44 +231,63 @@ $passwordMediumBg: $warningColor !default;
 $passwordStrongBg: $successColor !default;
 
 //link
+$linkColor: $textColor !default;
+$linkHoverColor: map-get($colors, 'red') !default;
+$linkTextDecoration: underline !default;
+$linkHoverTextDecoration: underline !default;
 $linkButtonColor: $textColor !default;
-$linkButtonHoverColor: var(--blue-500) !default;
+$linkButtonHoverColor: map-get($colors, 'red') !default;
 $linkButtonTextHoverDecoration: underline !default;
 $linkButtonFocusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
 
 //button
-$buttonPadding: 0.5rem 1rem !default;
+$buttonPadding: 10px 15px !default;
 $buttonIconOnlyWidth: 2.357rem !default;
 $buttonIconOnlyPadding: 0.5rem 0 !default;
 $buttonBg: $primaryColor !default;
-$buttonTextColor: $primaryTextColor !default;
-$buttonBorder: 2px solid transparent !default;
-$buttonHoverBg: $black100 !default;
+$buttonFontSize: var(--font-size-5) !default;
+$buttonTextColor: $white !default;
+$buttonBorder: transparent solid 2px !default;
+$buttonHoverBg: $white !default;
 $buttonTextHoverColor: $primaryColor !default;
-$buttonHoverBorderColor: transparent !default;
-$buttonActiveBg: $black400 !default;
-$buttonTextActiveColor: $primaryColor !default;
+$buttonHoverBorderColor: $primaryColor !default;
+$buttonActiveBg: $primaryColor !default;
+$buttonTextActiveColor: $white !default;
 $buttonActiveBorderColor: transparent !default;
 $raisedButtonShadow: 0 4px 4px 0px rgba(0, 0, 0, 0.2), 0 12px 10px 0 rgba(0, 0, 0, 0.06) !default;
-$roundedButtonBorderRadius: 2rem !default;
+$roundedButtonBorderRadius: 40px !default;
 
 $textButtonHoverBgOpacity: 0.12 !default;
 $textButtonActiveBgOpacity: 0.24 !default;
-$outlinedButtonBorder: 2px solid !default;
+$outlinedButtonPadding: 0 8px !default;
+$outlinedButtonTextTransform: uppercase;
+$outlinedButtonBorder: 1px solid !default;
+$outlinedButtonBorderRadius: 40px !default;
 $plainButtonTextColor: $textSecondaryColor !default;
 $plainButtonHoverBgColor: $white !default;
 $plainButtonActiveBgColor: $white200 !default;
 
-$secondaryButtonBg: $black100 !default;
-$secondaryButtonTextColor: #ffffff !default;
-$secondaryButtonBorder: 2px solid $black100 !default;
-$secondaryButtonHoverBg: $black50 !default;
-$secondaryButtonTextHoverColor: #ffffff !default;
-$secondaryButtonHoverBorderColor: $black100 !default;
-$secondaryButtonActiveBg: $black400 !default;
-$secondaryButtonTextActiveColor: #ffffff !default;
-$secondaryButtonActiveBorderColor: $black400 !default;
+$secondaryButtonBg: map-get($colors, 'soybean') !default;
+$secondaryButtonTextColor: $primaryColor !default;
+$secondaryButtonBorder: transparent solid 2px !default;
+$secondaryButtonHoverBg: $white !default;
+$secondaryButtonTextHoverColor: $primaryColor !default;
+$secondaryButtonHoverBorderColor: map-get($colors, 'soybean') !default;
+$secondaryButtonActiveBg: map-get($colors, 'soybean') !default;
+$secondaryButtonTextActiveColor: primaryColor !default;
+$secondaryButtonActiveBorderColor: transparent !default;
 $secondaryButtonFocusShadow: 0 0 0 0.2rem scale-color($secondaryButtonBg, $lightness: 60%) !default;
+
+$tertiaryButtonBg: map-get($colors, 'red') !default;
+$tertiaryButtonTextColor: $white !default;
+$tertiaryButtonBorder: transparent solid 2px !default;
+$tertiaryButtonHoverBg: $white !default;
+$tertiaryButtonTextHoverColor: map-get($colors, 'red') !default;
+$tertiaryButtonHoverBorderColor: map-get($colors, 'red') !default;
+$tertiaryButtonActiveBg: map-get($colors, 'red') !default;
+$tertiaryButtonTextActiveColor: $white !default;
+$tertiaryButtonActiveBorderColor: transparent !default;
+$tertiaryButtonFocusShadow: 0 0 0 0.2rem scale-color($secondaryButtonBg, $lightness: 60%) !default;
 
 $infoButtonBg: $infoColor !default;
 $infoButtonTextColor: #ffffff !default;
@@ -336,26 +347,26 @@ $dangerButtonFocusShadow: 0 0 0 0.2rem scale-color($dangerButtonBg, $lightness: 
 //checkbox
 $checkboxWidth: 20px !default;
 $checkboxHeight: 20px !default;
-$checkboxBorder: 2px solid $white300 !default;
+$checkboxBorder: 1px solid $black !default;
 $checkboxIconFontSize: 14px !default;
-$checkboxActiveBorderColor: $primaryColor !default;
-$checkboxActiveBg: $primaryColor !default;
-$checkboxIconActiveColor: $primaryTextColor !default;
-$checkboxActiveHoverBg: $primaryColorAlt !default;
-$checkboxIconActiveHoverColor: $primaryTextColor !default;
-$checkboxActiveHoverBorderColor: $primaryDarkerColor !default;
+$checkboxActiveBorderColor: $black !default;
+$checkboxActiveBg: $white !default;
+$checkboxIconActiveColor: $black !default;
+$checkboxActiveHoverBg: map-get($colors, 'lightsoybean') !default;
+$checkboxIconActiveHoverColor: $black !default;
+$checkboxActiveHoverBorderColor: $black !default;
 
 //radiobutton
 $radiobuttonWidth: 20px !default;
 $radiobuttonHeight: 20px !default;
-$radiobuttonBorder: 2px solid $white300 !default;
+$radiobuttonBorder: 1px solid $black !default;
 $radiobuttonIconSize: 10px !default;
-$radiobuttonActiveBorderColor: $primaryColor !default;
-$radiobuttonActiveBg: $primaryColor !default;
-$radiobuttonIconActiveColor: $primaryTextColor !default;
-$radiobuttonActiveHoverBg: $primaryColorAlt !default;
-$radiobuttonIconActiveHoverColor: $primaryTextColor !default;
-$radiobuttonActiveHoverBorderColor: $primaryColor !default;
+$radiobuttonActiveBorderColor: $black !default;
+$radiobuttonActiveBg: $white !default;
+$radiobuttonIconActiveColor: $black !default;
+$radiobuttonActiveHoverBg: map-get($colors, 'lightsoybean') !default;
+$radiobuttonIconActiveHoverColor: map-get($colors, 'lightsoybean') !default;
+$radiobuttonActiveHoverBorderColor: $black !default;
 
 //colorpicker
 $colorPickerPreviewWidth: 2rem !default;
@@ -812,16 +823,31 @@ $horizontalMenuRootMenuitemTextActiveColor: $menuitemTextActiveColor !default;
 $horizontalMenuRootMenuitemIconActiveColor: $menuitemIconActiveColor !default;
 $horizontalMenuRootMenuitemActiveBg: $menuitemActiveBg !default;
 
-//badge and tag
-$badgeBg: $primaryColor !default;
-$badgeTextColor: $primaryTextColor !default;
+//badge
+$badgeBg: $white !default;
+$badgeTextColor: $black !default;
+$badgeBorder: solid 1px $black !default;
+$badgeBorderRadius: 40px !default;
+$badgePadding: 1px 6px !default;
 $badgeMinWidth: 1.5rem !default;
 $badgeHeight: 1.5rem !default;
 $badgeFontWeight: 500 !default;
-$badgeFontSize: 0.633rem !default;
+$badgeFontSize: 1.2rem !default;
 $badgeLetterSpacing: 0.03rem !default;
+$badgeHoverBg: $black !default;
+$badgeHoverTextColor: $white !default;
 
-$tagPadding: 0.25rem 0.4rem !default;
+//tag
+$tagBg: $white !default;
+$tagTextColor: $black !default;
+$tagPadding: 1px 9px !default;
+$tagBorder: solid 1px $black !default;
+$tagBorderRadius: 40px !default;
+$tagFontWeight: 500 !default;
+$tagFontSize: 1.2rem !default;
+$tagLetterSpacing: 0.03rem !default;
+$tagHoverBg: $black !default;
+$tagHoverTextColor: $white !default;
 
 //carousel
 $carouselIndicatorsPadding: 1rem !default;
