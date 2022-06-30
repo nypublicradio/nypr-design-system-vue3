@@ -8,9 +8,15 @@
         <h3>h3: We're Pretty Sure Your Dog Can't Get Coronavirus</h3>
         <h4>h4: We're Pretty Sure Your Dog Can't Get Coronavirus</h4>
         <h5>h5: We're Pretty Sure Your Dog Can't Get Coronavirus</h5>
-        <h6>h6: We're Pretty Sure Your Dog Can't Get Coronavirus</h6>
+        <h6>h6: We're Pretty Sure Your Dog Can't Get Coronavirus</h6>        
         <h7>h7: We're Pretty Sure Your Dog Can't Get Coronavirus</h7>
+        <br/>
+        <br/>
         <div class="type-title">title: We're Pretty Sure Your Dog Can't Get Coronavirus</div>
+        <br/>
+        <p class="p1">p1: We're <b>Pretty</b> Sure Your <em>Dog</em> Can't Get Coronavirus</p>
+        <p class="p2">p2: We're <b>Pretty</b> Sure Your <em>Dog</em> Can't Get Coronavirus</p>
+        <p class="p3">p3: We're <b>Pretty</b> Sure Your <em>Dog</em> Can't Get Coronavirus</p>
         <ul class="mb-4">
           <li>One</li>
           <li>Two</li>
@@ -21,18 +27,29 @@
           <li>Two</li>
           <li>Three</li>
         </ol>
-        <p>
-          p: Blep boofers ur givin me a spook heckin ruff, you are doin me a
-          concern pupperino. Wrinkler very good spot doge, yapper. Pupperino
-          boof he made many woofs long doggo dat tungg tho adorable doggo, long
-          woofer shoober
-          <b>spats</b> super chub.
+        <p class="type-label1">
+          label1: This is a label
+        </p>
+        <p class="type-label2">
+          label3: This is a label
+        </p>
+        <p class="type-label3">
+          label3: This is a label
         </p>
         <p>
           <a href="http://www.google.com">Here is a text link</a>
         </p>
-        <p class="footer">
-          footer: Blep boofers ur givin me a spook heckin ruff, you are doin me
+        <p class="type-caption">
+          caption: Blep boofers ur givin me a spook heckin ruff, you are doin me
+          a concern pupperino. Wrinkler very good spot doge, yapper. Pupperino
+          boof he made many woofs long doggo dat tungg tho adorable doggo, long
+          woofer shoober smol borking doggo with a long snoot for pats
+          puggorino, waggy wags dat tungg tho maximum borkdrive pupperino. Fat
+          boi long water shoob blop much ruin diet, length boy. Super chub smol
+          borking doggo with a long snoot for pats super chub.
+        </p>
+        <p class="footer type-fineprint">
+          fineprint: Blep boofers ur givin me a spook heckin ruff, you are doin me
           a concern pupperino. Wrinkler very good spot doge, yapper. Pupperino
           boof he made many woofs long doggo dat tungg tho adorable doggo, long
           woofer shoober smol borking doggo with a long snoot for pats

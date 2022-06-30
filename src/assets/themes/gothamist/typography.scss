@@ -155,32 +155,141 @@ $type-title: (
     ),
 );
 
-$type-body: (
+$type-paragraph1: (
     'default': (
         'values': (
             'font-family': var(--font-family),
             'font-size': var(--font-size-8),
-            'line-height': var(--font-size-10),
-            'font-weight': var(--font-weight-400),
-            'color': var(--text-color),
+            'line-height': var(--font-size-12),
+            'color': var(--black200),
         ),
     ),
     $medium: (
         'values': (
             'font-size': var(--font-size-6),
+            'line-height': var(--font-size-10),
+        ),
+    ),
+);
+
+$type-paragraph2: (
+    'default': (
+        'values': (
+            'font-family': var(--font-family),
+            'font-size': var(--font-size-6),
+            'line-height': var(--font-size-9),
+            'color': var(--black200),
+        ),
+    ),
+    $medium: (
+        'values': (
+            'font-size': var(--font-size-5),
+            'line-height': var(--font-size-8),
+        ),
+    ),
+);
+$type-paragraph3: (
+    'default': (
+        'values': (
+            'font-family': var(--font-family-header),
+            'font-size': var(--font-size-6),
+            'line-height': var(--font-size-9),
+            'color': var(--black200),
+        ),
+    ),
+    $medium: (
+        'values': (
+            'font-size': var(--font-size-5),
             'line-height': var(--font-size-8),
         ),
     ),
 );
 
-$type-footer: (
+$type-label1: (
     'default': (
         'values': (
-            'font-size': var(--font-size-4),
-            'line-height': normal,
+            'font-family': var(--font-family-header),
+            'font-size': var(--font-size-10),
+            'line-height': var(--font-size-10),
+            'color': var(--text-color),
+            'letter-spacing': -0.01em,
+            'text-transform': uppercase,
+        ),
+    ),
+    $medium: (
+        'values': (
+            'font-size': var(--font-size-5),
+            'line-height': var(--font-size-5),
         ),
     ),
 );
+
+$type-label2: (
+    'default': (
+        'values': (
+            'font-family': var(--font-family-header),
+            'font-size': var(--font-size-7),
+            'line-height': var(--font-size-7),
+            'color': var(--text-color),
+            'letter-spacing': -0.01em,
+            'text-transform': uppercase,
+        ),
+    ),
+    $medium: (
+        'values': (
+            'font-size': var(--font-size-5),
+            'line-height': var(--font-size-5),
+        ),
+    ),
+);
+
+$type-label3: (
+    'default': (
+        'values': (
+            'font-family': var(--font-family-header),
+            'font-size': var(--font-size-6),
+            'line-height': var(--font-size-6),
+            'color': var(--text-color),
+            'letter-spacing': -0.01em,
+            'text-transform': uppercase,
+        ),
+    ),
+    $medium: (
+        'values': (
+            'font-size': var(--font-size-5),
+            'line-height': var(--font-size-5),
+        ),
+    ),
+);
+
+$type-caption: (
+    'default': (
+        'values': (
+            'font-family': var(--font-family-header),
+            'font-size': var(--font-size-4),
+            'line-height': var(--font-size-7),
+            'color': var(--black200),
+        ),
+    ),
+);
+
+$type-fineprint: (
+    'default': (
+        'values': (
+            'font-family': var(--font-family-header),
+            'font-size': var(--font-size-3),
+            'line-height': var(--font-size-6),
+            'color': var(--black100),
+        ),
+    ),
+    $medium: (
+        'values': (
+            'font-size': var(--font-size-2),
+            'line-height': var(--font-size-5),
+        ),
+    ),
+);
+
 
 h1,
 .h1,
@@ -224,27 +333,44 @@ h7,
     @include font-config($type-header7);
 }
 
-
-
 .type-title {
     @include font-config($type-title);
+}
+
+p,
+.p1, .type-paragraph1 {
+    @include font-config($type-paragraph1);
+}
+
+.p2, .type-paragraph2 {
+    @include font-config($type-paragraph2);
+}
+
+.p3, .type-paragraph3 {
+    @include font-config($type-paragraph3);
+}
+
+.type-label1 {
+    @include font-config($type-label1);
+}
+.type-label2 {
+    @include font-config($type-label2);
+}
+.type-label3 {
+    @include font-config($type-label3);
+
+}
+.type-caption {
+    @include font-config($type-caption);
+}
+.type-fineprint {
+    @include font-config($type-fineprint);
 }
 
 ul,
 ol {
     padding-left: 1rem;
     li {
-        @include font-config($type-body);
+        @include font-config($type-paragraph1);
     }
 }
-
-p,
-.p .type-body {
-    @include font-config($type-body);
-}
-
-.footer {
-    @include font-config($type-footer);
-}
-
-// special configs below
