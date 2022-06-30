@@ -177,6 +177,7 @@ a {
 
 /* tags */
 .v-tag .flexible-link .p-button .p-button-label {
+    font-family: var(--font-family-header);
     @include media('<lg') {
         font-size: var(--font-size-5);
     }
