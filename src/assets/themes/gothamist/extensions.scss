@@ -1,110 +1,114 @@
 /* Customizations to the designer theme should be defined here */
 
+$mobileBreakpoint: '<lg';
+
 /* Extra Link Styles */
 a {
-    color: var(--link-color);
-    font-weight: bold;
-    transition: var(--transition-duration);
-    text-decoration: var(--link-text-decoration);
-    &:hover {
-        color: var(--link-hover-color);
-        text-decoration: var(--link-hover-text-decoration);
-    }
+  color: var(--link-color);
+  font-weight: bold;
+  transition: var(--transition-duration);
+  text-decoration: var(--link-text-decoration);
+  &:hover {
+    color: var(--link-hover-color);
+    text-decoration: var(--link-hover-text-decoration);
+  }
 }
 
 /* Disabled Background Color */
 .p-disabled,
 .p-component:disabled {
-    opacity: var(--disabled-opacity);
-    background: var(--disabled-background);
+  opacity: var(--disabled-opacity);
+  background: var(--disabled-background);
 }
 
 /* Button Styles */
 .p-button {
-    font-size: var(--button-font-size);
+  font-size: var(--button-font-size);
 }
-.p-button.p-button-tertiary, .p-buttonset.p-button-tertiary > .p-button, .p-splitbutton.p-button-tertiary > .p-button {
-    color: $tertiaryButtonTextColor;
-    background: $tertiaryButtonBg;
-    border: $tertiaryButtonBorder;
+.p-button.p-button-tertiary,
+.p-buttonset.p-button-tertiary > .p-button,
+.p-splitbutton.p-button-tertiary > .p-button {
+  color: $tertiaryButtonTextColor;
+  background: $tertiaryButtonBg;
+  border: $tertiaryButtonBorder;
+
+  &:enabled:hover {
+    background: $tertiaryButtonHoverBg;
+    color: $tertiaryButtonTextHoverColor;
+    border-color: $tertiaryButtonHoverBorderColor;
+  }
+
+  &:enabled:focus {
+    box-shadow: $tertiaryButtonFocusShadow;
+  }
+
+  &:enabled:active {
+    background: $tertiaryButtonActiveBg;
+    color: $tertiaryButtonTextActiveColor;
+    border-color: $tertiaryButtonActiveBorderColor;
+  }
+
+  &.p-button-outlined {
+    background-color: transparent;
+    color: $tertiaryButtonBg;
+    border: $outlinedButtonBorder;
 
     &:enabled:hover {
-        background: $tertiaryButtonHoverBg;
-        color: $tertiaryButtonTextHoverColor;
-        border-color: $tertiaryButtonHoverBorderColor;
-    }
-
-    &:enabled:focus {
-        box-shadow: $tertiaryButtonFocusShadow;
+      background: rgba($tertiaryButtonBg, $textButtonHoverBgOpacity);
+      color: $tertiaryButtonBg;
+      border: $outlinedButtonBorder;
     }
 
     &:enabled:active {
-        background: $tertiaryButtonActiveBg;
-        color: $tertiaryButtonTextActiveColor;
-        border-color: $tertiaryButtonActiveBorderColor;
+      background: rgba($tertiaryButtonBg, $textButtonActiveBgOpacity);
+      color: $tertiaryButtonBg;
+      border: $outlinedButtonBorder;
     }
-    
-    &.p-button-outlined {
-        background-color: transparent;
-        color: $tertiaryButtonBg;
-        border: $outlinedButtonBorder;
+  }
 
-        &:enabled:hover {
-            background: rgba($tertiaryButtonBg, $textButtonHoverBgOpacity);
-            color: $tertiaryButtonBg;
-            border: $outlinedButtonBorder;
-        }
+  &.p-button-text {
+    background-color: transparent;
+    color: $tertiaryButtonBg;
+    border-color: transparent;
 
-        &:enabled:active {
-            background: rgba($tertiaryButtonBg, $textButtonActiveBgOpacity);
-            color: $tertiaryButtonBg;
-            border: $outlinedButtonBorder;
-        }
+    &:enabled:hover {
+      background: rgba($tertiaryButtonBg, $textButtonHoverBgOpacity);
+      border-color: transparent;
+      color: $tertiaryButtonBg;
     }
 
-    &.p-button-text {
-        background-color: transparent;
-        color: $tertiaryButtonBg;
-        border-color: transparent;
-
-        &:enabled:hover {
-            background: rgba($tertiaryButtonBg, $textButtonHoverBgOpacity);
-            border-color: transparent;
-            color: $tertiaryButtonBg;
-        }
-
-        &:enabled:active {
-            background: rgba($tertiaryButtonBg, $textButtonActiveBgOpacity);
-            border-color: transparent;
-            color: $tertiaryButtonBg;
-        }
+    &:enabled:active {
+      background: rgba($tertiaryButtonBg, $textButtonActiveBgOpacity);
+      border-color: transparent;
+      color: $tertiaryButtonBg;
     }
+  }
 
-    .p-button-icon:before {
-        color: $tertiaryButtonTextColor;
-    }
+  .p-button-icon:before {
+    color: $tertiaryButtonTextColor;
+  }
 }
 
 /* Checkbox Styles */
 .p-checkbox {
-    &:not(.p-checkbox-disabled) {
-        .p-checkbox-box {
-            &:hover {
-                border-color: var(--checkbox-active-hover-border-color);
-                background: var(--checkbox-active-hover-bg);
-            }
-        }
+  &:not(.p-checkbox-disabled) {
+    .p-checkbox-box {
+      &:hover {
+        border-color: var(--checkbox-active-hover-border-color);
+        background: var(--checkbox-active-hover-bg);
+      }
     }
+  }
 }
 
 /* Radio Button Styles */
 .p-radiobutton {
-    .p-radiobutton-box {
-        &:not(.p-disabled):not(.p-highlight):hover {
-            border-color: var(--radiobutton-active-hover-border-color);
-            background: var(--radiobutton-active-hover-bg);
-        }
+  .p-radiobutton-box {
+    &:not(.p-disabled):not(.p-highlight):hover {
+      border-color: var(--radiobutton-active-hover-border-color);
+      background: var(--radiobutton-active-hover-bg);
     }
+  }
 }
 
 /* Input Border Radii */
@@ -113,98 +117,175 @@ a {
 .p-inputtext,
 .p-inputgroup-addon,
 .p-dropdown {
-    border-radius: var(--input-border-radius);
+  border-radius: var(--input-border-radius);
 }
 .p-inputgroup {
-    > .p-component,
-    > .p-inputwrapper > .p-inputtext,
-    > .p-float-label > .p-component {
-        border-radius: var(--input-border-radius);
-    }
+  > .p-component,
+  > .p-inputwrapper > .p-inputtext,
+  > .p-float-label > .p-component {
+    border-radius: var(--input-border-radius);
+  }
 }
 
 /* VCard */
+$img-width: 318px;
+$img-height: 212px;
+$img-width-mobile: 106px;
+$img-height-mobile: 106px;
+.v-card .image-with-caption {
+  width: $img-width !important;
+  @include media(#{$mobileBreakpoint}) {
+    width: $img-width-mobile !important;
+  }
+}
 .v-card .card-image-wrapper {
-    margin-right: 30px;
+  margin-right: 30px;
+  @include media(#{$mobileBreakpoint}) {
+    margin-right: 15px;
+  }
 }
 .v-card.mod-left .card-image-wrapper {
-    margin-left: 30px;
+  margin-left: 30px;
 }
 .v-card .card-details {
-    padding: 0;
+  padding: 0;
+  display: flex;
+  align-self: stretch;
+  flex-direction: column;
+  gap: 0.5rem;
+  overflow: visible;
 }
+
 .v-card .card-details .card-title .card-title-link {
-    display: block!important;
+  width: auto !important;
+  display: block !important;
 }
 .v-card .card-details .card-title .v-tag {
-    margin-top: 3.5px;
-    @include media('<lg') {
-        margin-top: -1px;
-    }
+  margin-top: 3.5px;
+  @include media(#{$mobileBreakpoint}) {
+    margin-top: -1px;
+  }
 }
 .v-card .card-details .card-title,
 .v-card .card-details .card-title .h2 {
-    font-size: var(--font-size-12);
-    line-height: var(--font-size-13);
-    @include media('<lg') {
-        font-size: var(--font-size-10);
-        line-height: var(--font-size-11);
-    }
+  font-size: var(--font-size-12);
+  line-height: var(--font-size-13);
+  @include media(#{$mobileBreakpoint}) {
+    font-size: var(--font-size-10);
+    line-height: var(--font-size-11);
+  }
 }
 .v-card.mod-featured .card-details .card-title,
 .v-card.mod-featured .card-details .card-title .h2 {
-    font-size: var(--font-size-19);
-    line-height: var(--font-size-19);
-    @include media('<lg') {
-        font-size: var(--font-size-10);
-        line-height: var(--font-size-11);
-    }
+  font-size: var(--font-size-19);
+  line-height: var(--font-size-19);
+  @include media(#{$mobileBreakpoint}) {
+    font-size: var(--font-size-10);
+    line-height: var(--font-size-11);
+  }
+}
+.v-card .card-details .card-slot {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0;
+  justify-content: space-between;
+}
+.v-card .card-details .card-slot .desc {
+  @include truncate();
+  @include t3lines();
+  @include font-config($type-paragraph2);
 }
 .v-card.sponsored {
-    background: var(--soybean200);
+  background: var(--soybean200);
 }
 .v-card.sponsored .card-details {
-    padding: 0 30px 30px;
+  padding: 0 30px 30px;
 }
 .v-card.mod-horizontal .card-details .card-title,
 .v-card.mod-horizontal .card-details .card-title .h2 {
-    @include media('<lg') {
-        font-size: var(--font-size-7);
-        line-height: var(--font-size-8);
+  @include media(#{$mobileBreakpoint}) {
+    font-size: var(--font-size-7);
+    line-height: var(--font-size-8);
+  }
+}
+
+.v-card.mod-horizontal {
+  @include media(#{$mobileBreakpoint}) {
+    .simple-responsive-image-holder {
+      aspect-ratio: 1 / 1 !important;
+      .image {
+        width: $img-width-mobile;
+        height: $img-height-mobile;
+      }
     }
+  }
+}
+
+@mixin tag-small() {
+  font-size: var(--font-size-6);
+}
+
+@mixin tag-large() {
+  font-size: var(--font-size-10);
+}
+
+@mixin tag-mobile() {
+  font-size: var(--font-size-5) !important;
 }
 
 /* tags */
-.v-tag .flexible-link .p-button .p-button-label {
+.v-tag {
+  .p-button-label {
     font-family: var(--font-family-header);
-    @include media('<lg') {
-        font-size: var(--font-size-5);
+    font-size: var(--font-size-7);
+  }
+  &.tag-large .p-button-label {
+    @include tag-large();
+  }
+  &.tag-small .p-button-label {
+    @include tag-small();
+  }
+  @include media(#{$mobileBreakpoint}) {
+    .p-button-label {
+      @include tag-mobile();
     }
+  }
+}
+
+/* v-tag in v-card */
+.v-card {
+  &.tag-large .card-details .v-tag .p-button-label {
+    @include tag-large();
+  }
+  &.tag-small .card-details .v-tag .p-button-label {
+    @include tag-small();
+  }
 }
 
 /* Sponsored Buttons */
 .p-button.sponsored,
 .v-tag .flexible-link .p-button.sponsored {
-    background: var(--black);
-    color: var(--white100);
+  background: var(--black);
+  color: var(--white100);
 }
 
 /* Article Metadata */
 .article-metadata {
-    font-size: var(--font-size-4);
-    line-height: var(--font-size-4);
-    margin-top: 12px;
-    @include media('<lg') {
-        font-size: var(--font-size-3);
-        line-height: var(--font-size-3);
-    }
+  font-size: var(--font-size-4);
+  line-height: var(--font-size-4);
+  margin-top: 12px;
+  @include media(#{$mobileBreakpoint}) {
+    font-size: var(--font-size-3);
+    line-height: var(--font-size-3);
+  }
 }
 .article-metadata > * {
-    float: left;
-    &:not(:first-child) {
-        border-left: 1px solid var(--black300);
-        margin-left: 12px;
-        padding-left: 12px;
-        height: 12px;
-    }
+  float: left;
+  &:not(:first-child) {
+    border-left: 1px solid var(--black300);
+    margin-left: 12px;
+    padding-left: 12px;
+    height: 12px;
+  }
 }
