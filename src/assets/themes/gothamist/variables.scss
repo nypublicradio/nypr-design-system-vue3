@@ -50,18 +50,18 @@ $breakpoints: (
 // add these to the cssvars file as well
 // if you need to use these colors later in this file, use map-get($colors, "red")
 $colors: (
-    "black": #111111,
-    "soybean": #D8D7AF,
-    "lightsoybean": #F3F3E5,
-    "red": #DE1E3D
+    'black': #111111,
+    'soybean': #d8d7af,
+    'lightsoybean': #f3f3e5,
+    'red': #de1e3d,
 );
 
-$primaryColor: map-get($colors, "black");
+$primaryColor: map-get($colors, 'black');
 $primaryColorAlt: $primaryColor;
 $primaryLightColor: scale-color($primaryColor, $lightness: 30%) !default;
 $primaryDarkColor: scale-color($primaryColor, $lightness: -10%) !default;
 $primaryDarkerColor: scale-color($primaryColor, $lightness: -20%) !default;
-$primaryTextColor: map-get($colors, "black") !default;
+$primaryTextColor: map-get($colors, 'black') !default;
 
 $infoColor: #639bb2 !default;
 $infoLightColor: #88c0d0 !default;
@@ -75,7 +75,7 @@ $dangerColor: map-get($colors, 'red') !default;
 $dangerLightColor: #d88889 !default;
 $yellowColor: #ebcb8b !default;
 
-$black: map-get($colors, "black") !default;
+$black: map-get($colors, 'black') !default;
 $black50: #808080 !default;
 // $black 100 is used for a lot of text color in components
 $black100: #555555 !default;
@@ -115,7 +115,7 @@ $fontRatio: 1.125;
 $fontRatioLarge: 1.333;
 $fontFamily: 'Reckless Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
-$fontFamilyHeader: 'Haffer SQ XH', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+$fontFamilyHeader: 'Haffer SQ', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
 $textColor: $primaryTextColor !default;
 $textSecondaryColor: $primaryColorAlt !default;
