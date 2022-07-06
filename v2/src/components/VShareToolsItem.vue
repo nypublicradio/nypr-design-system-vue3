@@ -91,10 +91,8 @@ const props = defineProps({
   },
 })
 
-const getServiceComponent = computed(() =>
-  defineAsyncComponent(() =>
-    import('../assets/icons/' + icons[props.service] + '.vue')
-  )
+const GetServiceIcon = defineAsyncComponent(() =>
+  import('../assets/icons/' + icons[props.service] + '.vue')
 )
 
 const socialLink = computed(() => {
@@ -187,24 +185,30 @@ const share = () => {
 </script>
 
 <template>
-  <a
-    v-if="action === 'follow'"
-    :href="username ? socialLink : link"
-    class="follow-link c-share-tools__link"
-    :class="service"
-    :aria-label="ariaLabel"
-    :target="service !== 'phone' ? '_blank' : '_self'"
-    rel="noopener noreferrer"
-    :title="username ? socialLink : link"
-    @click="emit('follow', service)"
-  >
-    <component :is="getServiceComponent" v-if="service !== 'site'" />
-    <span v-else>{{ label }}</span>
-  </a>
+  <div>
+    <a
+      v-if="action === 'follow'"
+      :href="username ? socialLink : link"
+      class="follow-link c-share-tools__link"
+      :class="service"
+      :aria-label="ariaLabel"
+      :target="service !== 'phone' ? '_blank' : '_self'"
+      rel="noopener noreferrer"
+      :title="username ? socialLink : link"
+      @click="emit('follow', service)"
+    >
+      <client-only>
+        <GetServiceIcon v-if="service !== 'site'" />
+        <span v-else>{{ label }}</span>
+      </client-only>
+    </a>
 
-  <button v-else-if="action === 'share'" class="share-button" @click="share">
-    <component :is="getServiceComponent" />
-  </button>
+    <button v-else-if="action === 'share'" class="share-button" @click="share">
+      <client-only>
+        <GetServiceIcon />
+      </client-only>
+    </button>
+  </div>
 </template>
 
 <style lang="scss">
