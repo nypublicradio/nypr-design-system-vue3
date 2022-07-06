@@ -1,6 +1,41 @@
 <script setup>
 import { computed, defineAsyncComponent } from 'vue'
 
+const props = defineProps({
+  action: {
+    type: String,
+    default: 'follow',
+  },
+  service: {
+    type: String,
+    default: 'site',
+  },
+  username: {
+    type: String,
+    default: null,
+  },
+  label: {
+    type: String,
+    default: null,
+  },
+  link: {
+    type: String,
+    default: null,
+  },
+  url: {
+    type: String,
+    default: null,
+  },
+  shareParameters: {
+    type: Object,
+    default: () => ({}),
+  },
+  utmParameters: {
+    type: Object,
+    default: () => ({}),
+  },
+})
+
 const emit = defineEmits(['share', 'follow'])
 
 const icons = {
@@ -14,6 +49,7 @@ const icons = {
   spotify: 'SpotifyIcon',
   twitter: 'TwitterIcon',
   youtube: 'YoutubeIcon',
+  site: 'SiteIcon',
 }
 
 const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
@@ -56,45 +92,8 @@ const SOCIAL_SERVICE_MAP = {
   },
 }
 
-const props = defineProps({
-  action: {
-    type: String,
-    default: 'follow',
-  },
-  service: {
-    type: String,
-    default: 'site',
-  },
-  username: {
-    type: String,
-    default: null,
-  },
-  label: {
-    type: String,
-    default: null,
-  },
-  link: {
-    type: String,
-    default: null,
-  },
-  url: {
-    type: String,
-    default: null,
-  },
-  shareParameters: {
-    type: Object,
-    default: () => ({}),
-  },
-  utmParameters: {
-    type: Object,
-    default: () => ({}),
-  },
-})
-
-const getServiceComponent = computed(() =>
-  defineAsyncComponent(() =>
-    import('../assets/icons/' + icons[props.service] + '.vue')
-  )
+const GetServiceIcon = defineAsyncComponent(() =>
+  import('../assets/icons/' + icons[props.service] + '.vue')
 )
 
 const socialLink = computed(() => {
@@ -187,24 +186,30 @@ const share = () => {
 </script>
 
 <template>
-  <a
-    v-if="action === 'follow'"
-    :href="username ? socialLink : link"
-    class="follow-link c-share-tools__link"
-    :class="service"
-    :aria-label="ariaLabel"
-    :target="service !== 'phone' ? '_blank' : '_self'"
-    rel="noopener noreferrer"
-    :title="username ? socialLink : link"
-    @click="emit('follow', service)"
-  >
-    <component :is="getServiceComponent" v-if="service !== 'site'" />
-    <span v-else>{{ label }}</span>
-  </a>
+  <div>
+    <a
+      v-if="action === 'follow'"
+      :href="username ? socialLink : link"
+      class="follow-link c-share-tools__link"
+      :class="service"
+      :aria-label="ariaLabel"
+      :target="service !== 'phone' ? '_blank' : '_self'"
+      rel="noopener noreferrer"
+      :title="username ? socialLink : link"
+      @click="emit('follow', service)"
+    >
+      <client-only>
+        <GetServiceIcon v-if="!label" />
+        <span v-else>{{ label }}</span>
+      </client-only>
+    </a>
 
-  <button v-else-if="action === 'share'" class="share-button" @click="share">
-    <component :is="getServiceComponent" />
-  </button>
+    <button v-else-if="action === 'share'" class="share-button" @click="share">
+      <client-only>
+        <GetServiceIcon />
+      </client-only>
+    </button>
+  </div>
 </template>
 
 <style lang="scss">

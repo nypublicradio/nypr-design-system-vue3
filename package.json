@@ -19,6 +19,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@nuxt/vite-builder": "^3.0.0-rc.4",
     "axios": "^0.25.0",
     "focus-visible": "^5.2.0",
     "gsap": "^3.9.1",
@@ -42,9 +43,7 @@
     "@storybook/manager-webpack5": "^6.4.18",
     "@storybook/preset-scss": "^1.0.3",
     "@storybook/vue3": "^6.4.18",
-    "@vitejs/plugin-vue": "^2.3.1",
     "@vue/test-utils": "^2.0.0-rc.21",
-    "@vueblocks/vue-use-vuex": "^0.2.11",
     "babel-loader": "^8.2.3",
     "css-loader": "^6.6.0",
     "eslint": "^8.7.0",
@@ -52,17 +51,15 @@
     "eslint-plugin-storybook": "^0.5.6",
     "eslint-plugin-vue": "^8.3.0",
     "node-sass": "^7.0.1",
-    "nuxt": "^3.0.0-rc.3",
+    "nuxt": "^3.0.0-rc.4",
     "postcss": "^8.4.5",
     "prettier": "2.5.1",
     "sass": "^1.49.7",
     "sass-loader": "^12.4.0",
     "storybook-dark-mode": "^1.0.9",
     "style-loader": "^3.3.1",
-    "vite": "^2.9.7",
     "vue": "^3.2.33",
     "vue-loader": "^16.8.3",
-    "vue-router": "^4.0.12",
     "webpack": "^5.67.0"
   }
 }

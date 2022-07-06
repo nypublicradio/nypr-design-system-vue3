@@ -33,6 +33,7 @@ const Template = (args) => ({
             <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" />
             <v-share-tools-item service="phone" link="tel:19731231234" />
             <v-share-tools-item service="email" link="mailto:sample@gmail.com" />
+            <v-share-tools-item service="site" link="https://www.google.com" />
             <v-share-tools-item service="site" label="google.com" link="https://www.google.com" />
         </v-share-tools>
     `,
