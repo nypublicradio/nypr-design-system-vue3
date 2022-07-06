@@ -12,6 +12,10 @@ import { onBeforeMount, ref } from 'vue'
           <div class="col-12">
             <h1 class="h2">The Team</h1>
             <v-share-tools>
+              <v-share-tools-item
+                service="site"
+                link="https://www.sample.com"
+              />
               <v-share-tools-item service="facebook" username="gothamist" />
               <v-share-tools-item service="twitter" username="gothamist" />
               <v-share-tools-item service="instagram" username="gothamist" />

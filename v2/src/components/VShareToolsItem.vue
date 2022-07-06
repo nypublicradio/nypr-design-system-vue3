@@ -1,6 +1,41 @@
 <script setup>
 import { computed, defineAsyncComponent } from 'vue'
 
+const props = defineProps({
+  action: {
+    type: String,
+    default: 'follow',
+  },
+  service: {
+    type: String,
+    default: 'site',
+  },
+  username: {
+    type: String,
+    default: null,
+  },
+  label: {
+    type: String,
+    default: null,
+  },
+  link: {
+    type: String,
+    default: null,
+  },
+  url: {
+    type: String,
+    default: null,
+  },
+  shareParameters: {
+    type: Object,
+    default: () => ({}),
+  },
+  utmParameters: {
+    type: Object,
+    default: () => ({}),
+  },
+})
+
 const emit = defineEmits(['share', 'follow'])
 
 const icons = {
@@ -14,6 +49,7 @@ const icons = {
   spotify: 'SpotifyIcon',
   twitter: 'TwitterIcon',
   youtube: 'YoutubeIcon',
+  site: 'SiteIcon',
 }
 
 const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
@@ -55,41 +91,6 @@ const SOCIAL_SERVICE_MAP = {
     omitUrl: true,
   },
 }
-
-const props = defineProps({
-  action: {
-    type: String,
-    default: 'follow',
-  },
-  service: {
-    type: String,
-    default: 'site',
-  },
-  username: {
-    type: String,
-    default: null,
-  },
-  label: {
-    type: String,
-    default: null,
-  },
-  link: {
-    type: String,
-    default: null,
-  },
-  url: {
-    type: String,
-    default: null,
-  },
-  shareParameters: {
-    type: Object,
-    default: () => ({}),
-  },
-  utmParameters: {
-    type: Object,
-    default: () => ({}),
-  },
-})
 
 const GetServiceIcon = defineAsyncComponent(() =>
   import('../assets/icons/' + icons[props.service] + '.vue')
@@ -198,7 +199,7 @@ const share = () => {
       @click="emit('follow', service)"
     >
       <client-only>
-        <GetServiceIcon v-if="service !== 'site'" />
+        <GetServiceIcon v-if="!label" />
         <span v-else>{{ label }}</span>
       </client-only>
     </a>
