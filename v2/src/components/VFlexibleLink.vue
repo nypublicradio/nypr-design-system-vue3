@@ -19,6 +19,11 @@ const props = defineProps({
     default: 'none',
   },
 })
+
+const emit = defineEmits([
+  'emit-flexible-link',
+])
+
 const isExternal = computed(() => {
   const reg = /^https?:\/\/|mailto:|tel:/i
   if (typeof props.to === 'string' && reg.test(props.to)) {
