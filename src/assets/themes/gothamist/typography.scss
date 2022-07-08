@@ -161,6 +161,7 @@ $type-paragraph1: (
             'font-family': var(--font-family),
             'font-size': var(--font-size-8),
             'line-height': var(--font-size-12),
+            'font-weight': var(--font-weight),
             'color': var(--black200),
         ),
     ),
@@ -178,6 +179,7 @@ $type-paragraph2: (
             'font-family': var(--font-family),
             'font-size': var(--font-size-6),
             'line-height': var(--font-size-9),
+            'font-weight': var(--font-weight),
             'color': var(--black200),
         ),
     ),
@@ -194,6 +196,7 @@ $type-paragraph3: (
             'font-family': var(--font-family-header),
             'font-size': var(--font-size-6),
             'line-height': var(--font-size-9),
+            'font-weight': var(--font-weight),
             'color': var(--black200),
         ),
     ),
@@ -211,6 +214,7 @@ $type-label1: (
             'font-family': var(--font-family-header),
             'font-size': var(--font-size-10),
             'line-height': var(--font-size-10),
+            'font-weight': var(--font-weight),
             'color': var(--text-color),
             'letter-spacing': -0.01em,
             'text-transform': uppercase,
@@ -230,6 +234,7 @@ $type-label2: (
             'font-family': var(--font-family-header),
             'font-size': var(--font-size-7),
             'line-height': var(--font-size-7),
+            'font-weight': var(--font-weight),
             'color': var(--text-color),
             'letter-spacing': -0.01em,
             'text-transform': uppercase,
@@ -249,6 +254,7 @@ $type-label3: (
             'font-family': var(--font-family-header),
             'font-size': var(--font-size-6),
             'line-height': var(--font-size-6),
+            'font-weight': var(--font-weight),
             'color': var(--text-color),
             'letter-spacing': -0.01em,
             'text-transform': uppercase,
@@ -268,6 +274,7 @@ $type-caption: (
             'font-family': var(--font-family-header),
             'font-size': var(--font-size-4),
             'line-height': var(--font-size-7),
+            'font-weight': var(--font-weight),
             'color': var(--black200),
         ),
     ),
@@ -279,6 +286,7 @@ $type-fineprint: (
             'font-family': var(--font-family-header),
             'font-size': var(--font-size-3),
             'line-height': var(--font-size-6),
+            'font-weight': var(--font-weight),
             'color': var(--black100),
         ),
     ),
@@ -289,7 +297,6 @@ $type-fineprint: (
         ),
     ),
 );
-
 
 h1,
 .h1,
@@ -338,15 +345,18 @@ h7,
 }
 
 p,
-.p1, .type-paragraph1 {
+.p1,
+.type-paragraph1 {
     @include font-config($type-paragraph1);
 }
 
-.p2, .type-paragraph2 {
+.p2,
+.type-paragraph2 {
     @include font-config($type-paragraph2);
 }
 
-.p3, .type-paragraph3 {
+.p3,
+.type-paragraph3 {
     @include font-config($type-paragraph3);
 }
 
@@ -358,7 +368,6 @@ p,
 }
 .type-label3 {
     @include font-config($type-label3);
-
 }
 .type-caption {
     @include font-config($type-caption);
