@@ -1,10 +1,4 @@
 import { defineNuxtPlugin } from "#app"
-// import PrimeVue from "primevue/config/config.esm.js"
-// import Button from "primevue/button/button.esm.js"
-// import Toast from "primevue/toast/toast.esm.js"
-// import InputText from "primevue/inputtext/inputtext.esm.js"
-
-
 import Accordion from 'primevue/accordion/accordion.esm.js'
 import AccordionTab from 'primevue/accordiontab/accordiontab.esm.js'
 import AutoComplete from 'primevue/autocomplete/autocomplete.esm.js'
@@ -14,8 +8,8 @@ import Checkbox from 'primevue/checkbox/checkbox.esm.js'
 import Chips from 'primevue/chips/chips.esm.js'
 import Column from 'primevue/column/column.esm.js'
 import ConfirmDialog from 'primevue/confirmdialog/confirmdialog.esm.js'
-import ConfirmationService from 'primevue/confirmationservice/confirmationservice.esm.js'
 import ConfirmPopup from 'primevue/confirmpopup/confirmpopup.esm.js'
+import ConfirmationService from 'primevue/confirmationservice/confirmationservice.esm.js'
 import ContextMenu from 'primevue/contextmenu/contextmenu.esm.js'
 import DataTable from 'primevue/datatable/datatable.esm.js'
 import Dialog from 'primevue/dialog/dialog.esm.js'
