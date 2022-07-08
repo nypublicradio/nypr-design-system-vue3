@@ -48,22 +48,16 @@ src/assets/library/
 npm run build-themes
 ```
 
-## Prime Theme View
-first, rename config file to `vite.config.js`
-file being rendered: `src/components/Home.vue`
-add/select the theme you want import here: `\src\main.js` line 51
-```
-npm run prime-serve
-```
-
-
-
 ## Nuxt instance
-first, rename config file to `--vite.config.js` to avoid conflict with nuxt.config.js
 update THEME env var with the name of the theme you want to use: `.env` line 1
 ```
 npm run dev
 ```
+
+## Prime Theme View
+Prime Theme view is now included in the NUXT instance via pages/index.vue
+file being rendered: `src/components/Home.vue`
+
 
 ## font size scale reference helper
 --font-size = 16px

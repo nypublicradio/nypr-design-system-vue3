@@ -1,6 +1,7 @@
 <script setup>
 import VShareTools from '/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '/v2/src/components/VShareToolsItem.vue'
+import Home from '/src/components/Home.vue'
 import { onBeforeMount, ref } from 'vue'
 </script>
 
@@ -24,6 +25,9 @@ import { onBeforeMount, ref } from 'vue'
                 username="UCY_2VeS5Q9_sMZRhtvF0c5Q"
               />
             </v-share-tools>
+            <client-only>
+              <home />
+            </client-only>
           </div>
         </div>
       </div>
@@ -31,4 +35,6 @@ import { onBeforeMount, ref } from 'vue'
   </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+@import '../src/App';
+</style>

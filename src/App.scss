@@ -7,14 +7,14 @@ body {
         --font-family,
         -apple-system,
         BlinkMacSystemFont,
-        "Segoe UI",
+        'Segoe UI',
         Roboto,
         Helvetica,
         Arial,
         sans-serif,
-        "Apple Color Emoji",
-        "Segoe UI Emoji",
-        "Segoe UI Symbol"
+        'Apple Color Emoji',
+        'Segoe UI Emoji',
+        'Segoe UI Symbol'
     );
     background-color: var(--surface-ground);
     color: var(--text-color);
@@ -30,9 +30,9 @@ body {
     }
 }
 
-a {
-    text-decoration: none;
-}
+// a {
+//     text-decoration: none;
+// }
 
 h1,
 h2,
@@ -41,38 +41,10 @@ h4,
 h5,
 h6 {
     margin: 1.5rem 0 1rem 0 !important;
-    font-family: inherit;
-    font-weight: 600;
-    line-height: 1.2;
-    color: inherit;
 
     &:first-child {
         margin-top: 0;
     }
-}
-
-h1 {
-    font-size: 2.5rem;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.75rem;
-}
-
-h4 {
-    font-size: 1.5rem;
-}
-
-h5 {
-    font-size: 1.25rem;
-}
-
-h6 {
-    font-size: 1rem;
 }
 
 p {
@@ -300,7 +272,7 @@ p {
                 font-size: 1rem;
             }
 
-            input[type="text"] {
+            input[type='text'] {
                 padding: 0.5rem;
                 color: var(--text-color);
             }
@@ -404,7 +376,7 @@ p {
     }
 }
 
-i:not([class~="pi"]) {
+i:not([class~='pi']) {
     background-color: var(--surface-ground);
     color: #2196f3;
     font-family: Monaco, courier, monospace;
@@ -418,7 +390,7 @@ i:not([class~="pi"]) {
     margin: 0 2px;
 }
 
-pre[class*="language-"] {
+pre[class*='language-'] {
     &:before,
     &:after {
         display: none !important;

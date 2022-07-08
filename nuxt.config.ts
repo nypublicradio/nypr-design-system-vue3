@@ -19,9 +19,9 @@ export default defineNuxtConfig({
       },
     },
   },
-  // components: true,
+  //components: true,
   // components: [
-  //   { path: '~/v2.src.components/', extensions: ['vue'] }
+  //   { path: '~/src/components/', extensions: ['vue'] }
   // ],
   build: {
     transpile: [
