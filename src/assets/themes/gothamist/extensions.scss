@@ -130,6 +130,7 @@ a {
 /* VCard */
 $img-width: 318px;
 $img-height: 212px;
+$img-width-small: 158px;
 $img-width-mobile: 106px;
 $img-height-mobile: 106px;
 .v-card .image-with-caption {
@@ -219,6 +220,29 @@ $img-height-mobile: 106px;
         height: $img-height-mobile;
       }
     }
+  }
+}
+
+.v-card.mod-small {
+  .image-with-caption {
+    width: $img-width-small !important;
+    @include media(#{$mobileBreakpoint}) {
+      width: $img-width-mobile !important;
+    }
+  }
+  .card-details .card-title,
+  .card-details .card-title .h2 {
+    font-size: var(--font-size-6);
+    line-height: var(--font-size-8);
+    font-weight: 400;
+  }
+}
+.v-card.mod-small.mod-left {
+  .card-image-wrapper {
+    margin-right: 0;
+  }
+  .card-details {
+    padding-left: 0;
   }
 }
 
