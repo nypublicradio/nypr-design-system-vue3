@@ -232,7 +232,7 @@ $passwordStrongBg: $successColor !default;
 
 //link
 $linkColor: $textColor !default;
-$linkHoverColor: map-get($colors, 'red') !default;
+$linkHoverColor: $black100 !default;
 $linkTextDecoration: underline !default;
 $linkHoverTextDecoration: underline !default;
 $linkButtonColor: $textColor !default;
