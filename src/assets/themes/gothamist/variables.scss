@@ -236,7 +236,7 @@ $linkHoverColor: $black100 !default;
 $linkTextDecoration: underline !default;
 $linkHoverTextDecoration: underline !default;
 $linkButtonColor: $textColor !default;
-$linkButtonHoverColor: map-get($colors, 'red') !default;
+$linkButtonHoverColor: $black100 !default;
 $linkButtonTextHoverDecoration: underline !default;
 $linkButtonFocusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
 
