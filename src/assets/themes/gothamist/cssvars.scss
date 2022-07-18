@@ -1,9 +1,9 @@
 :root,
 [data-style-mode='default'] {
-    --black: #{map-get($colors, "black")};
-    --red: #{map-get($colors, "red")};
-    --soybean: #{map-get($colors, "soybean")};
-    --soybean200: #{map-get($colors, "soybeanlight")};
+    --black: #{map-get($colors, 'black')};
+    --red: #{map-get($colors, 'red')};
+    --soybean: #{map-get($colors, 'soybean')};
+    --soybean200: #{map-get($colors, 'soybeanlight')};
 
     --primary-color: #{$primaryColor};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
@@ -214,9 +214,15 @@
 [data-style-mode='dark'] {
     /* --primary-color: #{$dangerColor};
     --primary-color-rgb: #{hex2rgb($dangerColor)}; */
-    --link-button-color: var(--primary-light-color);
+    --link-button-color: #{$white200};
+    --link-button-hover-color: var(--soybean);
+    --link-color: #{$white200};
+    --link-hover-color: var(--soybean);
     --text-color: var(--white100);
     --text-color-secondary: var(--white300);
+
+    --black100: #{$white300};
+    --black200: #{$white200};
 
     --surface-a: #{$black};
     --surface-b: #{$gray-900};
