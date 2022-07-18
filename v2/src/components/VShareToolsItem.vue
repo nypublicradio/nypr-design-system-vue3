@@ -93,7 +93,7 @@ const SOCIAL_SERVICE_MAP = {
 }
 
 const GetServiceIcon = defineAsyncComponent(() =>
-  import('../assets/icons/' + icons[props.service] + '.vue')
+  import('/v2/src/assets/icons/' + icons[props.service] + '.vue')
 )
 
 const socialLink = computed(() => {
