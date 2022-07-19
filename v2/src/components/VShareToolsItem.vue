@@ -1,20 +1,20 @@
 <script setup>
 import { computed } from 'vue'
 
-import AudioIcon from '../assets/icons/AudioIcon'
+import AudioIcon from '../assets/icons/AudioIcon.vue'
 // eslint-disable-next-line import/no-duplicates
-import EmailIcon from '../assets/icons/EmailIcon'
-import FacebookIcon from '../assets/icons/FacebookIcon'
-import InstagramIcon from '../assets/icons/InstagramIcon'
-import LinkedinIcon from '../assets/icons/LinkedinIcon'
+import EmailIcon from '../assets/icons/EmailIcon.vue'
+import FacebookIcon from '../assets/icons/FacebookIcon.vue'
+import InstagramIcon from '../assets/icons/InstagramIcon.vue'
+import LinkedinIcon from '../assets/icons/LinkedinIcon.vue'
 // eslint-disable-next-line import/no-duplicates
-import NewsletterIcon from '../assets/icons/EmailIcon'
-import PhoneIcon from '../assets/icons/PhoneIcon'
-import RedditIcon from '../assets/icons/RedditIcon'
-import SiteIcon from '../assets/icons/SiteIcon'
-import SpotifyIcon from '../assets/icons/SpotifyIcon'
-import TwitterIcon from '../assets/icons/TwitterIcon'
-import YoutubeIcon from '../assets/icons/YoutubeIcon'
+import NewsletterIcon from '../assets/icons/EmailIcon.vue'
+import PhoneIcon from '../assets/icons/PhoneIcon.vue'
+import RedditIcon from '../assets/icons/RedditIcon.vue'
+import SiteIcon from '../assets/icons/SiteIcon.vue'
+import SpotifyIcon from '../assets/icons/SpotifyIcon.vue'
+import TwitterIcon from '../assets/icons/TwitterIcon.vue'
+import YoutubeIcon from '../assets/icons/YoutubeIcon.vue'
 
 const props = defineProps({
   action: {
