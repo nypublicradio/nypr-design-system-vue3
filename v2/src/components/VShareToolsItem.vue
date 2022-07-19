@@ -1,5 +1,20 @@
 <script setup>
-import { ref, computed, defineAsyncComponent } from 'vue'
+import { computed } from 'vue'
+
+import AudioIcon from '../assets/icons/AudioIcon'
+// eslint-disable-next-line import/no-duplicates
+import EmailIcon from '../assets/icons/EmailIcon'
+import FacebookIcon from '../assets/icons/FacebookIcon'
+import InstagramIcon from '../assets/icons/InstagramIcon'
+import LinkedinIcon from '../assets/icons/LinkedinIcon'
+// eslint-disable-next-line import/no-duplicates
+import NewsletterIcon from '../assets/icons/EmailIcon'
+import PhoneIcon from '../assets/icons/PhoneIcon'
+import RedditIcon from '../assets/icons/RedditIcon'
+import SiteIcon from '../assets/icons/SiteIcon'
+import SpotifyIcon from '../assets/icons/SpotifyIcon'
+import TwitterIcon from '../assets/icons/TwitterIcon'
+import YoutubeIcon from '../assets/icons/YoutubeIcon'
 
 const props = defineProps({
   action: {
@@ -39,17 +54,17 @@ const props = defineProps({
 const emit = defineEmits(['share', 'follow'])
 
 const icons = {
-  email: 'EmailIcon',
-  phone: 'PhoneIcon',
-  facebook: 'FacebookIcon',
-  instagram: 'InstagramIcon',
-  linkedin: 'LinkedinIcon',
-  newsletter: 'EmailIcon',
-  reddit: 'RedditIcon',
-  spotify: 'SpotifyIcon',
-  twitter: 'TwitterIcon',
-  youtube: 'YoutubeIcon',
-  site: 'SiteIcon',
+  email: EmailIcon,
+  phone: PhoneIcon,
+  facebook: FacebookIcon,
+  instagram: InstagramIcon,
+  linkedin: LinkedinIcon,
+  newsletter: EmailIcon,
+  reddit: RedditIcon,
+  spotify: SpotifyIcon,
+  twitter: TwitterIcon,
+  youtube: YoutubeIcon,
+  site: SiteIcon,
 }
 
 const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
@@ -91,14 +106,6 @@ const SOCIAL_SERVICE_MAP = {
     omitUrl: true,
   },
 }
-
-const thisIcon = ref(
-  computed(() =>
-    defineAsyncComponent(() =>
-      import(`../assets/icons/${icons[props.service]}.vue`)
-    )
-  )
-)
 
 const socialLink = computed(() => {
   return SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username || ''
@@ -202,16 +209,12 @@ const share = () => {
       :title="username ? socialLink : link"
       @click="emit('follow', service)"
     >
-      <client-only>
-        <component :is="thisIcon" v-if="!label" />
-        <span v-else>{{ label }}</span>
-      </client-only>
+      <component :is="icons[props.service]" v-if="!label" />
+      <span v-else>{{ label }}</span>
     </a>
 
     <button v-else-if="action === 'share'" class="share-button" @click="share">
-      <client-only>
-        <component :is="thisIcon" />
-      </client-only>
+      <component :is="icons[props.service]" />
     </button>
   </div>
 </template>
