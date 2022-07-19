@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineAsyncComponent } from 'vue'
+import { ref, computed, defineAsyncComponent } from 'vue'
 
 const props = defineProps({
   action: {
@@ -92,8 +92,12 @@ const SOCIAL_SERVICE_MAP = {
   },
 }
 
-const GetServiceIcon = defineAsyncComponent(() =>
-  import('./../assets/icons/' + icons[props.service] + '.vue')
+const thisIcon = ref(
+  computed(() =>
+    defineAsyncComponent(() =>
+      import(`../assets/icons/${icons[props.service]}.vue`)
+    )
+  )
 )
 
 const socialLink = computed(() => {
@@ -199,14 +203,14 @@ const share = () => {
       @click="emit('follow', service)"
     >
       <client-only>
-        <GetServiceIcon v-if="!label" />
+        <component :is="thisIcon" v-if="!label" />
         <span v-else>{{ label }}</span>
       </client-only>
     </a>
 
     <button v-else-if="action === 'share'" class="share-button" @click="share">
       <client-only>
-        <GetServiceIcon />
+        <component :is="thisIcon" />
       </client-only>
     </button>
   </div>
