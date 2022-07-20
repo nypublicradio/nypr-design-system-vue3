@@ -14,6 +14,37 @@ a {
   }
 }
 
+/* inputs*/
+input,
+.p-component,
+.p-component li,
+label,
+.p-dropdown .p-dropdown-label,
+.p-paginator-page {
+  font-family: var(--font-family-header);
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-family: var(--font-family-header);
+    color: var(--gray-200);
+    opacity: 1; /* Firefox */
+  }
+
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    font-family: var(--font-family-header);
+    color: var(--gray-200);
+  }
+
+  &::-ms-input-placeholder {
+    /* Microsoft Edge */
+    font-family: var(--font-family-header);
+    color: var(--gray-200);
+  }
+  label {
+    font-family: var(--font-family-header);
+  }
+}
+
 /* Disabled Background Color */
 .p-disabled,
 .p-component:disabled {
@@ -93,6 +124,7 @@ a {
 .p-checkbox {
   &:not(.p-checkbox-disabled) {
     .p-checkbox-box {
+      border-radius: 2px;
       &:hover {
         border-color: var(--checkbox-active-hover-border-color);
         background: var(--checkbox-active-hover-bg);
