@@ -49,12 +49,34 @@ label,
 .p-disabled,
 .p-component:disabled {
   opacity: var(--disabled-opacity);
+  color: var(--text-color);
   background: var(--disabled-background);
 }
 
+/*error font*/
+.p-error {
+  font-family: var(--font-family-header);
+}
 /* Button Styles */
 .p-button {
+  background: var(--button-bg);
+  color: var(--button-text-color);
   font-size: var(--button-font-size);
+  &:enabled {
+    &:hover {
+      background: var(--button-hover-bg);
+      color: var(--button-text-hover-color);
+      border-color: var(--button-hover-border-color);
+    }
+    &:active {
+      background: var(--button-active-bg);
+      color: var(--button-text-active-color);
+    }
+  }
+  &:disabled,
+  .p-disabled {
+    color: var(--button-text-disabled-color);
+  }
 }
 .p-button.p-button-tertiary,
 .p-buttonset.p-button-tertiary > .p-button,

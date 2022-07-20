@@ -52,6 +52,8 @@ $breakpoints: (
 $colors: (
     'black': #111111,
     'soybean': #d8d7af,
+    'soybeanhover': #e0dfc0,
+    'soybeanpress': #f3f3e5,
     'lightsoybean': #f3f3e5,
     'red': #de1e3d,
 );
@@ -81,7 +83,7 @@ $black50: #808080 !default;
 $black100: #555555 !default;
 $black200: #333333 !default;
 $black300: #cfcfcf !default;
-$black400: #cfcfcf !default;
+$black400: #808080 !default;
 $black500: #cfcfcf !default;
 
 $white: #ffffff !default;
@@ -144,7 +146,7 @@ $primeIconFontSize: 1rem !default;
 $divider: 1px solid $white200 !default;
 $inlineSpacing: 2rem !default;
 $disabledOpacity: 1 !default;
-$disabledBackground: rgba(207, 207, 207, 0.4) !default;
+$disabledBackground: $black300 !default;
 $maskBg: rgba($black100, 0.5) !default;
 $loadingIconFontSize: 2rem !default;
 $errorColor: $dangerColor !default;
@@ -248,10 +250,10 @@ $buttonBg: $primaryColor !default;
 $buttonFontSize: var(--font-size-5) !default;
 $buttonTextColor: $white !default;
 $buttonBorder: transparent solid 2px !default;
-$buttonHoverBg: $white !default;
-$buttonTextHoverColor: $primaryColor !default;
-$buttonHoverBorderColor: $primaryColor !default;
-$buttonActiveBg: $primaryColor !default;
+$buttonHoverBg: $black200 !default;
+$buttonTextHoverColor: $white !default;
+$buttonHoverBorderColor: $black200 !default;
+$buttonActiveBg: $black100 !default;
 $buttonTextActiveColor: $white !default;
 $buttonActiveBorderColor: transparent !default;
 $raisedButtonShadow: 0 4px 4px 0px rgba(0, 0, 0, 0.2), 0 12px 10px 0 rgba(0, 0, 0, 0.06) !default;
@@ -270,10 +272,10 @@ $plainButtonActiveBgColor: $white200 !default;
 $secondaryButtonBg: map-get($colors, 'soybean') !default;
 $secondaryButtonTextColor: $primaryColor !default;
 $secondaryButtonBorder: transparent solid 2px !default;
-$secondaryButtonHoverBg: $white !default;
+$secondaryButtonHoverBg: map-get($colors, 'soybeanhover') !default;
 $secondaryButtonTextHoverColor: $primaryColor !default;
-$secondaryButtonHoverBorderColor: map-get($colors, 'soybean') !default;
-$secondaryButtonActiveBg: map-get($colors, 'soybean') !default;
+$secondaryButtonHoverBorderColor: map-get($colors, 'soybeanhover') !default;
+$secondaryButtonActiveBg: map-get($colors, 'soybeanpress') !default;
 $secondaryButtonTextActiveColor: primaryColor !default;
 $secondaryButtonActiveBorderColor: transparent !default;
 $secondaryButtonFocusShadow: 0 0 0 0.2rem scale-color($secondaryButtonBg, $lightness: 60%) !default;
@@ -375,7 +377,7 @@ $colorPickerBg: #323232 !default;
 $colorPickerBorder: 1px solid #191919 !default;
 $colorPickerHandleColor: $white !default;
 
-//togglebutton
+//togglebutton$white
 $toggleButtonBg: $inputBg !default;
 $toggleButtonBorder: 2px solid $white300 !default;
 $toggleButtonTextColor: $black100 !default;
