@@ -197,26 +197,28 @@ const share = () => {
 </script>
 
 <template>
-  <div>
-    <a
-      v-if="action === 'follow'"
-      :href="username ? socialLink : link"
-      class="follow-link c-share-tools__link"
-      :class="service"
-      :aria-label="ariaLabel"
-      :target="service !== 'phone' ? '_blank' : '_self'"
-      rel="noopener noreferrer"
-      :title="username ? socialLink : link"
-      @click="emit('follow', service)"
-    >
-      <component :is="icons[props.service]" v-if="!label" />
-      <span v-else>{{ label }}</span>
-    </a>
+  <a
+    v-if="action === 'follow'"
+    :href="username ? socialLink : link"
+    class="v-share-tools-item follow-link c-share-tools__link"
+    :class="service"
+    :aria-label="ariaLabel"
+    :target="service !== 'phone' ? '_blank' : '_self'"
+    rel="noopener noreferrer"
+    :title="username ? socialLink : link"
+    @click="emit('follow', service)"
+  >
+    <component :is="icons[props.service]" v-if="!label" />
+    <span v-else>{{ label }}</span>
+  </a>
 
-    <button v-else-if="action === 'share'" class="share-button" @click="share">
-      <component :is="icons[props.service]" />
-    </button>
-  </div>
+  <button
+    v-else-if="action === 'share'"
+    class="v-share-tools-item share-button"
+    @click="share"
+  >
+    <component :is="icons[props.service]" />
+  </button>
 </template>
 
 <style lang="scss">
