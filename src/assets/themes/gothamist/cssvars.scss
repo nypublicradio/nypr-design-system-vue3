@@ -16,6 +16,15 @@
     --primary-darker-color: #{$primaryDarkerColor};
     --primary-darker-color-rgb: #{hex2rgb($primaryDarkerColor)};
 
+    --button-bg: #{$buttonBg};
+    --button-hover-bg: #{$buttonHoverBg};
+    --button-hover-border-color: #{$buttonHoverBorderColor};
+    --button-active-bg: #{$buttonActiveBg};
+    --button-text-color: #{$buttonTextColor};
+    --button-text-hover-color: #{$buttonTextHoverColor};
+    --button-text-active-color: #{$buttonTextActiveColor};
+    --button-text-disabled-color: #{$white};
+
     --link-color: #{$linkColor};
     --link-hover-color: #{$linkHoverColor};
     --link-text-decoration: #{$linkTextDecoration};
@@ -213,8 +222,20 @@
     --z-index-100: #{$z-index-100};
 }
 [data-style-mode='dark'] {
-    /* --primary-color: #{$dangerColor};
-    --primary-color-rgb: #{hex2rgb($dangerColor)}; */
+    // --primary-color: #{$white};
+    // --primary-color-rgb: #{hex2rgb($dangerColor)};
+
+    --button-bg: #{$white};
+    --button-hover-bg: #{$black300};
+    --button-hover-border-color: #{$black300};
+    --button-active-bg: #{$black400};
+    --button-text-color: #{$black};
+    --button-text-hover-color: #{$black};
+    --button-text-active-color: #{$black};
+    --button-text-disabled-color: #{$black};
+
+    --disabled-background: #{$black100};
+
     --link-button-color: #{$white200};
     --link-button-hover-color: var(--soybean);
     --link-color: #{$white200};
