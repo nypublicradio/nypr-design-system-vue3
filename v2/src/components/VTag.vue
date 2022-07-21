@@ -20,7 +20,11 @@ const props = defineProps({
 
 <template>
   <span class="v-tag">
-    <v-flexible-link :to="props.slug" :class="props.slug ? '' : 'disabled'">
+    <v-flexible-link
+      :to="props.slug"
+      :class="props.slug ? '' : 'disabled'"
+      class="raw"
+    >
       <Button
         :class="props.name"
         :label="props.name"
@@ -55,8 +59,12 @@ const props = defineProps({
         letter-spacing: var(--tag-letter-spacing);
         text-transform: uppercase;
       }
-      &:hover {
+      &:link,
+      &:visited,
+      &:hover,
+      &:active {
         background: var(--tag-hover-bg);
+        text-decoration: none !important;
         .p-button-label {
           color: var(--tag-hover-text-color) !important;
           text-decoration: none !important;
