@@ -85,7 +85,32 @@
 
     <div class="col-12 md:col-6 p-fluid">
       <div class="card">
-        <h5>Input Text</h5>
+        <h5>Input Text small</h5>
+        <div class="grid p-formgrid">
+          <div class="col-4">
+            <InputText
+              class="p-inputtext-sm"
+              type="text"
+              placeholder="Default"
+            ></InputText>
+          </div>
+          <div class="col-4">
+            <InputText
+              class="p-inputtext-sm"
+              type="text"
+              placeholder="Disabled"
+              :disabled="true"
+            ></InputText>
+          </div>
+          <div class="col-4">
+            <InputText
+              class="p-invalid p-inputtext-sm"
+              type="text"
+              placeholder="Invalid"
+            />
+          </div>
+        </div>
+        <h5>Input Text medium</h5>
         <div class="grid p-formgrid">
           <div class="col-4">
             <InputText type="text" placeholder="Default"></InputText>
@@ -99,6 +124,31 @@
           </div>
           <div class="col-4">
             <InputText type="text" placeholder="Invalid" class="p-invalid" />
+          </div>
+        </div>
+        <h5>Input Text large</h5>
+        <div class="grid p-formgrid">
+          <div class="col-4">
+            <InputText
+              class="p-inputtext-lg"
+              type="text"
+              placeholder="Default"
+            ></InputText>
+          </div>
+          <div class="col-4">
+            <InputText
+              class="p-inputtext-lg"
+              type="text"
+              placeholder="Disabled"
+              :disabled="true"
+            ></InputText>
+          </div>
+          <div class="col-4">
+            <InputText
+              type="text"
+              placeholder="Invalid"
+              class="p-invalid p-inputtext-lg"
+            />
           </div>
         </div>
 
