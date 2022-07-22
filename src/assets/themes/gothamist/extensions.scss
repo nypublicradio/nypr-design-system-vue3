@@ -78,6 +78,46 @@ label,
     color: var(--button-text-disabled-color);
   }
 }
+
+/* link Button Styles */
+.p-button.p-button-link {
+  color: var(--link-button-color);
+  &:enabled {
+    &:hover {
+      color: var(--link-button-hover-color);
+    }
+    &:active {
+      color: var(--link-button-hover-color);
+    }
+  }
+  &:disabled,
+  .p-disabled {
+    color: var(--button-text-disabled-color);
+  }
+}
+
+.p-button.p-button-text,
+.p-button.p-button-outlined {
+  color: var(--link-color);
+  &:enabled {
+    &:hover {
+      color: var(--link-color);
+      background: hsla(0, 0%, 50%, 0.12);
+    }
+    &:active {
+      color: var(--link-color);
+      background: hsla(0, 0%, 50%, 0.12);
+    }
+    &:focus {
+      box-shadow: 0 0 0 0.2rem #d6d6d6;
+    }
+  }
+  &:disabled,
+  .p-disabled {
+    color: var(--button-text-disabled-color);
+  }
+}
+
 .p-button.p-button-tertiary,
 .p-buttonset.p-button-tertiary > .p-button,
 .p-splitbutton.p-button-tertiary > .p-button {

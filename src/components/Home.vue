@@ -459,6 +459,8 @@
           class="p-button-rounded p-button-danger mb:p-2"
         />
 
+        <h5>Text link Buttons</h5>
+        <Button label="Primary" class="p-button-link mr-2 mb:p-2" />
         <h5>Text Buttons</h5>
         <Button label="Primary" class="p-button-text mr-2 mb:p-2" />
         <Button
