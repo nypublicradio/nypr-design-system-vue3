@@ -84,25 +84,25 @@ $black100: #555555 !default;
 $black200: #333333 !default;
 $black300: #cfcfcf !default;
 $black400: #808080 !default;
-$black500: #cfcfcf !default;
+$black500: #ececec !default;
 
 $white: #ffffff !default;
 $white100: #f4f2f0 !default;
-$white200: #e5e9f0 !default;
-$white300: #d8dee9 !default;
+$white200: #ededed !default;
+$white300: #e8e8e8 !default;
 
 //gray and surfaces
-$gray-50: #edeef0 !default;
-$gray-100: #dbdde1 !default;
-$gray-200: #b7bbc3 !default;
-$gray-300: #949aa6 !default;
-$gray-400: #707888 !default;
-$gray-500: #4c566a !default;
-$gray-600: #3d4555 !default;
-$gray-700: #2e3440 !default;
-$gray-800: #1e222a !default;
-$gray-900: #0f1115 !default;
-$gray-950: #08090c !default;
+$gray-50: #f0f0f0 !default;
+$gray-100: #e2e2e2 !default;
+$gray-200: #c2c2c2 !default;
+$gray-300: #a6a6a6 !default;
+$gray-400: #858585 !default;
+$gray-500: #6c6c6c !default;
+$gray-600: #555555 !default;
+$gray-700: #3e3e3e !default;
+$gray-800: #292929 !default;
+$gray-900: #161616 !default;
+$gray-950: #0d0d0d !default;
 
 //labels surfaces
 $surfaceGround: #ffffff !default;
@@ -145,7 +145,7 @@ $primeIconFont: 'primeicons';
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $white200 !default;
 $inlineSpacing: 2rem !default;
-$disabledOpacity: 1 !default;
+$disabledOpacity: 0.4 !default;
 $disabledBackground: $black300 !default;
 $maskBg: rgba($black100, 0.5) !default;
 $loadingIconFontSize: 2rem !default;
@@ -190,6 +190,7 @@ $inputFocusBorderColor: map-get($colors, 'soybean') !default;
 $inputErrorColor: $errorColor !default;
 $inputErrorBorderColor: $errorColor !default;
 $inputPlaceholderTextColor: $black50 !default;
+$inputPlaceholderTextColorOnDark: $black100 !default;
 $inputFilledBg: $white100 !default;
 $inputFilledHoverBg: $inputFilledBg !default;
 $inputFilledFocusBg: $white !default;
@@ -350,6 +351,7 @@ $dangerButtonFocusShadow: 0 0 0 0.2rem scale-color($dangerButtonBg, $lightness: 
 $checkboxWidth: 20px !default;
 $checkboxHeight: 20px !default;
 $checkboxBorder: 1px solid $black !default;
+$checkboxBg: $white !default;
 $checkboxIconFontSize: 14px !default;
 $checkboxActiveBorderColor: $black !default;
 $checkboxActiveBg: $white !default;
