@@ -151,6 +151,31 @@
             />
           </div>
         </div>
+        <h5>Input Text large alt-design</h5>
+        <div class="grid p-formgrid">
+          <div class="col-4">
+            <InputText
+              class="p-inputtext-lg alt-design"
+              type="text"
+              placeholder="Default"
+            ></InputText>
+          </div>
+          <div class="col-4">
+            <InputText
+              class="p-inputtext-lg alt-design"
+              type="text"
+              placeholder="Disabled"
+              :disabled="true"
+            ></InputText>
+          </div>
+          <div class="col-4">
+            <InputText
+              type="text"
+              placeholder="Invalid"
+              class="p-invalid p-inputtext-lg alt-design"
+            />
+          </div>
+        </div>
 
         <h5>Icons</h5>
         <div class="grid p-formgrid">
@@ -370,7 +395,6 @@
           class="mr-2 mb:p-2"
         />
         <Button label="Disabled" disabled="disabled" class="mr-2 mb:p-2" />
-
         <h5>Severities</h5>
         <Button label="Primary" class="mr-2 mb:p-2" />
         <Button label="Secondary" class="p-button-secondary mr-2 mb:p-2" />

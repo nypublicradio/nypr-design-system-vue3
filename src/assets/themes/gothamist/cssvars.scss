@@ -54,12 +54,20 @@
     --font-ratio: #{$fontRatio};
     --font-ratio-large: #{$fontRatioLarge};
 
+    /*checkbox*/
+    --checkbox-bg: #{$checkboxBg};
+    --checkbox-border-color: #{$black};
+    --checkbox-icon-color: #{$black};
     --checkbox-active-hover-border-color: #{$checkboxActiveHoverBorderColor};
     --checkbox-active-hover-bg: #{$checkboxActiveHoverBg};
 
     --radiobutton-active-hover-border-color: #{$radiobuttonActiveHoverBorderColor};
     --radiobutton-active-hover-bg: #{$radiobuttonActiveHoverBg};
 
+    /*input text*/
+    --input-placeholder-text-color: #{$inputPlaceholderTextColor};
+    --input-placeholder-text-color-on-dark: #{$inputPlaceholderTextColorOnDark};
+    --input-bg: #{$inputBg};
     --input-border-radius: #{$inputBorderRadius};
 
     --font-size-1: calc(var(--font-size-2) / var(--font-ratio));
@@ -224,6 +232,7 @@
 [data-style-mode='dark'] {
     // --primary-color: #{$white};
     // --primary-color-rgb: #{hex2rgb($dangerColor)};
+    /*button*/
 
     --button-bg: #{$white};
     --button-hover-bg: #{$black300};
@@ -233,6 +242,13 @@
     --button-text-hover-color: #{$black};
     --button-text-active-color: #{$black};
     --button-text-disabled-color: #{$black};
+
+    /*checkbox*/
+    --checkbox-bg: #{$black};
+    --checkbox-border-color: #{$white};
+    --checkbox-icon-color: #{$white};
+    --checkbox-active-hover-bg: #{$black200};
+    --checkbox-active-hover-border-color: #{$white};
 
     --disabled-background: #{$black100};
 
