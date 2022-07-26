@@ -273,9 +273,10 @@ $type-link: (
         'values': (
             'font-family': var(--font-family-header),
             'font-size': var(--font-size-5),
-            'line-height': var(--font-size-6),
+            'line-height': 15.4px,
             'font-weight': var(--font-weight-500),
             'color': var(--text-color),
+            'text-decoration': none,
         ),
     ),
 );
@@ -288,6 +289,7 @@ $type-listlink: (
             'font-weight': var(--font-weight-500),
             'color': var(--text-color),
             'letter-spacing': -0.01em,
+            'text-transform': uppercase,
         ),
     ),
     $medium: (
