@@ -54,7 +54,7 @@ $colors: (
     'soybean': #d8d7af,
     'soybeanhover': #e0dfc0,
     'soybeanpress': #f3f3e5,
-    'lightsoybean': #f3f3e5,
+    'soybeanlight': #f3f3e5,
     'red': #de1e3d,
 );
 
@@ -356,7 +356,7 @@ $checkboxIconFontSize: 14px !default;
 $checkboxActiveBorderColor: $black !default;
 $checkboxActiveBg: $white !default;
 $checkboxIconActiveColor: $black !default;
-$checkboxActiveHoverBg: map-get($colors, 'lightsoybean') !default;
+$checkboxActiveHoverBg: map-get($colors, 'soybeanlight') !default;
 $checkboxIconActiveHoverColor: $black !default;
 $checkboxActiveHoverBorderColor: $black !default;
 
@@ -368,8 +368,8 @@ $radiobuttonIconSize: 10px !default;
 $radiobuttonActiveBorderColor: $black !default;
 $radiobuttonActiveBg: $white !default;
 $radiobuttonIconActiveColor: $black !default;
-$radiobuttonActiveHoverBg: map-get($colors, 'lightsoybean') !default;
-$radiobuttonIconActiveHoverColor: map-get($colors, 'lightsoybean') !default;
+$radiobuttonActiveHoverBg: map-get($colors, 'soybeanlight') !default;
+$radiobuttonIconActiveHoverColor: map-get($colors, 'soybeanlight') !default;
 $radiobuttonActiveHoverBorderColor: $black !default;
 
 //colorpicker
