@@ -24,6 +24,14 @@ const Template = (args) => ({
     template: '<v-flexible-link v-bind="args" >Link to URL or NUXT route</v-flexible-link>',
 })
 
+const TemplateAnchor = (args) => ({
+    components: { VFlexibleLink },
+    setup() {
+        return { args }
+    },
+    template: '<v-flexible-link v-bind="args" >Anchor to ID</v-flexible-link><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><div id="anchor">anchored here</div>',
+})
+
 const TemplateRaw = (args) => ({
     components: { VFlexibleLink, Button },
     setup() {
@@ -83,5 +91,10 @@ NuxtLinkRawHover.args = {
     to: 'news',
     raw: true,
     rawHover: "underline",
+}
+
+export const Anchor = TemplateAnchor.bind({})
+Anchor.args = {
+    to: '#anchor'
 }
 

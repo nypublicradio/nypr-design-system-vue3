@@ -20,13 +20,17 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits([
-  'emit-flexible-link',
-])
+const emit = defineEmits(['emit-flexible-link'])
 
 const isExternal = computed(() => {
   const reg = /^https?:\/\/|mailto:|tel:/i
   if (typeof props.to === 'string' && reg.test(props.to)) {
+    return true
+  }
+  return false
+})
+const isAnchor = computed(() => {
+  if (props.to.charAt(0) === '#') {
     return true
   }
   return false
@@ -44,6 +48,17 @@ const isExternal = computed(() => {
     :target="target"
     :rel="`noopener ${props.target === '_blank' ? 'noreferrer' : ''}`"
     class="flexible-link external"
+    :class="{ ['raw']: raw }"
+    @click="emit('emit-flexible-link')"
+  >
+    <slot name="default"></slot>
+  </a>
+  <a
+    v-else-if="isAnchor"
+    v-bind="{ ...$props, ...$attrs }"
+    :href="to"
+    target="_self"
+    class="flexible-link anchor"
     :class="{ ['raw']: raw }"
     @click="emit('emit-flexible-link')"
   >
