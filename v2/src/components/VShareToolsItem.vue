@@ -180,7 +180,7 @@ const share = () => {
     `location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=${top},left=${left}`
   const popupPosition = getPopupPosition()
   const newWindow = window.open(
-    shareUrl,
+    shareUrl.value,
     'share window',
     windowString(popupPosition)
   )
