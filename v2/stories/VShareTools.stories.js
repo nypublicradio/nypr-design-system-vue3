@@ -46,10 +46,10 @@ const TemplateShare = (args) => ({
     },
     template: `
         <v-share-tools v-bind="args">
-            <v-share-tools-item service="facebook" username="WNYC" action="share"/>
-            <v-share-tools-item service="twitter" username="WNYC" action="share"/>
-            <v-share-tools-item service="instagram" username="WNYC" action="share"/>
-            <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" action="share"/>
+            <v-share-tools-item service="facebook" username="WNYC" action="share" url="https://www.gothamist.com" />
+            <v-share-tools-item service="twitter" username="WNYC" action="share" url="https://www.gothamist.com" />
+            <v-share-tools-item service="instagram" username="WNYC" action="share" url="https://www.gothamist.com" />
+            <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" action="share" url="https://www.gothamist.com" />
         </v-share-tools>
     `,
 })
