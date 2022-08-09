@@ -246,7 +246,6 @@ const hasDetails = computed(() => {
   .card-details {
     align-self: flex-start;
     flex: 1;
-    padding: spacing(3);
     overflow: hidden;
     .card-title {
       line-height: var(--font-size-8);
