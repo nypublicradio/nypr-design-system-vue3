@@ -17,7 +17,7 @@ export default {
     },
 }
 
-const Template = ( args ) => ( {
+const Template = (args) => ({
     components: {
         VCard
     },
@@ -27,8 +27,8 @@ const Template = ( args ) => ( {
         }
     },
     template: '<v-card v-bind="args"></v-card>',
-} )
-const TemplateIcons = ( args ) => ( {
+})
+const TemplateIcons = (args) => ({
     components: {
         VCard
     },
@@ -38,9 +38,9 @@ const TemplateIcons = ( args ) => ( {
         }
     },
     template: '<v-card v-bind="args"><a href="https://primefaces.org/primevue/showcase/#/icons">Get icons here</a></v-card>',
-} )
+})
 
-const TemplateCustomIcons = ( args ) => ( {
+const TemplateCustomIcons = (args) => ({
     components: {
         VCard,
         GothamistArrow
@@ -51,9 +51,9 @@ const TemplateCustomIcons = ( args ) => ( {
         }
     },
     template: '<v-card v-bind="args"><code>&lt;template #customIcon&gt; &lt;gothamist-arrow/&gt; &lt;/template&gt;</code><template #customIcon> <gothamist-arrow/> </template></v-card>',
-} )
+})
 
-const TemplateWithSlot = ( args ) => ( {
+const TemplateWithSlot = (args) => ({
     components: {
         VCard
     },
@@ -63,9 +63,9 @@ const TemplateWithSlot = ( args ) => ( {
         }
     },
     template: '<v-card v-bind="args"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </v-card>',
-} )
+})
 
-const GothamistModVertical = ( args ) => ( {
+const GothamistSponsoredModVertical = (args) => ({
     components: {
         VCard
     },
@@ -75,9 +75,20 @@ const GothamistModVertical = ( args ) => ( {
         }
     },
     template: `<v-card class="mod-vertical" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-} )
+})
+const GothamistSponsoredModHorizontal = (args) => ({
+    components: {
+        VCard
+    },
+    setup() {
+        return {
+            args
+        }
+    },
+    template: `<v-card class="mod-horizontal" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
+})
 
-const GothamistModFeatured = ( args ) => ( {
+const GothamistModFeatured = (args) => ({
     components: {
         VCard
     },
@@ -87,9 +98,9 @@ const GothamistModFeatured = ( args ) => ( {
         }
     },
     template: `<v-card class="mod-vertical mod-featured" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-} )
+})
 
-const GothamistModHorizontal = ( args ) => ( {
+const GothamistModHorizontal = (args) => ({
     components: {
         VCard
     },
@@ -99,9 +110,9 @@ const GothamistModHorizontal = ( args ) => ( {
         }
     },
     template: `<v-card class="mod-horizontal" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-} )
+})
 
-const GothamistModLarge = ( args ) => ( {
+const GothamistModLarge = (args) => ({
     components: {
         VCard
     },
@@ -111,9 +122,9 @@ const GothamistModLarge = ( args ) => ( {
         }
     },
     template: `<v-card class="mod-large" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-} )
+})
 
-const GothamistModLeft = ( args ) => ( {
+const GothamistModLeft = (args) => ({
     components: {
         VCard
     },
@@ -123,10 +134,10 @@ const GothamistModLeft = ( args ) => ( {
         }
     },
     template: `<v-card class="mod-horizontal mod-left" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-} )
+})
 
 
-export const Default = Template.bind( {} )
+export const Default = Template.bind({})
 Default.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -138,7 +149,7 @@ Default.args = {
     maxHeight: 2560,
 }
 
-export const DefaultWithBlurb = Template.bind( {} )
+export const DefaultWithBlurb = Template.bind({})
 DefaultWithBlurb.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -151,7 +162,7 @@ DefaultWithBlurb.args = {
     maxHeight: 2560,
 }
 
-export const DefaultWithEyebrow = Template.bind( {} )
+export const DefaultWithEyebrow = Template.bind({})
 DefaultWithEyebrow.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -164,7 +175,7 @@ DefaultWithEyebrow.args = {
     maxHeight: 2560,
 }
 
-export const Icon = TemplateIcons.bind( {} )
+export const Icon = TemplateIcons.bind({})
 Icon.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -177,7 +188,7 @@ Icon.args = {
     icon: "images"
 }
 
-export const CustomIcon = TemplateCustomIcons.bind( {} )
+export const CustomIcon = TemplateCustomIcons.bind({})
 CustomIcon.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -189,7 +200,7 @@ CustomIcon.args = {
     maxHeight: 2560,
 }
 
-export const SmallerImageOnPhone = Template.bind( {} )
+export const SmallerImageOnPhone = Template.bind({})
 SmallerImageOnPhone.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -202,7 +213,7 @@ SmallerImageOnPhone.args = {
     mobileImageScale: 0.65,
 }
 
-export const SmallerImageCustomBreapoint = Template.bind( {} )
+export const SmallerImageCustomBreapoint = Template.bind({})
 SmallerImageCustomBreapoint.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -216,7 +227,7 @@ SmallerImageCustomBreapoint.args = {
     bp: "lg"
 }
 
-export const VerticalImageEffect = Template.bind( {} )
+export const VerticalImageEffect = Template.bind({})
 VerticalImageEffect.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -230,7 +241,7 @@ VerticalImageEffect.args = {
     responsive: true,
 }
 
-export const Tags = Template.bind( {} )
+export const Tags = Template.bind({})
 Tags.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -240,17 +251,17 @@ Tags.args = {
     height: 175,
     maxWidth: 1440,
     maxHeight: 2560,
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
     }, {
         'name': 'food',
         'food': ''
-    } ],
+    }],
 }
 
 
-export const TagsSponsored = Template.bind( {} )
+export const TagsSponsored = Template.bind({})
 TagsSponsored.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -260,17 +271,17 @@ TagsSponsored.args = {
     height: 175,
     maxWidth: 1440,
     maxHeight: 2560,
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
     }, {
         'name': 'food',
         'food': ''
-    } ],
+    }],
     sponsored: true,
 }
 
-export const DefaultWithSlotContent = TemplateWithSlot.bind( {} )
+export const DefaultWithSlotContent = TemplateWithSlot.bind({})
 DefaultWithSlotContent.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -280,17 +291,16 @@ DefaultWithSlotContent.args = {
     height: 175,
     maxWidth: 1440,
     maxHeight: 2560,
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
     }, {
         'name': 'food',
         'food': ''
-    } ],
-    sponsored: true,
+    }],
 }
 
-export const ResponsiveWithSlotContent = TemplateWithSlot.bind( {} )
+export const ResponsiveWithSlotContent = TemplateWithSlot.bind({})
 ResponsiveWithSlotContent.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
@@ -299,17 +309,17 @@ ResponsiveWithSlotContent.args = {
     height: 214,
     maxWidth: 1440,
     maxHeight: 2560,
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
     }, {
         'name': 'food',
         'food': ''
-    } ],
+    }],
     responsive: true,
 }
 
-export const ResponsiveDefaultAtSM = Template.bind( {} )
+export const ResponsiveDefaultAtSM = Template.bind({})
 ResponsiveDefaultAtSM.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -322,7 +332,7 @@ ResponsiveDefaultAtSM.args = {
     responsive: true,
 }
 
-export const ResponsiveAtMdBreakpoint = Template.bind( {} )
+export const ResponsiveAtMdBreakpoint = Template.bind({})
 ResponsiveAtMdBreakpoint.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -336,7 +346,7 @@ ResponsiveAtMdBreakpoint.args = {
     bp: 'md',
 }
 
-export const ResponsiveAlways = Template.bind( {} )
+export const ResponsiveAlways = Template.bind({})
 ResponsiveAlways.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -348,7 +358,7 @@ ResponsiveAlways.args = {
     bp: 'max',
 }
 
-export const CustomImageRatio = Template.bind( {} )
+export const CustomImageRatio = Template.bind({})
 CustomImageRatio.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -358,10 +368,10 @@ CustomImageRatio.args = {
     maxHeight: 2560,
     responsive: true,
     bp: 'max',
-    ratio: [ 4, 1 ]
+    ratio: [4, 1]
 }
 
-export const quality = Template.bind( {} )
+export const quality = Template.bind({})
 quality.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -374,7 +384,7 @@ quality.args = {
     quality: 30
 }
 
-export const srcsetSizes = Template.bind( {} )
+export const srcsetSizes = Template.bind({})
 srcsetSizes.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
@@ -384,101 +394,112 @@ srcsetSizes.args = {
     maxHeight: 2560,
     responsive: true,
     bp: 'max',
-    sizes: [ 2, 2.5 ]
+    sizes: [2, 2.5]
 }
 
-export const GothamistExampleModHorizontal = GothamistModHorizontal.bind( {} )
+export const GothamistExampleModHorizontal = GothamistModHorizontal.bind({})
 GothamistExampleModHorizontal.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
     titleLink: 'https://www.google.com',
-    ratio: [ 3, 2 ],
+    ratio: [3, 2],
     width: 318,
     height: 214,
     maxWidth: 1440,
     maxHeight: 2560,
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
-    } ],
+    }],
 }
 
-export const GothamistExampleModLarge = GothamistModLarge.bind( {} )
+export const GothamistExampleModLarge = GothamistModLarge.bind({})
 GothamistExampleModLarge.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
     titleLink: 'https://www.google.com',
-    ratio: [ 3, 2 ],
+    ratio: [3, 2],
     width: 1053,
     height: 708,
     maxWidth: 1440,
     maxHeight: 2560,
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
-    } ],
+    }],
 }
 
-export const GothamistExampleModLeft = GothamistModLeft.bind( {} )
+export const GothamistExampleModLeft = GothamistModLeft.bind({})
 GothamistExampleModLeft.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
     titleLink: 'https://www.google.com',
-    ratio: [ 3, 2 ],
+    ratio: [3, 2],
     width: 318,
     height: 214,
     maxWidth: 1440,
     maxHeight: 2560,
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
-    } ],
+    }],
 }
 
-export const GothamistExampleModVertical = GothamistModVertical.bind( {} )
+export const GothamistExampleModVertical = GothamistSponsoredModVertical.bind({})
 GothamistExampleModVertical.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
     titleLink: 'https://www.google.com',
-    ratio: [ 3, 2 ],
+    ratio: [3, 2],
     maxWidth: 1440,
     maxHeight: 2560,
     responsive: true,
     bp: 'max',
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
     }, {
         'name': 'food',
         'food': ''
-    } ],
+    }],
 }
 
-export const GothamistExampleModFeatured = GothamistModFeatured.bind( {} )
+export const GothamistExampleModFeatured = GothamistModFeatured.bind({})
 GothamistExampleModFeatured.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
     titleLink: 'https://www.google.com',
-    ratio: [ 3, 2 ],
+    ratio: [3, 2],
     maxWidth: 1440,
     maxHeight: 2560,
     responsive: true,
     bp: 'max',
-    tags: [ {
+    tags: [{
         'name': 'news',
         'slug': 'news'
     }, {
         'name': 'food',
         'food': ''
-    } ],
+    }],
 }
 
-export const GothamistExampleSponsored = GothamistModVertical.bind( {} )
+export const GothamistExampleSponsored = GothamistSponsoredModHorizontal.bind({})
 GothamistExampleSponsored.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
     titleLink: 'https://www.google.com',
-    ratio: [ 3, 2 ],
+    ratio: [3, 2],
+    maxWidth: 1440,
+    maxHeight: 2560,
+    sponsored: true,
+}
+
+export const GothamistExampleSponsoredVertical = GothamistSponsoredModVertical.bind({})
+GothamistExampleSponsoredVertical.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
+    titleLink: 'https://www.google.com',
+    ratio: [3, 2],
     maxWidth: 1440,
     maxHeight: 2560,
     responsive: true,
