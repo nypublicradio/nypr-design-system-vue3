@@ -246,8 +246,8 @@ const hasDetails = computed(() => {
   .card-details {
     align-self: flex-start;
     flex: 1;
-    padding: spacing(3) spacing(6) spacing(6) spacing(3);
-    overflow: auto;
+    padding: spacing(3);
+    overflow: hidden;
     .card-title {
       line-height: var(--font-size-8);
       .v-tag {
@@ -290,6 +290,9 @@ const hasDetails = computed(() => {
 
 .v-card.mod-vertical {
   flex-direction: column;
+  .card-details {
+    padding: spacing(0);
+  }
 }
 
 .v-card.mod-vertical .card-image-wrapper {
