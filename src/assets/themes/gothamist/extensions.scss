@@ -298,14 +298,14 @@ $img-height-mobile: 106px;
     width: $img-width-mobile !important;
   }
 }
-.v-card .card-image-wrapper {
-  margin-right: 30px;
+.v-card {
+  gap: 1.5rem;
   @include media(#{$mobileBreakpoint}) {
-    margin-right: 15px;
+    gap: 0.5rem;
   }
 }
 .v-card.mod-left .card-image-wrapper {
-  margin-left: 30px;
+  display: contents;
 }
 .v-card .card-details {
   padding: 0;
@@ -403,9 +403,6 @@ $img-height-mobile: 106px;
   }
 }
 .v-card.mod-small.mod-left {
-  .card-image-wrapper {
-    margin-right: 0;
-  }
   .card-details {
     padding-left: 0;
   }

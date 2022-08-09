@@ -234,6 +234,7 @@ const hasDetails = computed(() => {
   border-radius: var(--border-radius);
   width: 100%;
   max-width: 100%;
+  gap: 1rem;
   a.disabled {
     pointer-events: none;
   }
@@ -292,7 +293,7 @@ const hasDetails = computed(() => {
 }
 
 .v-card.mod-vertical .card-image-wrapper {
-  margin-bottom: spacing(5);
+  display: contents;
 }
 
 .v-card.mod-horizontal {

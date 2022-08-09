@@ -163,7 +163,7 @@ ResponsiveCustomRatio.args = {
 export const ResponsiveVerticalEffect = Template.bind({})
 ResponsiveVerticalEffect.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.demo.nypr.digital/images/212136/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329836/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
