@@ -9,6 +9,10 @@ const props = defineProps({
     default: null,
     type: String,
   },
+  loading: {
+    type: String,
+    default: 'lazy',
+  },
   caption: {
     default: null,
     type: String,
@@ -210,6 +214,7 @@ const getCurrentDimensions = computed(() => {
             v-if="(image && thisWidth) || width"
             :src="image"
             :alt="altText"
+            :loading="loading"
             :width="width ? width : getCurrentDimensions.width"
             :height="height ? height : getCurrentDimensions.height"
             :max-width="maxWidth || Infinity"
