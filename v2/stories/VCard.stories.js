@@ -149,6 +149,19 @@ Default.args = {
     maxHeight: 2560,
 }
 
+export const loadingEager = Template.bind({})
+loadingEager.args = {
+    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    width: 175,
+    height: 175,
+    maxWidth: 1440,
+    maxHeight: 2560,
+    loading: 'eager',
+}
+
 export const DefaultWithBlurb = Template.bind({})
 DefaultWithBlurb.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',

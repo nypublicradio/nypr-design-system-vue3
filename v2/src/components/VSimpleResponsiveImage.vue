@@ -11,6 +11,11 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  /* loading image prop */
+  loading: {
+    type: String,
+    default: 'lazy',
+  },
   /** * An image url template string with tokens to replace for width and height
    * * e.g. "https://source.unsplash.com/random/%width%x%height%"
    * A plain image url here will also 'work' but you won't get additional sizes
@@ -227,7 +232,7 @@ const closeEnlarge = () => {
         :width="width"
         :height="height"
         :alt="alt"
-        loading="lazy"
+        :loading="loading"
       />
     </div>
     <client-only v-if="allowPreview">
@@ -243,7 +248,7 @@ const closeEnlarge = () => {
         :style="[isVertical ? `width:${computedWidth}px;` : '']"
         :alt="alt"
         :preview="allowPreview"
-        loading="lazy"
+        :loading="loading"
         @show="enlarge"
         @hide="closeEnlarge"
         @click="emit('click', $event.target.value)"
@@ -284,7 +289,7 @@ const closeEnlarge = () => {
       :height="height"
       :style="[isVertical ? `width:${computedWidth}px;` : '']"
       :alt="alt"
-      loading="lazy"
+      :loading="loading"
       @click="emit('click', $event.target.value)"
       @keypress="emit('keypress', $event.target.value)"
     />

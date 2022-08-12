@@ -10,6 +10,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  loading: {
+    type: String,
+    default: 'lazy',
+  },
   image: {
     type: String,
     default: null,
@@ -156,6 +160,7 @@ const hasDetails = computed(() => {
           :class="responsive ? `${bp}:hidden ${bp}:w-max` : 'hidden'"
           :image="image"
           :alt-text="title"
+          :loading="loading"
           :image-url="titleLink"
           :width="width ? Math.round(width * props.mobileImageScale) : null"
           :height="height ? Math.round(height * props.mobileImageScale) : null"
@@ -178,6 +183,7 @@ const hasDetails = computed(() => {
           :max-width="maxWidth"
           :max-height="maxHeight"
           :alt-text="title"
+          :loading="loading"
           :quality="quality"
           :flat-quality="flatQuality"
           :sizes="sizes"
