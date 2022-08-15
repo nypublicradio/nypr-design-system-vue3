@@ -209,13 +209,9 @@ const enlarge = () => {
       props.imageEnlarged ? props.imageEnlarged : props.src
     )
   } else {
-    console.log('srcset.value = ', srcset.value)
     const sizeList = srcset.value.split(',')
-    console.log('sizeList = ', sizeList)
     const lastSize = sizeList[sizeList.length - 1]
-    console.log('lastSize = ', lastSize)
     const biggestSize = lastSize.slice(0, -3)
-    console.log('biggestSize = ', biggestSize)
     img[0].setAttribute('src', biggestSize)
   }
 }

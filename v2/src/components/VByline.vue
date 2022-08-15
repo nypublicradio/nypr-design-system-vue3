@@ -24,7 +24,7 @@ const props = defineProps({
         v-for="(author, index) in props.authors"
         :key="`author-${index}`"
       >
-        <v-byline-unit class="v-byline-unit" :author="author" />
+        <v-byline-unit class="v-byline-unit" :author="author || null" />
         <span v-if="index !== authors.length - 1" class="v-byline-concat">
           {{ props.concat }}
         </span>
