@@ -56,8 +56,10 @@ export const Enlarge = Template.bind({})
 Enlarge.args = {
     alt: 'Fallback alt text here',
     src: 'https://cms.prod.nypr.digital/images/329399/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    width: 1284,
-    height: 856,
+    width: 1360,
+    height: 907,
+    maxWidth: 4517,
+    maxHeight: 3011,
     allowVerticalEffect: false,
     allowPreview: true,
 }
