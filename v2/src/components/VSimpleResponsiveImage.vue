@@ -175,9 +175,7 @@ const srcset = computed(() => {
           .replace(props.widthToken, width)
           .replace(props.heightToken, height)
           .replace(props.qualityToken, calcQuality(props.quality, size))
-        srcset += `${url} ${size}x${
-          size < props.sizes.length && !lastImage ? ',' : ''
-        } `
+        srcset += `${url} ${size}x${size <= props.sizes.length ? ',' : ''} `
       }
     }
     return srcset
