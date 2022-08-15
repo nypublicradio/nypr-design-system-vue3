@@ -94,6 +94,13 @@ const isAnchor = computed(() => {
     @include focused();
   }
 }
+.flexible-link.null {
+  color: inherit;
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}
 .flexible-link.raw {
   color: inherit;
   text-decoration: none;

@@ -131,7 +131,7 @@ const props = defineProps({
   sizes: {
     type: Array,
     default() {
-      return [2, 3, 3.5, 4]
+      return [2, 3, 4]
     },
   },
 })

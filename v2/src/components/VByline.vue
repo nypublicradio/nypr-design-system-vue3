@@ -1,50 +1,49 @@
 <script setup>
-import VFlexibleLink from './VFlexibleLink.vue'
+import VBylineUnit from './VBylineUnit.vue'
 const props = defineProps({
   authors: {
-    type: Array,
+    type: [Array, Object],
     default: null,
   },
   prefix: {
     type: String,
-    default: 'by ',
+    default: 'By ',
+  },
+  concat: {
+    type: String,
+    default: ' and ',
   },
 })
-// console.log('authors - ', props.authors)
 </script>
 
 <template>
-  <div class="byline">
+  <div class="v-byline">
     {{ props.prefix }}
-    <span
-      v-for="(author, index) in props.authors"
-      :key="index"
-      class="byline-author"
-    >
-      <v-flexible-link v-if="author.url" target="_self" :to="author.url"
-        >{{ author.firstName }}&nbsp;{{ author.lastName }}</v-flexible-link
+    <template v-if="Array.isArray(props.authors)">
+      <template
+        v-for="(author, index) in props.authors"
+        :key="`author-${index}`"
       >
-      <template v-else
-        >{{ author.firstName }}&nbsp;{{ author.lastName }}</template
-      >
-      <template v-if="author.organization && author.organizationUrl">
-        <v-flexible-link :to="author.organizationUrl"
-          >({{ author.organization }})</v-flexible-link
-        >
+        <v-byline-unit class="v-byline-unit" :author="author || null" />
+        <span v-if="index !== authors.length - 1" class="v-byline-concat">
+          {{ props.concat }}
+        </span>
       </template>
-      <template v-if="author.organization && !author.organizationUrl"
-        >({{ author.organization }})</template
-      >
-      <template v-if="index < props.authors.length - 2">,&nbsp;</template>
-      <template v-if="index === props.authors.length - 2"
-        >&nbsp;and&nbsp;</template
-      >
-    </span>
+    </template>
+    <template v-else>
+      <v-byline-unit class="v-byline-unit" :author="props.authors" />
+    </template>
   </div>
 </template>
 
 <style lang="scss">
-.byline {
+.v-byline {
   color: var(--text-color);
+
+  .v-byline-contributing-org,
+  .v-byline-concat,
+  .v-byline-unit {
+    display: inline;
+  }
 }
 </style>

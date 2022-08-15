@@ -68,7 +68,7 @@ const props = defineProps({
   sizes: {
     type: Array,
     default() {
-      return [2, 3, 3.5, 4]
+      return [2, 3, 4]
     },
   },
   /** * bool to NOT use the variable quality calc based on sizes */
