@@ -52,9 +52,23 @@ const authors = [
     }
 ]
 
+const authorsObject =
+{
+    firstName: 'Trinity',
+    lastName: 'Anderson',
+    url: '/trinity-anderson',
+    organization: 'Gothamist',
+    organizationUrl: 'http://www.gothamist.com',
+}
+
+
 export const Default = Template.bind({})
 Default.args = {
     authors: authors
+}
+export const DefaultDataAsObject = Template.bind({})
+DefaultDataAsObject.args = {
+    authors: authorsObject
 }
 
 export const OneAuthor = Template.bind({})

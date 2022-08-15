@@ -68,7 +68,7 @@ const props = defineProps({
   sizes: {
     type: Array,
     default() {
-      return [2, 3, 3.5, 4]
+      return [2, 3, 4]
     },
   },
   /** * bool to NOT use the variable quality calc based on sizes */
@@ -209,9 +209,13 @@ const enlarge = () => {
       props.imageEnlarged ? props.imageEnlarged : props.src
     )
   } else {
+    console.log('srcset.value = ', srcset.value)
     const sizeList = srcset.value.split(',')
+    console.log('sizeList = ', sizeList)
     const lastSize = sizeList[sizeList.length - 1]
+    console.log('lastSize = ', lastSize)
     const biggestSize = lastSize.slice(0, -3)
+    console.log('biggestSize = ', biggestSize)
     img[0].setAttribute('src', biggestSize)
   }
 }
