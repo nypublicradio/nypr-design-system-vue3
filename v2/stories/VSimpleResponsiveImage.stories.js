@@ -62,16 +62,6 @@ Enlarge.args = {
     allowPreview: true,
 }
 
-export const EnlargeBroke = Template.bind({})
-EnlargeBroke.args = {
-    alt: 'Fallback alt text here',
-    src: 'https://cms.prod.nypr.digital/images/329399/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    width: 1343,
-    height: 895,
-    allowVerticalEffect: false,
-    allowPreview: true,
-}
-
 export const RawImageEnlarge = Template.bind({})
 RawImageEnlarge.args = {
     alt: 'Fallback alt text here',
