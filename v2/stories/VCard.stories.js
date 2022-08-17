@@ -371,6 +371,19 @@ ResponsiveAlways.args = {
     bp: 'max',
 }
 
+export const WithCaption = Template.bind({})
+WithCaption.args = {
+    image: 'https://cms.demo.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    maxWidth: 1440,
+    maxHeight: 2560,
+    responsive: true,
+    caption: 'This is a sample caption text to show up in the image',
+    bp: 'max',
+}
+
 export const CustomImageRatio = Template.bind({})
 CustomImageRatio.args = {
     image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',

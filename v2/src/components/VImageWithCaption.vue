@@ -17,6 +17,10 @@ const props = defineProps({
     default: null,
     type: String,
   },
+  captionKeepOnTop: {
+    type: Boolean,
+    default: false,
+  },
   credit: {
     default: null,
     type: String,
@@ -236,6 +240,7 @@ const getCurrentDimensions = computed(() => {
           <div
             v-if="caption && captionVisible"
             class="image-with-caption-caption"
+            :class="[{ 'keep-on-top': props.captionKeepOnTop }]"
           >
             <p>{{ caption }}</p>
           </div>
@@ -320,7 +325,7 @@ const getCurrentDimensions = computed(() => {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  padding: spacingXY(4, 2);
+  padding: spacingTRBL(4, 10, 4, 4);
   overflow-y: auto;
   display: block;
   max-height: 100%;
@@ -328,6 +333,14 @@ const getCurrentDimensions = computed(() => {
   pointer-events: none;
   p {
     color: var(--white);
+  }
+  @include media('<md') {
+    position: relative;
+    background: rgba(var(--primary-dark-color-rgb), 1);
+  }
+  &.keep-on-top {
+    position: absolute;
+    background: rgba(var(--primary-dark-color-rgb), 0.7);
   }
 }
 

@@ -81,6 +81,19 @@ Caption.args = {
     width: 600,
     height: 400,
 }
+export const CaptionKeepOnTop = Template.bind({})
+CaptionKeepOnTop.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    caption: 'Caption Text Here',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    width: 600,
+    height: 400,
+    captionKeepOnTop: true,
+}
 
 export const Enlarge = Template.bind({})
 Enlarge.args = {
