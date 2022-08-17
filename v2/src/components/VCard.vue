@@ -62,6 +62,14 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  caption: {
+    type: String,
+    default: null,
+  },
+  captionKeepOnTop: {
+    type: Boolean,
+    default: false,
+  },
   maxHeight: {
     type: Number,
     default: Infinity,
@@ -171,6 +179,8 @@ const hasDetails = computed(() => {
           :quality="quality"
           :flat-quality="flatQuality"
           :sizes="sizes"
+          :caption="caption"
+          :caption-keep-on-top="captionKeepOnTop"
           role="presentation"
         />
         <!-- desktop, uses width and height props -->
@@ -187,6 +197,8 @@ const hasDetails = computed(() => {
           :quality="quality"
           :flat-quality="flatQuality"
           :sizes="sizes"
+          :caption="caption"
+          :caption-keep-on-top="captionKeepOnTop"
           role="presentation"
           :image-url="titleLink"
         />
