@@ -170,12 +170,15 @@ const srcset = computed(() => {
           width = props.maxWidth
           lastImage = true
         }
-
+        // if we are on the last size in the arraym set lastImage to true
+        if (props.sizes.length - 1 === props.sizes.indexOf(size)) {
+          lastImage = true
+        }
         const url = template
           .replace(props.widthToken, width)
           .replace(props.heightToken, height)
           .replace(props.qualityToken, calcQuality(props.quality, size))
-        srcset += `${url} ${size}x${size <= props.sizes.length ? ',' : ''} `
+        srcset += `${url} ${size}x${!lastImage ? ',' : ''} `
       }
     }
     return srcset
