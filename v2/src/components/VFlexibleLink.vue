@@ -76,7 +76,7 @@ const isAnchor = computed(() => {
   </nuxt-link>
 </template>
 <style lang="scss">
-.flexible-link:not(.raw) {
+.flexible-link:not(.raw):not(.null) {
   color: var(--link-button-color);
   transition: all var(--transition-duration);
   * {
