@@ -43,6 +43,39 @@ NoText.args = {
     width: 600,
     height: 400,
 }
+export const JustTitle = Template.bind({})
+JustTitle.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    title: 'Title Text Here',
+}
+export const JustDescription = Template.bind({})
+JustDescription.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    description: 'Description Text Here',
+}
+export const JustCredit = Template.bind({})
+JustCredit.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    credit: 'Credit Text Here',
+}
+export const JustCreditAndUrl = Template.bind({})
+JustCreditAndUrl.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    width: 600,
+    height: 400,
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+}
 
 export const quality = Template.bind({})
 quality.args = {

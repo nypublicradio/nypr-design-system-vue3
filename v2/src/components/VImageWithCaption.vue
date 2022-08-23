@@ -263,27 +263,20 @@ const getCurrentDimensions = computed(() => {
         ></Button>
       </div>
     </div>
-    <figcaption v-if="credit || (caption && gothamistVariation)" class="mt-1">
-      <!--       <gothamist-arrow v-if="caption && gothamistVariation" />
-      <div class="image-with-caption-credit">
-        <p v-if="caption && gothamistVariation" class="gothamist-caption">{{ caption }}</p>
-      </div>-->
+    <figcaption class="mt-1">
       <h4 v-if="title" class="image-with-caption-title">{{ title }}</h4>
-      <p v-if="description" class="footer image-with-caption-description">
+      <p v-if="description" class="image-with-caption-description">
         {{ description }}
       </p>
       <v-flexible-link
-        v-if="creditUrl"
+        v-if="creditUrl || credit"
         :to="creditUrl"
         rel="noopener"
         class="image-with-caption-credit-link"
-        @click="emit('credit-click', creditUrl)"
+        @click="creditUrl ? emit('credit-click', creditUrl) : null"
       >
-        <span class="footer">{{ credit }}</span>
+        {{ credit }}
       </v-flexible-link>
-      <span v-else class="image-with-caption-credit-link footer">{{
-        credit
-      }}</span>
     </figcaption>
   </figure>
 </template>
