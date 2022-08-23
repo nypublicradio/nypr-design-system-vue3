@@ -135,6 +135,18 @@ const computedSrc = computed(() => {
         .replace(props.qualityToken, props.quality)
     : undefined
 })
+
+const computedEnlargeSrc = computed(() => {
+  const template = props.src
+
+  return template
+    ? template
+        .replace(props.widthToken, props.maxWidth)
+        .replace(props.heightToken, props.maxHeight)
+        .replace(props.qualityToken, 80)
+    : undefined
+})
+
 const computedSrcBg = computed(() => {
   const template = props.src
   return template
@@ -210,10 +222,7 @@ const enlarge = () => {
       props.imageEnlarged ? props.imageEnlarged : props.src
     )
   } else {
-    const sizeList = srcset.value.split(',')
-    const lastSize = sizeList[sizeList.length - 1]
-    const biggestSize = lastSize.slice(0, -3)
-    img[0].setAttribute('src', biggestSize)
+    img[0].setAttribute('src', computedEnlargeSrc.value)
   }
 }
 
