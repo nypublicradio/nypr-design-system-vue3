@@ -52,12 +52,12 @@ FlatQuality.args = {
     flatQuality: true,
 }
 
-export const Enlarge = Template.bind({})
-Enlarge.args = {
+export const EnlargeMustSpecifyMaxwidthAndMaxheight = Template.bind({})
+EnlargeMustSpecifyMaxwidthAndMaxheight.args = {
     alt: 'Fallback alt text here',
     src: 'https://cms.prod.nypr.digital/images/329407/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    width: 1600,
-    height: 1066,
+    width: 640,
+    height: 480,
     maxWidth: 4517,
     maxHeight: 3011,
     allowVerticalEffect: false,
@@ -68,6 +68,17 @@ export const RawImageEnlarge = Template.bind({})
 RawImageEnlarge.args = {
     alt: 'Fallback alt text here',
     src: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
+    width: 600,
+    height: 400,
+    allowVerticalEffect: false,
+    allowPreview: true,
+}
+
+export const RawImageEnlargeSpecific = Template.bind({})
+RawImageEnlargeSpecific.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://images.ctfassets.net/pjshm78m9jt4/6LU8pkJjaDEZBnPdOwgAY5/df1dc98c5cb25c8efe0cc70e38fa7040/CATS_010721_PA.jpg',
+    imageEnlarged: 'https://www.thesprucepets.com/thmb/RifAcVgWFh-nbe0HXP4ugdUX7kA=/2119x1415/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-1130711967-fd98e23781c54512b9b8353d64bd08cb.jpg',
     width: 600,
     height: 400,
     allowVerticalEffect: false,
