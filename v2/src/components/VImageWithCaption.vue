@@ -271,6 +271,7 @@ const getCurrentDimensions = computed(() => {
       <v-flexible-link
         v-if="creditUrl || credit"
         :to="creditUrl"
+        :raw="creditUrl ? false : true"
         rel="noopener"
         class="image-with-caption-credit-link"
         @click="creditUrl ? emit('credit-click', creditUrl) : null"
