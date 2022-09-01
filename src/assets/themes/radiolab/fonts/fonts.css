@@ -1,3 +1,7 @@
+/* load this in the nuxt-config 
+    css:['@nypublicradio/nypr-design-system-vue3/src/assets/themes/radiolab/fonts/fonts.css',] 
+*/
+
 /* @font-face {
     font-family: "Matter";
     src: url("Matter-Bold.woff2") format("woff2"),
