@@ -9,7 +9,7 @@ module.exports = {
   staticDirs: ['../assets-shared'],
   webpackFinal: async (config, { configType }) => {
     const envTheme = process.env.STORYBOOK_THEME
-    config.module.rules.push({
+    await config.module.rules.push({
       test: /\.scss$/,
       use: [
         // 'style-loader',
