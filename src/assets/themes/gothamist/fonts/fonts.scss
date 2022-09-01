@@ -1,51 +1,50 @@
 @font-face {
     font-family: 'Haffer SQ';
-    src: local('HafferSQ-Regular.woff2') format('woff2'), local('HafferSQ-Regular.woff') format('woff'),
-        local('HafferSQ-Regular.ttf') format('truetype');
+    src: url('HafferSQ-Regular.woff2') format('woff2'), url('HafferSQ-Regular.woff') format('woff'),
+        url('HafferSQ-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Haffer SQ';
-    src: local('HafferSQ-RegularItalic.woff2') format('woff2'), local('HafferSQ-RegularItalic.woff') format('woff'),
-        local('HafferSQ-RegularItalic.ttf') format('truetype');
+    src: url('HafferSQ-RegularItalic.woff2') format('woff2'), url('HafferSQ-RegularItalic.woff') format('woff'),
+        url('HafferSQ-RegularItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
 @font-face {
     font-family: 'Haffer SQ';
-    src: local('HafferSQ-Medium.woff2') format('woff2'), local('HafferSQ-Medium.woff') format('woff'),
-        local('HafferSQ-Medium.ttf') format('truetype');
+    src: url('HafferSQ-Medium.woff2') format('woff2'), url('HafferSQ-Medium.woff') format('woff'),
+        url('HafferSQ-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
 }
 @font-face {
     font-family: 'Haffer SQ';
-    src: local('HafferSQ-SemiBold.woff2') format('woff2'), local('HafferSQ-SemiBold.woff') format('woff'),
-        local('HafferSQ-SemiBold.ttf') format('truetype');
+    src: url('HafferSQ-SemiBold.woff2') format('woff2'), url('HafferSQ-SemiBold.woff') format('woff'),
+        url('HafferSQ-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
 }
 
 @font-face {
     font-family: 'Reckless Neue';
-    src: local('RecklessNeue-Regular.woff2') format('woff2'), local('RecklessNeue-Regular.woff') format('woff'),
-        local('RecklessNeue-Regular.ttf') format('truetype');
+    src: url('RecklessNeue-Regular.woff2') format('woff2'), url('RecklessNeue-Regular.woff') format('woff'),
+        url('RecklessNeue-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'Reckless Neue';
-    src: local('RecklessNeue-RegularItalic.woff2') format('woff2'),
-        local('RecklessNeue-RegularItalic.woff') format('woff'),
-        local('RecklessNeue-RegularItalic.ttf') format('truetype');
+    src: url('RecklessNeue-RegularItalic.woff2') format('woff2'), url('RecklessNeue-RegularItalic.woff') format('woff'),
+        url('RecklessNeue-RegularItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
 }
 @font-face {
     font-family: 'Reckless Neue';
-    src: local('RecklessNeue-Medium.woff2') format('woff2'), local('RecklessNeue-Medium.woff') format('woff'),
-        local('RecklessNeue-Medium.ttf') format('truetype');
+    src: url('RecklessNeue-Medium.woff2') format('woff2'), url('RecklessNeue-Medium.woff') format('woff'),
+        url('RecklessNeue-Medium.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
 }
