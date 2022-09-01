@@ -9,7 +9,7 @@ module.exports = {
   staticDirs: ['../assets-shared'],
   webpackFinal: async (config, { configType }) => {
     const envTheme = process.env.STORYBOOK_THEME
-    config.module.rules.push({
+    await config.module.rules.push({
       test: /\.scss$/,
       use: [
         // 'style-loader',
@@ -18,7 +18,7 @@ module.exports = {
         {
           loader: 'sass-loader',
           options: {
-            additionalData: `${process.env.STORYBOOK_EDIT === 'true' ? `@import "~/src/assets/themes/${envTheme}/_theme.scss";` : `@import "~/src/assets/themes/${envTheme}/${envTheme}.min.css"; @import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`} @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css";`,
+            additionalData: `${process.env.STORYBOOK_EDIT === 'true' ? `@import "~/src/assets/themes/${envTheme}/_theme.scss";` : `@import "~/src/assets/themes/${envTheme}/${envTheme}.min.css"; @import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`} @import "~/src/assets/themes/${envTheme}/fonts/fonts.css"; @import "primevue/resources/primevue.min.css"; @import "primeicons/primeicons.css";`,
           },
         },
       ],
