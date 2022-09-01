@@ -56,17 +56,17 @@
     font-style: italic;
 } */
 
-// @font-face {
-//     font-family: 'Matter';
-//     src: url('Matter-BoldItalic.eot');
-//     src: url('Matter Bold Italic'), url('Matter-BoldItalic'),
-//         url('Matter-BoldItalic.eot?#iefix') format('embedded-opentype'),
-//         url('Matter-BoldItalic.woff2') format('woff2'),
-//         url('Matter-BoldItalic.woff') format('woff'),
-//         url('Matter-BoldItalic.ttf') format('truetype');
-//     font-weight: bold;
-//     font-style: italic;
-// }
+/* @font-face {
+    font-family: 'Matter';
+    src: url('Matter-BoldItalic.eot');
+    src: url('Matter Bold Italic'), url('Matter-BoldItalic'),
+        url('Matter-BoldItalic.eot?#iefix') format('embedded-opentype'),
+        url('Matter-BoldItalic.woff2') format('woff2'),
+        url('Matter-BoldItalic.woff') format('woff'),
+        url('Matter-BoldItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+} */
 
 @font-face {
     font-family: 'Matter';
