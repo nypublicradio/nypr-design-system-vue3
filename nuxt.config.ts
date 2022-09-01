@@ -6,7 +6,7 @@ const envTheme = process.env.VITE_VUE_APP_THEME
 export default defineNuxtConfig({
   css: [
     '~/src/assets/library/primeflex.min.css',
-    `~/src/assets/themes/${envTheme}/${envTheme}/fonts/fonts.css`,
+    `~/src/assets/themes/${envTheme}/fonts/fonts.css`,
     `~/src/assets/themes/${envTheme}/${envTheme}.min.css`,
     'primevue/resources/primevue.min.css',
     'primeicons/primeicons.css'

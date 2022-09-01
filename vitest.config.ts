@@ -18,7 +18,7 @@ export default ({ mode }) => {
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: `@import "src/assets/themes/${envTheme}/variables.scss"; @import "src/assets/themes/${envTheme}/_mixins.scss";`,
+          additionalData: `@import "src/assets/themes/${envTheme}/fonts/fonts.css"; @import "src/assets/themes/${envTheme}/variables.scss"; @import "src/assets/themes/${envTheme}/_mixins.scss";`,
         },
       },
     },
