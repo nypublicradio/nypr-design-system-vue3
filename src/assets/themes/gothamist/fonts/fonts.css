@@ -7,6 +7,7 @@
         url('HafferSQ-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Haffer SQ';
@@ -14,6 +15,7 @@
         url('HafferSQ-RegularItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Haffer SQ';
@@ -21,6 +23,7 @@
         url('HafferSQ-Medium.ttf') format('truetype');
     font-weight: 500;
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Haffer SQ';
@@ -28,6 +31,7 @@
         url('HafferSQ-SemiBold.ttf') format('truetype');
     font-weight: 600;
     font-style: normal;
+    font-display: swap;
 }
 
 @font-face {
@@ -36,6 +40,7 @@
         url('RecklessNeue-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Reckless Neue';
@@ -43,6 +48,7 @@
         url('RecklessNeue-RegularItalic.ttf') format('truetype');
     font-weight: normal;
     font-style: italic;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Reckless Neue';
@@ -50,4 +56,5 @@
         url('RecklessNeue-Medium.ttf') format('truetype');
     font-weight: bold;
     font-style: normal;
+    font-display: swap;
 }
