@@ -116,7 +116,7 @@ const props = defineProps({
   /** * jpg compression quality */
   quality: {
     type: Number,
-    default: 85,
+    default: 70,
   },
   /** * bool to NOT use the variable quality calc based on sizes */
   flatQuality: {
@@ -126,7 +126,7 @@ const props = defineProps({
   sizes: {
     type: Array,
     default() {
-      return [2, 3, 4]
+      return [2, 3]
     },
   },
 })
