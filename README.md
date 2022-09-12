@@ -95,16 +95,6 @@ Add a new import for the new theme
 import './assets/themes/newthemename/_theme.scss'
 comments the other theme imports
 
-NOTE: when getting close to launch, you can remove all the unused PrimeVue components scss by commenting them out in this file 
-```
-/src/assets/designer/_components.scss
-```
-
-To know what PrimeVue components the site is using, refer to this file in the project
-```
-/plugins/primevue.js
-```
-
 ## Updating the new theme
 Make all variable changes to the `nypr-design-system-vue3/src/assets/themes/newthemename/variables.scss` file.
 Put all your colors into the $colors sass object (this will export a gradient for each color that you can use in your project where the "-500" version is the selected color. Lower values are lighter, higher numbers are darker. eg. --blue-100,--blue-200,--blue-300,--blue-400,--blue-500,--blue-600,--blue-700,--blue-800,--blue-900).
