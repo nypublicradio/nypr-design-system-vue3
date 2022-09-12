@@ -4,6 +4,13 @@
     --red: #{map-get($colors, 'red')};
     --soybean: #{map-get($colors, 'soybean')};
     --soybean200: #{map-get($colors, 'lightsoybean')};
+    --soybeanHover: #{map-get($colors, 'soybeanhover')};
+
+    --img-width: #{$img-width};
+    --img-height: #{$img-height};
+    --img-width-small: #{$img-width-small};
+    --img-width-mobile: #{$img-width-mobile};
+    --img-height-mobile: #{$img-height-mobile};
 
     --primary-color: #{$primaryColor};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
@@ -193,6 +200,9 @@
     --surface-border: #{$surfaceBorder};
     --surface-hover: #{$surfaceHover};
 
+    --focus-outline: #{$focusOutline};
+    --focus-outline-offset: #{$focusOutlineOffset};
+    --focus-shadow: #{$focusShadow};
     --focus-ring: #{$focusShadow};
     --tab-padding: #{$tagPadding};
     --badge-bg: #{$badgeBg};
