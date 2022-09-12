@@ -11,8 +11,6 @@
 // added 9/12/2022
 /* Customizations to the designer theme should be defined here */
 
-$mobileBreakpoint: '<lg';
-
 /* Extra Link Styles */
 a {
     color: var(--link-color);
@@ -300,11 +298,7 @@ label,
 }
 
 /* VCard */
-$img-width: 318px;
-$img-height: 212px;
-$img-width-small: 158px;
-$img-width-mobile: 106px;
-$img-height-mobile: 106px;
+
 .image-with-caption {
     .image-with-caption-description {
         @include font-config($type-paragraph3);

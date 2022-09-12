@@ -1,5 +1,12 @@
 @import './breakpoints';
 
+$mobileBreakpoint: '<lg';
+$img-width: 318px;
+$img-height: 212px;
+$img-width-small: 158px;
+$img-width-mobile: 106px;
+$img-height-mobile: 106px;
+
 // scale-color example
 // $newColor: scale-color($existingColor, $saturation: 30%, $lightness: -30%, $alpha: -90%) !default;
 // can use any of the following $red, $green, $blue, $saturation, $lightness, $whiteness, $blackness, $alpha
