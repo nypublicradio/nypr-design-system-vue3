@@ -3,32 +3,28 @@
 */
 @font-face {
     font-family: 'Haffer SQ';
-    src: url('HafferSQ-Regular.woff2') format('woff2'), url('HafferSQ-Regular.woff') format('woff'),
-        url('HafferSQ-Regular.ttf') format('truetype');
+    src: url('HafferSQ-Regular.woff2') format('woff2'), url('HafferSQ-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Haffer SQ';
-    src: url('HafferSQ-RegularItalic.woff2') format('woff2'), url('HafferSQ-RegularItalic.woff') format('woff'),
-        url('HafferSQ-RegularItalic.ttf') format('truetype');
+    src: url('HafferSQ-RegularItalic.woff2') format('woff2'), url('HafferSQ-RegularItalic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
 }
 @font-face {
     font-family: 'Haffer SQ';
-    src: url('HafferSQ-Medium.woff2') format('woff2'), url('HafferSQ-Medium.woff') format('woff'),
-        url('HafferSQ-Medium.ttf') format('truetype');
+    src: url('HafferSQ-Medium.woff2') format('woff2'), url('HafferSQ-Medium.woff') format('woff');
     font-weight: 500;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Haffer SQ';
-    src: url('HafferSQ-SemiBold.woff2') format('woff2'), url('HafferSQ-SemiBold.woff') format('woff'),
-        url('HafferSQ-SemiBold.ttf') format('truetype');
+    src: url('HafferSQ-SemiBold.woff2') format('woff2'), url('HafferSQ-SemiBold.woff') format('woff');
     font-weight: 600;
     font-style: normal;
     font-display: swap;
@@ -36,24 +32,21 @@
 
 @font-face {
     font-family: 'Reckless Neue';
-    src: url('RecklessNeue-Regular.woff2') format('woff2'), url('RecklessNeue-Regular.woff') format('woff'),
-        url('RecklessNeue-Regular.ttf') format('truetype');
+    src: url('RecklessNeue-Regular.woff2') format('woff2'), url('RecklessNeue-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: 'Reckless Neue';
-    src: url('RecklessNeue-RegularItalic.woff2') format('woff2'), url('RecklessNeue-RegularItalic.woff') format('woff'),
-        url('RecklessNeue-RegularItalic.ttf') format('truetype');
+    src: url('RecklessNeue-RegularItalic.woff2') format('woff2'), url('RecklessNeue-RegularItalic.woff') format('woff');
     font-weight: normal;
     font-style: italic;
     font-display: swap;
 }
 @font-face {
     font-family: 'Reckless Neue';
-    src: url('RecklessNeue-Medium.woff2') format('woff2'), url('RecklessNeue-Medium.woff') format('woff'),
-        url('RecklessNeue-Medium.ttf') format('truetype');
+    src: url('RecklessNeue-Medium.woff2') format('woff2'), url('RecklessNeue-Medium.woff') format('woff');
     font-weight: bold;
     font-style: normal;
     font-display: swap;
