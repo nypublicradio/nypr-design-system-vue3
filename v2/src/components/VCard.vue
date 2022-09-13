@@ -8,7 +8,7 @@ import VImageWithCaption from './VImageWithCaption.vue'
 const props = defineProps({
   alt: {
     type: String,
-    default: null,
+    default: '',
   },
   loading: {
     type: String,
@@ -266,7 +266,7 @@ const hasDetails = computed(() => {
   .card-details {
     align-self: flex-start;
     flex: 1;
-    overflow: hidden;
+    //  overflow: hidden;
     .card-title {
       line-height: var(--font-size-8);
       .v-tag {

@@ -6,7 +6,7 @@ import Button from 'primevue/button'
 
 const props = defineProps({
   altText: {
-    default: null,
+    default: "",
     type: String,
   },
   loading: {
