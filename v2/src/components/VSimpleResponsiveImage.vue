@@ -9,7 +9,7 @@ const props = defineProps({
   /* alt text prop */
   alt: {
     type: String,
-    default: null,
+    default: "",
   },
   /* loading image prop */
   loading: {
