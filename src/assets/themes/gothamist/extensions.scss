@@ -569,6 +569,18 @@ label,
         color: var(--black) !important;
     }
 }
+//enlarge buttons margin adjustment for smaller phones
+.p-image-mask .p-image-toolbar .p-image-action {
+    @include media('<395px') {
+        margin-right: 1.75rem;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+    @include media('<xs') {
+        margin-right: 0.9rem;
+    }
+}
 
 /* Streamfield */
 .streamfield-paragraph ul,
