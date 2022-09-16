@@ -106,7 +106,8 @@ const isAnchor = computed(() => {
 .flexible-link.raw {
   color: inherit;
   text-decoration: none;
-  &:hover {
+  &:hover,
+  *:hover {
     text-decoration: v-bind(rawHover);
   }
 }

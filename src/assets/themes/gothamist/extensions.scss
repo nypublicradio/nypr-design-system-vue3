@@ -711,13 +711,14 @@ ol ol li {
 
 .tag-large {
     text-transform: uppercase;
-    padding: 0 0.75rem;
+    padding: 0.2rem 1.25rem;
     font-size: var(--font-size-10);
     line-height: var(--font-size-10);
     color: var(--soybean);
     border: solid 1px var(--soybean);
     border-radius: var(--tag-border-radius);
-    white-space: nowrap;
+    white-space: normal;
+    text-align: center;
     @include media('>lg') {
         padding: 0 1.75rem;
         font-size: var(--font-size-16);
