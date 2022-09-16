@@ -2,6 +2,7 @@
 import VShareTools from '/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '/v2/src/components/VShareToolsItem.vue'
 import VFlexibleLink from '/v2/src/components/VFlexibleLink.vue'
+import VCard from '~~/v2/src/components/VCard.vue'
 import Home from '/src/components/Home.vue'
 import { onBeforeMount, ref } from 'vue'
 </script>
