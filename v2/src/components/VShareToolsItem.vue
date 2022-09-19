@@ -155,15 +155,14 @@ const ariaLabel = computed(() => {
 })
 
 const share = () => {
-  if (props.service === 'email') {
-    window.open(`${shareUrl.value}`, '_blank')
-
-    return
-  }
   if (!props.service) {
     return
   }
   emit('share', props.service)
+  if (props.service === 'email') {
+    window.open(`${shareUrl.value}`, '_blank')
+    return
+  }
 
   // get the position of the popup window
   function getPopupPosition() {
