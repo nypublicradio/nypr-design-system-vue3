@@ -50,6 +50,7 @@ const TemplateShare = (args) => ({
             <v-share-tools-item service="twitter" username="WNYC" action="share" url="https://www.gothamist.com" />
             <v-share-tools-item service="instagram" username="WNYC" action="share" url="https://www.gothamist.com" />
             <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" action="share" url="https://www.gothamist.com" />
+            <v-share-tools-item service="email"  :share-parameters="{ body: 'Title of artice' + ' - %URL%' }" action="share" url="https://www.gothamist.com" />
         </v-share-tools>
     `,
 })
