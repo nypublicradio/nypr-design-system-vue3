@@ -218,7 +218,7 @@ const getCurrentDimensions = computed(() => {
           :to="imageUrl && !allowPreview ? imageUrl : null"
           target="_blank"
           :aria-hidden="isDecorative ? true : false"
-          :tabIndex="isDecorative ? -1 : 0"
+          :tab-index="isDecorative ? -1 : 0"
           @click="
             imageUrl && !allowPreview ? emit('image-click', imageUrl) : null
           "
@@ -250,6 +250,7 @@ const getCurrentDimensions = computed(() => {
             v-if="caption && captionVisible"
             class="image-with-caption-caption"
             :class="[{ 'keep-on-top': props.captionKeepOnTop }]"
+            aria-live="polite"
           >
             <p>{{ caption }}</p>
           </div>
@@ -262,11 +263,13 @@ const getCurrentDimensions = computed(() => {
       >
         <Button
           v-if="captionVisible"
+          aria-label="Hide Caption"
           icon="pi pi-times p-button-icon"
           class="p-button-sm p-button-secondary p-button-text image-with-caption-icons-close"
         ></Button>
         <Button
           v-else
+          aria-label="Show Caption"
           icon="pi pi-info"
           class="p-button-sm image-with-caption-icons-info"
         ></Button>
