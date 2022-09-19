@@ -44,10 +44,11 @@ import { onBeforeMount, ref } from 'vue'
                   <h5>Cards</h5>
                   <v-card
                     image="https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/"
-                    title:="Title with some <em>HTML</em>"
+                    title="Title with some <em>HTML</em>"
                     titleLink="https://www.google.com"
                     subtitle="Subtitle"
                     :width="175"
+                    :tags="[{name: 'tag', slug: 'tag'}]"
                     :height="175"
                     :maxWidth="1440"
                     :maxHeight="2560">
