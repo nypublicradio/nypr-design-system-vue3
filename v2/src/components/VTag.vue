@@ -21,18 +21,13 @@ const props = defineProps({
 <template>
   <span class="v-tag">
     <v-flexible-link
-      :to="props.slug"
-      :class="props.slug ? '' : 'disabled'"
-      class="raw"
+      :to="slug"
+      :class="slug ? '' : 'disabled'"
+      @click="slug ? emit('tagClick', slug) : null"
     >
-      <Button
-        :class="props.name"
-        :label="props.name"
-        :style="
-          props.radius !== null ? `border-radius: ${props.radius}px;` : ''
-        "
-        @click="props.slug ? emit('tagClick', props.slug) : null"
-      ></Button>
+      <div :class="`p-button p-button-rounded p-button-outlined ${name}`">
+        <span class="p-button-label">{{name}}</span>
+      </div>
     </v-flexible-link>
   </span>
 </template>
@@ -45,30 +40,29 @@ const props = defineProps({
     &.disabled {
       pointer-events: none;
     }
+    &:hover .p-button,
+    &:active .p-button {
+      background: var(--tag-hover-bg);
+      text-decoration: none !important;
+      .p-button-label {
+        color: var(--tag-hover-text-color) !important;
+        text-decoration: none !important;
+      }
+    }
     .p-button {
       padding: var(--tag-padding);
       border: var(--tag-border);
       border-radius: var(--tag-border-radius);
-      text-decoration: none;
+      text-decoration: none !important;
       vertical-align: middle;
       background: var(--tag-bg);
       color: var(--tag-text-color);
+      white-space: nowrap;
       .p-button-label {
         font-weight: var(--tag-font-weight);
         font-size: var(--tag-font-size);
         letter-spacing: var(--tag-letter-spacing);
         text-transform: uppercase;
-      }
-      &:link,
-      &:visited,
-      &:hover,
-      &:active {
-        background: var(--tag-hover-bg);
-        text-decoration: none !important;
-        .p-button-label {
-          color: var(--tag-hover-text-color) !important;
-          text-decoration: none !important;
-        }
       }
     }
   }

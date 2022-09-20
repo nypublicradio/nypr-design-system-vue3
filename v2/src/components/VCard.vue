@@ -167,7 +167,8 @@ const hasDetails = computed(() => {
           class="card-image w-full"
           :class="responsive ? `${bp}:hidden ${bp}:w-max` : 'hidden'"
           :image="image"
-          :alt-text="alt"
+          alt-text=""
+          is-decorative
           :loading="loading"
           :image-url="titleLink"
           :width="width ? Math.round(width * props.mobileImageScale) : null"
@@ -188,7 +189,8 @@ const hasDetails = computed(() => {
           class="card-image w-full"
           :class="{ [`hidden ${bp}:w-max ${bp}:block`]: responsive }"
           :image="image"
-          :alt-text="alt"
+          alt-text=""
+          is-decorative
           :loading="loading"
           :image-url="titleLink"
           :width="width ? Math.round(width * props.mobileImageScale) : null"

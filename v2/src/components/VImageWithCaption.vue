@@ -138,6 +138,14 @@ const props = defineProps({
       return [2, 3]
     },
   },
+  /** * Use to indicate decorative images with a link, where the exact same link is repeated in nearby text.
+  e.g. A thumbnail that links to an article next to a title that links to the same article.
+  WARNING: This will make the link unreachable by assistive software so only use this for truly redundant links.
+  */
+  isDecorative: {
+    type: Boolean,
+    default: false
+  }
 })
 
 const emit = defineEmits([
@@ -209,7 +217,8 @@ const getCurrentDimensions = computed(() => {
           :class="!imageUrl && !allowPreview ? 'disabled' : ''"
           :to="imageUrl && !allowPreview ? imageUrl : null"
           target="_blank"
-          aria-hidden="true"
+          :aria-hidden="isDecorative ? true : false"
+          :tab-index="isDecorative ? -1 : 0"
           @click="
             imageUrl && !allowPreview ? emit('image-click', imageUrl) : null
           "
@@ -217,7 +226,7 @@ const getCurrentDimensions = computed(() => {
           <v-simple-responsive-image
             v-if="(image && thisWidth) || width"
             :src="image"
-            :alt="altText"
+            :alt="isDecorative ? '' : altText"
             :loading="loading"
             :width="width ? width : getCurrentDimensions.width"
             :height="height ? height : getCurrentDimensions.height"
@@ -241,6 +250,7 @@ const getCurrentDimensions = computed(() => {
             v-if="caption && captionVisible"
             class="image-with-caption-caption"
             :class="[{ 'keep-on-top': props.captionKeepOnTop }]"
+            aria-live="polite"
           >
             <p>{{ caption }}</p>
           </div>
@@ -253,11 +263,13 @@ const getCurrentDimensions = computed(() => {
       >
         <Button
           v-if="captionVisible"
+          aria-label="Hide Caption"
           icon="pi pi-times p-button-icon"
           class="p-button-sm p-button-secondary p-button-text image-with-caption-icons-close"
         ></Button>
         <Button
           v-else
+          aria-label="Show Caption"
           icon="pi pi-info"
           class="p-button-sm image-with-caption-icons-info"
         ></Button>

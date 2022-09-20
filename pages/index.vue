@@ -2,6 +2,8 @@
 import VShareTools from '/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '/v2/src/components/VShareToolsItem.vue'
 import VFlexibleLink from '/v2/src/components/VFlexibleLink.vue'
+import VCard from '/v2/src/components/VCard.vue'
+import VImageWithCaption from '/v2/src/components/VImageWithCaption.vue'
 import Home from '/src/components/Home.vue'
 import { onBeforeMount, ref } from 'vue'
 </script>
@@ -18,7 +20,6 @@ import { onBeforeMount, ref } from 'vue'
                 ><a href="#darkmode">jump to DARK MODE</a></span
               >
             </h1>
-
             <v-share-tools>
               <v-share-tools-item
                 service="site"
@@ -37,6 +38,40 @@ import { onBeforeMount, ref } from 'vue'
             >
             <br />
             <br />
+
+            <div class="grid">
+              <div class="col-12 p-fluid">
+                <div class="card">
+                  <h5>Card</h5>
+                  <v-card
+                    image="https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/"
+                    title="Title with some <em>HTML</em>"
+                    title-link="https://www.google.com"
+                    subtitle="Subtitle"
+                    :width="175"
+                    :tags="[{name: 'tag', slug: 'tag'}]"
+                    :height="175"
+                    :max-width="1440"
+                    :max-height="2560">
+                    <a href="https://primefaces.org/primevue/showcase/#/icons">Get icons here</a>
+                  </v-card>
+                </div>
+                <div class="card">
+                  <h5>Image With Caption</h5>
+                  <v-image-with-caption
+                    alt-text="Fallback alt text here"
+                    image="https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/"
+                    caption="Caption Here"
+                    credit="Credit Text Here"
+                    credit-url="https://www.Credit-URL-Here.com"
+                    title='Title Text Here'
+                    description='Description Text Here'
+                    :width="600"
+                    :height="400"
+                  />
+                </div>
+              </div>
+            </div>
             <client-only>
               <home />
             </client-only>
