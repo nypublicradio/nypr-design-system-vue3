@@ -218,7 +218,7 @@ const getCurrentDimensions = computed(() => {
           :to="imageUrl && !allowPreview ? imageUrl : null"
           target="_blank"
           :aria-hidden="isDecorative ? true : false"
-          :tab-index="isDecorative ? -1 : 0"
+          :tabindex="isDecorative ? -1 : 0"
           @click="
             imageUrl && !allowPreview ? emit('image-click', imageUrl) : null
           "
