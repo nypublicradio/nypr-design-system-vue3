@@ -23,7 +23,7 @@ const props = defineProps({
     <v-flexible-link
       :to="slug"
       :class="slug ? '' : 'disabled'"
-      @click="slug ? emit('tagClick', slug) : null"
+      @click="emit('tagClick', tag)"
     >
       <div :class="`p-button p-button-rounded p-button-outlined ${name}`">
         <span class="p-button-label">{{name}}</span>
