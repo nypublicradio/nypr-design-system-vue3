@@ -10,11 +10,7 @@ const props = defineProps({
   name: {
     type: String,
     default: null,
-  },
-  radius: {
-    type: Number,
-    default: null,
-  },
+  }
 })
 </script>
 
