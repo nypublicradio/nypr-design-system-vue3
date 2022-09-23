@@ -66,6 +66,7 @@ import { onBeforeMount, ref } from 'vue'
                     credit-url="https://www.Credit-URL-Here.com"
                     title='Title Text Here'
                     description='Description Text Here'
+                    :allow-preview="true"
                     :width="600"
                     :height="400"
                   />
