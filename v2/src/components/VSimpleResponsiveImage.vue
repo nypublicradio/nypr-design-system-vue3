@@ -216,6 +216,10 @@ const calcQuality = (quality, size) => {
 const enlarge = () => {
   loadingEnlargedImage.value = true
   const img = document.getElementsByClassName('p-image-preview')
+  img[0].setAttribute(
+    'alt',
+    props.alt
+  )
   if (rawImage) {
     img[0].setAttribute(
       'src',
@@ -268,6 +272,7 @@ const closeEnlarge = () => {
           <Button
             icon="pi pi-arrows-v"
             class="p-button-sm enlarge-button"
+            aria-label="Enlarge Image"
           ></Button>
         </template>
       </Image>
