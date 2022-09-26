@@ -160,7 +160,7 @@ const share = () => {
   }
   emit('share', props.service)
   if (props.service === 'email') {
-    window.open(`${shareUrl.value}`, '_blank')
+    window.open(`${shareUrl.value}`, '_self')
     return
   }
 
