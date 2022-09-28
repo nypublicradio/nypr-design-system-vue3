@@ -459,6 +459,9 @@ label,
         @include media(#{$mobileBreakpoint}) {
             width: $img-width-mobile !important;
         }
+        @include media('<xs') {
+            width: $img-width-xs !important;
+        }
     }
     .card-details .card-title,
     .card-details .card-title .h2 {
