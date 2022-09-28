@@ -312,9 +312,6 @@ label,
     @include media(#{$mobileBreakpoint}) {
         width: $img-width-mobile !important;
     }
-    @include media('<xs') {
-        width: $img-width-xs !important;
-    }
 }
 .v-card {
     gap: 1.5rem !important;
@@ -431,7 +428,11 @@ label,
         line-height: 21px;
     }
 }
-
+.v-card.mod-horizontal .image-with-caption {
+    @include media('<xs') {
+        width: $img-width-xs !important;
+    }
+}
 .v-card.mod-horizontal {
     @include media(#{$mobileBreakpoint}) {
         .simple-responsive-image-holder {
