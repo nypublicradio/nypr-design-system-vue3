@@ -349,6 +349,8 @@ label,
 .v-card .card-details .card-title .card-title-link {
     width: auto !important;
     display: block !important;
+    word-break: normal !important;
+    overflow-wrap: normal !important;
 }
 .v-card .card-details .card-title .v-tag {
     margin-top: 3.5px;
@@ -360,7 +362,7 @@ label,
 .v-card .card-details .card-title .h2 {
     font-size: var(--font-size-12);
     line-height: var(--font-size-13);
-    word-break: break-word;
+    word-break: normal;
     @include media(#{$mobileBreakpoint}) {
         font-size: var(--font-size-10);
         line-height: var(--font-size-11);
@@ -426,7 +428,11 @@ label,
         line-height: 21px;
     }
 }
-
+.v-card.mod-horizontal .image-with-caption {
+    @include media('<xs') {
+        width: $img-width-xs !important;
+    }
+}
 .v-card.mod-horizontal {
     @include media(#{$mobileBreakpoint}) {
         .simple-responsive-image-holder {
@@ -434,6 +440,14 @@ label,
             .image {
                 width: $img-width-mobile;
                 height: $img-height-mobile;
+            }
+        }
+    }
+    @include media('<xs') {
+        .simple-responsive-image-holder {
+            .image {
+                width: $img-width-xs;
+                height: $img-height-xs;
             }
         }
     }
