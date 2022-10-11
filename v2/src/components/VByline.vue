@@ -15,6 +15,7 @@ const props = defineProps({
   },
 })
 
+// depending on the author object, we return a unique key
 const getUniqueKey = (author) => {
   if(author.id) return author.id
   if(author.name) return author.name.replace(/\s+/g, '-').toLowerCase();
