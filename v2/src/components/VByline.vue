@@ -14,6 +14,14 @@ const props = defineProps({
     default: ' and ',
   },
 })
+
+// depending on the author object, we return a unique key
+const getUniqueKey = (author) => {
+  if(author.id) return author.id
+  if(author.name) return author.name.replace(/\s+/g, '-').toLowerCase();
+  return Math.random().toString(36).substr(2, 9)
+}
+
 </script>
 
 <template>
@@ -22,7 +30,7 @@ const props = defineProps({
     <template v-if="Array.isArray(props.authors)">
       <template
         v-for="(author, index) in props.authors"
-        :key="`author-${index}`"
+        :key="`author-${index}-${getUniqueKey(author)}`"
       >
         <v-byline-unit class="v-byline-unit" :author="author || null" />
         <span v-if="index !== authors.length - 1" class="v-byline-concat">
