@@ -293,7 +293,7 @@ const timelineClick = (e) => {
   emit('timeline-click', e)
   scrubTimelineEnd(e)
 }
-
+// exposed method to handle the minimize toggle
 const toggleMinimize = (e) => {
   emit('is-minimized', e)
   isMinimized.value = e
