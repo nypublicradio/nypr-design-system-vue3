@@ -773,3 +773,113 @@ ol ol li {
         padding: 1rem 1rem 1.5rem 0;
     }
 }
+
+.persistent-player {
+    border-top: 1px solid var(--white);
+    position: fixed;
+    background-color: var(--black);
+
+    .play-button {
+        background-color: var(--red);
+        //border: 1px solid var(--white);
+        border-radius: 50%;
+        min-width: 41px !important;
+        width: 41px;
+        height: 41px;
+        &:hover {
+            border: none;
+            background-color: var(--danger-light-color);
+        }
+        .pi-play {
+            &:before {
+                content: '';
+                border-color: transparent transparent transparent #ffffff;
+                width: 10px;
+                height: 6px;
+                position: relative;
+                /* background: #ffffff; */
+                display: block;
+                box-sizing: border-box;
+                border-width: 6px 0px 6px 10px;
+                border-style: solid;
+            }
+        }
+    }
+
+    .minimize-btn {
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    * {
+        color: var(--white) !important;
+        :not(.pi) {
+            font-family: var(--font-family-header) !important;
+        }
+    }
+    .track-info-description {
+        font-size: 0.85rem;
+        opacity: 0.85;
+    }
+    .track-info-livestream-station {
+        font-weight: normal;
+    }
+
+    .flexible-link,
+    .flexible-link:not(.raw):not(.null) {
+        &:hover {
+            color: var(--white) !important;
+        }
+    }
+    .track-info-livestream-indicator {
+        background: var(--white) !important;
+        .track-info-livestream-indicator-text {
+            color: #111111 !important;
+            line-height: normal;
+        }
+    }
+
+    .p-slider-range {
+        background: var(--red);
+    }
+
+    .maximize-btn-holder {
+        left: 0;
+        right: 0;
+        margin: auto;
+        .maximize-btn.p-button {
+            background-color: var(--black);
+            border: 1px solid var(--black100);
+            height: 30px;
+            &.show {
+                top: 10px;
+            }
+            &:hover {
+                background-color: var(--black100);
+            }
+        }
+    }
+
+    /*   &.at-bottom {
+
+    .maximize-btn-holder,
+    .minimize-btn {
+      display: none;
+    }
+  } */
+}
+
+// slide in from bottom to top
+.player-enter-active {
+    transition: transform calc(var(--transition-duration) * 2) ease-out;
+}
+
+.player-leave-active {
+    transition: transform calc(var(--transition-duration) * 2) ease-in;
+}
+
+.player-enter-from,
+.player-leave-to {
+    transform: translateY(v-bind(playerHeight));
+}
