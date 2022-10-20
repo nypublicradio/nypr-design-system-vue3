@@ -774,7 +774,8 @@ ol ol li {
     }
 }
 
-.persistent-player {
+.persistent-player,
+.persistent-player.player {
     border-top: 1px solid var(--white);
     position: fixed;
     background-color: var(--black);
