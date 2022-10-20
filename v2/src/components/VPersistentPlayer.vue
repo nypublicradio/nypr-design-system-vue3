@@ -117,6 +117,7 @@ const emit = defineEmits([
   'sound-loaded',
   'sound-looping',
   'timeline-click',
+  'is-minimized',
 ])
 
 onMounted(() => {
@@ -292,9 +293,15 @@ const timelineClick = (e) => {
   emit('timeline-click', e)
   scrubTimelineEnd(e)
 }
+// exposed method to handle the minimize toggle
+const toggleMinimize = (e) => {
+  emit('is-minimized', e)
+  isMinimized.value = e
+}
 
 defineExpose({
   togglePlay,
+  toggleMinimize,
 })
 </script>
 
@@ -307,7 +314,7 @@ defineExpose({
         class="maximize-btn p-button-icon-only"
         :class="{ show: isMinimized }"
         aria-label="maximize player"
-        @click="isMinimized = !isMinimized"
+        @click="toggleMinimize(!isMinimized)"
       >
         <img v-if="playing" :src="soundAnimGif" alt="sounds wave animation" />
         <i v-else class="pi pi-chevron-up"></i>
@@ -389,7 +396,7 @@ defineExpose({
         title="Minimize Player"
         class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
         aria-label="minimize player"
-        @click="isMinimized = !isMinimized"
+        @click="toggleMinimize(!isMinimized)"
       >
         <i class="pi pi-chevron-down"></i>
       </Button>
