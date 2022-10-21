@@ -780,6 +780,12 @@ ol ol li {
     position: fixed;
     background-color: var(--black);
 
+    .p-button {
+        &:focus {
+            box-shadow: 0 0 0 0.2rem var(--white);
+        }
+    }
+
     .play-button {
         background-color: var(--red);
         //border: 1px solid var(--white);
