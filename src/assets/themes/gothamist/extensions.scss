@@ -781,8 +781,12 @@ ol ol li {
     background-color: var(--black);
 
     .p-button {
+        border-radius: 50%;
+        min-width: 30px !important;
+        width: 30px;
+        height: 30px;
         &:focus {
-            box-shadow: 0 0 0 0.2rem var(--white);
+            box-shadow: 0 0 0 0.1rem var(--white) !important;
         }
     }
 
@@ -809,6 +813,19 @@ ol ol li {
                 box-sizing: border-box;
                 border-width: 6px 0px 6px 10px;
                 border-style: solid;
+            }
+        }
+        .pi-pause {
+            &:before {
+                content: '';
+                border-color: #ffffff;
+                width: 10px;
+                height: 10px;
+                position: relative;
+                display: block;
+                box-sizing: border-box;
+                border-style: solid;
+                border-width: 0px 3px 0px 3px;
             }
         }
     }
