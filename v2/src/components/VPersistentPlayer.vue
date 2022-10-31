@@ -143,7 +143,7 @@ onMounted(() => {
     }
   })
 
-  window.addEventListener('keyup', (event) => {
+  /*   window.addEventListener('keyup', (event) => {
     // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.
     var isPlayButtonActive =
       document.getElementsByClassName('the-play-button')[0] ===
@@ -158,7 +158,7 @@ onMounted(() => {
           break
       }
     }
-  })
+  }) */
 
   // auto play
   props.autoPlay ? togglePlay() : null
