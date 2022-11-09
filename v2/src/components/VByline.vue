@@ -9,19 +9,22 @@ const props = defineProps({
     type: String,
     default: 'By ',
   },
-  concat: {
+  concatLast: {
     type: String,
     default: ' and ',
+  },
+  concat: {
+    type: String,
+    default: ', ',
   },
 })
 
 // depending on the author object, we return a unique key
 const getUniqueKey = (author) => {
-  if(author.id) return author.id
-  if(author.name) return author.name.replace(/\s+/g, '-').toLowerCase();
+  if (author.id) return author.id
+  if (author.name) return author.name.replace(/\s+/g, '-').toLowerCase()
   return Math.random().toString(36).substr(2, 9)
 }
-
 </script>
 
 <template>
@@ -33,8 +36,14 @@ const getUniqueKey = (author) => {
         :key="`author-${index}-${getUniqueKey(author)}`"
       >
         <v-byline-unit class="v-byline-unit" :author="author || null" />
-        <span v-if="index !== authors.length - 1" class="v-byline-concat">
+        <span
+          v-if="authors.length > 1 && index < authors.length - 2"
+          class="v-byline-concat"
+        >
           {{ props.concat }}
+        </span>
+        <span v-else-if="index !== authors.length - 1" class="v-byline-concat">
+          {{ props.concatLast }}
         </span>
       </template>
     </template>

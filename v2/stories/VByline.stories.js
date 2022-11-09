@@ -91,3 +91,10 @@ CustomPrefix.args = {
     authors: authors,
     prefix: 'Produced by:'
 }
+export const CustomConcatsNoPrefix = Template.bind({})
+CustomConcatsNoPrefix.args = {
+    authors: authors,
+    prefix: '',
+    concat: ' : ',
+    concatLast: ' : '
+}
