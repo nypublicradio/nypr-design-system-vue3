@@ -24,7 +24,7 @@ const Template = (args) => ({
     template: '<v-byline v-bind="args" />',
 })
 
-const authors = [
+const authorsArray = [
     {
         id: '1',
         firstName: 'Jen',
@@ -74,7 +74,7 @@ const authorsObject =
 
 export const Default = Template.bind({})
 Default.args = {
-    authors: authors
+    authors: authorsArray
 }
 export const DefaultDataAsObject = Template.bind({})
 DefaultDataAsObject.args = {
@@ -83,11 +83,18 @@ DefaultDataAsObject.args = {
 
 export const OneAuthor = Template.bind({})
 OneAuthor.args = {
-    authors: authors.slice(0, 1)
+    authors: authorsArray.slice(0, 1)
 }
 
 export const CustomPrefix = Template.bind({})
 CustomPrefix.args = {
-    authors: authors,
+    authors: authorsArray,
     prefix: 'Produced by:'
+}
+export const CustomConcatsNoPrefix = Template.bind({})
+CustomConcatsNoPrefix.args = {
+    authors: authorsArray,
+    prefix: '',
+    concat: ' : ',
+    concatLast: ' : '
 }
