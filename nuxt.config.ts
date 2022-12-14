@@ -1,9 +1,7 @@
-import { defineNuxtConfig } from 'nuxt'
-
 const envTheme = process.env.VITE_VUE_APP_THEME
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
-export default defineNuxtConfig({
+export default {
   css: [
     '~/src/assets/library/primeflex.min.css',
     `~/src/assets/themes/${envTheme}/fonts/fonts.css`,
@@ -29,4 +27,4 @@ export default defineNuxtConfig({
       'primevue'
     ]
   }
-})
+}
