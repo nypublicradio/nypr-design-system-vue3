@@ -9,10 +9,6 @@
             color: $ratingCancelIconColor;
         }
 
-        &:focus {
-            @include focused();
-        }
-
         &:first-child {
             margin-left: 0;
         }
@@ -24,6 +20,10 @@
 
     &:not(.p-disabled):not(.p-readonly) {
         .p-rating-icon {
+            &.p-focus {
+                @include focused-input();
+            }
+
             &:hover {
                 color: $ratingStarIconHoverColor;
             }

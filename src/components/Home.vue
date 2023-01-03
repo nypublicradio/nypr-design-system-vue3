@@ -1,197 +1,39 @@
 <template>
-  <div :class="containerClass">
-    <div class="col-12 p-fluid">
-      <div class="card">
-        <h5>Typography</h5>
-        <h1>h1: We're Pretty Sure Your Dog Can't Get Coronavirus</h1>
-        <h2>h2: We're Pretty Sure Your Dog Can't Get Coronavirus</h2>
-        <h3>h3: We're Pretty Sure Your Dog Can't Get Coronavirus</h3>
-        <h4>h4: We're Pretty Sure Your Dog Can't Get Coronavirus</h4>
-        <h5>h5: We're Pretty Sure Your Dog Can't Get Coronavirus</h5>
-        <h6>h6: We're Pretty Sure Your Dog Can't Get Coronavirus</h6>
-        <!-- <h7>h7: We're Pretty Sure Your Dog Can't Get Coronavirus</h7> -->
-        <br />
-        <br />
-        <div class="type-title">
-          title: We're Pretty Sure Your Dog Can't Get Coronavirus
-        </div>
-        <br />
-        <p class="p1">
-          p1: We're <b>Pretty</b> Sure Your <em>Dog</em> Can't Get Coronavirus
-        </p>
-        <p class="p2">
-          p2: We're <b>Pretty</b> Sure Your <em>Dog</em> Can't Get Coronavirus
-        </p>
-        <p class="p3">
-          p3: We're <b>Pretty</b> Sure Your <em>Dog</em> Can't Get Coronavirus
-        </p>
-        <ul class="mb-4">
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-        </ul>
-        <ol class="mb-4">
-          <li>One</li>
-          <li>Two</li>
-          <li>Three</li>
-        </ol>
-        <p class="type-label1">label1: This is a label</p>
-        <p class="type-label2">label3: This is a label</p>
-        <p class="type-label3">label3: This is a label</p>
-        <p>
-          <a href="http://www.google.com">Here is a text link</a>
-        </p>
-        <p class="type-caption">
-          caption: Blep boofers ur givin me a spook heckin ruff, you are doin me
-          a concern pupperino. Wrinkler very good spot doge, yapper. Pupperino
-          boof he made many woofs long doggo dat tungg tho adorable doggo, long
-          woofer shoober smol borking doggo with a long snoot for pats
-          puggorino, waggy wags dat tungg tho maximum borkdrive pupperino. Fat
-          boi long water shoob blop much ruin diet, length boy. Super chub smol
-          borking doggo with a long snoot for pats super chub.
-        </p>
-        <p class="footer type-fineprint">
-          fineprint: Blep boofers ur givin me a spook heckin ruff, you are doin
-          me a concern pupperino. Wrinkler very good spot doge, yapper.
-          Pupperino boof he made many woofs long doggo dat tungg tho adorable
-          doggo, long woofer shoober smol borking doggo with a long snoot for
-          pats puggorino, waggy wags dat tungg tho maximum borkdrive pupperino.
-          Fat boi long water shoob blop much ruin diet, length boy. Super chub
-          smol borking doggo with a long snoot for pats super chub.
-        </p>
-      </div>
-    </div>
-
-    <div class="col-12 p-fluid">
-      <div class="card">
-        <h5>Colors</h5>
-        <div class="grid">
-          <div class="col-2 swatch black">Black</div>
-          <div class="col-2 swatch black100">Black 100</div>
-          <div class="col-2 swatch black200">Black 200</div>
-          <div class="col-2 swatch black300">Black 300</div>
-          <div class="col-2 swatch black400">Black 400</div>
-          <div class="col-2 swatch black500">Black 500</div>
-        </div>
-        <h5>Gothamist Colors (only works if gothamist theme is active)</h5>
-        <div class="grid">
-          <div class="col-4 swatch soybean">Soybean</div>
-          <div class="col-4 swatch soybean200">Soybean 200</div>
-          <div class="col-4 swatch soybean100">Soybean 100</div>
-          <div class="col-12 swatch red">WNYC Red</div>
-        </div>
-      </div>
-    </div>
-
+  <div class="grid">
     <div class="col-12 md:col-6 p-fluid">
       <div class="card">
-        <h5>Input Text small</h5>
-        <div class="grid p-formgrid">
-          <div class="col-4">
-            <InputText
-              class="p-inputtext-sm"
-              type="text"
-              placeholder="Default"
-            ></InputText>
-          </div>
-          <div class="col-4">
-            <InputText
-              class="p-inputtext-sm"
-              type="text"
-              placeholder="Disabled"
-              :disabled="true"
-            ></InputText>
-          </div>
-          <div class="col-4">
-            <InputText
-              class="p-invalid p-inputtext-sm"
-              type="text"
-              placeholder="Invalid"
-            />
-          </div>
-        </div>
-        <h5>Input Text medium</h5>
-        <div class="grid p-formgrid">
-          <div class="col-4">
+        <h5>InputText</h5>
+        <div class="grid fprmgrid">
+          <div class="col-12 mb-2 lg:col-4 lg:mb-0">
             <InputText type="text" placeholder="Default"></InputText>
           </div>
-          <div class="col-4">
+          <div class="col-12 mb-2 lg:col-4 lg:mb-0">
             <InputText
               type="text"
               placeholder="Disabled"
               :disabled="true"
             ></InputText>
           </div>
-          <div class="col-4">
+          <div class="col-12 mb-2 lg:col-4 lg:mb-0">
             <InputText type="text" placeholder="Invalid" class="p-invalid" />
-          </div>
-        </div>
-        <h5>Input Text large</h5>
-        <div class="grid p-formgrid">
-          <div class="col-4">
-            <InputText
-              class="p-inputtext-lg"
-              type="text"
-              placeholder="Default"
-            ></InputText>
-          </div>
-          <div class="col-4">
-            <InputText
-              class="p-inputtext-lg"
-              type="text"
-              placeholder="Disabled"
-              :disabled="true"
-            ></InputText>
-          </div>
-          <div class="col-4">
-            <InputText
-              type="text"
-              placeholder="Invalid"
-              class="p-invalid p-inputtext-lg"
-            />
-          </div>
-        </div>
-        <h5>Input Text large alt-design</h5>
-        <div class="grid p-formgrid">
-          <div class="col-4">
-            <InputText
-              class="p-inputtext-lg alt-design"
-              type="text"
-              placeholder="Default"
-            ></InputText>
-          </div>
-          <div class="col-4">
-            <InputText
-              class="p-inputtext-lg alt-design"
-              type="text"
-              placeholder="Disabled"
-              :disabled="true"
-            ></InputText>
-          </div>
-          <div class="col-4">
-            <InputText
-              type="text"
-              placeholder="Invalid"
-              class="p-invalid p-inputtext-lg alt-design"
-            />
           </div>
         </div>
 
         <h5>Icons</h5>
-        <div class="grid p-formgrid">
-          <div class="col-4">
+        <div class="grid fprmgrid">
+          <div class="col-12 mb-2 lg:col-4 lg:mb-0">
             <span class="p-input-icon-left">
               <i class="pi pi-user" />
               <InputText type="text" placeholder="Username" />
             </span>
           </div>
-          <div class="col-4">
+          <div class="col-12 mb-2 lg:col-4 lg:mb-0">
             <span class="p-input-icon-right">
               <InputText type="text" placeholder="Search" />
               <i class="pi pi-search" />
             </span>
           </div>
-          <div class="col-4">
+          <div class="col-12 mb-2 lg:col-4 lg:mb-0">
             <span class="p-input-icon-left p-input-icon-right">
               <i class="pi pi-user" />
               <InputText type="text" placeholder="Search" />
@@ -214,7 +56,7 @@
           cols="30"
         />
 
-        <h5>Auto Complete</h5>
+        <h5>AutoComplete</h5>
         <AutoComplete
           id="dd"
           v-model="selectedAutoValue"
@@ -259,9 +101,9 @@
 
     <div class="col-12 md:col-6">
       <div class="card">
-        <h5>Radio Buttons</h5>
+        <h5>RadioButton</h5>
         <div class="grid">
-          <div class="col-4 md:p-1">
+          <div class="col-12 md:col-4">
             <div class="field-radiobutton">
               <RadioButton
                 id="option1"
@@ -272,7 +114,7 @@
               <label for="option1">Option 1</label>
             </div>
           </div>
-          <div class="col-4 md:p-1">
+          <div class="col-12 md:col-4">
             <div class="field-radiobutton">
               <RadioButton
                 id="option2"
@@ -283,7 +125,7 @@
               <label for="option2">Option 2</label>
             </div>
           </div>
-          <div class="col-4 md:p-1">
+          <div class="col-12 md:col-4">
             <div class="field-radiobutton">
               <RadioButton
                 id="option3"
@@ -296,9 +138,9 @@
           </div>
         </div>
 
-        <h5>Checkboxes</h5>
+        <h5>Checkbox</h5>
         <div class="grid">
-          <div class="col-4 md:p-1">
+          <div class="col-12 md:col-4">
             <div class="field-checkbox">
               <Checkbox
                 id="checkOption1"
@@ -309,7 +151,7 @@
               <label for="checkOption1">Option 1</label>
             </div>
           </div>
-          <div class="col-4 md:p-1">
+          <div class="col-12 md:col-4">
             <div class="field-checkbox">
               <Checkbox
                 id="checkOption2"
@@ -320,7 +162,7 @@
               <label for="checkOption2">Option 2</label>
             </div>
           </div>
-          <div class="col-4 md:p-1">
+          <div class="col-12 md:col-4">
             <div class="field-checkbox">
               <Checkbox
                 id="checkOption3"
@@ -385,268 +227,240 @@
     <div class="col-12">
       <div class="card">
         <h5>Buttons</h5>
-        <Button label="Submit" class="mr-2 mb:p-2" />
-        <Button icon="pi pi-check" class="mr-2 mb:p-2" />
-        <Button label="Submit" icon="pi pi-check" class="mr-2 mb:p-2" />
+        <Button label="Submit" class="mr-2 mb-2" />
+        <Button icon="pi pi-check" class="mr-2 mb-2" />
+        <Button label="Submit" icon="pi pi-check" class="mr-2 mb-2" />
         <Button
           label="Submit"
           icon="pi pi-check"
           icon-pos="right"
-          class="mr-2 mb:p-2"
+          class="mr-2 mb-2"
         />
-        <Button label="Disabled" disabled="disabled" class="mr-2 mb:p-2" />
+        <Button label="Disabled" disabled="disabled" class="mr-2 mb-2" />
+
         <h5>Severities</h5>
-        <Button label="Primary" class="mr-2 mb:p-2" />
-        <Button label="Secondary" class="p-button-secondary mr-2 mb:p-2" />
-        <Button label="Success" class="p-button-success mr-2 mb:p-2" />
-        <Button label="Info" class="p-button-info mr-2 mb:p-2" />
-        <Button label="Warning" class="p-button-warning mr-2 mb:p-2" />
-        <Button label="Help" class="p-button-help mr-2 mb:p-2" />
-        <Button label="Danger" class="p-button-danger mr-2 mb:p-2" />
+        <Button label="Primary" class="mr-2 mb-2" />
+        <Button label="Secondary" class="p-button-secondary mr-2 mb-2" />
+        <Button label="Success" class="p-button-success mr-2 mb-2" />
+        <Button label="Info" class="p-button-info mr-2 mb-2" />
+        <Button label="Warning" class="p-button-warning mr-2 mb-2" />
+        <Button label="Help" class="p-button-help mr-2 mb-2" />
+        <Button label="Danger" class="p-button-danger mr-2 mb-2" />
 
         <h5>Raised Buttons</h5>
-        <Button label="Primary" class="p-button-raised mr-2 mb:p-2" />
+        <Button label="Primary" class="p-button-raised mr-2 mb-2" />
         <Button
           label="Secondary"
-          class="p-button-raised p-button-secondary mr-2 mb:p-2"
+          class="p-button-raised p-button-secondary mr-2 mb-2"
         />
         <Button
           label="Success"
-          class="p-button-raised p-button-success mr-2 mb:p-2"
+          class="p-button-raised p-button-success mr-2 mb-2"
         />
-        <Button
-          label="Info"
-          class="p-button-raised p-button-info mr-2 mb:p-2"
-        />
+        <Button label="Info" class="p-button-raised p-button-info mr-2 mb-2" />
         <Button
           label="Warning"
-          class="p-button-raised p-button-warning mr-2 mb:p-2"
+          class="p-button-raised p-button-warning mr-2 mb-2"
         />
-        <Button
-          label="Help"
-          class="p-button-raised p-button-help mr-2 mb:p-2"
-        />
-        <Button label="Danger" class="p-button-raised p-button-danger mb:p-2" />
+        <Button label="Help" class="p-button-raised p-button-help mr-2 mb-2" />
+        <Button label="Danger" class="p-button-raised p-button-danger mb-2" />
 
         <h5>Rounded Buttons</h5>
-        <Button label="Primary" class="p-button-rounded mr-2 mb:p-2" />
+        <Button label="Primary" class="p-button-rounded mr-2 mb-2" />
         <Button
           label="Secondary"
-          class="p-button-rounded p-button-secondary mr-2 mb:p-2"
-        />
-        <Button
-          label="Tertiary"
-          class="p-button-rounded p-button-tertiary mr-2 mb:p-2"
+          class="p-button-rounded p-button-secondary mr-2 mb-2"
         />
         <Button
           label="Success"
-          class="p-button-rounded p-button-success mr-2 mb:p-2"
+          class="p-button-rounded p-button-success mr-2 mb-2"
         />
-        <Button
-          label="Info"
-          class="p-button-rounded p-button-info mr-2 mb:p-2"
-        />
+        <Button label="Info" class="p-button-rounded p-button-info mr-2 mb-2" />
         <Button
           label="Warning"
-          class="p-button-rounded p-button-warning mr-2 mb:p-2"
+          class="p-button-rounded p-button-warning mr-2 mb-2"
         />
-        <Button
-          label="Help"
-          class="p-button-rounded p-button-help mr-2 mb:p-2"
-        />
-        <Button
-          label="Danger"
-          class="p-button-rounded p-button-danger mb:p-2"
-        />
+        <Button label="Help" class="p-button-rounded p-button-help mr-2 mb-2" />
+        <Button label="Danger" class="p-button-rounded p-button-danger mb-2" />
 
-        <h5>Text link Buttons</h5>
-        <Button label="Primary" class="p-button-link mr-2 mb:p-2" />
         <h5>Text Buttons</h5>
-        <Button label="Primary" class="p-button-text mr-2 mb:p-2" />
+        <Button label="Primary" class="p-button-text mr-2 mb-2" />
         <Button
           label="Secondary"
-          class="p-button-secondary p-button-text mr-2 mb:p-2"
+          class="p-button-secondary p-button-text mr-2 mb-2"
         />
         <Button
           label="Success"
-          class="p-button-success p-button-text mr-2 mb:p-2"
+          class="p-button-success p-button-text mr-2 mb-2"
         />
-        <Button label="Info" class="p-button-info p-button-text mr-2 mb:p-2" />
+        <Button label="Info" class="p-button-info p-button-text mr-2 mb-2" />
         <Button
           label="Warning"
-          class="p-button-warning p-button-text mr-2 mb:p-2"
+          class="p-button-warning p-button-text mr-2 mb-2"
         />
-        <Button label="Help" class="p-button-help p-button-text mr-2 mb:p-2" />
+        <Button label="Help" class="p-button-help p-button-text mr-2 mb-2" />
         <Button
           label="Danger"
-          class="p-button-danger p-button-text mr-2 mb:p-2"
+          class="p-button-danger p-button-text mr-2 mb-2"
         />
-        <Button label="Plain" class="p-button-text p-button-plain mb:p-2" />
+        <Button label="Plain" class="p-button-text p-button-plain mb-2" />
 
         <h5>Raised Text Buttons</h5>
         <Button
           label="Primary"
-          class="p-button-raised p-button-text mr-2 mb:p-2"
+          class="p-button-raised p-button-text mr-2 mb-2"
         />
         <Button
           label="Secondary"
-          class="p-button-raised p-button-secondary p-button-text mr-2 mb:p-2"
+          class="p-button-raised p-button-secondary p-button-text mr-2 mb-2"
         />
         <Button
           label="Success"
-          class="p-button-raised p-button-success p-button-text mr-2 mb:p-2"
+          class="p-button-raised p-button-success p-button-text mr-2 mb-2"
         />
         <Button
           label="Info"
-          class="p-button-raised p-button-info p-button-text mr-2 mb:p-2"
+          class="p-button-raised p-button-info p-button-text mr-2 mb-2"
         />
         <Button
           label="Warning"
-          class="p-button-raised p-button-warning p-button-text mr-2 mb:p-2"
+          class="p-button-raised p-button-warning p-button-text mr-2 mb-2"
         />
         <Button
           label="Help"
-          class="p-button-raised p-button-help p-button-text mr-2 mb:p-2"
+          class="p-button-raised p-button-help p-button-text mr-2 mb-2"
         />
         <Button
           label="Danger"
-          class="p-button-raised p-button-danger p-button-text mr-2 mb:p-2"
+          class="p-button-raised p-button-danger p-button-text mr-2 mb-2"
         />
         <Button
           label="Plain"
-          class="p-button-raised p-button-plain p-button-text mb:p-2"
+          class="p-button-raised p-button-plain p-button-text mb-2"
         />
 
         <h5>Outlined Buttons</h5>
-        <Button label="Primary" class="p-button-outlined mr-2 mb:p-2" />
+        <Button label="Primary" class="p-button-outlined mr-2 mb-2" />
         <Button
           label="Secondary"
-          class="p-button-outlined p-button-secondary mr-2 mb:p-2"
-        />
-        <Button
-          label="White"
-          class="p-button-outlined p-button-white mr-2 mb:p-2"
+          class="p-button-outlined p-button-secondary mr-2 mb-2"
         />
         <Button
           label="Success"
-          class="p-button-outlined p-button-success mr-2 mb:p-2"
+          class="p-button-outlined p-button-success mr-2 mb-2"
         />
         <Button
           label="Info"
-          class="p-button-outlined p-button-info mr-2 mb:p-2"
+          class="p-button-outlined p-button-info mr-2 mb-2"
         />
         <Button
           label="Warning"
-          class="p-button-outlined p-button-warning mr-2 mb:p-2"
+          class="p-button-outlined p-button-warning mr-2 mb-2"
         />
         <Button
           label="Help"
-          class="p-button-outlined p-button-help mr-2 mb:p-2"
+          class="p-button-outlined p-button-help mr-2 mb-2"
         />
         <Button
           label="Danger"
-          class="p-button-outlined p-button-danger mr-2 mb:p-2"
+          class="p-button-outlined p-button-danger mr-2 mb-2"
         />
-        <Button label="Plain" class="p-button-outlined p-button-plain mb:p-2" />
+        <Button label="Plain" class="p-button-outlined p-button-plain mb-2" />
 
         <h5>Rounded Icon Buttons</h5>
-        <Button icon="pi pi-check" class="p-button-rounded mr-2 mb:p-2" />
+        <Button icon="pi pi-check" class="p-button-rounded mr-2 mb-2" />
         <Button
           icon="pi pi-bookmark"
-          class="p-button-rounded p-button-secondary mr-2 mb:p-2"
-        />
-        <Button
-          icon="pi pi-play"
-          class="p-button-rounded p-button-tertiary mr-2 mb:p-2"
+          class="p-button-rounded p-button-secondary mr-2 mb-2"
         />
         <Button
           icon="pi pi-search"
-          class="p-button-rounded p-button-success mr-2 mb:p-2"
+          class="p-button-rounded p-button-success mr-2 mb-2"
         />
         <Button
           icon="pi pi-user"
-          class="p-button-rounded p-button-info mr-2 mb:p-2"
+          class="p-button-rounded p-button-info mr-2 mb-2"
         />
         <Button
           icon="pi pi-bell"
-          class="p-button-rounded p-button-warning mr-2 mb:p-2"
+          class="p-button-rounded p-button-warning mr-2 mb-2"
         />
         <Button
           icon="pi pi-heart"
-          class="p-button-rounded p-button-help mr-2 mb:p-2"
+          class="p-button-rounded p-button-help mr-2 mb-2"
         />
         <Button
           icon="pi pi-times"
-          class="p-button-rounded p-button-danger mb:p-2"
+          class="p-button-rounded p-button-danger mb-2"
         />
 
         <h5>Rounded Text Icon Buttons</h5>
         <Button
           icon="pi pi-check"
-          class="p-button-rounded p-button-text mr-2 mb:p-2"
+          class="p-button-rounded p-button-text mr-2 mb-2"
         />
         <Button
           icon="pi pi-bookmark"
-          class="p-button-rounded p-button-secondary p-button-text mr-2 mb:p-2"
+          class="p-button-rounded p-button-secondary p-button-text mr-2 mb-2"
         />
         <Button
           icon="pi pi-search"
-          class="p-button-rounded p-button-success p-button-text mr-2 mb:p-2"
+          class="p-button-rounded p-button-success p-button-text mr-2 mb-2"
         />
         <Button
           icon="pi pi-user"
-          class="p-button-rounded p-button-info p-button-text mr-2 mb:p-2"
+          class="p-button-rounded p-button-info p-button-text mr-2 mb-2"
         />
         <Button
           icon="pi pi-bell"
-          class="p-button-rounded p-button-warning p-button-text mr-2 mb:p-2"
+          class="p-button-rounded p-button-warning p-button-text mr-2 mb-2"
         />
         <Button
           icon="pi pi-heart"
-          class="p-button-rounded p-button-help p-button-text mr-2 mb:p-2"
+          class="p-button-rounded p-button-help p-button-text mr-2 mb-2"
         />
         <Button
           icon="pi pi-times"
-          class="p-button-rounded p-button-danger p-button-text mr-2 mb:p-2"
+          class="p-button-rounded p-button-danger p-button-text mr-2 mb-2"
         />
 
         <h5>Rounded and Outlined Icon Buttons</h5>
         <Button
           icon="pi pi-check"
-          class="p-button-rounded p-button-outlined mr-2 mb:p-2"
+          class="p-button-rounded p-button-outlined mr-2 mb-2"
         />
         <Button
           icon="pi pi-bookmark"
-          class="p-button-rounded p-button-secondary p-button-outlined mr-2 mb:p-2"
+          class="p-button-rounded p-button-secondary p-button-outlined mr-2 mb-2"
         />
         <Button
           icon="pi pi-search"
-          class="p-button-rounded p-button-success p-button-outlined mr-2 mb:p-2"
+          class="p-button-rounded p-button-success p-button-outlined mr-2 mb-2"
         />
         <Button
           icon="pi pi-user"
-          class="p-button-rounded p-button-info p-button-outlined mr-2 mb:p-2"
+          class="p-button-rounded p-button-info p-button-outlined mr-2 mb-2"
         />
         <Button
           icon="pi pi-bell"
-          class="p-button-rounded p-button-warning p-button-outlined mr-2 mb:p-2"
+          class="p-button-rounded p-button-warning p-button-outlined mr-2 mb-2"
         />
         <Button
           icon="pi pi-heart"
-          class="p-button-rounded p-button-help p-button-outlined mr-2 mb:p-2"
+          class="p-button-rounded p-button-help p-button-outlined mr-2 mb-2"
         />
         <Button
           icon="pi pi-times"
-          class="p-button-rounded p-button-danger p-button-outlined mb:p-2"
+          class="p-button-rounded p-button-danger p-button-outlined mb-2"
         />
 
         <h5>Badges</h5>
-        <Button type="button" label="Emails" badge="8" class="mr-2 mb:p-2" />
+        <Button type="button" label="Emails" badge="8" class="mr-2 mb-2" />
         <Button
           type="button"
           label="Messages"
           icon="pi pi-users"
-          class="p-button-warning mb:p-2"
+          class="p-button-warning mb-2"
           badge="8"
           badge-class="p-badge-danger"
         />
@@ -683,8 +497,8 @@
           responsive-layout="scroll"
         >
           <template #header>
-            <div class="p-d-flex p-jc-between p-ai-center">
-              <h5 class="p-m-0">Customers</h5>
+            <div class="flex justify-content-between align-items-center">
+              <h5 class="m-0">Customers</h5>
               <span class="p-input-icon-left">
                 <i class="pi pi-search" />
                 <InputText
@@ -694,10 +508,12 @@
               </span>
             </div>
           </template>
-          <template #empty>No customers found.</template>
+          <template #empty> No customers found. </template>
           <Column selection-mode="multiple" style="min-width: 3rem"></Column>
           <Column field="name" header="Name" sortable style="min-width: 14rem">
-            <template #body="{ data }">{{ data.name }}</template>
+            <template #body="{ data }">
+              {{ data.name }}
+            </template>
             <template #filter="{ filterModel }">
               <InputText
                 v-model="filterModel.value"
@@ -716,7 +532,6 @@
           >
             <template #body="{ data }">
               <img
-                alt="placeholder"
                 src="../assets/images/flag_placeholder.png"
                 :class="'flag flag-' + data.country.code"
                 width="30"
@@ -751,7 +566,7 @@
               <span class="image-text">{{ data.representative.name }}</span>
             </template>
             <template #filter="{ filterModel }">
-              <div class="mb:p-3 p-text-bold">Agent Picker</div>
+              <div class="mb-3 font-bold">Agent Picker</div>
               <MultiSelect
                 v-model="filterModel.value"
                 :options="representatives"
@@ -780,7 +595,9 @@
             data-type="date"
             style="min-width: 8rem"
           >
-            <template #body="{ data }">{{ formatDate(data.date) }}</template>
+            <template #body="{ data }">
+              {{ formatDate(data.date) }}
+            </template>
             <template #filter="{ filterModel }">
               <Calendar
                 v-model="filterModel.value"
@@ -796,9 +613,9 @@
             data-type="numeric"
             style="min-width: 8rem"
           >
-            <template #body="{ data }">{{
-              formatCurrency(data.balance)
-            }}</template>
+            <template #body="{ data }">
+              {{ formatCurrency(data.balance) }}
+            </template>
             <template #filter="{ filterModel }">
               <InputNumber
                 v-model="filterModel.value"
@@ -816,9 +633,9 @@
             style="min-width: 10rem"
           >
             <template #body="{ data }">
-              <span :class="'customer-badge status-' + data.status">
-                {{ data.status }}
-              </span>
+              <span :class="'customer-badge status-' + data.status">{{
+                data.status
+              }}</span>
             </template>
             <template #filter="{ filterModel }">
               <Dropdown
@@ -829,14 +646,14 @@
                 :show-clear="true"
               >
                 <template #value="slotProps">
-                  <span :class="'customer-badge status-' + slotProps.value">
-                    {{ slotProps.value }}
-                  </span>
+                  <span :class="'customer-badge status-' + slotProps.value">{{
+                    slotProps.value
+                  }}</span>
                 </template>
                 <template #option="slotProps">
-                  <span :class="'customer-badge status-' + slotProps.option">
-                    {{ slotProps.option }}
-                  </span>
+                  <span :class="'customer-badge status-' + slotProps.option">{{
+                    slotProps.option
+                  }}</span>
                 </template>
               </Dropdown>
             </template>
@@ -852,12 +669,12 @@
               <ProgressBar :value="data.activity" :show-value="false" />
             </template>
             <template #filter="{ filterModel }">
-              <Slider v-model="filterModel.value" range class="p-m-3"></Slider>
-              <div class="p-d-flex p-ai-center p-jc-between p-px-2">
+              <Slider v-model="filterModel.value" range class="m-3"></Slider>
+              <div class="flex align-items-center justify-content-between px-2">
                 <span>{{ filterModel.value ? filterModel.value[0] : 0 }}</span>
-                <span>
-                  {{ filterModel.value ? filterModel.value[1] : 100 }}
-                </span>
+                <span>{{
+                  filterModel.value ? filterModel.value[1] : 100
+                }}</span>
               </div>
             </template>
           </Column>
@@ -872,7 +689,7 @@
         </DataTable>
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-12 md:col-6">
       <div class="card">
         <h5>AccordionPanel</h5>
         <Accordion :multiple="true" :active-index="[0]">
@@ -923,8 +740,8 @@
               reprehenderit in voluptate velit esse cillum dolore eu fugiat
               nulla pariatur. Excepteur sint occaecat cupidatat non proident,
               sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
-          </TabPanel>
+            </p></TabPanel
+          >
           <TabPanel header="Header II">
             <p style="margin: 0">
               Sed ut perspiciatis unde omnis iste natus error sit voluptatem
@@ -950,7 +767,7 @@
         </TabView>
       </div>
     </div>
-    <div class="col-12">
+    <div class="col-12 md:col-6">
       <div class="card">
         <h5>Panel</h5>
         <Panel header="Header" :toggleable="true">
@@ -980,7 +797,7 @@
         </Fieldset>
       </div>
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-3">
       <div class="card p-fluid">
         <h5>Overlay Panel</h5>
         <Button
@@ -1014,15 +831,15 @@
               </template>
             </Column>
             <Column field="price" header="Price" sortable>
-              <template #body="slotProps">{{
-                formatCurrency(slotProps.data.price)
-              }}</template>
+              <template #body="slotProps">
+                {{ formatCurrency(slotProps.data.price) }}
+              </template>
             </Column>
           </DataTable>
         </OverlayPanel>
       </div>
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-3">
       <div class="card p-fluid">
         <h5>Dialog</h5>
         <Dialog
@@ -1057,7 +874,7 @@
         />
       </div>
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-3">
       <div class="card p-fluid">
         <h5>Confirm Popup</h5>
         <Button
@@ -1070,7 +887,7 @@
         <ConfirmPopup group="popup"></ConfirmPopup>
       </div>
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-3">
       <div class="card p-fluid">
         <h5>Confirm Dialog</h5>
         <Button
@@ -1096,21 +913,21 @@
         </Menubar>
       </div>
     </div>
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-4">
       <div class="card">
         <h5>Tiered Menu</h5>
         <TieredMenu :model="tieredMenuItems" />
       </div>
     </div>
 
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-4">
       <div class="card">
         <h5>Plain Menu</h5>
         <Menu :model="menuitems" />
       </div>
     </div>
 
-    <div class="col-12 md:col-6">
+    <div class="col-12 md:col-4">
       <div class="card">
         <h5>Overlay Menu</h5>
 
@@ -1123,16 +940,15 @@
           @click="toggleMenu"
         />
       </div>
-    </div>
-    <div class="col-12 md:col-6">
+
       <div class="card" @contextmenu="onContextRightClick">
-        <h5>Context Menu</h5>
+        <h5>ContextMenu</h5>
         Right click to display.
         <ContextMenu ref="contextMenu" :model="contextMenuItems" />
       </div>
     </div>
 
-    <div class="col-12 md:col-6">
+    <div class="col-12 lg:col-6">
       <div class="card">
         <h5>Messages</h5>
         <Message severity="info">Info Message</Message>
@@ -1142,30 +958,29 @@
       </div>
     </div>
 
-    <div class="col-12 md:col-6">
+    <div class="col-12 lg:col-6">
       <div class="card">
         <h5>Toast</h5>
-        <client-only>
-          <Toast />
-        </client-only>
+
+        <Toast />
         <Button
           label="Info"
-          class="p-button-info mr-2 mb:p-2"
+          class="p-button-info mr-2 mb-2"
           @click="showToast('info')"
         />
         <Button
           label="Success"
-          class="p-button-success mr-2 mb:p-2"
+          class="p-button-success mr-2 mb-2"
           @click="showToast('success')"
         />
         <Button
           label="Warn"
-          class="p-button-warning mr-2 mb:p-2"
+          class="p-button-warning mr-2 mb-2"
           @click="showToast('warn')"
         />
         <Button
           label="Error"
-          class="p-button-danger mb:p-2"
+          class="p-button-danger mb-2"
           @click="showToast('error')"
         />
       </div>
@@ -1173,15 +988,17 @@
       <div class="card">
         <h5>Timeline</h5>
         <Timeline :value="timelineEvents" align="alternate">
-          <template #content="slotProps">{{ slotProps.item.status }}</template>
+          <template #content="slotProps">
+            {{ slotProps.item.status }}
+          </template>
         </Timeline>
       </div>
     </div>
 
-    <div class="col-12 md:col-8">
+    <div class="col-12 lg:col-8">
       <div class="card">
         <h5>Inline Message</h5>
-        <div class="p-formgroup-inline" style="margin-bottom: 0.5rem">
+        <div class="formgroup-inline" style="margin-bottom: 0.5rem">
           <label for="username1" class="p-sr-only">Username</label>
           <InputText
             id="username1"
@@ -1191,7 +1008,7 @@
           />
           <InlineMessage>Username is required</InlineMessage>
         </div>
-        <div class="p-formgroup-inline">
+        <div class="formgroup-inline">
           <label for="email" class="p-sr-only">email</label>
           <InputText id="email" placeholder="Email" class="p-invalid mr-2" />
           <InlineMessage />
@@ -1199,10 +1016,10 @@
       </div>
     </div>
 
-    <div class="col-12 md:col-4">
+    <div class="col-12 lg:col-4">
       <div class="card">
         <h5>Helper Text</h5>
-        <div class="p-field p-fluid">
+        <div class="field p-fluid">
           <label for="username2">Username</label>
           <InputText
             id="username2"
@@ -1477,15 +1294,12 @@ export default {
   },
   countryService: null,
   computed: {
-    containerClass() {
-      return [
-        'grid',
-        {
-          // $appState is not available when moved to NUXT instance
-          //'p-input-filled': this.$appState.inputStyle === 'filled',
-        },
-      ]
-    },
+    // containerClass() {
+    //     return ['grid', {
+    //             'p-input-filled': this.$appState.inputStyle === 'filled',
+    //         }
+    //     ];
+    // }
   },
   created() {
     this.countryService = new CountryService()
@@ -1619,42 +1433,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.swatch {
-  height: 100px;
-}
-.black {
-  background: var(--black);
-  color: white;
-}
-.black100 {
-  background: var(--black100);
-  color: white;
-}
-.black200 {
-  background: var(--black200);
-  color: white;
-}
-.black300 {
-  background: var(--black300);
-}
-.black400 {
-  background: var(--black400);
-}
-.black500 {
-  background: var(--black500);
-}
-.red {
-  background: var(--red-500);
-}
-.soybean {
-  background: var(--soybean-500);
-}
-.soybean200 {
-  background: var(--soybean-200);
-}
-.soybean100 {
-  background: var(--soybean-100);
-}
 .image-text {
   vertical-align: middle;
 }

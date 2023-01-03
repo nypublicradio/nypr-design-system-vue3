@@ -1,4 +1,5 @@
 <script setup>
+import { ref } from 'vue'
 import Slider from 'primevue/slider'
 
 const props = defineProps({
@@ -13,20 +14,23 @@ const emit = defineEmits([
   'scrub-timeline-end',
   'timeline-click',
 ])
+
+// v-model can't be used with props, so we need to create a ref
+const progressRef = ref(props.progress)
 </script>
 
 <template>
   <div class="progress-control">
     <Slider
-      v-model="progress"
+      v-model="progressRef"
       :min="0.1"
       :max="100"
       aria-label="Volume slider"
       title="Volume slider"
       aria-labelledby="Volume slider"
-      @slideend="emit('scrub-timeline-end', progress)"
-      @change="emit('scrub-timeline-change', progress)"
-      @click="emit('timeline-click', progress)"
+      @slideend="emit('scrub-timeline-end', progressRef)"
+      @change="emit('scrub-timeline-change', progressRef)"
+      @click="emit('timeline-click', progressRef)"
     />
   </div>
 </template>

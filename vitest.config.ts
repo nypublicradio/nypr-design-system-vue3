@@ -4,7 +4,7 @@ import { defineConfig, loadEnv } from 'vite'
 import vue from '@vitejs/plugin-vue'
 
 export default ({ mode }) => {
-  process.env = {...process.env, ...loadEnv(mode, process.cwd())};
+  process.env = { ...process.env, ...loadEnv(mode, process.cwd()) };
   const envTheme = process.env.VITE_VUE_APP_THEME
 
   return defineConfig({
@@ -14,6 +14,9 @@ export default ({ mode }) => {
     test: {
       globals: true,
       environment: 'jsdom',
+      coverage: {
+        provider: 'istanbul'
+      },
     },
     css: {
       preprocessorOptions: {

@@ -11,8 +11,10 @@
       @compile="onCompile"
       @restart="onRestart"
     />
-    <div v-if="codeEditor || initialized" class="layout-content">
-      <router-view />
+    <div class="layout-content">
+      <div v-if="codeEditor || initialized" class="layout-content-inner">
+        <router-view />
+      </div>
     </div>
     <div
       v-if="!codeEditor && initialized"
@@ -30,10 +32,10 @@
 </template>
 
 <script>
-import AppIntro from './AppIntro.vue'
-import AppTopBar from './AppTopbar.vue'
-import AppEditor from './AppEditor.vue'
-import AppFooter from './AppFooter.vue'
+import AppIntro from './AppIntro'
+import AppTopBar from './AppTopbar'
+import AppEditor from './AppEditor'
+import AppFooter from './AppFooter'
 
 export default {
   components: {
@@ -61,8 +63,7 @@ export default {
       ]
     },
     codeEditor() {
-      // return import.meta.env.VITE_VUE_APP_EDITOR === 'code'
-      return true
+      return process.env.VUE_APP_EDITOR === 'code'
     },
   },
   methods: {

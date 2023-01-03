@@ -45,6 +45,7 @@ describe('VByline', () => {
         prefix
       }
     })
+    expect(wrapper.text()).toContain(prefix)
     expect(wrapper.text()).toContain(authors[0].lastName)
     expect(wrapper.text()).toContain(authors[0].firstName)
     expect(wrapper.text()).toContain(authors[0].organization)

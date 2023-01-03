@@ -60,7 +60,7 @@
                 },
                 {
                     "name": "$highlightTextColor",
-                    "value": "9eade6",
+                    "value": "#9eade6",
                     "description": "Text on Highlight",
                     "type": "color"
                 },

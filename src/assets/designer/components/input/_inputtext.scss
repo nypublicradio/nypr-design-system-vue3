@@ -38,6 +38,10 @@
     transition-duration: $transitionDuration;
 }
 
+.p-float-label > .p-invalid + label {
+    color: $inputErrorBorderColor;
+}
+
 .p-input-icon-left > i:first-of-type {
     left: nth($inputPadding, 2);
     color: $inputIconColor;

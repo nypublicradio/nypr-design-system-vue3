@@ -114,8 +114,8 @@
             }
 
             &:focus {
-                outline: 1px solid $focusOutlineColor;
-                outline-offset: -1px;
+                outline: 0.15rem solid $focusOutlineColor;
+                outline-offset: -0.15rem;
             }
 
             &.p-highlight {

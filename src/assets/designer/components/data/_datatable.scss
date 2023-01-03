@@ -126,8 +126,8 @@
             }
 
             &:focus {
-                outline: 1px solid $focusOutlineColor;
-                outline-offset: -1px;
+                outline: 0.15rem solid $focusOutlineColor;
+                outline-offset: -0.15rem;
             }
 
             &.p-highlight {
@@ -161,7 +161,8 @@
         background: $panelHeaderBg;
     }
 
-    &.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table {
+    &.p-datatable-scrollable > .p-datatable-wrapper > .p-datatable-table,
+    &.p-datatable-scrollable > .p-datatable-wrapper > .p-virtualscroller > .p-datatable-table {
         > .p-datatable-thead,
         > .p-datatable-tfoot {
             background-color: $tableHeaderCellBg;

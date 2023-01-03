@@ -22,38 +22,38 @@ $xxxl: 1920px;
 $max: 7680px;
 
 $breakpoints: (
-    "phone": $xsmall,
-    "tablet": $medium,
-    "desktop": $xlarge,
-    "xsmall": $xsmall,
-    "xs": $xsmall,
-    "small": $small,
-    "sm": $small,
-    "medium": $medium,
-    "md": $medium,
-    "large": $large,
-    "lg": $large,
-    "xlarge": $xlarge,
-    "xl": $xlarge,
-    "xxlarge": $xxlarge,
-    "xxl": $xxlarge,
-    "xxxlarge": $xxxlarge,
-    "xxxl": $xxxlarge,
-    "max": $max,
+    'phone': $xsmall,
+    'tablet': $medium,
+    'desktop': $xlarge,
+    'xsmall': $xsmall,
+    'xs': $xsmall,
+    'small': $small,
+    'sm': $small,
+    'medium': $medium,
+    'md': $medium,
+    'large': $large,
+    'lg': $large,
+    'xlarge': $xlarge,
+    'xl': $xlarge,
+    'xxlarge': $xxlarge,
+    'xxl': $xxlarge,
+    'xxxlarge': $xxxlarge,
+    'xxxl': $xxxlarge,
+    'max': $max,
 );
 
 //colors
 $colors: (
-    "blue": #5e81ac,
-    "green": #7fa366,
-    "yellow": #dac57a,
-    "cyan": #71abc2,
-    "pink": #bf616a,
-    "indigo": #4e6aa4,
-    "teal": #5eac90,
-    "orange": #d08770,
-    "bluegray": #7e8d9f,
-    "purple": #9a6796,
+    'blue': #5e81ac,
+    'green': #7fa366,
+    'yellow': #dac57a,
+    'cyan': #71abc2,
+    'pink': #bf616a,
+    'indigo': #4e6aa4,
+    'teal': #5eac90,
+    'orange': #d08770,
+    'bluegray': #7e8d9f,
+    'purple': #9a6796,
 );
 
 // scale-color example
@@ -116,10 +116,10 @@ $surfaceHover: #d8dee9 !default;
 $fontSize: 1rem !default;
 $fontRatio: 1.125;
 $fontRatioLarge: 1.333;
-$fontFamily: "Source Sans Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$fontFamilyHeader: "Libre Baskerville", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial,
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
+$fontFamily: 'Source Sans Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
+$fontFamilyHeader: 'Libre Baskerville', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol' !default;
 $textColor: $black100 !default;
 $textSecondaryColor: $primaryColorAlt !default;
 $fontWeight: normal !default;
@@ -142,7 +142,7 @@ $formElementTransition: background-color $transitionDuration, color $transitionD
     border-color $transitionDuration, box-shadow $transitionDuration !default;
 $actionIconTransition: background-color $transitionDuration, color $transitionDuration, box-shadow $transitionDuration !default;
 $listItemTransition: none !default;
-$primeIconFont: "primeicons";
+$primeIconFont: 'primeicons';
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $white200 !default;
 $inlineSpacing: 0.5rem !default;
@@ -153,6 +153,7 @@ $errorColor: $dangerColor !default;
 
 //highlight
 $highlightBg: $white300 !default;
+$highlightFocusBg: $white300 !default;
 $highlightTextColor: $black400 !default;
 
 //scale
@@ -204,7 +205,9 @@ $inputListBorder: $inputBorder !default;
 $inputListPadding: 0.5rem 0 !default;
 $inputListItemPadding: 0.5rem 1rem !default;
 $inputListItemBg: transparent !default;
+$inputListItemFocusBg: transparent !default;
 $inputListItemTextColor: $black100 !default;
+$inputListItemTextFocusColor: $black100 !default;
 $inputListItemHoverBg: transparent !default;
 $inputListItemTextHoverColor: $black100 !default;
 $inputListItemBorder: 0 none !default;
@@ -467,6 +470,7 @@ $panelHeaderTextHoverColor: $black100 !default;
 $panelContentBorderColor: $white200 !default;
 $panelContentBorder: 1px solid $white200 !default;
 $panelContentBg: $white !default;
+$panelContentEvenRowBg: $white !default;
 $panelContentTextColor: $black100 !default;
 $panelContentPadding: 1rem !default;
 
@@ -881,7 +885,9 @@ $avatarTextColor: $textColor !default;
 
 //avatar
 $chipBg: $white200 !default;
+$chipFocusBg: $white200 !default;
 $chipTextColor: $textColor !default;
+$chipFocusTextColor: $textColor !default;
 $chipBorderRadius: 16px !default;
 
 //scrollTop

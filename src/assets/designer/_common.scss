@@ -1,5 +1,5 @@
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 .p-component {
@@ -13,8 +13,7 @@
     transition-duration: $transitionDuration;
 }
 
-.p-disabled,
-.p-component:disabled {
+.p-disabled, .p-component:disabled {
     opacity: $disabledOpacity;
 }
 
@@ -27,7 +26,6 @@
 }
 
 .pi {
-    font-family: $primeIconFont;
     font-size: $primeIconFontSize;
 }
 
@@ -58,7 +56,7 @@
             background-color: var(--maskbg);
         }
     }
-
+    
     @keyframes p-component-overlay-leave-animation {
         from {
             background-color: var(--maskbg);

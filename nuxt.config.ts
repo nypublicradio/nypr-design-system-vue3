@@ -1,5 +1,3 @@
-import { defineNuxtConfig } from 'nuxt'
-
 const envTheme = process.env.VITE_VUE_APP_THEME
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
@@ -28,5 +26,5 @@ export default defineNuxtConfig({
     transpile: [
       'primevue'
     ]
-  }
+  },
 })
