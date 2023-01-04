@@ -2,7 +2,6 @@
   "name": "@nypublicradio/nypr-design-system-vue3",
   "repository": "git://github.com/nypublicradio/nypr-design-system-vue3.git",
   "version": "0.0.0",
-  "private": true,
   "scripts": {
     "prime-serve": "vue-cli-service serve",
     "prime-build": "vue-cli-service build",
