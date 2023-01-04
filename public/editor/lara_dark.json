@@ -5,7 +5,7 @@
             "options": [
                 {
                     "name": "$fontFamily",
-                    "value": "Source Sans Pro,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"",
+                    "value": "-apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif, \"Apple Color Emoji\", \"Segoe UI Emoji\", \"Segoe UI Symbol\"",
                     "description": "Font Family",
                     "type": "text"
                 },
@@ -89,19 +89,19 @@
             "options": [
                 {
                     "name": "$shade900",
-                    "value": "#1c2127",
+                    "value": "#040d19",
                     "description": "Ground",
                     "type": "color"
                 },
                 {
                     "name": "$shade800",
-                    "value": "#22272d",
+                    "value": "#071426",
                     "description": "Content",
                     "type": "color"
                 },
                 {
                     "name": "$shade600",
-                    "value": "#444c56",
+                    "value": "#0b213f",
                     "description": "Border",
                     "type": "color"
                 }
@@ -112,7 +112,7 @@
             "options": [
                 {
                     "name": "$inputBg",
-                    "value": "#1c2127",
+                    "value": "#040d19",
                     "description": "Background",
                     "type": "color"
                 },
@@ -130,7 +130,7 @@
                 },
                 {
                     "name": "$inputFilledBg",
-                    "value": "#444c56",
+                    "value": "#0b213f",
                     "description": "Filled Background",
                     "type": "color"
                 }

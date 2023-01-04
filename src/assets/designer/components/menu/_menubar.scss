@@ -19,15 +19,15 @@
                 > .p-menuitem-link,
                 > .p-menuitem-link:not(.p-disabled):hover {
                     background: $horizontalMenuRootMenuitemActiveBg;
-
+            
                     .p-menuitem-text {
                         color: $horizontalMenuRootMenuitemTextActiveColor;
                     }
-
+            
                     .p-menuitem-icon {
                         color: $horizontalMenuRootMenuitemIconActiveColor;
                     }
-
+                    
                     .p-submenu-icon {
                         color: $horizontalMenuRootMenuitemIconActiveColor;
                     }
@@ -62,8 +62,7 @@
                     color: $menuitemTextActiveColor;
                 }
 
-                .p-menuitem-icon,
-                .p-submenu-icon {
+                .p-menuitem-icon, .p-submenu-icon {
                     color: $menuitemIconActiveColor;
                 }
             }
@@ -71,7 +70,7 @@
     }
 }
 
-@media screen and (max-width: $lg) {
+@media screen and (max-width: 960px) {
     .p-menubar {
         position: relative;
 
@@ -82,12 +81,12 @@
             color: $horizontalMenuRootMenuitemIconColor;
             border-radius: $actionIconBorderRadius;
             transition: $actionIconTransition;
-
+        
             &:hover {
                 color: $horizontalMenuRootMenuitemIconHoverColor;
                 background: $horizontalMenuRootMenuitemHoverBg;
             }
-
+        
             &:focus {
                 @include focused();
             }
@@ -101,12 +100,12 @@
             border: $overlayMenuBorder;
             box-shadow: $overlayMenuShadow;
             width: 100%;
-
+    
             .p-menu-separator {
                 border-top: $divider;
                 margin: $menuSeparatorMargin;
             }
-
+    
             .p-submenu-icon {
                 font-size: $menuitemSubmenuIconFontSize;
             }
@@ -152,7 +151,7 @@
                     }
                 }
             }
-
+    
             .p-menuitem {
                 width: 100%;
                 position: static;

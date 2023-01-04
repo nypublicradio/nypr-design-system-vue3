@@ -16,7 +16,7 @@ npm i
 ```
 
 ## Storybook
-if STORYBOOK_EDIT is set to false (default = ture), it will use the compiled minified theme and not provide real time updates as you develop. This is useful when you just want to refernce the storybook instance quickly because it builds way faster, and to test the mionified theme build
+if STORYBOOK_EDIT is set to false (default = ture), it will use the compiled minified theme and not provide real time updates as you develop. This is useful when you just want to refernce the storybook instance quickly because it builds way faster, and to test the minified theme build
 ```
 npm run storybook
 ```
@@ -43,19 +43,21 @@ src/assets/themes/
 ## global scss location
 src/assets/library/
 
-## build Themes 
+## build Themes
+this will compile all the custom themes and output a .min and a .map file in the theme folder 
 ```
 npm run build-themes
 ```
 
 ## Nuxt instance
 update THEME env var with the name of the theme you want to use: `.env` line 1
+Manually navigate to /nuxt to view the sample `pages/nuxt.vue`
 ```
 npm run dev
 ```
 
 ## Prime Theme View
-Prime Theme view is now included in the NUXT instance via pages/index.vue
+Prime Theme view is now included in the NUXT instance via pages/nuxt.vue
 file being rendered: `src/components/Home.vue`
 
 
@@ -93,7 +95,7 @@ In the root `.env` file, change THEME to equal the new name
 Navigate to `nypr-design-system-vue3\src\main.js`  line:51
 Add a new import for the new theme
 import './assets/themes/newthemename/_theme.scss'
-comments the other theme imports
+comment out the other theme imports
 
 ## Updating the new theme
 Make all variable changes to the `nypr-design-system-vue3/src/assets/themes/newthemename/variables.scss` file.
@@ -104,6 +106,3 @@ Do not remove any css vars, as they may be being used by our custom components i
 Be sure to use the css var font scale located in the `cssvars.scss` file for all font-sizes. Then reference chart above will how you choose.
 When creating/modifying custom components, make sure to use the css vars when styling.
 When modifying/overriding PrimeVue components for your new theme, add the styles to the `nypr-design-system-vue3/src/assets/themes/newthemename/extensions.scss` file. Once again, be sure to use css vars when styling. This will allow for the components to react to data-style-mode changes (dark mode etc).
-
-When updating to a newer versions of Prime Designer in the future, we will create a new root `src_v3.7.1` folder and move all the files into that folder. This will allow you to update to the new version of Prime Designer without breaking your current theme. We'll see what happenes when we get to that point. Likely near the end of the year when PrimeVue has their next major updates complete.
-

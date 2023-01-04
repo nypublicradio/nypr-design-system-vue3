@@ -1,3 +1,4 @@
+
 import { app, addParameters } from '@storybook/vue3'
 import { action } from '@storybook/addon-actions'
 import addons from '@storybook/addons'
@@ -18,7 +19,6 @@ channel.on('DARK_MODE', isDark => {
     document.body.setAttribute('data-style-mode', 'default')
   }
 })
-
 
 addParameters({
   docs: {

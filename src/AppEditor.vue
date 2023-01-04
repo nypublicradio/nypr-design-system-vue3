@@ -13,7 +13,7 @@
           </a>
           <a
             v-tooltip.bottom="'Download'"
-            class="action-icon action-download p-button-raised p-ml-2"
+            class="action-icon action-download p-button-raised ml-2"
             @click="download"
           >
             <i class="pi pi-download"></i>
@@ -24,7 +24,7 @@
       <p>
         Visual editor is for quick prototyping, for advanced editing such as
         implementing your style guide, refer to the
-        <a href="https://www.primefaces.org/designer/api/primevue/3.10.0/"
+        <a href="https://www.primefaces.org/designer/api/primevue/3.12.0/"
           >SASS API</a
         >
         with 500+ variables.
@@ -52,11 +52,11 @@
         />
       </div>
 
-      <div class="p-d-flex p-mt-4">
+      <div class="flex mt-4">
         <div>
           <h6>Input Style</h6>
-          <div class="p-formgroup-inline">
-            <div class="p-field-radiobutton">
+          <div class="formgroup-inline">
+            <div class="field-radiobutton">
               <RadioButton
                 id="input_outlined"
                 name="inputstyle"
@@ -66,7 +66,7 @@
               />
               <label for="input_outlined">Outlined</label>
             </div>
-            <div class="p-field-radiobutton">
+            <div class="field-radiobutton">
               <RadioButton
                 id="input_filled"
                 name="inputstyle"
@@ -79,7 +79,7 @@
           </div>
         </div>
 
-        <div class="p-ml-auto">
+        <div class="ml-auto">
           <h6>Ripple Effect</h6>
           <InputSwitch
             :model-value="rippleActive"
@@ -93,7 +93,7 @@
         :key="category.label"
         class="editor-category"
       >
-        <h6 class="p-mt-4 mb:p-2">{{ category.label }}</h6>
+        <h6 class="mt-4 mb-2">{{ category.label }}</h6>
         <div
           v-for="option of category.options"
           :key="option.name"
@@ -228,7 +228,7 @@ export default {
     async compile() {
       try {
         const response = await axios.post(
-          import.meta.VITE_VUE_APP_THEME_BUILDER_URL + '?theme=' + this.theme,
+          process.env.VUE_APP_THEME_BUILDER_URL + '?theme=' + this.theme,
           this.variables
         )
         this.$emit('compile', response.data)
@@ -239,7 +239,7 @@ export default {
     async downloadTheme() {
       try {
         const response = await axios.post(
-          import.meta.VITE_VUE_APP_THEME_BUILDER_URL + '?theme=' + this.theme,
+          process.env.VUE_APP_THEME_BUILDER_URL + '?theme=' + this.theme,
           this.variables
         )
         const url = window.URL.createObjectURL(

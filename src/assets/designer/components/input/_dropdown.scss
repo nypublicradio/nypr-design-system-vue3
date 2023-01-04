@@ -26,6 +26,7 @@
             color: $inputPlaceholderTextColor;
         }
 
+        &:focus,
         &:enabled:focus {
             outline: 0 none;
             box-shadow: none;
@@ -92,11 +93,22 @@
             &.p-highlight {
                 color: $highlightTextColor;
                 background: $highlightBg;
+
+                &.p-focus {
+                    background: $highlightFocusBg;
+                }
             }
 
-            &:not(.p-highlight):not(.p-disabled):hover {
-                color: $inputListItemTextHoverColor;
-                background: $inputListItemHoverBg;
+            &:not(.p-highlight):not(.p-disabled) {
+                &.p-focus {
+                    color: $inputListItemTextFocusColor;
+                    background: $inputListItemFocusBg;
+                }
+
+                &:hover {
+                    color: $inputListItemTextHoverColor;
+                    background: $inputListItemHoverBg;
+                }
             }
         }
 
@@ -126,6 +138,10 @@
     
         &:not(.p-disabled).p-focus {
             background-color: $inputFilledFocusBg;
+
+            .p-inputtext {
+                background-color: transparent;
+            }
         }
     }
 }
