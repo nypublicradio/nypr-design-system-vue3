@@ -175,7 +175,7 @@ const convertTime = (val) => {
 }
 const download = () => {
   emit('download')
-  window.open(props.file, '_top')
+  window.open(props.file, '_blank')
 }
 const goAhead15 = () => {
   if (sound) {
