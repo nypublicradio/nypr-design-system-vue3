@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, watch, onUpdated } from 'vue'
 import Slider from 'primevue/slider'
 
 const props = defineProps({
@@ -17,6 +17,10 @@ const emit = defineEmits([
 
 // v-model can't be used with props, so we need to create a ref
 const progressRef = ref(props.progress)
+
+onUpdated(() => {
+  progressRef.value = props.progress
+})
 </script>
 
 <template>
