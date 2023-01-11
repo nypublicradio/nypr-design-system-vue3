@@ -1,10 +1,15 @@
 <script setup>
-import VShareTools from '/v2/src/components/VShareTools.vue'
-import VShareToolsItem from '/v2/src/components/VShareToolsItem.vue'
-import VFlexibleLink from '/v2/src/components/VFlexibleLink.vue'
-import VCard from '/v2/src/components/VCard.vue'
-import VImageWithCaption from '/v2/src/components/VImageWithCaption.vue'
+import VShareTools from '~/v2/src/components/VShareTools.vue'
+import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
+import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
+import VCard from '~/v2/src/components/VCard.vue'
+import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
 import Home from '~/src/components/Home.vue'
+
+const emitClick = (type) => {
+  console.log('click = ', type)
+}
+
 </script>
 
 <template>
@@ -52,6 +57,11 @@ import Home from '~/src/components/Home.vue'
                     :height="175"
                     :max-width="1440"
                     :max-height="2560"
+                    credit="Credit Text Here"
+                    credit-url="https://www.Credit-URL-Here.com"
+                    @image-click="emitClick('image')"
+                    @title-click="emitClick('title')"
+                    @credit-click="emitClick('credit')"
                   >
                     <a href="https://primefaces.org/primevue/showcase/#/icons"
                       >Get icons here</a

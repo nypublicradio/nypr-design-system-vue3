@@ -70,6 +70,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  credit: {
+    default: null,
+    type: String,
+  },
+  creditUrl: {
+    default: null,
+    type: String,
+  },
   maxHeight: {
     type: Number,
     default: Infinity,
@@ -130,6 +138,13 @@ const props = defineProps({
     },
   },
 })
+
+const emit = defineEmits([
+  'title-click',
+  'image-click',
+  'credit-click',
+])
+
 const slots = useSlots()
 
 const hasDetails = computed(() => {
@@ -182,7 +197,11 @@ const hasDetails = computed(() => {
           :sizes="sizes"
           :caption="caption"
           :caption-keep-on-top="captionKeepOnTop"
+          :credit="credit"
+          :credit-url="creditUrl"
           role="presentation"
+          @image-click="emit('image-click')"
+          @credit-click="emit('credit-click')"
         />
         <!-- desktop, uses width and height props -->
         <v-image-with-caption
@@ -204,7 +223,11 @@ const hasDetails = computed(() => {
           :sizes="sizes"
           :caption="caption"
           :caption-keep-on-top="captionKeepOnTop"
+          :credit="credit"
+          :credit-url="creditUrl"
           role="presentation"
+          @image-click="emit('image-click')"
+          @credit-click="emit('credit-click')"
         />
       </div>
     </template>
@@ -224,6 +247,7 @@ const hasDetails = computed(() => {
           class="card-title-link"
           :class="{ disabled: !titleLink }"
           :to="titleLink"
+          @emit-flexible-link="emit('title-click')"
         >
           <div class="h2" v-html="title"></div>
           <i
