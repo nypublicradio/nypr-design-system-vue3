@@ -6,8 +6,9 @@ import VCard from '~/v2/src/components/VCard.vue'
 import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
 import Home from '~/src/components/Home.vue'
 
-const emitClick = (type) => {
+const emitClick = (type,event) => {
   console.log('click = ', type)
+  console.log('event = ', event)
 }
 
 </script>
@@ -59,9 +60,10 @@ const emitClick = (type) => {
                     :max-height="2560"
                     credit="Credit Text Here"
                     credit-url="https://www.Credit-URL-Here.com"
-                    @image-click="emitClick('image')"
-                    @title-click="emitClick('title')"
-                    @credit-click="emitClick('credit')"
+                    @image-click="(e) => emitClick('image',e)"
+                    @title-click="(e) => emitClick('title',e)"
+                    @credit-click="(e) => emitClick('credit',e)"
+                    @tag-click="(e) => emitClick('tag',e)"
                   >
                     <a href="https://primefaces.org/primevue/showcase/#/icons"
                       >Get icons here</a
