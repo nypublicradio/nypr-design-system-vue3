@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { ref, watch, computed } from 'vue'
 import VImageWithCaption from './VImageWithCaption.vue'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VProgressScrubber from './VProgressScrubber.vue'
