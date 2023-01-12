@@ -1,5 +1,4 @@
 <script setup>
-import Button from 'primevue/button'
 import VFlexibleLink from './VFlexibleLink.vue'
 const emit = defineEmits(['tagClick'])
 const props = defineProps({
@@ -19,7 +18,7 @@ const props = defineProps({
     <v-flexible-link
       :to="props.slug"
       :class="props.slug ? '' : 'disabled'"
-      @click="emit('tagClick', tag)"
+      @click="emit('tagClick', props.slug)"
     >
       <div :class="`p-button p-button-rounded p-button-outlined ${props.name}`">
         <span class="p-button-label">{{props.name}}</span>

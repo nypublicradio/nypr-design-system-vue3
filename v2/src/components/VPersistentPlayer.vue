@@ -277,6 +277,8 @@ const scrubTimelineEnd = (e) => {
   onceFlag = null
 }
 const scrubTimelineChange = (e) => {
+  // update currentSeconds from the Slider change event, that passes the value to the Slider.
+  currentSeconds.value = (e * durationSeconds.value) / 100
   if (!onceFlag) {
     emit('scrub-timeline-change', e)
     onceFlag = true
