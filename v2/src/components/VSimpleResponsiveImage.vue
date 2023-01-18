@@ -332,6 +332,7 @@ const closeEnlarge = () => {
       opacity: 1;
       width: 0;
       height: 0;
+      border: none;
     }
     img {
       cursor: default;
