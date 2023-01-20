@@ -1,4 +1,6 @@
 <script setup>
+import VPerson from '~/v2/src/components/VPerson.vue'
+import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
 import VShareTools from '~/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
@@ -10,10 +12,43 @@ const emitClick = (type, event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
 }
+
+const social = [
+    {
+        service: 'facebook',
+        profileUrl: 'https://www.facebook.com/WNYC',
+    },
+    {
+        service: 'twitter',
+        profileUrl: 'https://twitter.com/WNYC'
+    },
+    {
+        service: 'instagram',
+        profileUrl: 'https://www.instagram.com/WNYC/'
+    },
+    {
+        service: 'linkedin',
+        profileUrl: 'https://www.linkedin.com/company/wnyc-radio/'
+    },
+    {
+        service: 'youtube',
+        profileUrl: 'https://www.youtube.com/channel/UCbysmY4hyViQAAYEzOR-uCQ'
+    }
+]
 </script>
 
 <template>
-  <div>
+  <main>
+    <v-persistent-player
+      data-style-mode="dark"
+      :livestream="true"
+      title="The Takeaway"
+      station="WNYC 93.9 FM"
+      title-link="http://www.google.com"
+      image="https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/"
+      description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
+      file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    />
     <section>
       <div class="content lg:px-8 pb-0">
         <div class="grid">
@@ -40,50 +75,57 @@ const emitClick = (type, event) => {
             <v-flexible-link to="https://www.google.com"
               >google</v-flexible-link
             >
-            <br />
-            <br />
+
+            <div class="mb-8" />
+
+            <h1 class="h1">H1 Header Text</h1>
+            <h2 class="h2">H2 Header Text</h2>
+            <h3 class="h3">H3 Header Text</h3>
+            <h4 class="h4">H4 Header Text</h4>
+            <h5 class="h5">H5 Header Text</h5>
+            <h6 class="h6">H6 Header Text</h6>
+
+            <div class="mb-8" />
 
             <div class="grid">
               <div class="col-12 p-fluid">
                 <div class="card">
-                  <h5>Card</h5>
                   <v-card
-                    image="https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/"
+                    image="https://media.wnyc.org/i/240/240/l/80/2020/06/AllOfIt.png"
                     title="Title with some <em>HTML</em>"
                     title-link="https://www.google.com"
-                    subtitle="Subtitle"
-                    :width="175"
-                    :tags="[{ name: 'tag', slug: 'tag' }]"
-                    :height="175"
-                    :max-width="1440"
-                    :max-height="2560"
-                    credit="Credit Text Here"
-                    credit-url="https://www.Credit-URL-Here.com"
+                    loading="eager"
+                    :width="240"
+                    :height="240"
+                    :max-width="240"
+                    :max-height="240"
                     @image-click="(e) => emitClick('image', e)"
                     @title-click="(e) => emitClick('title', e)"
                     @credit-click="(e) => emitClick('credit', e)"
                     @tag-click="(e) => emitClick('tag', e)"
                   >
-                    <a href="https://primefaces.org/primevue/showcase/#/icons"
-                      >Get icons here</a
-                    >
+                    <p>
+                      All Of It with Alison Stewart is a live daily conversation
+                      about culture and the culture in and around New York City.
+                      Follow All Of It on
+                      <a
+                        href="https://www.instagram.com/allofitwnyc/?hl=en"
+                        target="_blank"
+                        >Instagram</a
+                      >.
+                    </p>
+                    <Button label="Listen Live" icon="pi pi-play" />
                   </v-card>
                 </div>
-                <div class="card">
-                  <h5>Image With Caption</h5>
-                  <v-image-with-caption
-                    alt-text="Fallback alt text here"
-                    image="https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/"
-                    caption="Caption Here"
-                    credit="Credit Text Here"
-                    credit-url="https://www.Credit-URL-Here.com"
-                    title="Title Text Here"
-                    description="Description Text Here"
-                    :allow-preview="true"
-                    :width="600"
-                    :height="400"
-                  />
-                </div>
+
+                <div class="mb-8" />
+
+                <v-person
+                  image="https://media.wnyc.org/i/1860/1240/l/80/2020/10/NYPR_020819_1161_R1_silo_layers-Alison-Stewart.jpg"
+                  full-name="Alison Stewart"
+                  role="Host"
+                  :social="social"
+                />
               </div>
             </div>
             <client-only>
@@ -109,7 +151,7 @@ const emitClick = (type, event) => {
         </div>
       </div>
     </section>
-  </div>
+  </main>
 </template>
 
 <style lang="scss">

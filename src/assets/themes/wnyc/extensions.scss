@@ -1,0 +1,191 @@
+/* Customizations to the designer theme should be defined here */
+main {
+    background: linear-gradient(180deg, var(--red) 20.82%, var(--blue) 50.8%);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    // Use lining figures instead of text figures for headers
+    // https://www.codesmite.com/article/fixing-raleway-and-similar-fonts-numerals
+    -webkit-font-feature-settings: 'lnum';
+    -moz-font-feature-settings: 'lnum';
+    font-feature-settings: 'lnum';
+}
+
+a:not(.v-share-tools-item) {
+    color: var(--white);
+    padding-bottom: 4px;
+    border-bottom: solid 2px var(--white);
+    transition: opacity var(--transition-duration);
+}
+
+.p-button {
+    transition: var(--transition-duration);
+    box-shadow: 0px 4px 8px RGBA(0, 0, 0, 0.15);
+    border-radius: 30px;
+    padding: 0 40px;
+    height: 41px;
+    line-height: 41px;
+}
+
+.p-button .p-button-label {
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    font-size: var(--font-size-6);
+    color: var(--color-red);
+}
+
+.card {
+    background: linear-gradient(180deg, RGB(43, 111, 153, 0.49) 0%, RGB(43, 111, 153, 0.17) 100%), #191716 !important;
+    border-radius: 6px;
+    position: relative;
+
+    &:after {
+        content: '';
+        height: 8px;
+        width: calc(100% - 40px);
+        background: var(--red);
+        border-radius: 0 0 6px 6px;
+        margin: auto;
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: -8px;
+        @include media('>=medium') {
+            width: calc(100% - 64px);
+        }
+    }
+}
+.v-card {
+    background: transparent !important;
+}
+.v-card .card-details .card-title .card-title-link {
+    border-bottom: none;
+}
+.v-card .card-image-link img {
+    border-radius: 3px;
+}
+.v-card .p-button {
+    background-color: var(--red);
+    border: none;
+    color: var(--white);
+    width: fit-content;
+}
+
+.persistent-player,
+.persistent-player.player {
+    font-family: var(--font-family);
+    position: fixed;
+    background-color: var(--black);
+
+    .p-button {
+        border-radius: 50%;
+        min-width: 30px !important;
+        width: 30px;
+        height: 30px;
+        &:focus {
+            box-shadow: 0 0 0 0.1rem var(--white) !important;
+        }
+    }
+
+    .play-button {
+        background-color: var(--red);
+        border-radius: 50%;
+        min-width: 41px !important;
+        width: 41px;
+        height: 41px;
+        &:hover {
+            border: none;
+            background-color: var(--danger-light-color);
+        }
+        .pi-play {
+            &:before {
+                content: '';
+                border-color: transparent transparent transparent #ffffff;
+                width: 10px;
+                height: 6px;
+                position: relative;
+                display: block;
+                box-sizing: border-box;
+                border-width: 6px 0px 6px 10px;
+                border-style: solid;
+            }
+        }
+        .pi-pause {
+            &:before {
+                content: '';
+                border-color: var(--white);
+                width: 10px;
+                height: 10px;
+                position: relative;
+                display: block;
+                box-sizing: border-box;
+                border-style: solid;
+                border-width: 0px 3px 0px 3px;
+            }
+        }
+    }
+
+    .minimize-btn {
+        right: 0;
+        left: 0;
+        margin: auto;
+    }
+
+    * {
+        color: var(--white) !important;
+        :not(.pi) {
+            font-family: var(--font-family) !important;
+        }
+    }
+    .track-info-description {
+        font-size: 0.85rem;
+    }
+    .track-info-livestream-station {
+        font-weight: normal;
+    }
+
+    .flexible-link,
+    .flexible-link:not(.raw):not(.null) {
+        &:hover {
+            color: var(--white) !important;
+        }
+    }
+    .track-info-livestream-indicator {
+        background: var(--white) !important;
+        .track-info-livestream-indicator-text {
+            color: #111111 !important;
+            line-height: normal;
+        }
+    }
+
+    .p-slider-range {
+        background: var(--red);
+    }
+
+    .maximize-btn-holder {
+        left: 0;
+        right: 0;
+        margin: auto;
+        .maximize-btn.p-button {
+            background-color: var(--black);
+            border: 1px solid var(--black100);
+            height: 30px;
+            &.show {
+                top: 10px;
+            }
+            &:hover {
+                background-color: var(--black100);
+            }
+        }
+    }
+}
+
+.person img {
+    border-radius: 50%;
+}
