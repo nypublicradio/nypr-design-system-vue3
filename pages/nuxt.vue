@@ -111,6 +111,7 @@ const social = [
                       <a
                         href="https://www.instagram.com/allofitwnyc/?hl=en"
                         target="_blank"
+                        rel="noopener noreferrer"
                         >Instagram</a
                       >.
                     </p>
