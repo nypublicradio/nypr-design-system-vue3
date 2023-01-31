@@ -16,28 +16,38 @@ h6 {
     font-feature-settings: 'lnum';
 }
 
-a:not(.v-share-tools-item) {
+a:not(.v-share-tools-item):not(.p-accordion-header-link) {
     color: var(--white);
     padding-bottom: 4px;
     border-bottom: solid 2px var(--white);
     transition: opacity var(--transition-duration);
 }
 
-.p-button {
+.p-button:not(.p-button-text):not(.p-button-rounded) {
     transition: var(--transition-duration);
     box-shadow: 0px 4px 8px RGBA(0, 0, 0, 0.15);
     border-radius: 30px;
     padding: 0 40px;
     height: 41px;
     line-height: 41px;
+    opacity: 1;
+    &:hover {
+        opacity: 0.75;
+    }
 }
 
 .p-button .p-button-label {
     text-transform: uppercase;
     font-weight: 700;
     letter-spacing: 0.02em;
-    font-size: var(--font-size-6);
-    color: var(--color-red);
+    font-size: var(--font-size-6) !important;
+}
+
+.p-button-rounded {
+    box-shadow: 0px 4px 8px RGBA(0, 0, 0, 0.15);
+    &:hover {
+        border: none;
+    }
 }
 
 .card {
@@ -59,6 +69,10 @@ a:not(.v-share-tools-item) {
         @include media('>=medium') {
             width: calc(100% - 64px);
         }
+    }
+
+    .p-error {
+        color: var(--concrete);
     }
 }
 .v-card {
@@ -186,6 +200,33 @@ a:not(.v-share-tools-item) {
     }
 }
 
-.person img {
-    border-radius: 50%;
+.person {
+    .person-inner .person-details .person-name-link-holder .person-name-link {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+    .h2 {
+        font-size: var(--font-size-7);
+        font-family: var(--font-family);
+        line-height: 1.25;
+        font-weight: 700;
+        letter-spacing: normal;
+    }
+    .person-role {
+        font-size: var(--font-size-4);
+        font-family: var(--font-family);
+        line-height: 1.25;
+        text-transform: uppercase;
+        font-weight: 700;
+        letter-spacing: 1.14px;
+    }
+    img {
+        border-radius: 50%;
+    }
+}
+
+.divider {
+    background: rgba(234,239,240,.5);
+    width: 1px;
+    min-height: 100px;
 }

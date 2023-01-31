@@ -12,33 +12,10 @@ const emitClick = (type, event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
 }
-
-const social = [
-    {
-        service: 'facebook',
-        profileUrl: 'https://www.facebook.com/WNYC',
-    },
-    {
-        service: 'twitter',
-        profileUrl: 'https://twitter.com/WNYC'
-    },
-    {
-        service: 'instagram',
-        profileUrl: 'https://www.instagram.com/WNYC/'
-    },
-    {
-        service: 'linkedin',
-        profileUrl: 'https://www.linkedin.com/company/wnyc-radio/'
-    },
-    {
-        service: 'youtube',
-        profileUrl: 'https://www.youtube.com/channel/UCbysmY4hyViQAAYEzOR-uCQ'
-    }
-]
 </script>
 
 <template>
-  <main>
+  <main class="pb-8">
     <v-persistent-player
       data-style-mode="dark"
       :livestream="true"
@@ -49,7 +26,7 @@ const social = [
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
     />
-    <section>
+    <section class="pb-8">
       <div class="content lg:px-8 pb-0">
         <div class="grid">
           <div class="col-12">
@@ -121,12 +98,43 @@ const social = [
 
                 <div class="mb-8" />
 
-                <v-person
-                  image="https://media.wnyc.org/i/1860/1240/l/80/2020/10/NYPR_020819_1161_R1_silo_layers-Alison-Stewart.jpg"
-                  full-name="Alison Stewart"
-                  role="Host"
-                  :social="social"
-                />
+                <div class="grid align-items-center">
+                  <div class="col-12 lg:col-3">
+                    <v-person
+                      image="https://media.wnyc.org/i/1860/1240/l/80/2020/10/NYPR_020819_1161_R1_silo_layers-Alison-Stewart.jpg"
+                      full-name="Alison Stewart"
+                      role="Host"
+                    />
+                  </div>
+                  <div class="col-1 hidden lg:flex justify-content-center">
+                    <div class="divider" />
+                  </div>
+                  <div class="col-12 lg:col-3">
+                    <p class="text-sm">Connect with the show!</p>
+                    <v-share-tools>
+                      <v-share-tools-item
+                        service="site"
+                        link="https://www.sample.com"
+                      />
+                      <v-share-tools-item
+                        service="facebook"
+                        username="gothamist"
+                      />
+                      <v-share-tools-item
+                        service="twitter"
+                        username="gothamist"
+                      />
+                      <v-share-tools-item
+                        service="instagram"
+                        username="gothamist"
+                      />
+                      <v-share-tools-item
+                        service="youtube"
+                        username="UCY_2VeS5Q9_sMZRhtvF0c5Q"
+                      />
+                    </v-share-tools>
+                  </div>
+                </div>
               </div>
             </div>
             <client-only>

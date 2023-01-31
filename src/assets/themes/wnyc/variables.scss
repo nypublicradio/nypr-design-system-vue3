@@ -58,7 +58,7 @@ $colors: (
 // $newColor: scale-color($existingColor, $saturation: 30%, $lightness: -30%, $alpha: -90%) !default;
 // can use any of the following $red, $green, $blue, $saturation, $lightness, $whiteness, $blackness, $alpha
 
-$primaryColor: #f4f2f0 !default;
+$primaryColor: #ffffff !default;
 $primaryColorAlt: scale-color($primaryColor, $lightness: 15%) !default;
 $primaryLightColor: scale-color($primaryColor, $lightness: 30%) !default;
 $primaryDarkColor: scale-color($primaryColor, $lightness: -10%) !default;
@@ -71,9 +71,9 @@ $successColor: #7fa366 !default;
 $successLightColor: #a3be8c !default;
 $warningColor: #d08770 !default;
 $warningLightColor: #e2ac94 !default;
-$helpColor: #9a6796 !default;
+$helpColor: #ffffff !default;
 $helpLightColor: #b48ead !default;
-$dangerColor: #bf616a !default;
+$dangerColor: #de1e3d !default;
 $dangerLightColor: #d88889 !default;
 $yellowColor: #ebcb8b !default;
 
@@ -240,14 +240,14 @@ $linkButtonFocusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
 $buttonPadding: 0 40px !default;
 $buttonIconOnlyWidth: 2.357rem !default;
 $buttonIconOnlyPadding: 0.5rem 0 !default;
-$buttonBg: $primaryColor !default;
-$buttonTextColor: $primaryTextColor !default;
+$buttonBg: #ffffff!default;
+$buttonTextColor: map-get($colors, 'lightblue') !default;
 $buttonBorder: 2px solid transparent !default;
-$buttonHoverBg: $black100 !default;
-$buttonTextHoverColor: $primaryColor !default;
+$buttonHoverBg: #ffffff !default;
+$buttonTextHoverColor: map-get($colors, 'lightblue') !default;
 $buttonHoverBorderColor: transparent !default;
-$buttonActiveBg: $black400 !default;
-$buttonTextActiveColor: $primaryColor !default;
+$buttonActiveBg: #ffffff !default;
+$buttonTextActiveColor: map-get($colors, 'lightblue') !default;
 $buttonActiveBorderColor: transparent !default;
 $raisedButtonShadow: 0 4px 4px 0px rgba(0, 0, 0, 0.2), 0 12px 10px 0 rgba(0, 0, 0, 0.06) !default;
 $roundedButtonBorderRadius: 2rem !default;
@@ -259,15 +259,15 @@ $plainButtonTextColor: $textSecondaryColor !default;
 $plainButtonHoverBgColor: $white !default;
 $plainButtonActiveBgColor: $white200 !default;
 
-$secondaryButtonBg: $black100 !default;
+$secondaryButtonBg: map-get($colors, 'red') !default;
 $secondaryButtonTextColor: #ffffff !default;
-$secondaryButtonBorder: 2px solid $black100 !default;
-$secondaryButtonHoverBg: $black50 !default;
+$secondaryButtonBorder: 2px solid transparent !default;
+$secondaryButtonHoverBg: map-get($colors, 'red') !default;
 $secondaryButtonTextHoverColor: #ffffff !default;
-$secondaryButtonHoverBorderColor: $black100 !default;
-$secondaryButtonActiveBg: $black400 !default;
+$secondaryButtonHoverBorderColor: transparent !default;
+$secondaryButtonActiveBg: map-get($colors, 'red') !default;
 $secondaryButtonTextActiveColor: #ffffff !default;
-$secondaryButtonActiveBorderColor: $black400 !default;
+$secondaryButtonActiveBorderColor: transparent !default;
 $secondaryButtonFocusShadow: 0 0 0 0.2rem scale-color($secondaryButtonBg, $lightness: 60%) !default;
 
 $infoButtonBg: $infoColor !default;
@@ -453,28 +453,28 @@ $inputSwitchSliderOnHoverBg: $primaryColorAlt !default;
 $inputSwitchHandleOnBg: $white !default;
 
 //panel
-$panelHeaderBorderColor: $white200 !default;
-$panelHeaderBorder: 1px solid $white200 !default;
+$panelHeaderBorderColor: transparent !default;
+$panelHeaderBorder: 1px solid transparent !default;
 $panelHeaderBg: $white !default;
-$panelHeaderTextColor: $black100 !default;
+$panelHeaderTextColor: $primaryTextColor !default;
 $panelHeaderFontWeight: 500 !default;
 $panelHeaderPadding: 1rem !default;
 $panelToggleableHeaderPadding: 0.5rem 1rem !default;
 
-$panelHeaderHoverBg: $white !default;
-$panelHeaderHoverBorderColor: $white200 !default;
-$panelHeaderTextHoverColor: $black100 !default;
+$panelHeaderHoverBg: transparent !default;
+$panelHeaderHoverBorderColor: transparent !default;
+$panelHeaderTextHoverColor: $primaryTextColor !default;
 
-$panelContentBorderColor: $white200 !default;
-$panelContentBorder: 1px solid $white200 !default;
-$panelContentBg: $white !default;
-$panelContentEvenRowBg: $white !default;
-$panelContentTextColor: $black100 !default;
+$panelContentBorderColor: transparent !default;
+$panelContentBorder: 1px solid transparent !default;
+$panelContentBg: transparent !default;
+$panelContentEvenRowBg: transparent !default;
+$panelContentTextColor: $primaryTextColor !default;
 $panelContentPadding: 1rem !default;
 
-$panelFooterBorder: 1px solid $white200 !default;
-$panelFooterBg: $white !default;
-$panelFooterTextColor: $black100 !default;
+$panelFooterBorder: 1px solid transparent !default;
+$panelFooterBg: transparent !default;
+$panelFooterTextColor: $primaryTextColor !default;
 $panelFooterPadding: 0.5rem 1rem !default;
 
 //accordion
@@ -487,15 +487,15 @@ $accordionHeaderPadding: $panelHeaderPadding !default;
 
 $accordionHeaderHoverBg: $white !default;
 $accordionHeaderHoverBorderColor: $white200 !default;
-$accordionHeaderTextHoverColor: $black100 !default;
+$accordionHeaderTextHoverColor: $primaryTextColor !default;
 
 $accordionHeaderActiveBg: $panelHeaderBg !default;
 $accordionHeaderActiveBorderColor: $white200 !default;
-$accordionHeaderTextActiveColor: $black100 !default;
+$accordionHeaderTextActiveColor: $primaryTextColor !default;
 
 $accordionHeaderActiveHoverBg: $white !default;
 $accordionHeaderActiveHoverBorderColor: $white200 !default;
-$accordionHeaderTextActiveHoverColor: $black100 !default;
+$accordionHeaderTextActiveHoverColor: $primaryTextColor !default;
 
 $accordionContentBorder: $panelContentBorder !default;
 $accordionContentBg: $panelContentBg !default;
