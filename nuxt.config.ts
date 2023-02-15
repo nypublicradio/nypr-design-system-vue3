@@ -22,9 +22,20 @@ export default {
   // components: [
   //   { path: '~/src/components/', extensions: ['vue'] }
   // ],
+  imports: {
+    dirs: [
+      'composables', // top-level modules
+      'composables/*/index.{ts,js,mjs,mts}' // one level directories's index.js,
+    ]
+  },
   build: {
     transpile: [
       'primevue'
     ]
+  },
+  runtimeConfig: {
+    public: {
+      IMAGE_BASE_URL: process.env['IMAGE_BASE_URL'] || 'https://cms.prod.nypr.digital/images/',
+    }
   },
 }

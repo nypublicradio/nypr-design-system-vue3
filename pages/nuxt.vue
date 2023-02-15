@@ -12,10 +12,54 @@ const emitClick = (type, event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
 }
+
+const block = ref({
+  type: 'image',
+  value: {
+    image: {
+      id: 336706,
+      title: 'FTVDAY021423_Gabriela-Bhaskar-0334.jpg',
+      width: 3000,
+      height: 2000,
+      createdAt: '2022-03-24T17:18:54.828125-04:00',
+      focalPointX: null,
+      focalPointY: null,
+      focalPointWidth: null,
+      focalPointHeight: null,
+      fileSize: 4464794,
+      fileHash: 'abbbe9be96a1f501da9ee298550e2c2ab55bed46',
+      alt: 'A photo of a "Vote Yes" banner held by Amazon union organizers.',
+      caption:
+        'Amazon union organizers rally for a union ahead of a vote that begins Friday.',
+      credit: 'Gwynne Hogan/Gothamist',
+      creditLink: '',
+      file: 'https://cdn.cms.demo.nypr.digital/original_images/FTVDAY021423_Gabriela-Bhaskar-0334.original.jpg',
+      usageLimitations: '',
+      expiryDate: null,
+      collection: 1,
+      uploadedByUser: 123,
+    },
+    caption: 'VOTE YES! This is a caption override. YAY!',
+  },
+  id: '7a907edf-af2b-43a2-8d64-dea6d196a8ee',
+})
 </script>
 
 <template>
   <main class="pb-8">
+    <v-image-with-caption
+      v-if="block.value.image"
+      class="mb-7"
+      :image="useImageUrl(block.value.image)"
+      :alt-text="block.value.image.alt"
+      :maxWidth="block.value.image.width"
+      :maxHeight="block.value.image.height"
+      :description="block.value.caption || block.value.image.caption"
+      :credit="block.value.image.credit"
+      :credit-url="block.value.image.creditLink"
+      :sizes="[2]"
+      :ratio="[block.value.image.width, block.value.image.height]"
+    />
     <v-persistent-player
       data-style-mode="dark"
       :livestream="true"
