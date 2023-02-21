@@ -18,6 +18,9 @@ const props = defineProps({
     default: ', ',
   },
 })
+const emit = defineEmits([
+  'name-click', 'organization-click'
+])
 
 // depending on the author object, we return a unique key
 const getUniqueKey = (author) => {
@@ -35,7 +38,12 @@ const getUniqueKey = (author) => {
         v-for="(author, index) in props.authors"
         :key="`author-${index}-${getUniqueKey(author)}`"
       >
-        <v-byline-unit class="v-byline-unit" :author="author || null" />
+        <v-byline-unit
+          class="v-byline-unit"
+          :author="author || null"
+          @name-click="emit('name-click', $event)"
+          @organization-click="emit('organization-click', $event)"
+        />
         <span
           v-if="authors.length > 1 && index < authors.length - 2"
           class="v-byline-concat"
@@ -48,7 +56,12 @@ const getUniqueKey = (author) => {
       </template>
     </template>
     <template v-else>
-      <v-byline-unit class="v-byline-unit" :author="props.authors" />
+      <v-byline-unit
+        class="v-byline-unit"
+        :author="props.authors"
+        @name-click="emit('name-click', $event)"
+        @organization-click="emit('organization-click', $event)"
+      />
     </template>
   </div>
 </template>
