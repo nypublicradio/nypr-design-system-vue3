@@ -187,8 +187,6 @@ const hasDetails = computed(() => {
           is-decorative
           :loading="loading"
           :image-url="titleLink"
-          :width="width ? Math.round(width * props.mobileImageScale) : null"
-          :height="height ? Math.round(height * props.mobileImageScale) : null"
           :max-width="maxWidth"
           :max-height="maxHeight"
           :allow-vertical-effect="allowVerticalEffect"
@@ -201,8 +199,8 @@ const hasDetails = computed(() => {
           :credit="credit"
           :credit-url="creditUrl"
           role="presentation"
-          @image-click="(e) => emit('image-click',e)"
-          @credit-click="(e) => emit('credit-click',e)"
+          @image-click="(e) => emit('image-click', e)"
+          @credit-click="(e) => emit('credit-click', e)"
         />
         <!-- desktop, uses width and height props -->
         <v-image-with-caption
@@ -227,8 +225,8 @@ const hasDetails = computed(() => {
           :credit="credit"
           :credit-url="creditUrl"
           role="presentation"
-          @image-click="(e) => emit('image-click',e)"
-          @credit-click="(e) => emit('credit-click',e)"
+          @image-click="(e) => emit('image-click', e)"
+          @credit-click="(e) => emit('credit-click', e)"
         />
       </div>
     </template>
@@ -249,7 +247,7 @@ const hasDetails = computed(() => {
           class="card-title-link"
           :class="{ disabled: !titleLink }"
           :to="titleLink"
-          @emit-flexible-link="emit('title-click',titleLink)"
+          @emit-flexible-link="emit('title-click', titleLink)"
         >
           <div class="h2" v-html="title"></div>
           <i
