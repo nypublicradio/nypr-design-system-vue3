@@ -41,8 +41,8 @@ const getUniqueKey = (author) => {
         <v-byline-unit
           class="v-byline-unit"
           :author="author || null"
-          @name-click="emit('name-click', $event)"
-          @organization-click="emit('organization-click', $event)"
+          @name-click="$event => emit('name-click', $event)"
+          @organization-click="$event => emit('organization-click', $event)"
         />
         <span
           v-if="authors.length > 1 && index < authors.length - 2"
@@ -59,8 +59,8 @@ const getUniqueKey = (author) => {
       <v-byline-unit
         class="v-byline-unit"
         :author="props.authors"
-        @name-click="emit('name-click', $event)"
-        @organization-click="emit('organization-click', $event)"
+        @name-click="$event => emit('name-click', $event)"
+        @organization-click="$event => emit('organization-click', $event)"
       />
     </template>
   </div>
