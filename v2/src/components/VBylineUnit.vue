@@ -16,7 +16,7 @@ const emit = defineEmits([
     <v-flexible-link
       :to="author.url || null"
       class="v-byline-author-name"
-      @click="emit('name-click', {text: `${author.firstName} ${author.lastName}`, url: author.url})"
+      @click="() => emit('name-click', {text: `${author.firstName} ${author.lastName}`, url: author.url})"
     >
       {{ author.firstName }} {{ author.lastName }}
     </v-flexible-link>
@@ -25,7 +25,7 @@ const emit = defineEmits([
       v-if="author.organization"
       :to="author.organizationUrl || null"
       class="v-byline-contributing-org"
-      @click="emit('organization-click', {text: author.organization, url: author.organizationUrl})"
+      @click="() => emit('organization-click', {text: author.organization, url: author.organizationUrl})"
     >
       {{ author.organization }}
     </v-flexible-link>
