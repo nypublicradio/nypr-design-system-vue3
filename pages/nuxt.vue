@@ -13,6 +13,24 @@ const emitClick = (type, event) => {
   //console.log('event = ', event)
 }
 
+function useImageUrl(image, options) {
+  const config = useRuntimeConfig()
+  if (!image) {
+    return ''
+  }
+  const imageUrlTemplate = `${config.public.IMAGE_BASE_URL}${image.id}/fill-%width%x%height%|format-webp|webpquality-%quality%`
+  return imageUrlTemplate
+    .replace('%width%', (options?.width && String(options.width)) || '%width%')
+    .replace(
+      '%height%',
+      (options?.height && String(options.height)) || '%height%'
+    )
+    .replace(
+      '%quality%',
+      (options?.quality && String(options.quality)) || '%quality%'
+    )
+}
+
 const block = ref({
   type: 'image',
   value: {

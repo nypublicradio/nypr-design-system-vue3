@@ -524,7 +524,7 @@ $tabviewContentPadding: $panelContentPadding !default;
 
 //upload
 $fileUploadProgressBarHeight: 0.25rem !default;
-$fileUploadContentPadding: 2rem 1rem !default;
+$fileUploadContentPadding: $panelContentPadding !default;
 
 //scrollpanel
 $scrollPanelTrackBorder: 0 none !default;
@@ -948,3 +948,25 @@ $imagePreviewActionIconWidth: 3rem !default;
 $imagePreviewActionIconHeight: 3rem !default;
 $imagePreviewActionIconFontSize: 1.5rem !default;
 $imagePreviewActionIconBorderRadius: 50% !default;
+
+//3.29.1 additions
+//upload
+$fileUploadProgressBarHeight: 0.25rem !default;
+$fileUploadFileBorder: 1px solid #c8c8c8 !default;
+$fileUploadFilePadding: 1rem !default;
+
+//menu (e.g. menu, menubar, tieredmenu)
+$menuitemActiveFocusBg: #eaeaea !default;
+$menuitemTextFocusColor: $textColor !default;
+$menuitemIconFocusColor: $textColor !default;
+$menuitemFocusBg: #d6d6d6 !default;
+
+//dock
+$dockItemBorderRadius: $borderRadius !default;
+
+//progressbar
+$progressSpinnerStrokeColor: $errorMessageTextColor !default;
+$progressSpinnerColorOne: $errorMessageTextColor !default;
+$progressSpinnerColorTwo: $infoMessageTextColor !default;
+$progressSpinnerColorThree: $successMessageTextColor !default;
+$progressSpinnerColorFour: $warningMessageTextColor !default;

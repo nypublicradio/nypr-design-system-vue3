@@ -44,13 +44,13 @@ $breakpoints: (
 
 //colors
 $colors: (
-    'coolwhite': #EAEFF0,
+    'coolwhite': #eaeff0,
     'blue': #203849,
-    'lightblue': #235B9C,
+    'lightblue': #235b9c,
     'darkblue': #191716,
     'red': #de1e3d,
     'darkred': #6a1017,
-    'concrete': #E0E2E3,
+    'concrete': #e0e2e3,
     'almostblack': #101012,
 );
 
@@ -240,7 +240,7 @@ $linkButtonFocusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
 $buttonPadding: 0 40px !default;
 $buttonIconOnlyWidth: 2.357rem !default;
 $buttonIconOnlyPadding: 0.5rem 0 !default;
-$buttonBg: #ffffff!default;
+$buttonBg: #ffffff !default;
 $buttonTextColor: map-get($colors, 'lightblue') !default;
 $buttonBorder: 2px solid transparent !default;
 $buttonHoverBg: #ffffff !default;
@@ -547,7 +547,7 @@ $cardSubTitleColor: $primaryColorAlt !default;
 $cardContentPadding: 1rem 0 !default;
 $cardFooterPadding: 1rem 0 0 0 !default;
 $cardShadow: none !default;
-$cardBackground: linear-gradient(180deg,rgba(43,111,153,.49),rgba(43,111,153,.17)),#191716;
+$cardBackground: linear-gradient(180deg, rgba(43, 111, 153, 0.49), rgba(43, 111, 153, 0.17)), #191716;
 
 //editor
 $editorToolbarBg: $panelHeaderBg !default;
@@ -941,3 +941,25 @@ $imagePreviewActionIconWidth: 3rem !default;
 $imagePreviewActionIconHeight: 3rem !default;
 $imagePreviewActionIconFontSize: 1.5rem !default;
 $imagePreviewActionIconBorderRadius: 50% !default;
+
+//3.29.1 additions
+//upload
+$fileUploadProgressBarHeight: 0.25rem !default;
+$fileUploadFileBorder: 1px solid #c8c8c8 !default;
+$fileUploadFilePadding: 1rem !default;
+
+//menu (e.g. menu, menubar, tieredmenu)
+$menuitemActiveFocusBg: #eaeaea !default;
+$menuitemTextFocusColor: $textColor !default;
+$menuitemIconFocusColor: $textColor !default;
+$menuitemFocusBg: #d6d6d6 !default;
+
+//dock
+$dockItemBorderRadius: $borderRadius !default;
+
+//progressbar
+$progressSpinnerStrokeColor: $errorMessageTextColor !default;
+$progressSpinnerColorOne: $errorMessageTextColor !default;
+$progressSpinnerColorTwo: $infoMessageTextColor !default;
+$progressSpinnerColorThree: $successMessageTextColor !default;
+$progressSpinnerColorFour: $warningMessageTextColor !default;
