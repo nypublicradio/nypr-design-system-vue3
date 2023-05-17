@@ -26,6 +26,7 @@ $colors: (
     'purple': #8949f8,
     'red': #ff2b32,
     'black': #000000,
+    'white': #ffffff,
     'primary': $primaryColor,
 );
 
@@ -41,41 +42,6 @@ $shade700: #343a3f !default; //text color
 $shade800: #21272a !default; //unused
 $shade900: #121619 !default; //unused
 
-$black: map-get($colors, 'black') !default;
-$black50: #808080 !default;
-// $black 100 is used for a lot of text color in components
-$black100: #555555 !default;
-$black200: #333333 !default;
-$black300: #cfcfcf !default;
-$black400: #808080 !default;
-$black500: #ececec !default;
-
-$white: #ffffff !default;
-$white100: #f4f2f0 !default;
-$white200: #ededed !default;
-$white300: #e8e8e8 !default;
-
-//gray and surfaces
-$gray-50: #f0f0f0 !default;
-$gray-100: #e2e2e2 !default;
-$gray-200: #c2c2c2 !default;
-$gray-300: #a6a6a6 !default;
-$gray-400: #858585 !default;
-$gray-500: #6c6c6c !default;
-$gray-600: #555555 !default;
-$gray-700: #3e3e3e !default;
-$gray-800: #292929 !default;
-$gray-900: #161616 !default;
-$gray-950: #0d0d0d !default;
-
-//labels surfaces
-$surfaceGround: #ffffff !default;
-$surfaceSection: #ffffff !default;
-$surfaceCard: #ffffff !default;
-$surfaceOverlay: #ffffff !default;
-$surfaceBorder: #ffffff !default;
-$surfaceHover: #ffffff !default;
-
 //global
 $fontFamily: 'Roboto', sans-serif !default;
 $fontFamilyHeader: 'Roboto', sans-serif !default;
@@ -83,35 +49,25 @@ $fontSize: 1rem !default;
 $fontRatio: 1.125;
 $fontRatioLarge: 1.333;
 $fontWeight: normal !default;
-$fontWeight-100: 100 !default;
-$fontWeight-200: 200 !default;
-$fontWeight-300: 300 !default;
-$fontWeight-400: 400 !default;
-$fontWeight-500: 500 !default;
-$fontWeight-600: 600 !default;
-$fontWeight-700: 700 !default;
-$fontWeight-800: 800 !default;
-$fontWeight-900: 900 !default;
-
 $textColor: $shade700 !default;
 $textSecondaryColor: $shade600 !default;
 $borderRadius: 1px !default;
 $transitionDuration: 0.2s !default;
+$transitionEase: ease-in-out !default;
 $formElementTransition: background-color $transitionDuration, color $transitionDuration,
     border-color $transitionDuration, box-shadow $transitionDuration !default;
 $actionIconTransition: background-color $transitionDuration, color $transitionDuration, box-shadow $transitionDuration !default;
-$transitionEase: ease-in-out !default;
 $listItemTransition: box-shadow $transitionDuration !default;
 $primeIconFont: 'primeicons';
 $primeIconFontSize: 1rem !default;
 $divider: 1px solid $shade300 !default;
 $inlineSpacing: 0.5rem !default;
 $disabledOpacity: 0.6 !default;
-$disabledBackground: $black300 !default;
 $maskBg: rgba(0, 0, 0, 0.4) !default;
+$shadow: none !default;
 $loadingIconFontSize: 2rem !default;
 $errorColor: #d8222f !default;
-$shadow: none !default;
+
 //scale
 $scaleSM: 0.875 !default;
 $scaleLG: 1.25 !default;
@@ -141,12 +97,10 @@ $inputBg: $shade000 !default;
 $inputTextColor: $shade700 !default;
 $inputIconColor: $shade600 !default;
 $inputBorder: 1px solid $shade400 !default;
-$inputBorderRadius: $borderRadius !default;
 $inputHoverBorderColor: $primaryColor !default;
 $inputFocusBorderColor: $primaryColor !default;
 $inputErrorBorderColor: $errorColor !default;
 $inputPlaceholderTextColor: $shade600 !default;
-$inputPlaceholderTextColorOnDark: $black100 !default;
 $inputFilledBg: $shade100 !default;
 $inputFilledHoverBg: $inputFilledBg !default;
 $inputFilledFocusBg: $shade000 !default;
@@ -285,21 +239,10 @@ $linkButtonHoverColor: $primaryDarkerColor !default;
 $linkButtonTextHoverDecoration: underline !default;
 $linkButtonFocusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
 
-//link
-$linkColor: $textColor !default;
-$linkHoverColor: $black100 !default;
-$linkTextDecoration: underline !default;
-$linkHoverTextDecoration: underline !default;
-$linkButtonColor: $textColor !default;
-$linkButtonHoverColor: $black100 !default;
-$linkButtonTextHoverDecoration: underline !default;
-$linkButtonFocusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
-
 //checkbox
 $checkboxWidth: 14px !default;
 $checkboxHeight: 14px !default;
 $checkboxBorder: 2px solid $shade400 !default;
-$checkboxBg: $white !default;
 $checkboxIconFontSize: 12px !default;
 $checkboxActiveBorderColor: $primaryColor !default;
 $checkboxActiveBg: $primaryColor !default;
@@ -790,28 +733,12 @@ $horizontalMenuRootMenuitemActiveBg: $menuitemActiveBg !default;
 //badge and tag
 $badgeBg: $primaryColor !default;
 $badgeTextColor: $primaryTextColor !default;
-$badgeBorder: solid 1px $black !default;
-$badgeBorderRadius: 40px !default;
-$badgePadding: 1px 6px !default;
 $badgeMinWidth: 1.5rem !default;
 $badgeHeight: 1.5rem !default;
 $badgeFontWeight: 700 !default;
 $badgeFontSize: 0.75rem !default;
-$badgeLetterSpacing: 0.03rem !default;
-$badgeHoverBg: $black !default;
-$badgeHoverTextColor: $white !default;
 
-//tag
-$tagBg: $white !default;
-$tagTextColor: $black !default;
 $tagPadding: 0.25rem 0.4rem !default;
-$tagBorder: solid 1px $black !default;
-$tagBorderRadius: 40px !default;
-$tagFontWeight: 400 !default;
-$tagFontSize: 1.125rem !default;
-$tagLetterSpacing: 0.03rem !default;
-$tagHoverBg: $black !default;
-$tagHoverTextColor: $white !default;
 
 //carousel
 $carouselIndicatorsPadding: 1rem !default;
@@ -939,52 +866,3 @@ $imagePreviewActionIconWidth: 3rem !default;
 $imagePreviewActionIconHeight: 3rem !default;
 $imagePreviewActionIconFontSize: 1.5rem !default;
 $imagePreviewActionIconBorderRadius: 50% !default;
-
-:root {
-    --surface-a: #{$shade000};
-    --surface-b: #{$shade100};
-    --surface-c: #{$shade200};
-    --surface-d: #{$shade300};
-    --surface-e: #{$shade000};
-    --surface-f: #{$shade000};
-    --text-color: #{$shade700};
-    --text-color-secondary: #{$shade600};
-    --primary-color: #{$primaryColor};
-    --primary-color-text: #{$primaryTextColor};
-    --font-family: #{$fontFamily};
-    --surface-0: #ffffff;
-    --surface-50: #eff0f0;
-    --surface-100: #dfe0e1;
-    --surface-200: #bfc1c4;
-    --surface-300: #9fa3a6;
-    --surface-400: #7f8489;
-    --surface-500: #5f656b;
-    --surface-600: #4c5156;
-    --surface-700: #393d40;
-    --surface-800: #26282b;
-    --surface-900: #131415;
-    --gray-50: #eff0f0;
-    --gray-100: #dfe0e1;
-    --gray-200: #bfc1c4;
-    --gray-300: #9fa3a6;
-    --gray-400: #7f8489;
-    --gray-500: #5f656b;
-    --gray-600: #4c5156;
-    --gray-700: #393d40;
-    --gray-800: #26282b;
-    --gray-900: #131415;
-    --content-padding: #{$panelContentPadding};
-    --inline-spacing: #{$inlineSpacing};
-    --border-radius: #{$borderRadius};
-    --surface-ground: #f2f4f8;
-    --surface-section: #ffffff;
-    --surface-card: #ffffff;
-    --surface-overlay: #ffffff;
-    --surface-border: #dee2e6;
-    --surface-hover: #dde1e6;
-    --focus-ring: #{$focusShadow};
-    --maskbg: #{$maskBg};
-    --highlight-bg: #{$highlightBg};
-    --highlight-text-color: #{$highlightTextColor};
-    color-scheme: light;
-}
