@@ -8,7 +8,8 @@
     "prime-lint": "vue-cli-service lint",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
-    "build-themes": "node src/assets/themes/build-theme.js",
+    "build-themes": "node src/assets/themes/build-themes.js",
+    "build-theme": "node src/assets/themes/build-theme.js",
     "dev": "nuxi dev",
     "test": "vitest",
     "coverage": "vitest run --coverage"

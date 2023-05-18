@@ -20,6 +20,10 @@ if STORYBOOK_EDIT is set to false (default = true), it will use the compiled min
 ```
 npm run storybook
 ```
+NOTE: be sure to build the theme to see the updates
+```
+npm run build-theme themeName
+```
 
 # TESTING 
 VSCode users, install the test helper plugin: `https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer`
@@ -43,10 +47,16 @@ src/assets/themes/
 ## global scss location
 src/assets/library/
 
-## build Themes
+## build all Themes
 this will compile all the custom themes and output a .min and a .map file in the theme folder 
 ```
 npm run build-themes
+```
+
+## build one Theme
+this will compile all the custom themes and output a .min and a .map file in the theme folder 
+```
+npm run build-theme themeName
 ```
 
 ## Nuxt instance
@@ -55,6 +65,11 @@ Manually navigate to /nuxt to view the sample `pages/nuxt.vue`
 ```
 npm run dev
 ```
+NOTE: be sure to build the theme to see the updates
+```
+npm run build-theme themeName
+```
+
 
 ## Prime Theme View
 Prime Theme view is now included in the NUXT instance via pages/nuxt.vue
