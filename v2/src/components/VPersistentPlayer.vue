@@ -407,42 +407,33 @@ defineExpose({
 </template>
 
 <style lang="scss">
-$persistentPlayerHeight: 100px;
-$persistentPlayerHeightBuffer: 20px;
-
 .persistent-player {
   bottom: 0;
   left: 0;
-  height: $persistentPlayerHeight;
+  height: var(--persistent-player-height);
   position: fixed;
-  z-index: var(--z-index-10);
+  z-index: var(--persistent-player-z-index);
   width: 100%;
   padding: 8px 16px 8px 8px;
   color: var(--text-color);
-  background-color: var(--gray-100);
+  background-color: var(--persistent-player-bg);
   transition: bottom 0.25s;
   -webkit-transition: bottom 0.25s;
 
   &.minimized {
-    bottom: -$persistentPlayerHeight - $persistentPlayerHeightBuffer;
-  }
-
-  .minimize-btn {
-    position: absolute;
-    right: 10px;
-    top: 3px;
-    padding: 0.4rem 0.2rem !important;
-
-    .pi {
-      font-size: 0.7rem;
-    }
+    bottom: calc(
+      calc(var(--persistent-player-height) * -1) -
+        var(--persistent-player-height-buffer)
+    );
   }
 
   .maximize-btn-holder {
     position: absolute;
     display: block;
-    right: 12px;
-    top: calc(-40px - $persistentPlayerHeightBuffer);
+    right: 0;
+    left: 0;
+    margin: auto;
+    top: calc(-40px - var(--persistent-player-height-buffer));
     width: 40px;
     height: 40px;
     overflow: hidden;
@@ -456,20 +447,20 @@ $persistentPlayerHeightBuffer: 20px;
       width: 40px;
       height: 40px;
       border-radius: 4px 4px 0 0;
-      background-color: var(--gray-100);
+      background-color: var(--persistent-player-maximize-btn-bg);
       pointer-events: none;
       transition: top 0.1s;
       -webkit-transition: top 0.1s;
-
+      color: var(--persistent-player-maximize-btn-color);
       &.show {
         transition: top 0.5s;
         -webkit-transition: top 0.5s;
-        top: 0px;
+        top: 1px;
         pointer-events: all;
       }
 
       &:hover {
-        background-color: var(--gray-300);
+        background-color: var(--persistent-player-maximize-btn-bg-hover);
       }
 
       .pi {
@@ -489,12 +480,22 @@ $persistentPlayerHeightBuffer: 20px;
     height: 100%;
     gap: 16px;
 
-    .player-cta-play-button {
-      min-width: 150px;
-    }
-
     .play-button {
-      min-width: 55px;
+      min-width: var(--persistent-player-play-button-width);
+      min-height: inherit;
+    }
+    .minimize-btn {
+      position: absolute;
+      right: 0;
+      left: 0;
+      margin: auto;
+      top: 3px;
+      padding: 0.4rem 0.2rem !important;
+      background-color: var(--persistent-player-minimize-btn-bg);
+      color: var(--persistent-player-minimize-btn-color);
+      .pi {
+        font-size: 0.7rem;
+      }
     }
   }
 

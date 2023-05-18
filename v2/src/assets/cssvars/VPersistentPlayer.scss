@@ -1,0 +1,25 @@
+:root,
+[data-style-mode='default'] {
+    --persistent-player-height: 100px;
+    --persistent-player-height-buffer: 20px;
+    --persistent-player-bg: #e2e2e2;
+    --persistent-player-minimize-btn-color: #000;
+    --persistent-player-minimize-btn-bg: var(--persistent-player-bg);
+    --persistent-player-minimize-btn-bg-hover: #a6a6a6;
+    --persistent-player-maximize-btn-color: #000;
+    --persistent-player-maximize-btn-bg: var(--persistent-player-bg);
+    --persistent-player-maximize-btn-bg-hover: #a6a6a6;
+    --persistent-player-z-index: var(--z-index-10);
+    --persistent-player-live-indicator-bg: var(--text-color);
+    --persistent-player-live-indicator-color: #fff;
+    --persistent-player-play-button-width: 55px;
+}
+[data-style-mode='dark'] {
+    --persistent-player-bg: #2f2f2f;
+    --persistent-player-minimize-btn-bg: var(--persistent-player-bg);
+    --persistent-player-minimize-btn-color: #fff;
+    --persistent-player-maximize-btn-bg: var(--persistent-player-bg);
+    --persistent-player-maximize-btn-color: #fff;
+    --persistent-player-live-indicator-bg: #fff;
+    --persistent-player-live-indicator-color: #000;
+}

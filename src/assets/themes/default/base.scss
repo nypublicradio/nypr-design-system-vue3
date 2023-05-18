@@ -12,6 +12,7 @@ body {
     min-height: 100%;
     -webkit-text-size-adjust: 100%;
     -webkit-font-smoothing: antialiased;
+    font-variant-numeric: lining-nums;
     -moz-osx-font-smoothing: grayscale;
 }
 body.overlay-is-active {

@@ -183,10 +183,10 @@ $track-info-image-size: 84px;
       .track-info-livestream-indicator {
         display: flex;
         align-items: center;
-        background: var(--text-color);
-        color: var(--white);
+        background: var(--persistent-player-live-indicator-bg);
+        color: var(--persistent-player-live-indicator-color);
         border-radius: 44px;
-        padding: 4px;
+        padding: 6px;
         margin-right: 8px;
         .track-info-livestream-indicator-text {
           font-size: 10px;
@@ -199,6 +199,7 @@ $track-info-image-size: 84px;
           border-radius: 8px;
           height: 8px;
           width: 8px;
+          margin-left: 2px;
         }
       }
       .track-info-livestream-station {

@@ -79,6 +79,7 @@ const block = ref({
       :ratio="[block.value.image.width, block.value.image.height]"
     />
     <v-persistent-player
+      :canMinimize="true"
       data-style-mode="dark"
       :livestream="true"
       title="The Takeaway"
@@ -229,7 +230,7 @@ const block = ref({
 @import '../src/App.scss';
 .dark-mode-section {
   padding: 3rem 0;
-  background-color: var(--surface-card);
+  background-color: #000;
   .content {
     padding: 1rem 2rem;
   }

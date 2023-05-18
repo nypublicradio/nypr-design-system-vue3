@@ -5,9 +5,10 @@
 @import '../../library/primeflex.min';
 @import '../../library/_config.imports';
 @import './variables';
-@import './cssvars';
 //@import './fonts/fonts.scss';
 @import '../../designer/_components';
+@import '../../../../v2/src/assets/cssvars/_cssvars';
+@import './cssvars';
 @import './base';
 @import './typography';
 @import './transitions';
