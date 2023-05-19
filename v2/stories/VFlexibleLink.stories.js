@@ -1,5 +1,7 @@
 import VFlexibleLink from '../src/components/VFlexibleLink.vue'
-import Button from "primevue/button/button.esm.js"
+import Button from "primevue/button"
+
+//import Button from "primevue/button/button.esm.js"
 export default {
     title: 'Components-V2/VFlexibleLink',
     component: VFlexibleLink,
@@ -32,6 +34,7 @@ const TemplateAnchor = (args) => ({
     template: '<v-flexible-link v-bind="args" >Anchor to ID</v-flexible-link><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><div id="anchor">anchored here</div>',
 })
 
+
 const TemplateRaw = (args) => ({
     components: { VFlexibleLink, Button },
     setup() {
@@ -40,7 +43,7 @@ const TemplateRaw = (args) => ({
     template: '<v-flexible-link v-bind="args" ><Button>button inside flexible-link</Button></v-flexible-link><Button>normal button</Button>',
 })
 const TemplateRawHover = (args) => ({
-    components: { VFlexibleLink, Button },
+    components: { VFlexibleLink },
     setup() {
         return { args }
     },

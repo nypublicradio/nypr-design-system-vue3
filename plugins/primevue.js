@@ -1,3 +1,6 @@
+/*BE SURE TO SYNC E:\git\_NYPR\nypr-design-system-vue3\src\main.js with the follwoing as well*/
+
+import { defineNuxtPlugin } from "#app"
 import PrimeVue from 'primevue/config'
 import AutoComplete from 'primevue/autocomplete'
 import Accordion from 'primevue/accordion'

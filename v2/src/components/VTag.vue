@@ -9,19 +9,20 @@ const props = defineProps({
   name: {
     type: String,
     default: null,
-  }
+  },
 })
 </script>
 
 <template>
   <span class="v-tag">
     <v-flexible-link
+      raw
       :to="props.slug"
       :class="props.slug ? '' : 'disabled'"
       @click="emit('tagClick', props.slug)"
     >
       <div :class="`p-button p-button-rounded p-button-outlined ${props.name}`">
-        <span class="p-button-label">{{props.name}}</span>
+        <span class="p-button-label">{{ props.name }}</span>
       </div>
     </v-flexible-link>
   </span>

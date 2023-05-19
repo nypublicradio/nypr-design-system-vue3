@@ -111,19 +111,10 @@
     --link-button-hover-color: #{$linkButtonHoverColor};
     --link-button-text-hover-decoration: #{$linkButtonTextHoverDecoration};
     --link-button-focus-shadow: #{$linkButtonFocusShadow};
-
     --focus-outline: #{$focusOutline};
     --focus-outline-offset: #{$focusOutlineOffset};
     --focus-shadow: #{$focusShadow};
     --focus-ring: #{$focusShadow};
-    --tab-padding: #{$tagPadding};
-    --badge-bg: #{$badgeBg};
-    --badge-text-color: #{$badgeTextColor};
-    --badge-font-weight: #{$badgeFontWeight};
-    --badge-font-size: #{$badgeFontSize};
-
-    --highlight-bg: #{$highlightBg};
-    --highlight-text-color: #{$highlightTextColor};
 }
 [data-style-mode='dark'] {
     // --primary-color: var(--white);
