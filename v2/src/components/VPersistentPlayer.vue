@@ -319,7 +319,7 @@ defineExpose({
         @click="toggleMinimize(!isMinimized)"
       >
         <img v-if="playing" :src="soundAnimGif" alt="sounds wave animation" />
-        <i v-else class="pi pi-chevron-up"></i>
+        <slot v-else name="chevronUp"><i class="pi pi-chevron-up"></i></slot>
       </Button>
     </div>
     <div class="player-controls">
@@ -348,7 +348,14 @@ defineExpose({
         :is-muted="muted"
         @volume-toggle-mute="volumeToggleMute"
         @volume-change="volumeChange"
-      />
+      >
+        <template #volumeOn>
+          <slot name="volumeOn"></slot>
+        </template>
+        <template #volumeOff>
+          <slot name="volumeOff"></slot>
+        </template>
+      </v-volume-control>
       <Button
         v-if="props.showSkip && !props.livestream"
         title="Go Back 15 Seconds"
@@ -357,7 +364,7 @@ defineExpose({
         aria-label="go back 15 seconds"
         @click="goBack15"
       >
-        <i class="pi pi-replay"></i>
+        <slot name="prev"><i class="pi pi-replay"></i></slot>
       </Button>
       <Button
         :disabled="loading"
@@ -366,9 +373,15 @@ defineExpose({
         :aria-label="playing ? 'Pause button' : 'Play button'"
         @click="togglePlay"
       >
-        <i v-if="!playing && !loading" class="pi pi-play"></i>
-        <i v-if="playing && !loading" class="pi pi-pause"></i>
-        <i v-if="loading" class="pi pi-spin pi-spinner"></i>
+        <slot v-if="!playing && !loading" name="play"
+          ><i class="pi pi-play"></i
+        ></slot>
+        <slot v-if="playing && !loading" name="pause"
+          ><i class="pi pi-pause"></i
+        ></slot>
+        <slot v-if="loading" name="loading"
+          ><i class="pi pi-spin pi-spinner"></i
+        ></slot>
       </Button>
       <Button
         v-if="props.showSkip && !props.livestream"
@@ -378,7 +391,9 @@ defineExpose({
         aria-label="go ahead 15 seconds"
         @click="goAhead15"
       >
-        <i class="pi pi-refresh"></i>
+        <slot name="skip">
+          <i class="pi pi-refresh"></i>
+        </slot>
       </Button>
 
       <Button
@@ -391,7 +406,9 @@ defineExpose({
         @click="download"
         @keypress.space.enter="download"
       >
-        <i class="pi pi-download download-icon"></i>
+        <slot name="download">
+          <i class="pi pi-download download-icon"></i>
+        </slot>
       </Button>
       <Button
         v-if="props.canMinimize"
@@ -400,7 +417,9 @@ defineExpose({
         aria-label="minimize player"
         @click="toggleMinimize(!isMinimized)"
       >
-        <i class="pi pi-chevron-down"></i>
+        <slot name="chevronDown">
+          <i class="pi pi-chevron-down"></i>
+        </slot>
       </Button>
     </div>
   </div>
@@ -482,6 +501,7 @@ defineExpose({
     .play-button {
       min-width: var(--persistent-player-play-button-width);
       min-height: var(--persistent-player-play-button-height);
+      border-radius: var(--persistent-player-play-button-radius);
     }
     .minimize-btn {
       position: absolute;
@@ -497,19 +517,24 @@ defineExpose({
       }
     }
     .p-button-text {
-      color: var(--text-color);
-      color: var(--shade-600);
+      border-radius: var(--persistent-player-text-button-radius);
+      color: var(--persistent-player-text-button-color);
+      &:hover {
+        color: var(--persistent-player-text-button-color-hover) !important;
+      }
     }
   }
 
   a,
   a:visited,
   a:active {
-    color: var(--text-color);
+    color: var(--persistent-player-text-button-color);
+
     text-decoration: none;
 
     &:hover {
       text-decoration: none;
+      color: var(--persistent-player-text-button-color-hover) !important;
     }
   }
 }

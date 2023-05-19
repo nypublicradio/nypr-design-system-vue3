@@ -10,10 +10,17 @@
     --persistent-player-maximize-btn-bg: var(--persistent-player-bg);
     --persistent-player-maximize-btn-bg-hover: #a6a6a6;
     --persistent-player-z-index: var(--z-index-10);
+
     --persistent-player-live-indicator-bg: var(--text-color);
     --persistent-player-live-indicator-color: #fff;
-    --persistent-player-play-button-width: 55px;
-    --persistent-player-play-button-height: inherit;
+
+    --persistent-player-text-button-color: var(--text-color);
+    --persistent-player-text-button-color-hover: inherit;
+    --persistent-player-text-button-radius: 15px;
+
+    --persistent-player-play-button-width: 40px;
+    --persistent-player-play-button-height: 40px;
+    --persistent-player-play-button-radius: 20px;
 }
 [data-style-mode='dark'] {
     --persistent-player-bg: #2f2f2f;
@@ -23,4 +30,6 @@
     --persistent-player-maximize-btn-color: #fff;
     --persistent-player-live-indicator-bg: #fff;
     --persistent-player-live-indicator-color: #000;
+    --persistent-player-text-button-color: #d9d9d9;
+    --persistent-player-text-button-color-hover: #fff;
 }

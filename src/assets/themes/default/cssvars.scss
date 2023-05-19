@@ -81,6 +81,7 @@
     --font-family: #{$fontFamily};
     --font-family-header: #{$fontFamilyHeader};
     --text-color: #{$textColor};
+    --text-color-on-dark: #{$textColorOnDark};
     --text-color-secondary: #{$primaryColorAlt};
     --primary-text-color: #{$primaryTextColor};
     --primary-color-text: #{$primaryTextColor};
@@ -121,4 +122,5 @@
     // --primary-color-rgb: #{hex2rgb($dangerColor)};
     /*button*/
     color-scheme: dark;
+    --text-color: var(--text-color-on-dark);
 }

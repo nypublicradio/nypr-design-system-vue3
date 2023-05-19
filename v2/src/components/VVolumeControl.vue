@@ -55,8 +55,12 @@ onUpdated(() => {
       @click="emit('volume-toggle-mute')"
       @keypress.space.enter="mute"
     >
-      <i v-if="!props.isMuted" class="pi pi-volume-up"></i>
-      <i v-if="props.isMuted" class="pi pi-volume-off"></i>
+      <slot v-if="!props.isMuted" name="volumeOn"
+        ><i class="pi pi-volume-up"></i
+      ></slot>
+      <slot v-if="props.isMuted" name="volumeOff"
+        ><i class="pi pi-volume-off"></i
+      ></slot>
     </button>
   </div>
 </template>
@@ -87,7 +91,7 @@ onUpdated(() => {
     margin-right: 4px;
   }
   .volume-control-icon {
-    color: var(--text-color);
+    color: var(--persistent-player-text-button-color);
     flex: 1 0;
     appearance: none;
     border: none;
@@ -97,6 +101,9 @@ onUpdated(() => {
     height: 36px;
     min-width: 36px;
     max-width: 36px;
+    &:hover {
+      color: var(--persistent-player-text-button-color-hover);
+    }
   }
   .volume-control-slider {
     transition: width var(--transition-duration),

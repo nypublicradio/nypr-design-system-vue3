@@ -65,6 +65,11 @@ const block = ref({
 
 <template>
   <main class="pb-8">
+    <VFlexibleLink to="https://www.google.com">go to google</VFlexibleLink>
+    <VFlexibleLink raw to="https://www.google.com"
+      ><Button label="button"></Button
+    ></VFlexibleLink>
+
     <v-image-with-caption
       v-if="block.value.image"
       class="mb-7"
@@ -79,7 +84,7 @@ const block = ref({
       :ratio="[block.value.image.width, block.value.image.height]"
     />
     <v-persistent-player
-      data-style-mode="default"
+      data-style-mode="dark"
       :can-minimize="true"
       :show-download="true"
       :show-skip="true"
@@ -90,7 +95,38 @@ const block = ref({
       image="https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/"
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
-    />
+    >
+      <template #chevronDown>
+        <i class="pi pi-twitter"></i>
+      </template>
+      <template #chevronUp>
+        <i class="pi pi-facebook"></i>
+      </template>
+      <template #volumeOn>
+        <i class="pi pi-twitter"></i>
+      </template>
+      <template #volumeOff>
+        <i class="pi pi-facebook"></i>
+      </template>
+      <template #prev>
+        <i class="pi pi-twitter"></i>
+      </template>
+      <template #play>
+        <i class="pi pi-twitter"></i>
+      </template>
+      <template #pause>
+        <i class="pi pi-facebook"></i>
+      </template>
+      <template #loading>
+        <i class="pi pi-spin pi-spinner"></i>
+      </template>
+      <template #skip>
+        <i class="pi pi-twitter"></i>
+      </template>
+      <template #download>
+        <i class="pi pi-twitter"></i>
+      </template>
+    </v-persistent-player>
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">
         <div class="grid">
