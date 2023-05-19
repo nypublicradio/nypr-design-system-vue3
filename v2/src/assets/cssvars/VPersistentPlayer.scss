@@ -2,7 +2,7 @@
 [data-style-mode='default'] {
     --persistent-player-height: 100px;
     --persistent-player-height-buffer: 20px;
-    --persistent-player-bg: #e2e2e2;
+    --persistent-player-bg: #f1f1f1;
     --persistent-player-minimize-btn-color: #000;
     --persistent-player-minimize-btn-bg: var(--persistent-player-bg);
     --persistent-player-minimize-btn-bg-hover: #a6a6a6;
@@ -13,6 +13,7 @@
     --persistent-player-live-indicator-bg: var(--text-color);
     --persistent-player-live-indicator-color: #fff;
     --persistent-player-play-button-width: 55px;
+    --persistent-player-play-button-height: inherit;
 }
 [data-style-mode='dark'] {
     --persistent-player-bg: #2f2f2f;

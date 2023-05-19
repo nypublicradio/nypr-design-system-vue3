@@ -79,9 +79,11 @@ const block = ref({
       :ratio="[block.value.image.width, block.value.image.height]"
     />
     <v-persistent-player
-      :canMinimize="true"
-      data-style-mode="dark"
-      :livestream="true"
+      data-style-mode="default"
+      :can-minimize="true"
+      :show-download="true"
+      :show-skip="true"
+      :livestream="false"
       title="The Takeaway"
       station="WNYC 93.9 FM"
       title-link="http://www.google.com"

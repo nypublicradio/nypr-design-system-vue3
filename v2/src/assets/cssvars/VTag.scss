@@ -1,0 +1,25 @@
+:root,
+[data-style-mode='default'] {
+    --tag-bg: var(--primary-color);
+    --tag-text-color: var(--white);
+    --tag-font-weight: normal;
+    --tag-font-size: 1rem;
+    --tag-letter-spacing: 0.03rem;
+    --tag-border: solid 1px var(--primary-color);
+    --tag-border-radius: 40px;
+    --tag-padding: 2px 10px;
+    --tag-hover-bg: var(--primary-dark-color);
+    --tag-hover-text-color: var(--white);
+}
+[data-style-mode='dark'] {
+    // --tag-bg: #{$tagDarkBg};
+    // --tag-text-color: #{$tagDarkTextColor};
+    // --tag-font-weight: #{$tagDarkFontWeight};
+    // --tag-font-size: #{$tagDarkFontSize};
+    // --tag-letter-spacing: #{$tagDarkLetterSpacing};
+    // --tag-border: #{$tagDarkBorder};
+    // --tag-border-radius: #{$tagDarkBorderRadius};
+    // --tag-padding: #{$tagDarkPadding};
+    // --tag-hover-bg: #{$tagDarkHoverBg};
+    // --tag-hover-text-color: #{$tagDarkHoverTextColor};
+}

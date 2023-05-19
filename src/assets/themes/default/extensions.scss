@@ -1,1 +1,11 @@
 /* Customizations to the designer theme should be defined here */
+
+//wrapping in BODY adds spesificity to the selectors, so they override the default theme.
+body {
+}
+:root,
+[data-style-mode='default'] {
+    --persistent-player-height: 100px;
+}
+[data-style-mode='dark'] {
+}

@@ -419,7 +419,6 @@ defineExpose({
   background-color: var(--persistent-player-bg);
   transition: bottom 0.25s;
   -webkit-transition: bottom 0.25s;
-
   &.minimized {
     bottom: calc(
       calc(var(--persistent-player-height) * -1) -
@@ -482,7 +481,7 @@ defineExpose({
 
     .play-button {
       min-width: var(--persistent-player-play-button-width);
-      min-height: inherit;
+      min-height: var(--persistent-player-play-button-height);
     }
     .minimize-btn {
       position: absolute;
@@ -496,6 +495,10 @@ defineExpose({
       .pi {
         font-size: 0.7rem;
       }
+    }
+    .p-button-text {
+      color: var(--text-color);
+      color: var(--shade-600);
     }
   }
 
