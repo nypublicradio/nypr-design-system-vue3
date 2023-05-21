@@ -21,6 +21,10 @@
     --persistent-player-play-button-width: 40px;
     --persistent-player-play-button-height: 40px;
     --persistent-player-play-button-radius: 20px;
+
+    --persistent-player-title-size: var(--font-size-9);
+    --persistent-player-title-weight: 400;
+    --persistent-player-title-color: var(--text-color);
 }
 [data-style-mode='dark'] {
     --persistent-player-bg: #2f2f2f;
@@ -32,4 +36,5 @@
     --persistent-player-live-indicator-color: #000;
     --persistent-player-text-button-color: #d9d9d9;
     --persistent-player-text-button-color-hover: #fff;
+    --persistent-player-title-color: var(--text-color);
 }

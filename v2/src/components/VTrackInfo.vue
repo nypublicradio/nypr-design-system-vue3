@@ -93,15 +93,15 @@ const convertTime = (val) => {
           <div class="track-info-livestream-station">{{ station }}</div>
         </div>
         <div class="track-info-title">
-          <h2 v-if="title && titleLink">
+          <div v-if="title && titleLink">
             <v-flexible-link
-              class="track-info-title-link"
+              class="track-info-title-link title"
               :to="titleLink"
               @emit-flexible-link="emit('title-click')"
               v-html="title"
             />
-          </h2>
-          <div v-if="title && !titleLink" class="h2" v-html="title"></div>
+          </div>
+          <div v-if="title && !titleLink" class="title" v-html="title"></div>
         </div>
         <div v-if="description" class="track-info-description">
           <div
@@ -213,9 +213,10 @@ $track-info-image-size: 84px;
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      h2 {
-        font-weight: 500;
+      .title {
+        font-weight: var(--persistent-player-title-weight);
         font-size: var(--font-size-9);
+        color: var(--persistent-player-title-color);
         line-height: 1;
         text-overflow: ellipsis;
         overflow: hidden;
