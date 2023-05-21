@@ -34,6 +34,7 @@ module.exports = {
       ],
       // include: path.resolve(__dirname, '../'),
     })
+    console.log('config = ', config)
     return config
   },
 }

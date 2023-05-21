@@ -6,6 +6,10 @@ import addons from '@storybook/addons'
 // darkmose styles
 import './darkmode.css'
 
+// enable primevue
+import PrimeVue from 'primevue/config'
+app.use(PrimeVue)
+
 // get an instance to the communication channel for the manager and preview
 const channel = addons.getChannel()
 
