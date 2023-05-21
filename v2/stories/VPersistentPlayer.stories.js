@@ -28,7 +28,14 @@ const TemplateCustomIcons = (args) => ({
     setup() {
         return { args }
     },
-    template: '<v-persistent-player v-bind="args" ><template #chevronDown> < i class="pi pi-twitter" ></ > </template > <template #chevronUp> <i class="pi pi-facebook"></i> </template> <template #volumeOn> <i class="pi pi-twitter"></i> </template> <template #volumeOff> <i class="pi pi-facebook"></i> </template> <template #prev> <i class="pi pi-twitter"></i> </template> <template #play> <i class="pi pi-twitter"></i> </template> <template #pause> <i class="pi pi-facebook"></i> </template> <template #loading> <i class="pi pi-spin pi-spinner"></i> </template> <template #skip> <i class="pi pi-twitter"></i> </template> <template #download> <i class="pi pi-twitter"></i> </template></v-persistent-player> ',
+    template: '<v-persistent-player v-bind="args" ><template #chevronDown> <i class="pi pi-twitter"></ > </template > <template #chevronUp> <i class="pi pi-facebook"></i> </template> <template #volumeOn> <i class="pi pi-twitter"></i> </template> <template #volumeOff> <i class="pi pi-facebook"></i> </template> <template #prev> <i class="pi pi-twitter"></i> </template> <template #play> <i class="pi pi-twitter"></i> </template> <template #pause> <i class="pi pi-facebook"></i> </template> <template #loading> <i class="pi pi-spin pi-spinner"></i> </template> <template #skip> <i class="pi pi-twitter"></i> </template> <template #download> <i class="pi pi-twitter"></i> </template></v-persistent-player> ',
+})
+const TemplateCanExpand = (args) => ({
+    components: { VPersistentPlayer },
+    setup() {
+        return { args }
+    },
+    template: '<v-persistent-player v-bind="args" ><div>Slotted content here</div></v-persistent-player> ',
 })
 
 export const Default = Template.bind({})
@@ -146,6 +153,18 @@ CanMinimize.args = {
     canMinimize: true,
 }
 
+export const CanExpand = TemplateCanExpand.bind({})
+CanExpand.args = {
+    title: "The Takeaway",
+    station: "WNYC 93.9 FM",
+    titleLink: "http://www.google.com",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    showDownload: true,
+    canExpand: true,
+}
+
 export const SetVolume = Template.bind({})
 SetVolume.args = {
     title: "The Takeaway",
@@ -165,5 +184,6 @@ customIcons.args = {
     image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
-    showDownload: true
+    showDownload: true,
+    canMinimize: true
 }

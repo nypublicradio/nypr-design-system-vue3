@@ -79,6 +79,10 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  canExpand: {
+    type: Boolean,
+    default: false,
+  },
   volume: {
     type: Number,
     default: 100,
@@ -97,6 +101,7 @@ const muted = ref(props.isMuted)
 const currentFile = ref(null)
 
 const isMinimized = ref(false)
+const isExpanded = ref(false)
 
 let sound = null
 
@@ -118,6 +123,7 @@ const emit = defineEmits([
   'sound-looping',
   'timeline-click',
   'is-minimized',
+  'is-expanded',
 ])
 
 onMounted(() => {
@@ -300,6 +306,10 @@ const toggleMinimize = (e) => {
   emit('is-minimized', e)
   isMinimized.value = e
 }
+const toggleExpanded = (e) => {
+  emit('is-expanded', e)
+  isExpanded.value = e
+}
 
 defineExpose({
   togglePlay,
@@ -421,6 +431,16 @@ defineExpose({
           <i class="pi pi-chevron-down"></i>
         </slot>
       </Button>
+      <Button
+        v-if="props.canExpand"
+        title="Expand Player"
+        class="expand-btn p-button-icon-only p-button-text p-button-secondary"
+        :class="{ show: isExpanded }"
+        aria-label="expand player"
+        @click="toggleExpanded(!isExpanded)"
+      >
+        <slot name="chevronUp"><i class="pi pi-chevron-up"></i></slot>
+      </Button>
     </div>
   </div>
 </template>
@@ -503,7 +523,8 @@ defineExpose({
       min-height: var(--persistent-player-play-button-height);
       border-radius: var(--persistent-player-play-button-radius);
     }
-    .minimize-btn {
+    .minimize-btn,
+    .expand-btn {
       position: absolute;
       right: 0;
       left: 0;
