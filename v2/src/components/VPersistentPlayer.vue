@@ -251,9 +251,11 @@ const volumeToggleMute = (e) => {
 }
 
 const volumeChange = (e) => {
-  emit('volume-change', e)
-  sound.volume(e / 100)
-  volume.value = e
+  if (sound) {
+    emit('volume-change', e)
+    sound.volume(e / 100)
+    volume.value = e
+  }
 }
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
@@ -318,7 +320,10 @@ defineExpose({
 </script>
 
 <template>
-  <div class="persistent-player" :class="{ minimized: isMinimized }">
+  <div
+    class="persistent-player"
+    :class="[{ minimized: isMinimized }, { expanded: isExpanded }]"
+  >
     <div class="maximize-btn-holder">
       <Button
         v-if="props.canMinimize"
@@ -332,116 +337,361 @@ defineExpose({
         <slot v-else name="chevronUp"><i class="pi pi-chevron-up"></i></slot>
       </Button>
     </div>
-    <div class="player-controls">
-      <v-track-info
-        :livestream="props.livestream"
-        :station="props.station"
-        :image="props.image"
-        :title="props.title"
-        :title-link="props.titleLink"
-        :description="props.description"
-        :description-link="props.descriptionLink"
-        :buffered="buffered"
-        :current-seconds="currentSeconds"
-        :duration-seconds="durationSeconds"
-        @scrub-timeline-change="scrubTimelineChange"
-        @scrub-timeline-end="scrubTimelineEnd"
-        @timeline-click="timelineClick"
-        @image-click="emit('image-click')"
-        @description-click="emit('description-click')"
-        @title-click="emit('title-click')"
-      />
-      <v-volume-control
-        class="hidden md:flex"
-        :disabled="!currentFile"
-        :volume="volume"
-        :is-muted="muted"
-        @volume-toggle-mute="volumeToggleMute"
-        @volume-change="volumeChange"
-      >
-        <template #volumeOn>
-          <slot name="volumeOn"></slot>
-        </template>
-        <template #volumeOff>
-          <slot name="volumeOff"></slot>
-        </template>
-      </v-volume-control>
-      <Button
-        v-if="props.showSkip && !props.livestream"
-        title="Go Back 15 Seconds"
-        class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
-        :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
-        aria-label="go back 15 seconds"
-        @click="goBack15"
-      >
-        <slot name="prev"><i class="pi pi-replay"></i></slot>
-      </Button>
-      <Button
-        :disabled="loading"
-        :title="playing ? 'Pause' : props.livestream ? 'Listen Live' : 'Play'"
-        class="the-play-button play-button p-button-icon-only"
-        :aria-label="playing ? 'Pause button' : 'Play button'"
-        @click="togglePlay"
-      >
-        <slot v-if="!playing && !loading" name="play"
-          ><i class="pi pi-play"></i
-        ></slot>
-        <slot v-if="playing && !loading" name="pause"
-          ><i class="pi pi-pause"></i
-        ></slot>
-        <slot v-if="loading" name="loading"
-          ><i class="pi pi-spin pi-spinner"></i
-        ></slot>
-      </Button>
-      <Button
-        v-if="props.showSkip && !props.livestream"
-        title="Go Ahead 15 Seconds"
-        class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
-        :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
-        aria-label="go ahead 15 seconds"
-        @click="goAhead15"
-      >
-        <slot name="skip">
-          <i class="pi pi-refresh"></i>
-        </slot>
-      </Button>
+    <Transition name="expand">
+      <div v-if="!isExpanded" class="player-controls">
+        <v-track-info
+          :livestream="props.livestream"
+          :station="props.station"
+          :image="props.image"
+          :title="props.title"
+          :title-link="props.titleLink"
+          :description="props.description"
+          :description-link="props.descriptionLink"
+          :buffered="buffered"
+          :current-seconds="currentSeconds"
+          :duration-seconds="durationSeconds"
+          @scrub-timeline-change="scrubTimelineChange"
+          @scrub-timeline-end="scrubTimelineEnd"
+          @timeline-click="timelineClick"
+          @image-click="emit('image-click')"
+          @description-click="emit('description-click')"
+          @title-click="emit('title-click')"
+        />
+        <v-volume-control
+          class="hidden md:flex"
+          :disabled="!currentFile"
+          :volume="volume"
+          :is-muted="muted"
+          @volume-toggle-mute="volumeToggleMute"
+          @volume-change="volumeChange"
+        >
+          <template #volumeOn>
+            <slot name="volumeOn"></slot>
+          </template>
+          <template #volumeOff>
+            <slot name="volumeOff"></slot>
+          </template>
+        </v-volume-control>
+        <Button
+          v-if="props.showSkip && !props.livestream"
+          title="Go Back 15 Seconds"
+          class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
+          :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
+          aria-label="go back 15 seconds"
+          @click="goBack15"
+        >
+          <slot name="prev"><i class="pi pi-replay"></i></slot>
+        </Button>
+        <Button
+          :disabled="loading"
+          :title="playing ? 'Pause' : props.livestream ? 'Listen Live' : 'Play'"
+          class="the-play-button play-button p-button-icon-only"
+          :aria-label="playing ? 'Pause button' : 'Play button'"
+          @click="togglePlay"
+        >
+          <slot v-if="!playing && !loading" name="play"
+            ><i class="pi pi-play"></i
+          ></slot>
+          <slot v-if="playing && !loading" name="pause"
+            ><i class="pi pi-pause"></i
+          ></slot>
+          <slot v-if="loading" name="loading"
+            ><i class="pi pi-spin pi-spinner"></i
+          ></slot>
+        </Button>
+        <Button
+          v-if="props.showSkip && !props.livestream"
+          title="Go Ahead 15 Seconds"
+          class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
+          :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
+          aria-label="go ahead 15 seconds"
+          @click="goAhead15"
+        >
+          <slot name="skip">
+            <i class="pi pi-refresh"></i>
+          </slot>
+        </Button>
 
-      <Button
-        v-if="props.showDownload && !props.livestream"
-        title="Download"
-        tabindex="0"
-        class="player-download-icon p-button-icon-only p-button-text p-button-secondary"
-        :class="{ [`hidden md:flex`]: props.hideDownloadMobile }"
-        aria-label="download"
-        @click="download"
-        @keypress.space.enter="download"
-      >
-        <slot name="download">
-          <i class="pi pi-download download-icon"></i>
-        </slot>
-      </Button>
-      <Button
-        v-if="props.canMinimize"
-        title="Minimize Player"
-        class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
-        aria-label="minimize player"
-        @click="toggleMinimize(!isMinimized)"
-      >
-        <slot name="chevronDown">
-          <i class="pi pi-chevron-down"></i>
-        </slot>
-      </Button>
-      <Button
-        v-if="props.canExpand"
-        title="Expand Player"
-        class="expand-btn p-button-icon-only p-button-text p-button-secondary"
-        :class="{ show: isExpanded }"
-        aria-label="expand player"
-        @click="toggleExpanded(!isExpanded)"
-      >
-        <slot name="chevronUp"><i class="pi pi-chevron-up"></i></slot>
-      </Button>
-    </div>
+        <Button
+          v-if="props.showDownload && !props.livestream"
+          title="Download"
+          tabindex="0"
+          class="player-download-icon p-button-icon-only p-button-text p-button-secondary"
+          :class="{ [`hidden md:flex`]: props.hideDownloadMobile }"
+          aria-label="download"
+          @click="download"
+          @keypress.space.enter="download"
+        >
+          <slot name="download">
+            <i class="pi pi-download download-icon"></i>
+          </slot>
+        </Button>
+        <Button
+          v-if="props.canMinimize"
+          title="Minimize Player"
+          class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
+          aria-label="minimize player"
+          @click="toggleMinimize(!isMinimized)"
+        >
+          <slot name="chevronDown">
+            <i class="pi pi-chevron-down"></i>
+          </slot>
+        </Button>
+        <Button
+          v-if="props.canExpand && !isExpanded"
+          title="Expand Player"
+          class="expand-btn p-button-icon-only p-button-text p-button-secondary"
+          :class="{ show: isExpanded }"
+          aria-label="expand player"
+          @click="toggleExpanded(!isExpanded)"
+        >
+          <slot name="chevronUp"><i class="pi pi-chevron-up"></i></slot>
+        </Button>
+      </div>
+    </Transition>
+    <Transition name="expand-delay">
+      <div v-if="isExpanded" class="expanded-view">
+        <div class="expanded-content">
+          <div class="header">
+            <slot name="expanded-header">
+              <div class="flex">
+                <Button
+                  class="p-button-icon-only p-button-text p-button-secondary"
+                  @click="toggleExpanded(!isExpanded)"
+                >
+                  <i class="pi pi-chevron-down"
+                /></Button>
+              </div>
+            </slot>
+          </div>
+          <slot name="expanded-content"
+            >placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholderplaceholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholderplaceholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholderplaceholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholderplaceholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder
+            placeholderplaceholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholderplaceholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholderplaceholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholderplaceholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder
+            placeholderplaceholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder placeholder placeholder placeholder
+            placeholder placeholder END END END END END END END END END END END
+            END END END END END END END
+          </slot>
+        </div>
+      </div>
+    </Transition>
   </div>
 </template>
 
@@ -456,13 +706,19 @@ defineExpose({
   padding: 8px 16px 8px 8px;
   color: var(--text-color);
   background-color: var(--persistent-player-bg);
-  transition: bottom 0.25s;
-  -webkit-transition: bottom 0.25s;
+  transition: bottom 0.25s, height calc(var(--transition-duration) * 2);
+  -webkit-transition: bottom 0.25s, height calc(var(--transition-duration) * 2);
+  display: flex;
+  flex-direction: column;
   &.minimized {
     bottom: calc(
       calc(var(--persistent-player-height) * -1) -
         var(--persistent-player-height-buffer)
     );
+  }
+  &.expanded {
+    bottom: 0;
+    height: 100%;
   }
 
   .maximize-btn-holder {
@@ -558,5 +814,45 @@ defineExpose({
       color: var(--persistent-player-text-button-color-hover) !important;
     }
   }
+  .expanded-view {
+    position: relative;
+    height: inherit;
+    .expanded-content {
+      .header {
+        position: sticky;
+        top: 0;
+        background-color: var(--persistent-player-bg);
+        padding: 5px 0;
+      }
+      position: relative;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: inherit;
+    }
+  }
+}
+
+//expand-delay
+.expand-delay-enter-active {
+  transition: opacity calc(var(--transition-duration) * 2) ease-out;
+}
+.expand-delay-leave-active {
+  transition: opacity calc(var(--transition-duration) * 2) ease-in;
+}
+.expand-delay-enter-from,
+.expand-delay-leave-to {
+  opacity: 0;
+}
+//expand
+.expand-enter-active {
+  transition: opacity calc(var(--transition-duration) * 2) ease-out;
+  transition-delay: calc(var(--transition-duration) * 2.25);
+}
+.expand-leave-active {
+  transition: opacity 0s ease-in;
+}
+.expand-enter-from,
+.expand-leave-to {
+  opacity: 0;
 }
 </style>

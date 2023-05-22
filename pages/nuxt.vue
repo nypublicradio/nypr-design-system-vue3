@@ -96,7 +96,7 @@ const block = ref({
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
     >
-      <template #chevronDown>
+      <!-- <template #chevronDown>
         <i class="pi pi-twitter"></i>
       </template>
       <template #chevronUp>
@@ -125,7 +125,7 @@ const block = ref({
       </template>
       <template #download>
         <i class="pi pi-twitter"></i>
-      </template>
+      </template> -->
     </v-persistent-player>
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">
