@@ -518,6 +518,7 @@ defineExpose({
   -webkit-transition: bottom 0.25s, height calc(var(--transition-duration) * 2);
   display: flex;
   flex-direction: column;
+  justify-content: center;
   &.minimized {
     bottom: calc(
       calc(var(--persistent-player-height) * -1) -
