@@ -352,9 +352,8 @@ defineExpose({
     class="persistent-player"
     :class="[{ minimized: isMinimized }, { expanded: isExpanded }]"
   >
-    <div class="maximize-btn-holder">
+    <div v-if="props.canMinimize" class="maximize-btn-holder">
       <Button
-        v-if="props.canMinimize"
         title="maximize Player"
         class="maximize-btn p-button-icon-only"
         :class="{ show: isMinimized }"
