@@ -24,19 +24,19 @@ const Template = (args) => ({
     template: '<v-counter v-bind="args"></v-counter>',
 })
 
-export const Comments = Template.bind({})
-Comments.args = {
-    icon: "comment",
+const TemplateCustomIcon = (args) => ({
+    components: { VCounter },
+    setup() {
+        return { args }
+    },
+    template: '<v-counter v-bind="args"><template #icon="slotProps"><i :class="`pi pi-facebook`" role="img" :aria-label="`${slotProps.props.value} ${slotProps.props.text}`" ></i></template></v-counter>',
+})
+
+export const Default = Template.bind({})
+Default.args = {
+    icon: true,
     text: "Comments",
     value: 40,
-    href: "http://www.google.com"
-}
-
-export const Gallery = Template.bind({})
-Gallery.args = {
-    icon: "gallery",
-    text: "Photos",
-    value: 25,
     href: "http://www.google.com"
 }
 
@@ -46,10 +46,17 @@ NoIcon.args = {
     value: 40,
     href: "http://www.google.com"
 }
+export const CustomIcon = TemplateCustomIcon.bind({})
+CustomIcon.args = {
+    icon: true,
+    text: "Comments",
+    value: 40,
+    href: "http://www.google.com"
+}
 
 export const NoText = Template.bind({})
 NoText.args = {
-    icon: "comment",
+    icon: true,
     value: 40,
     href: "http://www.google.com"
 }

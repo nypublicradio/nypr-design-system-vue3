@@ -8,8 +8,8 @@ const props = defineProps({
     //required: true,
   },
   icon: {
-    type: String,
-    default: null,
+    type: Boolean,
+    default: false,
   },
   text: {
     type: String,
@@ -31,11 +31,13 @@ const props = defineProps({
       class="counter"
     >
       <span v-if="props.icon" class="icon">
-        <i
-          :class="`pi pi-${props.icon}`"
-          role="img"
-          :aria-label="`${props.value} ${props.text}`"
-        ></i>
+        <slot name="icon" :props="props">
+          <i
+            :class="`pi pi-comment`"
+            role="img"
+            :aria-label="`${props.value} ${props.text}`"
+          ></i>
+        </slot>
       </span>
       {{ props.value }} {{ props.text }}
     </v-flexible-link>
@@ -50,8 +52,8 @@ const props = defineProps({
     position: relative;
     margin-right: spacing(2);
     margin-top: spacing(0.5);
-    .pi {
-      text-decoration: none;
+    * {
+      text-decoration: none !important;
     }
   }
 }
