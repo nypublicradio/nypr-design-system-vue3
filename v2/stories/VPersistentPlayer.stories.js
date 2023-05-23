@@ -35,7 +35,21 @@ const TemplateCanExpand = (args) => ({
     setup() {
         return { args }
     },
-    template: '<v-persistent-player v-bind="args" ><div>Slotted content here</div></v-persistent-player> ',
+    template: '<v-persistent-player v-bind="args" ><template #expanded-content>Slotted content here</template></v-persistent-player> ',
+})
+const TemplateCanExpandCustomButtonIcon = (args) => ({
+    components: { VPersistentPlayer },
+    setup() {
+        return { args }
+    },
+    template: '<v-persistent-player v-bind="args" ><template #expanded-content>Slotted content here</template><template #unexpanded-button-icon><i class="pi pi-facebook" /></template></v-persistent-player> ',
+})
+const TemplateCanExpandCustomHeaderContent = (args) => ({
+    components: { VPersistentPlayer },
+    setup() {
+        return { args }
+    },
+    template: '<v-persistent-player v-bind="args" ><template #expanded-content>Slotted content here</template><template #header-content><p>Custom Header Content</p></template></v-persistent-player> ',
 })
 
 export const Default = Template.bind({})
@@ -155,6 +169,28 @@ CanMinimize.args = {
 
 export const CanExpand = TemplateCanExpand.bind({})
 CanExpand.args = {
+    title: "The Takeaway",
+    station: "WNYC 93.9 FM",
+    titleLink: "http://www.google.com",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    showDownload: true,
+    canExpand: true,
+}
+export const CanExpandHeaderContent = TemplateCanExpandCustomHeaderContent.bind({})
+CanExpandHeaderContent.args = {
+    title: "The Takeaway",
+    station: "WNYC 93.9 FM",
+    titleLink: "http://www.google.com",
+    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    showDownload: true,
+    canExpand: true,
+}
+export const CanExpandCustomUnexpandButtonIcon = TemplateCanExpandCustomButtonIcon.bind({})
+CanExpandCustomUnexpandButtonIcon.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",

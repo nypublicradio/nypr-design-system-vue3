@@ -451,7 +451,7 @@ defineExpose({
     </Transition>
     <Transition name="expand-delay">
       <div v-if="isExpanded" class="expanded-view">
-        <div class="expanded-content">
+        <div class="expanded-content-holder">
           <div class="header">
             <slot name="expanded-header">
               <div class="flex">
@@ -459,236 +459,17 @@ defineExpose({
                   class="p-button-icon-only p-button-text p-button-secondary"
                   @click="toggleExpanded(!isExpanded)"
                 >
-                  <i class="pi pi-chevron-down"
-                /></Button>
+                  <slot name="unexpanded-button-icon">
+                    <i class="pi pi-chevron-down" />
+                  </slot>
+                </Button>
+                <div class="header-content">
+                  <slot name="header-content"></slot>
+                </div>
               </div>
             </slot>
           </div>
-          <slot name="expanded-content"
-            >placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholderplaceholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholderplaceholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholderplaceholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholderplaceholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder
-            placeholderplaceholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholderplaceholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholderplaceholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholderplaceholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder
-            placeholderplaceholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder placeholder placeholder placeholder
-            placeholder placeholder END END END END END END END END END END END
-            END END END END END END END
-          </slot>
+          <slot name="expanded-content"></slot>
         </div>
       </div>
     </Transition>
@@ -817,7 +598,7 @@ defineExpose({
   .expanded-view {
     position: relative;
     height: inherit;
-    .expanded-content {
+    .expanded-content-holder {
       .header {
         position: sticky;
         top: 0;
