@@ -4,6 +4,7 @@ import VVolumeControl from './VVolumeControl.vue'
 import VTrackInfo from './VTrackInfo.vue'
 import Button from 'primevue/button'
 import { Howl, Howler } from 'howler'
+import { useSwipe } from '@vueuse/core'
 import soundAnimGif from '../assets/images/audioAnim.gif'
 
 const props = defineProps({
@@ -83,6 +84,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  canExpandWithSwipe: {
+    type: Boolean,
+    default: false,
+  },
+  canUnexpandWithSwipe: {
+    type: Boolean,
+    default: false,
+  },
   volume: {
     type: Number,
     default: 100,
@@ -125,6 +134,24 @@ const emit = defineEmits([
   'is-minimized',
   'is-expanded',
 ])
+
+//swipe setup
+const playerRef = ref(null)
+const { direction, lengthY } = useSwipe(playerRef, {
+  passive: true,
+  onSwipe() {
+    if (props.canExpand && props.canExpandWithSwipe) {
+      if (direction.value === 'up' && lengthY.value > 100) {
+        isExpanded.value = true
+      }
+    }
+    if (props.canExpand && props.canUnexpandWithSwipe) {
+      if (direction.value === 'down' && lengthY.value < -100) {
+        isExpanded.value = false
+      }
+    }
+  },
+})
 
 onMounted(() => {
   // keyboard accessibility
@@ -321,6 +348,7 @@ defineExpose({
 
 <template>
   <div
+    ref="playerRef"
     class="persistent-player"
     :class="[{ minimized: isMinimized }, { expanded: isExpanded }]"
   >
@@ -501,7 +529,6 @@ defineExpose({
     bottom: 0;
     height: 100%;
   }
-
   .maximize-btn-holder {
     position: absolute;
     display: block;
@@ -552,7 +579,6 @@ defineExpose({
   .player-controls {
     display: flex;
     align-items: center;
-    height: 100%;
     gap: 16px;
 
     .play-button {
