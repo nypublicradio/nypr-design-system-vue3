@@ -133,6 +133,8 @@ const emit = defineEmits([
   'timeline-click',
   'is-minimized',
   'is-expanded',
+  'swipe-up',
+  'swipe-down',
 ])
 
 //swipe setup
@@ -143,11 +145,13 @@ const { direction, lengthY } = useSwipe(playerRef, {
     if (props.canExpand && props.canExpandWithSwipe) {
       if (direction.value === 'up' && lengthY.value > 100) {
         isExpanded.value = true
+        emit('swipe-up')
       }
     }
     if (props.canExpand && props.canUnexpandWithSwipe) {
       if (direction.value === 'down' && lengthY.value < -100) {
         isExpanded.value = false
+        emit('swipe-down')
       }
     }
   },
