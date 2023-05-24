@@ -1,9 +1,195 @@
+<script setup>
+import { gsap } from 'gsap'
+import { isInViewport } from '../mixins/helpers.js'
+import VShareTools from './VShareTools.vue'
+import VShareToolsItem from './VShareToolsItem.vue'
+import VImageWithCaption from './VImageWithCaption.vue'
+import Button from 'primevue/button'
+import { ref, shallowRef, computed, onBeforeMount, onMounted } from 'vue'
+
+const props = defineProps({
+  /**
+   *  A URL pointing to an image of the person.
+   */
+  image: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  image scale in its container in vertical orientation only, 1(8.333%) through 12(100%)
+   */
+  imgScale: {
+    type: String,
+    default: '5',
+  },
+  /**
+   *  adds a circle mask around the image.
+   */
+  circle: {
+    type: Boolean,
+    default: false,
+  },
+  /**
+   *  youtube link to promo video
+   */
+  video: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  Full name of the person.
+   */
+  fullName: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  A URL pointing to the person's bio page or anywhere else they want to link to.
+   */
+  nameLink: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  Organization this person is from.
+   */
+  organization: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  link to the organization.
+   */
+  organizationLink: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  The person's role or job. e.g. Host, Guest, Author, etc.
+   */
+  role: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  Information about the author. e.g. "Jen is a blah blah..." etc.
+   */
+  blurb: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  maxium lines of text to show when truncarted
+   */
+  truncate: {
+    type: [Boolean, String],
+    default: false,
+  },
+  /**
+   *  persons website url
+   */
+  websiteUrl: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  persons website label
+   */
+  websiteLabel: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  persons email address
+   */
+  email: {
+    type: String,
+    default: null,
+  },
+  /**
+   *  persons phone number
+   */
+  phoneNumbers: {
+    type: Array,
+    default: null,
+  },
+  /**
+   *  social account array
+   */
+  social: {
+    type: Array,
+    default: null,
+  },
+  /**
+   *  horizontal(default), vertical, responsive (changes to vertical at the small break point)
+   */
+  orientation: {
+    type: String,
+    default: 'horizontal',
+  },
+  /**
+   *  orientation responsive break point
+   */
+  bp: {
+    type: String,
+    default: 'sm',
+  },
+  /**
+   *  If component is on the Author page, disables image and name links
+   */
+  onAuthorPage: {
+    type: Boolean,
+    default: false,
+  },
+})
+
+const readMore = shallowRef(false)
+const socialArrayData = ref([])
+const bpVar = ref(props.bp)
+
+const thisPersonRef = ref('thisPersonRef')
+const blurbHolderRef = ref('blurbHolderRef')
+const blurbRef = ref('blurbRef')
+const imgRef = ref('imgRef')
+
+const getSocialArray = computed(() => {
+  let socialArray = []
+  if (props.social) {
+    props.social.forEach((item) => {
+      socialArray.push({
+        name: item.name,
+        url: item.url,
+        icon: item.icon,
+      })
+    })
+  }
+  return socialArray
+})
+
+const cssVars = computed(() => {
+  return {
+    '--trunc-lines': props.truncate ? props.truncate : 'unset',
+  }
+})
+const hasDetails = computed(() => {
+  return !!props.role || !!props.blurb || !!props.social || !!props.fullName
+})
+const organizationComputed = computed(() => {
+  return ' (' + props.organization + ')'
+})
+
+onBeforeMount(() => {})
+
+onMounted(() => {
+  socialArrayData.value = getSocialArray.value
+})
+</script>
+
 <template>
-  <div ref="thisPerson" class="person override" :style="cssVars">
+  <div ref="thisPersonRef" class="person" :style="cssVars">
     <div
-      v-resize="onResize"
       class="person-inner grid grid-nogutter"
-      :class="[hasDetails ? 'has-details' : '', image ? '' : 'no-image']"
+      :class="[{ 'has-details': hasDetails }, { 'no-image': !props.image }]"
     >
       <!-- Image section -->
       <div
@@ -27,23 +213,11 @@
           ]"
         >
           <div ref="visual" class="visual" :class="[circle ? 'circle' : '']">
-            <canvas ref="canvas" class="person-image" />
-            <img
-              v-if="isGIF(image)"
-              ref="img"
-              class="person-image person-image-img"
-              :src="image"
-              :alt="fullName"
-              role="presentation"
-              loading="lazy"
-              decoding="async"
-            />
             <v-image-with-caption
-              v-else
               class="person-image person-image-img"
-              :image="image"
-              :alt-text="fullName"
-              :image-url="nameLink ? nameLink : null"
+              :image="props.image"
+              :alt-text="props.fullName"
+              :image-url="props.nameLink ? props.nameLink : null"
               :ratio="[1, 1]"
               role="presentation"
               loading="lazy"
@@ -52,21 +226,6 @@
               :height="400"
             />
           </div>
-          <Button
-            v-if="video"
-            :label="null"
-            class="p-button-icon-only pi pi-play video-play-button"
-            :class="[
-              { 'pi-times': showVideo },
-              { 'p-button-rounded circle': circle },
-            ]"
-            :title="
-              (showVideo ? 'Close ' : 'Play ') +
-              fullName +
-              `'s introduction video`
-            "
-            @click="handleVideoClick($event)"
-          />
         </div>
       </div>
 
@@ -86,13 +245,13 @@
       >
         <div class="person-name-link-holder">
           <a
-            v-if="fullName"
+            v-if="props.fullName"
             class="person-name-link"
             role="link"
-            :class="!nameLink || onAuthorPage ? 'disabled' : ''"
-            :href="nameLink ? nameLink : null"
+            :class="!props.nameLink || onAuthorPage ? 'disabled' : ''"
+            :href="props.nameLink ? props.nameLink : null"
           >
-            <div class="h2" v-html="fullName"></div>
+            <div class="h2" v-html="props.fullName"></div>
           </a>
         </div>
         <div v-if="role" class="person-role footer">
@@ -144,422 +303,9 @@
           />
         </v-share-tools>
       </div>
-      <div
-        v-if="video && showVideo"
-        ref="videoHolderRef"
-        class="video-holder col-12"
-        @click="handleVideoClick($event)"
-      >
-        <iframe
-          ref="youtubeRef"
-          title="Video player"
-          class="iframeHolder"
-          type="text/html"
-          :src="
-            'https://www.youtube.com/embed/' +
-            getYoutubeId(video) +
-            '?autoplay=1'
-          "
-          frameborder="0"
-          allowfullscreen
-        />
-
-        <!-- <div class="closer" @click="handleVideoClick($event)">
-          <close-icon />
-        </div>-->
-        <Button
-          v-if="video"
-          :label="null"
-          class="p-button-icon-only pi pi-times closer"
-          :class="[{ 'p-button-rounded': circle }]"
-          @click="handleVideoClick($event)"
-        />
-      </div>
     </div>
   </div>
 </template>
-
-<script>
-import { gsap } from 'gsap'
-import { isInViewport } from '../mixins/helpers.js'
-import VShareTools from './VShareTools.vue'
-import VShareToolsItem from './VShareToolsItem.vue'
-import VImageWithCaption from './VImageWithCaption.vue'
-import Button from 'primevue/button'
-
-function initResizeListener(binding) {
-  const onResizeCallback = binding.value
-  window.addEventListener('resize', () => {
-    const width = document.documentElement.clientWidth
-    const height = document.documentElement.clientHeight
-    onResizeCallback({ width, height })
-  })
-}
-
-/**
- * A component for displaying details about a person
- */
-export default {
-  name: 'VPerson',
-  components: {
-    VShareTools,
-    VShareToolsItem,
-    Button,
-    VImageWithCaption,
-  },
-  directives: {
-    resize: {
-      // vue3 support
-      mounted(el, binding) {
-        initResizeListener(binding)
-      },
-      // vue 2 supoort
-      inserted(el, binding) {
-        initResizeListener(binding)
-      },
-    },
-  },
-  props: {
-    /**
-     *  A URL pointing to an image of the person.
-     */
-    image: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  image scale in its container in vertical orientation only, 1(8.333%) through 12(100%)
-     */
-    imgScale: {
-      type: String,
-      default: '5',
-    },
-    /**
-     *  adds a circle mask around the image.
-     */
-    circle: {
-      type: Boolean,
-      default: false,
-    },
-    /**
-     *  adds a basic animation to the component when it enters the viewport once. If an image and details are present, it will animate them individually. If either is missing, it will animate the entire component.
-     */
-    // animate: {
-    //   type: Boolean,
-    //   default: false,
-    // },
-    /**
-     *  youtube link to promo video
-     */
-    video: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  Full name of the person.
-     */
-    fullName: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  A URL pointing to the person's bio page or anywhere else they want to link to.
-     */
-    nameLink: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  Organization this person is from.
-     */
-    organization: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  link to the organization.
-     */
-    organizationLink: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  The person's role or job. e.g. Host, Guest, Author, etc.
-     */
-    role: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  Information about the author. e.g. "Jen is a blah blah..." etc.
-     */
-    blurb: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  maxium lines of text to show when truncarted
-     */
-    truncate: {
-      type: [Boolean, String],
-      default: false,
-    },
-    /**
-     *  persons website url
-     */
-    websiteUrl: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  persons website label
-     */
-    websiteLabel: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  persons email address
-     */
-    email: {
-      type: String,
-      default: null,
-    },
-    /**
-     *  persons phone number
-     */
-    phoneNumbers: {
-      type: Array,
-      default: null,
-    },
-    /**
-     *  social account array
-     */
-    social: {
-      type: Array,
-      default: null,
-    },
-    /**
-     *  horizontal(default), vertical, responsive (changes to vertical at the small break point)
-     */
-    orientation: {
-      type: String,
-      default: 'horizontal',
-    },
-    /**
-     *  orientation responsive break point
-     */
-    bp: {
-      type: String,
-      default: 'sm',
-    },
-    /**
-     *  If component is on the Author page, disables image and name links
-     */
-    onAuthorPage: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  data() {
-    return {
-      readMore: false,
-      showVideo: false,
-      inViewPort: false,
-      windowSize: {},
-      socialArrayData: [],
-      initTruncHeight: 0,
-      bpVar: this.bp,
-    }
-  },
-  computed: {
-    cssVars() {
-      return {
-        '--trunc-lines': this.truncate ? this.truncate : 'unset',
-      }
-    },
-    hasDetails() {
-      return !!this.role || !!this.blurb || !!this.social || !!this.fullName
-    },
-    organizationComputed() {
-      return ' (' + this.organization + ')'
-    },
-  },
-  watch: {
-    windowSize() {
-      this.runHandleOnResizeDebounce()
-    },
-  },
-  beforeMount() {
-    this.socialArrayData = this.socialArray()
-  },
-  mounted() {
-    const { thisPerson, blurbHolderRef, blurbRef } = this.$refs
-
-    if (this.truncate) {
-      // set initial height of element so gsap can animate it
-      this.initTruncHeight = blurbRef.offsetHeight + 5
-      gsap.set(blurbHolderRef, {
-        height: this.initTruncHeight,
-      })
-
-      // initial call of handleResize
-      this.handleResize()
-    }
-
-    // if (this.animate) {
-    //   thisPerson.classList.add('animate')
-    // }
-    // const observer = new IntersectionObserver((entries) => {
-    //   entries.forEach((entry) => {
-    //     if (entry.isIntersecting) {
-    //       // console.log('in viewport')
-    //       // stop GIF
-    //       if (this.image && this.isGIF(this.image)) {
-    //         this.handleGifInViewPort()
-    //       }
-
-    //       // animate
-    //       if (this.animate) {
-    //         thisPerson.classList.remove('animate')
-    //       }
-    //       observer.disconnect()
-    //     }
-    //   })
-    // })
-
-    // observer.observe(thisPerson)
-
-    // running the resize code in a debounce and controlled by a watch method looking at a data var windowSize, which is updarted by the onResize method with the screen is resized
-    this.runHandleOnResizeDebounce = this.debounce(() => {
-      this.handleResize()
-    }, 500)
-  },
-  methods: {
-    getOffsetTop(el) {
-      const rect = el.getBoundingClientRect()
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop
-      return rect.top + scrollTop - 160 // 160 is the ~ height of the header buffer
-    },
-    handleBlurb() {
-      this.readMore = !this.readMore
-      const { blurbRef, blurbHolderRef, imgRef, thisPerson } = this.$refs
-      if (this.readMore) {
-        blurbRef.classList.toggle('expanded')
-      }
-      // animate height of blurb container (vue/nuxt3 w/ gsap)
-      gsap.to(blurbHolderRef, {
-        duration: this.readMore ? 0.5 : this.isInViewport(imgRef) ? 0.15 : 0.5,
-        height: this.readMore ? 'auto' : this.initTruncHeight,
-        overwrite: true,
-        onComplete: () => {
-          if (!this.readMore) {
-            blurbRef.classList.toggle('expanded')
-          }
-          this.handleResize()
-        },
-      })
-
-      // when closeing the expanded blurb, if the image is not in the viewport, animate it into view
-      if (!this.readMore && !this.isInViewport(imgRef)) {
-        window.scrollTo({
-          top: this.getOffsetTop(thisPerson),
-          behavior: 'smooth',
-        })
-      }
-    },
-    debounce(fn, delay) {
-      let timeoutID = null
-      return function () {
-        clearTimeout(timeoutID)
-        const args = arguments
-        const that = this
-        timeoutID = setTimeout(function () {
-          fn.apply(that, args)
-        }, delay)
-      }
-    },
-    onResize(size) {
-      this.windowSize = size
-    },
-    handleResize() {
-      if (!this.readMore && this.truncate) {
-        const { blurbRef, readMoreRef } = this.$refs
-        const clamped = blurbRef.scrollHeight > blurbRef.clientHeight
-        readMoreRef.classList.toggle('show-me', clamped)
-      }
-    },
-    handleVideoClick(event) {
-      event.preventDefault()
-      event.stopPropagation()
-      this.$emit(' componentEvent', 'playing promo video')
-      this.showVideo = !this.showVideo
-      setTimeout(() => {
-        // when showing the video and it is not inviewport, it scrolls element into view
-        const { videoHolderRef, thisPerson, blurbRef } = this.$refs
-        if (this.showVideo && !this.isInViewport(videoHolderRef)) {
-          window.scrollTo({
-            top: this.getOffsetTop(thisPerson) + blurbRef.clientHeight,
-            behavior: 'smooth',
-          })
-        }
-      }, 100)
-    },
-    handleGifInViewPort(inViewPort) {
-      /* wait 10 seconds then swap out GIF with canvas render */
-      this.inViewPort = inViewPort
-      const { canvas, img } = this.$refs
-      setTimeout(function () {
-        const w = img.clientWidth
-        const h = img.clientHeight
-        canvas.setAttribute('width', w + 'px')
-        canvas.setAttribute('height', h + 'px')
-        canvas.getContext('2d').drawImage(img, 0, 0, w, h)
-        img.remove()
-        canvas.classList.add('show')
-      }, 10000)
-    },
-    isGIF(imageURL) {
-      return imageURL.match(/(http(s?):)([/|.|\w|\s|-])*\.(?:gif)/g)
-    },
-    getYoutubeId(url) {
-      const regExp =
-        /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
-      const match = url.match(regExp)
-      return match && match[7].length === 11 ? match[7] : false
-    },
-    socialArray() {
-      // Website, Email, Phone array
-      const wepArray = this.social ? this.social : []
-
-      if (this.email) {
-        wepArray.push({
-          service: 'email',
-          username: this.email,
-        })
-      }
-      if (this.phoneNumbers) {
-        this.phoneNumbers.forEach((phone) => {
-          wepArray.push({
-            service: 'phone',
-            username: phone.phoneNumber,
-          })
-        })
-      }
-      if (this.websiteUrl) {
-        wepArray.push({
-          service: 'site',
-          profileUrl: this.websiteUrl,
-          label: this.websiteLabel ? this.websiteLabel : 'Website',
-        })
-      }
-      return wepArray
-    },
-    // imported global helpers
-    isInViewport,
-  },
-}
-</script>
 
 <style lang="scss">
 @mixin aspect-ratio($width, $height) {
@@ -714,7 +460,6 @@ export default {
         letter-spacing: 0.6px;
         text-transform: uppercase;
         margin-top: spacing(1);
-        display: none;
         &.show-me {
           display: inline-block;
         }
