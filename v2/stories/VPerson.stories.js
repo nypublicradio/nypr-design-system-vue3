@@ -15,7 +15,38 @@ export default {
         // },
     },
 }
-
+const profileFromArticle = {
+    "id": 19,
+    "firstName": "Scott",
+    "lastName": "Lynch",
+    "name": "Scott Lynch",
+    "photoID": 327700,
+    "jobTitle": "Photojournalist",
+    "biography": "Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC. Photojournalist, food writer, preschool receptionist.  Love NYC.",
+    "website": "http://t.co/Np4U39BYlh",
+    "phone_numbers": [
+        {
+            "phone_number": "9731231234"
+        },
+        {
+            "phone_number": "2011231234"
+        }
+    ],
+    "email": "scoboco@gmail.com",
+    "slug": "scott-lynch",
+    "url": "/staff/scott-lynch",
+    "link": "https://www.sponsoredLink.com",
+    "socialMediaProfile": [
+        {
+            "service": "instagram",
+            "profileUrl": "https://www.instagram.com/scoboco/"
+        },
+        {
+            "service": "twitter",
+            "profileUrl": "https://twitter.com/Scoboco"
+        }
+    ]
+}
 const profile = {
     "id": 19,
     "meta": {
@@ -125,5 +156,6 @@ const Template = (args) => ({
 
 export const DefaultHorizontal = Template.bind({})
 DefaultHorizontal.args = {
-    profileId: 19,
+    profileData: profileFromArticle,
+    truncate: 2,
 }

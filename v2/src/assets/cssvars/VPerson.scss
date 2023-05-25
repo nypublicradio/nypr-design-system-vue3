@@ -1,0 +1,10 @@
+:root,
+[data-style-mode='default'] {
+    --person-name-size: var(--font-size-9);
+    --person-name-color: var(--text-color);
+    --person-name-weight: var(--font-weight-600);
+    --person-name-decoration: none;
+    --person-name-hover-decoration: underline;
+}
+[data-style-mode='dark'] {
+}
