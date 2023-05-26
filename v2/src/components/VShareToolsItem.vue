@@ -224,18 +224,13 @@ const share = () => {
   </button>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .share-button,
 .follow-link,
 .follow-link svg,
 .share-button svg {
-  width: 24px;
-  height: 24px;
-
-  @include media('<sm') {
-    width: 30px;
-    height: 30px;
-  }
+  width: 20px;
+  height: 20px;
 }
 
 .share-button svg > *,

@@ -162,13 +162,13 @@ $type-paragraph1: (
             'font-size': var(--font-size-6),
             'line-height': var(--font-size-9),
             'font-weight': var(--font-weight),
-            'color': var(--black200),
+            'color': var(--text-color),
         ),
     ),
     $medium: (
         'values': (
-            'font-size': var(--font-size-6),
-            'line-height': var(--font-size-9),
+            'font-size': var(--font-size-5),
+            'line-height': var(--font-size-8),
         ),
     ),
 );
@@ -180,7 +180,7 @@ $type-paragraph2: (
             'font-size': var(--font-size-6),
             'line-height': var(--font-size-9),
             'font-weight': var(--font-weight),
-            'color': var(--black200),
+            'color': var(--text-color),
         ),
     ),
     $medium: (
@@ -197,7 +197,7 @@ $type-paragraph3: (
             'font-size': var(--font-size-6),
             'line-height': var(--font-size-9),
             'font-weight': var(--font-weight),
-            'color': var(--black200),
+            'color': var(--text-color),
         ),
     ),
     $medium: (
@@ -332,7 +332,7 @@ $type-caption: (
             'font-size': 13px,
             'line-height': var(--font-size-7),
             'font-weight': var(--font-weight),
-            'color': var(--black200),
+            'color': var(--text-color),
         ),
     ),
 );
@@ -344,7 +344,7 @@ $type-fineprint: (
             'font-size': 12px,
             'line-height': var(--font-size-6),
             'font-weight': var(--font-weight),
-            'color': var(--black100),
+            'color': var(--text-color),
         ),
     ),
     $medium: (

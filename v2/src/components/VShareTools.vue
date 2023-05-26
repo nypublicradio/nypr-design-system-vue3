@@ -42,7 +42,7 @@ const props = defineProps({
   align-items: center;
   flex-wrap: wrap;
   justify-content: flex-start;
-  gap: spacing(4);
+  gap: 0.5rem 1rem;
   &.group.vertical {
     flex-direction: column;
   }

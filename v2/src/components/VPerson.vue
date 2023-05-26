@@ -22,9 +22,25 @@ const props = defineProps({
     type: String,
     default: '../assets/images/default-user.jpg',
   },
+  verticalMobile: {
+    type: Boolean,
+    default: false,
+  },
   showCta: {
     type: Boolean,
     default: true,
+  },
+  showBio: {
+    type: Boolean,
+    default: true,
+  },
+  showSocial: {
+    type: Boolean,
+    default: true,
+  },
+  alignItems: {
+    type: String,
+    default: 'start',
   },
   sponsored: {
     type: Boolean,
@@ -106,72 +122,82 @@ const accountNameFromUrl = (url) => {
 </script>
 
 <template>
-  <div
-    v-if="profile"
-    class="author-profile"
-    :class="[{ reverse: props.reverse }]"
-  >
-    <div class="profile">
-      <div class="author-image">
-        <v-flexible-link
-          :to="profileLink"
-          raw
-          :aria-hidden="true"
-          :tabindex="-1"
-          @click="emit('click-image', profileLink)"
+  <div class="v-person">
+    <div
+      v-if="profile"
+      class="author-profile"
+      :class="[
+        { reverse: props.reverse, verticalMobile: props.verticalMobile },
+      ]"
+      :style="`align-items: ${props.alignItems};`"
+    >
+      <div class="profile">
+        <div class="author-image">
+          <v-flexible-link
+            :to="profileLink"
+            raw
+            :aria-hidden="true"
+            :tabindex="-1"
+            @click="emit('click-image', profileLink)"
+          >
+            <v-simple-responsive-image
+              v-if="profile.photoID"
+              :src="`${props.imgApi}${profile.photoID}${props.imgApiSuffix}`"
+              :width="imageSize"
+              :height="imageSize"
+              :sizes="props.sizes"
+              :ratio="props.ratio"
+              :loading="props.loading"
+              alt="Profile image"
+            />
+            <img
+              v-else
+              :src="`${props.imageFallbackPath}`"
+              :loading="props.loading"
+              alt="Profile image"
+            />
+          </v-flexible-link>
+        </div>
+      </div>
+      <div class="info">
+        <div class="name-holder">
+          <v-flexible-link
+            class="name-link"
+            :to="profileLink"
+            @click="emit('click-name', profileLink)"
+          >
+            <div class="name">{{ props.namePrefix }} {{ profile.name }}</div>
+          </v-flexible-link>
+          <v-share-tools v-if="profile.socialMediaProfile && props.showSocial">
+            <v-share-tools-item
+              v-for="account in updatedSocialArr"
+              :key="account.id"
+              :service="account.service"
+              :username="accountNameFromUrl(account.profileUrl)"
+              @share="(service) => emit('click-social-share', service)"
+              @follow="(service) => emit('click-social-follow', service)"
+            />
+          </v-share-tools>
+        </div>
+        <p
+          v-if="profile.biography && props.showBio"
+          class="bio"
+          :class="props.truncate ? `truncate t${props.truncate}lines` : ''"
         >
-          <v-simple-responsive-image
-            v-if="profile.photoID"
-            :src="`${props.imgApi}${profile.photoID}${props.imgApiSuffix}`"
-            :width="imageSize"
-            :height="imageSize"
-            :sizes="props.sizes"
-            :ratio="props.ratio"
-            :loading="props.loading"
-            alt="Profile image"
-          />
-          <img
-            v-else
-            :src="`${props.imageFallbackPath}`"
-            :loading="props.loading"
-            alt="Profile image"
-          />
+          {{ profile.biography }}
+        </p>
+        <div class="slot">
+          <slot name="slot" />
+        </div>
+        <v-flexible-link
+          v-if="showCta"
+          :to="profileLink"
+          class="cta"
+          @click="emit('click-cta', profileLink)"
+        >
+          {{ ctaText }}
         </v-flexible-link>
       </div>
-    </div>
-    <div class="info">
-      <div class="name-holder">
-        <v-flexible-link
-          class="name-link"
-          :to="profileLink"
-          @click="emit('click-name', profileLink)"
-        >
-          <div class="name">{{ props.namePrefix }} {{ profile.name }}</div>
-        </v-flexible-link>
-        <v-share-tools v-if="profile.socialMediaProfile">
-          <v-share-tools-item
-            v-for="account in updatedSocialArr"
-            :key="account.id"
-            :service="account.service"
-            :username="accountNameFromUrl(account.profileUrl)"
-            @share="(service) => emit('click-social-share', service)"
-            @follow="(service) => emit('click-social-follow', service)"
-          />
-        </v-share-tools>
-      </div>
-      <p
-        v-if="profile.biography"
-        :class="props.truncate ? `truncate t${props.truncate}lines` : ''"
-      >
-        {{ profile.biography }}
-      </p>
-      <v-flexible-link
-        v-if="showCta"
-        :to="profileLink"
-        @click="emit('click-cta', profileLink)"
-      >
-        {{ ctaText }}
-      </v-flexible-link>
     </div>
   </div>
 </template>
@@ -192,61 +218,91 @@ $container-breakpoint-md: if(
   map-get($breakpoints, 'md'),
   768px
 );
-.author-profile {
+.v-person {
   container-type: inline-size;
-  display: flex;
-  align-items: start;
-  margin-right: 0;
-  margin-left: 0;
-  margin-top: 0;
-  gap: 1rem;
-  .author-image {
-    background: #ffffff;
-    width: v-bind(imageSizePx);
-    height: auto;
-    border-radius: v-bind(radius);
-    overflow: hidden;
-    // @include media('<md') {
-    //   width: v-bind(profileImageSizeSm);
-    //   height: v-bind(profileImageSizeSm);
-    // }
-  }
-  .info {
+
+  .author-profile {
     display: flex;
-    flex-direction: column;
-    gap: 0.25rem;
-    .name-holder {
+    align-items: start;
+    margin-right: 0;
+    margin-left: 0;
+    margin-top: 0;
+    gap: 1rem;
+
+    .author-image {
+      background: #ffffff;
+      width: v-bind(imageSizePx);
+      height: auto;
+      border-radius: v-bind(radius);
+      overflow: hidden;
+    }
+    .info {
       display: flex;
-      gap: 10px;
-      .name-link {
-        text-decoration: var(--person-name-decoration);
-        display: inline-block;
-        color: var(--person-name-color);
-        .name {
-          font-size: var(--person-name-size);
-          font-weight: var(--person-name-weight);
-        }
-        &:hover {
-          text-decoration: var(--person-name-hover-decoration);
+      flex-direction: column;
+      gap: 0.25rem;
+      .name-holder {
+        display: flex;
+        gap: 1rem;
+        .name-link {
+          text-decoration: var(--person-name-decoration);
+          display: inline-block;
+          color: var(--person-name-color);
+          .name {
+            font-size: var(--person-name-size);
+            font-weight: var(--person-name-weight);
+          }
+          &:hover {
+            text-decoration: var(--person-name-hover-decoration);
+          }
         }
       }
+      .slot {
+      }
     }
-  }
-  &.reverse {
-    flex-direction: row-reverse;
+    &.reverse {
+      flex-direction: row-reverse;
+    }
   }
 }
 @container (max-width: #{$container-breakpoint-md}) {
-  .author-profile {
-    .author-image {
-      width: 60px;
-      height: auto;
+  .v-person {
+    .author-profile {
+      .info {
+        .name-holder {
+          flex-direction: column;
+          gap: 0.25rem;
+        }
+      }
     }
   }
 }
 
 @container (max-width: #{$container-breakpoint-sm}) {
-  .author-profile {
+  .v-person {
+    .author-profile {
+      .author-image {
+        width: 60px;
+        height: auto;
+      }
+      .info {
+        .name-holder {
+          .name-link {
+            .name {
+              font-size: var(--person-name-small-size);
+            }
+          }
+        }
+      }
+      &.verticalMobile {
+        flex-direction: column;
+        align-items: center !important;
+        text-align: center;
+        .author-image {
+          width: v-bind(imageSizePx);
+          height: auto;
+        }
+      }
+    }
   }
 }
 
