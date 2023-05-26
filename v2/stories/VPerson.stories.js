@@ -158,4 +158,5 @@ export const DefaultHorizontal = Template.bind({})
 DefaultHorizontal.args = {
     profileData: profileFromArticle,
     truncate: 2,
+    namePrefix: 'By',
 }

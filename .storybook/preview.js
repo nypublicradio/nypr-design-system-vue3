@@ -2,7 +2,7 @@
 import { app, addParameters } from '@storybook/vue3'
 import { action } from '@storybook/addon-actions'
 import addons from '@storybook/addons'
-
+import '@storybook/addon-console'
 // darkmose styles
 import './darkmode.css'
 

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onBeforeMount } from 'vue'
+import { ref, computed, onBeforeMount, clientOnly } from 'vue'
 import Image from 'primevue/image'
 import ProgressSpinner from 'primevue/progressspinner'
 import Button from 'primevue/button'
@@ -9,7 +9,7 @@ const props = defineProps({
   /* alt text prop */
   alt: {
     type: String,
-    default: "",
+    default: '',
   },
   /* loading image prop */
   loading: {
@@ -216,10 +216,7 @@ const calcQuality = (quality, size) => {
 const enlarge = () => {
   loadingEnlargedImage.value = true
   const img = document.getElementsByClassName('p-image-preview')
-  img[0].setAttribute(
-    'alt',
-    props.alt
-  )
+  img[0].setAttribute('alt', props.alt)
   if (rawImage) {
     img[0].setAttribute(
       'src',

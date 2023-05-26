@@ -10,6 +10,7 @@ module.exports = {
     "@storybook/addon-docs",
     "@storybook/preset-scss",
     "@storybook/addon-postcss",
+    "@storybook/addon-console",
     "storybook-dark-mode",
   ],
   "framework": "@storybook/vue3",

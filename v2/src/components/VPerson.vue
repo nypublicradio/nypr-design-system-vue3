@@ -10,6 +10,10 @@ const props = defineProps({
     type: Object,
     default: null,
   },
+  namePrefix: {
+    type: String,
+    default: null,
+  },
   imageSize: {
     type: Number,
     default: 100,
@@ -62,6 +66,14 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits([
+  'click-image',
+  'click-name',
+  'click-cta',
+  'click-social-share',
+  'click-social-follow',
+])
+
 const profile = ref(props.profileData)
 
 const updatedSocialArr = ref([])
@@ -106,6 +118,7 @@ const accountNameFromUrl = (url) => {
           raw
           :aria-hidden="true"
           :tabindex="-1"
+          @click="emit('click-image', profileLink)"
         >
           <v-simple-responsive-image
             v-if="profile.photoID"
@@ -128,8 +141,12 @@ const accountNameFromUrl = (url) => {
     </div>
     <div class="info">
       <div class="name-holder">
-        <v-flexible-link class="name-link" :to="profileLink">
-          <div class="name">{{ profile.name }}</div>
+        <v-flexible-link
+          class="name-link"
+          :to="profileLink"
+          @click="emit('click-name', profileLink)"
+        >
+          <div class="name">{{ props.namePrefix }} {{ profile.name }}</div>
         </v-flexible-link>
         <v-share-tools v-if="profile.socialMediaProfile">
           <v-share-tools-item
@@ -137,6 +154,8 @@ const accountNameFromUrl = (url) => {
             :key="account.id"
             :service="account.service"
             :username="accountNameFromUrl(account.profileUrl)"
+            @share="(service) => emit('click-social-share', service)"
+            @follow="(service) => emit('click-social-follow', service)"
           />
         </v-share-tools>
       </div>
@@ -146,17 +165,37 @@ const accountNameFromUrl = (url) => {
       >
         {{ profile.biography }}
       </p>
-      <v-flexible-link v-if="showCta" :to="profileLink">
+      <v-flexible-link
+        v-if="showCta"
+        :to="profileLink"
+        @click="emit('click-cta', profileLink)"
+      >
         {{ ctaText }}
       </v-flexible-link>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+$container-breakpoint-xs: if(
+  global-variable-exists(breakpoints),
+  map-get($breakpoints, 'xs'),
+  375px
+);
+$container-breakpoint-sm: if(
+  global-variable-exists(breakpoints),
+  map-get($breakpoints, 'sm'),
+  576px
+);
+$container-breakpoint-md: if(
+  global-variable-exists(breakpoints),
+  map-get($breakpoints, 'md'),
+  768px
+);
 .author-profile {
+  container-type: inline-size;
   display: flex;
-  align-items: center;
+  align-items: start;
   margin-right: 0;
   margin-left: 0;
   margin-top: 0;
@@ -164,7 +203,7 @@ const accountNameFromUrl = (url) => {
   .author-image {
     background: #ffffff;
     width: v-bind(imageSizePx);
-    height: v-bind(imageSizePx);
+    height: auto;
     border-radius: v-bind(radius);
     overflow: hidden;
     // @include media('<md') {
@@ -195,6 +234,24 @@ const accountNameFromUrl = (url) => {
   }
   &.reverse {
     flex-direction: row-reverse;
+  }
+}
+@container (max-width: #{$container-breakpoint-md}) {
+  .author-profile {
+    .author-image {
+      width: 60px;
+      height: auto;
+    }
+  }
+}
+
+@container (max-width: #{$container-breakpoint-sm}) {
+  .author-profile {
+  }
+}
+
+@container (max-width: #{$container-breakpoint-xs}) {
+  .author-profile {
   }
 }
 </style>
