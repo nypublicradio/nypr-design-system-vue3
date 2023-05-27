@@ -90,12 +90,12 @@ const Template = (args) => ({
     },
     template: '<v-person v-bind="args" />',
 })
-const TemplateSlot = (args) => ({
+const TemplateSlots = (args) => ({
     components: { VPerson },
     setup() {
         return { args }
     },
-    template: '<v-person v-bind="args" ><template #slot>slotted content</template></v-person>',
+    template: '<v-person v-bind="args" ><template #slot-above-name>SLOTTED CONTENT ABOVE NAME</template><template #slot-above-bio>SLOTTED CONTENT ABOVE BIO</template><template #slot-below-bio>SLOTTED CONTENT BELOW BIO</template><template #slot-below-cta>SLOTTED CONTENT BELOW CTA</template></v-person>',
 })
 
 export const Default = Template.bind({})
@@ -195,4 +195,8 @@ export const PixelDensitySizes = Template.bind({})
 PixelDensitySizes.args = {
     profileData: profileFromArticle,
     pixelDensitySizes: [2, 3, 4],
+}
+export const SlottedContent = TemplateSlots.bind({})
+SlottedContent.args = {
+    profileData: profileFromArticle,
 }

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { ref } from 'vue'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage.vue'
 import VShareTools from './VShareTools.vue'
@@ -174,6 +174,9 @@ const accountNameFromUrl = (url) => {
         </div>
       </div>
       <div class="info">
+        <div class="slot slot-above-name">
+          <slot name="slot-above-name" />
+        </div>
         <div class="name-holder">
           <v-flexible-link
             class="name-link"
@@ -193,6 +196,9 @@ const accountNameFromUrl = (url) => {
             />
           </v-share-tools>
         </div>
+        <div class="slot slot-above-bio">
+          <slot name="slot-above-bio" />
+        </div>
         <p
           v-if="profile.biography && props.showBio"
           class="bio"
@@ -200,8 +206,8 @@ const accountNameFromUrl = (url) => {
         >
           {{ profile.biography }}
         </p>
-        <div class="slot">
-          <slot name="slot" />
+        <div class="slot slot-below-bio">
+          <slot name="slot-below-bio" />
         </div>
         <v-flexible-link
           v-if="showCta"
@@ -211,16 +217,18 @@ const accountNameFromUrl = (url) => {
         >
           {{ ctaText }}
         </v-flexible-link>
+        <div class="slot slot-below-cta">
+          <slot name="slot-below-cta" />
+        </div>
       </div>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-// possibly import this from the library as a template to support container breakpoints based on the theme breakpoint variables
 $buffer: if(
-  global-variable-exists(content-padding),
-  calc($content-padding - 1px),
+  global-variable-exists(page-gutter-padding),
+  calc($page-gutter-padding - 1px),
   33px
 );
 $container-breakpoint-xs: if(
@@ -238,11 +246,7 @@ $container-breakpoint-md: if(
   calc(map-get($breakpoints, 'md') - $buffer),
   768px
 );
-$container-breakpoint-lg: if(
-  global-variable-exists(breakpoints),
-  calc(map-get($breakpoints, 'lg') - $buffer),
-  1024px
-);
+
 .v-person {
   container-type: inline-size;
 
