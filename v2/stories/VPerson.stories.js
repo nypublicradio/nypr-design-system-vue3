@@ -102,16 +102,6 @@ export const Default = Template.bind({})
 Default.args = {
     profileData: profileFromArticle,
 }
-export const TruncatedBio2Lines = Template.bind({})
-TruncatedBio2Lines.args = {
-    profileData: profileFromArticle,
-    truncate: 2,
-}
-export const TruncatedBio3Lines = Template.bind({})
-TruncatedBio3Lines.args = {
-    profileData: profileFromArticle,
-    truncate: 3,
-}
 export const ImageSize = Template.bind({})
 ImageSize.args = {
     profileData: profileFromArticle,
@@ -137,7 +127,11 @@ NamePrefix.args = {
 export const NoPhotoFallbackImage = Template.bind({})
 NoPhotoFallbackImage.args = {
     profileData: profileFromArticleNoPhoto,
-
+}
+export const NoPhotoCustomImage = Template.bind({})
+NoPhotoCustomImage.args = {
+    profileData: profileFromArticleNoPhoto,
+    imageFallbackPath: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
 }
 export const VerticalMobile = Template.bind({})
 VerticalMobile.args = {
@@ -165,4 +159,40 @@ export const Sponsored = Template.bind({})
 Sponsored.args = {
     profileData: profileFromArticle,
     sponsored: true,
+}
+export const Reverse = Template.bind({})
+Reverse.args = {
+    profileData: profileFromArticle,
+    reverse: true,
+}
+export const TruncatedBio2Lines = Template.bind({})
+TruncatedBio2Lines.args = {
+    profileData: profileFromArticle,
+    truncate: 2,
+}
+export const TruncatedBio3Lines = Template.bind({})
+TruncatedBio3Lines.args = {
+    profileData: profileFromArticle,
+    truncate: 3,
+}
+export const ImageRadius = Template.bind({})
+ImageRadius.args = {
+    profileData: profileFromArticle,
+    radius: '10px',
+}
+export const EagerLoading = Template.bind({})
+EagerLoading.args = {
+    profileData: profileFromArticle,
+    loading: 'eager',
+}
+export const ImageRatio = Template.bind({})
+ImageRatio.args = {
+    profileData: profileFromArticle,
+    imageRatio: [4, 2],
+    radius: '0',
+}
+export const PixelDensitySizes = Template.bind({})
+PixelDensitySizes.args = {
+    profileData: profileFromArticle,
+    pixelDensitySizes: [2, 3, 4],
 }

@@ -71,7 +71,7 @@ const props = defineProps({
     type: Array,
     default: () => [1, 1],
   },
-  sizes: {
+  pixelDensitySizes: {
     type: Array,
     default() {
       return [2]
@@ -152,7 +152,7 @@ const accountNameFromUrl = (url) => {
               :src="`${props.imgApi}${profile.photoID}${props.imgApiSuffix}`"
               :width="imageSize"
               :height="imageSize"
-              :sizes="props.sizes"
+              :sizes="props.pixelDensitySizes"
               :ratio="props.imageRatio"
               :loading="props.loading"
               alt="Profile image"
