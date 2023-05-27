@@ -18,9 +18,13 @@ const props = defineProps({
     type: Number,
     default: 100,
   },
+  imageSizeScaleRatio: {
+    type: Number,
+    default: 1.5,
+  },
   imageFallbackPath: {
     type: String,
-    default: '../assets/images/default-user.jpg',
+    default: 'static/media/v2/src/assets/images/default-user.jpg',
   },
   verticalMobile: {
     type: Boolean,
@@ -111,6 +115,7 @@ const profileLink = ref(
 
 // cssvars
 const imageSizePx = ref(props.imageSize + 'px')
+const imageSizeScaleRatio = ref(props.imageSizeScaleRatio)
 const radius = ref(props.radius)
 
 const accountNameFromUrl = (url) => {
@@ -154,6 +159,7 @@ const accountNameFromUrl = (url) => {
               v-else
               :src="`${props.imageFallbackPath}`"
               :loading="props.loading"
+              style="width: 100%; height: auto"
               alt="Profile image"
             />
           </v-flexible-link>
@@ -203,6 +209,7 @@ const accountNameFromUrl = (url) => {
 </template>
 
 <style lang="scss" scoped>
+// possibly import this from the library as a template to support container breakpoints based on the theme breakpoint variables
 $buffer: if(
   global-variable-exists(content-padding),
   calc($content-padding - 1px),
@@ -223,6 +230,11 @@ $container-breakpoint-md: if(
   calc(map-get($breakpoints, 'md') - $buffer),
   768px
 );
+$container-breakpoint-lg: if(
+  global-variable-exists(breakpoints),
+  calc(map-get($breakpoints, 'lg') - $buffer),
+  1024px
+);
 .v-person {
   container-type: inline-size;
 
@@ -240,6 +252,7 @@ $container-breakpoint-md: if(
       height: auto;
       border-radius: v-bind(radius);
       overflow: hidden;
+      aspect-ratio: 1 / 1;
     }
     .info {
       display: flex;
@@ -287,6 +300,7 @@ $container-breakpoint-md: if(
     .author-profile {
       .author-image {
         width: 60px;
+        width: calc(v-bind(imageSizePx) / v-bind(imageSizeScaleRatio));
         height: auto;
       }
       .info {
@@ -318,7 +332,10 @@ $container-breakpoint-md: if(
   .v-person {
     .author-profile {
       .author-image {
-        width: 40px;
+        width: calc(
+          v-bind(imageSizePx) / v-bind(imageSizeScaleRatio) /
+            v-bind(imageSizeScaleRatio)
+        );
       }
     }
   }
