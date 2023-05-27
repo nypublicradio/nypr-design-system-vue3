@@ -4,6 +4,7 @@ import VFlexibleLink from './VFlexibleLink.vue'
 import VSimpleResponsiveImage from './VSimpleResponsiveImage.vue'
 import VShareTools from './VShareTools.vue'
 import VShareToolsItem from './VShareToolsItem.vue'
+import defaultUserPhoto from '../assets/images/default-user.jpg'
 
 const props = defineProps({
   profileData: {
@@ -24,7 +25,7 @@ const props = defineProps({
   },
   imageFallbackPath: {
     type: String,
-    default: 'images/default-user.jpg',
+    default: null,
   },
   verticalMobile: {
     type: Boolean,
@@ -159,7 +160,11 @@ const accountNameFromUrl = (url) => {
             <img
               v-else
               :src="`${
-                props.sponsored ? profile.logo : props.imageFallbackPath
+                props.sponsored
+                  ? profile.logo
+                  : props.imageFallbackPath
+                  ? props.imageFallbackPath
+                  : defaultUserPhoto
               }`"
               :loading="props.loading"
               style="width: 100%; height: auto"
