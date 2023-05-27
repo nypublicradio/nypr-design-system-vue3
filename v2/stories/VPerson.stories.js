@@ -36,7 +36,7 @@ const profileFromArticle = {
     "slug": "scott-lynch",
     "url": "/staff/scott-lynch",
     "link": "https://www.sponsoredLink.com",
-    "logo": "../assets/images/default-sponsor.jpg",
+    "logo": "images/default-sponsor.png",
     "socialMediaProfile": [
         {
             "service": "instagram",
@@ -137,15 +137,32 @@ NamePrefix.args = {
 export const NoPhotoFallbackImage = Template.bind({})
 NoPhotoFallbackImage.args = {
     profileData: profileFromArticleNoPhoto,
-    //imageFallbackPath: '../assets/images/default-user.jpg',
-    //imageSize: '80',
-    //imageSizeScaleRatio: 1
-    //truncate: 3,
-    //namePrefix: 'By',
-    //showBio: false,
-    //showCta: false,
-    //showSocial: false,
-    //reverse: true,
-    //alignItems: 'center',
-    //verticalMobile: true,
+
+}
+export const VerticalMobile = Template.bind({})
+VerticalMobile.args = {
+    profileData: profileFromArticle,
+    verticalMobile: true,
+}
+export const HideCTA = Template.bind({})
+HideCTA.args = {
+    profileData: profileFromArticle,
+    showCta: false,
+}
+export const HideBioCTAAndCenter = Template.bind({})
+HideBioCTAAndCenter.args = {
+    profileData: profileFromArticle,
+    showBio: false,
+    showCta: false,
+    alignItems: 'center',
+}
+export const HideSocial = Template.bind({})
+HideSocial.args = {
+    profileData: profileFromArticle,
+    showSocial: false,
+}
+export const Sponsored = Template.bind({})
+Sponsored.args = {
+    profileData: profileFromArticle,
+    sponsored: true,
 }

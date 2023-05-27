@@ -24,7 +24,7 @@ const props = defineProps({
   },
   imageFallbackPath: {
     type: String,
-    default: 'static/media/v2/src/assets/images/default-user.jpg',
+    default: 'images/default-user.jpg',
   },
   verticalMobile: {
     type: Boolean,
@@ -66,7 +66,7 @@ const props = defineProps({
     type: String,
     default: 'lazy',
   },
-  ratio: {
+  imageRatio: {
     type: Array,
     default: () => [1, 1],
   },
@@ -114,9 +114,10 @@ const profileLink = ref(
 )
 
 // cssvars
-const imageSizePx = ref(props.imageSize + 'px')
-const imageSizeScaleRatio = ref(props.imageSizeScaleRatio)
-const radius = ref(props.radius)
+const cssImageSizePx = ref(props.imageSize + 'px')
+const cssImageSizeScaleRatio = ref(props.imageSizeScaleRatio)
+const cssRadius = ref(props.radius)
+const cssImageRatio = ref(`${props.imageRatio[0]} / ${props.imageRatio[1]}`)
 
 const accountNameFromUrl = (url) => {
   return url
@@ -146,18 +147,20 @@ const accountNameFromUrl = (url) => {
             @click="emit('click-image', profileLink)"
           >
             <v-simple-responsive-image
-              v-if="profile.photoID"
+              v-if="profile.photoID && !props.sponsored"
               :src="`${props.imgApi}${profile.photoID}${props.imgApiSuffix}`"
               :width="imageSize"
               :height="imageSize"
               :sizes="props.sizes"
-              :ratio="props.ratio"
+              :ratio="props.imageRatio"
               :loading="props.loading"
               alt="Profile image"
             />
             <img
               v-else
-              :src="`${props.imageFallbackPath}`"
+              :src="`${
+                props.sponsored ? profile.logo : props.imageFallbackPath
+              }`"
               :loading="props.loading"
               style="width: 100%; height: auto"
               alt="Profile image"
@@ -248,11 +251,11 @@ $container-breakpoint-lg: if(
 
     .author-image {
       background: #ffffff;
-      width: v-bind(imageSizePx);
+      width: v-bind(cssImageSizePx);
       height: auto;
-      border-radius: v-bind(radius);
+      border-radius: v-bind(cssRadius);
       overflow: hidden;
-      aspect-ratio: 1 / 1;
+      aspect-ratio: v-bind(cssImageRatio);
     }
     .info {
       display: flex;
@@ -300,7 +303,7 @@ $container-breakpoint-lg: if(
     .author-profile {
       .author-image {
         width: 60px;
-        width: calc(v-bind(imageSizePx) / v-bind(imageSizeScaleRatio));
+        width: calc(v-bind(cssImageSizePx) / v-bind(cssImageSizeScaleRatio));
         height: auto;
       }
       .info {
@@ -317,7 +320,7 @@ $container-breakpoint-lg: if(
         align-items: center !important;
         text-align: center;
         .author-image {
-          width: v-bind(imageSizePx);
+          width: v-bind(cssImageSizePx);
           height: auto;
         }
         .v-share-tools {
@@ -333,8 +336,8 @@ $container-breakpoint-lg: if(
     .author-profile {
       .author-image {
         width: calc(
-          v-bind(imageSizePx) / v-bind(imageSizeScaleRatio) /
-            v-bind(imageSizeScaleRatio)
+          v-bind(cssImageSizePx) / v-bind(cssImageSizeScaleRatio) /
+            v-bind(cssImageSizeScaleRatio)
         );
       }
     }
