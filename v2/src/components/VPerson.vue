@@ -203,19 +203,24 @@ const accountNameFromUrl = (url) => {
 </template>
 
 <style lang="scss" scoped>
+$buffer: if(
+  global-variable-exists(content-padding),
+  calc($content-padding - 1px),
+  33px
+);
 $container-breakpoint-xs: if(
   global-variable-exists(breakpoints),
-  map-get($breakpoints, 'xs'),
+  calc(map-get($breakpoints, 'xs') - $buffer),
   375px
 );
 $container-breakpoint-sm: if(
   global-variable-exists(breakpoints),
-  map-get($breakpoints, 'sm'),
+  calc(map-get($breakpoints, 'sm') - $buffer),
   576px
 );
 $container-breakpoint-md: if(
   global-variable-exists(breakpoints),
-  map-get($breakpoints, 'md'),
+  calc(map-get($breakpoints, 'md') - $buffer),
   768px
 );
 .v-person {
@@ -301,13 +306,21 @@ $container-breakpoint-md: if(
           width: v-bind(imageSizePx);
           height: auto;
         }
+        .v-share-tools {
+          justify-content: center;
+        }
       }
     }
   }
 }
 
 @container (max-width: #{$container-breakpoint-xs}) {
-  .author-profile {
+  .v-person {
+    .author-profile {
+      .author-image {
+        width: 40px;
+      }
+    }
   }
 }
 </style>

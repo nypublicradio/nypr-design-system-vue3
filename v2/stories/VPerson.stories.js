@@ -73,5 +73,5 @@ Default.args = {
     //showSocial: false,
     //reverse: true,
     //alignItems: 'center',
-    verticalMobile: true,
+    //verticalMobile: true,
 }
