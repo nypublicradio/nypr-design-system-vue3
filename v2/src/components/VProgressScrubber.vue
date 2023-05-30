@@ -39,11 +39,21 @@ onUpdated(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
+$buffer: if(
+  global-variable-exists(page-gutter-padding),
+  calc($page-gutter-padding - 1px),
+  33px
+);
+$container-breakpoint-md: if(
+  global-variable-exists(breakpoints),
+  calc(map-get($breakpoints, 'md') - $buffer),
+  768px
+);
 .progress-control {
   width: 100%;
 
-  @media (max-width: $md) {
+  @container (max-width: #{$container-breakpoint-md}) {
     position: absolute;
     cursor: pointer;
     min-width: 200px;

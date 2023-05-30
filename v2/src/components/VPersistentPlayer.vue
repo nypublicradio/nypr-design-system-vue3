@@ -389,7 +389,7 @@ defineExpose({
           @title-click="emit('title-click')"
         />
         <v-volume-control
-          class="hidden md:flex"
+          class="hideOnMobile"
           :disabled="!currentFile"
           :volume="volume"
           :is-muted="muted"
@@ -407,7 +407,7 @@ defineExpose({
           v-if="props.showSkip && !props.livestream"
           title="Go Back 15 Seconds"
           class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
-          :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
+          :class="{ [`hideOnMobile`]: props.hideSkipMobile }"
           aria-label="go back 15 seconds"
           @click="goBack15"
         >
@@ -434,7 +434,7 @@ defineExpose({
           v-if="props.showSkip && !props.livestream"
           title="Go Ahead 15 Seconds"
           class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
-          :class="{ [`hidden md:flex`]: props.hideSkipMobile }"
+          :class="{ [`hideOnMobile`]: props.hideSkipMobile }"
           aria-label="go ahead 15 seconds"
           @click="goAhead15"
         >
@@ -448,7 +448,7 @@ defineExpose({
           title="Download"
           tabindex="0"
           class="player-download-icon p-button-icon-only p-button-text p-button-secondary"
-          :class="{ [`hidden md:flex`]: props.hideDownloadMobile }"
+          :class="{ [`hideOnMobile`]: props.hideDownloadMobile }"
           aria-label="download"
           @click="download"
           @keypress.space.enter="download"
@@ -508,7 +508,18 @@ defineExpose({
 </template>
 
 <style lang="scss">
+$buffer: if(
+  global-variable-exists(page-gutter-padding),
+  calc($page-gutter-padding - 1px),
+  33px
+);
+$container-breakpoint-md: if(
+  global-variable-exists(breakpoints),
+  calc(map-get($breakpoints, 'md') - $buffer),
+  768px
+);
 .persistent-player {
+  container-type: inline-size;
   bottom: 0;
   left: 0;
   height: var(--persistent-player-height);
@@ -639,6 +650,11 @@ defineExpose({
       overflow-y: auto;
       overflow-x: hidden;
       height: inherit;
+    }
+  }
+  .hideOnMobile {
+    @container (max-width: #{$container-breakpoint-md}) {
+      display: none;
     }
   }
 }

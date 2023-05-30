@@ -142,8 +142,18 @@ const convertTime = (val) => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $track-info-image-size: 84px;
+$buffer: if(
+  global-variable-exists(page-gutter-padding),
+  calc($page-gutter-padding - 1px),
+  33px
+);
+$container-breakpoint-md: if(
+  global-variable-exists(breakpoints),
+  calc(map-get($breakpoints, 'md') - $buffer),
+  768px
+);
 .track-info {
   display: flex;
   gap: 12px;
@@ -152,9 +162,9 @@ $track-info-image-size: 84px;
   flex: auto;
   align-self: center;
   .track-info-image {
-    display: none;
-    @media all and (min-width: $md) {
-      display: block;
+    display: block;
+    @container (max-width: #{$container-breakpoint-md}) {
+      display: none;
     }
     width: $track-info-image-size;
     max-width: $track-info-image-size;
@@ -225,12 +235,12 @@ $track-info-image-size: 84px;
       }
     }
     .track-info-description {
-      display: none;
+      display: block;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      @media all and (min-width: $md) {
-        display: block;
+      @container (max-width: #{$container-breakpoint-md}) {
+        display: none;
       }
       .track-info-description-link {
         display: block;
@@ -246,8 +256,9 @@ $track-info-image-size: 84px;
     .track-info-time {
       display: flex;
       gap: spacing(1);
-      @media all and (min-width: $md) {
-        justify-content: flex-end;
+      justify-content: flex-end;
+      @container (max-width: #{$container-breakpoint-md}) {
+        justify-content: flex-start;
       }
       .player-track-time-current {
         margin-right: spacing(1);
@@ -256,6 +267,6 @@ $track-info-image-size: 84px;
         margin-left: spacing(1);
       }
     }
-  } // track-info-details
+  }
 }
 </style>
