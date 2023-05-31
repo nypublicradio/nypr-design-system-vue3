@@ -15,6 +15,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  imageSrc: {
+    type: String,
+    default: null,
+  },
   imageSize: {
     type: Number,
     default: 100,
@@ -148,10 +152,12 @@ const accountNameFromUrl = (url) => {
             @click="emit('click-image', profileLink)"
           >
             <v-simple-responsive-image
-              v-if="profile.photoID && !props.sponsored"
-              :src="`${props.imgApi}${profile.photoID}${props.imgApiSuffix}`"
-              :width="imageSize"
-              :height="imageSize"
+              v-if="
+                props.imageSrc && !props.sponsored && !props.imageFallbackPath
+              "
+              :src="props.imageSrc"
+              :width="Number(imageSize)"
+              :height="Number(imageSize)"
               :sizes="props.pixelDensitySizes"
               :ratio="props.imageRatio"
               :loading="props.loading"

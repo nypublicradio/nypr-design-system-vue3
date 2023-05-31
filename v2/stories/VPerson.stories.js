@@ -98,54 +98,76 @@ const TemplateSlots = (args) => ({
     template: '<v-person v-bind="args" ><template #slot-above-name>SLOTTED CONTENT ABOVE NAME</template><template #slot-above-bio>SLOTTED CONTENT ABOVE BIO</template><template #slot-below-bio>SLOTTED CONTENT BELOW BIO</template><template #slot-below-cta>SLOTTED CONTENT BELOW CTA</template></v-person>',
 })
 
+function useImageUrl(imageID, options) {
+    console.log('imageID = ', imageID)
+    if (!imageID) {
+        return null
+    }
+    const imageUrlTemplate = `https://cms.prod.nypr.digital/images/${imageID}/fill-%width%x%height%|format-webp|webpquality-%quality%`
+    return imageUrlTemplate
+        .replace('%width%', options?.width && String(options.width) || '%width%')
+        .replace('%height%', options?.height && String(options.height) || '%height%')
+        .replace('%quality%', options?.quality && String(options.quality) || '%quality%')
+}
+
 export const Default = Template.bind({})
 Default.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID)
 }
 export const ImageSize = Template.bind({})
 ImageSize.args = {
     profileData: profileFromArticle,
-    imageSize: '150',
+    imageSrc: useImageUrl(profileFromArticle.photoID),
+    imageSize: 150,
 }
 export const ImageSizeScaleRatio = Template.bind({})
 ImageSizeScaleRatio.args = {
     profileData: profileFromArticle,
-    imageSize: '150',
+    imageSrc: useImageUrl(profileFromArticle.photoID),
+    imageSize: 150,
     imageSizeScaleRatio: 2
 }
 export const ImageSizeWithNoScaleRatio = Template.bind({})
 ImageSizeWithNoScaleRatio.args = {
     profileData: profileFromArticle,
-    imageSize: '80',
+    imageSrc: useImageUrl(profileFromArticle.photoID),
+    imageSize: 80,
     imageSizeScaleRatio: 1
 }
 export const NamePrefix = Template.bind({})
 NamePrefix.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     namePrefix: 'By',
 }
 export const NoPhotoFallbackImage = Template.bind({})
 NoPhotoFallbackImage.args = {
     profileData: profileFromArticleNoPhoto,
+    imageSrc: useImageUrl(profileFromArticleNoPhoto.photoID),
 }
 export const NoPhotoCustomImage = Template.bind({})
 NoPhotoCustomImage.args = {
     profileData: profileFromArticleNoPhoto,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     imageFallbackPath: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
 }
 export const VerticalMobile = Template.bind({})
 VerticalMobile.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     verticalMobile: true,
 }
 export const HideCTA = Template.bind({})
 HideCTA.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     showCta: false,
 }
 export const HideBioCTAAndCenter = Template.bind({})
 HideBioCTAAndCenter.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     showBio: false,
     showCta: false,
     alignItems: 'center',
@@ -153,50 +175,60 @@ HideBioCTAAndCenter.args = {
 export const HideSocial = Template.bind({})
 HideSocial.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     showSocial: false,
 }
 export const Sponsored = Template.bind({})
 Sponsored.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     sponsored: true,
 }
 export const Reverse = Template.bind({})
 Reverse.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     reverse: true,
 }
 export const TruncatedBio2Lines = Template.bind({})
 TruncatedBio2Lines.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     truncate: 2,
 }
 export const TruncatedBio3Lines = Template.bind({})
 TruncatedBio3Lines.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     truncate: 3,
 }
 export const ImageRadius = Template.bind({})
 ImageRadius.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     radius: '10px',
 }
 export const EagerLoading = Template.bind({})
 EagerLoading.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     loading: 'eager',
 }
 export const ImageRatio = Template.bind({})
 ImageRatio.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     imageRatio: [4, 2],
     radius: '0',
 }
 export const PixelDensitySizes = Template.bind({})
 PixelDensitySizes.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
     pixelDensitySizes: [2, 3, 4],
 }
 export const SlottedContent = TemplateSlots.bind({})
 SlottedContent.args = {
     profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
 }
