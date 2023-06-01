@@ -82,6 +82,30 @@ const profileFromArticleNoPhoto = {
         }
     ]
 }
+const profileFromArticleNoSocial = {
+    "id": 19,
+    "firstName": "Scott",
+    "lastName": "Lynch",
+    "name": "Scott Lynch",
+    "photoID": 327700,
+    "jobTitle": "Photojournalist",
+    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+    "website": "http://t.co/Np4U39BYlh",
+    "phone_numbers": [
+        {
+            "phone_number": "9731231234"
+        },
+        {
+            "phone_number": "2011231234"
+        }
+    ],
+    "email": "scoboco@gmail.com",
+    "slug": "scott-lynch",
+    "url": "/staff/scott-lynch",
+    "link": "https://www.sponsoredLink.com",
+    "logo": "../assets/images/default-sponsor.jpg",
+    "socialMediaProfile": null
+}
 
 const Template = (args) => ({
     components: { VPerson },
@@ -89,6 +113,14 @@ const Template = (args) => ({
         return { args }
     },
     template: '<v-person v-bind="args" />',
+})
+
+const TemplateJustImage = (args) => ({
+    components: { VPerson },
+    setup() {
+        return { args }
+    },
+    template: '<div style="display:flex; flex-wrap:wrap; gap:10px;"><v-person v-bind="args" /><v-person v-bind="args" /><v-person v-bind="args" /><v-person v-bind="args" /><v-person v-bind="args" /><v-person v-bind="args" /><v-person v-bind="args" /></div>',
 })
 const TemplateSlots = (args) => ({
     components: { VPerson },
@@ -231,4 +263,15 @@ export const SlottedContent = TemplateSlots.bind({})
 SlottedContent.args = {
     profileData: profileFromArticle,
     imageSrc: useImageUrl(profileFromArticle.photoID),
+}
+export const justImage = TemplateJustImage.bind({})
+justImage.args = {
+    profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
+    justImage: true
+}
+export const NoSocial = Template.bind({})
+NoSocial.args = {
+    profileData: profileFromArticleNoSocial,
+    imageSrc: useImageUrl(profileFromArticleNoSocial.photoID),
 }

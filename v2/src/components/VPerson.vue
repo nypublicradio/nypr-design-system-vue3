@@ -47,6 +47,14 @@ const props = defineProps({
     type: Boolean,
     default: true,
   },
+  showName: {
+    type: Boolean,
+    default: true,
+  },
+  justImage: {
+    type: Boolean,
+    default: false,
+  },
   alignItems: {
     type: String,
     default: 'start',
@@ -81,14 +89,6 @@ const props = defineProps({
       return [2]
     },
   },
-  imgApi: {
-    type: String,
-    default: 'https://cms.prod.nypr.digital/images/',
-  },
-  imgApiSuffix: {
-    type: String,
-    default: '/fill-%width%x%height%|format-webp|webpquality-%quality%',
-  },
 })
 
 const emit = defineEmits([
@@ -103,19 +103,36 @@ const profile = ref(props.profileData)
 
 const updatedSocialArr = ref([])
 const email = { service: 'email', profileUrl: String(profile.value.email) }
-// push original social array and email into new updatedSocialArr
-updatedSocialArr.value.push(...profile.value.socialMediaProfile, email)
-// push phone numbers into new updatedSocialArr
-profile.value.phone_numbers.map((phone) => {
-  updatedSocialArr.value.push({
-    service: 'phone',
-    profileUrl: String(phone.phone_number),
+const website = {
+  service: 'site',
+  profileUrl: profile.value.website,
+}
+
+// push original social array into new updatedSocialArr if it exist
+if (profile.value.socialMediaProfile) {
+  updatedSocialArr.value.push(...profile.value.socialMediaProfile)
+}
+// push website into new updatedSocialArr if it exist
+if (profile.value.website) {
+  updatedSocialArr.value.push(website)
+}
+// push email into new updatedSocialArr if it exist
+if (profile.value.email) {
+  updatedSocialArr.value.push(email)
+}
+// push phone numbers into new updatedSocialArr if it exist
+if (profile.value.phone_numbers.length > 0) {
+  profile.value.phone_numbers.map((phone) => {
+    updatedSocialArr.value.push({
+      service: 'phone',
+      profileUrl: String(phone.phone_number),
+    })
   })
-})
+}
 
 const ctaText = ref(props.sponsored ? 'Learn More' : 'Read more')
 const profileLink = ref(
-  props.sponsored ? profile.value.link : profile.value.url
+  props.sponsored ? profile.value?.link : profile.value.url
 )
 
 // cssvars
@@ -123,6 +140,7 @@ const cssImageSizePx = ref(props.imageSize + 'px')
 const cssImageSizeScaleRatio = ref(props.imageSizeScaleRatio)
 const cssRadius = ref(props.radius)
 const cssImageRatio = ref(`${props.imageRatio[0]} / ${props.imageRatio[1]}`)
+const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
 
 const accountNameFromUrl = (url) => {
   return url
@@ -179,23 +197,25 @@ const accountNameFromUrl = (url) => {
           </v-flexible-link>
         </div>
       </div>
-      <div class="info">
+      <div class="info" v-if="!justImage">
         <div class="slot slot-above-name">
           <slot name="slot-above-name" />
         </div>
         <div class="name-holder">
           <v-flexible-link
+            v-if="props.showName"
             class="name-link"
             :to="profileLink"
             @click="emit('click-name', profileLink)"
           >
             <div class="name">{{ props.namePrefix }} {{ profile.name }}</div>
           </v-flexible-link>
-          <v-share-tools v-if="profile.socialMediaProfile && props.showSocial">
+          <v-share-tools v-if="updatedSocialArr && props.showSocial">
             <v-share-tools-item
               v-for="account in updatedSocialArr"
               :key="account.id"
               :service="account.service"
+              :link="account.profileUrl"
               :username="accountNameFromUrl(account.profileUrl)"
               @share="(service) => emit('click-social-share', service)"
               @follow="(service) => emit('click-social-follow', service)"
@@ -254,7 +274,7 @@ $container-breakpoint-md: if(
 );
 
 .v-person {
-  container-type: inline-size;
+  container-type: v-bind(cssContainerType);
 
   .author-profile {
     display: flex;

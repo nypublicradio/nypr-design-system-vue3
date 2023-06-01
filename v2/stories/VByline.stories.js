@@ -1,5 +1,7 @@
 import VByline from '../src/components/VByline.vue'
 import VSimpleResponsiveImage from '../src/components/VSimpleResponsiveImage.vue'
+import VCounter from '../src/components/VCounter.vue'
+import VPerson from '../src/components/VPerson.vue'
 
 export default {
     title: 'Components-V2/VByline',
@@ -33,13 +35,20 @@ const TemplateImage = (args) => ({
     },
     template: '<v-byline v-bind="args"> <template #images="slotProps" ><VSimpleResponsiveImage :src="`https://cms.prod.nypr.digital/images/${slotProps.author.photoID}/fill-%width%x%height%|format-webp|webpquality-%quality%`" :width="48" :height="48" :ratio="[1,1]" alt="Profile image" style="width:48px; height:auto;"/></template></v-byline>',
 })
-
-const TemplateBelowNameSlot = (args) => ({
-    components: { VByline },
+const TemplateImagePerson = (args) => ({
+    components: { VByline, VPerson },
     setup() {
         return { args }
     },
-    template: '<v-byline v-bind="args"> <template #belowNames="slotProps" >SLOT BELOW THE NAMES</template></v-byline>',
+    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VPerson :profileData="slotProps.author" :justImage="true" :imageSrc="`https://cms.prod.nypr.digital/images/${slotProps.author.photoID}/fill-%width%x%height%|format-webp|webpquality-%quality%`"/></template></v-byline>',
+})
+
+const TemplateBelowNameSlot = (args) => ({
+    components: { VByline, VCounter },
+    setup() {
+        return { args }
+    },
+    template: '<v-byline v-bind="args"> <template #belowNames="slotProps" ><v-counter text="Comments" :value="40" href="http://www.google.com" /></template></v-byline>',
 })
 
 const TemplateAfterNameSlot = (args) => ({
@@ -146,6 +155,11 @@ CustomConcatsNoPrefix.args = {
 }
 export const imageSlot = TemplateImage.bind({})
 imageSlot.args = {
+    authors: authorArray,
+    showImage: true,
+}
+export const imageSlotPerson = TemplateImagePerson.bind({})
+imageSlotPerson.args = {
     authors: authorArray,
     showImage: true,
 }

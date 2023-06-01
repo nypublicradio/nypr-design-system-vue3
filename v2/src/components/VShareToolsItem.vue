@@ -202,13 +202,13 @@ const share = () => {
 <template>
   <a
     v-if="action === 'follow'"
-    :href="username ? socialLink : link"
+    :href="username && props.service !== 'site' ? socialLink : link"
     class="v-share-tools-item follow-link c-share-tools__link"
     :class="service"
     :aria-label="ariaLabel"
     :target="service !== 'phone' ? '_blank' : '_self'"
     rel="noopener noreferrer"
-    :title="username ? socialLink : link"
+    :title="username && props.service !== 'site' ? socialLink : link"
     @click="emit('follow', service)"
   >
     <component :is="icons[props.service]" v-if="!label" />
