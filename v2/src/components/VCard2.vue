@@ -1,5 +1,5 @@
 <script setup>
-import { computed, useSlots } from 'vue'
+import { computed, useSlots, ref } from 'vue'
 import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VImageWithCaption from './VImageWithCaption.vue'
@@ -35,6 +35,10 @@ const props = defineProps({
   },
   blurb: {
     type: String,
+    default: null,
+  },
+  truncate: {
+    type: Number,
     default: null,
   },
   title: {
@@ -118,6 +122,9 @@ const hasDetails = computed(() => {
     !!props.eyebrow
   )
 })
+
+// css vars
+const imageWidth = ref(props.width + 'px')
 </script>
 
 <template>
@@ -125,7 +132,6 @@ const hasDetails = computed(() => {
     <v-image-with-caption
       v-if="props.imageSrc"
       class="card-image"
-      :style="`max-width: ${props.width}px;`"
       :image="props.imageSrc"
       :alt-text="props.alt"
       is-decorative
@@ -176,7 +182,12 @@ const hasDetails = computed(() => {
       <div v-if="props.subtitle" class="card-subtitle">
         {{ props.subtitle }}
       </div>
-      <div v-if="props.blurb" class="card-blurb" v-html="props.blurb"></div>
+      <div
+        v-if="props.blurb"
+        :class="props.truncate ? `truncate t${props.truncate}lines` : ''"
+        class="card-blurb"
+        v-html="props.blurb"
+      ></div>
       <div class="slot slot-below-blurb"><slot name="belowBlurb"></slot></div>
     </div>
   </div>
@@ -192,11 +203,18 @@ const hasDetails = computed(() => {
   max-width: 100%;
   gap: 1rem;
   .card-image {
+    &.image-with-caption {
+      max-width: v-bind(imageWidth);
+      min-width: v-bind(imageWidth);
+    }
   }
   .card-details {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    div:empty {
+      display: none;
+    }
     .title-holder {
       display: flex;
       flex-direction: row;
