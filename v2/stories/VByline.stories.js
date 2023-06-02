@@ -40,7 +40,7 @@ const TemplateImagePerson = (args) => ({
     setup() {
         return { args }
     },
-    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VPerson :profileData="slotProps.author" :justImage="true" :imageSrc="`https://cms.prod.nypr.digital/images/${slotProps.author.photoID}/fill-%width%x%height%|format-webp|webpquality-%quality%`"/></template></v-byline>',
+    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VPerson :profileData="slotProps.author" :imageSize="45" :justImage="true" :imageSrc="`https://cms.prod.nypr.digital/images/${slotProps.author.photoID}/fill-%width%x%height%|format-webp|webpquality-%quality%`"/></template></v-byline>',
 })
 
 const TemplateBelowNameSlot = (args) => ({
@@ -71,6 +71,7 @@ const authorArray = [
         "email": "",
         "slug": "nsikan-akpan",
         "url": "/staff/nsikan-akpan",
+
         "socialMediaProfile": [
             {
                 "service": "twitter",
@@ -158,10 +159,16 @@ imageSlot.args = {
     authors: authorArray,
     showImage: true,
 }
-export const imageSlotPerson = TemplateImagePerson.bind({})
-imageSlotPerson.args = {
+export const imageSlotVPerson = TemplateImagePerson.bind({})
+imageSlotVPerson.args = {
     authors: authorArray,
     showImage: true,
+}
+export const imagesSlotVPersons = TemplateImagePerson.bind({})
+imagesSlotVPersons.args = {
+    authors: authorsArray,
+    showImage: true,
+    flexDirection: 'column',
 }
 export const imagesSlot = TemplateImage.bind({})
 imagesSlot.args = {

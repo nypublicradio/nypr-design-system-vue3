@@ -22,7 +22,7 @@ const profileFromArticle = {
     "name": "Scott Lynch",
     "photoID": 327700,
     "jobTitle": "Photojournalist",
-    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+    "biography": "Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
     "website": "http://t.co/Np4U39BYlh",
     "phone_numbers": [
         {
@@ -56,7 +56,7 @@ const profileFromArticleNoPhoto = {
     "name": "Scott Lynch",
     "photoID": null,
     "jobTitle": "Photojournalist",
-    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+    "biography": "Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
     "website": "http://t.co/Np4U39BYlh",
     "phone_numbers": [
         {
@@ -89,7 +89,7 @@ const profileFromArticleNoSocial = {
     "name": "Scott Lynch",
     "photoID": 327700,
     "jobTitle": "Photojournalist",
-    "biography": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
+    "biography": "Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
     "website": "http://t.co/Np4U39BYlh",
     "phone_numbers": [
         {
@@ -131,7 +131,6 @@ const TemplateSlots = (args) => ({
 })
 
 function useImageUrl(imageID, options) {
-    console.log('imageID = ', imageID)
     if (!imageID) {
         return null
     }

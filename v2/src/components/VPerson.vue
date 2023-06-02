@@ -121,7 +121,7 @@ if (profile.value.email) {
   updatedSocialArr.value.push(email)
 }
 // push phone numbers into new updatedSocialArr if it exist
-if (profile.value.phone_numbers.length > 0) {
+if (profile.value.phone_numbers) {
   profile.value.phone_numbers.map((phone) => {
     updatedSocialArr.value.push({
       service: 'phone',
@@ -132,7 +132,7 @@ if (profile.value.phone_numbers.length > 0) {
 
 const ctaText = ref(props.sponsored ? 'Learn More' : 'Read more')
 const profileLink = ref(
-  props.sponsored ? profile.value?.link : profile.value.url
+  props.sponsored ? profile.value.link : profile.value.url
 )
 
 // cssvars
@@ -225,13 +225,12 @@ const accountNameFromUrl = (url) => {
         <div class="slot slot-above-bio">
           <slot name="slot-above-bio" />
         </div>
-        <p
+        <div
           v-if="profile.biography && props.showBio"
           class="bio"
           :class="props.truncate ? `truncate t${props.truncate}lines` : ''"
-        >
-          {{ profile.biography }}
-        </p>
+          v-html="profile.biography"
+        />
         <div class="slot slot-below-bio">
           <slot name="slot-below-bio" />
         </div>

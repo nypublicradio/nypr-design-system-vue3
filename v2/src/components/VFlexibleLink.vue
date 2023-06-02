@@ -75,7 +75,10 @@ const isAnchor = computed(() => {
     <slot name="default"></slot>
   </nuxt-link>
 </template>
-<style lang="scss">
+<style lang="scss" scoped>
+.flexible-link {
+  width: fit-content;
+}
 .flexible-link:not(.raw):not(.null) {
   color: var(--link-button-color);
   transition: all var(--transition-duration);
