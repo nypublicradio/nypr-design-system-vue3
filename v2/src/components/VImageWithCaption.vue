@@ -6,7 +6,7 @@ import Button from 'primevue/button'
 
 const props = defineProps({
   altText: {
-    default: "",
+    default: '',
     type: String,
   },
   loading: {
@@ -144,8 +144,8 @@ const props = defineProps({
   */
   isDecorative: {
     type: Boolean,
-    default: false
-  }
+    default: false,
+  },
 })
 
 const emit = defineEmits([

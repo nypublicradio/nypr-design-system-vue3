@@ -14,7 +14,7 @@ const props = defineProps({
     type: String,
     default: 'lazy',
   },
-  image: {
+  imageSrc: {
     type: String,
     default: null,
   },
@@ -24,14 +24,6 @@ const props = defineProps({
   },
   width: {
     type: Number,
-    default: null,
-  },
-  icon: {
-    type: String,
-    default: null,
-  },
-  customIcon: {
-    type: Object,
     default: null,
   },
   sponsored: {
@@ -94,27 +86,6 @@ const props = defineProps({
     default: false,
   },
   /**
-   * Switches to vertical layout on 'sm' mobile breakpoint
-   */
-  responsive: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * will control the scale of the image on 'sm' mobile breakpoint
-   */
-  mobileImageScale: {
-    type: Number,
-    default: 1,
-  },
-  /**
-   * what breakpoint to be mobile breakpoint
-   */
-  bp: {
-    type: String,
-    default: 'sm',
-  },
-  /**
    * ratio (in landscape)
    */
   ratio: {
@@ -153,89 +124,46 @@ const hasDetails = computed(() => {
     !!props.title ||
     !!props.subtitle ||
     !!slots.default ||
-    !!slots.blurb ||
-    !!slots.eyebrow
+    !!props.blurb ||
+    !!props.eyebrow
   )
 })
-
-// const getMobileImageScale = computed(() => {
-//   // console.log('window.innerWidth = ', window.innerWidth)
-//   // console.log('breakpoint[props.bp] = ', breakpoint[props.bp])
-//   return window.innerWidth < breakpoint[props.bp] ? props.mobileImageScale : 1
-// })
 </script>
 
 <template>
-  <div
-    class="v-card"
-    :class="{
-      [`flex-column ${bp}:flex-row`]: responsive,
-      sponsored: sponsored,
-    }"
-  >
-    <template v-if="image">
-      <div
-        class="card-image-link card-image-wrapper"
-        :class="{ [`w-full ${bp}:w-max`]: responsive }"
-      >
-        <!-- mobile, uses window width to load the image size-->
-        <v-image-with-caption
-          class="card-image w-full"
-          :class="responsive ? `${bp}:hidden ${bp}:w-max` : 'hidden'"
-          :image="image"
-          alt-text=""
-          is-decorative
-          :loading="loading"
-          :image-url="titleLink"
-          :max-width="maxWidth"
-          :max-height="maxHeight"
-          :allow-vertical-effect="allowVerticalEffect"
-          :ratio="ratio"
-          :quality="quality"
-          :flat-quality="flatQuality"
-          :sizes="sizes"
-          :caption="caption"
-          :caption-keep-on-top="captionKeepOnTop"
-          :credit="credit"
-          :credit-url="creditUrl"
-          role="presentation"
-          @image-click="(e) => emit('image-click', e)"
-          @credit-click="(e) => emit('credit-click', e)"
-        />
-        <!-- desktop, uses width and height props -->
-        <v-image-with-caption
-          class="card-image w-full"
-          :class="{ [`hidden ${bp}:w-max ${bp}:block`]: responsive }"
-          :image="image"
-          alt-text=""
-          is-decorative
-          :loading="loading"
-          :image-url="titleLink"
-          :width="width ? Math.round(width * props.mobileImageScale) : null"
-          :height="height ? Math.round(height * props.mobileImageScale) : null"
-          :max-width="maxWidth"
-          :max-height="maxHeight"
-          :allow-vertical-effect="allowVerticalEffect"
-          :ratio="ratio"
-          :quality="quality"
-          :flat-quality="flatQuality"
-          :sizes="sizes"
-          :caption="caption"
-          :caption-keep-on-top="captionKeepOnTop"
-          :credit="credit"
-          :credit-url="creditUrl"
-          role="presentation"
-          @image-click="(e) => emit('image-click', e)"
-          @credit-click="(e) => emit('credit-click', e)"
-        />
-      </div>
-    </template>
+  <div class="v-card2" :class="{ sponsored: sponsored }">
+    <v-image-with-caption
+      v-if="props.imageSrc"
+      class="card-image"
+      :style="`max-width: ${props.width}px;`"
+      :image="props.imageSrc"
+      :alt-text="props.alt"
+      is-decorative
+      :loading="props.loading"
+      :image-url="props.titleLink"
+      :width="props.width"
+      :height="props.height"
+      :max-width="props.maxWidth"
+      :max-height="props.maxHeight"
+      :allow-vertical-effect="props.allowVerticalEffect"
+      :ratio="props.ratio"
+      :quality="props.quality"
+      :flat-quality="props.flatQuality"
+      :sizes="props.sizes"
+      :caption="props.caption"
+      :caption-keep-on-top="props.captionKeepOnTop"
+      :credit="props.credit"
+      :credit-url="props.creditUrl"
+      role="presentation"
+      @image-click="(e) => emit('image-click', e)"
+      @credit-click="(e) => emit('credit-click', e)"
+    />
     <div v-if="hasDetails" class="card-details">
-      <div v-if="eyebrow" class="card-eyebrow type-body" v-html="eyebrow" />
+      <div v-if="eyebrow" class="card-eyebrow" v-html="eyebrow" />
       <div v-if="title" class="card-title" role="heading" aria-level="3">
-        <template v-if="tags || sponsored">
+        <template v-if="props.tags || sponsored">
           <v-tag
-            v-for="(tag, index) in tags"
+            v-for="(tag, index) in props.tags"
             :key="index"
             :name="tag.name"
             :slug="tag.slug"
@@ -243,139 +171,58 @@ const hasDetails = computed(() => {
           />
           <v-tag v-if="sponsored" name="sponsored" />
         </template>
-        <v-flexible-link
-          class="card-title-link"
-          :class="{ disabled: !titleLink }"
-          :to="titleLink"
-          @emit-flexible-link="emit('title-click', titleLink)"
-        >
-          <div class="h2" v-html="title"></div>
-          <i
-            v-if="icon"
-            :class="`pi pi-${icon}`"
-            role="img"
-            :aria-label="icon + ' icon'"
-          ></i>
-          <slot name="customIcon"></slot>
-        </v-flexible-link>
+        <div class="title-holder">
+          <div>
+            <div class="slot slot-before-title">
+              <slot name="beforeTitle"></slot>
+            </div>
+            <v-flexible-link
+              class="card-title-link"
+              :class="{ disabled: !props.titleLink }"
+              :to="props.titleLink"
+              @emit-flexible-link="emit('title-click', props.titleLink)"
+            >
+              <div class="card-title-title" v-html="props.title"></div>
+              <!-- CHANGE TO SLOT AFTER TITLE -->
+            </v-flexible-link>
+          </div>
+          <div class="slot slot-after-title">
+            <slot name="afterTitle"></slot>
+          </div>
+        </div>
       </div>
-      <p v-if="subtitle" class="card-subtitle">{{ subtitle }}</p>
-      <div v-if="blurb" class="card-blurb" v-html="blurb"></div>
-
-      <div v-if="$slots.default" class="card-slot">
-        <slot />
+      <div v-if="props.subtitle" class="card-subtitle">
+        {{ props.subtitle }}
       </div>
+      <div v-if="props.blurb" class="card-blurb" v-html="props.blurb"></div>
+      <div class="slot slot-below-blurb"><slot name="belowBlurb"></slot></div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-.v-card {
+<style lang="scss" scoped>
+.v-card2 {
   display: flex;
-  align-items: flex-start;
-  background: var(--surface-a);
-  color: var(--text-color);
-  box-shadow: var(--shadow);
-  -webkit-box-shadow: var(--shadow);
   border-radius: var(--border-radius);
   width: 100%;
   max-width: 100%;
   gap: 1rem;
+  .card-image {
+  }
+  .card-details {
+    .title-holder {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      gap: 0.5rem;
+      .slot-before-title {
+        float: left;
+        margin-right: 0.5rem;
+      }
+    }
+  }
   a.disabled {
     pointer-events: none;
-  }
-  .card-image-link {
-    img {
-      cursor: pointer;
-    }
-  }
-  .card-details {
-    align-self: flex-start;
-    flex: 1;
-    //  overflow: hidden;
-    .card-title {
-      line-height: var(--font-size-8);
-      .v-tag {
-        float: left;
-        margin-right: spacing(2);
-        line-height: var(--font-size-8);
-      }
-      .card-title-link {
-        display: inline-block;
-        width: 100%;
-        text-decoration: none;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        .pi {
-          font-size: var(--font-size-8);
-          margin-left: spacing(2);
-          margin-top: spacing(0.5);
-          text-decoration: none;
-          &:before {
-            color: var(--link-button-color);
-          }
-        }
-      }
-    }
-  }
-  .card-slot {
-    word-break: break-word;
-    margin-top: spacing(5);
-  }
-  .card-slot,
-  .card-slot p {
-    font-size: var(--font-size-6);
-    line-height: var(--font-size-9);
-    @include media('<lg') {
-      font-size: var(--font-size-5);
-      line-height: var(--font-size-8);
-    }
-  }
-}
-
-.v-card.mod-vertical {
-  flex-direction: column;
-  .card-details {
-    padding: spacing(0);
-  }
-}
-
-.v-card.mod-vertical .card-image-wrapper {
-  display: contents;
-}
-
-.v-card.mod-horizontal {
-  @include media('<lg') {
-    .image {
-      width: 100px;
-    }
-  }
-}
-
-.v-card.mod-left {
-  flex-direction: row-reverse;
-}
-
-.v-card.mod-large {
-  @include media('<lg') {
-    flex-direction: column;
-  }
-}
-.v-card.mod-large .card-image-wrapper {
-  flex-basis: 75%;
-  @include media('<lg') {
-    flex-basis: 100%;
-    width: 100%;
-    margin-bottom: spacing(5);
-  }
-}
-.v-card.mod-large .card-image-wrapper .image-with-caption {
-  width: 100% !important;
-}
-.v-card.mod-large .card-details {
-  align-self: flex-end;
-  @include media('<lg') {
-    align-self: flex-start;
   }
 }
 </style>
