@@ -63,9 +63,9 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  reverse: {
-    type: Boolean,
-    default: false,
+  flexDirection: {
+    type: String,
+    default: 'row',
   },
   truncate: {
     type: Number,
@@ -155,9 +155,7 @@ const accountNameFromUrl = (url) => {
     <div
       v-if="profile"
       class="author-profile"
-      :class="[
-        { reverse: props.reverse, verticalMobile: props.verticalMobile },
-      ]"
+      :class="[{ verticalMobile: props.verticalMobile }]"
       :style="`align-items: ${props.alignItems};`"
     >
       <div class="profile">
@@ -278,6 +276,7 @@ $container-breakpoint-md: if(
   .author-profile {
     display: flex;
     align-items: start;
+    flex-direction: v-bind(flexDirection);
     margin-right: 0;
     margin-left: 0;
     margin-top: 0;
@@ -313,9 +312,6 @@ $container-breakpoint-md: if(
       }
       .slot {
       }
-    }
-    &.reverse {
-      flex-direction: row-reverse;
     }
   }
 }

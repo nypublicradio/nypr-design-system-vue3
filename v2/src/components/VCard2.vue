@@ -1,7 +1,6 @@
 <script setup>
 import { computed, useSlots } from 'vue'
 import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
-import VTag from './VTag.vue'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VImageWithCaption from './VImageWithCaption.vue'
 
@@ -38,14 +37,6 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  eyebrow: {
-    type: String,
-    default: null,
-  },
-  tags: {
-    type: Array,
-    default: null,
-  },
   title: {
     type: String,
     default: null,
@@ -77,6 +68,10 @@ const props = defineProps({
   maxWidth: {
     type: Number,
     default: Infinity,
+  },
+  flexDirection: {
+    type: String,
+    default: 'row',
   },
   /**
    * does not allow the vertical effect to happen
@@ -110,12 +105,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits([
-  'title-click',
-  'image-click',
-  'credit-click',
-  'tag-click',
-])
+const emit = defineEmits(['title-click', 'image-click', 'credit-click'])
 
 const slots = useSlots()
 
@@ -159,18 +149,10 @@ const hasDetails = computed(() => {
       @credit-click="(e) => emit('credit-click', e)"
     />
     <div v-if="hasDetails" class="card-details">
-      <div v-if="eyebrow" class="card-eyebrow" v-html="eyebrow" />
+      <div class="slot slot-above-title">
+        <slot name="aboveTitle"></slot>
+      </div>
       <div v-if="title" class="card-title" role="heading" aria-level="3">
-        <template v-if="props.tags || sponsored">
-          <v-tag
-            v-for="(tag, index) in props.tags"
-            :key="index"
-            :name="tag.name"
-            :slug="tag.slug"
-            @tagClick="(e) => emit('tag-click', e)"
-          />
-          <v-tag v-if="sponsored" name="sponsored" />
-        </template>
         <div class="title-holder">
           <div>
             <div class="slot slot-before-title">
@@ -203,13 +185,18 @@ const hasDetails = computed(() => {
 <style lang="scss" scoped>
 .v-card2 {
   display: flex;
-  border-radius: var(--border-radius);
+  flex-direction: v-bind(flexDirection);
+  border-radius: var(--v-card-border-radius);
+  overflow: hidden;
   width: 100%;
   max-width: 100%;
   gap: 1rem;
   .card-image {
   }
   .card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     .title-holder {
       display: flex;
       flex-direction: row;

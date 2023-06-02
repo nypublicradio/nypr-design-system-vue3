@@ -219,7 +219,7 @@ export const Reverse = Template.bind({})
 Reverse.args = {
     profileData: profileFromArticle,
     imageSrc: useImageUrl(profileFromArticle.photoID),
-    reverse: true,
+    flexDirection: 'row-reverse',
 }
 export const TruncatedBio2Lines = Template.bind({})
 TruncatedBio2Lines.args = {

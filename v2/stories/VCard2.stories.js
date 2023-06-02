@@ -48,7 +48,19 @@ const TemplateSlotBeforeTitle = (args) => ({
             args
         }
     },
-    template: '<v-card2 v-bind="args"><template #beforeTitle><VTag name="News" slug="/news"/></template><template #afterTitle><VTag name="News" slug="/news"/></template></v-card2>',
+    template: '<v-card2 v-bind="args"><template #beforeTitle><VTag name="News" slug="/news"/></template></v-card2>',
+})
+
+const TemplateSlotAboveTitle = (args) => ({
+    components: {
+        VCard2, VTag
+    },
+    setup() {
+        return {
+            args
+        }
+    },
+    template: '<v-card2 v-bind="args"><template #aboveTitle><VTag name="News" slug="/news"/><VTag name="News" slug="/news"/><VTag name="News" slug="/news"/></template></v-card2>',
 })
 
 
@@ -77,6 +89,17 @@ SlotAfterTitle.args = {
 }
 export const SlotBeforeTitle = TemplateSlotBeforeTitle.bind({})
 SlotBeforeTitle.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>",
+    titleLink: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    width: 175,
+    height: 175,
+    maxWidth: 1440,
+    maxHeight: 2560,
+}
+export const SlotAboveTitle = TemplateSlotAboveTitle.bind({})
+SlotAboveTitle.args = {
     imageSrc: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>",
     titleLink: 'https://www.google.com',
