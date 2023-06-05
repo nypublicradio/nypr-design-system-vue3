@@ -5,6 +5,10 @@ import VFlexibleLink from './VFlexibleLink.vue'
 import VImageWithCaption from './VImageWithCaption.vue'
 
 const props = defineProps({
+  titleClass: {
+    type: String,
+    default: 'h1',
+  },
   alt: {
     type: String,
     default: '',
@@ -166,7 +170,11 @@ const imageWidth = ref(props.width + 'px')
             </div>
             <v-flexible-link
               class="card-title-link"
-              :class="{ disabled: !props.titleLink }"
+              :class="[
+                { disabled: !props.titleLink },
+                { customTitleClass: props.titleClass },
+                props.titleClass ? props.titleClass : '',
+              ]"
               :to="props.titleLink"
               @emit-flexible-link="emit('title-click', props.titleLink)"
             >
@@ -223,6 +231,25 @@ const imageWidth = ref(props.width + 'px')
       .slot-before-title {
         float: left;
         margin-right: 0.5rem;
+      }
+      .card-title-link {
+        text-decoration: none;
+        color: var(--v-card-title-color);
+        &:hover {
+          color: var(--v-card-title-hover-color);
+          .card-title-title:not(.customTitleClass) {
+            text-decoration: var(--v-card-title-hover-text-decoration);
+          }
+        }
+
+        .card-title-title:not(.customTitleClass) {
+          font-family: var(--v-card-title-font-family);
+          font-size: var(--v-card-title-font-size);
+          font-weight: var(--v-card-title-font-weight);
+          line-height: var(--v-card-title-line-height);
+          letter-spacing: var(--v-card-title-letter-spacing);
+          text-decoration: var(--v-card-title-text-decoration);
+        }
       }
     }
   }

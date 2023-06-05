@@ -40,16 +40,7 @@ onUpdated(() => {
 </template>
 
 <style lang="scss" scoped>
-$buffer: if(
-  global-variable-exists(page-gutter-padding),
-  calc($page-gutter-padding - 1px),
-  33px
-);
-$container-breakpoint-md: if(
-  global-variable-exists(breakpoints),
-  calc(map-get($breakpoints, 'md') - $buffer),
-  768px
-);
+$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 .progress-control {
   width: 100%;
 

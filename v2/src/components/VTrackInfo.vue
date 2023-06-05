@@ -144,16 +144,7 @@ const convertTime = (val) => {
 
 <style lang="scss" scoped>
 $track-info-image-size: 84px;
-$buffer: if(
-  global-variable-exists(page-gutter-padding),
-  calc($page-gutter-padding - 1px),
-  33px
-);
-$container-breakpoint-md: if(
-  global-variable-exists(breakpoints),
-  calc(map-get($breakpoints, 'md') - $buffer),
-  768px
-);
+$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 .track-info {
   display: flex;
   gap: 12px;

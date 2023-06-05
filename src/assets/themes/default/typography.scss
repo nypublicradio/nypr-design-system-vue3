@@ -7,8 +7,8 @@ $type-header1: (
     'default': (
         'values': (
             'font-family': var(--font-family-header),
-            'font-size': var(--font-size-19),
-            'line-height': var(--font-size-19),
+            'font-size': var(--font-size-15),
+            'line-height': var(--font-size-15),
             'font-weight': var(--font-weight-600),
             'letter-spacing': -0.02em,
             'color': var(--text-color),
@@ -25,8 +25,8 @@ $type-header2: (
     'default': (
         'values': (
             'font-family': var(--font-family-header),
-            'font-size': var(--font-size-17),
-            'line-height': var(--font-size-17),
+            'font-size': var(--font-size-13),
+            'line-height': var(--font-size-13),
             'font-weight': var(--font-weight-600),
             'letter-spacing': -0.02em,
             'color': var(--text-color),
@@ -43,8 +43,8 @@ $type-header3: (
     'default': (
         'values': (
             'font-family': var(--font-family-header),
-            'font-size': var(--font-size-14),
-            'line-height': var(--font-size-14),
+            'font-size': var(--font-size-12),
+            'line-height': var(--font-size-12),
             'font-weight': var(--font-weight-600),
             'letter-spacing': -0.02em,
             'color': var(--text-color),
@@ -52,8 +52,8 @@ $type-header3: (
     ),
     $medium: (
         'values': (
-            'font-size': var(--font-size-10),
-            'line-height': var(--font-size-10),
+            'font-size': var(--font-size-9),
+            'line-height': var(--font-size-9),
         ),
     ),
 );
@@ -61,8 +61,8 @@ $type-header4: (
     'default': (
         'values': (
             'font-family': var(--font-family-header),
-            'font-size': var(--font-size-12),
-            'line-height': var(--font-size-12),
+            'font-size': var(--font-size-10),
+            'line-height': var(--font-size-10),
             'font-weight': var(--font-weight-600),
             'letter-spacing': -0.02em,
             'color': var(--text-color),

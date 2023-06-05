@@ -508,16 +508,8 @@ defineExpose({
 </template>
 
 <style lang="scss">
-$buffer: if(
-  global-variable-exists(page-gutter-padding),
-  calc($page-gutter-padding - 1px),
-  33px
-);
-$container-breakpoint-md: if(
-  global-variable-exists(breakpoints),
-  calc(map-get($breakpoints, 'md') - $buffer),
-  768px
-);
+$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
+
 .persistent-player {
   container-type: inline-size;
   bottom: 0;

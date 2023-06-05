@@ -249,26 +249,9 @@ const accountNameFromUrl = (url) => {
 </template>
 
 <style lang="scss" scoped>
-$buffer: if(
-  global-variable-exists(page-gutter-padding),
-  calc($page-gutter-padding - 1px),
-  33px
-);
-$container-breakpoint-xs: if(
-  global-variable-exists(breakpoints),
-  calc(map-get($breakpoints, 'xs') - $buffer),
-  375px
-);
-$container-breakpoint-sm: if(
-  global-variable-exists(breakpoints),
-  calc(map-get($breakpoints, 'sm') - $buffer),
-  576px
-);
-$container-breakpoint-md: if(
-  global-variable-exists(breakpoints),
-  calc(map-get($breakpoints, 'md') - $buffer),
-  768px
-);
+$container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
+$container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
+$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 
 .v-person {
   container-type: v-bind(cssContainerType);

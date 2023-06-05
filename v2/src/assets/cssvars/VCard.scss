@@ -1,6 +1,20 @@
 :root,
 [data-style-mode='default'] {
     --v-card-border-radius: 0;
+    --v-card-title-transition-duration: var(--transition-duration);
+    --v-card-title-font-size: var(--font-size-13);
+    --v-card-title-font-family: var(--font-family-header);
+    --v-card-title-line-height: var(--font-size-13);
+    --v-card-title-font-weight: var(--font-weight-600);
+    --v-card-title-letter-spacing: -0.02em;
+    --v-card-title-color: inherit;
+    --v-card-title-text-decoration: inherit;
+    //hover
+    --v-card-title-hover-text-decoration: inherit;
+    --v-card-title-hover-color: inherit;
 }
 [data-style-mode='dark'] {
+    --v-card-title-color: inherit;
+    //hover
+    --v-card-title-hover-color: inherit;
 }

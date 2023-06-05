@@ -2,14 +2,14 @@
 @mixin font-config($config-map) {
   @each $breakpoint, $values in $config-map {
     // @debug "breakpoint = #{$breakpoint}";
-    @if $breakpoint == "default" {
-      @each $key, $value in map.get($values, "values") {
+    @if $breakpoint == 'default' {
+      @each $key, $value in map.get($values, 'values') {
         #{$key}: #{$value};
       }
     } @else {
-      @include media("<#{$breakpoint}") {
+      @include media('<#{$breakpoint}') {
         //@media screen and (min-width: $breakpoint) {
-        @each $key, $value in map.get($values, "values") {
+        @each $key, $value in map.get($values, 'values') {
           #{$key}: #{$value};
         }
       }
@@ -32,16 +32,33 @@ $spacing-base: 0.25; //  matches prime-flex
 
 // hex to rgb
 @function hex2rgb($hexColor) {
-  @return "#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}";
+  @return '#{red($hexColor)},#{green($hexColor)},#{blue($hexColor)}';
 }
 
 @function strip-unit($number) {
-  @if type-of($number) == "number" and not unitless($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
     @return math.div($number, $number * 0 + 1);
   }
   @return $number;
 }
 
+@function useGutter($gutter: 0px) {
+  @if (global-variable-exists(page-gutter)) {
+    @return $page-gutter;
+  } @else {
+    @return $gutter;
+  }
+}
+@function removePageGutter($bp) {
+  @return calc($bp - (useGutter() * 2) - 1px);
+}
+@function useBreakpointOrFallback($bp, $fallback) {
+  @if (global-variable-exists(breakpoints)) {
+    @return removePageGutter(map-get($breakpoints, $bp));
+  } @else {
+    @return $fallback;
+  }
+}
 
 @mixin truncate() {
   -webkit-line-clamp: 1;
@@ -49,41 +66,41 @@ $spacing-base: 0.25; //  matches prime-flex
   position: relative;
   background: inherit;
   -webkit-box-orient: vertical;
-  word-break: var(--word-break, "none");
+  word-break: var(--word-break, 'none');
   overflow: hidden;
   hyphens: auto;
 
   // fade text's last word, if clamped ()
   &::after {
-      content: "";
-      height: 2ch;
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      pointer-events: none;
-      //background: linear-gradient(90deg, transparent, var(--bg));
-      background: inherit; // it's easier to work with inheritance
-      mask-image: linear-gradient(to left, black, transparent);
-      transition: 0.2s;
-      width: 3em;
+    content: '';
+    height: 2ch;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    //background: linear-gradient(90deg, transparent, var(--bg));
+    background: inherit; // it's easier to work with inheritance
+    mask-image: linear-gradient(to left, black, transparent);
+    transition: 0.2s;
+    width: 3em;
   }
   &.t2lines {
-      -webkit-line-clamp: 2;
+    -webkit-line-clamp: 2;
   }
   &.t3lines {
-      -webkit-line-clamp: 3;
+    -webkit-line-clamp: 3;
   }
   &.t4lines {
-      -webkit-line-clamp: 4;
+    -webkit-line-clamp: 4;
   }
   &.t5lines {
-      -webkit-line-clamp: 5;
+    -webkit-line-clamp: 5;
   }
   &.t6lines {
-      -webkit-line-clamp: 6;
+    -webkit-line-clamp: 6;
   }
   &.t7lines {
-      -webkit-line-clamp: 7;
+    -webkit-line-clamp: 7;
   }
 }
 
