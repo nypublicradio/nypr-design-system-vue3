@@ -7,7 +7,7 @@ import VImageWithCaption from './VImageWithCaption.vue'
 const props = defineProps({
   titleClass: {
     type: String,
-    default: 'h1',
+    default: null,
   },
   alt: {
     type: String,
@@ -29,9 +29,13 @@ const props = defineProps({
     type: Number,
     default: null,
   },
-  sponsored: {
-    type: Boolean,
-    default: false,
+  imageSizeScaleRatio: {
+    type: Number,
+    default: 1.5,
+  },
+  baseClass: {
+    type: String,
+    default: null,
   },
   subtitle: {
     type: String,
@@ -49,7 +53,7 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  titleLink: {
+  link: {
     type: String,
     default: null,
   },
@@ -95,6 +99,13 @@ const props = defineProps({
     type: Array,
     default: () => [3, 2],
   },
+  /**
+   * ratio (in landscape)
+   */
+  mobileRatio: {
+    type: Array,
+    default: () => null,
+  },
   /** * jpg compression quality */
   quality: {
     type: Number,
@@ -110,6 +121,10 @@ const props = defineProps({
     default() {
       return [2, 3]
     },
+  },
+  isDecorative: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -128,19 +143,24 @@ const hasDetails = computed(() => {
 })
 
 // css vars
-const imageWidth = ref(props.width + 'px')
+const cssImageWidth = ref(props.width + 'px')
+const cssMobileRatio = ref(
+  props.mobileRatio
+    ? `${props.mobileRatio[0]} / ${props.mobileRatio[1]}`
+    : `${props.ratio[0]} / ${props.ratio[1]}`
+)
 </script>
 
 <template>
-  <div class="v-card2" :class="{ sponsored: sponsored }">
+  <div class="v-card2" :class="baseClass">
     <v-image-with-caption
       v-if="props.imageSrc"
       class="card-image"
       :image="props.imageSrc"
       :alt-text="props.alt"
-      is-decorative
+      :is-decorative="props.isDecorative"
       :loading="props.loading"
-      :image-url="props.titleLink"
+      :image-url="props.link"
       :width="props.width"
       :height="props.height"
       :max-width="props.maxWidth"
@@ -171,12 +191,12 @@ const imageWidth = ref(props.width + 'px')
             <v-flexible-link
               class="card-title-link"
               :class="[
-                { disabled: !props.titleLink },
+                { disabled: !props.link },
                 { customTitleClass: props.titleClass },
                 props.titleClass ? props.titleClass : '',
               ]"
-              :to="props.titleLink"
-              @emit-flexible-link="emit('title-click', props.titleLink)"
+              :to="props.link"
+              @emit-flexible-link="emit('title-click', props.link)"
             >
               <div class="card-title-title" v-html="props.title"></div>
               <!-- CHANGE TO SLOT AFTER TITLE -->
@@ -202,7 +222,11 @@ const imageWidth = ref(props.width + 'px')
 </template>
 
 <style lang="scss" scoped>
+$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
+$container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
+$container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
 .v-card2 {
+  container-type: inline-size;
   display: flex;
   flex-direction: v-bind(flexDirection);
   border-radius: var(--v-card-border-radius);
@@ -212,10 +236,12 @@ const imageWidth = ref(props.width + 'px')
   gap: 1rem;
   .card-image {
     &.image-with-caption {
-      max-width: v-bind(imageWidth);
-      min-width: v-bind(imageWidth);
+      flex-basis: 340%;
+      max-width: v-bind(cssImageWidth);
+      //min-width: v-bind(cssImageWidth);
     }
   }
+
   .card-details {
     display: flex;
     flex-direction: column;
@@ -232,29 +258,42 @@ const imageWidth = ref(props.width + 'px')
         float: left;
         margin-right: 0.5rem;
       }
-      .card-title-link {
-        text-decoration: none;
+      .card-title-link:not(.customTitleClass) {
+        text-decoration: var(--v-card-title-hover-text-decoration);
         color: var(--v-card-title-color);
+        font-family: var(--v-card-title-font-family);
+        font-size: var(--v-card-title-font-size);
+        line-height: var(--v-card-title-line-height);
+        @container (max-width: #{$container-breakpoint-md}) {
+          font-size: var(--v-card-title-mobile-font-size);
+          line-height: var(--v-card-title-mobile-line-height);
+        }
+        font-weight: var(--v-card-title-font-weight);
+        letter-spacing: var(--v-card-title-letter-spacing);
+        text-decoration: var(--v-card-title-text-decoration);
         &:hover {
           color: var(--v-card-title-hover-color);
-          .card-title-title:not(.customTitleClass) {
+          .card-title-title {
             text-decoration: var(--v-card-title-hover-text-decoration);
           }
         }
-
-        .card-title-title:not(.customTitleClass) {
-          font-family: var(--v-card-title-font-family);
-          font-size: var(--v-card-title-font-size);
-          font-weight: var(--v-card-title-font-weight);
-          line-height: var(--v-card-title-line-height);
-          letter-spacing: var(--v-card-title-letter-spacing);
-          text-decoration: var(--v-card-title-text-decoration);
-        }
+      }
+      .card-title-link.disabled {
+        pointer-events: none;
       }
     }
   }
-  a.disabled {
-    pointer-events: none;
+}
+</style>
+<style lang="scss">
+$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
+$container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
+$container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
+@container (max-width: #{$container-breakpoint-sm}) {
+  .v-card2 {
+    .simple-responsive-image-holder {
+      aspect-ratio: v-bind(cssMobileRatio) !important;
+    }
   }
 }
 </style>

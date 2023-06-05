@@ -281,7 +281,8 @@ const hasDetails = computed(() => {
   width: 100%;
   max-width: 100%;
   gap: 1rem;
-  a.disabled {
+  a.disabled,
+  div.disabled {
     pointer-events: none;
   }
   .card-image-link {
