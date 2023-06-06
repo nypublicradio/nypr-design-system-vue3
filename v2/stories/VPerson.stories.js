@@ -183,6 +183,12 @@ NoPhotoCustomImage.args = {
     imageSrc: useImageUrl(profileFromArticle.photoID),
     imageFallbackPath: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
 }
+export const Vertical = Template.bind({})
+Vertical.args = {
+    profileData: profileFromArticle,
+    imageSrc: useImageUrl(profileFromArticle.photoID),
+    vertical: true,
+}
 export const VerticalMobile = Template.bind({})
 VerticalMobile.args = {
     profileData: profileFromArticle,

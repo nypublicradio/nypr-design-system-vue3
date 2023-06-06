@@ -31,6 +31,10 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  vertical: {
+    type: Boolean,
+    default: false,
+  },
   verticalMobile: {
     type: Boolean,
     default: false,
@@ -155,7 +159,10 @@ const accountNameFromUrl = (url) => {
     <div
       v-if="profile"
       class="author-profile"
-      :class="[{ verticalMobile: props.verticalMobile }]"
+      :class="[
+        { verticalMobile: props.verticalMobile },
+        { vertical: props.vertical },
+      ]"
       :style="`align-items: ${props.alignItems};`"
     >
       <div class="profile">
@@ -253,9 +260,29 @@ $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
 $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
 $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 
+@mixin verticalStyles {
+  flex-direction: column;
+  align-items: center !important;
+  text-align: center;
+  .name-holder {
+    align-items: center;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+  .author-image {
+    width: v-bind(cssImageSizePx);
+    height: auto;
+  }
+  .v-share-tools {
+    justify-content: center;
+  }
+  .cta {
+    align-self: center;
+  }
+}
+
 .v-person {
   container-type: v-bind(cssContainerType);
-
   .author-profile {
     display: flex;
     align-items: start;
@@ -296,6 +323,9 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       .slot {
       }
     }
+    &.vertical {
+      @include verticalStyles;
+    }
   }
 }
 @container (max-width: #{$container-breakpoint-md}) {
@@ -329,16 +359,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
         }
       }
       &.verticalMobile {
-        flex-direction: column;
-        align-items: center !important;
-        text-align: center;
-        .author-image {
-          width: v-bind(cssImageSizePx);
-          height: auto;
-        }
-        .v-share-tools {
-          justify-content: center;
-        }
+        @include verticalStyles;
       }
     }
   }
