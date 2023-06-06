@@ -73,8 +73,8 @@ const props = defineProps({
     default: null,
     type: String,
   },
-  creditFlexDirection: {
-    default: 'row',
+  creditJustifyContent: {
+    default: 'flex-start',
     type: String,
   },
   maxHeight: {
@@ -208,7 +208,7 @@ const cssImageMinWidth = ref(
         :caption-keep-on-top="props.captionKeepOnTop"
         :credit="props.credit"
         :credit-url="props.creditUrl"
-        :credit-flex-direction="creditFlexDirection"
+        :credit-justify-content="creditJustifyContent"
         role="presentation"
         @image-click="(e) => emit('image-click', e)"
         @credit-click="(e) => emit('credit-click', e)"

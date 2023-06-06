@@ -238,9 +238,9 @@ const block = ref({
                 </div>
               </div>
             </div>
-            <client-only>
+            <ClientOnly>
               <home />
-            </client-only>
+            </ClientOnly>
             <h1 id="darkmode" class="h2">
               Dark mode
               <span style="font-size: 1rem"
@@ -253,9 +253,9 @@ const block = ref({
                   >google dark</v-flexible-link
                 >
               </div>
-              <client-only>
+              <ClientOnly>
                 <home />
-              </client-only>
+              </ClientOnly>
             </div>
           </div>
         </div>

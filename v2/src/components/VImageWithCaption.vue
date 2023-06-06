@@ -29,8 +29,8 @@ const props = defineProps({
     default: null,
     type: String,
   },
-  creditFlexDirection: {
-    default: 'row',
+  creditJustifyContent: {
+    default: 'flex-start',
     type: String,
   },
   description: {
@@ -280,8 +280,8 @@ const getCurrentDimensions = computed(() => {
       </div>
     </div>
     <figcaption
-      class="mt-1 flex"
-      :style="`flex-direction:${props.creditFlexDirection}`"
+      class="mt-1 flex flex-column"
+      :style="`align-items:${props.creditJustifyContent}`"
     >
       <h4 v-if="title" class="image-with-caption-title">{{ title }}</h4>
       <p v-if="description" class="image-with-caption-description">
@@ -303,7 +303,7 @@ const getCurrentDimensions = computed(() => {
 
 <style lang="scss">
 .image-with-caption {
-  width: 100%;
+  width: fit-content;
 }
 
 .image-with-caption .image-with-caption-image,

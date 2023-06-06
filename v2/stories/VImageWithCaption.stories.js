@@ -27,52 +27,78 @@ const Template = (args) => ({
 export const Default = Template.bind({})
 Default.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
     description: 'Description Text Here',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
+}
+export const DefaultJustifyEnd = Template.bind({})
+DefaultJustifyEnd.args = {
+    altText: 'Fallback alt text here',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    credit: 'Credit Text Here',
+    creditUrl: 'https://www.Credit-URL-Here.com',
+    title: 'Title Text Here',
+    description: 'Description Text Here',
+    width: 600,
+    height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    creditJustifyContent: 'flex-end',
 }
 
 export const NoText = Template.bind({})
 NoText.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
 }
 export const JustTitle = Template.bind({})
 JustTitle.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     title: 'Title Text Here',
 }
 export const JustDescription = Template.bind({})
 JustDescription.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     description: 'Description Text Here',
 }
 export const JustCredit = Template.bind({})
 JustCredit.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     credit: 'Credit Text Here',
 }
 export const JustCreditAndUrl = Template.bind({})
 JustCreditAndUrl.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
 }
@@ -80,15 +106,17 @@ JustCreditAndUrl.args = {
 export const quality = Template.bind({})
 quality.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     quality: 30,
 }
 export const Srcset = Template.bind({})
 Srcset.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 300,
     height: 200,
     sizes: [2, 3],
@@ -100,12 +128,14 @@ PublisherImageNoText.args = {
     image: 'https://media.wnyc.org/i/%width%/%height%/c/%quality%/2022/02/RL_Hello_EpisodeImage.png',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
 }
 
 export const Caption = Template.bind({})
 Caption.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     caption: 'Caption Text Here',
@@ -113,11 +143,13 @@ Caption.args = {
     description: 'Description Text Here',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
 }
 export const CaptionKeepOnTop = Template.bind({})
 CaptionKeepOnTop.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     caption: 'Caption Text Here',
@@ -125,19 +157,25 @@ CaptionKeepOnTop.args = {
     description: 'Description Text Here',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     captionKeepOnTop: true,
 }
 
 export const Enlarge = Template.bind({})
 Enlarge.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
     description: 'Description Text Here',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    maxWidth: 1200,
+    maxHeight: 800,
     allowPreview: true,
     //imageUrl: 'https://www.google.com',
 }
@@ -145,13 +183,15 @@ Enlarge.args = {
 export const ImageIsLink = Template.bind({})
 ImageIsLink.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
     description: 'Description Text Here',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     allowPreview: false,
     imageUrl: 'https://www.google.com',
 }
@@ -159,13 +199,15 @@ ImageIsLink.args = {
 export const ImageIsRoute = Template.bind({})
 ImageIsRoute.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
     description: 'Description Text Here',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     allowPreview: false,
     imageUrl: 'news',
 }
@@ -173,7 +215,7 @@ ImageIsRoute.args = {
 export const CaptionAndEnlarge = Template.bind({})
 CaptionAndEnlarge.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
@@ -181,6 +223,8 @@ CaptionAndEnlarge.args = {
     caption: 'Caption Text Here',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     allowPreview: true,
     imageUrl: 'https://www.google.com',
 }
@@ -188,7 +232,7 @@ CaptionAndEnlarge.args = {
 export const Responsive = Template.bind({})
 Responsive.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',
@@ -198,7 +242,7 @@ Responsive.args = {
 export const ResponsiveCustomRatio = Template.bind({})
 ResponsiveCustomRatio.args = {
     altText: 'Fallback alt text here',
-    image: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    image: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     credit: 'Credit Text Here',
     creditUrl: 'https://www.Credit-URL-Here.com',
     title: 'Title Text Here',

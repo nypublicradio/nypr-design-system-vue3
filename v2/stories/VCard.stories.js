@@ -88,8 +88,8 @@ Default.args = {
     maxWidth: 2560,
     maxHeight: 1600,
 }
-export const ImageFlexBasis = Template.bind({})
-ImageFlexBasis.args = {
+export const CustomImageFlexBasis = Template.bind({})
+CustomImageFlexBasis.args = {
     imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
@@ -469,7 +469,7 @@ CreditReverse.args = {
     maxHeight: 1600,
     credit: 'Thomas Bono',
     creditUrl: 'https://www.thomasbono.com',
-    creditFlexDirection: 'row-reverse',
+    creditJustifyContent: 'flex-end',
     vertical: true,
 }
 

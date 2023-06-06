@@ -60,7 +60,8 @@ describe('VPerson', () => {
       global: {
         stubs: {
           'nuxt-link': true,
-          'client-only': true
+          'client-only': true,
+          'ClientOnly': true,
         }
       }
     })

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, onBeforeMount, clientOnly } from 'vue'
+import { ref, computed, onBeforeMount } from 'vue'
 import Image from 'primevue/image'
 import ProgressSpinner from 'primevue/progressspinner'
 import Button from 'primevue/button'
@@ -246,7 +246,7 @@ const closeEnlarge = () => {
         :loading="loading"
       />
     </div>
-    <client-only v-if="allowPreview">
+    <ClientOnly v-if="allowPreview">
       <Image
         class="image prime-image"
         :class="isVertical ? 'is-vertical' : ''"
@@ -265,7 +265,7 @@ const closeEnlarge = () => {
         @click="emit('click', $event.target.value)"
         @keypress="emit('keypress', $event.target.value)"
       >
-        <template v-if="allowPreview" #indicator>
+        <template v-if="allowPreview" #indicatoricon>
           <Button
             icon="pi pi-arrows-v"
             class="p-button-sm enlarge-button"
@@ -290,7 +290,7 @@ const closeEnlarge = () => {
           />
         </Teleport>
       </div>
-    </client-only>
+    </ClientOnly>
     <img
       v-else
       class="image native-image prime-img-class"
