@@ -1,5 +1,5 @@
 import VCard from '../src/components/VCard.vue'
-import GothamistArrow from '../src/assets/icons/GothamistArrow.vue'
+import VTag from '../src/components/VTag.vue'
 
 export default {
     title: 'Components-V2/VCard',
@@ -28,7 +28,7 @@ const Template = (args) => ({
     },
     template: '<v-card v-bind="args"></v-card>',
 })
-const TemplateIcons = (args) => ({
+const TemplateSlotAfterTitle = (args) => ({
     components: {
         VCard
     },
@@ -37,498 +37,466 @@ const TemplateIcons = (args) => ({
             args
         }
     },
-    template: '<v-card v-bind="args"><a href="https://primefaces.org/primevue/showcase/#/icons">Get icons here</a></v-card>',
+    template: '<v-card v-bind="args"><template #afterTitle><i class="pi pi-twitter" role="img" aria-label="twitter icon"></i></template></v-card>',
+})
+const TemplateSlotBeforeTitle = (args) => ({
+    components: {
+        VCard, VTag
+    },
+    setup() {
+        return {
+            args
+        }
+    },
+    template: '<v-card v-bind="args"><template #beforeTitle><VTag name="News" slug="/news"/></template></v-card>',
 })
 
-const TemplateCustomIcons = (args) => ({
+const TemplateSlotAboveTitle = (args) => ({
     components: {
-        VCard,
-        GothamistArrow
+        VCard, VTag
     },
     setup() {
         return {
             args
         }
     },
-    template: '<v-card v-bind="args"><code>&lt;template #customIcon&gt; &lt;gothamist-arrow/&gt; &lt;/template&gt;</code><template #customIcon> <gothamist-arrow/> </template></v-card>',
+    template: '<v-card v-bind="args"><template #aboveTitle><VTag name="News" slug="/news"/><VTag name="News" slug="/news"/><VTag name="News" slug="/news"/></template></v-card>',
 })
 
-const TemplateWithSlot = (args) => ({
+const TemplateSlotBelowBlurb = (args) => ({
     components: {
-        VCard
+        VCard, VTag
     },
     setup() {
         return {
             args
         }
     },
-    template: '<v-card v-bind="args"> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </v-card>',
-})
-
-const GothamistSponsoredModVertical = (args) => ({
-    components: {
-        VCard
-    },
-    setup() {
-        return {
-            args
-        }
-    },
-    template: `<v-card class="mod-vertical" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-})
-const GothamistSponsoredModHorizontal = (args) => ({
-    components: {
-        VCard
-    },
-    setup() {
-        return {
-            args
-        }
-    },
-    template: `<v-card class="mod-horizontal" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-})
-
-const GothamistModFeatured = (args) => ({
-    components: {
-        VCard
-    },
-    setup() {
-        return {
-            args
-        }
-    },
-    template: `<v-card class="mod-vertical mod-featured" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-})
-
-const GothamistModHorizontal = (args) => ({
-    components: {
-        VCard
-    },
-    setup() {
-        return {
-            args
-        }
-    },
-    template: `<v-card class="mod-horizontal" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-})
-
-const GothamistModLarge = (args) => ({
-    components: {
-        VCard
-    },
-    setup() {
-        return {
-            args
-        }
-    },
-    template: `<v-card class="mod-large" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
-})
-
-const GothamistModLeft = (args) => ({
-    components: {
-        VCard
-    },
-    setup() {
-        return {
-            args
-        }
-    },
-    template: `<v-card class="mod-horizontal mod-left" v-bind="args"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><div class="article-metadata"><span>byline goes here</span><span>comments go here</span></div></v-card>`,
+    template: '<v-card v-bind="args"><template #belowBlurb><VTag name="News" slug="/news"/><VTag name="News" slug="/news"/><VTag name="News" slug="/news"/></template></v-card>',
 })
 
 
 export const Default = Template.bind({})
 Default.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+}
+export const ImageFlexBasis = Template.bind({})
+ImageFlexBasis.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    imageFlexBasis: '50%',
+}
+export const NoImageFlexBasis = Template.bind({})
+NoImageFlexBasis.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    imageFlexBasis: null,
 }
 
-export const loadingEager = Template.bind({})
-loadingEager.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const CustomRatio = Template.bind({})
+CustomRatio.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    ratio: [5, 2],
+    maxWidth: 2560,
+    maxHeight: 1600,
+}
+
+export const CustomRatioAndMobileRatio = Template.bind({})
+CustomRatioAndMobileRatio.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 210,
+    height: 210,
+    ratio: [5, 2],
+    mobileRatio: [1, 1],
+    maxWidth: 2560,
+    maxHeight: 1600,
+}
+
+export const CustomeTitleClass = Template.bind({})
+CustomeTitleClass.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    titleClass: 'h1 anythingElse',
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+}
+
+export const IsNotDecrative = Template.bind({})
+IsNotDecrative.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    blurb: 'When isDecrative is set to false, the text and image links aria-hidden ,tabindex and alt-text are enabled.Use to indicate decorative images with a link, where the exact same link is repeated in nearby text. e.g.A thumbnail that links to an article next to a title that links to the same article. WARNING: This will make the link unreachable by assistive software so only use this for truly redundant links.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    isDecorative: false,
+    alt: 'alt text',
+}
+
+export const EagerLoading = Template.bind({})
+EagerLoading.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
     loading: 'eager',
 }
-
-export const DefaultWithBlurb = Template.bind({})
-DefaultWithBlurb.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const AddCustomBaseClass = Template.bind({})
+AddCustomBaseClass.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
-    blurb: 'This week, we flip the Disney story of life on it&rsquo;s head thanks to a barrel of seawater, a 1970s era computer, and underwater geyser. It&rsquo;s the chaos of life.',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    baseClass: 'customBaseClass',
 }
 
-export const DefaultWithEyebrow = Template.bind({})
-DefaultWithEyebrow.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const TruncateBlurb = Template.bind({})
+TruncateBlurb.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
-    eyebrow: 'MAR 4, 2022',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    truncate: 2,
+}
+export const NoTitle = Template.bind({})
+NoTitle.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    link: 'https://www.google.com',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    truncate: 2,
+}
+export const NoBlurb = Template.bind({})
+NoBlurb.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    truncate: 2,
 }
 
-export const Icon = TemplateIcons.bind({})
-Icon.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const NoSubtitle = Template.bind({})
+NoSubtitle.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+    link: 'https://www.google.com',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    truncate: 2,
+}
+export const NoImage = Template.bind({})
+NoImage.args = {
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    icon: "images"
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    truncate: 2,
+}
+export const NoLinks = Template.bind({})
+NoLinks.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    subtitle: 'Subtitle',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    truncate: 2,
 }
 
-export const CustomIcon = TemplateCustomIcons.bind({})
-CustomIcon.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const Reverse = Template.bind({})
+Reverse.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    reverse: true,
 }
 
-export const SmallerImageOnPhone = Template.bind({})
-SmallerImageOnPhone.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const Vertical = Template.bind({})
+Vertical.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    mobileImageScale: 0.65,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 800,
+    height: 533,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    vertical: true,
 }
 
-export const SmallerImageCustomBreapoint = Template.bind({})
-SmallerImageCustomBreapoint.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const ReverseVertical = Template.bind({})
+ReverseVertical.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    mobileImageScale: 0.65,
-    bp: "lg"
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 800,
+    height: 533,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    vertical: true,
+    reverse: true,
 }
 
-export const VerticalImageEffect = Template.bind({})
-VerticalImageEffect.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const VerticalOnMobile = Template.bind({})
+VerticalOnMobile.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 400,
+    height: 266,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    verticalMobile: true,
+}
+
+export const ReverseVerticalOnMobile = Template.bind({})
+ReverseVerticalOnMobile.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 400,
+    height: 266,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    verticalMobile: true,
+    reverse: true,
+}
+export const AllowVerticalEffect = Template.bind({})
+AllowVerticalEffect.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329836/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 800,
+
+    maxWidth: 2598,
+    maxHeight: 3484,
     allowVerticalEffect: true,
-    responsive: true,
+    vertical: true,
 }
 
-export const Tags = Template.bind({})
-Tags.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+export const SlotAfterTitle = TemplateSlotAfterTitle.bind({})
+SlotAfterTitle.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }, {
-        'name': 'food',
-        'food': ''
-    }],
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
 }
-
-
-export const TagsSponsored = Template.bind({})
-TagsSponsored.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+export const SlotBeforeTitle = TemplateSlotBeforeTitle.bind({})
+SlotBeforeTitle.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }, {
-        'name': 'food',
-        'food': ''
-    }],
-    sponsored: true,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
 }
-
-export const DefaultWithSlotContent = TemplateWithSlot.bind({})
-DefaultWithSlotContent.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+export const SlotAboveTitle = TemplateSlotAboveTitle.bind({})
+SlotAboveTitle.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>.",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }, {
-        'name': 'food',
-        'food': ''
-    }],
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
 }
-
-export const ResponsiveWithSlotContent = TemplateWithSlot.bind({})
-ResponsiveWithSlotContent.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
-    titleLink: 'https://www.google.com',
-    width: 318,
-    height: 214,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }, {
-        'name': 'food',
-        'food': ''
-    }],
-    responsive: true,
-}
-
-export const ResponsiveDefaultAtSM = Template.bind({})
-ResponsiveDefaultAtSM.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+export const SlotBelowBlurb = TemplateSlotBelowBlurb.bind({})
+SlotBelowBlurb.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>.",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
 }
 
-export const ResponsiveAtMdBreakpoint = Template.bind({})
-ResponsiveAtMdBreakpoint.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+
+export const Caption = Template.bind({})
+Caption.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>.",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 175,
-    height: 175,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    bp: 'md',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 800,
+    height: 533,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    caption: 'This is sample caption on the image',
+    vertical: true,
 }
 
-export const ResponsiveAlways = Template.bind({})
-ResponsiveAlways.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+export const Credit = Template.bind({})
+Credit.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>.",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    bp: 'max',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 800,
+    height: 533,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    credit: 'Thomas Bono',
+    vertical: true,
 }
 
-export const WithCaption = Template.bind({})
-WithCaption.args = {
-    image: 'https://cms.demo.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+export const CreditWithLink = Template.bind({})
+CreditWithLink.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>.",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    caption: 'This is a sample caption text to show up in the image',
-    bp: 'max',
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 800,
+    height: 533,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    credit: 'Thomas Bono',
+    creditUrl: 'https://www.thomasbono.com',
+    vertical: true,
 }
 
-export const CustomImageRatio = Template.bind({})
-CustomImageRatio.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+export const CreditReverse = Template.bind({})
+CreditReverse.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>.",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    bp: 'max',
-    ratio: [4, 1]
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 800,
+    height: 533,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    credit: 'Thomas Bono',
+    creditUrl: 'https://www.thomasbono.com',
+    creditFlexDirection: 'row-reverse',
+    vertical: true,
 }
 
-export const quality = Template.bind({})
-quality.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+export const ImageQuality = Template.bind({})
+ImageQuality.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>.",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    bp: 'max',
-    quality: 30
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    quality: 5,
 }
 
-export const srcsetSizes = Template.bind({})
-srcsetSizes.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em>",
-    titleLink: 'https://www.google.com',
+export const Srcset = Template.bind({})
+Srcset.args = {
+    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    title: "Title with some <em>HTML</em>.",
+    link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    bp: 'max',
-    sizes: [2, 2.5]
-}
-
-export const GothamistExampleModHorizontal = GothamistModHorizontal.bind({})
-GothamistExampleModHorizontal.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
-    titleLink: 'https://www.google.com',
-    ratio: [3, 2],
-    width: 318,
-    height: 214,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }],
-}
-
-export const GothamistExampleModLarge = GothamistModLarge.bind({})
-GothamistExampleModLarge.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
-    titleLink: 'https://www.google.com',
-    ratio: [3, 2],
-    width: 1053,
-    height: 708,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }],
-}
-
-export const GothamistExampleModLeft = GothamistModLeft.bind({})
-GothamistExampleModLeft.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
-    titleLink: 'https://www.google.com',
-    ratio: [3, 2],
-    width: 318,
-    height: 214,
-    maxWidth: 1440,
-    maxHeight: 2560,
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }],
-}
-
-export const GothamistExampleModVertical = GothamistSponsoredModVertical.bind({})
-GothamistExampleModVertical.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
-    titleLink: 'https://www.google.com',
-    ratio: [3, 2],
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    bp: 'max',
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }, {
-        'name': 'food',
-        'food': ''
-    }],
-}
-
-export const GothamistExampleModFeatured = GothamistModFeatured.bind({})
-GothamistExampleModFeatured.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
-    titleLink: 'https://www.google.com',
-    ratio: [3, 2],
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    bp: 'max',
-    tags: [{
-        'name': 'news',
-        'slug': 'news'
-    }, {
-        'name': 'food',
-        'food': ''
-    }],
-}
-
-export const GothamistExampleSponsored = GothamistSponsoredModHorizontal.bind({})
-GothamistExampleSponsored.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
-    titleLink: 'https://www.google.com',
-    ratio: [3, 2],
-    maxWidth: 1440,
-    maxHeight: 2560,
-    sponsored: true,
-}
-
-export const GothamistExampleSponsoredVertical = GothamistSponsoredModVertical.bind({})
-GothamistExampleSponsoredVertical.args = {
-    image: 'https://cms.demo.nypr.digital/images/212141/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
-    title: "Title with some <em>HTML</em> lorem ipsum dolor sit amet, elit consectetur adipiscing",
-    titleLink: 'https://www.google.com',
-    ratio: [3, 2],
-    maxWidth: 1440,
-    maxHeight: 2560,
-    responsive: true,
-    sponsored: true,
-    bp: 'max'
+    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    width: 200,
+    height: 133,
+    maxWidth: 2560,
+    maxHeight: 1600,
+    sizes: [2, 3, 4, 5],
 }
