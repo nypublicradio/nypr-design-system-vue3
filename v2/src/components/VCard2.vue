@@ -73,6 +73,10 @@ const props = defineProps({
     default: null,
     type: String,
   },
+  creditFlexDirection: {
+    default: 'row',
+    type: String,
+  },
   maxHeight: {
     type: Number,
     default: Infinity,
@@ -81,9 +85,9 @@ const props = defineProps({
     type: Number,
     default: Infinity,
   },
-  flexDirection: {
-    type: String,
-    default: 'row',
+  reverse: {
+    type: Boolean,
+    default: false,
   },
   /**
    * does not allow the vertical effect to happen
@@ -126,6 +130,14 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  vertical: {
+    type: Boolean,
+    default: false,
+  },
+  verticalMobile: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 const emit = defineEmits(['title-click', 'image-click', 'credit-click'])
@@ -144,6 +156,14 @@ const hasDetails = computed(() => {
 
 // css vars
 const cssImageWidth = ref(props.width + 'px')
+const cssVerticalOnMobileReverse = ref(
+  props.reverse && props.verticalMobile ? 'column-reverse' : 'column'
+)
+const cssFlexDirection = ref(
+  props.reverse
+    ? `${props.vertical ? 'column' : 'row'}-reverse`
+    : `${props.vertical ? 'column' : 'row'}`
+)
 const cssMobileRatio = ref(
   props.mobileRatio
     ? `${props.mobileRatio[0]} / ${props.mobileRatio[1]}`
@@ -152,71 +172,81 @@ const cssMobileRatio = ref(
 </script>
 
 <template>
-  <div class="v-card2" :class="baseClass">
-    <v-image-with-caption
-      v-if="props.imageSrc"
-      class="card-image"
-      :image="props.imageSrc"
-      :alt-text="props.alt"
-      :is-decorative="props.isDecorative"
-      :loading="props.loading"
-      :image-url="props.link"
-      :width="props.width"
-      :height="props.height"
-      :max-width="props.maxWidth"
-      :max-height="props.maxHeight"
-      :allow-vertical-effect="props.allowVerticalEffect"
-      :ratio="props.ratio"
-      :quality="props.quality"
-      :flat-quality="props.flatQuality"
-      :sizes="props.sizes"
-      :caption="props.caption"
-      :caption-keep-on-top="props.captionKeepOnTop"
-      :credit="props.credit"
-      :credit-url="props.creditUrl"
-      role="presentation"
-      @image-click="(e) => emit('image-click', e)"
-      @credit-click="(e) => emit('credit-click', e)"
-    />
-    <div v-if="hasDetails" class="card-details">
-      <div class="slot slot-above-title">
-        <slot name="aboveTitle"></slot>
-      </div>
-      <div v-if="title" class="card-title" role="heading" aria-level="3">
-        <div class="title-holder">
-          <div>
-            <div class="slot slot-before-title">
-              <slot name="beforeTitle"></slot>
+  <div class="v-card2">
+    <div
+      class="v-card-base"
+      :class="[
+        { verticalMobile: props.verticalMobile },
+        { vertical: props.vertical },
+        { baseClass: props.baseClass },
+      ]"
+    >
+      <v-image-with-caption
+        v-if="props.imageSrc"
+        class="card-image"
+        :image="props.imageSrc"
+        :alt-text="props.alt"
+        :is-decorative="props.isDecorative"
+        :loading="props.loading"
+        :image-url="props.link"
+        :width="props.width"
+        :height="props.height"
+        :max-width="props.maxWidth"
+        :max-height="props.maxHeight"
+        :allow-vertical-effect="props.allowVerticalEffect"
+        :ratio="props.ratio"
+        :quality="props.quality"
+        :flat-quality="props.flatQuality"
+        :sizes="props.sizes"
+        :caption="props.caption"
+        :caption-keep-on-top="props.captionKeepOnTop"
+        :credit="props.credit"
+        :credit-url="props.creditUrl"
+        :credit-flex-direction="creditFlexDirection"
+        role="presentation"
+        @image-click="(e) => emit('image-click', e)"
+        @credit-click="(e) => emit('credit-click', e)"
+      />
+      <div v-if="hasDetails" class="card-details">
+        <div class="slot slot-above-title">
+          <slot name="aboveTitle"></slot>
+        </div>
+        <div v-if="title" class="card-title" role="heading" aria-level="3">
+          <div class="title-holder">
+            <div>
+              <div class="slot slot-before-title">
+                <slot name="beforeTitle"></slot>
+              </div>
+              <v-flexible-link
+                class="card-title-link"
+                :class="[
+                  { disabled: !props.link },
+                  { customTitleClass: props.titleClass },
+                  props.titleClass ? props.titleClass : '',
+                ]"
+                :to="props.link"
+                @emit-flexible-link="emit('title-click', props.link)"
+              >
+                <div class="card-title-title" v-html="props.title"></div>
+                <!-- CHANGE TO SLOT AFTER TITLE -->
+              </v-flexible-link>
             </div>
-            <v-flexible-link
-              class="card-title-link"
-              :class="[
-                { disabled: !props.link },
-                { customTitleClass: props.titleClass },
-                props.titleClass ? props.titleClass : '',
-              ]"
-              :to="props.link"
-              @emit-flexible-link="emit('title-click', props.link)"
-            >
-              <div class="card-title-title" v-html="props.title"></div>
-              <!-- CHANGE TO SLOT AFTER TITLE -->
-            </v-flexible-link>
-          </div>
-          <div class="slot slot-after-title">
-            <slot name="afterTitle"></slot>
+            <div class="slot slot-after-title">
+              <slot name="afterTitle"></slot>
+            </div>
           </div>
         </div>
+        <div v-if="props.subtitle" class="card-subtitle">
+          {{ props.subtitle }}
+        </div>
+        <div
+          v-if="props.blurb"
+          :class="props.truncate ? `truncate t${props.truncate}lines` : ''"
+          class="card-blurb"
+          v-html="props.blurb"
+        ></div>
+        <div class="slot slot-below-blurb"><slot name="belowBlurb"></slot></div>
       </div>
-      <div v-if="props.subtitle" class="card-subtitle">
-        {{ props.subtitle }}
-      </div>
-      <div
-        v-if="props.blurb"
-        :class="props.truncate ? `truncate t${props.truncate}lines` : ''"
-        class="card-blurb"
-        v-html="props.blurb"
-      ></div>
-      <div class="slot slot-below-blurb"><slot name="belowBlurb"></slot></div>
     </div>
   </div>
 </template>
@@ -225,61 +255,88 @@ const cssMobileRatio = ref(
 $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
 $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
+
+@mixin verticalStyles {
+  //flex-direction: v-bind(cssFlexDirection);
+  .image-with-caption {
+    max-width: 100%;
+  }
+}
+
 .v-card2 {
   container-type: inline-size;
-  display: flex;
-  flex-direction: v-bind(flexDirection);
-  border-radius: var(--v-card-border-radius);
-  overflow: hidden;
-  width: 100%;
-  max-width: 100%;
-  gap: 1rem;
-  .card-image {
-    &.image-with-caption {
-      flex-basis: 340%;
-      max-width: v-bind(cssImageWidth);
-      //min-width: v-bind(cssImageWidth);
-    }
-  }
-
-  .card-details {
+  .v-card-base {
     display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    div:empty {
-      display: none;
-    }
-    .title-holder {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 0.5rem;
-      .slot-before-title {
-        float: left;
-        margin-right: 0.5rem;
+    flex-direction: v-bind(cssFlexDirection);
+    border-radius: var(--v-card-border-radius);
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    gap: 1rem;
+    .card-image {
+      &.image-with-caption {
+        flex-basis: 350%;
+        max-width: v-bind(cssImageWidth);
+        //min-width: v-bind(cssImageWidth);
       }
-      .card-title-link:not(.customTitleClass) {
-        text-decoration: var(--v-card-title-hover-text-decoration);
-        color: var(--v-card-title-color);
-        font-family: var(--v-card-title-font-family);
-        font-size: var(--v-card-title-font-size);
-        line-height: var(--v-card-title-line-height);
-        @container (max-width: #{$container-breakpoint-md}) {
-          font-size: var(--v-card-title-mobile-font-size);
-          line-height: var(--v-card-title-mobile-line-height);
+    }
+
+    .card-details {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      div:empty {
+        display: none;
+      }
+      .title-holder {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 0.5rem;
+        .slot-before-title {
+          float: left;
+          margin-right: 0.5rem;
         }
-        font-weight: var(--v-card-title-font-weight);
-        letter-spacing: var(--v-card-title-letter-spacing);
-        text-decoration: var(--v-card-title-text-decoration);
-        &:hover {
-          color: var(--v-card-title-hover-color);
-          .card-title-title {
-            text-decoration: var(--v-card-title-hover-text-decoration);
+        .card-title-link:not(.customTitleClass) {
+          text-decoration: var(--v-card-title-hover-text-decoration);
+          color: var(--v-card-title-color);
+          font-family: var(--v-card-title-font-family);
+          font-size: var(--v-card-title-font-size);
+          line-height: var(--v-card-title-line-height);
+          font-weight: var(--v-card-title-font-weight);
+          letter-spacing: var(--v-card-title-letter-spacing);
+          text-decoration: var(--v-card-title-text-decoration);
+          &:hover {
+            color: var(--v-card-title-hover-color);
+            .card-title-title {
+              text-decoration: var(--v-card-title-hover-text-decoration);
+            }
           }
         }
+        .card-title-link.disabled {
+          pointer-events: none;
+        }
       }
-      .card-title-link.disabled {
-        pointer-events: none;
+    }
+    &.vertical {
+      @include verticalStyles;
+    }
+  }
+}
+@container (max-width: #{$container-breakpoint-sm}) {
+  .v-card2 {
+    .v-card-base {
+      &.verticalMobile {
+        @include verticalStyles;
+        flex-direction: v-bind(cssVerticalOnMobileReverse) !important;
+      }
+      .card-details {
+        .title-holder {
+          .card-title-link:not(.customTitleClass) {
+            font-size: var(--v-card-title-mobile-font-size);
+            line-height: var(--v-card-title-mobile-line-height);
+          }
+        }
       }
     }
   }

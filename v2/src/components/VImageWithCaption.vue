@@ -29,6 +29,10 @@ const props = defineProps({
     default: null,
     type: String,
   },
+  creditFlexDirection: {
+    default: 'row',
+    type: String,
+  },
   description: {
     default: null,
     type: String,
@@ -275,7 +279,10 @@ const getCurrentDimensions = computed(() => {
         ></Button>
       </div>
     </div>
-    <figcaption class="mt-1">
+    <figcaption
+      class="mt-1 flex"
+      :style="`flex-direction:${props.creditFlexDirection}`"
+    >
       <h4 v-if="title" class="image-with-caption-title">{{ title }}</h4>
       <p v-if="description" class="image-with-caption-description">
         {{ description }}
