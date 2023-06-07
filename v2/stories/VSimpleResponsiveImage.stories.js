@@ -27,27 +27,33 @@ const Template = (args) => ({
 export const Default = Template.bind({})
 Default.args = {
     alt: 'Fallback alt text here',
-    src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    src: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     allowVerticalEffect: false,
 }
 
 export const Quality = Template.bind({})
 Quality.args = {
     alt: 'Fallback alt text here',
-    src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    src: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     quality: 30,
 }
 
 export const FlatQuality = Template.bind({})
 FlatQuality.args = {
     alt: 'Fallback alt text here',
-    src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    src: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 600,
     height: 400,
+    maxWidth: 2560,
+    maxHeight: 1600,
     quality: 50,
     flatQuality: true,
 }
@@ -55,7 +61,7 @@ FlatQuality.args = {
 export const EnlargeMustSpecifyMaxwidthAndMaxheight = Template.bind({})
 EnlargeMustSpecifyMaxwidthAndMaxheight.args = {
     alt: 'Fallback alt text here',
-    src: 'https://cms.prod.nypr.digital/images/329407/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    src: 'https://cms.demo.nypr.digital/images/329407/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 640,
     height: 480,
     maxWidth: 4517,
@@ -103,9 +109,11 @@ RawImageNoRatio.args = {
 export const SrcsetSizes = Template.bind({})
 SrcsetSizes.args = {
     alt: 'Fallback alt text here',
-    src: 'https://cms.prod.nypr.digital/images/328822/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    src: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
     width: 200,
     height: 150,
+    maxWidth: 2560,
+    maxHeight: 1600,
     sizes: [2, 2.5, 3]
 }
 
