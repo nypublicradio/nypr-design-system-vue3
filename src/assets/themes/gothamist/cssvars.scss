@@ -1,5 +1,6 @@
 :root,
-[data-style-mode='default'] {
+[data-style-mode='default'],
+.style-mode-default {
     --black: #{map-get($colors, 'black')};
     --red: #{map-get($colors, 'red')};
     --soybean: #{map-get($colors, 'soybean')};
@@ -239,7 +240,8 @@
     --z-index-75: #{$z-index-75};
     --z-index-100: #{$z-index-100};
 }
-[data-style-mode='dark'] {
+[data-style-mode='dark'],
+.style-mode-dark {
     // --primary-color: #{$white};
     // --primary-color-rgb: #{hex2rgb($dangerColor)};
     /*button*/

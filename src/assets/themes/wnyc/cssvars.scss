@@ -1,5 +1,6 @@
 :root,
-[data-style-mode='default'] {
+[data-style-mode='default'],
+.style-mode-default {
     --coolwhite: #{map-get($colors, 'coolwhite')};
     --blue: #{map-get($colors, 'blue')};
     --lightblue: #{map-get($colors, 'lightblue')};
@@ -184,7 +185,8 @@
     --z-index-75: #{$z-index-75};
     --z-index-100: #{$z-index-100};
 }
-[data-style-mode='dark'] {
+[data-style-mode='dark'],
+.style-mode-dark {
     /* --primary-color: #{$dangerColor};
     --primary-color-rgb: #{hex2rgb($dangerColor)}; */
     --link-button-color: var(--primary-light-color);

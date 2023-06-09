@@ -106,27 +106,27 @@ const emit = defineEmits([
 const profile = ref(props.profileData)
 
 const updatedSocialArr = ref([])
-const email = { service: 'email', profileUrl: String(profile.value.email) }
+const email = { service: 'email', profileUrl: String(profile.value?.email) }
 const website = {
   service: 'site',
-  profileUrl: profile.value.website,
+  profileUrl: profile.value?.website,
 }
 
 // push original social array into new updatedSocialArr if it exist
-if (profile.value.socialMediaProfile) {
-  updatedSocialArr.value.push(...profile.value.socialMediaProfile)
+if (profile.value?.socialMediaProfile) {
+  updatedSocialArr.value.push(...profile.value?.socialMediaProfile)
 }
 // push website into new updatedSocialArr if it exist
-if (profile.value.website) {
+if (profile.value?.website) {
   updatedSocialArr.value.push(website)
 }
 // push email into new updatedSocialArr if it exist
-if (profile.value.email) {
+if (profile.value?.email) {
   updatedSocialArr.value.push(email)
 }
 // push phone numbers into new updatedSocialArr if it exist
-if (profile.value.phone_numbers) {
-  profile.value.phone_numbers.map((phone) => {
+if (profile.value?.phone_numbers) {
+  profile.value?.phone_numbers.map((phone) => {
     updatedSocialArr.value.push({
       service: 'phone',
       profileUrl: String(phone.phone_number),
@@ -136,7 +136,7 @@ if (profile.value.phone_numbers) {
 
 const ctaText = ref(props.sponsored ? 'Learn More' : 'Read more')
 const profileLink = ref(
-  props.sponsored ? profile.value.link : profile.value.url
+  props.sponsored ? profile.value?.link : profile.value?.url
 )
 
 // cssvars
@@ -285,7 +285,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   container-type: v-bind(cssContainerType);
   .author-profile {
     display: flex;
-    align-items: start;
+    align-items: flex-start;
     flex-direction: v-bind(flexDirection);
     margin-right: 0;
     margin-left: 0;

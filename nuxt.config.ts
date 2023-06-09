@@ -2,6 +2,33 @@ const envTheme = process.env.VITE_VUE_APP_THEME
 
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default {
+  modules: [
+    '@nuxt/image'
+  ],
+  image: {
+    provider: 'wagtail',
+    wagtail: {
+      baseURL: "https://cms.demo.nypr.digital/images/",
+    },
+    screens: {
+      xs: 320,
+      sm: 640,
+      md: 768,
+      lg: 1024,
+      xl: 1280,
+      xxl: 1536,
+      '2xl': 1536
+    },
+    presets: {
+      avatar: {
+        modifiers: {
+          format: 'jpg',
+          width: 50,
+          height: 50
+        }
+      }
+    }
+  },
   css: [
     '~/src/assets/library/primeflex.min.css',
     `~/src/assets/themes/${envTheme}/fonts/fonts.css`,

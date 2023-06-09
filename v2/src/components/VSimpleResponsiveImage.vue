@@ -308,7 +308,7 @@ const closeEnlarge = () => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .simple-responsive-image-holder {
   line-height: 0;
   position: relative;

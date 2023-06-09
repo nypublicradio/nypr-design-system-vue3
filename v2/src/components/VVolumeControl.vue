@@ -67,6 +67,7 @@ onUpdated(() => {
 
 <style lang="scss">
 .volume-control {
+  display: flex;
   &:hover,
   &:focus-within,
   &:focus-visible {
@@ -91,6 +92,7 @@ onUpdated(() => {
     margin-right: 4px;
   }
   .volume-control-icon {
+    line-height: 0.5rem;
     color: var(--persistent-player-text-button-color);
     flex: 1 0;
     appearance: none;

@@ -1,11 +1,12 @@
 <script setup>
 import VPerson from '~/v2/src/components/VPerson.vue'
-import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
+//import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
 import VShareTools from '~/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
 import VCard from '~/v2/src/components/VCard.vue'
-import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
+//import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
+import VSimpleResponsiveImage2 from '~/v2/src/components/VSimpleResponsiveImage2.vue'
 import Home from '~/src/components/Home.vue'
 
 const emitClick = (type, event) => {
@@ -61,16 +62,110 @@ const block = ref({
   },
   id: '7a907edf-af2b-43a2-8d64-dea6d196a8ee',
 })
+
+const doSomethingOnLoad = () => {
+  console.log('doSomethingOnLoad')
+}
 </script>
 
 <template>
   <main class="pb-8">
-    <VFlexibleLink to="https://www.google.com">go to google</VFlexibleLink>
+    <div class="grid">
+      <div class="col-6">
+        <VSimpleResponsiveImage2
+          src="329836"
+          alt="this is alt text"
+          :width="700"
+          :height="400"
+          :max-width="2598"
+          :max-height="3484"
+          allow-preview
+          responsive-sizes="xs:400px md:800px"
+          :allow-vertical-effect="true"
+          format="jpeg"
+          :quality="85"
+          @load="doSomethingOnLoad"
+          @click="doSomethingOnLoad"
+          @keypress="doSomethingOnLoad"
+        />
+      </div>
+      <div class="col-6">
+        <VSimpleResponsiveImage2
+          src="329944"
+          alt="this is alt text"
+          :width="400"
+          responsive-sizes="xs:400px md:800px"
+          format="jpeg"
+          :quality="85"
+          @load="doSomethingOnLoad"
+        />
+      </div>
+      <div class="col-6">
+        <VSimpleResponsiveImage2
+          src="329944"
+          alt="this is alt text"
+          :width="400"
+          :height="400"
+          responsive-sizes="xs:400px md:800px"
+          format="jpeg"
+          :quality="85"
+          :modifiers="{ focusZoom: '100' }"
+          @load="doSomethingOnLoad"
+        />
+      </div>
+      <div class="col-6">
+        <VSimpleResponsiveImage2
+          src="329944"
+          alt="this is alt text"
+          :width="400"
+          allow-preview
+          responsive-sizes="xs:400px md:800px"
+          format="jpeg"
+          :quality="85"
+          @load="doSomethingOnLoad"
+        >
+          <template #closeicon>@</template>
+        </VSimpleResponsiveImage2>
+      </div>
+      <div class="col-6">
+        <VSimpleResponsiveImage2
+          src="329944"
+          alt="this is alt text"
+          :width="400"
+          allow-preview
+          responsive-sizes="xs:400px md:800px"
+          format="jpeg"
+          :quality="85"
+          @load="doSomethingOnLoad"
+        >
+          <template #enlargeButton="slotProps"
+            ><Button
+              icon="pi pi-youtube"
+              aria-label="Enlarge Image"
+              @click="slotProps.enlargeFunc"
+            ></Button
+          ></template>
+        </VSimpleResponsiveImage2>
+      </div>
+    </div>
+    <!-- <nuxt-img
+      class=""
+      provider="wagtail"
+      src="329944"
+      width="400"
+      height="400"
+      format="jpeg"
+      quality="100"
+      :modifiers="{ focusZoom: '100' }"
+      @load="doSomethingOnLoad"
+    /> -->
+
+    <!--  <VFlexibleLink to="https://www.google.com">go to google</VFlexibleLink>
     <VFlexibleLink raw to="https://www.google.com"
       ><Button label="button"></Button
-    ></VFlexibleLink>
+    ></VFlexibleLink> -->
 
-    <v-image-with-caption
+    <!--   <v-image-with-caption
       v-if="block.value.image"
       class="mb-7"
       :image="useImageUrl(block.value.image)"
@@ -82,8 +177,8 @@ const block = ref({
       :credit-url="block.value.image.creditLink"
       :sizes="[2]"
       :ratio="[block.value.image.width, block.value.image.height]"
-    />
-    <v-persistent-player
+    /> -->
+    <!--   <v-persistent-player
       data-style-mode="dark"
       :can-minimize="true"
       :show-download="true"
@@ -95,8 +190,8 @@ const block = ref({
       image="https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/"
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
-    >
-      <!-- <template #chevronDown>
+    > -->
+    <!-- <template #chevronDown>
         <i class="pi pi-twitter"></i>
       </template>
       <template #chevronUp>
@@ -125,8 +220,8 @@ const block = ref({
       </template>
       <template #download>
         <i class="pi pi-twitter"></i>
-      </template> -->
-    </v-persistent-player>
+      </template> 
+    </v-persistent-player>-->
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">
         <div class="grid">

@@ -1,5 +1,6 @@
 :root,
-[data-style-mode='default'] {
+[data-style-mode='default'],
+.style-mode-default {
     color-scheme: light;
 
     --white: #{map-get($colors, 'white')};
@@ -117,7 +118,8 @@
     --focus-shadow: #{$focusShadow};
     --focus-ring: #{$focusShadow};
 }
-[data-style-mode='dark'] {
+[data-style-mode='dark'],
+.style-mode-dark {
     // --primary-color: var(--white);
     // --primary-color-rgb: #{hex2rgb($dangerColor)};
     /*button*/

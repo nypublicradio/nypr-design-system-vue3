@@ -1,54 +1,46 @@
 
-import { app, addParameters } from '@storybook/vue3'
+import { setup } from '@storybook/vue3'
+import PrimeVue from 'primevue/config'
+import { themes } from '@storybook/theming'
 import { action } from '@storybook/addon-actions'
-import addons from '@storybook/addons'
-import '@storybook/addon-console'
+import NuxtImageWrapper from '../v2/src/wrappers/NuxtImageWrapper.vue'
+//import { NuxtImage } from '@nuxt/image'
+
 // darkmose styles
 import './darkmode.css'
 
-// enable primevue
-import PrimeVue from 'primevue/config'
-app.use(PrimeVue)
-
-// get an instance to the communication channel for the manager and preview
-const channel = addons.getChannel()
-
-// switch body class for story along with interface theme
-channel.on('DARK_MODE', isDark => {
-  if (isDark) {
-    document.body.classList.add('dark')
-    document.body.setAttribute('data-style-mode', 'dark')
-  } else {
-    document.body.classList.remove('dark')
-    document.body.setAttribute('data-style-mode', 'default')
-  }
-})
-
-addParameters({
-  docs: {
-    inlineStories: true,
-  },
-})
-
-app.component('nuxt-link', {
-  props: ['to'],
-  methods: {
-    log() {
-      action('link target')(this.to)
+//enable primevue
+setup((app) => {
+  app.use(PrimeVue)
+  app.component('nuxt-link', {
+    props: ['to'],
+    methods: {
+      log() {
+        action('link target')(this.to)
+      },
     },
-  },
-  template: '<a :href="to" @click.prevent="log()"><slot>NuxtLink</slot></a>',
+    template: '<a :href="to" @click.prevent="log()"><slot>NuxtLink</slot></a>',
+  })
+  app.component('ClientOnly', {
+    props: [],
+    methods: {
+      log() {
+      },
+    },
+    template: '<template><slot></slot></template>',
+  })
+  //app.component('nuxt-img', NuxtImageWrapper)
 })
 
+// dark mode setup
 export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
-  },
   darkMode: {
-    stylePreview: true
+    // Override the default dark theme
+    dark: { ...themes.dark, appBg: 'black' },
+    // Override the default light theme
+    light: { ...themes.normal },
+    stylePreview: true,
+    darkClass: 'style-mode-dark',
+    lightClass: 'style-mode-default',
   }
 }
