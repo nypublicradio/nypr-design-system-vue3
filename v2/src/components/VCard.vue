@@ -2,7 +2,7 @@
 import { computed, useSlots, ref } from 'vue'
 import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 import VFlexibleLink from './VFlexibleLink.vue'
-import VImageWithCaption from './VImageWithCaption.vue'
+import VImage from './VImage.vue'
 
 const props = defineProps({
   titleClass: {
@@ -115,16 +115,9 @@ const props = defineProps({
     type: Number,
     default: 70,
   },
-  /** * bool to NOT use the variable quality calc based on sizes */
-  flatQuality: {
-    type: Boolean,
-    default: false,
-  },
   sizes: {
-    type: Array,
-    default() {
-      return [2, 3]
-    },
+    type: String,
+    default: null,
   },
   isDecorative: {
     type: Boolean,
@@ -187,14 +180,14 @@ const cssImageMinWidth = ref(
         { baseClass: props.baseClass },
       ]"
     >
-      <v-image-with-caption
+      <!-- :image-url="props.link" -->
+      <!-- :is-decorative="props.isDecorative" -->
+      <VImage
         v-if="props.imageSrc"
         class="card-image"
-        :image="props.imageSrc"
-        :alt-text="props.alt"
-        :is-decorative="props.isDecorative"
+        :src="props.imageSrc"
+        :alt="props.alt"
         :loading="props.loading"
-        :image-url="props.link"
         :width="props.width"
         :height="props.height"
         :max-width="props.maxWidth"
@@ -202,17 +195,14 @@ const cssImageMinWidth = ref(
         :allow-vertical-effect="props.allowVerticalEffect"
         :ratio="props.ratio"
         :quality="props.quality"
-        :flat-quality="props.flatQuality"
         :sizes="props.sizes"
-        :caption="props.caption"
-        :caption-keep-on-top="props.captionKeepOnTop"
-        :credit="props.credit"
-        :credit-url="props.creditUrl"
-        :credit-justify-content="creditJustifyContent"
         role="presentation"
-        @image-click="(e) => emit('image-click', e)"
-        @credit-click="(e) => emit('credit-click', e)"
       />
+      <!-- @image-click="(e) => emit('image-click', e)"
+        @credit-click="(e) => emit('credit-click', e)"
+      :caption="props.caption" :caption-keep-on-top="props.captionKeepOnTop"
+      :credit="props.credit" :credit-url="props.creditUrl"
+      :credit-justify-content="creditJustifyContent" -->
       <div v-if="hasDetails" class="card-details">
         <div class="slot slot-above-title">
           <slot name="aboveTitle"></slot>
@@ -251,7 +241,9 @@ const cssImageMinWidth = ref(
           class="card-blurb"
           v-html="props.blurb"
         ></div>
-        <div class="slot slot-below-blurb"><slot name="belowBlurb"></slot></div>
+        <div class="slot slot-below-blurb">
+          <slot name="belowBlurb"></slot>
+        </div>
       </div>
     </div>
   </div>
@@ -263,7 +255,7 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
 $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
 
 @mixin verticalStyles {
-  .image-with-caption {
+  .v-image {
     max-width: 100%;
   }
 }
@@ -279,10 +271,11 @@ $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
     max-width: 100%;
     gap: 1rem;
     .card-image {
-      &.image-with-caption {
-        flex-basis: v-bind(cssImageFlexBasis);
+      &.v-image {
+        //flex-basis: v-bind(cssImageFlexBasis);
         max-width: v-bind(cssImageWidth);
         min-width: v-bind(cssImageMinWidth);
+        width: 100%;
       }
     }
 

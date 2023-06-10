@@ -1,8 +1,8 @@
-import VSimpleResponsiveImage2 from '../src/components/VSimpleResponsiveImage2.vue'
+import VImage from '../src/components/VImage.vue'
 
 export default {
-    title: 'Components-V2/VSimpleResponsiveImage2',
-    component: VSimpleResponsiveImage2,
+    title: 'Components-V2/VImage',
+    component: VImage,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -17,11 +17,11 @@ export default {
 }
 
 const Template = (args) => ({
-    components: { VSimpleResponsiveImage2 },
+    components: { VImage },
     setup() {
         return { args }
     },
-    template: '<v-simple-responsive-image2 v-bind="args" />',
+    template: '<VImage v-bind="args" />',
 })
 
 export const Default = Template.bind({})

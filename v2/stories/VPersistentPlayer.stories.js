@@ -76,7 +76,7 @@ WithImage.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
@@ -87,7 +87,7 @@ AutoPlay.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
@@ -98,7 +98,7 @@ LiveStream.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
@@ -108,7 +108,7 @@ LiveStreamWithoutTitleLink.args = {
     livestream: true,
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
@@ -118,7 +118,7 @@ LivestreamWithoutTitle.args = {
     livestream: true,
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
@@ -129,7 +129,7 @@ LivestreamWithoutDescription.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
 
@@ -138,7 +138,7 @@ LivestreamWithoutStation.args = {
     livestream: true,
     title: "The Takeaway",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 }
@@ -149,7 +149,7 @@ Download.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true
@@ -160,7 +160,7 @@ CanMinimize.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true,
@@ -172,7 +172,7 @@ CanExpand.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true,
@@ -183,7 +183,7 @@ CanExpandHeaderContent.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true,
@@ -194,7 +194,7 @@ CanExpandCustomUnexpandButtonIcon.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true,
@@ -205,7 +205,7 @@ CanExpandWithSwipe.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true,
@@ -217,7 +217,7 @@ CanUnexpandWithSwipe.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true,
@@ -231,7 +231,7 @@ SetVolume.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     volume: 15,
@@ -242,7 +242,7 @@ customIcons.args = {
     title: "The Takeaway",
     station: "WNYC 93.9 FM",
     titleLink: "http://www.google.com",
-    image: "https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/",
+    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     showDownload: true,

@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import VImageWithCaption from './VImageWithCaption.vue'
+import VImage from './VImage.vue'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VProgressScrubber from './VProgressScrubber.vue'
 
@@ -72,16 +72,22 @@ const convertTime = (val) => {
 <template>
   <div class="track-info">
     <div v-if="image" class="track-info-image">
-      <v-image-with-caption
-        :image="image"
-        :width="84"
-        :height="84"
-        :alt-text="title"
-        :image-url="titleLink ? titleLink : null"
-        :ratio="[1, 1]"
-        role="presentation"
-        @image-click="$emit('image-click', image)"
-      />
+      <VFlexibleLink
+        class="track-info-image-link"
+        :to="titleLink ? titleLink : null"
+        raw
+        @emit-flexible-link="emit('image-click')"
+      >
+        <VImage
+          :src="image"
+          :width="84"
+          :height="84"
+          sizes="xs:168px"
+          :alt-text="title"
+          :ratio="[1, 1]"
+          role="presentation"
+        />
+      </VFlexibleLink>
     </div>
     <div class="track-info-details">
       <div class="overflow-hidden">

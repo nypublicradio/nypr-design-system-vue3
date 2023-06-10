@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 import VFlexibleLink from './VFlexibleLink.vue'
-import VSimpleResponsiveImage from './VSimpleResponsiveImage.vue'
+import VImage from './VImage.vue'
 import VShareTools from './VShareTools.vue'
 import VShareToolsItem from './VShareToolsItem.vue'
 import defaultUserPhoto from '../assets/images/default-user.jpg'
@@ -12,10 +12,6 @@ const props = defineProps({
     default: null,
   },
   namePrefix: {
-    type: String,
-    default: null,
-  },
-  imageSrc: {
     type: String,
     default: null,
   },
@@ -87,11 +83,9 @@ const props = defineProps({
     type: Array,
     default: () => [1, 1],
   },
-  pixelDensitySizes: {
-    type: Array,
-    default() {
-      return [2]
-    },
+  sizes: {
+    type: String,
+    default: null,
   },
 })
 
@@ -174,18 +168,19 @@ const accountNameFromUrl = (url) => {
             :tabindex="-1"
             @click="emit('click-image', profileLink)"
           >
-            <v-simple-responsive-image
+            <VImage
               v-if="
-                props.imageSrc && !props.sponsored && !props.imageFallbackPath
+                profile.photoID && !props.sponsored && !props.imageFallbackPath
               "
-              :src="props.imageSrc"
-              :width="Number(imageSize)"
-              :height="Number(imageSize)"
-              :sizes="props.pixelDensitySizes"
+              :src="String(profile.photoID)"
+              :width="props.imageSize"
+              :height="props.imageSize"
+              :sizes="props.sizes"
               :ratio="props.imageRatio"
               :loading="props.loading"
               alt="Profile image"
             />
+            <!-- :sizes="props.pixelDensitySizes" -->
             <img
               v-else
               :src="`${

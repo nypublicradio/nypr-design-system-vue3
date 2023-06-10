@@ -1,5 +1,5 @@
 import VByline from '../src/components/VByline.vue'
-import VSimpleResponsiveImage from '../src/components/VSimpleResponsiveImage.vue'
+import VImage from '../src/components/VImage.vue'
 import VCounter from '../src/components/VCounter.vue'
 import VPerson from '../src/components/VPerson.vue'
 
@@ -29,11 +29,11 @@ const Template = (args) => ({
 
 
 const TemplateImage = (args) => ({
-    components: { VByline, VSimpleResponsiveImage },
+    components: { VByline, VImage },
     setup() {
         return { args }
     },
-    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VSimpleResponsiveImage :src="`https://cms.prod.nypr.digital/images/${slotProps.author.photoID}/fill-%width%x%height%|format-webp|webpquality-%quality%`" :width="48" :height="48" :ratio="[1,1]" alt="Profile image" style="width:48px; height:auto;"/></template></v-byline>',
+    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VImage :src="slotProps.author.photoID" :width="48" :height="48" :ratio="[1,1]" alt="Profile image" style="width:48px; height:auto;"/></template></v-byline>',
 })
 const TemplateImagePerson = (args) => ({
     components: { VByline, VPerson },

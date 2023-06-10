@@ -78,19 +78,19 @@ const TemplateSlotBelowBlurb = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    width: 200,
+    width: 300,
     height: 133,
     maxWidth: 2560,
     maxHeight: 1600,
 }
 export const CustomImageFlexBasis = Template.bind({})
 CustomImageFlexBasis.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -103,7 +103,7 @@ CustomImageFlexBasis.args = {
 }
 export const NoImageFlexBasis = Template.bind({})
 NoImageFlexBasis.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -117,7 +117,7 @@ NoImageFlexBasis.args = {
 
 export const CustomRatio = Template.bind({})
 CustomRatio.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -131,7 +131,7 @@ CustomRatio.args = {
 
 export const CustomRatioAndMobileRatio = Template.bind({})
 CustomRatioAndMobileRatio.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -146,7 +146,7 @@ CustomRatioAndMobileRatio.args = {
 
 export const CustomeTitleClass = Template.bind({})
 CustomeTitleClass.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     titleClass: 'h1 anythingElse',
     link: 'https://www.google.com',
@@ -160,7 +160,7 @@ CustomeTitleClass.args = {
 
 export const IsNotDecrative = Template.bind({})
 IsNotDecrative.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -175,7 +175,7 @@ IsNotDecrative.args = {
 
 export const EagerLoading = Template.bind({})
 EagerLoading.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -188,7 +188,7 @@ EagerLoading.args = {
 }
 export const AddCustomBaseClass = Template.bind({})
 AddCustomBaseClass.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -202,7 +202,7 @@ AddCustomBaseClass.args = {
 
 export const TruncateBlurb = Template.bind({})
 TruncateBlurb.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -215,7 +215,7 @@ TruncateBlurb.args = {
 }
 export const NoTitle = Template.bind({})
 NoTitle.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     link: 'https://www.google.com',
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 200,
@@ -226,7 +226,7 @@ NoTitle.args = {
 }
 export const NoBlurb = Template.bind({})
 NoBlurb.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -239,7 +239,7 @@ NoBlurb.args = {
 
 export const NoSubtitle = Template.bind({})
 NoSubtitle.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -263,7 +263,7 @@ NoImage.args = {
 }
 export const NoLinks = Template.bind({})
 NoLinks.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     subtitle: 'Subtitle',
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
@@ -276,7 +276,7 @@ NoLinks.args = {
 
 export const Reverse = Template.bind({})
 Reverse.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -290,7 +290,7 @@ Reverse.args = {
 
 export const Vertical = Template.bind({})
 Vertical.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -304,7 +304,7 @@ Vertical.args = {
 
 export const ReverseVertical = Template.bind({})
 ReverseVertical.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -319,7 +319,7 @@ ReverseVertical.args = {
 
 export const VerticalOnMobile = Template.bind({})
 VerticalOnMobile.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -333,7 +333,7 @@ VerticalOnMobile.args = {
 
 export const ReverseVerticalOnMobile = Template.bind({})
 ReverseVerticalOnMobile.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -347,7 +347,7 @@ ReverseVerticalOnMobile.args = {
 }
 export const AllowVerticalEffect = Template.bind({})
 AllowVerticalEffect.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329836/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329836',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -362,7 +362,7 @@ AllowVerticalEffect.args = {
 
 export const SlotAfterTitle = TemplateSlotAfterTitle.bind({})
 SlotAfterTitle.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -374,7 +374,7 @@ SlotAfterTitle.args = {
 }
 export const SlotBeforeTitle = TemplateSlotBeforeTitle.bind({})
 SlotBeforeTitle.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -386,7 +386,7 @@ SlotBeforeTitle.args = {
 }
 export const SlotAboveTitle = TemplateSlotAboveTitle.bind({})
 SlotAboveTitle.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -398,7 +398,7 @@ SlotAboveTitle.args = {
 }
 export const SlotBelowBlurb = TemplateSlotBelowBlurb.bind({})
 SlotBelowBlurb.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -412,7 +412,7 @@ SlotBelowBlurb.args = {
 
 export const Caption = Template.bind({})
 Caption.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -427,7 +427,7 @@ Caption.args = {
 
 export const Credit = Template.bind({})
 Credit.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -442,7 +442,7 @@ Credit.args = {
 
 export const CreditWithLink = Template.bind({})
 CreditWithLink.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -458,7 +458,7 @@ CreditWithLink.args = {
 
 export const CreditReverse = Template.bind({})
 CreditReverse.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -475,7 +475,7 @@ CreditReverse.args = {
 
 export const ImageQuality = Template.bind({})
 ImageQuality.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -489,7 +489,7 @@ ImageQuality.args = {
 
 export const Srcset = Template.bind({})
 Srcset.args = {
-    imageSrc: 'https://cms.demo.nypr.digital/images/329944/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/',
+    imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -498,5 +498,5 @@ Srcset.args = {
     height: 133,
     maxWidth: 2560,
     maxHeight: 1600,
-    sizes: [2, 3, 4, 5],
+    sizes: "xs:300px",
 }

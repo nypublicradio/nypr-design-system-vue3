@@ -1,10 +1,8 @@
 <script setup>
-import { ref, computed, onBeforeMount } from 'vue'
-import Image from 'primevue/image'
+import { ref, computed } from 'vue'
 import ProgressSpinner from 'primevue/progressspinner'
 import Dialog from 'primevue/dialog'
 import Button from 'primevue/button'
-/** * Responsive image component, generates a srcset with multiple image sizes for different display densities. */
 
 const props = defineProps({
   /* @nuxt/Image provider */
@@ -50,7 +48,7 @@ const props = defineProps({
     default: Infinity,
   },
   /** * List of sizes for the image at certain break points 'sm:200px' */
-  responsiveSizes: {
+  sizes: {
     type: String,
     default: '',
   },
@@ -123,10 +121,7 @@ const enlargeLoad = (target) => {
 </script>
 
 <template>
-  <div
-    class="simple-responsive-image-holder"
-    :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`"
-  >
+  <div class="v-image" :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`">
     <div v-if="isVertical" class="bg">
       <nuxt-img
         :provider="props.provider"
@@ -146,7 +141,7 @@ const enlargeLoad = (target) => {
       :src="props.src"
       :width="computedWidth"
       :height="props.height"
-      :sizes="props.responsiveSizes"
+      :sizes="props.sizes"
       :style="[
         isVertical
           ? `aspect-ratio:${props.maxWidth} / ${props.maxHeight}; object-fit: contain;`
@@ -209,7 +204,7 @@ const enlargeLoad = (target) => {
 </template>
 
 <style lang="scss" scoped>
-.simple-responsive-image-holder {
+.v-image {
   line-height: 0;
   position: relative;
   overflow: hidden;

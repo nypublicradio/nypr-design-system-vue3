@@ -6,7 +6,7 @@ import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
 import VCard from '~/v2/src/components/VCard.vue'
 //import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
-import VSimpleResponsiveImage2 from '~/v2/src/components/VSimpleResponsiveImage2.vue'
+import VImage from '~/v2/src/components/VImage.vue'
 import Home from '~/src/components/Home.vue'
 
 const emitClick = (type, event) => {
@@ -14,65 +14,52 @@ const emitClick = (type, event) => {
   //console.log('event = ', event)
 }
 
-function useImageUrl(image, options) {
-  const config = useRuntimeConfig()
-  if (!image) {
-    return ''
-  }
-  const imageUrlTemplate = `${config.public.IMAGE_BASE_URL}${image.id}/fill-%width%x%height%|format-webp|webpquality-%quality%`
-  return imageUrlTemplate
-    .replace('%width%', (options?.width && String(options.width)) || '%width%')
-    .replace(
-      '%height%',
-      (options?.height && String(options.height)) || '%height%'
-    )
-    .replace(
-      '%quality%',
-      (options?.quality && String(options.quality)) || '%quality%'
-    )
-}
-
-const block = ref({
-  type: 'image',
-  value: {
-    image: {
-      id: 336706,
-      title: 'FTVDAY021423_Gabriela-Bhaskar-0334.jpg',
-      width: 3000,
-      height: 2000,
-      createdAt: '2022-03-24T17:18:54.828125-04:00',
-      focalPointX: null,
-      focalPointY: null,
-      focalPointWidth: null,
-      focalPointHeight: null,
-      fileSize: 4464794,
-      fileHash: 'abbbe9be96a1f501da9ee298550e2c2ab55bed46',
-      alt: 'A photo of a "Vote Yes" banner held by Amazon union organizers.',
-      caption:
-        'Amazon union organizers rally for a union ahead of a vote that begins Friday.',
-      credit: 'Gwynne Hogan/Gothamist',
-      creditLink: '',
-      file: 'https://cdn.cms.demo.nypr.digital/original_images/FTVDAY021423_Gabriela-Bhaskar-0334.original.jpg',
-      usageLimitations: '',
-      expiryDate: null,
-      collection: 1,
-      uploadedByUser: 123,
-    },
-    caption: 'VOTE YES! This is a caption override. YAY!',
-  },
-  id: '7a907edf-af2b-43a2-8d64-dea6d196a8ee',
-})
-
 const doSomethingOnLoad = () => {
   console.log('doSomethingOnLoad')
+}
+
+const profileFromArticle = {
+  id: 19,
+  firstName: 'Scott',
+  lastName: 'Lynch',
+  name: 'Scott Lynch',
+  photoID: 327700,
+  jobTitle: 'Photojournalist',
+  biography:
+    'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
+  website: 'http://t.co/Np4U39BYlh',
+  phone_numbers: [
+    {
+      phone_number: '9731231234',
+    },
+    {
+      phone_number: '2011231234',
+    },
+  ],
+  email: 'scoboco@gmail.com',
+  slug: 'scott-lynch',
+  url: '/staff/scott-lynch',
+  link: 'https://www.sponsoredLink.com',
+  logo: 'images/default-sponsor.png',
+  socialMediaProfile: [
+    {
+      service: 'instagram',
+      profileUrl: 'https://www.instagram.com/scoboco/',
+    },
+    {
+      service: 'twitter',
+      profileUrl: 'https://twitter.com/Scoboco',
+    },
+  ],
 }
 </script>
 
 <template>
   <main class="pb-8">
+    <VPerson :profile-data="profileFromArticle" sizes="xs:60 sm:100 md:200" />
     <div class="grid">
       <div class="col-6">
-        <VSimpleResponsiveImage2
+        <VImage
           src="329836"
           alt="this is alt text"
           :width="700"
@@ -80,7 +67,7 @@ const doSomethingOnLoad = () => {
           :max-width="2598"
           :max-height="3484"
           allow-preview
-          responsive-sizes="xs:400px md:800px"
+          sizes="xs:400px md:800px"
           :allow-vertical-effect="true"
           format="jpeg"
           :quality="85"
@@ -90,23 +77,23 @@ const doSomethingOnLoad = () => {
         />
       </div>
       <div class="col-6">
-        <VSimpleResponsiveImage2
+        <VImage
           src="329944"
           alt="this is alt text"
           :width="400"
-          responsive-sizes="xs:400px md:800px"
+          sizes="xs:400px md:800px"
           format="jpeg"
           :quality="85"
           @load="doSomethingOnLoad"
         />
       </div>
       <div class="col-6">
-        <VSimpleResponsiveImage2
+        <VImage
           src="329944"
           alt="this is alt text"
           :width="400"
           :height="400"
-          responsive-sizes="xs:400px md:800px"
+          sizes="xs:400px md:800px"
           format="jpeg"
           :quality="85"
           :modifiers="{ focusZoom: '100' }"
@@ -114,26 +101,26 @@ const doSomethingOnLoad = () => {
         />
       </div>
       <div class="col-6">
-        <VSimpleResponsiveImage2
+        <VImage
           src="329944"
           alt="this is alt text"
           :width="400"
           allow-preview
-          responsive-sizes="xs:400px md:800px"
+          sizes="xs:400px md:800px"
           format="jpeg"
           :quality="85"
           @load="doSomethingOnLoad"
         >
           <template #closeicon>@</template>
-        </VSimpleResponsiveImage2>
+        </VImage>
       </div>
       <div class="col-6">
-        <VSimpleResponsiveImage2
+        <VImage
           src="329944"
           alt="this is alt text"
           :width="400"
           allow-preview
-          responsive-sizes="xs:400px md:800px"
+          sizes="xs:400px md:800px"
           format="jpeg"
           :quality="85"
           @load="doSomethingOnLoad"
@@ -145,7 +132,7 @@ const doSomethingOnLoad = () => {
               @click="slotProps.enlargeFunc"
             ></Button
           ></template>
-        </VSimpleResponsiveImage2>
+        </VImage>
       </div>
     </div>
     <!-- <nuxt-img
@@ -165,19 +152,6 @@ const doSomethingOnLoad = () => {
       ><Button label="button"></Button
     ></VFlexibleLink> -->
 
-    <!--   <v-image-with-caption
-      v-if="block.value.image"
-      class="mb-7"
-      :image="useImageUrl(block.value.image)"
-      :alt-text="block.value.image.alt"
-      :maxWidth="block.value.image.width"
-      :maxHeight="block.value.image.height"
-      :description="block.value.caption || block.value.image.caption"
-      :credit="block.value.image.credit"
-      :credit-url="block.value.image.creditLink"
-      :sizes="[2]"
-      :ratio="[block.value.image.width, block.value.image.height]"
-    /> -->
     <!--   <v-persistent-player
       data-style-mode="dark"
       :can-minimize="true"

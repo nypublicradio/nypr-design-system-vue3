@@ -21,6 +21,16 @@ setup((app) => {
     },
     template: '<a :href="to" @click.prevent="log()"><slot>NuxtLink</slot></a>',
   })
+  //support nuxt image mock
+  app.component('nuxt-img', {
+    props: ['src', 'alt', 'width', 'height', 'loading', 'maxWidth', 'maxHeight', 'quality', 'modifiers', 'allowVerticalEffect', 'verticalBgColor', 'verticalBgColorOpacity', 'verticalBgBlur', 'allowPreview', 'ratio'],
+    methods: {
+      log() {
+
+      },
+    },
+    template: '<img :src="`https://cms.demo.nypr.digital/images/${src}/fill-${width}x${height}-c0|format-webp|webpquality-85`" :width="width" :height="height"/>',
+  })
   app.component('ClientOnly', {
     props: [],
     methods: {

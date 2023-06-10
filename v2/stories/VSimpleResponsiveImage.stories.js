@@ -21,7 +21,7 @@ const Template = (args) => ({
     setup() {
         return { args }
     },
-    template: '<v-simple-responsive-image v-bind="args" />',
+    template: '<VImage v-bind="args" />',
 })
 
 export const Default = Template.bind({})

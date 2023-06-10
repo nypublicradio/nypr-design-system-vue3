@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onBeforeMount, onMounted } from 'vue'
-import VSimpleResponsiveImage from './VSimpleResponsiveImage.vue'
+import VImage from './VImage.vue'
 import VFlexibleLink from './VFlexibleLink.vue'
 import Button from 'primevue/button'
 
@@ -227,7 +227,7 @@ const getCurrentDimensions = computed(() => {
             imageUrl && !allowPreview ? emit('image-click', imageUrl) : null
           "
         >
-          <v-simple-responsive-image
+          <VImage
             v-if="(image && thisWidth) || width"
             :src="image"
             :alt="isDecorative ? '' : altText"
