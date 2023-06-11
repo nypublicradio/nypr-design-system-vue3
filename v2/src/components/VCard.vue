@@ -5,132 +5,170 @@ import VFlexibleLink from './VFlexibleLink.vue'
 import VImage from './VImage.vue'
 
 const props = defineProps({
+  /**
+   * a class assigned to the title
+   */
   titleClass: {
     type: String,
     default: null,
   },
+  /**
+   * alt text for the image
+   */
   alt: {
     type: String,
     default: '',
   },
+  /**
+   * image loading type (eager or lazy)
+   */
   loading: {
     type: String,
     default: 'lazy',
   },
+  /**
+   * wagtail image id
+   */
   imageSrc: {
     type: String,
     default: null,
   },
+  /**
+   * The desired height for image
+   */
   height: {
     type: Number,
     default: null,
   },
+  /**
+   * The desired width for image
+   */
   width: {
     type: Number,
     default: null,
   },
+  /**
+   * The desired min-width for image when the flexbox is responding
+   */
   minWidth: {
     type: Number,
     default: null,
   },
-  baseClass: {
-    type: String,
-    default: null,
-  },
+  /**
+   * at what percentage the image starts to scale down
+   */
   imageFlexBasis: {
     type: String,
     default: '33.33333%',
   },
+  /**
+   * Subtitle text below the title
+   */
   subtitle: {
     type: String,
     default: null,
   },
+  /**
+   * Blur of text below the subtitle that can be truncated
+   */
   blurb: {
     type: String,
     default: null,
   },
+  /**
+   * nuber of lines to truncate the blurb
+   */
   truncate: {
     type: Number,
     default: null,
   },
+  /**
+   * The title text
+   */
   title: {
     type: String,
     default: null,
   },
+  /**
+   * link for the title and image
+   */
   link: {
     type: String,
     default: null,
   },
-  caption: {
-    type: String,
-    default: null,
-  },
-  captionKeepOnTop: {
-    type: Boolean,
-    default: false,
-  },
-  credit: {
-    default: null,
-    type: String,
-  },
-  creditUrl: {
-    default: null,
-    type: String,
-  },
-  creditJustifyContent: {
-    default: 'flex-start',
-    type: String,
-  },
+  /**
+   * max-height of the image used just for the vertical effect
+   */
   maxHeight: {
     type: Number,
     default: Infinity,
   },
+  /**
+   * max-width of the image used just for the vertical effect
+   */
   maxWidth: {
     type: Number,
     default: Infinity,
   },
+  /**
+   * reverse the flex direction
+   */
   reverse: {
     type: Boolean,
     default: false,
   },
   /**
-   * does not allow the vertical effect to happen
+   * allow the vertical effect to happen
    */
   allowVerticalEffect: {
     type: Boolean,
     default: false,
   },
   /**
-   * ratio (in landscape)
+   * ratio of the image
    */
   ratio: {
     type: Array,
     default: () => [3, 2],
   },
   /**
-   * ratio (in landscape)
+   * ratio of the image in mobile breakpoint only
    */
   mobileRatio: {
     type: Array,
     default: () => null,
   },
-  /** * jpg compression quality */
+  /**
+   * compression quality of the iamge
+   */
   quality: {
     type: Number,
-    default: 70,
+    default: null,
   },
+  /**
+   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   */
   sizes: {
     type: String,
     default: null,
   },
+  /**
+   * to help with A11y
+   */
   isDecorative: {
     type: Boolean,
     default: false,
   },
+  /**
+   * will put the image on top and 100% width
+   */
   vertical: {
     type: Boolean,
     default: false,
   },
+  /**
+   * will put the image on top and 100% width on mobile breakpoint only
+   */
   verticalMobile: {
     type: Boolean,
     default: false,
@@ -185,7 +223,6 @@ const cssImageMinWidth = ref(
       :class="[
         { verticalMobile: props.verticalMobile },
         { vertical: props.vertical },
-        { baseClass: props.baseClass },
       ]"
     >
       <!-- :image-url="props.link" -->
@@ -204,14 +241,14 @@ const cssImageMinWidth = ref(
         <VFlexibleLink
           :to="props.link"
           raw
-          :aria-hidden="true"
-          :tabindex="-1"
+          :aria-hidden="isDecorative ? true : false"
+          :tabindex="isDecorative ? -1 : 0"
           @click="emit('image-click', e)"
         >
           <VImage
             class="card-image"
             :src="props.imageSrc"
-            :alt="props.alt"
+            :alt="isDecorative ? '' : props.alt"
             :loading="props.loading"
             :width="props.width"
             :height="props.height"

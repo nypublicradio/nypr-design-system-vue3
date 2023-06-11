@@ -5,22 +5,30 @@ import Dialog from 'primevue/dialog'
 import Button from 'primevue/button'
 
 const props = defineProps({
-  /* @nuxt/Image provider */
+  /**
+   * @nuxt/Image provider
+   */
   provider: {
     type: String,
     default: 'wagtail',
   },
-  /* alt text prop */
+  /**
+   * alt text for the image
+   */
   alt: {
     type: String,
     default: '',
   },
-  /* loading img prop */
+  /**
+   * image loading type (eager or lazy)
+   */
   loading: {
     type: String,
     default: 'lazy',
   },
-  /* wagtail image id */
+  /**
+   * wagtail image id
+   */
   src: {
     type: String,
     default: null,
