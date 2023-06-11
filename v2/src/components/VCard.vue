@@ -1,6 +1,5 @@
 <script setup>
 import { computed, useSlots, ref } from 'vue'
-import breakpoint from '../../../src/assets/library/breakpoints.module.scss'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VImage from './VImage.vue'
 
@@ -118,11 +117,26 @@ const props = defineProps({
     default: false,
   },
   /**
-   * allow the vertical effect to happen
+   * allow the vertical effect to happen for vertical images (images that are taller than they are wide)
    */
   allowVerticalEffect: {
     type: Boolean,
     default: false,
+  },
+  /** * tint the grey blured background image */
+  verticalBgColor: {
+    type: String,
+    default: null,
+  },
+  /** * the opacity of the tint of the grey blured background image */
+  verticalBgColorOpacity: {
+    type: String,
+    default: null,
+  },
+  /** * ammount of blur for the blured background image */
+  verticalBgBlur: {
+    type: String,
+    default: null,
   },
   /**
    * ratio of the image
@@ -258,6 +272,11 @@ const cssImageMinWidth = ref(
             :ratio="props.ratio"
             :quality="props.quality"
             :sizes="props.sizes"
+            :vertical-bg-color="props.verticalBgColor || undefined"
+            :vertical-bg-color-opacity="
+              props.verticalBgColorOpacity || undefined
+            "
+            :vertical-bg-blur="props.verticalBgBlur || undefined"
             role="presentation"
           />
         </VFlexibleLink>

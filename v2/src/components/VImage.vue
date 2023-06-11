@@ -33,44 +33,54 @@ const props = defineProps({
     type: String,
     default: null,
   },
-  /** * The desired width for image. */
+  /**
+   * The desired width for image
+   */
   width: {
     type: Number,
     default: null,
   },
-  /** * The desired height for the image. * */
+  /**
+   * The desired height for image
+   */
   height: {
     type: Number,
     default: null,
   },
-  /** * Maximum width for the image. Generated sizes will be clipped to fit the max dimensions. * If you know the width of the original, full-sized image, use it here.
+  /** * Maximum width for the image. If you know the width of the original, full-sized image, use it here. It is needed for the vertical effect
    */
   maxWidth: {
     type: Number,
     default: Infinity,
   },
-  /** * Maximum height for the image. Generated sizes will be clipped to fit the max dimensions. * If you know the height of the original, full-sized image, use it here.
+  /** * Maximum height for the image. If you know the height of the original, full-sized image, use it here. It is needed for the vertical effect
    */
   maxHeight: {
     type: Number,
     default: Infinity,
   },
-  /** * List of sizes for the image at certain break points 'sm:200px' */
+  /**
+   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   */
   sizes: {
     type: String,
     default: '',
   },
-  /** * jpg compression quality */
+  /**
+   * compression quality of the iamge
+   */
   quality: {
     type: Number,
     default: 70,
   },
-  /** * wagtail modifiers */
+  /** * wagtail modifiers  (https://image.nuxtjs.org/components/nuxt-img/#modifiers*/
   modifiers: {
     type: Object,
     default: null,
   },
-  /** * allow the vertical effect to happen */
+  /**
+   * allow the vertical effect to happen for vertical images (images that are taller than they are wide)
+   */
   allowVerticalEffect: {
     type: Boolean,
     default: false,

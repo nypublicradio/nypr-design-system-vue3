@@ -383,6 +383,9 @@ AllowVerticalEffect.args = {
     maxWidth: 2598,
     maxHeight: 3484,
     allowVerticalEffect: true,
+    verticalBgBlur: '10px',
+    verticalBgColorOpacity: '0.8',
+    verticalBgColor: '#000000',
     vertical: true,
 }
 
