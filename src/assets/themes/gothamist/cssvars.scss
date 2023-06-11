@@ -1,6 +1,6 @@
 :root,
-[data-style-mode='default'],
-.style-mode-default {
+[data-style-mode='light'],
+.style-mode-light {
     --black: #{map-get($colors, 'black')};
     --red: #{map-get($colors, 'red')};
     --soybean: #{map-get($colors, 'soybean')};

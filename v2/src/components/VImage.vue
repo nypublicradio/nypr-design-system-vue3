@@ -47,13 +47,15 @@ const props = defineProps({
     type: Number,
     default: null,
   },
-  /** * Maximum width for the image. If you know the width of the original, full-sized image, use it here. It is needed for the vertical effect
+  /**
+   * Maximum width for the image. If you know the width of the original, full-sized image, use it here. It is needed for the vertical effect
    */
   maxWidth: {
     type: Number,
     default: Infinity,
   },
-  /** * Maximum height for the image. If you know the height of the original, full-sized image, use it here. It is needed for the vertical effect
+  /**
+   * Maximum height for the image. If you know the height of the original, full-sized image, use it here. It is needed for the vertical effect
    */
   maxHeight: {
     type: Number,
@@ -73,7 +75,8 @@ const props = defineProps({
     type: Number,
     default: 70,
   },
-  /** * wagtail modifiers  (https://image.nuxtjs.org/components/nuxt-img/#modifiers*/
+  /**
+   * wagtail modifiers  (https://image.nuxtjs.org/components/nuxt-img/#modifiers*/
   modifiers: {
     type: Object,
     default: null,
@@ -85,22 +88,28 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  /** * tint the grey blured background image */
+  /**
+   * tint the grey blured background image
+   * */
   verticalBgColor: {
     type: String,
     default: '#f1f1f1',
   },
-  /** * the opacity of the tint of the grey blured background image */
+  /**
+   *  the opacity of the tint of the grey blured background image
+   */
   verticalBgColorOpacity: {
     type: String,
     default: '0.6',
   },
-  /** * ammount of blur for the blured background image */
+  /**
+   *  ammount of blur for the blured background image */
   verticalBgBlur: {
     type: String,
     default: '3px',
   },
-  /** * allow the user to click on the enlarge button to open a dialogue with full sized image */
+  /**
+   * allow the user to click on the enlarge button to open a dialogue with full sized image */
   allowPreview: {
     type: Boolean,
     default: false,

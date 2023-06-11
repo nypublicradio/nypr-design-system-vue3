@@ -1,6 +1,6 @@
 :root,
-[data-style-mode='default'],
-.style-mode-default {
+[data-style-mode='light'],
+.style-mode-light {
     --primary-color: #{$primaryColor};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
     --primary-color-alt: #{$primaryColorAlt};

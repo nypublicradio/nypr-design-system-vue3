@@ -1,6 +1,6 @@
 :root,
-[data-style-mode='default'],
-.style-mode-default {
+[data-style-mode='light'],
+.style-mode-light {
     color-scheme: light;
 
     --white: #{map-get($colors, 'white')};

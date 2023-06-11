@@ -123,17 +123,20 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
-  /** * tint the grey blured background image */
+  /**
+   *  tint the grey blured background image */
   verticalBgColor: {
     type: String,
     default: null,
   },
-  /** * the opacity of the tint of the grey blured background image */
+  /**
+   *  the opacity of the tint of the grey blured background image */
   verticalBgColorOpacity: {
     type: String,
     default: null,
   },
-  /** * ammount of blur for the blured background image */
+  /**
+   *  ammount of blur for the blured background image */
   verticalBgBlur: {
     type: String,
     default: null,

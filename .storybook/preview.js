@@ -51,6 +51,6 @@ export const parameters = {
     light: { ...themes.normal },
     stylePreview: true,
     darkClass: 'style-mode-dark',
-    lightClass: 'style-mode-default',
+    lightClass: 'style-mode-light',
   }
 }

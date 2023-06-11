@@ -1,6 +1,6 @@
 :root,
-[data-style-mode='default'],
-.style-mode-default {
+[data-style-mode='light'],
+.style-mode-light {
     --coolwhite: #{map-get($colors, 'coolwhite')};
     --blue: #{map-get($colors, 'blue')};
     --lightblue: #{map-get($colors, 'lightblue')};
