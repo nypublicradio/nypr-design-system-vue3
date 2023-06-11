@@ -29,13 +29,17 @@ const props = defineProps({
     type: Number,
     default: null,
   },
+  minWidth: {
+    type: Number,
+    default: null,
+  },
   baseClass: {
     type: String,
     default: null,
   },
   imageFlexBasis: {
     type: String,
-    default: '350%',
+    default: '33.33333%',
   },
   subtitle: {
     type: String,
@@ -166,7 +170,11 @@ const cssImageFlexBasis = ref(
   props.imageFlexBasis ? props.imageFlexBasis : cssImageWidth.value
 )
 const cssImageMinWidth = ref(
-  props.imageFlexBasis ? 'unset' : cssImageWidth.value
+  props.minWidth
+    ? props.minWidth + 'px'
+    : props.imageFlexBasis
+    ? 'unset'
+    : cssImageWidth.value
 )
 </script>
 
@@ -182,22 +190,31 @@ const cssImageMinWidth = ref(
     >
       <!-- :image-url="props.link" -->
       <!-- :is-decorative="props.isDecorative" -->
-      <VImage
-        v-if="props.imageSrc"
-        class="card-image"
-        :src="props.imageSrc"
-        :alt="props.alt"
-        :loading="props.loading"
-        :width="props.width"
-        :height="props.height"
-        :max-width="props.maxWidth"
-        :max-height="props.maxHeight"
-        :allow-vertical-effect="props.allowVerticalEffect"
-        :ratio="props.ratio"
-        :quality="props.quality"
-        :sizes="props.sizes"
-        role="presentation"
-      />
+      <div v-if="props.imageSrc" class="card-image-holder">
+        <VFlexibleLink
+          :to="props.link"
+          raw
+          :aria-hidden="true"
+          :tabindex="-1"
+          @click="emit('image-click', e)"
+        >
+          <VImage
+            class="card-image"
+            :src="props.imageSrc"
+            :alt="props.alt"
+            :loading="props.loading"
+            :width="props.width"
+            :height="props.height"
+            :max-width="props.maxWidth"
+            :max-height="props.maxHeight"
+            :allow-vertical-effect="props.allowVerticalEffect"
+            :ratio="props.ratio"
+            :quality="props.quality"
+            :sizes="props.sizes"
+            role="presentation"
+          />
+        </VFlexibleLink>
+      </div>
       <!-- @image-click="(e) => emit('image-click', e)"
         @credit-click="(e) => emit('credit-click', e)"
       :caption="props.caption" :caption-keep-on-top="props.captionKeepOnTop"
@@ -266,22 +283,22 @@ $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
     display: flex;
     flex-direction: v-bind(cssFlexDirection);
     border-radius: var(--v-card-border-radius);
+    align-items: flex-start;
+    justify-content: space-evenly;
     overflow: hidden;
     width: 100%;
     max-width: 100%;
     gap: 1rem;
-    .card-image {
-      &.v-image {
-        //flex-basis: v-bind(cssImageFlexBasis);
-        max-width: v-bind(cssImageWidth);
-        min-width: v-bind(cssImageMinWidth);
-        width: 100%;
-      }
+    .card-image-holder {
+      flex-basis: v-bind(cssImageFlexBasis);
+      flex-shrink: 0;
+      max-width: v-bind(cssImageWidth);
+      min-width: v-bind(cssImageMinWidth);
     }
-
     .card-details {
       display: flex;
       flex-direction: column;
+      flex: auto;
       gap: 0.5rem;
       div:empty {
         display: none;
@@ -346,7 +363,7 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
 $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
 @container (max-width: #{$container-breakpoint-sm}) {
   .v-card {
-    .simple-responsive-image-holder {
+    .v-image {
       aspect-ratio: v-bind(cssMobileRatio) !important;
     }
   }
