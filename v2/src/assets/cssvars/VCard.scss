@@ -1,6 +1,9 @@
 :root,
 [data-style-mode='default'] {
+    --v-card-bg-color: transparent;
+    --v-card-padding: 0;
     --v-card-border-radius: 0;
+    --v-card-image-radius: 0;
     --v-card-title-transition-duration: var(--transition-duration);
     --v-card-title-font-size: var(--font-size-13);
     --v-card-title-line-height: var(--font-size-13);

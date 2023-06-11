@@ -332,6 +332,8 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
   .v-card-base {
     display: flex;
     flex-direction: v-bind(cssFlexDirection);
+    background-color: var(--v-card-bg-color);
+    padding: var(--v-card-padding);
     border-radius: var(--v-card-border-radius);
     align-items: flex-start;
     justify-content: space-evenly;
@@ -344,6 +346,8 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
       flex-shrink: 0;
       max-width: v-bind(cssImageWidth);
       min-width: v-bind(cssImageMinWidth);
+      border-radius: var(--v-card-image-radius);
+      overflow: hidden;
       &.is-vertical {
         max-width: 100%;
         min-width: 100%;
