@@ -280,9 +280,9 @@ const cssImageMinWidth = ref(
 </template>
 
 <style lang="scss" scoped>
-$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
+//$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
-$container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
+//$container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
 
 @mixin verticalStyles {
   .v-image {
@@ -362,6 +362,15 @@ $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
         @include verticalStyles;
         flex-direction: v-bind(cssVerticalOnMobileReverse) !important;
       }
+      .card-image-holder {
+        &.is-vertical-mobile {
+          max-width: 100% !important;
+          min-width: 100% !important;
+        }
+        .v-image {
+          aspect-ratio: v-bind(cssMobileRatio) !important;
+        }
+      }
       .card-details {
         .title-holder {
           .card-title-link:not(.customTitleClass) {
@@ -369,24 +378,6 @@ $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
             line-height: var(--v-card-title-mobile-line-height);
           }
         }
-      }
-    }
-  }
-}
-</style>
-<style lang="scss">
-$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
-$container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
-$container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
-@container (max-width: #{$container-breakpoint-sm}) {
-  .v-card {
-    .card-image-holder {
-      &.is-vertical-mobile {
-        max-width: 100% !important;
-        min-width: 100% !important;
-      }
-      .v-image {
-        aspect-ratio: v-bind(cssMobileRatio) !important;
       }
     }
   }
