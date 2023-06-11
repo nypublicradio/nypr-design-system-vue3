@@ -75,6 +75,30 @@ const TemplateSlotBelowBlurb = (args) => ({
     template: '<v-card v-bind="args"><template #belowBlurb><VTag name="News" slug="/news"/><VTag name="News" slug="/news"/><VTag name="News" slug="/news"/></template></v-card>',
 })
 
+const TemplateSlotBelowImage = (args) => ({
+    components: {
+        VCard, VTag
+    },
+    setup() {
+        return {
+            args
+        }
+    },
+    template: '<v-card v-bind="args"><template #belowImage>By: Peter Gibbons</template></v-card>',
+})
+
+const TemplateSlotAboveImage = (args) => ({
+    components: {
+        VCard, VTag
+    },
+    setup() {
+        return {
+            args
+        }
+    },
+    template: '<v-card v-bind="args"><template #aboveImage>By: Peter Gibbons</template></v-card>',
+})
+
 
 export const Default = Template.bind({})
 Default.args = {
@@ -85,8 +109,6 @@ Default.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
 }
 export const CustomImageFlexBasis = Template.bind({})
 CustomImageFlexBasis.args = {
@@ -97,8 +119,6 @@ CustomImageFlexBasis.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
     imageFlexBasis: '50%',
 }
 export const NoImageFlexBasis = Template.bind({})
@@ -110,8 +130,6 @@ NoImageFlexBasis.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
     imageFlexBasis: null,
 }
 
@@ -124,8 +142,6 @@ ImageMinWidth.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
     minWidth: 150,
 }
 
@@ -139,8 +155,6 @@ CustomRatio.args = {
     width: 300,
     height: 200,
     ratio: [5, 2],
-    maxWidth: 2560,
-    maxHeight: 1600,
 }
 
 export const CustomRatioAndMobileRatio = Template.bind({})
@@ -154,8 +168,6 @@ CustomRatioAndMobileRatio.args = {
     height: 300,
     ratio: [5, 2],
     mobileRatio: [1, 1],
-    maxWidth: 2560,
-    maxHeight: 1600,
 }
 
 export const CustomeTitleClass = Template.bind({})
@@ -168,8 +180,8 @@ CustomeTitleClass.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
 }
 
 export const IsNotDecrative = Template.bind({})
@@ -181,8 +193,8 @@ IsNotDecrative.args = {
     blurb: 'When isDecrative is set to false, the text and image links aria-hidden ,tabindex and alt-text are enabled.Use to indicate decorative images with a link, where the exact same link is repeated in nearby text. e.g.A thumbnail that links to an article next to a title that links to the same article. WARNING: This will make the link unreachable by assistive software so only use this for truly redundant links.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     isDecorative: false,
     alt: 'alt text',
 }
@@ -196,8 +208,8 @@ EagerLoading.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     loading: 'eager',
 }
 export const AddCustomBaseClass = Template.bind({})
@@ -209,8 +221,8 @@ AddCustomBaseClass.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     baseClass: 'customBaseClass',
 }
 
@@ -223,8 +235,8 @@ TruncateBlurb.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     truncate: 2,
 }
 export const NoTitle = Template.bind({})
@@ -234,8 +246,8 @@ NoTitle.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     truncate: 2,
 }
 export const NoBlurb = Template.bind({})
@@ -246,8 +258,8 @@ NoBlurb.args = {
     subtitle: 'Subtitle',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     truncate: 2,
 }
 
@@ -259,8 +271,8 @@ NoSubtitle.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     truncate: 2,
 }
 export const NoImage = Template.bind({})
@@ -271,8 +283,8 @@ NoImage.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     truncate: 2,
 }
 export const NoLinks = Template.bind({})
@@ -283,8 +295,8 @@ NoLinks.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     truncate: 2,
 }
 
@@ -297,8 +309,8 @@ Reverse.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     reverse: true,
 }
 
@@ -311,8 +323,8 @@ Vertical.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 800,
     height: 533,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     vertical: true,
 }
 
@@ -325,8 +337,8 @@ ReverseVertical.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 800,
     height: 533,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     vertical: true,
     reverse: true,
 }
@@ -340,8 +352,8 @@ VerticalOnMobile.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 400,
     height: 266,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     verticalMobile: true,
 }
 
@@ -354,8 +366,8 @@ ReverseVerticalOnMobile.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 400,
     height: 266,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     verticalMobile: true,
     reverse: true,
 }
@@ -367,7 +379,7 @@ AllowVerticalEffect.args = {
     subtitle: 'Subtitle',
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 800,
-
+    height: 533,
     maxWidth: 2598,
     maxHeight: 3484,
     allowVerticalEffect: true,
@@ -383,8 +395,8 @@ SlotAfterTitle.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
 }
 export const SlotBeforeTitle = TemplateSlotBeforeTitle.bind({})
 SlotBeforeTitle.args = {
@@ -395,8 +407,8 @@ SlotBeforeTitle.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
 }
 export const SlotAboveTitle = TemplateSlotAboveTitle.bind({})
 SlotAboveTitle.args = {
@@ -407,8 +419,8 @@ SlotAboveTitle.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
 }
 export const SlotBelowBlurb = TemplateSlotBelowBlurb.bind({})
 SlotBelowBlurb.args = {
@@ -419,72 +431,27 @@ SlotBelowBlurb.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
 }
-
-
-export const Caption = Template.bind({})
-Caption.args = {
+export const SlotBelowImage = TemplateSlotBelowImage.bind({})
+SlotBelowImage.args = {
     imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    width: 800,
-    height: 533,
-    maxWidth: 2560,
-    maxHeight: 1600,
-    caption: 'This is sample caption on the image',
-    vertical: true,
+    width: 300,
+    height: 200,
 }
 
-export const Credit = Template.bind({})
-Credit.args = {
+export const SlotAboveImage = TemplateSlotAboveImage.bind({})
+SlotAboveImage.args = {
     imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    width: 800,
-    height: 533,
-    maxWidth: 2560,
-    maxHeight: 1600,
-    credit: 'Thomas Bono',
-    vertical: true,
-}
-
-export const CreditWithLink = Template.bind({})
-CreditWithLink.args = {
-    imageSrc: '329944',
-    title: "Title with some <em>HTML</em>.",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    width: 800,
-    height: 533,
-    maxWidth: 2560,
-    maxHeight: 1600,
-    credit: 'Thomas Bono',
-    creditUrl: 'https://www.thomasbono.com',
-    vertical: true,
-}
-
-export const CreditReverse = Template.bind({})
-CreditReverse.args = {
-    imageSrc: '329944',
-    title: "Title with some <em>HTML</em>.",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    width: 800,
-    height: 533,
-    maxWidth: 2560,
-    maxHeight: 1600,
-    credit: 'Thomas Bono',
-    creditUrl: 'https://www.thomasbono.com',
-    creditJustifyContent: 'flex-end',
-    vertical: true,
+    width: 300,
+    height: 200,
 }
 
 export const ImageQuality = Template.bind({})
@@ -496,21 +463,20 @@ ImageQuality.args = {
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
     width: 300,
     height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
+
+
     quality: 5,
 }
 
-export const Srcset = Template.bind({})
-Srcset.args = {
+export const Sizes = Template.bind({})
+Sizes.args = {
     imageSrc: '329944',
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
     blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    width: 300,
-    height: 200,
-    maxWidth: 2560,
-    maxHeight: 1600,
-    sizes: "xs:300px",
+    width: 800,
+    height: 533,
+    vertical: true,
+    sizes: "xs:300px md:400px lg:800px",
 }

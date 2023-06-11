@@ -190,7 +190,17 @@ const cssImageMinWidth = ref(
     >
       <!-- :image-url="props.link" -->
       <!-- :is-decorative="props.isDecorative" -->
-      <div v-if="props.imageSrc" class="card-image-holder">
+      <div
+        v-if="props.imageSrc"
+        class="card-image-holder"
+        :class="[
+          { 'is-vertical': props.vertical },
+          { 'is-vertical-mobile': props.verticalMobile },
+        ]"
+      >
+        <div class="slot slot-above-image">
+          <slot name="aboveImage"></slot>
+        </div>
         <VFlexibleLink
           :to="props.link"
           raw
@@ -214,6 +224,9 @@ const cssImageMinWidth = ref(
             role="presentation"
           />
         </VFlexibleLink>
+        <div class="slot slot-below-image">
+          <slot name="belowImage"></slot>
+        </div>
       </div>
       <!-- @image-click="(e) => emit('image-click', e)"
         @credit-click="(e) => emit('credit-click', e)"
@@ -294,6 +307,10 @@ $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
       flex-shrink: 0;
       max-width: v-bind(cssImageWidth);
       min-width: v-bind(cssImageMinWidth);
+      &.is-vertical {
+        max-width: 100%;
+        min-width: 100%;
+      }
     }
     .card-details {
       display: flex;
@@ -363,8 +380,14 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
 $container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
 @container (max-width: #{$container-breakpoint-sm}) {
   .v-card {
-    .v-image {
-      aspect-ratio: v-bind(cssMobileRatio) !important;
+    .card-image-holder {
+      &.is-vertical-mobile {
+        max-width: 100% !important;
+        min-width: 100% !important;
+      }
+      .v-image {
+        aspect-ratio: v-bind(cssMobileRatio) !important;
+      }
     }
   }
 }
