@@ -164,11 +164,11 @@ const props = defineProps({
 })
 
 const emit = defineEmits([
-  'click-image',
-  'click-name',
-  'click-cta',
-  'click-social-share',
-  'click-social-follow',
+  'image-click',
+  'name-click',
+  'cta-click',
+  'social-share-click',
+  'social-follow-click',
 ])
 
 const profile = ref(props.profileData)
@@ -235,26 +235,33 @@ const accountNameFromUrl = (url) => {
     >
       <div class="profile">
         <div class="author-image">
-          <v-flexible-link
+          <VFlexibleLink
             :to="profileLink"
             raw
-            :aria-hidden="isDecorative ? true : false"
-            :tabindex="isDecorative ? -1 : 0"
-            @click="emit('click-image', profileLink)"
+            :aria-hidden="props.isDecorative ? true : false"
+            :tabindex="props.isDecorative ? -1 : 0"
+            @click="emit('image-click', profileLink)"
           >
             <VImage
               v-if="
                 profile.photoID && !props.sponsored && !props.imageFallbackPath
               "
-              :src="String(profile.photoID)"
+              :src="
+                profile.photoID
+                  ? String(profile.photoID)
+                  : props.sponsored
+                  ? profile.logo
+                  : props.imageFallbackPath
+                  ? props.imageFallbackPath
+                  : defaultUserPhoto
+              "
               :width="props.imageSize"
               :height="props.imageSize"
               :sizes="props.sizes"
               :ratio="props.imageRatio"
               :loading="props.loading"
-              :alt="isDecorative ? '' : props.alt"
+              :alt="props.isDecorative ? '' : props.alt"
             />
-            <!-- :sizes="props.pixelDensitySizes" -->
             <img
               v-else
               :src="`${
@@ -268,7 +275,7 @@ const accountNameFromUrl = (url) => {
               style="width: 100%; height: auto"
               alt="Profile image"
             />
-          </v-flexible-link>
+          </VFlexibleLink>
         </div>
       </div>
       <div class="info" v-if="!justImage">
@@ -276,25 +283,25 @@ const accountNameFromUrl = (url) => {
           <slot name="slot-above-name" />
         </div>
         <div class="name-holder">
-          <v-flexible-link
+          <VFlexibleLink
             v-if="props.showName"
             class="name-link"
             :to="profileLink"
-            @click="emit('click-name', profileLink)"
+            @click="emit('name-click', profileLink)"
           >
             <div class="name">{{ props.namePrefix }} {{ profile.name }}</div>
-          </v-flexible-link>
-          <v-share-tools v-if="updatedSocialArr && props.showSocial">
-            <v-share-tools-item
+          </VFlexibleLink>
+          <VShareTools v-if="updatedSocialArr && props.showSocial">
+            <VShareToolsItem
               v-for="account in updatedSocialArr"
               :key="account.id"
               :service="account.service"
               :link="account.profileUrl"
               :username="accountNameFromUrl(account.profileUrl)"
-              @share="(service) => emit('click-social-share', service)"
-              @follow="(service) => emit('click-social-follow', service)"
+              @share="(service) => emit('social-share-click', service)"
+              @follow="(service) => emit('cocial-follow-click', service)"
             />
-          </v-share-tools>
+          </VShareTools>
         </div>
         <div class="slot slot-above-bio">
           <slot name="slot-above-bio" />
@@ -308,14 +315,14 @@ const accountNameFromUrl = (url) => {
         <div class="slot slot-below-bio">
           <slot name="slot-below-bio" />
         </div>
-        <v-flexible-link
+        <VFlexibleLink
           v-if="showCta"
           :to="profileLink"
           class="cta"
-          @click="emit('click-cta', profileLink)"
+          @click="emit('cta-click', profileLink)"
         >
           {{ ctaText }}
-        </v-flexible-link>
+        </VFlexibleLink>
         <div class="slot slot-below-cta">
           <slot name="slot-below-cta" />
         </div>

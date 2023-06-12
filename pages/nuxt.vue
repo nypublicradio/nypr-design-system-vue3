@@ -25,7 +25,7 @@ const profileFromArticle = {
   firstName: 'Scott',
   lastName: 'Lynch',
   name: 'Scott Lynch',
-  photoID: 327700,
+
   jobTitle: 'Photojournalist',
   biography:
     'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
@@ -104,6 +104,7 @@ const profileFromArticle = {
         <div class="col-12 md:col-6">
           <VPerson
             :profile-data="profileFromArticle"
+            image-fallback-path="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg"
             sizes="xs:30 sm:100 md:200"
           />
         </div>
@@ -117,6 +118,7 @@ const profileFromArticle = {
             :height="400"
             sizes="xs:400px md:800px"
             allow-preview
+            to="https://www.thomasbono.com"
             @load="doSomethingOnLoad"
             @click="doSomethingOnLoad"
             @keypress="doSomethingOnLoad"
@@ -206,7 +208,11 @@ const profileFromArticle = {
           </VImage>
         </div>
       </div>
-      <NuxtImg src="images/default-sponsor.jpg" height="400" />
+      <!-- <VImage
+        :provider="null"
+        src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg"
+        height="400"
+      /> -->
     </div>
 
     <!--  <VFlexibleLink to="https://www.google.com">go to google</VFlexibleLink>

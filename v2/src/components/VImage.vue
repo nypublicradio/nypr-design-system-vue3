@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from 'vue'
+import VFlexibleLink from './VFlexibleLink.vue'
 import ProgressSpinner from 'primevue/progressspinner'
 import Dialog from 'primevue/dialog'
 import Button from 'primevue/button'
@@ -128,8 +129,19 @@ const props = defineProps({
     type: Array,
     default: () => [3, 2],
   },
+  /**
+   * address to navigate to when the image is clicked
+   */
+  to: {
+    type: String,
+    default: null,
+  },
+  isDecorative: {
+    type: Boolean,
+    default: false,
+  },
 })
-const emit = defineEmits(['click', 'keypress', 'load', 'enlargeLoad'])
+const emit = defineEmits(['image-click', 'load', 'enlargeLoad'])
 
 let isVertical = ref(
   props.allowVerticalEffect && props.maxHeight > props.maxWidth
@@ -156,97 +168,104 @@ const enlargeLoad = (target) => {
 
 <template>
   <div class="v-image" :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`">
-    <div class="v-image-holder">
-      <div v-if="isVertical" class="bg">
-        <nuxt-img
-          :provider="props.provider"
-          :src="props.src"
-          :width="props.width"
-          :height="props.height"
-          quality="15"
-          :alt="alt"
-          :modifiers="props.modifiers"
-          :loading="props.loading"
-        />
-      </div>
-      <nuxt-img
-        :provider="props.provider"
-        class="image native-image"
-        :class="isVertical ? 'is-vertical' : ''"
-        :src="props.src"
-        :width="computedWidth"
-        :height="props.height"
-        :sizes="props.sizes"
-        :densities="props.density"
-        :style="[
-          isVertical
-            ? `aspect-ratio:${props.maxWidth} / ${props.maxHeight}; object-fit: contain;`
-            : '',
-        ]"
-        :alt="alt"
-        :quality="String(props.quality)"
-        :loading="loading"
-        :modifiers="props.modifiers"
-        @click="emit('click', $event.target.value)"
-        @keypress="emit('keypress', $event.target.value)"
-        @load="emit('load', $event.target)"
-      />
-
-      <slot class="slot caption" name="caption"></slot>
-      <slot class="slot gallery" name="gallery"></slot>
-
-      <template v-if="allowPreview">
-        <div class="enlarge-button-holder">
-          <slot
-            class="slot enlarge-button"
-            name="enlargeButton"
-            :enlargeFunc="enlarge"
-          >
-            <Button
-              icon="pi pi-clone"
-              class="enlarge-button"
-              aria-label="Enlarge Image"
-              @click="enlarge"
-            ></Button>
-          </slot>
-        </div>
-        <Dialog
-          v-model:visible="loadingEnlargedImage"
-          modal
-          dismissable-mask
-          header=" "
-          :style="{ width: '95vw' }"
-        >
+    <VFlexibleLink
+      raw
+      :to="props.to"
+      :aria-hidden="props.isDecorative ? true : false"
+      :tabindex="props.isDecorative ? -1 : 0"
+      style="width: auto"
+      @click="props.to ? emit('image-click', props.to) : null"
+    >
+      <div class="v-image-holder">
+        <div v-if="isVertical" class="bg">
           <nuxt-img
             :provider="props.provider"
-            class="enlarged-image"
             :src="props.src"
-            style="width: 100%; height: auto"
-            :alt="alt"
-            loading="eager"
-            :quality="100"
+            :width="props.width"
+            :height="props.height"
+            quality="15"
+            :alt="props.isDecorative ? '' : props.alt"
             :modifiers="props.modifiers"
-            @load="enlargeLoad($event.target)"
+            :loading="props.loading"
           />
-          <template #closeicon
-            ><slot class="slot close-icon" name="closeicon"></slot
-          ></template>
-        </Dialog>
-        <ProgressSpinner
-          v-if="loadingEnlargedImage && !loadedEnlargedImage"
-          style="
-            z-index: 1102;
-            position: fixed;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-          "
-          stroke-width="6"
+        </div>
+        <nuxt-img
+          :provider="props.provider"
+          class="image native-image"
+          :class="isVertical ? 'is-vertical' : ''"
+          :src="props.src"
+          :width="computedWidth"
+          :height="props.height"
+          :sizes="props.sizes"
+          :densities="props.density"
+          :style="[
+            isVertical
+              ? `aspect-ratio:${props.maxWidth} / ${props.maxHeight}; object-fit: contain;`
+              : '',
+          ]"
+          :alt="props.isDecorative ? '' : props.alt"
+          :quality="String(props.quality)"
+          :loading="loading"
+          :modifiers="props.modifiers"
+          @load="emit('load', $event.target)"
         />
-      </template>
-    </div>
+
+        <slot class="slot caption" name="caption"></slot>
+        <slot class="slot gallery" name="gallery"></slot>
+
+        <template v-if="allowPreview">
+          <div class="enlarge-button-holder">
+            <slot
+              class="slot enlarge-button"
+              name="enlargeButton"
+              :enlargeFunc="enlarge"
+            >
+              <Button
+                icon="pi pi-clone"
+                class="enlarge-button"
+                aria-label="Enlarge Image"
+                @click.prevent="enlarge"
+              ></Button>
+            </slot>
+          </div>
+          <Dialog
+            v-model:visible="loadingEnlargedImage"
+            modal
+            dismissable-mask
+            header=" "
+            :style="{ width: '95vw' }"
+          >
+            <!-- :provider="props.provider" -->
+            <nuxt-img
+              class="enlarged-image"
+              :src="props.src"
+              style="width: 100%; height: auto"
+              :alt="props.isDecorative ? '' : props.alt"
+              loading="eager"
+              :quality="100"
+              :modifiers="props.modifiers"
+              @load="enlargeLoad($event.target)"
+            />
+            <template #closeicon
+              ><slot class="slot close-icon" name="closeicon"></slot
+            ></template>
+          </Dialog>
+          <ProgressSpinner
+            v-if="loadingEnlargedImage && !loadedEnlargedImage"
+            style="
+              z-index: 1102;
+              position: fixed;
+              top: 0;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              margin: auto;
+            "
+            stroke-width="6"
+          />
+        </template>
+      </div>
+    </VFlexibleLink>
   </div>
 </template>
 

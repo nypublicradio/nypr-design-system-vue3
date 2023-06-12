@@ -242,8 +242,6 @@ const cssImageMinWidth = ref(
         { vertical: props.vertical },
       ]"
     >
-      <!-- :image-url="props.link" -->
-      <!-- :is-decorative="props.isDecorative" -->
       <div
         v-if="props.imageSrc"
         class="card-image-holder"
@@ -255,43 +253,31 @@ const cssImageMinWidth = ref(
         <div class="slot slot-above-image">
           <slot name="aboveImage"></slot>
         </div>
-        <VFlexibleLink
+        <VImage
+          class="card-image"
+          :src="props.imageSrc"
+          :alt="isDecorative ? '' : props.alt"
+          :loading="props.loading"
+          :width="props.width"
+          :height="props.height"
+          :max-width="props.maxWidth"
+          :max-height="props.maxHeight"
+          :allow-vertical-effect="props.allowVerticalEffect"
+          :ratio="props.ratio"
+          :quality="props.quality || undefined"
+          :sizes="props.sizes"
+          :vertical-bg-color="props.verticalBgColor || undefined"
+          :vertical-bg-color-opacity="props.verticalBgColorOpacity || undefined"
+          :vertical-bg-blur="props.verticalBgBlur || undefined"
+          role="presentation"
           :to="props.link"
-          raw
-          :aria-hidden="isDecorative ? true : false"
-          :tabindex="isDecorative ? -1 : 0"
-          @click="emit('image-click', e)"
-        >
-          <VImage
-            class="card-image"
-            :src="props.imageSrc"
-            :alt="isDecorative ? '' : props.alt"
-            :loading="props.loading"
-            :width="props.width"
-            :height="props.height"
-            :max-width="props.maxWidth"
-            :max-height="props.maxHeight"
-            :allow-vertical-effect="props.allowVerticalEffect"
-            :ratio="props.ratio"
-            :quality="props.quality || undefined"
-            :sizes="props.sizes"
-            :vertical-bg-color="props.verticalBgColor || undefined"
-            :vertical-bg-color-opacity="
-              props.verticalBgColorOpacity || undefined
-            "
-            :vertical-bg-blur="props.verticalBgBlur || undefined"
-            role="presentation"
-          />
-        </VFlexibleLink>
+          :is-decorative="props.isDecorative"
+          @image-click="emit('image-click', props.imageSrc)"
+        />
         <div class="slot slot-below-image">
           <slot name="belowImage"></slot>
         </div>
       </div>
-      <!-- @image-click="(e) => emit('image-click', e)"
-        @credit-click="(e) => emit('credit-click', e)"
-      :caption="props.caption" :caption-keep-on-top="props.captionKeepOnTop"
-      :credit="props.credit" :credit-url="props.creditUrl"
-      :credit-justify-content="creditJustifyContent" -->
       <div v-if="hasDetails" class="card-details">
         <div class="slot slot-above-title">
           <slot name="aboveTitle"></slot>

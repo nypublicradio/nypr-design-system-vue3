@@ -40,7 +40,7 @@ const toggleCaption = () => {
       :icon="`pi pi-${showCaption ? 'times' : 'info'}`"
       class="caption-button"
       aria-label="caption button"
-      @click="toggleCaption"
+      @click.prevent="toggleCaption"
     >
     </Button>
   </div>
