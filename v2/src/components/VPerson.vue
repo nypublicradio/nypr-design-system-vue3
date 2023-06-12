@@ -7,22 +7,37 @@ import VShareToolsItem from './VShareToolsItem.vue'
 import defaultUserPhoto from '../assets/images/default-user.jpg'
 
 const props = defineProps({
+  /**
+   * API responseof the user/author's data
+   */
   profileData: {
     type: Object,
     default: null,
   },
+  /**
+   * the prefix before the name
+   */
   namePrefix: {
     type: String,
     default: null,
   },
+  /**
+   * The desired width & height for image
+   */
   imageSize: {
     type: Number,
     default: 100,
   },
+  /**
+   * the number that is used to calculate how much smaller the image gets on mobile breakpoints
+   */
   imageSizeScaleRatio: {
     type: Number,
     default: 1.5,
   },
+  /**
+   * the path to the fallback image
+   */
   imageFallbackPath: {
     type: String,
     default: null,
@@ -34,62 +49,107 @@ const props = defineProps({
     type: String,
     default: 'Profile Image',
   },
+  /**
+   * vertical layout
+   */
   vertical: {
     type: Boolean,
     default: false,
   },
+  /**
+   * vertical layout on mobile only
+   */
   verticalMobile: {
     type: Boolean,
     default: false,
   },
+  /**
+   * show/hide CTA button
+   */
   showCta: {
     type: Boolean,
     default: true,
   },
+  /**
+   * show/hide bio
+   */
   showBio: {
     type: Boolean,
     default: true,
   },
+  /**
+   * show/hide social icons
+   */
   showSocial: {
     type: Boolean,
     default: true,
   },
+  /**
+   * show/hide name
+   */
   showName: {
     type: Boolean,
     default: true,
   },
+  /**
+   * when true, only the image will be displayed... and work properly
+   */
   justImage: {
     type: Boolean,
     default: false,
   },
+  /**
+   * fflex-align for the image and content
+   */
   alignItems: {
     type: String,
     default: 'flex-start',
   },
+  /**
+   * flags the profile as sponsored
+   */
   sponsored: {
     type: Boolean,
     default: false,
   },
+  /**
+   * flex-direction for the image and content
+   */
   flexDirection: {
     type: String,
     default: 'row',
   },
+  /**
+   * snumber of lines to truncate the bio
+   */
   truncate: {
     type: Number,
     default: null,
   },
+  /**
+   * border radius for the image
+   */
   radius: {
     type: String,
     default: '50%',
   },
+  /**
+   * image loading type (eager or lazy)
+   */
   loading: {
     type: String,
     default: 'lazy',
   },
+  /**
+   * desired ratio of the image
+   */
   imageRatio: {
     type: Array,
     default: () => [1, 1],
   },
+  /**
+   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   */
   sizes: {
     type: String,
     default: null,
