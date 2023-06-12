@@ -380,9 +380,6 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
       flex-direction: column;
       flex: auto;
       gap: 0.5rem;
-      div:empty {
-        display: none;
-      }
       .title-holder {
         display: flex;
         flex-direction: row;
@@ -416,6 +413,9 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
     &.vertical {
       @include verticalStyles;
     }
+  }
+  .slot:empty {
+    display: none;
   }
 }
 @container (max-width: #{$container-breakpoint-sm}) {

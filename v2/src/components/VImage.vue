@@ -156,85 +156,97 @@ const enlargeLoad = (target) => {
 
 <template>
   <div class="v-image" :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`">
-    <div v-if="isVertical" class="bg">
-      <nuxt-img
-        :provider="props.provider"
-        :src="props.src"
-        :width="props.width"
-        :height="props.height"
-        quality="15"
-        :alt="alt"
-        :modifiers="props.modifiers"
-        :loading="props.loading"
-      />
-    </div>
-    <nuxt-img
-      :provider="props.provider"
-      class="image native-image"
-      :class="isVertical ? 'is-vertical' : ''"
-      :src="props.src"
-      :width="computedWidth"
-      :height="props.height"
-      :sizes="props.sizes"
-      :densities="props.density"
-      :style="[
-        isVertical
-          ? `aspect-ratio:${props.maxWidth} / ${props.maxHeight}; object-fit: contain;`
-          : '',
-      ]"
-      :alt="alt"
-      :quality="String(props.quality)"
-      :loading="loading"
-      :modifiers="props.modifiers"
-      @click="emit('click', $event.target.value)"
-      @keypress="emit('keypress', $event.target.value)"
-      @load="emit('load', $event.target)"
-    />
-    <template v-if="allowPreview">
-      <div class="enlarge-button-holder">
-        <slot name="enlargeButton" :enlargeFunc="enlarge">
-          <Button
-            icon="pi pi-clone"
-            class="enlarge-button"
-            aria-label="Enlarge Image"
-            @click="enlarge"
-          ></Button>
-        </slot>
-      </div>
-      <Dialog
-        v-model:visible="loadingEnlargedImage"
-        modal
-        dismissable-mask
-        header=" "
-        :style="{ width: '95vw' }"
-      >
+    <div class="v-image-holder">
+      <div v-if="isVertical" class="bg">
         <nuxt-img
           :provider="props.provider"
-          class="enlarged-image"
           :src="props.src"
-          style="width: 100%; height: auto"
+          :width="props.width"
+          :height="props.height"
+          quality="15"
           :alt="alt"
-          loading="eager"
-          :quality="100"
           :modifiers="props.modifiers"
-          @load="enlargeLoad($event.target)"
+          :loading="props.loading"
         />
-        <template #closeicon><slot name="closeicon"></slot></template>
-      </Dialog>
-      <ProgressSpinner
-        v-if="loadingEnlargedImage && !loadedEnlargedImage"
-        style="
-          z-index: 1102;
-          position: fixed;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          margin: auto;
-        "
-        stroke-width="6"
+      </div>
+      <nuxt-img
+        :provider="props.provider"
+        class="image native-image"
+        :class="isVertical ? 'is-vertical' : ''"
+        :src="props.src"
+        :width="computedWidth"
+        :height="props.height"
+        :sizes="props.sizes"
+        :densities="props.density"
+        :style="[
+          isVertical
+            ? `aspect-ratio:${props.maxWidth} / ${props.maxHeight}; object-fit: contain;`
+            : '',
+        ]"
+        :alt="alt"
+        :quality="String(props.quality)"
+        :loading="loading"
+        :modifiers="props.modifiers"
+        @click="emit('click', $event.target.value)"
+        @keypress="emit('keypress', $event.target.value)"
+        @load="emit('load', $event.target)"
       />
-    </template>
+
+      <slot class="slot caption" name="caption"></slot>
+      <slot class="slot gallery" name="gallery"></slot>
+
+      <template v-if="allowPreview">
+        <div class="enlarge-button-holder">
+          <slot
+            class="slot enlarge-button"
+            name="enlargeButton"
+            :enlargeFunc="enlarge"
+          >
+            <Button
+              icon="pi pi-clone"
+              class="enlarge-button"
+              aria-label="Enlarge Image"
+              @click="enlarge"
+            ></Button>
+          </slot>
+        </div>
+        <Dialog
+          v-model:visible="loadingEnlargedImage"
+          modal
+          dismissable-mask
+          header=" "
+          :style="{ width: '95vw' }"
+        >
+          <nuxt-img
+            :provider="props.provider"
+            class="enlarged-image"
+            :src="props.src"
+            style="width: 100%; height: auto"
+            :alt="alt"
+            loading="eager"
+            :quality="100"
+            :modifiers="props.modifiers"
+            @load="enlargeLoad($event.target)"
+          />
+          <template #closeicon
+            ><slot class="slot close-icon" name="closeicon"></slot
+          ></template>
+        </Dialog>
+        <ProgressSpinner
+          v-if="loadingEnlargedImage && !loadedEnlargedImage"
+          style="
+            z-index: 1102;
+            position: fixed;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+          "
+          stroke-width="6"
+        />
+      </template>
+    </div>
   </div>
 </template>
 
@@ -243,53 +255,59 @@ const enlargeLoad = (target) => {
   line-height: 0;
   position: relative;
   overflow: hidden;
-  .image {
+  .v-image-holder {
     position: relative;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    object-fit: cover;
-    &.is-vertical {
-      margin: auto;
-      display: block;
+    .image {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      object-fit: cover;
+      &.is-vertical {
+        margin: auto;
+        display: block;
+      }
+      img {
+        cursor: default;
+      }
     }
-    img {
-      cursor: default;
+    .enlarge-button-holder {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      .enlarge-button {
+        background-color: rgba(var(--primary-color-rgb), 0.8);
+        border-color: transparent;
+      }
     }
-  }
-  .enlarge-button-holder {
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    .enlarge-button {
-      background-color: rgba(var(--primary-color-rgb), 0.8);
-      border-color: transparent;
-    }
-  }
-  .bg {
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    &:after {
-      content: '';
-      background-color: v-bind(verticalBgColor);
+    .bg {
+      pointer-events: none;
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0;
-      opacity: v-bind(verticalBgColorOpacity);
+      overflow: hidden;
+      &:after {
+        content: '';
+        background-color: v-bind(verticalBgColor);
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: v-bind(verticalBgColorOpacity);
+      }
+      img {
+        width: 100%;
+        filter: blur(v-bind(verticalBgBlur)) grayscale(100%);
+        object-fit: cover;
+        height: inherit;
+      }
     }
-    img {
-      width: 100%;
-      filter: blur(v-bind(verticalBgBlur)) grayscale(100%);
-      object-fit: cover;
-      height: inherit;
-    }
+  }
+  .slot:empty {
+    display: none;
   }
 }
 </style>

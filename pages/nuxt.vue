@@ -7,6 +7,8 @@ import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
 import VCard from '~/v2/src/components/VCard.vue'
 //import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
 import VImage from '~/v2/src/components/VImage.vue'
+import VImageCaption from '~/v2/src/components/VImageCaption.vue'
+import VImageGallery from '~/v2/src/components/VImageGallery.vue'
 import Home from '~/src/components/Home.vue'
 
 const emitClick = (type, event) => {
@@ -107,6 +109,26 @@ const profileFromArticle = {
         </div>
       </div>
       <div class="grid">
+        <div class="col-6">
+          <VImage
+            src="329944"
+            alt="this is alt text"
+            :width="700"
+            :height="400"
+            sizes="xs:400px md:800px"
+            allow-preview
+            @load="doSomethingOnLoad"
+            @click="doSomethingOnLoad"
+            @keypress="doSomethingOnLoad"
+          >
+            <template #caption>
+              <VImageCaption text="This is a sample caption text <b>HTML</b>" />
+            </template>
+            <template #gallery>
+              <VImageGallery :count="9" gallery-link="https://www.google.com" />
+            </template>
+          </VImage>
+        </div>
         <div class="col-6">
           <VImage
             src="329836"
