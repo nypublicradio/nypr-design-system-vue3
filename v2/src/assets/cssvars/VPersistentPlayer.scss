@@ -1,5 +1,6 @@
 :root,
-[data-style-mode='default'] {
+[data-style-mode='light'],
+.style-mode-light {
     --persistent-player-height: 100px;
     --persistent-player-height-buffer: 20px;
     --persistent-player-bg: #f1f1f1;
@@ -26,7 +27,8 @@
     --persistent-player-title-weight: 400;
     --persistent-player-title-color: var(--text-color);
 }
-[data-style-mode='dark'] {
+[data-style-mode='dark'],
+.style-mode-dark {
     --persistent-player-bg: #2f2f2f;
     --persistent-player-minimize-btn-bg: var(--persistent-player-bg);
     --persistent-player-minimize-btn-color: #fff;

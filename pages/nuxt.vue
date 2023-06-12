@@ -11,6 +11,8 @@ import VImageCaption from '~/v2/src/components/VImageCaption.vue'
 import VImageGallery from '~/v2/src/components/VImageGallery.vue'
 import Home from '~/src/components/Home.vue'
 
+//import defaultUserPhoto from 'default-user.jpg'
+
 const emitClick = (type, event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
@@ -210,8 +212,17 @@ const profileFromArticle = {
       </div>
       <!-- <VImage
         :provider="null"
-        src="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg"
+        src="/default-sponsor.png"
+        width="400"
         height="400"
+        :ratio="[1, 1]"
+      />
+      <VImage
+        :provider="null"
+        src="default-user.jpg"
+        width="400"
+        height="400"
+        :ratio="[1, 1]"
       /> -->
     </div>
 

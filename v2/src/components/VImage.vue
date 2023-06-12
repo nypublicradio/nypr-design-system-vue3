@@ -136,6 +136,9 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  /**
+   * to help with a11y
+   */
   isDecorative: {
     type: Boolean,
     default: false,

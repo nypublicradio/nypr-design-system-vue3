@@ -1,5 +1,6 @@
 :root,
-[data-style-mode='default'] {
+[data-style-mode='light'],
+.style-mode-light {
     --v-card-bg-color: transparent;
     --v-card-padding: 0;
     --v-card-border-radius: 0;
@@ -20,7 +21,8 @@
     --v-card-title-hover-text-decoration: underline;
     --v-card-title-hover-color: inherit;
 }
-[data-style-mode='dark'] {
+[data-style-mode='dark'],
+.style-mode-dark {
     --v-card-title-color: inherit;
     //hover
     --v-card-title-hover-color: inherit;

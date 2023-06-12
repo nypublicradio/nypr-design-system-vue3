@@ -1,5 +1,6 @@
 :root,
-[data-style-mode='default'] {
+[data-style-mode='light'],
+.style-mode-light {
     --tag-bg: var(--primary-color);
     --tag-text-color: var(--white);
     --tag-font-weight: normal;
@@ -11,7 +12,8 @@
     --tag-hover-bg: var(--primary-dark-color);
     --tag-hover-text-color: var(--white);
 }
-[data-style-mode='dark'] {
+[data-style-mode='dark'],
+.style-mode-dark {
     // --tag-bg: #{$tagDarkBg};
     // --tag-text-color: #{$tagDarkTextColor};
     // --tag-font-weight: #{$tagDarkFontWeight};

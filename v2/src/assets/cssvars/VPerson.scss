@@ -1,5 +1,6 @@
 :root,
-[data-style-mode='default'] {
+[data-style-mode='light'],
+.style-mode-light {
     --person-name-size: var(--font-size-9);
     --person-name-small-size: var(--font-size-7);
     --person-name-color: var(--text-color);
@@ -7,6 +8,7 @@
     --person-name-decoration: none;
     --person-name-hover-decoration: underline;
 }
-[data-style-mode='dark'] {
+[data-style-mode='dark'],
+.style-mode-dark {
     --person-name-color: var(--text-color);
 }

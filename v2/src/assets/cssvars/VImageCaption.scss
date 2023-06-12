@@ -1,0 +1,9 @@
+:root,
+[data-style-mode='light'],
+.style-mode-light {
+    --v-caption-bg-color: var(--primary-color-rgb);
+    --v-caption-bg-color-opacity: 0.85;
+}
+[data-style-mode='dark'],
+.style-mode-dark {
+}

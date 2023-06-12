@@ -66,7 +66,10 @@ const toggleCaption = () => {
     left: 0;
     width: 100%;
     height: auto;
-    background-color: rgba(var(--primary-color-rgb), 0.85);
+    background-color: rgba(
+      var(--v-caption-bg-color),
+      var(--v-caption-bg-color-opacity)
+    );
     color: white;
     padding: 16px 54px 16px 16px;
     line-height: normal;
