@@ -69,6 +69,13 @@ const props = defineProps({
     default: '',
   },
   /**
+   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   */
+  density: {
+    type: String,
+    default: 'x1 x2',
+  },
+  /**
    * compression quality of the iamge
    */
   quality: {
@@ -169,6 +176,7 @@ const enlargeLoad = (target) => {
       :width="computedWidth"
       :height="props.height"
       :sizes="props.sizes"
+      :densities="props.density"
       :style="[
         isVertical
           ? `aspect-ratio:${props.maxWidth} / ${props.maxHeight}; object-fit: contain;`

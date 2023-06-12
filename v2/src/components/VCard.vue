@@ -170,7 +170,7 @@ const props = defineProps({
     default: null,
   },
   /**
-   * to help with A11y
+   * to help with a11y
    */
   isDecorative: {
     type: Boolean,
@@ -273,7 +273,7 @@ const cssImageMinWidth = ref(
             :max-height="props.maxHeight"
             :allow-vertical-effect="props.allowVerticalEffect"
             :ratio="props.ratio"
-            :quality="props.quality"
+            :quality="props.quality || undefined"
             :sizes="props.sizes"
             :vertical-bg-color="props.verticalBgColor || undefined"
             :vertical-bg-color-opacity="

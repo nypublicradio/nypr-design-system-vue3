@@ -121,3 +121,26 @@ Do not remove any css vars, as they may be being used by our custom components i
 Be sure to use the css var font scale located in the `cssvars.scss` file for all font-sizes. Then reference chart above will how you choose.
 When creating/modifying custom components, make sure to use the css vars when styling.
 When modifying/overriding PrimeVue components for your new theme, add the styles to the `nypr-design-system-vue3/src/assets/themes/newthemename/extensions.scss` file. Once again, be sure to use css vars when styling. This will allow for the components to react to data-style-mode changes (dark mode etc).
+
+
+## Updating the PrimeFlex breakpoints
+default breakpoints
+```
+$xs: 375px !default;
+$sm: 576px !default;
+$md: 768px !default;
+$lg: 992px !default;
+$xl: 1200px !default;
+```
+
+The default PrimeFlex breakpoints css file we use (just adding xs:375 to their default) is located here: `nypr-design-system-vue3/src/assets/library/primeflex.min.css`
+
+All the themes load this file by default in their respective `_theme.scss` file. You can create your own breakpoints by following the steps below.
+
+
+To update them,
+clone this repo: `https://github.com/primefaces/primeflex`
+open this file `primeflex\styles\lib\core\_variables.scss`
+and update/add the breakpoints you want to use
+then run `npm run build:sass` to compile the new css files in the `dist-lib` directory.
+Put the new css file in your theme directory and update the `_theme.scss` file to point to the new file.

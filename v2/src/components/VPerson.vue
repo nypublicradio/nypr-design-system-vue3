@@ -27,6 +27,13 @@ const props = defineProps({
     type: String,
     default: null,
   },
+  /**
+   * alt text for the image
+   */
+  alt: {
+    type: String,
+    default: 'Profile Image',
+  },
   vertical: {
     type: Boolean,
     default: false,
@@ -57,7 +64,7 @@ const props = defineProps({
   },
   alignItems: {
     type: String,
-    default: 'start',
+    default: 'flex-start',
   },
   sponsored: {
     type: Boolean,
@@ -86,6 +93,13 @@ const props = defineProps({
   sizes: {
     type: String,
     default: null,
+  },
+  /**
+   * to help with a11y
+   */
+  isDecorative: {
+    type: Boolean,
+    default: false,
   },
 })
 
@@ -164,8 +178,8 @@ const accountNameFromUrl = (url) => {
           <v-flexible-link
             :to="profileLink"
             raw
-            :aria-hidden="true"
-            :tabindex="-1"
+            :aria-hidden="isDecorative ? true : false"
+            :tabindex="isDecorative ? -1 : 0"
             @click="emit('click-image', profileLink)"
           >
             <VImage
@@ -178,7 +192,7 @@ const accountNameFromUrl = (url) => {
               :sizes="props.sizes"
               :ratio="props.imageRatio"
               :loading="props.loading"
-              alt="Profile image"
+              :alt="isDecorative ? '' : props.alt"
             />
             <!-- :sizes="props.pixelDensitySizes" -->
             <img

@@ -56,96 +56,136 @@ const profileFromArticle = {
 
 <template>
   <main class="pb-8">
-    <VPerson :profile-data="profileFromArticle" sizes="xs:60 sm:100 md:200" />
-    <div class="grid">
-      <div class="col-6">
-        <VImage
-          src="329836"
-          alt="this is alt text"
-          :width="700"
-          :height="400"
-          :max-width="2598"
-          :max-height="3484"
-          allow-preview
-          sizes="xs:400px md:800px"
-          :allow-vertical-effect="true"
-          format="jpeg"
-          :quality="85"
-          @load="doSomethingOnLoad"
-          @click="doSomethingOnLoad"
-          @keypress="doSomethingOnLoad"
-        />
+    <div style="max-width: 1024px; margin: 0 auto">
+      <VCard
+        image-src="329944"
+        title="Title with some <em>HTML</em>"
+        link="https://www.google.com"
+        subtitle="Subtitle"
+        blurb="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+        :width="300"
+        :height="200"
+      />
+      <div class="grid">
+        <div class="col-12 md:col-6">
+          <VCard
+            image-src="329944"
+            title="Title with some <em>HTML</em>"
+            link="https://www.google.com"
+            subtitle="Subtitle"
+            blurb="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            :width="168"
+            :height="112"
+            sizes="md:274px lg:168px"
+          />
+        </div>
+        <div class="col-12 md:col-6">
+          <VCard
+            image-src="329944"
+            title="Title with some <em>HTML</em>"
+            link="https://www.google.com"
+            subtitle="Subtitle"
+            blurb="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            :width="168"
+            :height="112"
+            sizes="md:274px lg:18px"
+          />
+        </div>
       </div>
-      <div class="col-6">
-        <VImage
-          src="329944"
-          alt="this is alt text"
-          :width="400"
-          sizes="xs:400px md:800px"
-          format="jpeg"
-          :quality="85"
-          @load="doSomethingOnLoad"
-        />
+      <div class="grid">
+        <div class="col-12 md:col-6">
+          <VPerson
+            :profile-data="profileFromArticle"
+            sizes="xs:30 sm:100 md:200"
+          />
+        </div>
+        <div class="col-12 md:col-6">
+          <VPerson
+            :profile-data="profileFromArticle"
+            sizes="xs:30 sm:100 md:200"
+          />
+        </div>
       </div>
-      <div class="col-6">
-        <VImage
-          src="329944"
-          alt="this is alt text"
-          :width="400"
-          :height="400"
-          sizes="xs:400px md:800px"
-          format="jpeg"
-          :quality="85"
-          :modifiers="{ focusZoom: '100' }"
-          @load="doSomethingOnLoad"
-        />
+      <div class="grid">
+        <div class="col-6">
+          <VImage
+            src="329836"
+            alt="this is alt text"
+            :width="700"
+            :height="400"
+            :max-width="2598"
+            :max-height="3484"
+            allow-preview
+            sizes="xs:400px md:800px"
+            :allow-vertical-effect="true"
+            format="jpeg"
+            :quality="85"
+            @load="doSomethingOnLoad"
+            @click="doSomethingOnLoad"
+            @keypress="doSomethingOnLoad"
+          />
+        </div>
+        <div class="col-6">
+          <VImage
+            src="329944"
+            alt="this is alt text"
+            :width="400"
+            sizes="xs:400px md:800px"
+            format="jpeg"
+            :quality="85"
+            @load="doSomethingOnLoad"
+          />
+        </div>
+        <div class="col-6">
+          <VImage
+            src="329944"
+            alt="this is alt text"
+            :width="400"
+            :height="400"
+            sizes="xs:400px md:800px"
+            format="jpeg"
+            :quality="85"
+            :modifiers="{ focusZoom: '100' }"
+            @load="doSomethingOnLoad"
+          />
+        </div>
+        <div class="col-6">
+          <VImage
+            src="329944"
+            alt="this is alt text"
+            :width="400"
+            allow-preview
+            sizes="xs:400px md:800px"
+            format="jpeg"
+            :quality="85"
+            @load="doSomethingOnLoad"
+          >
+            <template #closeicon>@</template>
+          </VImage>
+        </div>
+        <div class="col-6">
+          <VImage
+            src="329944"
+            alt="this is alt text"
+            :width="400"
+            allow-preview
+            sizes="xs:400px md:800px"
+            format="jpeg"
+            :quality="85"
+            @load="doSomethingOnLoad"
+          >
+            <template #enlargeButton="slotProps"
+              ><Button
+                icon="pi pi-youtube"
+                aria-label="Enlarge Image"
+                @click="slotProps.enlargeFunc"
+              ></Button
+            ></template>
+          </VImage>
+        </div>
       </div>
-      <div class="col-6">
-        <VImage
-          src="329944"
-          alt="this is alt text"
-          :width="400"
-          allow-preview
-          sizes="xs:400px md:800px"
-          format="jpeg"
-          :quality="85"
-          @load="doSomethingOnLoad"
-        >
-          <template #closeicon>@</template>
-        </VImage>
-      </div>
-      <div class="col-6">
-        <VImage
-          src="329944"
-          alt="this is alt text"
-          :width="400"
-          allow-preview
-          sizes="xs:400px md:800px"
-          format="jpeg"
-          :quality="85"
-          @load="doSomethingOnLoad"
-        >
-          <template #enlargeButton="slotProps"
-            ><Button
-              icon="pi pi-youtube"
-              aria-label="Enlarge Image"
-              @click="slotProps.enlargeFunc"
-            ></Button
-          ></template>
-        </VImage>
-      </div>
+      <NuxtImg src="images/default-sponsor.jpg" height="400" />
     </div>
-    <!-- <nuxt-img
-      class=""
-      provider="wagtail"
-      src="329944"
-      width="400"
-      height="400"
-      format="jpeg"
-      quality="100"
-      :modifiers="{ focusZoom: '100' }"
-      @load="doSomethingOnLoad"
-    /> -->
 
     <!--  <VFlexibleLink to="https://www.google.com">go to google</VFlexibleLink>
     <VFlexibleLink raw to="https://www.google.com"
