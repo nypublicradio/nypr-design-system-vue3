@@ -167,7 +167,7 @@ const enlargeLoad = (target) => {
 </script>
 
 <template>
-  <div class="v-image" :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`">
+  <div class="v-image">
     <VFlexibleLink
       raw
       :to="props.to"
@@ -176,7 +176,10 @@ const enlargeLoad = (target) => {
       style="width: auto"
       @click="props.to ? emit('image-click', props.to) : null"
     >
-      <div class="v-image-holder">
+      <div
+        class="v-image-holder"
+        :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`"
+      >
         <div v-if="isVertical" class="bg">
           <nuxt-img
             :provider="props.provider"
@@ -235,8 +238,8 @@ const enlargeLoad = (target) => {
             header=" "
             :style="{ width: '95vw' }"
           >
-            <!-- :provider="props.provider" -->
             <nuxt-img
+              :provider="props.provider"
               class="enlarged-image"
               :src="props.src"
               style="width: 100%; height: auto"

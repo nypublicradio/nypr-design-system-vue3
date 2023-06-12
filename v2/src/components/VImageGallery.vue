@@ -3,7 +3,7 @@ import VFlexibleLink from './VFlexibleLink.vue'
 import Button from 'primevue/button'
 const props = defineProps({
   count: {
-    type: Number,
+    type: String,
     default: null,
   },
   label: {

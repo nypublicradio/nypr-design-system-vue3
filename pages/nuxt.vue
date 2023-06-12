@@ -127,7 +127,7 @@ const profileFromArticle = {
               <VImageCaption text="This is a sample caption text <b>HTML</b>" />
             </template>
             <template #gallery>
-              <VImageGallery :count="9" gallery-link="https://www.google.com" />
+              <VImageGallery count="9" gallery-link="https://www.google.com" />
             </template>
           </VImage>
         </div>
