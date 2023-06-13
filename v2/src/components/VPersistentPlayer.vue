@@ -8,90 +8,149 @@ import { useSwipe } from '@vueuse/core'
 import soundAnimGif from '../assets/images/audioAnim.gif'
 
 const props = defineProps({
+  /**
+   * autoplay on load
+   */
   autoPlay: {
     type: Boolean,
     default: false,
   },
+  /**
+   * description text
+   */
   description: {
     type: String,
     default: null,
   },
+  /**
+   * link for the description
+   */
   descriptionLink: {
     type: String,
     default: null,
   },
+  /**
+   * audio file url
+   */
   file: {
     type: String,
     default: null,
   },
+  /**
+   * to render a livestream view (LIVE indicator and no progress bar)
+   */
   livestream: {
     type: Boolean,
     default: false,
   },
+  /**
+   * loop the audio when complete
+   */
   loop: {
     type: Boolean,
     default: false,
   },
+  /**
+   * loading state
+   */
   isLoading: {
     type: Boolean,
     default: false,
   },
+  /**
+   * show the download button
+   */
   showDownload: {
     type: Boolean,
     default: false,
   },
+  /**
+   * show the skip buttons
+   */
   showSkip: {
     type: Boolean,
     default: true,
   },
+  /**
+   * hide the download button on mobile
+   */
   hideDownloadMobile: {
     type: Boolean,
     default: true,
   },
+  /**
+   * hide the skip buttons on mobile
+   */
   hideSkipMobile: {
     type: Boolean,
     default: true,
   },
-  showTrack: {
-    type: Boolean,
-    default: true,
-  },
+  /**
+   * radio station name
+   */
   station: {
     type: String,
     default: null,
   },
+  /**
+   * left image representing the audio
+   */
   image: {
     type: String,
     default: null,
   },
+  /**
+   * title of the audio
+   */
   title: {
     type: String,
     default: null,
   },
+  /**
+   * link for the title
+   */
   titleLink: {
     type: String,
     default: null,
   },
+  /**
+   * muted state
+   */
   isMuted: {
     type: Boolean,
     default: false,
   },
+  /**
+   * make the player minimizable
+   */
   canMinimize: {
     type: Boolean,
     default: false,
   },
+  /**
+   * make the player expandable
+   */
   canExpand: {
     type: Boolean,
     default: false,
   },
+  /**
+   * expand the player with up swipe actions
+   */
   canExpandWithSwipe: {
     type: Boolean,
     default: false,
   },
+  /**
+   * can unexpand the player with down swipe actions
+   */
   canUnexpandWithSwipe: {
     type: Boolean,
     default: false,
   },
+  /**
+   * volume state
+   */
   volume: {
     type: Number,
     default: 100,

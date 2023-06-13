@@ -1,20 +1,18 @@
 <script setup>
 const props = defineProps({
+  /**
+   * label prefix
+   */
   label: {
     type: String,
     default: null,
   },
-  responsive: {
-    type: Boolean,
-    default: false,
-  },
+  /**
+   * stack icons vertically
+   */
   vertical: {
     type: Boolean,
     default: false,
-  },
-  bp: {
-    type: String,
-    default: 'sm',
   },
 })
 </script>
@@ -25,11 +23,7 @@ const props = defineProps({
     :class="[{ vertical: props.vertical }]"
     v-bind="{ ...$attrs }"
   >
-    <p
-      v-if="props.label"
-      class="label"
-      :class="[{ [`w-full ${bp}:w-auto`]: responsive }]"
-    >
+    <p v-if="props.label" class="label">
       {{ props.label }}
     </p>
     <slot />

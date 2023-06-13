@@ -1,30 +1,51 @@
 <script setup>
 import { computed } from 'vue'
 const props = defineProps({
-  label: {
+  /**
+   * arial label for the iframe
+   */
+  iFrameArialLabel: {
     type: String,
-    default: 'embedded video',
+    default: 'embedded media',
   },
+  /**
+   * url of the embed media
+   */
   url: {
     type: String,
     default: null,
   },
+  /**
+   * ratio of the embed media
+   */
   ratio: {
     type: Array,
     default: () => [16, 9],
   },
+  /**
+   * show controls state
+   */
   controls: {
     type: Boolean,
     default: true,
   },
+  /**
+   * autoplay the media if possible
+   */
   autoPlay: {
     type: Boolean,
     default: false,
   },
+  /**
+   * set start time of the media (youtube only)
+   */
   startTime: {
     type: String,
     default: '0',
   },
+  /**
+   * mute the media if possible
+   */
   mute: {
     type: Boolean,
     default: false,
@@ -61,6 +82,7 @@ const getSoundCloudUrl = computed(() => {
       allowfullscreen=""
       allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
       loading="lazy"
+      :aria-label="props.iFrameArialLabel"
     ></iframe>
     <iframe
       v-else-if="isSoundCloud"
@@ -69,6 +91,7 @@ const getSoundCloudUrl = computed(() => {
       scrolling="no"
       frameborder="no"
       allow="autoplay"
+      :aria-label="props.iFrameArialLabel"
       :src="getSoundCloudUrl"
     ></iframe>
 
@@ -80,7 +103,7 @@ const getSoundCloudUrl = computed(() => {
         mute ? '1' : '0'
       }`"
       title="Media Player"
-      :aria-label="label"
+      :aria-label="props.iFrameArialLabel"
       frameborder="0"
       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       allowfullscreen

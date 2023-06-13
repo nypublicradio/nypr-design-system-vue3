@@ -186,7 +186,7 @@ const enlargeLoad = (target) => {
         <div v-if="isVertical" class="bg">
           <nuxt-img
             :provider="props.provider"
-            :src="props.src"
+            :src="String(props.src)"
             :width="props.width"
             :height="props.height"
             quality="15"
@@ -199,7 +199,7 @@ const enlargeLoad = (target) => {
           :provider="props.provider"
           class="image native-image"
           :class="isVertical ? 'is-vertical' : ''"
-          :src="props.src"
+          :src="String(props.src)"
           :width="computedWidth"
           :height="props.height"
           :sizes="props.sizes"
@@ -244,7 +244,7 @@ const enlargeLoad = (target) => {
             <nuxt-img
               :provider="props.provider"
               class="enlarged-image"
-              :src="props.src"
+              :src="String(props.src)"
               style="width: 100%; height: auto"
               :alt="props.isDecorative ? '' : props.alt"
               loading="eager"

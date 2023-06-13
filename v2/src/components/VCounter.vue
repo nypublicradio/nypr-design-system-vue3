@@ -2,45 +2,64 @@
 import VFlexibleLink from './VFlexibleLink.vue'
 
 const props = defineProps({
+  /**
+   * url or slug or anchor to go to
+   */
   href: {
     type: String,
     default: null,
-    //required: true,
   },
-  icon: {
+  /**
+   * show icon state
+   */
+  showIcon: {
     type: Boolean,
-    default: false,
+    default: true,
   },
+  /**
+   * prime icons class
+   */
+  icon: {
+    type: String,
+    default: 'pi-comment',
+  },
+  /**
+   * label
+   */
   text: {
     type: String,
-    default: null,
+    default: 'Comments',
+    required: true,
   },
+  /**
+   * number value in coutner
+   */
   value: {
     type: Number,
     default: 0,
-    //required: true,
+    required: true,
   },
 })
 </script>
 
 <template>
   <span>
-    <v-flexible-link
+    <VFlexibleLink
       v-if="props.value && props.value > 0"
       :to="props.href"
       class="counter"
     >
-      <span v-if="props.icon" class="icon">
+      <span v-if="props.showIcon" class="icon">
         <slot name="icon" :props="props">
           <i
-            :class="`pi pi-comment`"
+            :class="`pi ${props.icon}`"
             role="img"
             :aria-label="`${props.value} ${props.text}`"
           ></i>
         </slot>
       </span>
       {{ props.value }} {{ props.text }}
-    </v-flexible-link>
+    </VFlexibleLink>
   </span>
 </template>
 

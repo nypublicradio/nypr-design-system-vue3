@@ -24,39 +24,48 @@ const Template = (args) => ({
     template: '<v-counter v-bind="args"></v-counter>',
 })
 
-const TemplateCustomIcon = (args) => ({
+const TemplateCustomIconSlot = (args) => ({
     components: { VCounter },
     setup() {
         return { args }
     },
-    template: '<v-counter v-bind="args"><template #icon="slotProps"><i :class="`pi pi-facebook`" role="img" :aria-label="`${slotProps.props.value} ${slotProps.props.text}`" ></i></template></v-counter>',
+    template: '<v-counter v-bind="args"><template #icon="slotProps"><i :class="`pi pi-twitter`" role="img" :aria-label="`${slotProps.props.value} ${slotProps.props.text}`" ></i></template></v-counter>',
 })
 
 export const Default = Template.bind({})
 Default.args = {
-    icon: true,
-    text: "Comments",
+    showIcon: true,
     value: 40,
     href: "http://www.google.com"
 }
 
-export const NoIcon = Template.bind({})
-NoIcon.args = {
-    text: "Comments",
+export const CustomText = Template.bind({})
+CustomText.args = {
+    text: "Photos",
     value: 40,
     href: "http://www.google.com"
 }
-export const CustomIcon = TemplateCustomIcon.bind({})
-CustomIcon.args = {
-    icon: true,
-    text: "Comments",
+export const NoIcon = Template.bind({})
+NoIcon.args = {
+    showIcon: false,
+    value: 40,
+    href: "http://www.google.com"
+}
+export const CustomIconClass = Template.bind({})
+CustomIconClass.args = {
+    icon: "pi-facebook",
+    value: 40,
+    href: "http://www.google.com"
+}
+export const CustomIconSlot = TemplateCustomIconSlot.bind({})
+CustomIconSlot.args = {
     value: 40,
     href: "http://www.google.com"
 }
 
 export const NoText = Template.bind({})
 NoText.args = {
-    icon: true,
     value: 40,
+    text: null,
     href: "http://www.google.com"
 }

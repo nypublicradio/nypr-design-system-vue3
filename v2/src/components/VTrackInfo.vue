@@ -100,7 +100,7 @@ const convertTime = (val) => {
         </div>
         <div class="track-info-title">
           <div v-if="title && titleLink">
-            <v-flexible-link
+            <VFlexibleLink
               class="track-info-title-link title"
               :to="titleLink"
               @emit-flexible-link="emit('title-click')"
@@ -116,7 +116,7 @@ const convertTime = (val) => {
             v-html="description"
           ></div>
 
-          <v-flexible-link
+          <VFlexibleLink
             v-if="description && descriptionLink"
             class="track-info-description-link"
             :to="descriptionLink"
@@ -126,7 +126,7 @@ const convertTime = (val) => {
         </div>
       </div>
       <template v-if="!livestream && currentSeconds > 0">
-        <v-progress-scrubber
+        <VProgressScrubber
           class="pl-0 md:pl-1"
           :progress="percentComplete"
           @scrub-timeline-change="emit('scrub-timeline-change', $event)"

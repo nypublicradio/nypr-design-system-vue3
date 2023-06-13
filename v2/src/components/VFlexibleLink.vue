@@ -2,18 +2,30 @@
 import { computed } from 'vue'
 
 const props = defineProps({
+  /**
+   * url or slug or anchor to go to
+   */
   to: {
     type: String,
     default: null,
   },
+  /**
+   * link target value
+   */
   target: {
     type: String,
     default: '_blank',
   },
+  /**
+   * pass through and not render link visuals
+   */
   raw: {
     type: Boolean,
     default: false,
   },
+  /**
+   * raw hover style
+   */
   rawHover: {
     type: String,
     default: 'none',

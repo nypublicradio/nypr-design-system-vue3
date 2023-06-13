@@ -70,11 +70,6 @@ Share.args = {
     label: 'Share'
 }
 
-export const DefaultResponsive = Template.bind({})
-DefaultResponsive.args = {
-    label: 'Connect',
-    responsive: true,
-}
 
 export const DefaultVertical = Template.bind({})
 DefaultVertical.args = {

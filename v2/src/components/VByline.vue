@@ -2,26 +2,44 @@
 import { ref } from 'vue'
 import VBylineUnit from './VBylineUnit.vue'
 const props = defineProps({
+  /**
+   * authors data to display
+   */
   authors: {
     type: [Array, Object],
     default: null,
   },
+  /**
+   * prefix text
+   */
   prefix: {
     type: String,
     default: 'By ',
   },
+  /**
+   * what the last concat should be befoe the last author
+   */
   concatLast: {
     type: String,
     default: ' and ',
   },
+  /**
+   * concat separator
+   */
   concat: {
     type: String,
     default: ', ',
   },
+  /**
+   * show author image state
+   */
   showImage: {
     type: Boolean,
     default: false,
   },
+  /**
+   * flex direction
+   */
   flexDirection: {
     type: String,
     default: 'row',
@@ -44,7 +62,7 @@ const getUniqueKey = (author) => {
 
 <template>
   <div class="v-byline">
-    <div class="images-holder" v-if="showImage">
+    <div v-if="showImage" class="images-holder">
       <template
         v-for="(author, index) in props.authors"
         :key="`author-${index}-${getUniqueKey(author)}`"
