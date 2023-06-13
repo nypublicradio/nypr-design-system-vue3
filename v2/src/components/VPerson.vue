@@ -1,10 +1,9 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VImage from './VImage.vue'
 import VShareTools from './VShareTools.vue'
 import VShareToolsItem from './VShareToolsItem.vue'
-import defaultUserPhoto from '../assets/images/default-user.jpg'
 
 const props = defineProps({
   /**
@@ -76,6 +75,13 @@ const props = defineProps({
   showCta: {
     type: Boolean,
     default: true,
+  },
+  /**
+   * show/hide CTA button
+   */
+  ctaText: {
+    type: String,
+    default: 'Read more',
   },
   /**
    * show/hide bio
@@ -209,10 +215,29 @@ if (profile.value?.phone_numbers) {
   })
 }
 
-const ctaText = ref(props.sponsored ? 'Learn More' : 'Read more')
 const profileLink = ref(
   props.sponsored ? profile.value?.link : profile.value?.url
 )
+
+const accountNameFromUrl = (url) => {
+  return url
+    ?.split('/')
+    .filter((str) => str !== '')
+    .slice(-1)[0]
+}
+
+const isWagtailImage = computed(() => {
+  return profile.value.photoID && !props.sponsored && !props.imageFallbackPath
+})
+const getImageSrc = computed(() => {
+  return props.sponsored
+    ? profile.value.logo
+    : profile.value.photoID
+    ? String(profile.value.photoID)
+    : props.imageFallbackPath
+    ? props.imageFallbackPath
+    : '/default-user.jpg'
+})
 
 // cssvars
 const cssImageSizePx = ref(props.imageSize + 'px')
@@ -230,13 +255,6 @@ const cssImageMinWidth = ref(
 const cssRadius = ref(props.radius)
 const cssImageRatio = ref(`${props.imageRatio[0]} / ${props.imageRatio[1]}`)
 const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
-
-const accountNameFromUrl = (url) => {
-  return url
-    ?.split('/')
-    .filter((str) => str !== '')
-    .slice(-1)[0]
-}
 </script>
 
 <template>
@@ -252,50 +270,22 @@ const accountNameFromUrl = (url) => {
     >
       <div class="profile">
         <div class="author-image">
-          <VFlexibleLink
+          <VImage
+            :src="getImageSrc"
+            :provider="isWagtailImage ? 'wagtail' : null"
+            :width="props.imageSize"
+            :height="props.imageSize"
+            :sizes="props.sizes"
+            :ratio="props.imageRatio"
+            :loading="props.loading"
+            :alt="props.isDecorative ? '' : props.alt"
+            :is-decorative="props.isDecorative"
             :to="profileLink"
-            raw
-            :aria-hidden="props.isDecorative ? true : false"
-            :tabindex="props.isDecorative ? -1 : 0"
-            @click="emit('image-click', profileLink)"
-          >
-            <VImage
-              v-if="
-                profile.photoID && !props.sponsored && !props.imageFallbackPath
-              "
-              :src="
-                profile.photoID
-                  ? String(profile.photoID)
-                  : props.sponsored
-                  ? profile.logo
-                  : props.imageFallbackPath
-                  ? props.imageFallbackPath
-                  : defaultUserPhoto
-              "
-              :width="props.imageSize"
-              :height="props.imageSize"
-              :sizes="props.sizes"
-              :ratio="props.imageRatio"
-              :loading="props.loading"
-              :alt="props.isDecorative ? '' : props.alt"
-            />
-            <img
-              v-else
-              :src="`${
-                props.sponsored
-                  ? profile.logo
-                  : props.imageFallbackPath
-                  ? props.imageFallbackPath
-                  : defaultUserPhoto
-              }`"
-              :loading="props.loading"
-              style="width: 100%; height: auto"
-              alt="Profile image"
-            />
-          </VFlexibleLink>
+            @image-click="emit('image-click', profileLink)"
+          />
         </div>
       </div>
-      <div class="info" v-if="!justImage">
+      <div v-if="!justImage" class="info">
         <div class="slot slot-above-name">
           <slot name="slot-above-name" />
         </div>

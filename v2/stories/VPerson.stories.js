@@ -36,7 +36,7 @@ const profileFromArticle = {
     "slug": "scott-lynch",
     "url": "/staff/scott-lynch",
     "link": "https://www.sponsoredLink.com",
-    "logo": "images/default-sponsor.png",
+    "logo": "/default-sponsor.png",
     "socialMediaProfile": [
         {
             "service": "instagram",
@@ -70,7 +70,7 @@ const profileFromArticleNoPhoto = {
     "slug": "scott-lynch",
     "url": "/staff/scott-lynch",
     "link": "https://www.sponsoredLink.com",
-    "logo": "../assets/images/default-sponsor.jpg",
+    "logo": "/images/default-sponsor.jpg",
     "socialMediaProfile": [
         {
             "service": "instagram",
@@ -103,7 +103,7 @@ const profileFromArticleNoSocial = {
     "slug": "scott-lynch",
     "url": "/staff/scott-lynch",
     "link": "https://www.sponsoredLink.com",
-    "logo": "../assets/images/default-sponsor.jpg",
+    "logo": "/images/default-sponsor.jpg",
     "socialMediaProfile": null
 }
 
@@ -191,6 +191,11 @@ HideCTA.args = {
 
     showCta: false,
 }
+export const CustomCTA = Template.bind({})
+CustomCTA.args = {
+    profileData: profileFromArticle,
+    ctaText: "Learn more",
+}
 export const HideBioCTAAndCenter = Template.bind({})
 HideBioCTAAndCenter.args = {
     profileData: profileFromArticle,
@@ -208,7 +213,6 @@ HideSocial.args = {
 export const Sponsored = Template.bind({})
 Sponsored.args = {
     profileData: profileFromArticle,
-
     sponsored: true,
 }
 export const Reverse = Template.bind({})

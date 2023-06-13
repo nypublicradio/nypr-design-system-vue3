@@ -43,7 +43,7 @@ const profileFromArticle = {
   slug: 'scott-lynch',
   url: '/staff/scott-lynch',
   link: 'https://www.sponsoredLink.com',
-  logo: 'images/default-sponsor.png',
+  logo: '/default-sponsor.png',
   socialMediaProfile: [
     {
       service: 'instagram',
@@ -77,7 +77,7 @@ const profileFromArticleNoPhoto = {
   slug: 'scott-lynch',
   url: '/staff/scott-lynch',
   link: 'https://www.sponsoredLink.com',
-  logo: 'images/default-sponsor.png',
+  logo: '/default-sponsor.png',
   socialMediaProfile: [
     {
       service: 'instagram',
@@ -144,11 +144,19 @@ const profileFromArticleNoPhoto = {
           />
         </div> -->
         <div class="col-6">
+          <VPerson :profile-data="profileFromArticle" />
+        </div>
+        <div class="col-6">
+          <VPerson :profile-data="profileFromArticleNoPhoto" />
+        </div>
+        <div class="col-6">
           <VPerson
-            :profile-data="profileFromArticle"
-            image-flex-basis="100px"
-            :imageSize="80"
+            :profile-data="profileFromArticleNoPhoto"
+            image-fallback-path="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg"
           />
+        </div>
+        <div class="col-6">
+          <VPerson :profile-data="profileFromArticle" sponsored />
         </div>
       </div>
       <div class="grid">
@@ -259,7 +267,7 @@ const profileFromArticleNoPhoto = {
       />
       <VImage
         :provider="null"
-        src="default-user.jpg"
+        src="/default-user.jpg"
         width="400"
         height="400"
         :ratio="[1, 1]"

@@ -5,7 +5,7 @@ export default {
     '@nuxt/image'
   ],
   image: {
-    //dir: 'assets-shared/images',
+    dir: 'assets-shared/images',
     wagtail: {
       baseURL: "https://cms.demo.nypr.digital/images/",
       screens: {
