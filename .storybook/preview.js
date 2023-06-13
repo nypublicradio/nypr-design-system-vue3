@@ -30,7 +30,7 @@ setup((app) => {
 
       },
     },
-    template: '<img :src="isNaN(src) && !src.includes(`http`) ? `/images/${src}` : src.includes(`http`) ? `${src}` : `https://cms.demo.nypr.digital/images/${src}/fill-${width}x${height}-c0|format-webp|webpquality-85` "  :width="width" :height="height"/>'
+    template: '<img :src="isNaN(src) && !src.includes(`http`) ? `/images/${src}` : src.includes(`http`) ? `${src}` : `https://cms.demo.nypr.digital/images/${src}/fill-${width}x${height}-c${modifiers && modifiers.focusZoom || 0}|format-webp|webpquality-${quality}` "  :width="width" :height="height"/>'
   })
   // template: '<img :src="isNaN(src) ? `/images/${src}` :  `https://cms.demo.nypr.digital/images/${src}/fill-${width}x${height}-c0|format-webp|webpquality-85` "  :width="width" :height="height"/>'
   app.component('ClientOnly', {

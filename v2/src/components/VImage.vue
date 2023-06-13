@@ -71,6 +71,7 @@ const props = defineProps({
   },
   /**
    * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   * NOT WORKING
    */
   density: {
     type: String,
@@ -81,10 +82,12 @@ const props = defineProps({
    */
   quality: {
     type: Number,
-    default: 70,
+    default: 80,
   },
   /**
-   * wagtail modifiers  (https://image.nuxtjs.org/components/nuxt-img/#modifiers*/
+   * wagtail modifiers  (https://image.nuxtjs.org/components/nuxt-img/#modifiers
+   * ONLY WORKS WITH WAGTAIL PROVIDER and only supporting 'focusZoom'
+   */
   modifiers: {
     type: Object,
     default: null,
