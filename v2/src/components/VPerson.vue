@@ -29,11 +29,18 @@ const props = defineProps({
     default: 100,
   },
   /**
-   * the number that is used to calculate how much smaller the image gets on mobile breakpoints
+   * The desired min-width for image when the flexbox is responding
    */
-  imageSizeScaleRatio: {
+  minWidth: {
     type: Number,
-    default: 1.5,
+    default: null,
+  },
+  /**
+   * at what percentage the image starts to scale down
+   */
+  imageFlexBasis: {
+    type: String,
+    default: '20%',
   },
   /**
    * the path to the fallback image
@@ -209,7 +216,17 @@ const profileLink = ref(
 
 // cssvars
 const cssImageSizePx = ref(props.imageSize + 'px')
-const cssImageSizeScaleRatio = ref(props.imageSizeScaleRatio)
+const cssImageFlexBasis = ref(
+  props.imageFlexBasis ? props.imageFlexBasis : cssImageSizePx.value
+)
+const cssImageMinWidth = ref(
+  props.minWidth
+    ? props.minWidth + 'px'
+    : props.imageFlexBasis
+    ? 'unset'
+    : cssImageSizePx.value
+)
+
 const cssRadius = ref(props.radius)
 const cssImageRatio = ref(`${props.imageRatio[0]} / ${props.imageRatio[1]}`)
 const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
@@ -345,10 +362,6 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
     flex-direction: column;
     gap: 0.25rem;
   }
-  .author-image {
-    width: v-bind(cssImageSizePx);
-    height: auto;
-  }
   .v-share-tools {
     justify-content: center;
   }
@@ -361,20 +374,26 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   container-type: v-bind(cssContainerType);
   .author-profile {
     display: flex;
-    align-items: flex-start;
     flex-direction: v-bind(flexDirection);
     margin-right: 0;
     margin-left: 0;
     margin-top: 0;
     gap: 1rem;
-
-    .author-image {
-      background: #ffffff;
-      width: v-bind(cssImageSizePx);
+    .profile {
       height: auto;
-      border-radius: v-bind(cssRadius);
-      overflow: hidden;
-      aspect-ratio: v-bind(cssImageRatio);
+      flex-basis: v-bind(cssImageFlexBasis) !important;
+      flex: auto;
+      flex-shrink: 0;
+      max-width: v-bind(cssImageSizePx);
+      min-width: v-bind(cssImageMinWidth);
+      .author-image {
+        aspect-ratio: v-bind(cssImageRatio);
+        border-radius: v-bind(cssRadius);
+        background: #ffffff;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+      }
     }
     .info {
       display: flex;
@@ -396,12 +415,13 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
           }
         }
       }
-      .slot {
-      }
     }
     &.vertical {
       @include verticalStyles;
     }
+  }
+  .slot:empty {
+    display: none;
   }
 }
 @container (max-width: #{$container-breakpoint-md}) {
@@ -420,11 +440,6 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 @container (max-width: #{$container-breakpoint-sm}) {
   .v-person {
     .author-profile {
-      .author-image {
-        width: 60px;
-        width: calc(v-bind(cssImageSizePx) / v-bind(cssImageSizeScaleRatio));
-        height: auto;
-      }
       .info {
         .name-holder {
           .name-link {
@@ -444,12 +459,6 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 @container (max-width: #{$container-breakpoint-xs}) {
   .v-person {
     .author-profile {
-      .author-image {
-        width: calc(
-          v-bind(cssImageSizePx) / v-bind(cssImageSizeScaleRatio) /
-            v-bind(cssImageSizeScaleRatio)
-        );
-      }
     }
   }
 }

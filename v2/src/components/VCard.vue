@@ -350,7 +350,7 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
     max-width: 100%;
     gap: 1rem;
     .card-image-holder {
-      flex-basis: v-bind(cssImageFlexBasis);
+      flex-basis: v-bind(cssImageFlexBasis) !important;
       flex-shrink: 0;
       max-width: v-bind(cssImageWidth);
       min-width: v-bind(cssImageMinWidth);

@@ -137,22 +137,25 @@ Default.args = {
 export const ImageSize = Template.bind({})
 ImageSize.args = {
     profileData: profileFromArticle,
-
     imageSize: 150,
 }
-export const ImageSizeScaleRatio = Template.bind({})
-ImageSizeScaleRatio.args = {
+export const ImageFlexBasis = Template.bind({})
+ImageFlexBasis.args = {
     profileData: profileFromArticle,
 
     imageSize: 150,
-    imageSizeScaleRatio: 2.5
+    imageFlexBasis: "8%"
 }
-export const ImageSizeWithNoScaleRatio = Template.bind({})
-ImageSizeWithNoScaleRatio.args = {
+export const ImageSizeWithNoScale = Template.bind({})
+ImageSizeWithNoScale.args = {
     profileData: profileFromArticle,
-
     imageSize: 80,
-    imageSizeScaleRatio: 1
+    imageFlexBasis: "80px"
+}
+export const ImageSizeMinWidth = Template.bind({})
+ImageSizeMinWidth.args = {
+    profileData: profileFromArticle,
+    minWidth: 80,
 }
 export const NamePrefix = Template.bind({})
 NamePrefix.args = {

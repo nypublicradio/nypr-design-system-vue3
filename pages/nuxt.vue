@@ -21,8 +21,41 @@ const emitClick = (type, event) => {
 const doSomethingOnLoad = () => {
   console.log('doSomethingOnLoad')
 }
-
 const profileFromArticle = {
+  id: 19,
+  firstName: 'Scott',
+  lastName: 'Lynch',
+  name: 'Scott Lynch',
+  photoID: 327700,
+  jobTitle: 'Photojournalist',
+  biography:
+    'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
+  website: 'http://t.co/Np4U39BYlh',
+  phone_numbers: [
+    {
+      phone_number: '9731231234',
+    },
+    {
+      phone_number: '2011231234',
+    },
+  ],
+  email: 'scoboco@gmail.com',
+  slug: 'scott-lynch',
+  url: '/staff/scott-lynch',
+  link: 'https://www.sponsoredLink.com',
+  logo: 'images/default-sponsor.png',
+  socialMediaProfile: [
+    {
+      service: 'instagram',
+      profileUrl: 'https://www.instagram.com/scoboco/',
+    },
+    {
+      service: 'twitter',
+      profileUrl: 'https://twitter.com/Scoboco',
+    },
+  ],
+}
+const profileFromArticleNoPhoto = {
   id: 19,
   firstName: 'Scott',
   lastName: 'Lynch',
@@ -70,7 +103,7 @@ const profileFromArticle = {
         :width="300"
         :height="200"
       />
-      <div class="grid">
+      <!-- <div class="grid">
         <div class="col-12 md:col-6">
           <VCard
             image-src="329944"
@@ -95,19 +128,26 @@ const profileFromArticle = {
             sizes="md:274px lg:18px"
           />
         </div>
-      </div>
+      </div> -->
       <div class="grid">
-        <div class="col-12 md:col-6">
+        <!-- <div class="col-12 md:col-6">
           <VPerson
-            :profile-data="profileFromArticle"
+            :profile-data="profileFromArticleNoPhoto"
             sizes="xs:30 sm:100 md:200"
           />
         </div>
         <div class="col-12 md:col-6">
           <VPerson
-            :profile-data="profileFromArticle"
+            :profile-data="profileFromArticleNoPhoto"
             image-fallback-path="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg"
             sizes="xs:30 sm:100 md:200"
+          />
+        </div> -->
+        <div class="col-6">
+          <VPerson
+            :profile-data="profileFromArticle"
+            image-flex-basis="100px"
+            :imageSize="80"
           />
         </div>
       </div>
