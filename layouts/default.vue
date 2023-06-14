@@ -1,15 +1,22 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { shallowRef } from 'vue'
 import VSmartHeader from '~/v2/src/components/VSmartHeader.vue'
+
+const headerHeight = shallowRef(76)
+const smartScrollBuffer = shallowRef(600)
+//cssVar
+const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
 </script>
 
 <template>
   <div class="layout layout-defualt">
-    <VSmartHeader :height="80">
-      <ul style="background-color: antiquewhite; padding: 10px">
-        <li><NuxtLink to="/nuxt">Home</NuxtLink></li>
-        <li><NuxtLink to="/about">About</NuxtLink></li>
-      </ul>
+    <VSmartHeader :buffer="smartScrollBuffer">
+      <div>
+        <ul style="background-color: antiquewhite; padding: 10px">
+          <li><NuxtLink to="/nuxt">Home</NuxtLink></li>
+          <li><NuxtLink to="/about">About</NuxtLink></li>
+        </ul>
+      </div>
     </VSmartHeader>
     <main>
       <slot />
@@ -19,5 +26,8 @@ import VSmartHeader from '~/v2/src/components/VSmartHeader.vue'
 
 <style lang="scss" scoped>
 .layout-defualt {
+  main {
+    padding-top: v-bind(cssHeaderHeight);
+  }
 }
 </style>

@@ -1,27 +1,39 @@
 <script setup>
-import { ref, computed, onMounted } from 'vue'
+import { shallowRef, ref, onMounted } from 'vue'
 import { useScroll } from '@vueuse/core'
 
 const props = defineProps({
-  height: {
+  buffer: {
     type: Number,
-    default: 0,
+    default: 400,
   },
 })
 
+// scroll handler
 let scroll = ref(null)
 if (process.client) {
   scroll = useScroll(window)
 }
 
+// vars
+const headerRef = ref(null)
+const headerHeight = shallowRef(null)
+
 // cssVars
-const cssHeaderHeight = ref(props.height + 'px')
+const cssHeaderHeight = shallowRef(null)
+
+onMounted(() => {
+  headerHeight.value = headerRef.value.clientHeight
+  cssHeaderHeight.value = headerHeight.value + 'px'
+})
 </script>
 
 <template>
   <div class="v-smart-header">
-    <header>
+    <header ref="headerRef">
       <slot>THIS IS THE HEADER</slot>
+      <!-- {{ scroll }}
+      {{ buffer }} -->
     </header>
   </div>
 </template>
@@ -34,10 +46,13 @@ const cssHeaderHeight = ref(props.height + 'px')
   width: 100%;
   z-index: 999;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.36);
+  &.hide {
+    top: v-bind(cssHeaderHeight);
+  }
 }
 </style>
+
 <style lang="scss">
-body {
-  padding-top: v-bind(cssHeaderHeight);
+main {
 }
 </style>
