@@ -62,3 +62,15 @@
     transform: translateY(100%);
     transition: all $transitionDuration ease-in 0s;
 }
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+    transition: all $transitionDuration ease-out;
+}
+
+.slide-up-enter,
+.slide-up-leave-to {
+    opacity: 0;
+    transform: translateY(-100%);
+    transition: all $transitionDuration ease-in 0s;
+}

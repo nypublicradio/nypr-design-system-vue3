@@ -3,14 +3,14 @@ import { shallowRef } from 'vue'
 import VSmartHeader from '~/v2/src/components/VSmartHeader.vue'
 
 const headerHeight = shallowRef(76)
-const smartScrollBuffer = shallowRef(600)
+const heroBuffer = shallowRef(600)
 //cssVar
 const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
 </script>
 
 <template>
   <div class="layout layout-defualt">
-    <VSmartHeader :buffer="smartScrollBuffer">
+    <VSmartHeader :hero-buffer="heroBuffer" :resume-delay="0">
       <div>
         <ul style="background-color: antiquewhite; padding: 10px">
           <li><NuxtLink to="/nuxt">Home</NuxtLink></li>
