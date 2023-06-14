@@ -48,10 +48,10 @@ watch(
 
 <template>
   <div>
-    <Transition name="minimize">
+    <Transition name="v-smart-header-minimize">
       <div v-show="!isMinimized" ref="headerRef" class="v-smart-header">
         <header>
-          <slot>THIS IS THE HEADER</slot>
+          <slot />
           <!-- <pre>
             {{ scroll }}
           </pre> -->
@@ -72,21 +72,15 @@ watch(
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.36);
 }
 //expand
-.minimize-enter-active {
+.v-smart-header-minimize-enter-active {
   transition: top calc(var(--transition-duration) * 2) ease-out;
 }
-.minimize-leave-active {
+.v-smart-header-minimize-leave-active {
   transition: top calc(var(--transition-duration) * 2) ease-in;
   transition-delay: calc(var(--transition-duration) * v-bind(resumeDelay));
 }
-.minimize-enter-from,
-.minimize-leave-to {
+.v-smart-header-minimize-enter-from,
+.v-smart-header-minimize-leave-to {
   top: calc(v-bind(cssHeaderHeight) * -1);
-}
-</style>
-
-<style lang="scss">
-main {
-  padding-top: 400px;
 }
 </style>

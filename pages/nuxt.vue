@@ -92,7 +92,10 @@ const profileFromArticleNoPhoto = {
 </script>
 
 <template>
-  <main class="pb-8">
+  <div class="pb-8">
+    <div style="height: 600px; text-align: center; background-color: #f1f1f1">
+      HERO BUFFER
+    </div>
     <div style="max-width: 1024px; margin: 0 auto">
       <VCard
         image-src="329944"
@@ -457,7 +460,7 @@ const profileFromArticleNoPhoto = {
         </div>
       </div>
     </section>
-  </main>
+  </div>
 </template>
 
 <style lang="scss">
