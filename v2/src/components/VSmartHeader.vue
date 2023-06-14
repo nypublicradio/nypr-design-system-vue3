@@ -9,7 +9,10 @@ const props = defineProps({
   },
 })
 
-const scroll = useScroll()
+let scroll = ref(null)
+if (process.client) {
+  scroll = useScroll(window)
+}
 
 // cssVars
 const cssHeaderHeight = ref(props.height + 'px')
@@ -18,7 +21,6 @@ const cssHeaderHeight = ref(props.height + 'px')
 <template>
   <div class="v-smart-header">
     <header>
-      {{ scroll.y }}
       <slot>THIS IS THE HEADER</slot>
     </header>
   </div>
