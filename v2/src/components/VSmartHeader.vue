@@ -1,12 +1,25 @@
 <script setup>
-import { shallowRef, ref, onMounted, watch } from 'vue'
+import { shallowRef, ref, onMounted, watch, inject } from 'vue'
 import { useScroll } from '@vueuse/core'
 
 const props = defineProps({
+  /**
+   * element class to use for scrolling (default is window)
+   */
+  windowClass: {
+    type: String,
+    default: null,
+  },
+  /**
+   * number of pixels at the top of the page before the header minimizes
+   */
   heroBuffer: {
     type: Number,
     default: 400,
   },
+  /**
+   * multipyler of the --transition-duration css var that determines the delay before the header minimizes when resuming to scroll down after scrolling up to show the menu
+   */
   resumeDelay: {
     type: Number,
     default: 3,
@@ -16,7 +29,14 @@ const props = defineProps({
 // scroll handler
 let scroll = null
 if (process.client) {
-  scroll = useScroll(window)
+  scroll = useScroll(
+    props.windowClass
+      ? document.getElementsByClassName(props.windowClass)[0]
+      : window,
+    {
+      behavior: 'smooth',
+    }
+  )
 }
 
 // vars
@@ -52,9 +72,6 @@ watch(
       <div v-show="!isMinimized" ref="headerRef" class="v-smart-header">
         <header>
           <slot />
-          <!-- <pre>
-            {{ scroll }}
-          </pre> -->
         </header>
       </div>
     </Transition>

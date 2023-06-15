@@ -10,7 +10,11 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
 
 <template>
   <div class="layout layout-defualt">
-    <VSmartHeader :hero-buffer="heroBuffer" :resume-delay="0">
+    <VSmartHeader
+      :hero-buffer="heroBuffer"
+      :resume-delay="0"
+      window-class="testWindow"
+    >
       <div>
         <ul style="background-color: antiquewhite; padding: 10px">
           <li><NuxtLink to="/nuxt">Home</NuxtLink></li>
@@ -18,6 +22,12 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
         </ul>
       </div>
     </VSmartHeader>
+    <div
+      class="testWindow"
+      style="height: 500px; overflow: scroll; background-color: red"
+    >
+      <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+    </div>
     <main>
       <slot />
     </main>
