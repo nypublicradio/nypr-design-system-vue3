@@ -103,6 +103,7 @@ const TemplateSlotAboveImage = (args) => ({
 export const Default = Template.bind({})
 Default.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',

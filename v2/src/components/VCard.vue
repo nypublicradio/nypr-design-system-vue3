@@ -256,7 +256,7 @@ const cssImageMinWidth = ref(
         <VImage
           class="card-image"
           :src="props.imageSrc"
-          :alt="isDecorative ? '' : props.alt"
+          :alt="props.isDecorative ? '' : props.alt"
           :loading="props.loading"
           :width="props.width"
           :height="props.height"
