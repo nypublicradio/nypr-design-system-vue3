@@ -97,7 +97,7 @@ const profileFromArticleNoPhoto = {
       HERO BUFFER
     </div>
     <div style="max-width: 1024px; margin: 0 auto">
-      <VCard
+      <!--       <VCard
         image-src="329944"
         title="Title with some <em>HTML</em>"
         link="https://www.google.com"
@@ -105,7 +105,7 @@ const profileFromArticleNoPhoto = {
         blurb="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         :width="300"
         :height="200"
-      />
+      /> -->
       <!-- <div class="grid">
         <div class="col-12 md:col-6">
           <VCard
@@ -146,7 +146,7 @@ const profileFromArticleNoPhoto = {
             sizes="xs:30 sm:100 md:200"
           />
         </div> -->
-        <div class="col-6">
+        <!-- <div class="col-6">
           <VPerson :profile-data="profileFromArticle" />
         </div>
         <div class="col-6">
@@ -160,7 +160,7 @@ const profileFromArticleNoPhoto = {
         </div>
         <div class="col-6">
           <VPerson :profile-data="profileFromArticle" sponsored />
-        </div>
+        </div> -->
       </div>
       <div class="grid">
         <div class="col-6">
@@ -176,15 +176,15 @@ const profileFromArticleNoPhoto = {
             @click="doSomethingOnLoad"
             @keypress="doSomethingOnLoad"
           >
-            <template #caption>
+            <!-- <template #caption>
               <VImageCaption text="This is a sample caption text <b>HTML</b>" />
-            </template>
+            </template>-->
             <template #gallery>
               <VImageGallery count="9" gallery-link="https://www.google.com" />
             </template>
           </VImage>
         </div>
-        <div class="col-6">
+        <!-- <div class="col-6">
           <VImage
             src="329836"
             alt="this is alt text"
@@ -201,8 +201,8 @@ const profileFromArticleNoPhoto = {
             @click="doSomethingOnLoad"
             @keypress="doSomethingOnLoad"
           />
-        </div>
-        <div class="col-6">
+        </div> -->
+        <!-- <div class="col-6">
           <VImage
             src="329944"
             alt="this is alt text"
@@ -212,8 +212,8 @@ const profileFromArticleNoPhoto = {
             :quality="85"
             @load="doSomethingOnLoad"
           />
-        </div>
-        <div class="col-6">
+        </div> -->
+        <!-- <div class="col-6">
           <VImage
             src="329944"
             alt="this is alt text"
@@ -225,8 +225,8 @@ const profileFromArticleNoPhoto = {
             :modifiers="{ focusZoom: '100' }"
             @load="doSomethingOnLoad"
           />
-        </div>
-        <div class="col-6">
+        </div> -->
+        <!-- <div class="col-6">
           <VImage
             src="329944"
             alt="this is alt text"
@@ -239,8 +239,8 @@ const profileFromArticleNoPhoto = {
           >
             <template #closeicon>@</template>
           </VImage>
-        </div>
-        <div class="col-6">
+        </div> -->
+        <!-- <div class="col-6">
           <VImage
             src="329944"
             alt="this is alt text"
@@ -259,7 +259,7 @@ const profileFromArticleNoPhoto = {
               ></Button
             ></template>
           </VImage>
-        </div>
+        </div> -->
       </div>
       <!-- <VImage
         :provider="null"

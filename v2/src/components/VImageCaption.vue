@@ -56,8 +56,8 @@ const toggleCaption = () => {
   height: 100%;
   .caption-button {
     position: absolute;
-    bottom: 8px;
-    right: 8px;
+    bottom: var(--v-image-button-padding);
+    right: var(--v-image-button-padding);
   }
   .content {
     position: absolute;

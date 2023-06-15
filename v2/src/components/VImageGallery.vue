@@ -39,7 +39,7 @@ const emit = defineEmits(['gallery-click'])
 <style lang="scss" scoped>
 .v-image-gallery {
   position: absolute;
-  top: 8px;
-  right: 8px;
+  top: var(--v-image-button-padding);
+  right: var(--v-image-button-padding);
 }
 </style>

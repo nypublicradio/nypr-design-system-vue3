@@ -301,8 +301,8 @@ const enlargeLoad = (target) => {
     }
     .enlarge-button-holder {
       position: absolute;
-      top: 8px;
-      left: 8px;
+      top: var(--v-image-button-padding);
+      left: var(--v-image-button-padding);
       .enlarge-button {
         background-color: rgba(var(--primary-color-rgb), 0.8);
         border-color: transparent;
