@@ -19,45 +19,6 @@ export default {
     },
 }
 
-const Template = (args) => ({
-    components: { VByline },
-    setup() {
-        return { args }
-    },
-    template: '<v-byline v-bind="args" />',
-})
-
-
-const TemplateImage = (args) => ({
-    components: { VByline, VImage },
-    setup() {
-        return { args }
-    },
-    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VImage :src="slotProps.author.photoID" :width="48" :height="48" :ratio="[1,1]" alt="Profile image" style="width:48px; height:auto;"/></template></v-byline>',
-})
-const TemplateImagePerson = (args) => ({
-    components: { VByline, VPerson },
-    setup() {
-        return { args }
-    },
-    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VPerson :profileData="slotProps.author" :imageSize="45" :justImage="true" :imageSrc="`https://cms.prod.nypr.digital/images/${slotProps.author.photoID}/fill-%width%x%height%|format-webp|webpquality-%quality%`"/></template></v-byline>',
-})
-
-const TemplateBelowNameSlot = (args) => ({
-    components: { VByline, VCounter },
-    setup() {
-        return { args }
-    },
-    template: '<v-byline v-bind="args"> <template #belowNames="slotProps" ><v-counter text="Comments" :value="40" href="http://www.google.com" /></template></v-byline>',
-})
-
-const TemplateAfterNameSlot = (args) => ({
-    components: { VByline },
-    setup() {
-        return { args }
-    },
-    template: '<v-byline v-bind="args"> <template #afterNames="slotProps" >SLOT AFTER THE NAMES</template></v-byline>',
-})
 const authorArray = [
     {
         "id": 146821,
@@ -93,6 +54,8 @@ const authorsArray = [
         "email": "",
         "slug": "jaclyn-jeffrey-wilensky",
         "url": "/staff/jaclyn-jeffrey-wilensky",
+        "organization": null,
+        "organizationUrl": null,
         "socialMediaProfile": []
     },
     {
@@ -107,6 +70,8 @@ const authorsArray = [
         "email": "",
         "slug": "nsikan-akpan",
         "url": "/staff/nsikan-akpan",
+        "organization": 'Gothamist',
+        "organizationUrl": 'http://www.gothamist.com',
         "socialMediaProfile": [
             {
                 "service": "twitter",
@@ -126,6 +91,47 @@ const authorsObject =
     organization: 'Gothamist',
     organizationUrl: 'http://www.gothamist.com',
 }
+
+
+const Template = (args) => ({
+    components: { VByline },
+    setup() {
+        return { args }
+    },
+    template: '<v-byline v-bind="args" />',
+})
+
+
+const TemplateImage = (args) => ({
+    components: { VByline, VImage },
+    setup() {
+        return { args }
+    },
+    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VImage :src="slotProps.author.photoID" :width="48" :height="48" :ratio="[1,1]" alt="Profile image" style="width:48px; height:auto;"/></template></v-byline>',
+})
+const TemplateImagePerson = (args) => ({
+    components: { VByline, VPerson },
+    setup() {
+        return { args }
+    },
+    template: '<v-byline v-bind="args"> <template #images="slotProps" ><VPerson :profileData="slotProps.author" :imageSize="45" :justImage="true" :imageSrc="`https://cms.prod.nypr.digital/images/${slotProps.author.photoID}/fill-%width%x%height%|format-webp|webpquality-%quality%`"/></template></v-byline>',
+})
+
+const TemplateBelowNameSlot = (args) => ({
+    components: { VByline, VCounter },
+    setup() {
+        return { args, authorArray }
+    },
+    template: '<v-byline v-bind="args"> <template #belowNames="slotProps" ><v-counter text="Comments" :value="authorArray[0].photoID" href="http://www.google.com" /></template></v-byline>',
+})
+
+const TemplateAfterNameSlot = (args) => ({
+    components: { VByline },
+    setup() {
+        return { args }
+    },
+    template: '<v-byline v-bind="args"> <template #afterNames="slotProps" >SLOT AFTER THE NAMES</template></v-byline>',
+})
 
 
 export const Default = Template.bind({})

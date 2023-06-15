@@ -8,7 +8,7 @@ expect.extend(toHaveNoViolations)
 describe('VCounter', () => {
   let wrapper = {}
   const value = 10
-  const icon = 'images'
+  const icon = 'pi-camera'
   const text = 'Photos'
   const href = 'https://www.google.com'
 
@@ -34,6 +34,7 @@ describe('VCounter', () => {
   test('props work', () => {
     createComponent({
       props: {
+        href,
         value,
         icon,
         text,
@@ -46,8 +47,25 @@ describe('VCounter', () => {
     expect(iconElm.exists()).toBe(true)
     expect(wrapper.text()).toMatch(`${value} ${text}`)
     expect(link.attributes().href).toMatch(href)
-    expect(iconSVG.attributes().class).toContain(`pi-${icon}`)
+    expect(iconSVG.attributes().class).toContain(icon)
   })
+
+  test('no icon', () => {
+    createComponent({
+      props: {
+        href,
+        value,
+        icon,
+        text,
+        href,
+        showIcon: false
+      }
+    })
+    const iconElm = wrapper.find('.icon')
+    expect(iconElm.exists()).toBe(false)
+  })
+
+
 
 
 

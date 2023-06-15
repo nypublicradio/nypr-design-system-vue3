@@ -227,7 +227,7 @@ const enlargeLoad = (target) => {
             <slot
               class="slot enlarge-button"
               name="enlargeButton"
-              :enlargeFunc="enlarge"
+              :enlarge-func="enlarge"
             >
               <Button
                 icon="pi pi-clone"

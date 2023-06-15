@@ -107,11 +107,11 @@ const getUniqueKey = (author) => {
       </template>
     </div>
     <div class="slot-holder">
-      <slot name="afterNames" :author="author" />
+      <slot name="afterNames" />
     </div>
   </div>
   <div class="v-byline-slot-holder">
-    <slot name="belowNames" :author="author" />
+    <slot name="belowNames" />
   </div>
 </template>
 
