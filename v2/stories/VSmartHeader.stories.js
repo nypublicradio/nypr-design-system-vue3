@@ -2,6 +2,8 @@ import VSmartHeader from '../src/components/VSmartHeader.vue'
 
 export default {
     title: 'Components-V2/VSmartHeader',
+    subTitle: 'Smart header that hides when scrolling down and shows when scrolling up.',
+
     component: VSmartHeader,
     argTypes: {
         // alt: {
@@ -21,7 +23,7 @@ const Template = (args) => ({
     setup() {
         return { args }
     },
-    template: '<div><v-smart-header v-bind="args" >This is slotted header content<br/>This is slotted header content<br/></v-smart-header><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/></div>',
+    template: '<div><v-smart-header v-bind="args" >This is slotted header content<br/>We can not simulate this component here in Storybook. Run `npm run dev` and navigate to /nuxt to see it in action.</v-smart-header></div>',
 })
 
 export const Default = Template.bind({})

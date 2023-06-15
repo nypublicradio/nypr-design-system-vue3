@@ -5,7 +5,6 @@ import { themes } from '@storybook/theming'
 import { action } from '@storybook/addon-actions'
 import NuxtImageWrapper from '../v2/src/wrappers/NuxtImageWrapper.vue'
 //import { NuxtImage } from '@nuxt/image'
-
 // darkmose styles
 import './darkmode.css'
 
