@@ -6,7 +6,7 @@ const props = defineProps({
   /**
    * element class to use for scrolling (default is window)
    */
-  windowClass: {
+  targetWindowClass: {
     type: String,
     default: null,
   },
@@ -30,8 +30,8 @@ const props = defineProps({
 let scroll = null
 if (process.client) {
   scroll = useScroll(
-    props.windowClass
-      ? document.getElementsByClassName(props.windowClass)[0]
+    props.targetWindowClass
+      ? document.getElementsByClassName(props.targetWindowClass)[0]
       : window,
     {
       behavior: 'smooth',

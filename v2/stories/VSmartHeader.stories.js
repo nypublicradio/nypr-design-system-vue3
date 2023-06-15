@@ -30,7 +30,7 @@ Default.args = {
 
 export const TargetWindowClass = Template.bind({})
 TargetWindowClass.args = {
-    windowClass: 'sb-show-main'
+    targetWindowClass: 'sb-show-main'
 }
 export const HeroBuffer = Template.bind({})
 HeroBuffer.args = {
