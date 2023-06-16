@@ -76,8 +76,7 @@ describe('VByline', () => {
       props,
       global: {
         stubs: {
-          'nuxt-link': true,
-          'nuxt-img': true
+
         }
       },
       slots: { images: '<div class="img">Image SLOT Mock</div>', belowNames: '<div class="below-names-content">belowNames SLOT Mock</div>', afterNames: '<div class="after-names-content">afterNames SLOT Mock</div>' }

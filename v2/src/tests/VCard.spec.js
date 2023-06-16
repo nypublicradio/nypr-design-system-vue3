@@ -10,6 +10,7 @@ describe('VCard', () => {
   let wrapper = {}
 
   const imageSrc = '329944'
+  const alt = 'Alt text'
   const title = "Title with some <em>HTML</em>"
   const link = 'https=//www.google.com'
   const subtitle = 'Subtitle'
@@ -17,16 +18,16 @@ describe('VCard', () => {
   const width = 300
   const height = 200
 
-  const createComponent = ({ props = {} } = {}) => {
+  const createComponent = ({ props = {}, slots = {} } = {}) => {
     wrapper = mount(VCard, {
       props,
       global: {
         stubs: {
-          'nuxt-link': true,
-          'nuxt-img': true
+
         }
       },
-      slots: {}
+      slots
+      //slots: { afterTitle: '<div>After Title</div>', beforeTitle: '<div>Before Title</div>', aboveTitle: '<div>Above Title</div>', belowBlurb: '<div>Below Blurb</div>', belowImage: '<div>Below Image</div>', aboveImage: '<div>Above Image</div>' }
     })
   }
 
@@ -42,6 +43,7 @@ describe('VCard', () => {
     createComponent({
       props: {
         imageSrc,
+        alt,
         title,
         link,
         subtitle,
@@ -66,6 +68,7 @@ describe('VCard', () => {
     createComponent({
       props: {
         imageSrc,
+        alt,
         title,
         link,
         subtitle,
@@ -85,6 +88,7 @@ describe('VCard', () => {
     createComponent({
       props: {
         imageSrc,
+        alt,
         title,
         link,
         subtitle,
@@ -94,7 +98,6 @@ describe('VCard', () => {
         titleClass: "customClass"
       }
     })
-    // can't figure out how to test the css of an element
     const _title = wrapper.find('.card-title-link')
     expect(_title.classes()).toContain('customClass')
   })
@@ -103,19 +106,197 @@ describe('VCard', () => {
     createComponent({
       props: {
         imageSrc,
+        alt,
         title,
         link,
         subtitle,
         blurb,
         width,
         height,
-        isDecrotive: true
+        isDecorative: true
       }
     })
-    // can't figure out how to test the css of an element
-    const _img = wrapper.find('.v-card .card-image .image')
+    const _img = wrapper.find('.card-image .v-image-holder .image')
     expect(_img.attributes('alt')).toBe('')
   })
+
+  test('eager loading', () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title,
+        link,
+        subtitle,
+        blurb,
+        width,
+        height,
+        loading: 'eager'
+      }
+    })
+    const _img = wrapper.find('.card-image .v-image-holder .image')
+    expect(_img.attributes('loading')).toBe('eager')
+  })
+
+  test('truncate blurb', () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title,
+        link,
+        subtitle,
+        blurb,
+        width,
+        height,
+        truncate: 2
+      }
+    })
+    const _blurb = wrapper.find('.card-blurb')
+    expect(_blurb.classes()).toContain('truncate')
+    expect(_blurb.classes()).toContain('t2lines')
+  })
+
+  test('no title', () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title: null,
+        link,
+        subtitle,
+        blurb,
+        width,
+        height,
+
+      }
+    })
+    const _title = wrapper.find('.card-title')
+    expect(_title.exists()).toBe(false)
+  })
+
+  test('no subtitle', () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title,
+        link,
+        subtitle: null,
+        blurb,
+        width,
+        height,
+
+      }
+    })
+    const _subTitle = wrapper.find('.card-subtitle')
+    expect(_subTitle.exists()).toBe(false)
+  })
+
+  test('no blurb', () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title,
+        link,
+        subtitle,
+        blurb: null,
+        width,
+        height,
+
+      }
+    })
+    const _blurb = wrapper.find('.card-blurb')
+    expect(_blurb.exists()).toBe(false)
+  })
+
+  test('no image', () => {
+    createComponent({
+      props: {
+        imageSrc: null,
+        alt,
+        title,
+        link,
+        subtitle,
+        blurb,
+        width,
+        height,
+
+      }
+    })
+    const _img = wrapper.find('.card-image-holder')
+    expect(_img.exists()).toBe(false)
+  })
+
+  test('no links', () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title,
+        link: null,
+        subtitle,
+        blurb,
+        width,
+        height,
+
+      }
+    })
+    const _flexibleLink = wrapper.findAll('.flexible-link')
+    for (var i = 0; i < _flexibleLink.length; i++) {
+      expect(_flexibleLink[i].classes()).toContain('null')
+    }
+  })
+
+  test('allow vertical effect', () => {
+    createComponent({
+      props: {
+        imageSrc: '329836',
+        alt,
+        title,
+        link,
+        subtitle,
+        blurb,
+        width,
+        height,
+        maxWidth: 2598,
+        maxHeight: 3484,
+        allowVerticalEffect: true
+      }
+    })
+    const _img = wrapper.find('.card-image .v-image-holder .image')
+    expect(_img.classes()).toContain('is-vertical')
+  })
+
+  test('slots have children', () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title,
+        link,
+        subtitle,
+        blurb,
+        width,
+        height,
+      },
+      slots: { afterTitle: '<div>After Title</div>', beforeTitle: '<div>Before Title</div>', aboveTitle: '<div>Above Title</div>', belowBlurb: '<div>Below Blurb</div>', belowImage: '<div>Below Image</div>', aboveImage: '<div>Above Image</div>' }
+    })
+    const aboveImage = wrapper.find('.slot.slot-above-image')
+    const belowImage = wrapper.find('.slot.slot-below-image')
+    const aboveTitle = wrapper.find('.slot.slot-above-title')
+    const beforeTitle = wrapper.find('.slot.slot-before-title')
+    const afterTitle = wrapper.find('.slot.slot-after-title')
+    const belowBlurb = wrapper.find('.slot.slot-below-blurb')
+    expect(aboveImage.element.children.length).toBeGreaterThan(0)
+    expect(belowImage.element.children.length).toBeGreaterThan(0)
+    expect(aboveTitle.element.children.length).toBeGreaterThan(0)
+    expect(beforeTitle.element.children.length).toBeGreaterThan(0)
+    expect(afterTitle.element.children.length).toBeGreaterThan(0)
+    expect(belowBlurb.element.children.length).toBeGreaterThan(0)
+  })
+
 
 
   test('it passes basic accessibility tests', async () => {

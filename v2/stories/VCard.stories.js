@@ -17,6 +17,8 @@ export default {
     },
 }
 
+const blurb = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
 const Template = (args) => ({
     components: {
         VCard
@@ -107,17 +109,18 @@ Default.args = {
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 }
 export const CustomImageFlexBasis = Template.bind({})
 CustomImageFlexBasis.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
     imageFlexBasis: '50%',
@@ -125,10 +128,11 @@ CustomImageFlexBasis.args = {
 export const NoImageFlexBasis = Template.bind({})
 NoImageFlexBasis.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
     imageFlexBasis: null,
@@ -137,10 +141,11 @@ NoImageFlexBasis.args = {
 export const ImageMinWidth = Template.bind({})
 ImageMinWidth.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
     minWidth: 150,
@@ -149,10 +154,11 @@ ImageMinWidth.args = {
 export const CustomRatio = Template.bind({})
 CustomRatio.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
     ratio: [5, 2],
@@ -161,10 +167,11 @@ CustomRatio.args = {
 export const CustomRatioAndMobileRatio = Template.bind({})
 CustomRatioAndMobileRatio.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 300,
     ratio: [5, 2],
@@ -174,11 +181,12 @@ CustomRatioAndMobileRatio.args = {
 export const CustomeTitleClass = Template.bind({})
 CustomeTitleClass.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     titleClass: 'h1 anythingElse',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -188,6 +196,7 @@ CustomeTitleClass.args = {
 export const IsNotDecrative = Template.bind({})
 IsNotDecrative.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -203,37 +212,26 @@ IsNotDecrative.args = {
 export const EagerLoading = Template.bind({})
 EagerLoading.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
 
     loading: 'eager',
 }
-export const AddCustomBaseClass = Template.bind({})
-AddCustomBaseClass.args = {
-    imageSrc: '329944',
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
-    width: 300,
-    height: 200,
-
-
-    baseClass: 'customBaseClass',
-}
 
 export const TruncateBlurb = Template.bind({})
 TruncateBlurb.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -243,8 +241,9 @@ TruncateBlurb.args = {
 export const NoTitle = Template.bind({})
 NoTitle.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     link: 'https://www.google.com',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -254,6 +253,7 @@ NoTitle.args = {
 export const NoBlurb = Template.bind({})
 NoBlurb.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
@@ -267,9 +267,10 @@ NoBlurb.args = {
 export const NoSubtitle = Template.bind({})
 NoSubtitle.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -281,7 +282,7 @@ NoImage.args = {
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -291,9 +292,10 @@ NoImage.args = {
 export const NoLinks = Template.bind({})
 NoLinks.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -304,10 +306,11 @@ NoLinks.args = {
 export const Reverse = Template.bind({})
 Reverse.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -318,10 +321,11 @@ Reverse.args = {
 export const Vertical = Template.bind({})
 Vertical.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 800,
     height: 533,
 
@@ -332,10 +336,11 @@ Vertical.args = {
 export const ReverseVertical = Template.bind({})
 ReverseVertical.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 800,
     height: 533,
 
@@ -347,10 +352,11 @@ ReverseVertical.args = {
 export const VerticalOnMobile = Template.bind({})
 VerticalOnMobile.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 400,
     height: 266,
 
@@ -361,10 +367,11 @@ VerticalOnMobile.args = {
 export const ReverseVerticalOnMobile = Template.bind({})
 ReverseVerticalOnMobile.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 400,
     height: 266,
 
@@ -375,10 +382,11 @@ ReverseVerticalOnMobile.args = {
 export const AllowVerticalEffect = Template.bind({})
 AllowVerticalEffect.args = {
     imageSrc: '329836',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 800,
     height: 533,
     maxWidth: 2598,
@@ -393,10 +401,11 @@ AllowVerticalEffect.args = {
 export const SlotAfterTitle = TemplateSlotAfterTitle.bind({})
 SlotAfterTitle.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -405,10 +414,11 @@ SlotAfterTitle.args = {
 export const SlotBeforeTitle = TemplateSlotBeforeTitle.bind({})
 SlotBeforeTitle.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -417,10 +427,11 @@ SlotBeforeTitle.args = {
 export const SlotAboveTitle = TemplateSlotAboveTitle.bind({})
 SlotAboveTitle.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 
@@ -429,20 +440,22 @@ SlotAboveTitle.args = {
 export const SlotBelowBlurb = TemplateSlotBelowBlurb.bind({})
 SlotBelowBlurb.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 }
 export const SlotBelowImage = TemplateSlotBelowImage.bind({})
 SlotBelowImage.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 }
@@ -450,10 +463,11 @@ SlotBelowImage.args = {
 export const SlotAboveImage = TemplateSlotAboveImage.bind({})
 SlotAboveImage.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
 }
@@ -461,24 +475,24 @@ SlotAboveImage.args = {
 export const ImageQuality = Template.bind({})
 ImageQuality.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 300,
     height: 200,
-
-
     quality: 5,
 }
 
 export const Sizes = Template.bind({})
 Sizes.args = {
     imageSrc: '329944',
+    alt: "Image alt text",
     title: "Title with some <em>HTML</em>.",
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.',
+    blurb: blurb,
     width: 800,
     height: 533,
     vertical: true,

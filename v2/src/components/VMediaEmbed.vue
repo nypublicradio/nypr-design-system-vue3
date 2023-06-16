@@ -56,6 +56,12 @@ const getRatio = computed(() => {
   return percent + '%'
 })
 
+const isYoutube = computed(() => {
+  return props.url.includes('youtube.com')
+})
+const isVimeo = computed(() => {
+  return props.url.includes('vimeo.com')
+})
 const isSpotify = computed(() => {
   return props.url.includes('spotify.com')
 })
@@ -67,12 +73,27 @@ const getSoundCloudUrl = computed(() => {
     ? props.url.replace('auto_play=false', 'auto_play=true')
     : props.url
 })
+
+const getPlatform = computed(() => {
+  if (isYoutube.value) {
+    return 'youtube'
+  } else if (isVimeo.value) {
+    return 'vimeo'
+  } else if (isSpotify.value) {
+    return 'spotify'
+  } else if (isSoundCloud.value) {
+    return 'sound-cloud'
+  } else {
+    return 'unknown'
+  }
+})
 </script>
 
 <template>
   <div class="responsive-embed">
     <iframe
       v-if="isSpotify"
+      class="spotify-player"
       style="border-radius: 12px"
       :src="props.url"
       title="Spotify Player"
@@ -86,6 +107,7 @@ const getSoundCloudUrl = computed(() => {
     ></iframe>
     <iframe
       v-else-if="isSoundCloud"
+      class="soundcloud-player"
       width="100%"
       height="200"
       scrolling="no"
@@ -102,6 +124,7 @@ const getSoundCloudUrl = computed(() => {
       }&amp;start=${startTime}&amp;autoplay=${autoPlay ? '1' : '0'}&amp;mute=${
         mute ? '1' : '0'
       }`"
+      :class="`${getPlatform}-player`"
       title="Media Player"
       :aria-label="props.iFrameArialLabel"
       frameborder="0"

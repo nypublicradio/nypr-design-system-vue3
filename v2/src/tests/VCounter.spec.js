@@ -9,17 +9,18 @@ describe('VCounter', () => {
   let wrapper = {}
   const value = 10
   const icon = 'pi-camera'
-  const text = 'Photos'
+  const text = 'Photossss'
   const href = 'https://www.google.com'
 
-  const createComponent = ({ props = {} } = {}) => {
+  const createComponent = ({ props = {}, slots = {} } = {}) => {
     wrapper = mount(VCounter, {
       props,
       global: {
         stubs: {
-          'nuxt-link': true
+
         }
-      }
+      },
+      slots
     })
   }
 
@@ -31,7 +32,7 @@ describe('VCounter', () => {
     }
   })
 
-  test('props work', () => {
+  test('default props work', () => {
     createComponent({
       props: {
         href,
@@ -50,6 +51,32 @@ describe('VCounter', () => {
     expect(iconSVG.attributes().class).toContain(icon)
   })
 
+  test('custom text', () => {
+    createComponent({
+      props: {
+        href,
+        value,
+        icon,
+        text: "custom text",
+        href,
+      }
+    })
+    expect(wrapper.text()).toMatch(`${value} custom text`)
+  })
+
+  test('no text', () => {
+    createComponent({
+      props: {
+        href,
+        value,
+        icon,
+        text: null,
+        href,
+      }
+    })
+    expect(wrapper.text()).toMatch(`${value}`)
+  })
+
   test('no icon', () => {
     createComponent({
       props: {
@@ -65,21 +92,46 @@ describe('VCounter', () => {
     expect(iconElm.exists()).toBe(false)
   })
 
-
-
-
-
   test('href(to) prop works with nuxt route', () => {
     createComponent({
       props: {
-        value: value,
-        icon: icon,
-        text: text,
+        value,
+        icon,
+        text,
         href: '/news'
       }
     })
     const link = wrapper.find('.flexible-link')
     expect(link.attributes('to')).toBe('/news')
+  })
+
+  test('custom icon class', () => {
+    createComponent({
+      props: {
+        href,
+        value,
+        icon: 'pi-facebook',
+        text,
+        href,
+      }
+    })
+    const iconElm = wrapper.find('.icon .pi')
+    expect(iconElm.classes()).toContain('pi-facebook')
+  })
+
+  test('custom icon slot', () => {
+    createComponent({
+      props: {
+        href,
+        value,
+        icon,
+        text,
+        href,
+      },
+      slots: { icon: '<div class="pi pi-twitter custom-icon"></div>' }
+    })
+    const iconElm = wrapper.find('.icon .custom-icon')
+    expect(iconElm.classes()).toContain('pi-twitter')
   })
 
   test('it passes basic accessibility tests', async () => {

@@ -189,11 +189,12 @@ const enlargeLoad = (target) => {
         <div v-if="isVertical" class="bg">
           <nuxt-img
             :provider="props.provider"
+            class="blurred-bg-image"
             :src="String(props.src)"
             :width="props.width"
             :height="props.height"
             quality="15"
-            :alt="props.isDecorative ? '' : props.alt"
+            :alt="props.isDecorative ? '' : props.alt + '-blurred-bg'"
             :modifiers="props.modifiers"
             :loading="props.loading"
           />

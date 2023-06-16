@@ -15,7 +15,6 @@ describe('VTag', () => {
   const createComponent = ({ props = {} } = {}) => {
     wrapper = mount(VTag, {
       props,
-      // cant user stub here because then the button will not render inside the VFlexibleLink component (nuxt-link)
       // global: {
       //   stubs: {
       //     'nuxt-link': true

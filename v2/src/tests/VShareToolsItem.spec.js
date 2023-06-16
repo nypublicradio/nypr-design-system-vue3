@@ -1,7 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
 import VShareToolsItem from '../components/VShareToolsItem.vue'
-//import axe from './axe-helper'
+import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
@@ -277,16 +277,16 @@ describe('VShareToolsItem', () => {
 
   // })
 
-  // test('it passes basic accessibility tests', () => {
-  //   const service = 'facebook'
-  //   createComponent({
-  //     props: {
-  //       username,
-  //       service,
-  //       label
-  //     }
-  //   })
-  //   const results = axe(wrapper.element)
-  //   expect(results).toHaveNoViolations()
-  // })
+  test('it passes basic accessibility tests', async () => {
+    createComponent({
+      props: {
+        username,
+        service: 'facebook',
+        label
+      }
+    })
+    const results = await axe(wrapper.element)
+    expect(results).toHaveNoViolations()
+  })
+
 })

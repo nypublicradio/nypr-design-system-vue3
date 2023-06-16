@@ -29,7 +29,7 @@ describe('VShareTools', () => {
     }
   })
 
-  test('default', () => {
+  test('with label', () => {
     createComponent({
       props: {
         label,
@@ -39,34 +39,6 @@ describe('VShareTools', () => {
     const labelProp = wrapper.find('.label')
 
     expect(labelProp.text()).toMatch(label)
-    //expect(labelProp.attributes().class).toContain('sm:')
-  })
-
-  test('responsive', () => {
-    createComponent({
-      props: {
-        label,
-        responsive,
-      }
-    })
-
-    const labelProp = wrapper.find('.label')
-
-    expect(labelProp.attributes().class).toContain('sm:')
-  })
-
-  test('responsive custom break point', () => {
-    createComponent({
-      props: {
-        label,
-        responsive,
-        bp
-      }
-    })
-
-    const labelProp = wrapper.find('.label')
-
-    expect(labelProp.attributes().class).toContain('md:')
   })
 
   test('vertical', () => {

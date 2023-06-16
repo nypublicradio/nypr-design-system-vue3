@@ -97,7 +97,7 @@ const profileFromArticleNoPhoto = {
       HERO BUFFER
     </div>
     <div style="max-width: 1024px; margin: 0 auto">
-      <!--       <VCard
+      <VCard
         image-src="329944"
         title="Title with some <em>HTML</em>"
         link="https://www.google.com"
@@ -105,7 +105,8 @@ const profileFromArticleNoPhoto = {
         blurb="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         :width="300"
         :height="200"
-      /> -->
+        alt="alt text"
+      />
       <!-- <div class="grid">
         <div class="col-12 md:col-6">
           <VCard

@@ -1,4 +1,4 @@
-import { shallowMount } from '@vue/test-utils'
+import { shallowMount, mount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
 import VMediaEmbed from '../components/VMediaEmbed.vue'
 //import axe from './axe-helper'
@@ -13,9 +13,8 @@ describe('VMediaEmbed', () => {
         url
       }
     })
-    // check if prop works and iframe src is populating correctly
-    const iframe = wrapper.findAll('iframe')
-    expect(iframe[0].attributes('src')).toBe(`${url}?controls=1&start=0&autoplay=0&mute=0`)
+    const iframe = wrapper.find('iframe')
+    expect(iframe.attributes('src')).toBe(`${url}?controls=1&start=0&autoplay=0&mute=0`)
   })
 
   test('No controls', () => {
@@ -25,9 +24,8 @@ describe('VMediaEmbed', () => {
         controls: false
       }
     })
-    // check if prop works and iframe src is populating correctly
-    const iframe = wrapper.findAll('iframe')
-    expect(iframe[0].attributes('src')).toBe(`${url}?controls=0&start=0&autoplay=0&mute=0`)
+    const iframe = wrapper.find('iframe')
+    expect(iframe.attributes('src')).toBe(`${url}?controls=0&start=0&autoplay=0&mute=0`)
   })
 
   test('Auto Play', () => {
@@ -37,9 +35,8 @@ describe('VMediaEmbed', () => {
         autoPlay: true
       }
     })
-    // check if prop works and iframe src is populating correctly
-    const iframe = wrapper.findAll('iframe')
-    expect(iframe[0].attributes('src')).toBe(`${url}?controls=1&start=0&autoplay=1&mute=0`)
+    const iframe = wrapper.find('iframe')
+    expect(iframe.attributes('src')).toBe(`${url}?controls=1&start=0&autoplay=1&mute=0`)
   })
 
   test('Muted', () => {
@@ -49,9 +46,8 @@ describe('VMediaEmbed', () => {
         mute: true
       }
     })
-    // check if prop works and iframe src is populating correctly
-    const iframe = wrapper.findAll('iframe')
-    expect(iframe[0].attributes('src')).toBe(`${url}?controls=1&start=0&autoplay=0&mute=1`)
+    const iframe = wrapper.find('iframe')
+    expect(iframe.attributes('src')).toBe(`${url}?controls=1&start=0&autoplay=0&mute=1`)
   })
 
   test('Custom start position', () => {
@@ -61,16 +57,57 @@ describe('VMediaEmbed', () => {
         startTime: "90"
       }
     })
-    // check if prop works and iframe src is populating correctly
-    const iframe = wrapper.findAll('iframe')
-    expect(iframe[0].attributes('src')).toBe(`${url}?controls=1&start=90&autoplay=0&mute=0`)
+    const iframe = wrapper.find('iframe')
+    expect(iframe.attributes('src')).toBe(`${url}?controls=1&start=90&autoplay=0&mute=0`)
   })
-  // does not pass, don't know why
+
+  test('is Youtube', () => {
+    const wrapper = shallowMount(VMediaEmbed, {
+      props: {
+        url: 'https://www.youtube.com/embed/1BCkSYQ0NRQ',
+      }
+    })
+    const iframe = wrapper.find('iframe')
+    expect(iframe.classes()).toContain(`youtube-player`)
+  })
+
+  test('is Vimeo', () => {
+    const wrapper = shallowMount(VMediaEmbed, {
+      props: {
+        url: 'https://player.vimeo.com/video/90283590',
+      }
+    })
+    const iframe = wrapper.find('iframe')
+    expect(iframe.classes()).toContain(`vimeo-player`)
+  })
+
+  test('is Spotify', () => {
+    const wrapper = shallowMount(VMediaEmbed, {
+      props: {
+        url: 'https://open.spotify.com/embed/track/5F7I0CfdEnVSPlwFabMyIi?utm_source=generator',
+      }
+    })
+    const iframe = wrapper.find('iframe')
+    expect(iframe.classes()).toContain(`spotify-player`)
+  })
+
+  test('is SoundCloud', () => {
+    const wrapper = shallowMount(VMediaEmbed, {
+      props: {
+        url: 'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/13165175&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true',
+      }
+    })
+    const iframe = wrapper.find('iframe')
+    expect(iframe.classes()).toContain(`soundcloud-player`)
+  })
+
+  //does not pass, don't know why
   // test('it passes basic accessibility tests', async () => {
-  //   const wrapper = shallowMount(VMediaEmbed, {
+  //   const wrapper = mount(VMediaEmbed, {
   //     props: { url }
   //   })
   //   const results = await axe(wrapper.element)
   //   expect(results).toHaveNoViolations()
   // })
+
 })

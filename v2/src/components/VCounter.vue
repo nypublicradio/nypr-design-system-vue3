@@ -43,24 +43,22 @@ const props = defineProps({
 </script>
 
 <template>
-  <span>
-    <VFlexibleLink
-      v-if="props.value && props.value > 0"
-      :to="props.href"
-      class="counter"
-    >
-      <span v-if="props.showIcon" class="icon">
-        <slot name="icon" :props="props">
-          <i
-            :class="`pi ${props.icon}`"
-            role="img"
-            :aria-label="`${props.value} ${props.text}`"
-          ></i>
-        </slot>
-      </span>
-      {{ props.value }} {{ props.text }}
-    </VFlexibleLink>
-  </span>
+  <VFlexibleLink
+    v-if="props.value && props.value > 0"
+    :to="props.href"
+    class="counter"
+  >
+    <span v-if="props.showIcon" class="icon">
+      <slot name="icon" :props="props">
+        <i
+          :class="`pi ${props.icon}`"
+          role="img"
+          :aria-label="`${props.value} ${props.text}`"
+        ></i>
+      </slot>
+    </span>
+    {{ props.value }} {{ props.text }}
+  </VFlexibleLink>
 </template>
 
 <style lang="scss">

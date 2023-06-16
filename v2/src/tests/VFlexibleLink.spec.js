@@ -9,6 +9,10 @@ describe('VFlexibleLink', () => {
   let wrapper = {}
   const toLink = '/abc'
   const urlLink = 'https://example.com'
+  const telLink = 'tel:1-234-567-8901'
+  const anchorLink = '#anchor'
+  const mailtoLink = 'mailto:digital@nypr.com'
+  const findFlexibleLink = () => wrapper.find('.flexible-link')
   const findNuxtLink = () => wrapper.find('.internal')
   const findAnchor = () => wrapper.find('a')
   const findNullDiv = () => wrapper.find('.null')
@@ -65,6 +69,43 @@ describe('VFlexibleLink', () => {
     expect(findAnchor().attributes('target')).toBe('_blank')
     expect(findAnchor().attributes('rel')).toBe('noopener noreferrer')
     expect(findAnchor().attributes('class')).toBe('flexible-link external')
+  })
+
+  it('should render with a tel link', () => {
+    createComponent({
+      props: {
+        to: telLink
+      }
+    })
+    expect(findAnchor().attributes('href')).toBe(telLink)
+  })
+
+  it('should render with a mailto link', () => {
+    createComponent({
+      props: {
+        to: mailtoLink
+      }
+    })
+    expect(findAnchor().attributes('href')).toBe(mailtoLink)
+  })
+
+  it('should render with a anchor link', () => {
+    createComponent({
+      props: {
+        to: anchorLink
+      }
+    })
+    expect(findAnchor().attributes('href')).toBe(anchorLink)
+  })
+
+  it('custom target', () => {
+    createComponent({
+      props: {
+        to: mailtoLink,
+        target: '_self'
+      }
+    })
+    expect(findAnchor().attributes('target')).toBe('_self')
   })
 
   test('it passes basic accessibility tests', async () => {
