@@ -56,7 +56,7 @@ const cssAlignOption = ref(
 const getUniqueKey = (author) => {
   if (author.id) return author.id
   if (author.name) return author.name.replace(/\s+/g, '-').toLowerCase()
-  return Math.random().toString(36).substr(2, 9)
+  return Math.floor(Math.random() * 1000)
 }
 </script>
 

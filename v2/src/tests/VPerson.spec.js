@@ -91,6 +91,7 @@ describe('VPerson', () => {
       props,
       global: {
         stubs: {
+
         }
       },
       slots
@@ -105,22 +106,25 @@ describe('VPerson', () => {
     }
   })
 
-  test('it renders props', () => {
+  test('it renders props', async () => {
     createComponent({
       props: { profileData }
     })
 
+    const _img = wrapper.find('.author-image .image')
     const _name = wrapper.find('.name-link .name')
+    const _bio = wrapper.find('.info .bio')
+    const _cta = wrapper.find('.info .cta')
+    const _flexibleLinks = wrapper.find('a')
+
+    expect(_img.attributes('src')).toContain(profileData.photoID)
     expect(_name.text()).toContain(profileData.name)
-    // expect(imageProp.attributes('src')).toMatch(image)
-    // expect(circleProp.exists()).toBe(true)
-    // expect(nameLinkProp.text()).toContain(fullName)
-    // expect(nameLinkProp.attributes('href')).toBe(nameLink)
-    // expect(imageLinkProp.attributes('href')).toBe(nameLink)
-    // expect(roleProp.text()).toContain(role)
-    // expect(blurbProp.text()).toContain(blurb)
-    // expect(truncateProp.exists()).toBe(true)
-    // expect(socialProp.exists()).toBe(true)
+    expect(_bio.html()).toContain(profileData.biography)
+    expect(_cta.text()).toContain('Read more')
+    for (var i = 0; i < _flexibleLinks.length; i++) {
+      expect(_flexibleLinks.classes().toContain('flexible-link').attributes('href')).toBe(profileData.url)
+    }
+
   })
 
   test('it passes basic accessibility tests', async () => {

@@ -69,6 +69,24 @@ describe('VByline', () => {
       ]
     }
   ]
+  const authorsNoID = [
+    {
+      id: null,
+      firstName: "Jaclyn",
+      lastName: "Jeffrey-Wilensky",
+      name: "Jaclyn Jeffrey-Wilensky",
+      photoID: 327474,
+      jobTitle: "Data Reporter",
+      biography: "Jaclyn writes data-driven health and science stories for WNYC/Gothamist. She also runs Gothamist's COVID data dashboards. She is an alumna of the Newmark Graduate School of Journalism. Her work has appeared in NBC News, Spectrum, the Daily Beast, and other outlets.",
+      website: "",
+      email: "",
+      slug: "jaclyn-jeffrey-wilensky",
+      url: 'http://www.google.com',
+      organization: 'Gothamist',
+      organizationUrl: 'http://www.gothamist.com',
+      socialMediaProfile: []
+    }
+  ]
   const prefix = 'By'
 
   const createComponent = ({ props = {} } = {}) => {

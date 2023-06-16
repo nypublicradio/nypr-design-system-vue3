@@ -3,8 +3,7 @@ import { setup } from '@storybook/vue3'
 import PrimeVue from 'primevue/config'
 import { themes } from '@storybook/theming'
 import { action } from '@storybook/addon-actions'
-import NuxtImageWrapper from '../v2/src/wrappers/NuxtImageWrapper.vue'
-//import { NuxtImage } from '@nuxt/image'
+
 // darkmose styles
 import './darkmode.css'
 
@@ -40,7 +39,7 @@ setup((app) => {
     },
     template: '<template><slot></slot></template>',
   })
-  //app.component('nuxt-img', NuxtImageWrapper)
+
 })
 
 // dark mode setup

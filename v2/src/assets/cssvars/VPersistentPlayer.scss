@@ -26,6 +26,8 @@
     --persistent-player-title-size: var(--font-size-9);
     --persistent-player-title-weight: 400;
     --persistent-player-title-color: var(--text-color);
+    --persistent-player-title-decoration: none;
+    --persistent-player-title-hover-decoration: underline;
 }
 [data-style-mode='dark'],
 .style-mode-dark {

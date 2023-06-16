@@ -566,7 +566,7 @@ defineExpose({
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 
 .persistent-player {
@@ -674,19 +674,6 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       }
     }
   }
-
-  a,
-  a:visited,
-  a:active {
-    color: var(--persistent-player-text-button-color);
-
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: none;
-      color: var(--persistent-player-text-button-color-hover) !important;
-    }
-  }
   .expanded-view {
     position: relative;
     height: inherit;
@@ -709,7 +696,6 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
     }
   }
 }
-
 //expand-delay
 .expand-delay-enter-active {
   transition: opacity calc(var(--transition-duration) * 2) ease-out;
@@ -732,5 +718,26 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 .expand-enter-from,
 .expand-leave-to {
   opacity: 0;
+}
+</style>
+
+<style lang="scss">
+.persistent-player {
+  .track-info-title {
+    a,
+    a:visited,
+    a:active {
+      color: var(--persistent-player-text-button-color);
+
+      text-decoration: var(--persistent-player-title-decoration) !important;
+
+      &:hover {
+        text-decoration: var(
+          --persistent-player-title-hover-decoration
+        ) !important;
+        color: var(--persistent-player-text-button-color-hover) !important;
+      }
+    }
+  }
 }
 </style>

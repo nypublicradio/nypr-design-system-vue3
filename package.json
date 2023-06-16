@@ -53,7 +53,7 @@
     "@storybook/theming": "^7.0.20",
     "@storybook/vue3": "^7.0.20",
     "@storybook/vue3-webpack5": "^7.0.20",
-    "@vitest/coverage-istanbul": "^0.32.0",
+    "@vitest/coverage-istanbul": "^0.32.2",
     "@vue/cli-plugin-babel": "~5.0.8",
     "@vue/cli-plugin-eslint": "~5.0.8",
     "@vue/cli-plugin-router": "~5.0.8",
