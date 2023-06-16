@@ -77,6 +77,7 @@ const convertTime = (val) => {
         :to="titleLink ? titleLink : null"
         raw
         @emit-flexible-link="emit('image-click')"
+        :title="titleLink ? titleLink : null"
       >
         <VImage
           :src="image"

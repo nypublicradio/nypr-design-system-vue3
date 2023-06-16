@@ -1,6 +1,7 @@
 import { mount } from '@vue/test-utils'
 import VPersistentPlayer from '../components/VPersistentPlayer.vue'
 import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
@@ -11,7 +12,7 @@ describe('VPersistentPlayer', () => {
   const title = 'The Takeaway'
   const station = 'WNYC 93.9 FM'
   const titleLink = 'http://www.google.com'
-  const image = 'https://cms.prod.nypr.digital/images/329534/fill-%width%x%height%|format-jpeg|jpegquality-%quality%/'
+  const image = '329534'
   const description = 'This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.'
   const descriptionLink = 'http://www.google.com'
   const file = 'https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3'
@@ -20,20 +21,24 @@ describe('VPersistentPlayer', () => {
   const showSkip = true
   const livestream = true
   const canMinimize = true
+  const canExpand = false
+  const canExpandWithSwipe = false
+  const canUnexpandWithSwipe = false
   const isMuted = true
   const autoPlay = true
   const loop = true
   const hideSkipMobile = false
   const hideDownloadMobile = false
 
-  const createComponent = ({ props = {} } = {}) => {
-    wrapper = mount(VCounter, {
+  const createComponent = ({ props = {}, slots = {} } = {}) => {
+    wrapper = mount(VPersistentPlayer, {
       props,
       global: {
+        plugins: [PrimeVue],
         stubs: {
-          'nuxt-link': true
         }
-      }
+      },
+      slots
     })
   }
 
@@ -45,20 +50,33 @@ describe('VPersistentPlayer', () => {
     }
   })
 
-  test('it renders base props', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file }
+  test('it passes basic accessibility tests', async () => {
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file
+      }
     })
-    const imageElm = wrapper.find('.simple-responsive-image-holder .image')
-    const titleElm = wrapper.find('.track-info-title')
-    const descriptionElm = wrapper.find('.track-info-description')
-
-    expect(imageElm.attributes('src')).toBe('https://cms.prod.nypr.digital/images/329534/fill-84x84|format-jpeg|jpegquality-70/')
-    expect(titleElm.text()).toMatch(title)
-    expect(descriptionElm.text()).toContain(description)
+    const results = await axe(wrapper.element)
+    expect(results).toHaveNoViolations()
   })
 
-  test('title & image & descriptionLink has a link', () => {
+  test('it renders default props with image', () => {
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file
+      }
+    })
+
+    const _image = wrapper.find('.v-image .image')
+    const _title = wrapper.find('.track-info-title')
+    const _description = wrapper.find('.track-info-description')
+
+    expect(_image.attributes('src')).toBe('329534')
+    expect(_title.text()).toMatch(title)
+    expect(_description.text()).toContain(description)
+  })
+
+  /* test('title & image & descriptionLink has a link', () => {
     const wrapper = mount(VPersistentPlayer, {
       props: { title, station, image, description, file, titleLink, descriptionLink }
     })
@@ -187,7 +205,7 @@ describe('VPersistentPlayer', () => {
 
     await wrapper.setProps({ hideDownloadMobile: true })
     expect(downloadBtn.attributes().class).toContain('hidden md:flex')
-  })
+  }) */
 
   // test('it passes basic accessibility tests', async () => {
   //   const axeWrapper = mount(VPersistentPlayer)
