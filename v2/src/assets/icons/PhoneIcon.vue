@@ -1,6 +1,5 @@
 <template>
   <svg
-    id="phone-shapes"
     role="img"
     :aria-label="title"
     class="o-icon phone-icon"
@@ -24,11 +23,10 @@ export default {
   props: {
     title: {
       type: String,
-      default: 'Phone'
-    }
-  }
+      default: 'Phone',
+    },
+  },
 }
 </script>
 
-<style lang="scss">
-</style>
+<style lang="scss"></style>
