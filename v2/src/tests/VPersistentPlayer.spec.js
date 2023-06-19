@@ -8,6 +8,7 @@ import axe from './axe-helper'
 expect.extend(toHaveNoViolations)
 
 describe('VPersistentPlayer', () => {
+  let originalWidth = 1366
   let wrapper = {}
   // all props once
   const title = 'The Takeaway'
@@ -43,7 +44,7 @@ describe('VPersistentPlayer', () => {
       slots
     })
   }
-  let originalWidth
+
   beforeEach(() => {
     originalWidth = window.innerWidth
   })
@@ -82,28 +83,30 @@ describe('VPersistentPlayer', () => {
     expect(_description.text()).toContain(description)
   })
 
-  // test('hide .hideOnMobile elements on mobile', () => {
-  //   mockBrowserWidth(375)
-  //   createComponent({
-  //     props: {
-  //       title, station, titleLink, image, description, file
-  //     }
-  //   })
-  //   const hideOnMobile = wrapper.find('.hideOnMobile')
-  //   expect(hideOnMobile.exists()).toBe(false)
-  // })
-
-  test('show download on mobile', () => {
-    mockBrowserWidth(375)
+  test('show download button', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, showDownload, hideDownloadMobile: false
+        title, station, titleLink, image, description, file, showDownload
       }
     })
-
-    const downloadBtn = wrapper.find('.player-download-icon')
-    expect(downloadBtn.exists()).toBe(true)
+    const _downloadButton = wrapper.find('.player-download-icon')
+    expect(_downloadButton.exists()).toBe(true)
   })
+
+  test('show hideSkipMobile and download elements on mobile', () => {
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, showDownload, hideSkipMobile: false, hideDownloadMobile: false
+      }
+    })
+    const _back15 = wrapper.find('.player-back-15-icon')
+    const _ahead15 = wrapper.find('.player-ahead-15-icon')
+    const _downloadButton = wrapper.find('.player-download-icon')
+    expect(_downloadButton.classes()).not.toContain('hideOnMobile')
+    expect(_ahead15.classes()).not.toContain('hideOnMobile')
+    expect(_back15.classes()).not.toContain('hideOnMobile')
+  })
+
 
   /* test('title & image & descriptionLink has a link', () => {
     const wrapper = mount(VPersistentPlayer, {
