@@ -236,7 +236,7 @@ const getImageSrc = computed(() => {
     ? String(profile.value.photoID)
     : props.imageFallbackPath
     ? props.imageFallbackPath
-    : '/default-user.jpg'
+    : 'default-user.jpg'
 })
 
 // cssvars
@@ -377,7 +377,6 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       max-width: v-bind(cssImageSizePx);
       min-width: v-bind(cssImageMinWidth);
       .author-image {
-        aspect-ratio: v-bind(cssImageRatio);
         border-radius: v-bind(cssRadius);
         background: #ffffff;
         width: 100%;

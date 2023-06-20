@@ -235,7 +235,7 @@ const closeEnlarge = () => {
       @click="props.to ? emit('image-click', props.to) : null"
     >
       <div
-        class="simple-responsive-image-holder"
+        class="v-image-publisher-holder"
         :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`"
       >
         <div v-if="isVertical" class="bg">
@@ -247,7 +247,7 @@ const closeEnlarge = () => {
             :loading="loading"
           />
         </div>
-        <tempate v-if="allowPreview">
+        <template v-if="allowPreview">
           <Image
             class="image prime-image"
             :class="isVertical ? 'is-vertical' : ''"
@@ -266,12 +266,14 @@ const closeEnlarge = () => {
             @keypress="emit('keypress', $event.target.value)"
           >
             <template v-if="allowPreview" #indicatoricon>
-              <Button
-                icon="pi pi-clone"
-                class="p-button-sm enlarge-button"
-                aria-label="Enlarge Image"
-                @click="emit('enlarge', $event.target.value)"
-              ></Button>
+              <ClientOnly>
+                <Button
+                  icon="pi pi-clone"
+                  class="p-button-sm enlarge-button"
+                  aria-label="Enlarge Image"
+                  @click.prevent="emit('enlarge', $event.target.value)"
+                ></Button>
+              </ClientOnly>
             </template>
           </Image>
           <div v-if="loadingEnlargedImage">
@@ -291,7 +293,7 @@ const closeEnlarge = () => {
               />
             </Teleport>
           </div>
-        </tempate>
+        </template>
         <img
           v-else
           class="image native-image prime-img-class"
@@ -311,73 +313,74 @@ const closeEnlarge = () => {
 </template>
 
 <style lang="scss">
-.simple-responsive-image-holder {
-  line-height: 0;
-  position: relative;
-  overflow: hidden;
-  .image {
+.v-image-publisher {
+  .v-image-publisher-holder {
+    line-height: 0;
     position: relative;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    object-fit: cover;
-    &.is-vertical {
-      margin: auto;
-      display: block;
-    }
-    .p-image-preview-indicator {
-      // remove the default indicator and just use the button
-      background-color: transparent !important;
-      opacity: 1;
-      width: 0;
-      height: 0;
-      border: none;
-    }
-    img {
-      cursor: default;
-    }
-  }
-  .enlarge-button {
-    background-color: rgba(var(--primary-color-rgb), 0.8);
-    border-color: transparent;
-    // pointer-events: none;
-    position: absolute;
-    top: var(--v-image-button-padding);
-    left: var(--v-image-button-padding);
-  }
-  .bg {
-    pointer-events: none;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
     overflow: hidden;
-    &:after {
-      content: '';
-      background-color: RGB(var(--surface-900));
+    .image {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      object-fit: cover;
+      &.is-vertical {
+        margin: auto;
+        display: block;
+      }
+      .p-image-preview-indicator {
+        // remove the default indicator and just use the button
+        background-color: transparent !important;
+        opacity: 1;
+        width: 0;
+        height: 0;
+        border: none;
+      }
+      img {
+        cursor: pointer;
+      }
+    }
+    .enlarge-button {
+      background-color: rgba(var(--primary-color-rgb), 0.8);
+      border-color: transparent;
+      position: absolute;
+      top: var(--v-image-button-padding);
+      left: var(--v-image-button-padding);
+    }
+    .bg {
+      pointer-events: none;
       width: 100%;
       height: 100%;
       position: absolute;
       top: 0;
       left: 0;
-      opacity: 0.7;
-    }
-    img {
-      width: 100%;
-      filter: blur(3px) grayscale(100%);
-      object-fit: cover;
-      height: inherit;
+      overflow: hidden;
+      &:after {
+        content: '';
+        background-color: RGB(var(--surface-900));
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        opacity: 0.7;
+      }
+      img {
+        width: 100%;
+        filter: blur(3px) grayscale(100%);
+        object-fit: cover;
+        height: inherit;
+      }
     }
   }
-}
-.p-component-overlay {
-  overflow: hidden;
-  .p-image-toolbar {
-    z-index: 1;
-  }
-  .p-progress-spinner {
+  .p-component-overlay {
     overflow: hidden;
+    .p-image-toolbar {
+      z-index: 1;
+    }
+    .p-progress-spinner {
+      overflow: hidden;
+    }
   }
 }
 </style>

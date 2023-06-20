@@ -256,7 +256,7 @@ export const ImageSizes = Template.bind({})
 ImageSizes.args = {
     profileData: profileFromArticle,
 
-    sizes: [2, 3, 4],
+    sizes: 'xs:30 sm:100 md:200',
 }
 export const SlottedContent = TemplateSlots.bind({})
 SlottedContent.args = {

@@ -137,6 +137,76 @@ describe('VPerson', () => {
 
   })
 
+  test('it renders a vertical layout', () => {
+    createComponent({
+      props: { profileData, vertical: true }
+    })
+
+    const _profile = wrapper.find('.author-profile')
+    expect(_profile.classes()).toContain('vertical')
+
+  })
+
+  test('it renders custom CTA', () => {
+    createComponent({
+      props: { profileData, ctaText: 'custom cta' }
+    })
+
+    const _cta = wrapper.find('.cta')
+    expect(_cta.text()).toMatch('custom cta')
+
+  })
+
+  test('it hides CTA', () => {
+    createComponent({
+      props: { profileData, showCta: false }
+    })
+
+    const _cta = wrapper.find('.cta')
+    expect(_cta.exists()).toBe(false)
+
+  })
+
+  test('it hides social links', () => {
+    createComponent({
+      props: { profileData, showSocial: false }
+    })
+
+    const _social = wrapper.find('.v-share-tools')
+    expect(_social.exists()).toBe(false)
+
+  })
+
+  test('it truncates the bio', () => {
+    createComponent({
+      props: { profileData, truncate: 2 }
+    })
+
+    const _bio = wrapper.find('.bio')
+    expect(_bio.classes()).toContain('truncate', 't2lines')
+
+  })
+
+  test('it loads the image eagerly', () => {
+    createComponent({
+      props: { profileData, loading: 'eager' }
+    })
+
+    const _img = wrapper.find('.image')
+    expect(_img.attributes('loading')).toBe('eager')
+
+  })
+
+  test('it loads just the image', () => {
+    createComponent({
+      props: { profileData, justImage: true }
+    })
+
+    const _info = wrapper.find('.info')
+    expect(_info.exists()).toBe(false)
+
+  })
+
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: { profileData }

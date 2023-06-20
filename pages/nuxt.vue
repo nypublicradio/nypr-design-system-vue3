@@ -100,7 +100,7 @@ const profileFromArticleNoPhoto = {
       HERO BUFFER
     </div> -->
     <div style="max-width: 1024px; margin: 0 auto">
-      <VCard
+      <!-- <VCard
         image-src="329944"
         title="Title with some <em>HTML</em>"
         link="https://www.google.com"
@@ -109,7 +109,7 @@ const profileFromArticleNoPhoto = {
         :width="300"
         :height="200"
         alt="alt text"
-      />
+      /> -->
       <!-- <div class="grid">
         <div class="col-12 md:col-6">
           <VCard
@@ -137,12 +137,14 @@ const profileFromArticleNoPhoto = {
         </div>
       </div> -->
       <div class="grid">
-        <!-- <div class="col-12 md:col-6">
-          <VPerson
-            :profile-data="profileFromArticleNoPhoto"
+        <div class="col-12 md:col-6">
+          <!-- <VPerson
+            :profile-data="profileFromArticle"
+            vertical
             sizes="xs:30 sm:100 md:200"
-          />
+          /> -->
         </div>
+        <!--
         <div class="col-12 md:col-6">
           <VPerson
             :profile-data="profileFromArticleNoPhoto"
@@ -187,7 +189,7 @@ const profileFromArticleNoPhoto = {
               <VImageGallery count="9" gallery-link="https://www.google.com" />
             </template>
           </VImage>
-          <VImage
+          <!-- <VImage
             src="https://ychef.files.bbci.co.uk/1600x900/p07ryyyj.webp"
             alt="this is alt text"
             :width="700"
@@ -209,13 +211,32 @@ const profileFromArticleNoPhoto = {
             to="https://www.thomasbono.com"
             @load="doSomethingOnLoad"
           >
-          </VImage>
+          </VImage> -->
           <VImagePublisher
-            src="https://media.wnyc.org/i/%width%/%height%/c/%quality%/2023/06/JuneteenthJeremyDaniel.jpg"
+            src="https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg"
             alt="this is alt text inline"
             :width="700"
-            :height="400"
+            :height="700"
+            :ratio="[3, 2]"
             to="https://www.thomasbono.com"
+            allow-preview
+          >
+          </VImagePublisher>
+          <VImagePublisher
+            src="https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg"
+            alt="this is alt text inline"
+            :width="700"
+            :height="700"
+            :ratio="[3, 2]"
+            to="https://www.thomasbono.com"
+          >
+          </VImagePublisher>
+          <VImagePublisher
+            src="https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg"
+            alt="this is alt text inline"
+            :width="700"
+            :height="700"
+            :ratio="[3, 2]"
           >
           </VImagePublisher>
           <!--   </Transition> -->

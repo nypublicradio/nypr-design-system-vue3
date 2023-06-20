@@ -21,7 +21,7 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
     <main>
       <slot />
     </main>
-    <VPersistentPlayer
+    <!-- <VPersistentPlayer
       data-style-mode="dark"
       :can-minimize="true"
       :show-download="true"
@@ -34,8 +34,8 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
       image="329534"
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
-    >
-      <!-- <template #chevronDown>
+    > -->
+    <!-- <template #chevronDown>
         <i class="pi pi-twitter"></i>
       </template>
       <template #chevronUp>
@@ -65,7 +65,7 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
       <template #download>
         <i class="pi pi-twitter"></i>
       </template> -->
-    </VPersistentPlayer>
+    <!-- </VPersistentPlayer> -->
   </div>
 </template>
 

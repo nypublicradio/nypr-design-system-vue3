@@ -5,12 +5,3 @@ export function mockBrowserWidth(width) {
         value: width
     })
 }
-
-export function mockMatchMedia(matches) {
-    window.matchMedia = () => ({
-        matches: matches,
-        addListener: () => { },
-        removeListener: () => { },
-        media: ''
-    })
-}
