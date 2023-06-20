@@ -139,3 +139,10 @@ PreviewAndCaptionSlotAndGallerySlot.args = {
     height: 400,
     allowPreview: true,
 }
+export const raw = Template.bind({})
+raw.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://ychef.files.bbci.co.uk/1600x900/p07ryyyj.webp',
+    width: 640,
+    height: 480,
+}

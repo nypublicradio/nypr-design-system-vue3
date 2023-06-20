@@ -7,6 +7,7 @@ import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
 import VCard from '~/v2/src/components/VCard.vue'
 //import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
 import VImage from '~/v2/src/components/VImage.vue'
+import VImagePublisher from '~/v2/src/components/VImagePublisher.vue'
 import VImageCaption from '~/v2/src/components/VImageCaption.vue'
 import VImageGallery from '~/v2/src/components/VImageGallery.vue'
 import Home from '~/src/components/Home.vue'
@@ -186,6 +187,37 @@ const profileFromArticleNoPhoto = {
               <VImageGallery count="9" gallery-link="https://www.google.com" />
             </template>
           </VImage>
+          <VImage
+            src="https://ychef.files.bbci.co.uk/1600x900/p07ryyyj.webp"
+            alt="this is alt text"
+            :width="700"
+            :height="400"
+            allow-preview
+            to="https://www.thomasbono.com"
+            @load="doSomethingOnLoad"
+          >
+          </VImage>
+          <VImage
+            src="https://cdn.shopify.com/s/files/1/0291/0214/5580/products/nhch_pManhinh2020-03-09luc10.29.52SA_33c6f18e-27a5-480f-82d5-b135439bcaa9_1946x.png?v=1595308523"
+            alt="this is alt text"
+            :width="700"
+            :height="400"
+            :max-width="1106"
+            :max-height="1658"
+            allow-preview
+            allow-vertical-effect
+            to="https://www.thomasbono.com"
+            @load="doSomethingOnLoad"
+          >
+          </VImage>
+          <VImagePublisher
+            src="https://media.wnyc.org/i/%width%/%height%/c/%quality%/2023/06/JuneteenthJeremyDaniel.jpg"
+            alt="this is alt text inline"
+            :width="700"
+            :height="400"
+            to="https://www.thomasbono.com"
+          >
+          </VImagePublisher>
           <!--   </Transition> -->
         </div>
         <!-- <div class="col-6">
