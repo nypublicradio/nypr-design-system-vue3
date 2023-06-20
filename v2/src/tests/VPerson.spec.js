@@ -62,7 +62,7 @@ describe('VPerson', () => {
       }
     ]
   }
-  const namePrefix = null
+  const namePrefix = 'By'
   const imageSize = 100
   const minWidth = null
   const imageFlexBasis = '20%'
@@ -124,6 +124,16 @@ describe('VPerson', () => {
     for (var i = 0; i < _flexibleLinks.length; i++) {
       expect(_flexibleLinks.classes().toContain('flexible-link').attributes('href')).toBe(profileData.url)
     }
+
+  })
+
+  test('it renders custom prefix', async () => {
+    createComponent({
+      props: { profileData, namePrefix }
+    })
+
+    const _name = wrapper.find('.name-link .name')
+    expect(_name.text()).toContain(namePrefix)
 
   })
 
