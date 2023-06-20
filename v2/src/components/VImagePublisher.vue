@@ -4,6 +4,7 @@ import Image from 'primevue/image'
 import VFlexibleLink from './VFlexibleLink.vue'
 import ProgressSpinner from 'primevue/progressspinner'
 import Button from 'primevue/button'
+
 /** * Responsive image component, generates a srcset with multiple image sizes for different display densities. */
 
 const props = defineProps({
@@ -114,7 +115,16 @@ const props = defineProps({
     default: false,
   },
 })
+const formatPublisherImageUrl = (url) => {
+  return url.replace('%s/%s/%s/%s', '%width%/%height%/c/%quality%')
+}
+const formatRawPublisherImageUrl = (url) => {
+  return url.replace('%s/%s/%s/%s', 'raw')
+}
+
 const emit = defineEmits(['image-click', 'keypress', 'enlarge'])
+const srcFormatted = formatPublisherImageUrl(props.src)
+const srcRaw = formatRawPublisherImageUrl(props.src)
 
 let isVertical = ref(false)
 let loadingEnlargedImage = ref(false)
@@ -126,7 +136,7 @@ const computedWidth = computed(() => {
 })
 
 const computedSrc = computed(() => {
-  const template = props.src
+  const template = srcFormatted
 
   return template
     ? template
@@ -136,19 +146,8 @@ const computedSrc = computed(() => {
     : undefined
 })
 
-const computedEnlargeSrc = computed(() => {
-  const template = props.src
-
-  return template
-    ? template
-        .replace(props.widthToken, props.maxWidth)
-        .replace(props.heightToken, props.maxHeight)
-        .replace(props.qualityToken, 80)
-    : undefined
-})
-
 const computedSrcBg = computed(() => {
-  const template = props.src
+  const template = srcFormatted
   return template
     ? template
         .replace(props.widthToken, props.width)
@@ -158,7 +157,7 @@ const computedSrcBg = computed(() => {
 })
 
 const srcset = computed(() => {
-  const template = props.src
+  const template = srcFormatted
   if (template) {
     // If this is just a plain string with no tokens,
     // we don't need to generate a srcset
@@ -217,7 +216,7 @@ const enlarge = () => {
   loadingEnlargedImage.value = true
   const img = document.getElementsByClassName('p-image-preview')
   img[0].setAttribute('alt', props.alt)
-  img[0].setAttribute('src', computedEnlargeSrc.value)
+  img[0].setAttribute('src', srcRaw)
 }
 
 const closeEnlarge = () => {

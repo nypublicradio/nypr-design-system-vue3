@@ -62,14 +62,6 @@ EagerLoading.args = {
     height: 400,
     loading: 'eager'
 }
-export const URLPath = Template.bind({})
-URLPath.args = {
-    alt: 'Fallback alt text here',
-    src: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
-    width: 600,
-    height: 400,
-    provider: null
-}
 export const localImage = Template.bind({})
 localImage.args = {
     alt: 'Fallback alt text here',
@@ -115,8 +107,8 @@ VerticalEffect.args = {
     verticalBgColorOpacity: '0.8',
     verticalBgColor: '#000000',
 }
-export const Preview = Template.bind({})
-Preview.args = {
+export const Enlarge = Template.bind({})
+Enlarge.args = {
     alt: 'Fallback alt text here',
     src: '329944',
     width: 600,
@@ -142,7 +134,8 @@ PreviewAndCaptionSlotAndGallerySlot.args = {
 export const raw = Template.bind({})
 raw.args = {
     alt: 'Fallback alt text here',
-    src: 'https://ychef.files.bbci.co.uk/1600x900/p07ryyyj.webp',
-    width: 640,
-    height: 480,
+    src: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
+    width: 600,
+    height: 400,
+    provider: null
 }
