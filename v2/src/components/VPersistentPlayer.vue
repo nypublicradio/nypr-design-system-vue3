@@ -546,7 +546,7 @@ defineExpose({
             <slot name="expanded-header">
               <div class="flex">
                 <Button
-                  class="p-button-icon-only p-button-text p-button-secondary"
+                  class="unexpand-btn p-button-icon-only p-button-text p-button-secondary"
                   @click="toggleExpanded(!isExpanded)"
                 >
                   <slot name="unexpanded-button-icon">

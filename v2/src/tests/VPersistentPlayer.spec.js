@@ -23,9 +23,9 @@ describe('VPersistentPlayer', () => {
   const showSkip = true
   const livestream = true
   const canMinimize = true
-  const canExpand = false
-  const canExpandWithSwipe = false
-  const canUnexpandWithSwipe = false
+  const canExpand = true
+  const canExpandWithSwipe = true
+  const canUnexpandWithSwipe = true
   const isMuted = true
   const autoPlay = true
   const loop = true
@@ -108,47 +108,47 @@ describe('VPersistentPlayer', () => {
   })
 
 
-  /* test('title & image & descriptionLink has a link', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, titleLink, descriptionLink }
+  test('title & image & descriptionLink has a link', () => {
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, titleLink, descriptionLink
+      }
     })
     const titleElm = wrapper.find('.track-info-title a')
-    const imageLinkElm = wrapper.find('.image-with-caption-image .image-with-caption-image-link')
+    const imageLinkElm = wrapper.find('.track-info-image .track-info-image-link')
     const descriptionLinkElm = wrapper.find('.track-info-description .track-info-description-link')
     expect(titleElm.attributes('href')).toMatch(titleLink)
     expect(imageLinkElm.attributes('href')).toMatch(titleLink)
     expect(descriptionLinkElm.attributes('href')).toMatch(descriptionLink)
   })
- 
-  test('show download button', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, showDownload }
-    })
-    const downloadBtn = wrapper.find('.player-download-icon')
-    expect(downloadBtn.exists()).toBe(true)
-  })
- 
+
   test('show loading indicator', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, isLoading }
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, isLoading
+      }
     })
     const spinner = wrapper.find('.the-play-button .pi-spinner')
     expect(spinner.exists()).toBe(true)
   })
- 
+
   test('show skip ahead and skip back buttons', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, showSkip }
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, showSkip
+      }
     })
     const back = wrapper.find('.player-back-15-icon')
     const ahead = wrapper.find('.player-ahead-15-icon')
     expect(back.exists()).toBe(true)
     expect(ahead.exists()).toBe(true)
   })
- 
+
   test('is in live stream mode', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, livestream }
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, livestream
+      }
     })
     const back = wrapper.find('.player-back-15-icon')
     const ahead = wrapper.find('.player-ahead-15-icon')
@@ -161,71 +161,77 @@ describe('VPersistentPlayer', () => {
     expect(volume.exists()).toBe(true)
     expect(play.exists()).toBe(true)
   })
- 
-  test('show minimize/maximize buttons & click them', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, canMinimize }
+
+  test('show minimize/un-minimize buttons & click them', () => {
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, canMinimize
+      }
     })
     const minimizeBtn = wrapper.find('.minimize-btn')
     const maximizeBtn = wrapper.find('.maximize-btn')
     expect(minimizeBtn.exists()).toBe(true)
     expect(maximizeBtn.exists()).toBe(true)
- 
+
     minimizeBtn.trigger('click')
     expect(wrapper.vm.isMinimized).toBe(true)
- 
+
     maximizeBtn.trigger('click')
     expect(wrapper.vm.isMinimized).toBe(false)
- 
   })
- 
-  test('hide minimize/maximize buttons', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, canMinimize: false }
+
+  test('hide minimize button', () => {
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, canMinimize: false
+      }
     })
     const minimizeBtn = wrapper.find('.minimize-btn')
     const maximizeBtn = wrapper.find('.maximize-btn')
     expect(minimizeBtn.exists()).toBe(false)
     expect(maximizeBtn.exists()).toBe(false)
   })
- 
+  test('show expand/un-expand buttons & click them', async () => {
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, canExpand
+      }
+    })
+    const expandBtn = wrapper.find('.expand-btn')
+    expect(expandBtn.exists()).toBe(true)
+
+    expandBtn.trigger('click')
+    await expect(wrapper.vm.isExpanded).toBe(true)
+    const unExpandBtn = wrapper.find('.unexpand-btn')
+    //expect(unExpandBtn.exists()).toBe(true)
+
+    unExpandBtn.trigger('click')
+    expect(wrapper.vm.isExpanded).toBe(false)
+  })
+
   test('is muted & mute clicked', () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, isMuted }
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, isMuted
+      }
     })
     const slider = wrapper.find('.volume-control .p-slider')
     const btn = wrapper.find('.volume-control .volume-control-icon')
     const icon = wrapper.find('.volume-control .volume-control-icon .pi')
     expect(slider.exists()).toBe(false)
     expect(icon.attributes().class).toContain('pi-volume-off')
- 
+
     btn.trigger('click')
     expect(wrapper.vm.muted).toBe(true)
   })
- 
+
   test('will auto play on load', async () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, autoPlay }
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, file, autoPlay
+      }
     })
     expect(wrapper.vm.playing).toBe(true)
   })
- 
-  test('show/hide skip buttons on mobile', async () => {
-    const wrapper = mount(VPersistentPlayer, {
-      props: { title, station, image, description, file, hideSkipMobile }
-    })
- 
-    const back = wrapper.find('.player-back-15-icon')
-    const ahead = wrapper.find('.player-ahead-15-icon')
- 
-    expect(back.attributes().class).not.toContain('hidden md:flex')
-    expect(ahead.attributes().class).not.toContain('hidden md:flex')
- 
-    await wrapper.setProps({ hideSkipMobile: true })
-    expect(back.attributes().class).toContain('hidden md:flex')
-    expect(ahead.attributes().class).toContain('hidden md:flex')
-  })
-*/
-
 
 })

@@ -17,8 +17,10 @@ const emitClick = (type, event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
 }
+const showImage = ref(false)
 
 const doSomethingOnLoad = () => {
+  showImage.value = true
   console.log('doSomethingOnLoad')
 }
 const profileFromArticle = {
@@ -93,9 +95,9 @@ const profileFromArticleNoPhoto = {
 
 <template>
   <div class="pb-8">
-    <div style="height: 600px; text-align: center; background-color: #f1f1f1">
+    <!--     <div style="height: 600px; text-align: center; background-color: #f1f1f1">
       HERO BUFFER
-    </div>
+    </div> -->
     <div style="max-width: 1024px; margin: 0 auto">
       <VCard
         image-src="329944"
@@ -165,6 +167,8 @@ const profileFromArticleNoPhoto = {
       </div>
       <div class="grid">
         <div class="col-6">
+          <!--   <Transition name="zoom"> -->
+          <!-- v-show="showImage" -->
           <VImage
             src="329944"
             alt="this is alt text"
@@ -174,8 +178,6 @@ const profileFromArticleNoPhoto = {
             allow-preview
             to="https://www.thomasbono.com"
             @load="doSomethingOnLoad"
-            @click="doSomethingOnLoad"
-            @keypress="doSomethingOnLoad"
           >
             <!-- <template #caption>
               <VImageCaption text="This is a sample caption text <b>HTML</b>" />
@@ -184,6 +186,7 @@ const profileFromArticleNoPhoto = {
               <VImageGallery count="9" gallery-link="https://www.google.com" />
             </template>
           </VImage>
+          <!--   </Transition> -->
         </div>
         <!-- <div class="col-6">
           <VImage
