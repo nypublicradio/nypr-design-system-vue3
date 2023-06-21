@@ -123,13 +123,14 @@ Ratio.args = {
     height: 400,
     ratio: [6, 2],
 }
-export const PreviewAndCaptionSlotAndGallerySlot = TemplateSlots.bind({})
-PreviewAndCaptionSlotAndGallerySlot.args = {
+export const PreviewAndCaptionSlotAndGallerySlotAndImageLink = TemplateSlots.bind({})
+PreviewAndCaptionSlotAndGallerySlotAndImageLink.args = {
     alt: 'Fallback alt text here',
     src: '329944',
     width: 600,
     height: 400,
     allowPreview: true,
+    to: 'https://www.imgLink.com'
 }
 export const raw = Template.bind({})
 raw.args = {

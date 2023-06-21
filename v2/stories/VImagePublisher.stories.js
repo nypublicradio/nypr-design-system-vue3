@@ -1,4 +1,7 @@
 import VImagePublisher from '../src/components/VImagePublisher.vue'
+import VImageGallery from '../src/components/VImageGallery.vue'
+import VImageCaption from '../src/components/VImageCaption.vue'
+
 
 export default {
     title: 'Components-V2/VImagePublisher',
@@ -22,6 +25,14 @@ const Template = (args) => ({
         return { args }
     },
     template: '<v-image-publisher v-bind="args" />',
+})
+
+const TemplateSlots = (args) => ({
+    components: { VImagePublisher, VImageCaption, VImageGallery },
+    setup() {
+        return { args }
+    },
+    template: '<VImagePublisher v-bind="args"> <template #caption> <VImageCaption text="This is a sample caption text <b>HTML</b>" /> </template> <template #gallery> <VImageGallery count="9" gallery-link="https://www.google.com" /> </VImagePublisher> </template>',
 })
 
 export const Default = Template.bind({})
@@ -86,4 +97,14 @@ Vertical.args = {
     maxWidth: 1395,
     maxHeight: 1860,
     allowVerticalEffect: true,
+}
+
+export const PreviewAndCaptionSlotAndGallerySlotandImageLink = TemplateSlots.bind({})
+PreviewAndCaptionSlotAndGallerySlotandImageLink.args = {
+    alt: 'Fallback alt text here',
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
+    width: 600,
+    height: 400,
+    allowPreview: true,
+    to: 'https://www.imgLink.com',
 }

@@ -334,12 +334,16 @@ const closeEnlarge = () => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scroped>
 .v-image-publisher {
   .v-image-publisher-holder {
     line-height: 0;
     position: relative;
     overflow: hidden;
+    .p-image-preview-container > img {
+      cursor: default !important;
+    }
+
     .image {
       position: relative;
       width: 100%;
@@ -357,9 +361,6 @@ const closeEnlarge = () => {
         width: 0;
         height: 0;
         border: none;
-      }
-      img {
-        cursor: pointer;
       }
     }
     .enlarge-button {
@@ -408,5 +409,8 @@ const closeEnlarge = () => {
   .slot:empty {
     display: none;
   }
+}
+.p-image-toolbar {
+  z-index: 2;
 }
 </style>

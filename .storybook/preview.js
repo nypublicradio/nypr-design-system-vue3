@@ -36,7 +36,7 @@ setup((app) => {
       log() {
       },
     },
-    template: '<template><slot></slot></template>',
+    template: '<slot></slot>',
   })
 
 })
