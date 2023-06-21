@@ -115,7 +115,7 @@ const getUniqueKey = (author) => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .v-byline {
   color: var(--text-color);
   display: flex;

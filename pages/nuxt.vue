@@ -182,9 +182,9 @@ const profileFromArticleNoPhoto = {
             to="https://www.thomasbono.com"
             @load="doSomethingOnLoad"
           >
-            <!-- <template #caption>
+            <template #caption>
               <VImageCaption text="This is a sample caption text <b>HTML</b>" />
-            </template>-->
+            </template>
             <template #gallery>
               <VImageGallery count="9" gallery-link="https://www.google.com" />
             </template>
@@ -212,17 +212,23 @@ const profileFromArticleNoPhoto = {
             @load="doSomethingOnLoad"
           >
           </VImage> -->
-          <!-- <VImagePublisher
+          <VImagePublisher
             src="https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg"
             alt="this is alt text inline"
             :width="700"
             :height="700"
             :ratio="[3, 2]"
-            to="https://www.thomasbono.com"
             allow-preview
+            to="https://www.thomasbono.com"
           >
+            <template #caption>
+              <VImageCaption text="This is a sample caption text <b>HTML</b>" />
+            </template>
+            <template #gallery>
+              <VImageGallery count="9" gallery-link="https://www.google.com" />
+            </template>
           </VImagePublisher>
-          <VImagePublisher
+          <!--<VImagePublisher
             src="https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg"
             alt="this is alt text inline"
             :width="700"

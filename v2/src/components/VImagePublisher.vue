@@ -88,6 +88,26 @@ const props = defineProps({
     type: Boolean,
     default: false,
   },
+  /**
+   * tint the grey blured background image
+   * */
+  verticalBgColor: {
+    type: String,
+    default: '#f1f1f1',
+  },
+  /**
+   *  the opacity of the tint of the grey blured background image
+   */
+  verticalBgColorOpacity: {
+    type: String,
+    default: '0.6',
+  },
+  /**
+   *  ammount of blur for the blured background image */
+  verticalBgBlur: {
+    type: String,
+    default: '3px',
+  },
   /** * allow the user to click on the image to open a lightbox */
   allowPreview: {
     type: Boolean,
@@ -307,6 +327,8 @@ const closeEnlarge = () => {
           :loading="loading"
           @keypress="emit('keypress', $event.target.value)"
         />
+        <slot class="slot caption" name="caption"></slot>
+        <slot class="slot gallery" name="gallery"></slot>
       </div>
     </VFlexibleLink>
   </div>
@@ -346,6 +368,7 @@ const closeEnlarge = () => {
       position: absolute;
       top: var(--v-image-button-padding);
       left: var(--v-image-button-padding);
+      z-index: 2;
     }
     .bg {
       pointer-events: none;
@@ -357,17 +380,17 @@ const closeEnlarge = () => {
       overflow: hidden;
       &:after {
         content: '';
-        background-color: RGB(var(--surface-900));
+        background-color: v-bind(verticalBgColor);
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         left: 0;
-        opacity: 0.7;
+        opacity: v-bind(verticalBgColorOpacity);
       }
       img {
         width: 100%;
-        filter: blur(3px) grayscale(100%);
+        filter: blur(v-bind(verticalBgBlur)) grayscale(100%);
         object-fit: cover;
         height: inherit;
       }
@@ -381,6 +404,9 @@ const closeEnlarge = () => {
     .p-progress-spinner {
       overflow: hidden;
     }
+  }
+  .slot:empty {
+    display: none;
   }
 }
 </style>
