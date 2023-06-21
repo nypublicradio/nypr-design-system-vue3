@@ -406,9 +406,6 @@ const closeEnlarge = () => {
       overflow: hidden;
     }
   }
-  .slot:empty {
-    display: none;
-  }
 }
 .p-image-toolbar {
   z-index: 2;

@@ -1,37 +1,34 @@
 import { mount } from '@vue/test-utils'
-import VImage from '../components/VImage.vue'
+import VImagePublisher from '../components/VImagePublisher.vue'
 import PrimeVue from 'primevue/config'
 import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
-describe('VImage', () => {
+describe('VImagePublisher', () => {
   let wrapper = {}
-  const provider = 'wagtail'
   const alt = ''
   const loading = 'lazy'
-  const src = 329944
+  const src = 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg'
   const width = 600
   const height = 400
   const maxWidth = Infinity
   const maxHeight = Infinity
   const sizes = ''
-  const density = 'x1 x2'
   const quality = 80
-  const modifiers = null
   const allowVerticalEffect = false
   const verticalBgColor = '#f1f1f1'
   const verticalBgColorOpacity = '0.6'
   const verticalBgBlur = '3px'
   const allowPreview = false
   const ratio = [3, 2]
-  const to = null
+  const to = 'https://www.google.com'
   const isDecorative = false
 
   const createComponent = ({ props = {}, slots = {} } = {}) => {
 
-    wrapper = mount(VImage, {
+    wrapper = mount(VImagePublisher, {
       props,
       global: {
         plugins: [PrimeVue],
@@ -91,7 +88,7 @@ describe('VImage', () => {
   test('is a vertical image effect', () => {
     createComponent({
       props: {
-        src: 329836,
+        src,
         width,
         height,
         maxWidth: 2598,
@@ -112,7 +109,7 @@ describe('VImage', () => {
         allowPreview: true,
       }
     })
-    const _enlargeBtn = wrapper.find('.enlarge-button-holder')
+    const _enlargeBtn = wrapper.find('.enlarge-button')
     expect(_enlargeBtn.exists()).toBe(true)
   })
 
@@ -125,7 +122,7 @@ describe('VImage', () => {
         ratio: [6, 2],
       }
     })
-    const _imgHolder = wrapper.find('.v-image-holder')
+    const _imgHolder = wrapper.find('.v-image-publisher-holder')
     expect(_imgHolder.attributes('style')).toContain('aspect-ratio: 6 / 2')
   })
 
