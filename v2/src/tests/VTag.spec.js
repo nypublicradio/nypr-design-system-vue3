@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import VTag from '../components/VTag.vue'
+import PrimeVue from 'primevue/config'
 import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
@@ -15,11 +16,12 @@ describe('VTag', () => {
   const createComponent = ({ props = {} } = {}) => {
     wrapper = mount(VTag, {
       props,
-      // global: {
-      //   stubs: {
-      //     'nuxt-link': true
-      //   }
-      // }
+      global: {
+        plugins: [PrimeVue],
+        stubs: {
+          //'nuxt-link': true
+        }
+      }
     })
   }
 

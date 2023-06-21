@@ -1,6 +1,7 @@
 import { mount, shallowMount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
 import VShareToolsItem from '../components/VShareToolsItem.vue'
+import PrimeVue from 'primevue/config'
 import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
@@ -19,6 +20,7 @@ describe('VShareToolsItem', () => {
     wrapper = mount(VShareToolsItem, {
       props,
       global: {
+        plugins: [PrimeVue],
         stubs: {
           'nuxt-link': true
         }

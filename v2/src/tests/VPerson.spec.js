@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import VPerson from '../components/VPerson.vue'
+import PrimeVue from 'primevue/config'
 import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
@@ -90,6 +91,7 @@ describe('VPerson', () => {
     wrapper = mount(VPerson, {
       props,
       global: {
+        plugins: [PrimeVue],
         stubs: {
 
         }

@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import VCounter from '../components/VCounter.vue'
+import PrimeVue from 'primevue/config'
 import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
@@ -16,6 +17,7 @@ describe('VCounter', () => {
     wrapper = mount(VCounter, {
       props,
       global: {
+        plugins: [PrimeVue],
         stubs: {
 
         }

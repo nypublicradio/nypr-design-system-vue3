@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import VCard from '../components/VCard.vue'
+import PrimeVue from 'primevue/config'
 import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
@@ -22,6 +23,7 @@ describe('VCard', () => {
     wrapper = mount(VCard, {
       props,
       global: {
+        plugins: [PrimeVue],
         stubs: {
 
         }

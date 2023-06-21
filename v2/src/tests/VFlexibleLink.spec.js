@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import VFlexibleLink from '../components/VFlexibleLink.vue'
+import PrimeVue from 'primevue/config'
 import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
@@ -24,6 +25,7 @@ describe('VFlexibleLink', () => {
         default: 'link text',
       },
       global: {
+        plugins: [PrimeVue],
         stubs: {
           'nuxt-link': true
         }

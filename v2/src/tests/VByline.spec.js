@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import VByline from '../components/VByline.vue'
+import PrimeVue from 'primevue/config'
 import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
@@ -93,6 +94,7 @@ describe('VByline', () => {
     wrapper = mount(VByline, {
       props,
       global: {
+        plugins: [PrimeVue],
         stubs: {
 
         }

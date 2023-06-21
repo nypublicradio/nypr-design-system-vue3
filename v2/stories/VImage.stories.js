@@ -65,7 +65,7 @@ EagerLoading.args = {
 export const localImage = Template.bind({})
 localImage.args = {
     alt: 'Fallback alt text here',
-    src: '/default-user.jpg',
+    src: 'default-user.jpg',
     width: 600,
     height: 400,
     provider: null
@@ -98,8 +98,8 @@ export const VerticalEffect = Template.bind({})
 VerticalEffect.args = {
     alt: 'Fallback alt text here',
     src: '329836',
-    width: 800,
-    height: 533,
+    width: 640,
+    height: 480,
     maxWidth: 2598,
     maxHeight: 3484,
     allowVerticalEffect: true,

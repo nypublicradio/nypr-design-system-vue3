@@ -1,5 +1,6 @@
 import { mount } from '@vue/test-utils'
 import VSmartHeader from '../components/VSmartHeader.vue'
+import PrimeVue from 'primevue/config'
 import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
 
@@ -16,6 +17,7 @@ describe('VSmartHeader', () => {
     wrapper = mount(VSmartHeader, {
       props,
       global: {
+        plugins: [PrimeVue],
         stubs: {
         }
       },
