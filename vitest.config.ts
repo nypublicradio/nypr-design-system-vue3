@@ -15,7 +15,7 @@ export default ({ mode }) => {
       globals: true,
       environment: 'jsdom',
       coverage: {
-        provider: 'istanbul'
+        provider: 'v8'
       },
     },
     css: {
