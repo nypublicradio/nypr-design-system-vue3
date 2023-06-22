@@ -24,21 +24,23 @@ const emit = defineEmits(['name-click', 'organization-click'])
     >
       {{ props.author?.firstName }} {{ props.author?.lastName }}
     </VFlexibleLink>
-    <span v-if="props.author?.organization" class="v-byline-parens"> (</span>
-    <VFlexibleLink
-      v-if="props.author?.organization"
-      :to="props.author?.organizationUrl || null"
-      class="v-byline-contributing-org"
-      @click="
-        () =>
-          emit('organization-click', {
-            text: props.author?.organization,
-            url: props.author?.organizationUrl,
-          })
-      "
-    >
-      {{ props.author?.organization }}
-    </VFlexibleLink>
-    <span v-if="props.author?.organization" class="v-byline-parens">)</span>
+    <template v-if="props.author?.organization">
+      <span class="v-byline-parens">&nbsp;(</span>
+      <VFlexibleLink
+        :to="props.author?.organizationUrl || null"
+        class="v-byline-contributing-org"
+        style="display: inline"
+        @click="
+          () =>
+            emit('organization-click', {
+              text: props.author?.organization,
+              url: props.author?.organizationUrl,
+            })
+        "
+      >
+        {{ props.author?.organization }}
+      </VFlexibleLink>
+      <span class="v-byline-parens">)</span>
+    </template>
   </div>
 </template>

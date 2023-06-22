@@ -50,9 +50,9 @@ describe('VByline', () => {
     },
     {
       id: 146861,
-      firstName: "Thomas",
-      lastName: "Bono",
-      name: "Thomas Bono",
+      firstName: "Peter",
+      lastName: "Gibbons",
+      name: "Peter Gibbons",
       photoID: 327577,
       jobTitle: "Front End Developer",
       biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
@@ -137,7 +137,7 @@ describe('VByline', () => {
       }
     })
     expect(wrapper.text()).toContain(`:`)
-    expect(wrapper.text()).toContain(`or Thomas Bono`)
+    expect(wrapper.text()).toContain(`or Peter Gibbons`)
   })
 
   test('Image Slot', () => {
@@ -184,4 +184,35 @@ describe('VByline', () => {
     const results = await axe(axeWrapper.element)
     expect(results).toHaveNoViolations()
   })
+
+  test('name click fires emit', () => {
+    createComponent({
+      props: {
+        authors,
+        prefix
+      }
+
+    })
+    const name = wrapper.findAll('.v-byline-unit .v-byline-author-name')
+    name[0].trigger('click')
+
+    expect(wrapper.emitted()['name-click']).toBeTruthy()
+    expect(wrapper.emitted()['name-click']).toEqual([[{ text: `${authors[0].firstName} ${authors[0].lastName}`, url: authors[0].url }]])
+  })
+
+  test('org click fires emit', () => {
+    createComponent({
+      props: {
+        authors,
+        prefix
+      }
+
+    })
+    const org = wrapper.findAll('.v-byline-unit .v-byline-contributing-org')
+    org[0].trigger('click')
+
+    expect(wrapper.emitted()['organization-click']).toBeTruthy()
+    expect(wrapper.emitted()['organization-click']).toEqual([[{ text: `${authors[0].organization}`, url: authors[0].organizationUrl }]])
+  })
+
 })

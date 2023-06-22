@@ -19,7 +19,7 @@ describe('VCounter', () => {
       global: {
         plugins: [PrimeVue],
         stubs: {
-
+          'nuxt-link': true,
         }
       },
       slots

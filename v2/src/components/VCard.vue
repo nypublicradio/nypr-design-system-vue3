@@ -192,7 +192,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['title-click', 'image-click', 'credit-click'])
+const emit = defineEmits(['title-click', 'image-click'])
 
 const slots = useSlots()
 

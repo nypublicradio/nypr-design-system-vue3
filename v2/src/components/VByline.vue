@@ -51,12 +51,13 @@ const emit = defineEmits(['name-click', 'organization-click'])
 const cssAlignOption = ref(
   props.flexDirection === 'row' ? 'center' : 'flex-start'
 )
+// to support if authors is an array or object
+const authorsData = Array.isArray(props.authors)
+  ? props.authors
+  : [props.authors]
 
-// depending on the author object, we return a unique key
 const getUniqueKey = (author) => {
-  if (author.id) return author.id
-  if (author.name) return author.name.replace(/\s+/g, '-').toLowerCase()
-  return Math.floor(Math.random() * 1000)
+  return author?.id || author?.photoID || author?.lastName
 }
 </script>
 
@@ -64,46 +65,36 @@ const getUniqueKey = (author) => {
   <div class="v-byline">
     <div v-if="showImage" class="images-holder">
       <template
-        v-for="(author, index) in props.authors"
-        :key="`author-${index}-${getUniqueKey(author)}`"
+        v-for="author in authorsData"
+        :key="`author-image-${getUniqueKey(author)}`"
       >
         <slot name="images" :author="author" />
       </template>
     </div>
     <div>
       {{ props.prefix }}
-      <template v-if="Array.isArray(props.authors)">
-        <template
-          v-for="(author, index) in props.authors"
-          :key="`author-${index}-${getUniqueKey(author)}`"
-        >
-          <v-byline-unit
-            class="v-byline-unit"
-            :author="author || null"
-            @name-click="($event) => emit('name-click', $event)"
-            @organization-click="($event) => emit('organization-click', $event)"
-          />
-          <span
-            v-if="authors.length > 1 && index < authors.length - 2"
-            class="v-byline-concat"
-          >
-            {{ props.concat }}
-          </span>
-          <span
-            v-else-if="index !== authors.length - 1"
-            class="v-byline-concat"
-          >
-            {{ props.concatLast }}
-          </span>
-        </template>
-      </template>
-      <template v-else>
+      <template
+        v-for="(author, index) in authorsData"
+        :key="`author-${getUniqueKey(author)}`"
+      >
         <v-byline-unit
           class="v-byline-unit"
-          :author="props.authors"
+          :author="author || null"
           @name-click="($event) => emit('name-click', $event)"
           @organization-click="($event) => emit('organization-click', $event)"
         />
+        <span
+          v-if="authorsData.length > 1 && index < authorsData.length - 2"
+          class="v-byline-concat"
+        >
+          {{ props.concat }}
+        </span>
+        <span
+          v-else-if="index !== authorsData.length - 1"
+          class="v-byline-concat"
+        >
+          {{ props.concatLast }}
+        </span>
       </template>
     </div>
     <div class="slot-holder">

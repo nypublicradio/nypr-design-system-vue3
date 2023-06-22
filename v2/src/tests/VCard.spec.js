@@ -300,11 +300,49 @@ describe('VCard', () => {
   })
 
 
-
   test('it passes basic accessibility tests', async () => {
     const axeWrapper = mount(VCard)
     const results = await axe(axeWrapper.element)
     expect(results).toHaveNoViolations()
   })
 
+  test('title click fires emit', async () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title,
+        link,
+        subtitle,
+        blurb,
+        width,
+        height,
+      }
+    })
+    const _title = wrapper.find('.card-title-link')
+    _title.trigger('click')
+
+    expect(wrapper.emitted()['title-click']).toBeTruthy()
+    expect(wrapper.emitted()['title-click']).toEqual([[link]])
+  })
+
+  test('image click fires emit', async () => {
+    createComponent({
+      props: {
+        imageSrc,
+        alt,
+        title,
+        link,
+        subtitle,
+        blurb,
+        width,
+        height,
+      }
+    })
+    const img = wrapper.find('.card-image .flexible-link')
+    img.trigger('click')
+
+    expect(wrapper.emitted()['image-click']).toBeTruthy()
+    expect(wrapper.emitted()['image-click']).toEqual([[imageSrc]])
+  })
 })
