@@ -136,6 +136,23 @@ describe('VCounter', () => {
     expect(iconElm.classes()).toContain('pi-twitter')
   })
 
+  test('counter click fires emit', async () => {
+    createComponent({
+      props: {
+        href,
+        value,
+        icon,
+        text,
+        href,
+      }
+    })
+    const link = wrapper.find('.counter')
+    link.trigger('click')
+
+    expect(wrapper.emitted()['counter-click']).toBeTruthy()
+    expect(wrapper.emitted()['counter-click']).toEqual([[{ text: `${value} ${text}`, url: `${href}` }]])
+  })
+
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {

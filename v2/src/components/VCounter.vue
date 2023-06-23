@@ -40,6 +40,8 @@ const props = defineProps({
     required: true,
   },
 })
+
+const emit = defineEmits(['counter-click'])
 </script>
 
 <template>
@@ -47,6 +49,13 @@ const props = defineProps({
     v-if="props.value && props.value > 0"
     :to="props.href"
     class="counter"
+    @click="
+      () =>
+        emit('counter-click', {
+          text: `${props.value} ${props.text}`,
+          url: props.href,
+        })
+    "
   >
     <span v-if="props.showIcon" class="icon">
       <slot name="icon" :props="props">
