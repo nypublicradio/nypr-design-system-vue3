@@ -28,6 +28,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.5",
     "@mdx-js/react": "^2.2.1",
+    "@nuxt/devtools": "^0.6.3",
     "@nuxt/image": "rc",
     "@storybook/addon-actions": "^7.0.20",
     "@storybook/addon-console": "^2.0.0",

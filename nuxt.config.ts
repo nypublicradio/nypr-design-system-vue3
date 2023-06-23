@@ -4,6 +4,7 @@ export default {
   modules: [
     '@nuxt/image'
   ],
+
   image: {
     dir: 'assets-shared/images',
     wagtail: {
@@ -28,6 +29,7 @@ export default {
       }
     },
   },
+
   css: [
 
     `~/src/assets/themes/${envTheme}/fonts/fonts.css`,
@@ -35,6 +37,7 @@ export default {
     'primevue/resources/primevue.min.css',
     'primeicons/primeicons.css'
   ],
+
   vite: {
     css: {
       preprocessorOptions: {
@@ -44,6 +47,7 @@ export default {
       },
     },
   },
+
   //components: true,
   // components: [
   //   { path: '~/src/components/', extensions: ['vue'] }
@@ -54,14 +58,20 @@ export default {
       'composables/*/index.{ts,js,mjs,mts}' // one level directories's index.js,
     ]
   },
+
   build: {
     transpile: [
       'primevue'
     ]
   },
+
   runtimeConfig: {
     public: {
       IMAGE_BASE_URL: process.env['IMAGE_BASE_URL'] || 'https://cms.prod.nypr.digital/images/',
     }
+  },
+
+  devtools: {
+    enabled: true
   }
-}
+};
