@@ -66,6 +66,35 @@ describe('VShareToolsItem', () => {
     expect(spanExists).toBe(false)
     expect(linkTag.attributes('href')).toBe(link)
   })
+
+  test('follow emit', async () => {
+    const service = 'site'
+    createComponent({
+      props: {
+        service,
+        link
+      }
+    })
+    await wrapper.trigger('click')
+    expect(wrapper.emitted()['follow']).toBeTruthy()
+    expect(wrapper.emitted()['follow']).toEqual([[service]])
+  })
+
+  test('share emit', async () => {
+    const service = 'site'
+    createComponent({
+      props: {
+        service,
+        link,
+        action: 'share'
+      }
+    })
+    await wrapper.trigger('click')
+    expect(wrapper.emitted()['share']).toBeTruthy()
+    expect(wrapper.emitted()['share']).toEqual([[service]])
+  })
+
+
   //TODO: not sure why this test is failing
   /*
     test('username attribute works', () => {

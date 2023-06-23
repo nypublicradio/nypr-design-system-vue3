@@ -57,7 +57,7 @@
     "eslint-plugin-vue": "^9.14.1",
     "jest-axe": "^7.0.1",
     "jsdom": "^22.1.0",
-    "nuxt": "^3.5.0",
+    "nuxt": "^3.6.0",
     "prettier": "^2.8.1",
     "prismjs": "1.9.0",
     "react": "^18.2.0",

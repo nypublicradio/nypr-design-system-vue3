@@ -1,6 +1,6 @@
 <script setup>
 import VFlexibleLink from './VFlexibleLink.vue'
-const emit = defineEmits(['tagClick'])
+
 const props = defineProps({
   /**
    * url or slug or anchor to go to
@@ -17,11 +17,12 @@ const props = defineProps({
     default: null,
   },
 })
+const emit = defineEmits(['tagClick'])
 </script>
 
 <template>
   <span class="v-tag">
-    <v-flexible-link
+    <VFlexibleLink
       raw
       :to="props.slug"
       :class="props.slug ? '' : 'disabled'"
@@ -30,7 +31,7 @@ const props = defineProps({
       <div :class="`p-button p-button-rounded p-button-outlined ${props.name}`">
         <span class="p-button-label">{{ props.name }}</span>
       </div>
-    </v-flexible-link>
+    </VFlexibleLink>
   </span>
 </template>
 

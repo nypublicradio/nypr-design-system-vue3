@@ -67,6 +67,30 @@ describe('VTag', () => {
     expect(div.attributes().to).toBe(slug)
   })
 
+  test('no slug', () => {
+    createComponent({
+      props: {
+        name,
+        slug: null
+      }
+    })
+    const div = wrapper.find('.flexible-link')
+    expect(div.classes()).toContain('disabled')
+  })
+
+  test('tagClick emit', async () => {
+    createComponent({
+      props: {
+        name,
+        slug
+      }
+    })
+    const div = wrapper.find('.flexible-link')
+    await div.trigger('click')
+    expect(wrapper.emitted()['tagClick']).toBeTruthy()
+    expect(wrapper.emitted()['tagClick']).toEqual([[slug]])
+  })
+
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {
