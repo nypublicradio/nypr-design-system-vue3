@@ -135,6 +135,7 @@ const props = defineProps({
     default: false,
   },
 })
+const emit = defineEmits(['image-click', 'keypress', 'image-enlarge-click'])
 const formatPublisherImageUrl = (url) => {
   return url.replace('%s/%s/%s/%s', '%width%/%height%/c/%quality%')
 }
@@ -142,7 +143,6 @@ const formatRawPublisherImageUrl = (url) => {
   return url.replace('%s/%s/%s/%s', 'raw')
 }
 
-const emit = defineEmits(['image-click', 'keypress', 'enlarge'])
 const srcFormatted = formatPublisherImageUrl(props.src)
 const srcRaw = formatRawPublisherImageUrl(props.src)
 
@@ -291,7 +291,9 @@ const closeEnlarge = () => {
                   icon="pi pi-clone"
                   class="p-button-sm enlarge-button"
                   aria-label="Enlarge Image"
-                  @click.prevent="emit('enlarge', $event.target.value)"
+                  @click.prevent="
+                    emit('image-enlarge-click', $event.target.value)
+                  "
                 ></Button>
               </ClientOnly>
             </template>

@@ -110,6 +110,20 @@ describe('VFlexibleLink', () => {
     expect(findAnchor().attributes('target')).toBe('_self')
   })
 
+
+  test('counter click fires emit', async () => {
+    createComponent({
+      props: {
+        to: toLink
+      }
+    })
+    const link = wrapper.find('.flexible-link')
+    link.trigger('click')
+
+    expect(wrapper.emitted()['flexible-link-click']).toBeTruthy()
+    expect(wrapper.emitted()['flexible-link-click']).toEqual([[toLink]])
+  })
+
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {

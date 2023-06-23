@@ -32,7 +32,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['emit-flexible-link'])
+const emit = defineEmits(['flexible-link-click'])
 
 const isExternal = computed(() => {
   const reg = /^https?:\/\/|mailto:|tel:/i
@@ -61,7 +61,7 @@ const isAnchor = computed(() => {
     :rel="`noopener ${props.target === '_blank' ? 'noreferrer' : ''}`"
     class="flexible-link external"
     :class="{ ['raw']: raw }"
-    @click="emit('emit-flexible-link')"
+    @click="emit('flexible-link-click', to)"
   >
     <slot name="default"></slot>
   </a>
@@ -72,7 +72,7 @@ const isAnchor = computed(() => {
     target="_self"
     class="flexible-link anchor"
     :class="{ ['raw']: raw }"
-    @click="emit('emit-flexible-link')"
+    @click="emit('flexible-link-click', to)"
   >
     <slot name="default"></slot>
   </a>
@@ -82,7 +82,7 @@ const isAnchor = computed(() => {
     :class="{ ['raw']: raw }"
     :to="to"
     v-bind="{ ...$attrs }"
-    @click="emit('emit-flexible-link')"
+    @click="emit('flexible-link-click', to)"
   >
     <slot name="default"></slot>
   </nuxt-link>

@@ -147,7 +147,12 @@ const props = defineProps({
     default: false,
   },
 })
-const emit = defineEmits(['image-click', 'load', 'enlargeLoad'])
+const emit = defineEmits([
+  'image-click',
+  'image-enlarge-click',
+  'image-load',
+  'enlarge-image-load',
+])
 
 let isVertical = ref(
   props.allowVerticalEffect && props.maxHeight > props.maxWidth
@@ -164,10 +169,11 @@ const computedWidth = computed(() => {
 const enlarge = () => {
   loadingEnlargedImage.value = true
   loadedEnlargedImage.value = false
+  emit('image-enlarge-click')
 }
 
 const enlargeLoad = (target) => {
-  emit('enlargeLoad', target)
+  emit('enlarge-image-load', target)
   loadedEnlargedImage.value = true
 }
 </script>
@@ -217,7 +223,7 @@ const enlargeLoad = (target) => {
           :quality="String(props.quality)"
           :loading="loading"
           :modifiers="props.modifiers"
-          @load="emit('load', $event.target)"
+          @load="emit('image-load', $event.target)"
         />
         <slot class="slot caption" name="caption"></slot>
         <slot class="slot gallery" name="gallery"></slot>

@@ -156,6 +156,39 @@ describe('VImagePublisher', () => {
     expect(_captionButtonComp.exists()).toBe(true)
   })
 
+  test('image click fires emit', () => {
+    createComponent({
+      props: {
+        src,
+        width,
+        height,
+        to: 'https://www.google.com'
+      }
+
+    })
+    const link = wrapper.find('.flexible-link')
+    link.trigger('click')
+
+    expect(wrapper.emitted()['image-click']).toBeTruthy()
+    expect(wrapper.emitted()['image-click']).toEqual([['https://www.google.com']])
+  })
+
+  test('image-enlarge-click fires emit', () => {
+    createComponent({
+      props: {
+        src,
+        width,
+        height,
+        allowPreview: true,
+      }
+
+    })
+    const enlargeBtn = wrapper.find('.enlarge-button')
+    enlargeBtn.trigger('click')
+
+    expect(wrapper.emitted()['image-enlarge-click']).toBeTruthy()
+  })
+
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {

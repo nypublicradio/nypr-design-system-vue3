@@ -25,11 +25,12 @@ const emit = defineEmits(['gallery-click'])
     class="v-image-gallery"
     :to="props.galleryLink"
     raw
-    @click="emit('gallery-click')"
+    @click="emit('gallery-click', props.galleryLink)"
   >
     <Button
       :label="props.label"
       :badge="props.count"
+      class="gallery-button"
       aria-label="gallery button"
     >
     </Button>
