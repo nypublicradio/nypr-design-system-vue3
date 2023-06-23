@@ -63,5 +63,5 @@ export default {
     public: {
       IMAGE_BASE_URL: process.env['IMAGE_BASE_URL'] || 'https://cms.prod.nypr.digital/images/',
     }
-  },
+  }
 }
