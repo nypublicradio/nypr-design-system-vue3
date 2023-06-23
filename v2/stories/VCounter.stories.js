@@ -1,8 +1,6 @@
 import VCounter from '../src/components/VCounter.vue'
 
 export default {
-    title: 'Components-V2/VCounter',
-    component: VCounter,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -14,6 +12,8 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VCounter,
+    title: 'Components-V2/VCounter',
 }
 
 const Template = (args) => ({
@@ -34,38 +34,38 @@ const TemplateCustomIconSlot = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
+    href: "http://www.google.com",
     showIcon: true,
-    value: 40,
-    href: "http://www.google.com"
+    value: 40
 }
 
 export const CustomText = Template.bind({})
 CustomText.args = {
+    href: "http://www.google.com",
     text: "Photos",
-    value: 40,
-    href: "http://www.google.com"
+    value: 40
 }
 export const NoIcon = Template.bind({})
 NoIcon.args = {
+    href: "http://www.google.com",
     showIcon: false,
-    value: 40,
-    href: "http://www.google.com"
+    value: 40
 }
 export const CustomIconClass = Template.bind({})
 CustomIconClass.args = {
+    href: "http://www.google.com",
     icon: "pi-facebook",
-    value: 40,
-    href: "http://www.google.com"
+    value: 40
 }
 export const CustomIconSlot = TemplateCustomIconSlot.bind({})
 CustomIconSlot.args = {
-    value: 40,
-    href: "http://www.google.com"
+    href: "http://www.google.com",
+    value: 40
 }
 
 export const NoText = Template.bind({})
 NoText.args = {
-    value: 40,
+    href: "http://www.google.com",
     text: null,
-    href: "http://www.google.com"
+    value: 40
 }

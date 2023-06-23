@@ -1,10 +1,8 @@
 import VImage from '../src/components/VImage.vue'
-import VImageGallery from '../src/components/VImageGallery.vue'
 import VImageCaption from '../src/components/VImageCaption.vue'
+import VImageGallery from '../src/components/VImageGallery.vue'
 
 export default {
-    title: 'Components-V2/VImage',
-    component: VImage,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -16,6 +14,8 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VImage,
+    title: 'Components-V2/VImage',
 }
 
 const Template = (args) => ({
@@ -43,100 +43,100 @@ const TemplateLink = (args) => ({
 export const Default = Template.bind({})
 Default.args = {
     alt: 'Fallback alt text here',
+    height: 400,
     src: '329944',
     width: 600,
-    height: 400,
 }
 export const DefaultWithLink = TemplateLink.bind({})
 DefaultWithLink.args = {
     alt: 'Fallback alt text here',
+    height: 400,
     src: '329944',
     width: 600,
-    height: 400,
 }
 export const EagerLoading = Template.bind({})
 EagerLoading.args = {
     alt: 'Fallback alt text here',
-    src: '329944',
-    width: 600,
     height: 400,
-    loading: 'eager'
+    loading: 'eager',
+    src: '329944',
+    width: 600
 }
 export const localImage = Template.bind({})
 localImage.args = {
     alt: 'Fallback alt text here',
-    src: 'default-user.jpg',
-    width: 600,
     height: 400,
-    provider: null
+    provider: null,
+    src: 'default-user.jpg',
+    width: 600
 }
 export const Sizes = Template.bind({})
 Sizes.args = {
     alt: 'Fallback alt text here',
-    src: '329944',
-    width: 600,
     height: 400,
     sizes: 'sm:200px md:400px lg:600px xl:800px',
+    src: '329944',
+    width: 600,
 }
 export const Quality = Template.bind({})
 Quality.args = {
     alt: 'Fallback alt text here',
-    src: '329944',
-    width: 600,
     height: 400,
-    quality: 10
+    quality: 10,
+    src: '329944',
+    width: 600
 }
 export const Modifiers = Template.bind({})
 Modifiers.args = {
     alt: 'Fallback alt text here',
-    src: '329944',
-    width: 600,
     height: 400,
-    modifiers: { focusZoom: '100' }
+    modifiers: { focusZoom: '100' },
+    src: '329944',
+    width: 600
 }
 export const VerticalEffect = Template.bind({})
 VerticalEffect.args = {
-    alt: 'Fallback alt text here',
-    src: '329836',
-    width: 640,
-    height: 480,
-    maxWidth: 2598,
-    maxHeight: 3484,
     allowVerticalEffect: true,
+    alt: 'Fallback alt text here',
+    height: 480,
+    maxHeight: 3484,
+    maxWidth: 2598,
+    src: '329836',
     verticalBgBlur: '10px',
-    verticalBgColorOpacity: '0.8',
     verticalBgColor: '#000000',
+    verticalBgColorOpacity: '0.8',
+    width: 640,
 }
 export const Enlarge = Template.bind({})
 Enlarge.args = {
+    allowPreview: true,
     alt: 'Fallback alt text here',
+    height: 400,
     src: '329944',
     width: 600,
-    height: 400,
-    allowPreview: true,
 }
 export const Ratio = Template.bind({})
 Ratio.args = {
     alt: 'Fallback alt text here',
-    src: '329944',
-    width: 600,
     height: 400,
     ratio: [6, 2],
+    src: '329944',
+    width: 600,
 }
 export const PreviewAndCaptionSlotAndGallerySlotAndImageLink = TemplateSlots.bind({})
 PreviewAndCaptionSlotAndGallerySlotAndImageLink.args = {
-    alt: 'Fallback alt text here',
-    src: '329944',
-    width: 600,
-    height: 400,
     allowPreview: true,
-    to: 'https://www.imgLink.com'
+    alt: 'Fallback alt text here',
+    height: 400,
+    src: '329944',
+    to: 'https://www.imgLink.com',
+    width: 600
 }
 export const raw = Template.bind({})
 raw.args = {
     alt: 'Fallback alt text here',
-    src: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
-    width: 600,
     height: 400,
-    provider: null
+    provider: null,
+    src: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
+    width: 600
 }

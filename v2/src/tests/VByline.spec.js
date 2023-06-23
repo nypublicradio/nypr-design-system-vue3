@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VByline from '../components/VByline.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -12,94 +12,94 @@ describe('VByline', () => {
 
   const authors = [
     {
-      id: 121,
+      biography: "Jaclyn writes data-driven health and science stories for WNYC/Gothamist. She also runs Gothamist's COVID data dashboards. She is an alumna of the Newmark Graduate School of Journalism. Her work has appeared in NBC News, Spectrum, the Daily Beast, and other outlets.",
+      email: "",
       firstName: "Jaclyn",
+      id: 121,
+      jobTitle: "Data Reporter",
       lastName: "Jeffrey-Wilensky",
       name: "Jaclyn Jeffrey-Wilensky",
-      photoID: 327474,
-      jobTitle: "Data Reporter",
-      biography: "Jaclyn writes data-driven health and science stories for WNYC/Gothamist. She also runs Gothamist's COVID data dashboards. She is an alumna of the Newmark Graduate School of Journalism. Her work has appeared in NBC News, Spectrum, the Daily Beast, and other outlets.",
-      website: "",
-      email: "",
-      slug: "jaclyn-jeffrey-wilensky",
-      url: 'http://www.google.com',
       organization: 'Gothamist',
       organizationUrl: 'http://www.gothamist.com',
-      socialMediaProfile: []
+      photoID: 327474,
+      slug: "jaclyn-jeffrey-wilensky",
+      socialMediaProfile: [],
+      url: 'http://www.google.com',
+      website: ""
     },
     {
-      id: 146821,
+      biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
+      email: "",
       firstName: "Nsikan",
+      id: 146821,
+      jobTitle: "Editor, Health & Science",
       lastName: "Akpan",
       name: "Nsikan Akpan",
-      photoID: 327577,
-      jobTitle: "Editor, Health & Science",
-      biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
-      website: "",
-      email: "",
-      slug: "nsikan-akpan",
-      url: 'http://www.google.com',
       organization: 'Gothamist',
       organizationUrl: 'http://www.gothamist.com',
+      photoID: 327577,
+      slug: "nsikan-akpan",
       socialMediaProfile: [
         {
-          service: "twitter",
-          profileUrl: "https://twitter.com/MoNscience"
+          profileUrl: "https://twitter.com/MoNscience",
+          service: "twitter"
         }
-      ]
+      ],
+      url: 'http://www.google.com',
+      website: ""
     },
     {
-      id: 146861,
+      biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
+      email: "",
       firstName: "Peter",
+      id: 146861,
+      jobTitle: "Front End Developer",
       lastName: "Gibbons",
       name: "Peter Gibbons",
-      photoID: 327577,
-      jobTitle: "Front End Developer",
-      biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
-      website: "",
-      email: "",
-      slug: "thomas-bono",
-      url: 'http://www.google.com',
       organization: null,
       organizationUrl: null,
+      photoID: 327577,
+      slug: "thomas-bono",
       socialMediaProfile: [
         {
-          service: "twitter",
-          profileUrl: "https://twitter.com/bonomite"
+          profileUrl: "https://twitter.com/bonomite",
+          service: "twitter"
         }
-      ]
+      ],
+      url: 'http://www.google.com',
+      website: ""
     }
   ]
   const authorsNoID = [
     {
-      id: null,
+      biography: "Jaclyn writes data-driven health and science stories for WNYC/Gothamist. She also runs Gothamist's COVID data dashboards. She is an alumna of the Newmark Graduate School of Journalism. Her work has appeared in NBC News, Spectrum, the Daily Beast, and other outlets.",
+      email: "",
       firstName: "Jaclyn",
+      id: null,
+      jobTitle: "Data Reporter",
       lastName: "Jeffrey-Wilensky",
       name: "Jaclyn Jeffrey-Wilensky",
-      photoID: 327474,
-      jobTitle: "Data Reporter",
-      biography: "Jaclyn writes data-driven health and science stories for WNYC/Gothamist. She also runs Gothamist's COVID data dashboards. She is an alumna of the Newmark Graduate School of Journalism. Her work has appeared in NBC News, Spectrum, the Daily Beast, and other outlets.",
-      website: "",
-      email: "",
-      slug: "jaclyn-jeffrey-wilensky",
-      url: 'http://www.google.com',
       organization: 'Gothamist',
       organizationUrl: 'http://www.gothamist.com',
-      socialMediaProfile: []
+      photoID: 327474,
+      slug: "jaclyn-jeffrey-wilensky",
+      socialMediaProfile: [],
+      url: 'http://www.google.com',
+      website: ""
     }
   ]
   const prefix = 'By'
 
   const createComponent = ({ props = {} } = {}) => {
     wrapper = mount(VByline, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
 
         }
       },
-      slots: { images: '<div class="img">Image SLOT Mock</div>', belowNames: '<div class="below-names-content">belowNames SLOT Mock</div>', afterNames: '<div class="after-names-content">afterNames SLOT Mock</div>' }
+      props,
+      slots: { afterNames: '<div class="after-names-content">afterNames SLOT Mock</div>', belowNames: '<div class="below-names-content">belowNames SLOT Mock</div>', images: '<div class="img">Image SLOT Mock</div>' }
     })
   }
 
@@ -131,9 +131,9 @@ describe('VByline', () => {
     createComponent({
       props: {
         authors,
-        prefix,
         concat: ": ",
         concatLast: " or ",
+        prefix,
       }
     })
     expect(wrapper.text()).toContain(`:`)

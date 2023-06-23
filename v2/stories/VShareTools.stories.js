@@ -2,8 +2,6 @@ import VShareTools from '../src/components/VShareTools.vue'
 import VShareToolsItem from '../src/components/VShareToolsItem.vue'
 
 export default {
-    title: 'Components-V2/VShareTools',
-    component: VShareTools,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -15,6 +13,8 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VShareTools,
+    title: 'Components-V2/VShareTools',
 }
 
 const Template = (args) => ({

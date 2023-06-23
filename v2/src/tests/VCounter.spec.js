@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VCounter from '../components/VCounter.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -15,13 +15,13 @@ describe('VCounter', () => {
 
   const createComponent = ({ props = {}, slots = {} } = {}) => {
     wrapper = mount(VCounter, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
           'nuxt-link': true,
         }
       },
+      props,
       slots
     })
   }
@@ -38,10 +38,10 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        value,
+        href,
         icon,
         text,
-        href
+        value
       }
     })
     const iconElm = wrapper.find('.icon')
@@ -57,10 +57,10 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        value,
+        href,
         icon,
         text: "custom text",
-        href,
+        value,
       }
     })
     expect(wrapper.text()).toMatch(`${value} custom text`)
@@ -70,10 +70,10 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        value,
+        href,
         icon,
         text: null,
-        href,
+        value,
       }
     })
     expect(wrapper.text()).toMatch(`${value}`)
@@ -83,11 +83,11 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        value,
-        icon,
-        text,
         href,
-        showIcon: false
+        icon,
+        showIcon: false,
+        text,
+        value
       }
     })
     const iconElm = wrapper.find('.icon')
@@ -97,10 +97,10 @@ describe('VCounter', () => {
   test('href(to) prop works with nuxt route', () => {
     createComponent({
       props: {
-        value,
+        href: '/news',
         icon,
         text,
-        href: '/news'
+        value
       }
     })
     const link = wrapper.find('.flexible-link')
@@ -111,10 +111,10 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        value,
+        href,
         icon: 'pi-facebook',
         text,
-        href,
+        value,
       }
     })
     const iconElm = wrapper.find('.icon .pi')
@@ -125,10 +125,10 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        value,
+        href,
         icon,
         text,
-        href,
+        value,
       },
       slots: { icon: '<div class="pi pi-twitter custom-icon"></div>' }
     })
@@ -140,10 +140,10 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        value,
+        href,
         icon,
         text,
-        href,
+        value,
       }
     })
     const link = wrapper.find('.counter')
@@ -156,10 +156,10 @@ describe('VCounter', () => {
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {
-        value,
+        href,
         icon,
         text,
-        href
+        value
       }
     })
     const results = await axe(wrapper.element)

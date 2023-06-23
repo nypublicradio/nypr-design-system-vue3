@@ -1,194 +1,194 @@
 <script setup>
-import { computed, useSlots, ref } from 'vue'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VImage from './VImage.vue'
+import { computed, ref, useSlots } from 'vue'
 
 const props = defineProps({
   /**
-   * a class assigned to the title
+   * allow the vertical effect to happen for vertical images (images that are taller than they are wide)
    */
-  titleClass: {
-    type: String,
-    default: null,
+  allowVerticalEffect: {
+    default: false,
+    type: Boolean,
   },
   /**
    * alt text for the image
    */
   alt: {
-    type: String,
     default: '',
-  },
-  /**
-   * image loading type (eager or lazy)
-   */
-  loading: {
     type: String,
-    default: 'lazy',
-  },
-  /**
-   * wagtail image id
-   */
-  imageSrc: {
-    type: String,
-    default: null,
-  },
-  /**
-   * The desired height for image
-   */
-  height: {
-    type: Number,
-    default: null,
-  },
-  /**
-   * The desired width for image
-   */
-  width: {
-    type: Number,
-    default: null,
-  },
-  /**
-   * The desired min-width for image when the flexbox is responding
-   */
-  minWidth: {
-    type: Number,
-    default: null,
-  },
-  /**
-   * at what percentage the image starts to scale down
-   */
-  imageFlexBasis: {
-    type: String,
-    default: '33.33333%',
-  },
-  /**
-   * Subtitle text below the title
-   */
-  subtitle: {
-    type: String,
-    default: null,
   },
   /**
    * Blur of text below the subtitle that can be truncated
    */
   blurb: {
-    type: String,
     default: null,
+    type: String,
   },
   /**
-   * nuber of lines to truncate the blurb
+   * The desired height for image
    */
-  truncate: {
+  height: {
+    default: null,
     type: Number,
-    default: null,
   },
   /**
-   * The title text
+   * at what percentage the image starts to scale down
    */
-  title: {
+  imageFlexBasis: {
+    default: '33.33333%',
     type: String,
-    default: null,
   },
   /**
-   * link for the title and image
+   * wagtail image id
    */
-  link: {
+  imageSrc: {
+    default: null,
     type: String,
-    default: null,
-  },
-  /**
-   * max-height of the image used just for the vertical effect
-   */
-  maxHeight: {
-    type: Number,
-    default: Infinity,
-  },
-  /**
-   * max-width of the image used just for the vertical effect
-   */
-  maxWidth: {
-    type: Number,
-    default: Infinity,
-  },
-  /**
-   * reverse the flex direction
-   */
-  reverse: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * allow the vertical effect to happen for vertical images (images that are taller than they are wide)
-   */
-  allowVerticalEffect: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   *  tint the grey blured background image */
-  verticalBgColor: {
-    type: String,
-    default: null,
-  },
-  /**
-   *  the opacity of the tint of the grey blured background image */
-  verticalBgColorOpacity: {
-    type: String,
-    default: null,
-  },
-  /**
-   *  ammount of blur for the blured background image */
-  verticalBgBlur: {
-    type: String,
-    default: null,
-  },
-  /**
-   * ratio of the image
-   */
-  ratio: {
-    type: Array,
-    default: () => [3, 2],
-  },
-  /**
-   * ratio of the image in mobile breakpoint only
-   */
-  mobileRatio: {
-    type: Array,
-    default: () => null,
-  },
-  /**
-   * compression quality of the iamge
-   */
-  quality: {
-    type: Number,
-    default: null,
-  },
-  /**
-   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
-   */
-  sizes: {
-    type: String,
-    default: null,
   },
   /**
    * to help with a11y
    */
   isDecorative: {
-    type: Boolean,
     default: false,
+    type: Boolean,
+  },
+  /**
+   * link for the title and image
+   */
+  link: {
+    default: null,
+    type: String,
+  },
+  /**
+   * image loading type (eager or lazy)
+   */
+  loading: {
+    default: 'lazy',
+    type: String,
+  },
+  /**
+   * max-height of the image used just for the vertical effect
+   */
+  maxHeight: {
+    default: Infinity,
+    type: Number,
+  },
+  /**
+   * max-width of the image used just for the vertical effect
+   */
+  maxWidth: {
+    default: Infinity,
+    type: Number,
+  },
+  /**
+   * The desired min-width for image when the flexbox is responding
+   */
+  minWidth: {
+    default: null,
+    type: Number,
+  },
+  /**
+   * ratio of the image in mobile breakpoint only
+   */
+  mobileRatio: {
+    default: () => null,
+    type: Array,
+  },
+  /**
+   * compression quality of the iamge
+   */
+  quality: {
+    default: null,
+    type: Number,
+  },
+  /**
+   * ratio of the image
+   */
+  ratio: {
+    default: () => [3, 2],
+    type: Array,
+  },
+  /**
+   * reverse the flex direction
+   */
+  reverse: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   */
+  sizes: {
+    default: null,
+    type: String,
+  },
+  /**
+   * Subtitle text below the title
+   */
+  subtitle: {
+    default: null,
+    type: String,
+  },
+  /**
+   * The title text
+   */
+  title: {
+    default: null,
+    type: String,
+  },
+  /**
+   * a class assigned to the title
+   */
+  titleClass: {
+    default: null,
+    type: String,
+  },
+  /**
+   * nuber of lines to truncate the blurb
+   */
+  truncate: {
+    default: null,
+    type: Number,
   },
   /**
    * will put the image on top and 100% width
    */
   vertical: {
-    type: Boolean,
     default: false,
+    type: Boolean,
+  },
+  /**
+   *  ammount of blur for the blured background image */
+  verticalBgBlur: {
+    default: null,
+    type: String,
+  },
+  /**
+   *  tint the grey blured background image */
+  verticalBgColor: {
+    default: null,
+    type: String,
+  },
+  /**
+   *  the opacity of the tint of the grey blured background image */
+  verticalBgColorOpacity: {
+    default: null,
+    type: String,
   },
   /**
    * will put the image on top and 100% width on mobile breakpoint only
    */
   verticalMobile: {
-    type: Boolean,
     default: false,
+    type: Boolean,
+  },
+  /**
+   * The desired width for image
+   */
+  width: {
+    default: null,
+    type: Number,
   },
 })
 

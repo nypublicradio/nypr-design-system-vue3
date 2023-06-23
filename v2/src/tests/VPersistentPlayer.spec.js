@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils'
 import VPersistentPlayer from '../components/VPersistentPlayer.vue'
+import axe from './axe-helper'
+import { mockBrowserWidth } from './helperFuncs.js'
+import { mount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
 import PrimeVue from 'primevue/config'
-import { mockBrowserWidth } from './helperFuncs.js'
-import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
@@ -34,13 +34,13 @@ describe('VPersistentPlayer', () => {
 
   const createComponent = ({ props = {}, slots = {} } = {}) => {
     wrapper = mount(VPersistentPlayer, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
           'nuxt-link': true,
         }
       },
+      props,
       slots
     })
   }
@@ -60,7 +60,7 @@ describe('VPersistentPlayer', () => {
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file
+        description, file, image, station, title, titleLink
       }
     })
     const results = await axe(wrapper.element)
@@ -70,7 +70,7 @@ describe('VPersistentPlayer', () => {
   test('it renders default props with image', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file
+        description, file, image, station, title, titleLink
       }
     })
 
@@ -86,7 +86,7 @@ describe('VPersistentPlayer', () => {
   test('show download button', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, showDownload
+        description, file, image, showDownload, station, title, titleLink
       }
     })
     const _downloadButton = wrapper.find('.player-download-icon')
@@ -96,7 +96,7 @@ describe('VPersistentPlayer', () => {
   test('show hideSkipMobile and download elements on mobile', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, showDownload, hideSkipMobile: false, hideDownloadMobile: false
+        description, file, hideDownloadMobile: false, hideSkipMobile: false, image, showDownload, station, title, titleLink
       }
     })
     const _back15 = wrapper.find('.player-back-15-icon')
@@ -111,7 +111,7 @@ describe('VPersistentPlayer', () => {
   test('title & image & descriptionLink has a link', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, titleLink, descriptionLink
+        description, descriptionLink, file, image, station, title, titleLink, titleLink
       }
     })
     const titleElm = wrapper.find('.track-info-title a')
@@ -125,7 +125,7 @@ describe('VPersistentPlayer', () => {
   test('show loading indicator', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, isLoading
+        description, file, image, isLoading, station, title, titleLink
       }
     })
     const spinner = wrapper.find('.the-play-button .pi-spinner')
@@ -135,7 +135,7 @@ describe('VPersistentPlayer', () => {
   test('show skip ahead and skip back buttons', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, showSkip
+        description, file, image, showSkip, station, title, titleLink
       }
     })
     const back = wrapper.find('.player-back-15-icon')
@@ -147,7 +147,7 @@ describe('VPersistentPlayer', () => {
   test('is in live stream mode', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, livestream
+        description, file, image, livestream, station, title, titleLink
       }
     })
     const back = wrapper.find('.player-back-15-icon')
@@ -165,7 +165,7 @@ describe('VPersistentPlayer', () => {
   test('show minimize/un-minimize buttons & click them', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, canMinimize
+        canMinimize, description, file, image, station, title, titleLink
       }
     })
     const minimizeBtn = wrapper.find('.minimize-btn')
@@ -183,7 +183,7 @@ describe('VPersistentPlayer', () => {
   test('hide minimize button', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, canMinimize: false
+        canMinimize: false, description, file, image, station, title, titleLink
       }
     })
     const minimizeBtn = wrapper.find('.minimize-btn')
@@ -194,7 +194,7 @@ describe('VPersistentPlayer', () => {
   test('show expand/un-expand buttons & click them', async () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, canExpand
+        canExpand, description, file, image, station, title, titleLink
       }
     })
     const expandBtn = wrapper.find('.expand-btn')
@@ -212,7 +212,7 @@ describe('VPersistentPlayer', () => {
   test('is muted & mute clicked', () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, isMuted
+        description, file, image, isMuted, station, title, titleLink
       }
     })
     const slider = wrapper.find('.volume-control .p-slider')
@@ -228,7 +228,7 @@ describe('VPersistentPlayer', () => {
   test('will auto play on load', async () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, file, autoPlay
+        autoPlay, description, file, image, station, title, titleLink
       }
     })
     expect(wrapper.vm.playing).toBe(true)
@@ -237,7 +237,7 @@ describe('VPersistentPlayer', () => {
   test('emits', async () => {
     createComponent({
       props: {
-        title, station, titleLink, image, description, descriptionLink, file, showDownload, canMinimize, canExpand, canExpandWithSwipe, canUnexpandWithSwipe
+        canExpand, canExpandWithSwipe, canMinimize, canUnexpandWithSwipe, description, descriptionLink, file, image, showDownload, station, title, titleLink
       }
 
     })

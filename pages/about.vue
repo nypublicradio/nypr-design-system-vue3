@@ -1,7 +1,3 @@
-<script setup>
-import { ref, computed, onMounted } from 'vue'
-</script>
-
 <template>
   <div>
     <div class="about-page">This is the ABOUT PAGE</div>

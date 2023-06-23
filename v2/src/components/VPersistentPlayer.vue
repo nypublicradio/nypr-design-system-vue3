@@ -1,159 +1,159 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import VVolumeControl from './VVolumeControl.vue'
-import VTrackInfo from './VTrackInfo.vue'
-import Button from 'primevue/button'
-import { Howl, Howler } from 'howler'
-import { useSwipe } from '@vueuse/core'
 import soundAnimGif from '../assets/images/audioAnim.gif'
+import VTrackInfo from './VTrackInfo.vue'
+import VVolumeControl from './VVolumeControl.vue'
+import { useSwipe } from '@vueuse/core'
+import { Howl, Howler } from 'howler'
+import Button from 'primevue/button'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 const props = defineProps({
   /**
    * autoplay on load
    */
   autoPlay: {
-    type: Boolean,
     default: false,
-  },
-  /**
-   * description text
-   */
-  description: {
-    type: String,
-    default: null,
-  },
-  /**
-   * link for the description
-   */
-  descriptionLink: {
-    type: String,
-    default: null,
-  },
-  /**
-   * audio file url
-   */
-  file: {
-    type: String,
-    default: null,
-  },
-  /**
-   * to render a livestream view (LIVE indicator and no progress bar)
-   */
-  livestream: {
     type: Boolean,
-    default: false,
-  },
-  /**
-   * loop the audio when complete
-   */
-  loop: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * loading state
-   */
-  isLoading: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * show the download button
-   */
-  showDownload: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * show the skip buttons
-   */
-  showSkip: {
-    type: Boolean,
-    default: true,
-  },
-  /**
-   * hide the download button on mobile
-   */
-  hideDownloadMobile: {
-    type: Boolean,
-    default: true,
-  },
-  /**
-   * hide the skip buttons on mobile
-   */
-  hideSkipMobile: {
-    type: Boolean,
-    default: true,
-  },
-  /**
-   * radio station name
-   */
-  station: {
-    type: String,
-    default: null,
-  },
-  /**
-   * left image representing the audio
-   */
-  image: {
-    type: String,
-    default: null,
-  },
-  /**
-   * title of the audio
-   */
-  title: {
-    type: String,
-    default: null,
-  },
-  /**
-   * link for the title
-   */
-  titleLink: {
-    type: String,
-    default: null,
-  },
-  /**
-   * muted state
-   */
-  isMuted: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * make the player minimizable
-   */
-  canMinimize: {
-    type: Boolean,
-    default: false,
   },
   /**
    * make the player expandable
    */
   canExpand: {
-    type: Boolean,
     default: false,
+    type: Boolean,
   },
   /**
    * expand the player with up swipe actions
    */
   canExpandWithSwipe: {
-    type: Boolean,
     default: false,
+    type: Boolean,
+  },
+  /**
+   * make the player minimizable
+   */
+  canMinimize: {
+    default: false,
+    type: Boolean,
   },
   /**
    * can unexpand the player with down swipe actions
    */
   canUnexpandWithSwipe: {
-    type: Boolean,
     default: false,
+    type: Boolean,
+  },
+  /**
+   * description text
+   */
+  description: {
+    default: null,
+    type: String,
+  },
+  /**
+   * link for the description
+   */
+  descriptionLink: {
+    default: null,
+    type: String,
+  },
+  /**
+   * audio file url
+   */
+  file: {
+    default: null,
+    type: String,
+  },
+  /**
+   * hide the download button on mobile
+   */
+  hideDownloadMobile: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * hide the skip buttons on mobile
+   */
+  hideSkipMobile: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * left image representing the audio
+   */
+  image: {
+    default: null,
+    type: String,
+  },
+  /**
+   * loading state
+   */
+  isLoading: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * muted state
+   */
+  isMuted: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * to render a livestream view (LIVE indicator and no progress bar)
+   */
+  livestream: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * loop the audio when complete
+   */
+  loop: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * show the download button
+   */
+  showDownload: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * show the skip buttons
+   */
+  showSkip: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * radio station name
+   */
+  station: {
+    default: null,
+    type: String,
+  },
+  /**
+   * title of the audio
+   */
+  title: {
+    default: null,
+    type: String,
+  },
+  /**
+   * link for the title
+   */
+  titleLink: {
+    default: null,
+    type: String,
   },
   /**
    * volume state
    */
   volume: {
-    type: Number,
     default: 100,
+    type: Number,
   },
 })
 let interval = null
@@ -199,7 +199,6 @@ const emit = defineEmits([
 //swipe setup
 const playerRef = ref(null)
 const { direction, lengthY } = useSwipe(playerRef, {
-  passive: true,
   onSwipe() {
     if (props.canExpand && props.canExpandWithSwipe) {
       if (direction.value === 'up' && lengthY.value > 100) {
@@ -214,6 +213,7 @@ const { direction, lengthY } = useSwipe(playerRef, {
       }
     }
   },
+  passive: true,
 })
 
 onMounted(() => {
@@ -295,17 +295,7 @@ const togglePlay = () => {
     currentFile.value = props.file
     loading.value = true
     sound = new Howl({
-      src: [props.file],
       html5: true,
-      preload: true,
-      onload: function () {
-        emit('sound-loaded')
-        loading.value = false
-        durationSeconds.value = sound.duration()
-      },
-      onloaderror: function (id, errorCode) {
-        emit('load-error', [id, errorCode])
-      },
       onend: function () {
         emit('sound-ended')
         if (props.loop) {
@@ -316,6 +306,16 @@ const togglePlay = () => {
           sound.unload()
         }
       },
+      onload: function () {
+        emit('sound-loaded')
+        loading.value = false
+        durationSeconds.value = sound.duration()
+      },
+      onloaderror: function (id, errorCode) {
+        emit('load-error', [id, errorCode])
+      },
+      preload: true,
+      src: [props.file],
     })
   }
   // Play or pause the sound.
@@ -404,8 +404,8 @@ const toggleExpanded = (e) => {
 }
 
 defineExpose({
-  togglePlay,
   toggleMinimize,
+  togglePlay,
 })
 </script>
 

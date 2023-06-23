@@ -1,11 +1,11 @@
 <script setup>
-import { ref, onUpdated } from 'vue'
 import Slider from 'primevue/slider'
+import { onUpdated, ref } from 'vue'
 
 const props = defineProps({
   progress: {
-    type: Number,
     default: 0,
+    type: Number,
   },
 })
 

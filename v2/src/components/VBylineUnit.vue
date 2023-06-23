@@ -2,8 +2,8 @@
 import VFlexibleLink from './VFlexibleLink.vue'
 const props = defineProps({
   author: {
-    type: Object,
     default: null,
+    type: Object,
   },
 })
 const emit = defineEmits(['name-click', 'organization-click'])

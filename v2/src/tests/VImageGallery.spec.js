@@ -1,9 +1,9 @@
-import { mount } from '@vue/test-utils'
 import VImageGallery from '../components/VImageGallery.vue'
+import axe from './axe-helper'
+import { mockBrowserWidth } from './helperFuncs.js'
+import { mount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
 import PrimeVue from 'primevue/config'
-import { mockBrowserWidth } from './helperFuncs.js'
-import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
@@ -16,13 +16,13 @@ describe('VImageGallery', () => {
     const createComponent = ({ props = {}, slots = {} } = {}) => {
 
         wrapper = mount(VImageGallery, {
-            props,
             global: {
+                plugins: [PrimeVue],
                 stubs: {
 
                 },
-                plugins: [PrimeVue],
             },
+            props,
             slots
         })
     }
@@ -39,8 +39,8 @@ describe('VImageGallery', () => {
         createComponent({
             props: {
                 count,
-                label,
-                galleryLink
+                galleryLink,
+                label
             }
         })
         const link = wrapper.find('.flexible-link')
@@ -53,8 +53,8 @@ describe('VImageGallery', () => {
         createComponent({
             props: {
                 count,
-                label,
-                galleryLink
+                galleryLink,
+                label
             }
         })
         const link = wrapper.find('.flexible-link')
@@ -67,8 +67,8 @@ describe('VImageGallery', () => {
         createComponent({
             props: {
                 count,
-                label,
-                galleryLink
+                galleryLink,
+                label
             }
         })
         const results = await axe(wrapper.element)

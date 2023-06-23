@@ -1,48 +1,48 @@
 <script setup>
-import { ref } from 'vue'
 import VBylineUnit from './VBylineUnit.vue'
+import { ref } from 'vue'
 const props = defineProps({
   /**
    * authors data to display
    */
   authors: {
-    type: [Array, Object],
     default: null,
-  },
-  /**
-   * prefix text
-   */
-  prefix: {
-    type: String,
-    default: 'By ',
-  },
-  /**
-   * what the last concat should be befoe the last author
-   */
-  concatLast: {
-    type: String,
-    default: ' and ',
+    type: [Array, Object],
   },
   /**
    * concat separator
    */
   concat: {
-    type: String,
     default: ', ',
+    type: String,
   },
   /**
-   * show author image state
+   * what the last concat should be befoe the last author
    */
-  showImage: {
-    type: Boolean,
-    default: false,
+  concatLast: {
+    default: ' and ',
+    type: String,
   },
   /**
    * flex direction
    */
   flexDirection: {
-    type: String,
     default: 'row',
+    type: String,
+  },
+  /**
+   * prefix text
+   */
+  prefix: {
+    default: 'By ',
+    type: String,
+  },
+  /**
+   * show author image state
+   */
+  showImage: {
+    default: false,
+    type: Boolean,
   },
 })
 const emit = defineEmits(['name-click', 'organization-click'])

@@ -1,6 +1,6 @@
-import { shallowMount, mount } from '@vue/test-utils'
-import { toHaveNoViolations } from 'jest-axe'
 import VMediaEmbed from '../components/VMediaEmbed.vue'
+import { mount, shallowMount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
 //import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
@@ -20,8 +20,8 @@ describe('VMediaEmbed', () => {
   test('No controls', () => {
     const wrapper = shallowMount(VMediaEmbed, {
       props: {
-        url,
-        controls: false
+        controls: false,
+        url
       }
     })
     const iframe = wrapper.find('iframe')
@@ -31,8 +31,8 @@ describe('VMediaEmbed', () => {
   test('Auto Play', () => {
     const wrapper = shallowMount(VMediaEmbed, {
       props: {
-        url,
-        autoPlay: true
+        autoPlay: true,
+        url
       }
     })
     const iframe = wrapper.find('iframe')
@@ -42,8 +42,8 @@ describe('VMediaEmbed', () => {
   test('Muted', () => {
     const wrapper = shallowMount(VMediaEmbed, {
       props: {
-        url,
-        mute: true
+        mute: true,
+        url
       }
     })
     const iframe = wrapper.find('iframe')
@@ -53,8 +53,8 @@ describe('VMediaEmbed', () => {
   test('Custom start position', () => {
     const wrapper = shallowMount(VMediaEmbed, {
       props: {
-        url,
-        startTime: "90"
+        startTime: "90",
+        url
       }
     })
     const iframe = wrapper.find('iframe')

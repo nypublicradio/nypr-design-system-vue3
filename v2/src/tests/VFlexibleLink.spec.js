@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VFlexibleLink from '../components/VFlexibleLink.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -20,15 +20,15 @@ describe('VFlexibleLink', () => {
 
   const createComponent = ({ props = {} } = {}) => {
     wrapper = mount(VFlexibleLink, {
-      props,
-      slots: {
-        default: 'link text',
-      },
       global: {
         plugins: [PrimeVue],
         stubs: {
           'nuxt-link': true
         }
+      },
+      props,
+      slots: {
+        default: 'link text',
       }
     })
   }
@@ -103,8 +103,8 @@ describe('VFlexibleLink', () => {
   it('custom target', () => {
     createComponent({
       props: {
-        to: mailtoLink,
-        target: '_self'
+        target: '_self',
+        to: mailtoLink
       }
     })
     expect(findAnchor().attributes('target')).toBe('_self')

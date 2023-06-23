@@ -1,10 +1,10 @@
+import AudioIcon from '../assets/icons/AudioIcon.vue'
+import VShareTools from '../components/VShareTools.vue'
+import axe from './axe-helper'
 import { mount } from '@vue/test-utils'
 // import { describe, test, expect } from '@jest/globals'
 import { toHaveNoViolations } from 'jest-axe'
-import VShareTools from '../components/VShareTools.vue'
-import AudioIcon from '../assets/icons/AudioIcon.vue'
 import PrimeVue from 'primevue/config'
-import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
@@ -18,13 +18,13 @@ describe('VShareTools', () => {
 
   const createComponent = ({ props = {}, slots = {} } = {}) => {
     wrapper = mount(VShareTools, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
 
         }
       },
+      props,
       slots
     })
   }

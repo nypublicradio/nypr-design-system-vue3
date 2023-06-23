@@ -1,8 +1,6 @@
 import VPerson from '../src/components/VPerson.vue'
 
 export default {
-    title: 'Components-V2/VPerson',
-    component: VPerson,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -14,16 +12,19 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VPerson,
+    title: 'Components-V2/VPerson',
 }
 const profileFromArticle = {
-    "id": 19,
-    "firstName": "Scott",
-    "lastName": "Lynch",
-    "name": "Scott Lynch",
-    "photoID": 327700,
-    "jobTitle": "Photojournalist",
     "biography": "Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
-    "website": "http://t.co/Np4U39BYlh",
+    "email": "scoboco@gmail.com",
+    "firstName": "Scott",
+    "id": 19,
+    "jobTitle": "Photojournalist",
+    "lastName": "Lynch",
+    "link": "https://www.sponsoredLink.com",
+    "logo": "/default-sponsor.png",
+    "name": "Scott Lynch",
     "phone_numbers": [
         {
             "phone_number": "9731231234"
@@ -32,32 +33,32 @@ const profileFromArticle = {
             "phone_number": "2011231234"
         }
     ],
-    "email": "scoboco@gmail.com",
+    "photoID": 327700,
     "slug": "scott-lynch",
-    "url": "/staff/scott-lynch",
-    "link": "https://www.sponsoredLink.com",
-    "logo": "/default-sponsor.png",
     "socialMediaProfile": [
         {
-            "service": "instagram",
-            "profileUrl": "https://www.instagram.com/scoboco/"
+            "profileUrl": "https://www.instagram.com/scoboco/",
+            "service": "instagram"
         },
         {
-            "service": "twitter",
-            "profileUrl": "https://twitter.com/Scoboco"
+            "profileUrl": "https://twitter.com/Scoboco",
+            "service": "twitter"
         }
-    ]
+    ],
+    "url": "/staff/scott-lynch",
+    "website": "http://t.co/Np4U39BYlh"
 }
 
 const profileFromArticleNoPhoto = {
-    "id": 19,
-    "firstName": "Scott",
-    "lastName": "Lynch",
-    "name": "Scott Lynch",
-    "photoID": null,
-    "jobTitle": "Photojournalist",
     "biography": "Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
-    "website": "http://t.co/Np4U39BYlh",
+    "email": "scoboco@gmail.com",
+    "firstName": "Scott",
+    "id": 19,
+    "jobTitle": "Photojournalist",
+    "lastName": "Lynch",
+    "link": "https://www.sponsoredLink.com",
+    "logo": "/images/default-sponsor.jpg",
+    "name": "Scott Lynch",
     "phone_numbers": [
         {
             "phone_number": "9731231234"
@@ -66,31 +67,31 @@ const profileFromArticleNoPhoto = {
             "phone_number": "2011231234"
         }
     ],
-    "email": "scoboco@gmail.com",
+    "photoID": null,
     "slug": "scott-lynch",
-    "url": "/staff/scott-lynch",
-    "link": "https://www.sponsoredLink.com",
-    "logo": "/images/default-sponsor.jpg",
     "socialMediaProfile": [
         {
-            "service": "instagram",
-            "profileUrl": "https://www.instagram.com/scoboco/"
+            "profileUrl": "https://www.instagram.com/scoboco/",
+            "service": "instagram"
         },
         {
-            "service": "twitter",
-            "profileUrl": "https://twitter.com/Scoboco"
+            "profileUrl": "https://twitter.com/Scoboco",
+            "service": "twitter"
         }
-    ]
+    ],
+    "url": "/staff/scott-lynch",
+    "website": "http://t.co/Np4U39BYlh"
 }
 const profileFromArticleNoSocial = {
-    "id": 19,
-    "firstName": "Scott",
-    "lastName": "Lynch",
-    "name": "Scott Lynch",
-    "photoID": 327700,
-    "jobTitle": "Photojournalist",
     "biography": "Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
-    "website": "http://t.co/Np4U39BYlh",
+    "email": "scoboco@gmail.com",
+    "firstName": "Scott",
+    "id": 19,
+    "jobTitle": "Photojournalist",
+    "lastName": "Lynch",
+    "link": "https://www.sponsoredLink.com",
+    "logo": "/images/default-sponsor.jpg",
+    "name": "Scott Lynch",
     "phone_numbers": [
         {
             "phone_number": "9731231234"
@@ -99,12 +100,11 @@ const profileFromArticleNoSocial = {
             "phone_number": "2011231234"
         }
     ],
-    "email": "scoboco@gmail.com",
+    "photoID": 327700,
     "slug": "scott-lynch",
+    "socialMediaProfile": null,
     "url": "/staff/scott-lynch",
-    "link": "https://www.sponsoredLink.com",
-    "logo": "/images/default-sponsor.jpg",
-    "socialMediaProfile": null
+    "website": "http://t.co/Np4U39BYlh"
 }
 
 const Template = (args) => ({
@@ -136,32 +136,32 @@ Default.args = {
 }
 export const ImageSize = Template.bind({})
 ImageSize.args = {
-    profileData: profileFromArticle,
     imageSize: 150,
+    profileData: profileFromArticle,
 }
 export const ImageFlexBasis = Template.bind({})
 ImageFlexBasis.args = {
-    profileData: profileFromArticle,
+    imageFlexBasis: "8%",
 
     imageSize: 150,
-    imageFlexBasis: "8%"
+    profileData: profileFromArticle
 }
 export const ImageSizeWithNoScale = Template.bind({})
 ImageSizeWithNoScale.args = {
-    profileData: profileFromArticle,
+    imageFlexBasis: "80px",
     imageSize: 80,
-    imageFlexBasis: "80px"
+    profileData: profileFromArticle
 }
 export const ImageSizeMinWidth = Template.bind({})
 ImageSizeMinWidth.args = {
-    profileData: profileFromArticle,
     minWidth: 80,
+    profileData: profileFromArticle,
 }
 export const NamePrefix = Template.bind({})
 NamePrefix.args = {
-    profileData: profileFromArticle,
-
     namePrefix: 'By',
+
+    profileData: profileFromArticle,
 }
 export const NoPhotoFallbackImage = Template.bind({})
 NoPhotoFallbackImage.args = {
@@ -169,9 +169,9 @@ NoPhotoFallbackImage.args = {
 }
 export const NoPhotoCustomImage = Template.bind({})
 NoPhotoCustomImage.args = {
-    profileData: profileFromArticleNoPhoto,
-
     imageFallbackPath: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
+
+    profileData: profileFromArticleNoPhoto,
 }
 export const Vertical = Template.bind({})
 Vertical.args = {
@@ -193,16 +193,16 @@ HideCTA.args = {
 }
 export const CustomCTA = Template.bind({})
 CustomCTA.args = {
-    profileData: profileFromArticle,
     ctaText: "Learn more",
+    profileData: profileFromArticle,
 }
 export const HideBioCTAAndCenter = Template.bind({})
 HideBioCTAAndCenter.args = {
-    profileData: profileFromArticle,
+    alignItems: 'center',
 
+    profileData: profileFromArticle,
     showBio: false,
     showCta: false,
-    alignItems: 'center',
 }
 export const HideSocial = Template.bind({})
 HideSocial.args = {
@@ -217,9 +217,9 @@ Sponsored.args = {
 }
 export const Reverse = Template.bind({})
 Reverse.args = {
-    profileData: profileFromArticle,
-
     flexDirection: 'row-reverse',
+
+    profileData: profileFromArticle,
 }
 export const TruncatedBio2Lines = Template.bind({})
 TruncatedBio2Lines.args = {
@@ -241,15 +241,15 @@ ImageRadius.args = {
 }
 export const EagerLoading = Template.bind({})
 EagerLoading.args = {
-    profileData: profileFromArticle,
-
     loading: 'eager',
+
+    profileData: profileFromArticle,
 }
 export const ImageRatio = Template.bind({})
 ImageRatio.args = {
-    profileData: profileFromArticle,
-
     imageRatio: [4, 2],
+
+    profileData: profileFromArticle,
     radius: '0',
 }
 export const ImageSizes = Template.bind({})
@@ -265,9 +265,9 @@ SlottedContent.args = {
 }
 export const justImage = TemplateJustImage.bind({})
 justImage.args = {
-    profileData: profileFromArticle,
+    justImage: true,
 
-    justImage: true
+    profileData: profileFromArticle
 }
 export const NoSocial = Template.bind({})
 NoSocial.args = {

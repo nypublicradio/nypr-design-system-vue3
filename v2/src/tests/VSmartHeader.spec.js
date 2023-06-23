@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VSmartHeader from '../components/VSmartHeader.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -15,12 +15,12 @@ describe('VSmartHeader', () => {
   const createComponent = ({ props = {}, slots = {} } = {}) => {
 
     wrapper = mount(VSmartHeader, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
         }
       },
+      props,
       slots
     })
   }
@@ -36,9 +36,9 @@ describe('VSmartHeader', () => {
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {
-        targetWindowClass,
         heroBuffer,
-        resumeDelay
+        resumeDelay,
+        targetWindowClass
       }
     })
     const results = await axe(wrapper.element)

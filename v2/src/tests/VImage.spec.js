@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VImage from '../components/VImage.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -32,12 +32,12 @@ describe('VImage', () => {
   const createComponent = ({ props = {}, slots = {} } = {}) => {
 
     wrapper = mount(VImage, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
         }
       },
+      props,
       slots
     })
   }
@@ -53,10 +53,10 @@ describe('VImage', () => {
   test('the image has a link', () => {
     createComponent({
       props: {
-        src,
-        width,
         height,
-        to: 'https://www.google.com'
+        src,
+        to: 'https://www.google.com',
+        width
       }
     })
     const _link = wrapper.find('.flexible-link')
@@ -66,10 +66,10 @@ describe('VImage', () => {
   test('to have eager loading', () => {
     createComponent({
       props: {
-        src,
-        width,
         height,
-        loading: 'eager'
+        loading: 'eager',
+        src,
+        width
       }
     })
     const _img = wrapper.find('.image')
@@ -79,9 +79,9 @@ describe('VImage', () => {
   test('use local image', () => {
     createComponent({
       props: {
+        height,
         src: 'default-userEvent.jpg',
-        width,
-        height
+        width
       }
     })
     const _img = wrapper.find('.image')
@@ -91,12 +91,12 @@ describe('VImage', () => {
   test('is a vertical image effect', () => {
     createComponent({
       props: {
+        allowVerticalEffect: true,
+        height,
+        maxHeight: 3484,
+        maxWidth: 2598,
         src: 329836,
         width,
-        height,
-        maxWidth: 2598,
-        maxHeight: 3484,
-        allowVerticalEffect: true,
       }
     })
     const _img = wrapper.find('.image')
@@ -106,10 +106,10 @@ describe('VImage', () => {
   test('enable enlarge', () => {
     createComponent({
       props: {
+        allowPreview: true,
+        height,
         src,
         width,
-        height,
-        allowPreview: true,
       }
     })
     const _enlargeBtn = wrapper.find('.enlarge-button-holder')
@@ -119,10 +119,10 @@ describe('VImage', () => {
   test('aspect ratio', () => {
     createComponent({
       props: {
-        src,
-        width,
         height,
         ratio: [6, 2],
+        src,
+        width,
       }
     })
     const _imgHolder = wrapper.find('.v-image-holder')
@@ -132,9 +132,9 @@ describe('VImage', () => {
   test('gallery button component slot', () => {
     createComponent({
       props: {
+        height,
         src,
         width,
-        height,
       },
       slots: {
         gallery: '<button class="v-image-gallery"></button>'
@@ -147,9 +147,9 @@ describe('VImage', () => {
   test('caption button component slot', () => {
     createComponent({
       props: {
+        height,
         src,
         width,
-        height,
       },
       slots: {
         caption: '<button class="v-image-caption"></button>'
@@ -162,10 +162,10 @@ describe('VImage', () => {
   test('image click fires emit', () => {
     createComponent({
       props: {
-        src,
-        width,
         height,
-        to: 'https://www.google.com'
+        src,
+        to: 'https://www.google.com',
+        width
       }
 
     })
@@ -182,10 +182,10 @@ describe('VImage', () => {
   test('image-enlarge-click fires emit', () => {
     createComponent({
       props: {
+        allowPreview: true,
+        height,
         src,
         width,
-        height,
-        allowPreview: true,
       }
 
     })
@@ -199,9 +199,9 @@ describe('VImage', () => {
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {
+        height,
         src,
-        width,
-        height
+        width
       }
     })
     const results = await axe(wrapper.element)

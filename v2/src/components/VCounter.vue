@@ -6,38 +6,38 @@ const props = defineProps({
    * url or slug or anchor to go to
    */
   href: {
-    type: String,
     default: null,
-  },
-  /**
-   * show icon state
-   */
-  showIcon: {
-    type: Boolean,
-    default: true,
+    type: String,
   },
   /**
    * prime icons class
    */
   icon: {
-    type: String,
     default: 'pi-comment',
+    type: String,
+  },
+  /**
+   * show icon state
+   */
+  showIcon: {
+    default: true,
+    type: Boolean,
   },
   /**
    * label
    */
   text: {
-    type: String,
     default: 'Comments',
     required: true,
+    type: String,
   },
   /**
    * number value in coutner
    */
   value: {
-    type: Number,
     default: 0,
     required: true,
+    type: Number,
   },
 })
 

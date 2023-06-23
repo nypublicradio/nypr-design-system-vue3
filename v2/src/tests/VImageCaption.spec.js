@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VImageCaption from '../components/VImageCaption.vue'
+import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
 import PrimeVue from 'primevue/config'
-import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
@@ -14,12 +14,12 @@ describe('VImageCaption', () => {
     const createComponent = ({ props = {}, slots = {} } = {}) => {
 
         wrapper = mount(VImageCaption, {
-            props,
             global: {
+                plugins: [PrimeVue],
                 stubs: {
                 },
-                plugins: [PrimeVue],
             },
+            props,
             slots
         })
     }

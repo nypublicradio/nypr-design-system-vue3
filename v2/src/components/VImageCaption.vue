@@ -4,8 +4,8 @@ import { shallowRef } from 'vue'
 
 const props = defineProps({
   text: {
-    type: String,
     default: null,
+    type: String,
   },
 })
 

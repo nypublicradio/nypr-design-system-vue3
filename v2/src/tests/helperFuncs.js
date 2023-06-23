@@ -1,7 +1,7 @@
 export function mockBrowserWidth(width) {
     Object.defineProperty(window, 'innerWidth', {
-        writable: true,
         configurable: true,
-        value: width
+        value: width,
+        writable: true,
     })
 }

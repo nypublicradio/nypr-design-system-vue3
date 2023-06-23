@@ -2,8 +2,6 @@ import VFlexibleLink from '../src/components/VFlexibleLink.vue'
 import Button from "primevue/button"
 
 export default {
-    title: 'Components-V2/VFlexibleLink',
-    component: VFlexibleLink,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -15,6 +13,8 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VFlexibleLink,
+    title: 'Components-V2/VFlexibleLink',
 }
 
 const Template = (args) => ({
@@ -56,8 +56,8 @@ Default.args = {
 
 export const Tel = Template.bind({})
 Tel.args = {
-    to: 'tel:12011231234',
     target: '_self',
+    to: 'tel:12011231234',
 }
 
 export const MailTo = Template.bind({})
@@ -67,8 +67,8 @@ MailTo.args = {
 
 export const DefaultCustomTarget = Template.bind({})
 DefaultCustomTarget.args = {
-    to: 'https://www.google.com/',
     target: '_self',
+    to: 'https://www.google.com/',
 }
 
 export const NuxtLink = Template.bind({})
@@ -78,21 +78,21 @@ NuxtLink.args = {
 
 export const DefaultRaw = TemplateRaw.bind({})
 DefaultRaw.args = {
-    to: 'https://www.google.com/',
     raw: true,
+    to: 'https://www.google.com/',
 }
 
 export const NuxtLinkRaw = TemplateRaw.bind({})
 NuxtLinkRaw.args = {
-    to: 'news',
     raw: true,
+    to: 'news',
 }
 
 export const NuxtLinkRawHover = TemplateRawHover.bind({})
 NuxtLinkRawHover.args = {
-    to: 'news',
     raw: true,
     rawHover: "underline",
+    to: 'news',
 }
 
 export const Anchor = TemplateAnchor.bind({})

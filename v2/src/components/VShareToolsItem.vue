@@ -1,53 +1,50 @@
 <script setup>
-import { computed } from 'vue'
-
-import AudioIcon from '../assets/icons/AudioIcon.vue'
-// eslint-disable-next-line import/no-duplicates
+//import AudioIcon from '../assets/icons/AudioIcon.vue'
 import EmailIcon from '../assets/icons/EmailIcon.vue'
 import FacebookIcon from '../assets/icons/FacebookIcon.vue'
 import InstagramIcon from '../assets/icons/InstagramIcon.vue'
+//import NewsletterIcon from '../assets/icons/EmailIcon.vue'
 import LinkedinIcon from '../assets/icons/LinkedinIcon.vue'
-// eslint-disable-next-line import/no-duplicates
-import NewsletterIcon from '../assets/icons/EmailIcon.vue'
 import PhoneIcon from '../assets/icons/PhoneIcon.vue'
 import RedditIcon from '../assets/icons/RedditIcon.vue'
 import SiteIcon from '../assets/icons/SiteIcon.vue'
 import SpotifyIcon from '../assets/icons/SpotifyIcon.vue'
 import TwitterIcon from '../assets/icons/TwitterIcon.vue'
 import YoutubeIcon from '../assets/icons/YoutubeIcon.vue'
+import { computed } from 'vue'
 
 const props = defineProps({
   action: {
-    type: String,
     default: 'follow',
-  },
-  service: {
     type: String,
-    default: 'site',
-  },
-  username: {
-    type: String,
-    default: null,
   },
   label: {
-    type: String,
     default: null,
+    type: String,
   },
   link: {
-    type: String,
     default: null,
+    type: String,
   },
-  url: {
+  service: {
+    default: 'site',
     type: String,
-    default: null,
   },
   shareParameters: {
-    type: Object,
     default: () => ({}),
+    type: Object,
+  },
+  url: {
+    default: null,
+    type: String,
+  },
+  username: {
+    default: null,
+    type: String,
   },
   utmParameters: {
-    type: Object,
     default: () => ({}),
+    type: Object,
   },
 })
 
@@ -55,55 +52,55 @@ const emit = defineEmits(['share', 'follow'])
 
 const icons = {
   email: EmailIcon,
-  phone: PhoneIcon,
   facebook: FacebookIcon,
   instagram: InstagramIcon,
   linkedin: LinkedinIcon,
   newsletter: EmailIcon,
+  phone: PhoneIcon,
   reddit: RedditIcon,
+  site: SiteIcon,
   spotify: SpotifyIcon,
   twitter: TwitterIcon,
   youtube: YoutubeIcon,
-  site: SiteIcon,
 }
 
 const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
 const SOCIAL_SERVICE_MAP = {
-  spotify: {
-    profileBase: 'https://open.spotify.com/playlist/',
+  email: {
+    omitUrl: true,
+    profileBase: 'mailto:',
+    shareBase: 'mailto:',
   },
   facebook: {
     profileBase: 'https://www.facebook.com/',
     shareBase: 'https://www.facebook.com/sharer.php',
     urlKey: 'u',
   },
+  instagram: {
+    profileBase: 'https://www.instagram.com/',
+  },
   linkedin: {
     profileBase: 'https://www.linkedin.com/in/',
     shareBase: 'https://www.linkedin.com/sharing/share-offsite/',
   },
-  twitter: {
-    profileBase: 'https://twitter.com/',
-    shareBase: 'https://twitter.com/intent/tweet',
+  phone: {
+    omitUrl: true,
+    profileBase: 'tel:',
+    shareBase: 'tel:',
   },
   reddit: {
     profileBase: 'https://www.reddit.com/r/',
     shareBase: 'https://www.reddit.com/submit',
   },
-  instagram: {
-    profileBase: 'https://www.instagram.com/',
+  spotify: {
+    profileBase: 'https://open.spotify.com/playlist/',
+  },
+  twitter: {
+    profileBase: 'https://twitter.com/',
+    shareBase: 'https://twitter.com/intent/tweet',
   },
   youtube: {
     profileBase: 'https://www.youtube.com/channel/',
-  },
-  email: {
-    profileBase: 'mailto:',
-    shareBase: 'mailto:',
-    omitUrl: true,
-  },
-  phone: {
-    profileBase: 'tel:',
-    shareBase: 'tel:',
-    omitUrl: true,
   },
 }
 
@@ -179,7 +176,7 @@ const share = () => {
   }
 
   // get the position of the window
-  const windowString = ({ top, left }) =>
+  const windowString = ({ left, top }) =>
     `location=no,toolbar=no,menubar=no,scrollbars=no,status=no,width=550,height=600,top=${top},left=${left}`
   const popupPosition = getPopupPosition()
   const newWindow = window.open(

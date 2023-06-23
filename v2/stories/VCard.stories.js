@@ -2,8 +2,6 @@ import VCard from '../src/components/VCard.vue'
 import VTag from '../src/components/VTag.vue'
 
 export default {
-    title: 'Components-V2/VCard',
-    component: VCard,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -15,6 +13,8 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VCard,
+    title: 'Components-V2/VCard',
 }
 
 const blurb = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
@@ -104,397 +104,397 @@ const TemplateSlotAboveImage = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
+    title: "Title with some <em>HTML</em>",
     width: 300,
-    height: 200,
 }
 export const CustomImageFlexBasis = Template.bind({})
 CustomImageFlexBasis.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 200,
     imageFlexBasis: '50%',
+    imageSrc: '329944',
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
+    width: 300,
 }
 export const NoImageFlexBasis = Template.bind({})
 NoImageFlexBasis.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 200,
     imageFlexBasis: null,
+    imageSrc: '329944',
+    link: 'https://www.google.com',
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
+    width: 300,
 }
 
 export const ImageMinWidth = Template.bind({})
 ImageMinWidth.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 200,
+    imageSrc: '329944',
+    link: 'https://www.google.com',
     minWidth: 150,
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
+    width: 300,
 }
 
 export const CustomRatio = Template.bind({})
 CustomRatio.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 200,
+    imageSrc: '329944',
+    link: 'https://www.google.com',
     ratio: [5, 2],
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
+    width: 300,
 }
 
 export const CustomRatioAndMobileRatio = Template.bind({})
 CustomRatioAndMobileRatio.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 300,
-    ratio: [5, 2],
+    imageSrc: '329944',
+    link: 'https://www.google.com',
     mobileRatio: [1, 1],
+    ratio: [5, 2],
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
+    width: 300,
 }
 
 export const CustomeTitleClass = Template.bind({})
 CustomeTitleClass.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    titleClass: 'h1 anythingElse',
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
+    title: "Title with some <em>HTML</em>",
+    titleClass: 'h1 anythingElse',
     width: 300,
-    height: 200,
 
 
 }
 
 export const IsNotDecrative = Template.bind({})
 IsNotDecrative.args = {
-    imageSrc: '329944',
+    alt: 'alt text',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
+    blurb: 'When isDecrative is set to false, the text and image links aria-hidden ,tabindex and alt-text are enabled.Use to indicate decorative images with a link, where the exact same link is repeated in nearby text. e.g.A thumbnail that links to an article next to a title that links to the same article. WARNING: This will make the link unreachable by assistive software so only use this for truly redundant links.',
+    height: 200,
+    imageSrc: '329944',
+    isDecorative: false,
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: 'When isDecrative is set to false, the text and image links aria-hidden ,tabindex and alt-text are enabled.Use to indicate decorative images with a link, where the exact same link is repeated in nearby text. e.g.A thumbnail that links to an article next to a title that links to the same article. WARNING: This will make the link unreachable by assistive software so only use this for truly redundant links.',
+
+
+    title: "Title with some <em>HTML</em>",
     width: 300,
-    height: 200,
-
-
-    isDecorative: false,
-    alt: 'alt text',
 }
 
 export const EagerLoading = Template.bind({})
 EagerLoading.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 200,
-
-
+    imageSrc: '329944',
+    link: 'https://www.google.com',
     loading: 'eager',
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
+
+
+    width: 300,
 }
 
 export const TruncateBlurb = Template.bind({})
 TruncateBlurb.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
-    width: 300,
-    height: 200,
-
-
+    title: "Title with some <em>HTML</em>",
     truncate: 2,
+
+
+    width: 300,
 }
 export const NoTitle = Template.bind({})
 NoTitle.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    link: 'https://www.google.com',
     blurb: blurb,
-    width: 300,
     height: 200,
-
-
+    imageSrc: '329944',
+    link: 'https://www.google.com',
     truncate: 2,
+
+
+    width: 300,
 }
 export const NoBlurb = Template.bind({})
 NoBlurb.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    width: 300,
-    height: 200,
-
-
+    title: "Title with some <em>HTML</em>",
     truncate: 2,
+
+
+    width: 300,
 }
 
 export const NoSubtitle = Template.bind({})
 NoSubtitle.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
     blurb: blurb,
-    width: 300,
     height: 200,
-
-
+    imageSrc: '329944',
+    link: 'https://www.google.com',
+    title: "Title with some <em>HTML</em>",
     truncate: 2,
+
+
+    width: 300,
 }
 export const NoImage = Template.bind({})
 NoImage.args = {
-    title: "Title with some <em>HTML</em>",
+    blurb: blurb,
+    height: 200,
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
-    width: 300,
-    height: 200,
-
-
+    title: "Title with some <em>HTML</em>",
     truncate: 2,
+
+
+    width: 300,
 }
 export const NoLinks = Template.bind({})
 NoLinks.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 200,
-
-
+    imageSrc: '329944',
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
     truncate: 2,
+
+
+    width: 300,
 }
 
 export const Reverse = Template.bind({})
 Reverse.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 200,
-
-
+    imageSrc: '329944',
+    link: 'https://www.google.com',
     reverse: true,
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
+
+
+    width: 300,
 }
 
 export const Vertical = Template.bind({})
 Vertical.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
+    blurb: blurb,
+    height: 533,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
-    width: 800,
-    height: 533,
-
-
+    title: "Title with some <em>HTML</em>",
     vertical: true,
+
+
+    width: 800,
 }
 
 export const ReverseVertical = Template.bind({})
 ReverseVertical.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 800,
     height: 533,
+    imageSrc: '329944',
+    link: 'https://www.google.com',
+    reverse: true,
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
 
 
     vertical: true,
-    reverse: true,
+    width: 800,
 }
 
 export const VerticalOnMobile = Template.bind({})
 VerticalOnMobile.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
+    blurb: blurb,
+    height: 266,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
-    width: 400,
-    height: 266,
-
-
+    title: "Title with some <em>HTML</em>",
     verticalMobile: true,
+
+
+    width: 400,
 }
 
 export const ReverseVerticalOnMobile = Template.bind({})
 ReverseVerticalOnMobile.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 400,
     height: 266,
+    imageSrc: '329944',
+    link: 'https://www.google.com',
+    reverse: true,
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
 
 
     verticalMobile: true,
-    reverse: true,
+    width: 400,
 }
 export const AllowVerticalEffect = Template.bind({})
 AllowVerticalEffect.args = {
-    imageSrc: '329836',
-    alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
-    blurb: blurb,
-    width: 800,
-    height: 533,
-    maxWidth: 2598,
-    maxHeight: 3484,
     allowVerticalEffect: true,
-    verticalBgBlur: '10px',
-    verticalBgColorOpacity: '0.8',
-    verticalBgColor: '#000000',
+    alt: "Image alt text",
+    blurb: blurb,
+    height: 533,
+    imageSrc: '329836',
+    link: 'https://www.google.com',
+    maxHeight: 3484,
+    maxWidth: 2598,
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>",
     vertical: true,
+    verticalBgBlur: '10px',
+    verticalBgColor: '#000000',
+    verticalBgColorOpacity: '0.8',
+    width: 800,
 }
 
 export const SlotAfterTitle = TemplateSlotAfterTitle.bind({})
 SlotAfterTitle.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>",
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
+    title: "Title with some <em>HTML</em>",
     width: 300,
-    height: 200,
 
 
 }
 export const SlotBeforeTitle = TemplateSlotBeforeTitle.bind({})
 SlotBeforeTitle.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>",
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
+    title: "Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>. Title with some <em>HTML</em>",
     width: 300,
-    height: 200,
 
 
 }
 export const SlotAboveTitle = TemplateSlotAboveTitle.bind({})
 SlotAboveTitle.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>.",
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
+    title: "Title with some <em>HTML</em>.",
     width: 300,
-    height: 200,
 
 
 }
 export const SlotBelowBlurb = TemplateSlotBelowBlurb.bind({})
 SlotBelowBlurb.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>.",
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
+    title: "Title with some <em>HTML</em>.",
     width: 300,
-    height: 200,
 }
 export const SlotBelowImage = TemplateSlotBelowImage.bind({})
 SlotBelowImage.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>.",
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
+    title: "Title with some <em>HTML</em>.",
     width: 300,
-    height: 200,
 }
 
 export const SlotAboveImage = TemplateSlotAboveImage.bind({})
 SlotAboveImage.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>.",
+    blurb: blurb,
+    height: 200,
+    imageSrc: '329944',
     link: 'https://www.google.com',
     subtitle: 'Subtitle',
-    blurb: blurb,
+    title: "Title with some <em>HTML</em>.",
     width: 300,
-    height: 200,
 }
 
 export const ImageQuality = Template.bind({})
 ImageQuality.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>.",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 300,
     height: 200,
+    imageSrc: '329944',
+    link: 'https://www.google.com',
     quality: 5,
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>.",
+    width: 300,
 }
 
 export const Sizes = Template.bind({})
 Sizes.args = {
-    imageSrc: '329944',
     alt: "Image alt text",
-    title: "Title with some <em>HTML</em>.",
-    link: 'https://www.google.com',
-    subtitle: 'Subtitle',
     blurb: blurb,
-    width: 800,
     height: 533,
-    vertical: true,
+    imageSrc: '329944',
+    link: 'https://www.google.com',
     sizes: "xs:300px md:400px lg:800px",
+    subtitle: 'Subtitle',
+    title: "Title with some <em>HTML</em>.",
+    vertical: true,
+    width: 800,
 }

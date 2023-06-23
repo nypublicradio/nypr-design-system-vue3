@@ -3,18 +3,18 @@ import VFlexibleLink from './VFlexibleLink.vue'
 
 const props = defineProps({
   /**
-   * url or slug or anchor to go to
-   */
-  slug: {
-    type: String,
-    default: null,
-  },
-  /**
    * tag label
    */
   name: {
-    type: String,
     default: null,
+    type: String,
+  },
+  /**
+   * url or slug or anchor to go to
+   */
+  slug: {
+    default: null,
+    type: String,
   },
 })
 const emit = defineEmits(['tagClick'])

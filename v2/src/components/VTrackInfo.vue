@@ -1,49 +1,49 @@
 <script setup>
-import { computed } from 'vue'
-import VImage from './VImage.vue'
 import VFlexibleLink from './VFlexibleLink.vue'
+import VImage from './VImage.vue'
 import VProgressScrubber from './VProgressScrubber.vue'
+import { computed } from 'vue'
 
 const props = defineProps({
-  description: {
-    type: String,
-    default: null,
-  },
-  descriptionLink: {
-    type: String,
-    default: null,
-  },
-  livestream: {
-    type: Boolean,
-    default: false,
-  },
-  station: {
-    type: String,
-    default: null,
-  },
-  image: {
-    type: String,
-    default: null,
-  },
-  title: {
-    type: String,
-    default: null,
-  },
-  titleLink: {
-    type: String,
-    default: null,
-  },
-  durationSeconds: {
-    type: Number,
+  buffered: {
     default: 0,
+    type: Number,
   },
   currentSeconds: {
-    type: Number,
     default: 0,
+    type: Number,
   },
-  buffered: {
-    type: Number,
+  description: {
+    default: null,
+    type: String,
+  },
+  descriptionLink: {
+    default: null,
+    type: String,
+  },
+  durationSeconds: {
     default: 0,
+    type: Number,
+  },
+  image: {
+    default: null,
+    type: String,
+  },
+  livestream: {
+    default: false,
+    type: Boolean,
+  },
+  station: {
+    default: null,
+    type: String,
+  },
+  title: {
+    default: null,
+    type: String,
+  },
+  titleLink: {
+    default: null,
+    type: String,
   },
 })
 
@@ -158,6 +158,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   align-self: center;
   .track-info-image {
     display: block;
+    // prettier-ignore
     @container (max-width: #{$container-breakpoint-md}) {
       display: none;
     }

@@ -1,8 +1,6 @@
 import VPersistentPlayer from '../src/components/VPersistentPlayer.vue'
 
 export default {
-    title: 'Components-V2/VPersistentPlayer',
-    component: VPersistentPlayer,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -14,6 +12,8 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VPersistentPlayer,
+    title: 'Components-V2/VPersistentPlayer',
 }
 
 const Template = (args) => ({
@@ -54,197 +54,197 @@ const TemplateCanExpandCustomHeaderContent = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
 }
 
 export const DescriptionLink = Template.bind({})
 DescriptionLink.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     descriptionLink: "http://www.bing.com",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
 }
 
 export const WithImage = Template.bind({})
 WithImage.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
 }
 
 export const AutoPlay = Template.bind({})
 AutoPlay.args = {
     autoPlay: true,
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
 }
 
 export const LiveStream = Template.bind({})
 LiveStream.args = {
-    livestream: true,
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    livestream: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
 }
 
 export const LiveStreamWithoutTitleLink = Template.bind({})
 LiveStreamWithoutTitleLink.args = {
-    livestream: true,
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    livestream: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway"
 }
 
 export const LivestreamWithoutTitle = Template.bind({})
 LivestreamWithoutTitle.args = {
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
     livestream: true,
     station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
-    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    titleLink: "http://www.google.com"
 }
 
 export const LivestreamWithoutDescription = Template.bind({})
 LivestreamWithoutDescription.args = {
-    livestream: true,
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     image: "329534",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    livestream: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
 }
 
 export const LivestreamWithoutStation = Template.bind({})
 LivestreamWithoutStation.args = {
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
     livestream: true,
     title: "The Takeaway",
-    titleLink: "http://www.google.com",
-    image: "329534",
-    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+    titleLink: "http://www.google.com"
 }
 
 
 export const Download = Template.bind({})
 Download.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
-    showDownload: true
+    image: "329534",
+    showDownload: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
 }
 
 export const CanMinimize = Template.bind({})
 CanMinimize.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
+    canMinimize: true,
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
     showDownload: true,
-    canMinimize: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com",
 }
 
 export const CanExpand = TemplateCanExpand.bind({})
 CanExpand.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
+    canExpand: true,
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
     showDownload: true,
-    canExpand: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com",
 }
 export const CanExpandHeaderContent = TemplateCanExpandCustomHeaderContent.bind({})
 CanExpandHeaderContent.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
+    canExpand: true,
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
     showDownload: true,
-    canExpand: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com",
 }
 export const CanExpandCustomUnexpandButtonIcon = TemplateCanExpandCustomButtonIcon.bind({})
 CanExpandCustomUnexpandButtonIcon.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
+    canExpand: true,
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
     showDownload: true,
-    canExpand: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com",
 }
 export const CanExpandWithSwipe = CanExpand.bind({})
 CanExpandWithSwipe.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
-    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
-    showDownload: true,
     canExpand: true,
     canExpandWithSwipe: true,
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    showDownload: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com",
 }
 export const CanUnexpandWithSwipe = CanExpand.bind({})
 CanUnexpandWithSwipe.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
-    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
-    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
-    showDownload: true,
     canExpand: true,
     canExpandWithSwipe: true,
     canUnexpandWithSwipe: true,
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    showDownload: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com",
 }
 
 export const SetVolume = Template.bind({})
 SetVolume.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com",
     volume: 15,
 }
 
 export const customIcons = TemplateCustomIcons.bind({})
 customIcons.args = {
-    title: "The Takeaway",
-    station: "WNYC 93.9 FM",
-    titleLink: "http://www.google.com",
-    image: "329534",
+    canMinimize: true,
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
     showDownload: true,
-    canMinimize: true
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
 }

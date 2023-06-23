@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VBylineUnit from '../components/VBylineUnit.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -12,72 +12,72 @@ describe('VBylineUnit', () => {
 
   const authorOrg =
   {
-    id: 146821,
+    biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
+    email: "",
     firstName: "Nsikan",
+    id: 146821,
+    jobTitle: "Editor, Health & Science",
     lastName: "Akpan",
     name: "Nsikan Akpan",
-    photoID: 327577,
-    jobTitle: "Editor, Health & Science",
-    biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
-    website: "",
-    email: "",
-    slug: "nsikan-akpan",
-    url: 'http://www.google.com',
     organization: 'Gothamist',
     organizationUrl: 'http://www.gothamist.com',
+    photoID: 327577,
+    slug: "nsikan-akpan",
     socialMediaProfile: [
       {
-        service: "twitter",
-        profileUrl: "https://twitter.com/MoNscience"
+        profileUrl: "https://twitter.com/MoNscience",
+        service: "twitter"
       }
-    ]
+    ],
+    url: 'http://www.google.com',
+    website: ""
   }
 
   const authorNoOrgLink =
   {
-    id: 146821,
+    biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
+    email: "",
     firstName: "Nsikan",
+    id: 146821,
+    jobTitle: "Editor, Health & Science",
     lastName: "Akpan",
     name: "Nsikan Akpan",
-    photoID: 327577,
-    jobTitle: "Editor, Health & Science",
-    biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
-    website: "",
-    email: "",
-    slug: "nsikan-akpan",
-    url: 'http://www.google.com',
     organization: 'Gothamist',
     organizationUrl: null,
+    photoID: 327577,
+    slug: "nsikan-akpan",
     socialMediaProfile: [
       {
-        service: "twitter",
-        profileUrl: "https://twitter.com/MoNscience"
+        profileUrl: "https://twitter.com/MoNscience",
+        service: "twitter"
       }
-    ]
+    ],
+    url: 'http://www.google.com',
+    website: ""
   }
 
 
   const authorNoOrg =
   {
-    id: 146861,
+    biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
+    email: "",
     firstName: "Peter",
+    id: 146861,
+    jobTitle: "Front End Developer",
     lastName: "Gibbons",
     name: "Peter Gibbons",
-    photoID: 327577,
-    jobTitle: "Front End Developer",
-    biography: "Nsikan runs the health and science desk at WNYC/Gothamist. Nsikan was previously at National Geographic where he worked as a science editor, overseeing its COVID-19 coverage in addition to other topics in science, health and technology. Before National Geographic, he worked for more than four years at PBS NewsHour, where he co-created an award-winning video series named ScienceScope. \r\n\r\nHe shared a 2020 Emmy for the PBS NewsHour series “Stopping a Killer Pandemic” and in 2019 received a George Foster Peabody Award for the PBS NewsHour series “The Plastic Problem.” Nsikan has also worked for NPR, Science News Magazine, Science Magazine, KUSP Central Coast Public Radio, the Santa Cruz Sentinel and as a writer at the Center for Infection and Immunity at Columbia University. He holds a doctorate in pathobiology from Columbia University and is an alum of the science communication program at the University of California, Santa Cruz.",
-    website: "",
-    email: "",
-    slug: "thomas-bono",
-    url: 'http://www.google.com',
     organization: null,
     organizationUrl: null,
+    photoID: 327577,
+    slug: "thomas-bono",
     socialMediaProfile: [
       {
-        service: "twitter",
-        profileUrl: "https://twitter.com/bonomite"
+        profileUrl: "https://twitter.com/bonomite",
+        service: "twitter"
       }
-    ]
+    ],
+    url: 'http://www.google.com',
+    website: ""
   }
 
 
@@ -85,12 +85,12 @@ describe('VBylineUnit', () => {
 
   const createComponent = ({ props = {}, slots = {} } = {}) => {
     wrapper = mount(VBylineUnit, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
         }
       },
+      props,
       slots
     })
   }

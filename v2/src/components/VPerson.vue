@@ -1,178 +1,178 @@
 <script setup>
-import { ref, computed } from 'vue'
 import VFlexibleLink from './VFlexibleLink.vue'
 import VImage from './VImage.vue'
 import VShareTools from './VShareTools.vue'
 import VShareToolsItem from './VShareToolsItem.vue'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   /**
-   * API responseof the user/author's data
+   * fflex-align for the image and content
    */
-  profileData: {
-    type: Object,
-    default: null,
-  },
-  /**
-   * the prefix before the name
-   */
-  namePrefix: {
+  alignItems: {
+    default: 'flex-start',
     type: String,
-    default: null,
-  },
-  /**
-   * The desired width & height for image
-   */
-  imageSize: {
-    type: Number,
-    default: 100,
-  },
-  /**
-   * The desired min-width for image when the flexbox is responding
-   */
-  minWidth: {
-    type: Number,
-    default: null,
-  },
-  /**
-   * at what percentage the image starts to scale down
-   */
-  imageFlexBasis: {
-    type: String,
-    default: '20%',
-  },
-  /**
-   * the path to the fallback image
-   */
-  imageFallbackPath: {
-    type: String,
-    default: null,
   },
   /**
    * alt text for the image
    */
   alt: {
-    type: String,
     default: 'Profile Image',
-  },
-  /**
-   * vertical layout
-   */
-  vertical: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * vertical layout on mobile only
-   */
-  verticalMobile: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * show/hide CTA button
-   */
-  showCta: {
-    type: Boolean,
-    default: true,
+    type: String,
   },
   /**
    * show/hide CTA button
    */
   ctaText: {
-    type: String,
     default: 'Read more',
-  },
-  /**
-   * show/hide bio
-   */
-  showBio: {
-    type: Boolean,
-    default: true,
-  },
-  /**
-   * show/hide social icons
-   */
-  showSocial: {
-    type: Boolean,
-    default: true,
-  },
-  /**
-   * show/hide name
-   */
-  showName: {
-    type: Boolean,
-    default: true,
-  },
-  /**
-   * when true, only the image will be displayed... and work properly
-   */
-  justImage: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * fflex-align for the image and content
-   */
-  alignItems: {
     type: String,
-    default: 'flex-start',
-  },
-  /**
-   * flags the profile as sponsored
-   */
-  sponsored: {
-    type: Boolean,
-    default: false,
   },
   /**
    * flex-direction for the image and content
    */
   flexDirection: {
-    type: String,
     default: 'row',
+    type: String,
   },
   /**
-   * snumber of lines to truncate the bio
+   * the path to the fallback image
    */
-  truncate: {
-    type: Number,
+  imageFallbackPath: {
     default: null,
+    type: String,
   },
   /**
-   * border radius for the image
+   * at what percentage the image starts to scale down
    */
-  radius: {
+  imageFlexBasis: {
+    default: '20%',
     type: String,
-    default: '50%',
-  },
-  /**
-   * image loading type (eager or lazy)
-   */
-  loading: {
-    type: String,
-    default: 'lazy',
   },
   /**
    * desired ratio of the image
    */
   imageRatio: {
-    type: Array,
     default: () => [1, 1],
+    type: Array,
   },
   /**
-   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   * The desired width & height for image
    */
-  sizes: {
-    type: String,
-    default: null,
+  imageSize: {
+    default: 100,
+    type: Number,
   },
   /**
    * to help with a11y
    */
   isDecorative: {
-    type: Boolean,
     default: false,
+    type: Boolean,
+  },
+  /**
+   * when true, only the image will be displayed... and work properly
+   */
+  justImage: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * image loading type (eager or lazy)
+   */
+  loading: {
+    default: 'lazy',
+    type: String,
+  },
+  /**
+   * The desired min-width for image when the flexbox is responding
+   */
+  minWidth: {
+    default: null,
+    type: Number,
+  },
+  /**
+   * the prefix before the name
+   */
+  namePrefix: {
+    default: null,
+    type: String,
+  },
+  /**
+   * API responseof the user/author's data
+   */
+  profileData: {
+    default: null,
+    type: Object,
+  },
+  /**
+   * border radius for the image
+   */
+  radius: {
+    default: '50%',
+    type: String,
+  },
+  /**
+   * show/hide bio
+   */
+  showBio: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * show/hide CTA button
+   */
+  showCta: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * show/hide name
+   */
+  showName: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * show/hide social icons
+   */
+  showSocial: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   */
+  sizes: {
+    default: null,
+    type: String,
+  },
+  /**
+   * flags the profile as sponsored
+   */
+  sponsored: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * snumber of lines to truncate the bio
+   */
+  truncate: {
+    default: null,
+    type: Number,
+  },
+  /**
+   * vertical layout
+   */
+  vertical: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * vertical layout on mobile only
+   */
+  verticalMobile: {
+    default: false,
+    type: Boolean,
   },
 })
 
@@ -187,10 +187,10 @@ const emit = defineEmits([
 const profile = ref(props.profileData)
 
 const updatedSocialArr = ref([])
-const email = { service: 'email', profileUrl: String(profile.value?.email) }
+const email = { profileUrl: String(profile.value?.email), service: 'email' }
 const website = {
-  service: 'site',
   profileUrl: profile.value?.website,
+  service: 'site',
 }
 
 // push original social array into new updatedSocialArr if it exist
@@ -209,8 +209,8 @@ if (profile.value?.email) {
 if (profile.value?.phone_numbers) {
   profile.value?.phone_numbers.map((phone) => {
     updatedSocialArr.value.push({
-      service: 'phone',
       profileUrl: String(phone.phone_number),
+      service: 'phone',
     })
   })
 }

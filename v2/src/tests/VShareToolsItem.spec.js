@@ -1,8 +1,8 @@
+import VShareToolsItem from '../components/VShareToolsItem.vue'
+import axe from './axe-helper'
 import { mount, shallowMount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
-import VShareToolsItem from '../components/VShareToolsItem.vue'
 import PrimeVue from 'primevue/config'
-import axe from './axe-helper'
 
 expect.extend(toHaveNoViolations)
 
@@ -18,13 +18,13 @@ describe('VShareToolsItem', () => {
 
   const createComponent = ({ props = {} } = {}) => {
     wrapper = mount(VShareToolsItem, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
           'nuxt-link': true
         }
-      }
+      },
+      props
     })
   }
 
@@ -39,9 +39,9 @@ describe('VShareToolsItem', () => {
     const service = 'site'
     createComponent({
       props: {
-        service,
         label,
-        link
+        link,
+        service
       }
     })
     const linkTag = wrapper.find('.c-share-tools__link')
@@ -56,8 +56,8 @@ describe('VShareToolsItem', () => {
     const service = 'site'
     createComponent({
       props: {
-        service,
-        link
+        link,
+        service
       }
     })
     const linkTag = wrapper.find('.c-share-tools__link')
@@ -71,8 +71,8 @@ describe('VShareToolsItem', () => {
     const service = 'site'
     createComponent({
       props: {
-        service,
-        link
+        link,
+        service
       }
     })
     await wrapper.trigger('click')
@@ -84,9 +84,9 @@ describe('VShareToolsItem', () => {
     const service = 'site'
     createComponent({
       props: {
-        service,
+        action: 'share',
         link,
-        action: 'share'
+        service
       }
     })
     await wrapper.trigger('click')
@@ -311,9 +311,9 @@ describe('VShareToolsItem', () => {
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {
-        username,
+        label,
         service: 'facebook',
-        label
+        username
       }
     })
     const results = await axe(wrapper.element)

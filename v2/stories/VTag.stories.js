@@ -1,8 +1,6 @@
 import VTag from '../src/components/VTag.vue'
 
 export default {
-    title: 'Components-V2/VTag',
-    component: VTag,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -14,6 +12,8 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VTag,
+    title: 'Components-V2/VTag',
 }
 
 const Template = (args) => ({

@@ -1,10 +1,6 @@
 import VSmartHeader from '../src/components/VSmartHeader.vue'
 
 export default {
-    title: 'Components-V2/VSmartHeader',
-    subTitle: 'Smart header that hides when scrolling down and shows when scrolling up.',
-
-    component: VSmartHeader,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -16,6 +12,10 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VSmartHeader,
+
+    subTitle: 'Smart header that hides when scrolling down and shows when scrolling up.',
+    title: 'Components-V2/VSmartHeader',
 }
 
 const Template = (args) => ({

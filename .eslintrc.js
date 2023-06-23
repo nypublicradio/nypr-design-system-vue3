@@ -1,7 +1,7 @@
 module.exports = {
   "env": {
     "browser": true,
-    "es2021": true
+    "es2021": true,
   },
   "extends": [
     // "plugin:storybook/recommended",
@@ -13,8 +13,29 @@ module.exports = {
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["vue"],
+  "plugins": ["vue", "perfectionist"],
   "rules": {
-    'vue/no-v-html': 0
+    "perfectionist/sort-imports": [
+      "error",
+      {
+        "order": "asc",
+        "type": "natural",
+      }
+    ],
+    "perfectionist/sort-named-imports": [
+      "error",
+      {
+        "order": "asc",
+        "type": "natural",
+      }
+    ],
+    "perfectionist/sort-objects": [
+      "error",
+      {
+        "order": "asc",
+        "type": "natural",
+      }
+    ],
+    "vue/no-v-html": 0,
   }
 }

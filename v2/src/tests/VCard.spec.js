@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VCard from '../components/VCard.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -21,13 +21,13 @@ describe('VCard', () => {
 
   const createComponent = ({ props = {}, slots = {} } = {}) => {
     wrapper = mount(VCard, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
 
         }
       },
+      props,
       slots
       //slots: { afterTitle: '<div>After Title</div>', beforeTitle: '<div>Before Title</div>', aboveTitle: '<div>Above Title</div>', belowBlurb: '<div>Below Blurb</div>', belowImage: '<div>Below Image</div>', aboveImage: '<div>Above Image</div>' }
     })
@@ -44,14 +44,14 @@ describe('VCard', () => {
   test('default prop works', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
         link,
         subtitle,
-        blurb,
+        title,
         width,
-        height,
       }
     })
     const _img = wrapper.find('.card-image-holder')
@@ -69,15 +69,15 @@ describe('VCard', () => {
   test('custom flex-basis', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageFlexBasis: "60%",
+        imageSrc,
         link,
         subtitle,
-        blurb,
-        width,
-        height,
-        imageFlexBasis: "60%"
+        title,
+        width
       }
     })
     // can't figure out how to test the css of an element
@@ -89,15 +89,15 @@ describe('VCard', () => {
   test('custom title class', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
         link,
         subtitle,
-        blurb,
-        width,
-        height,
-        titleClass: "customClass"
+        title,
+        titleClass: "customClass",
+        width
       }
     })
     const _title = wrapper.find('.card-title-link')
@@ -107,15 +107,15 @@ describe('VCard', () => {
   test('is decrotive', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
+        isDecorative: true,
         link,
         subtitle,
-        blurb,
-        width,
-        height,
-        isDecorative: true
+        title,
+        width
       }
     })
     const _img = wrapper.find('.card-image .v-image-holder .image')
@@ -125,15 +125,15 @@ describe('VCard', () => {
   test('eager loading', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
-        link,
-        subtitle,
         blurb,
-        width,
         height,
-        loading: 'eager'
+        imageSrc,
+        link,
+        loading: 'eager',
+        subtitle,
+        title,
+        width
       }
     })
     const _img = wrapper.find('.card-image .v-image-holder .image')
@@ -143,15 +143,15 @@ describe('VCard', () => {
   test('truncate blurb', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
         link,
         subtitle,
-        blurb,
-        width,
-        height,
-        truncate: 2
+        title,
+        truncate: 2,
+        width
       }
     })
     const _blurb = wrapper.find('.card-blurb')
@@ -162,14 +162,14 @@ describe('VCard', () => {
   test('no title', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title: null,
+        blurb,
+        height,
+        imageSrc,
         link,
         subtitle,
-        blurb,
+        title: null,
         width,
-        height,
 
       }
     })
@@ -180,14 +180,14 @@ describe('VCard', () => {
   test('no subtitle', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
         link,
         subtitle: null,
-        blurb,
+        title,
         width,
-        height,
 
       }
     })
@@ -198,14 +198,14 @@ describe('VCard', () => {
   test('no blurb', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb: null,
+        height,
+        imageSrc,
         link,
         subtitle,
-        blurb: null,
+        title,
         width,
-        height,
 
       }
     })
@@ -216,14 +216,14 @@ describe('VCard', () => {
   test('no image', () => {
     createComponent({
       props: {
-        imageSrc: null,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc: null,
         link,
         subtitle,
-        blurb,
+        title,
         width,
-        height,
 
       }
     })
@@ -234,14 +234,14 @@ describe('VCard', () => {
   test('no links', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
         link: null,
         subtitle,
-        blurb,
+        title,
         width,
-        height,
 
       }
     })
@@ -254,17 +254,17 @@ describe('VCard', () => {
   test('allow vertical effect', () => {
     createComponent({
       props: {
-        imageSrc: '329836',
+        allowVerticalEffect: true,
         alt,
-        title,
-        link,
-        subtitle,
         blurb,
-        width,
         height,
-        maxWidth: 2598,
+        imageSrc: '329836',
+        link,
         maxHeight: 3484,
-        allowVerticalEffect: true
+        maxWidth: 2598,
+        subtitle,
+        title,
+        width
       }
     })
     const _img = wrapper.find('.card-image .v-image-holder .image')
@@ -274,16 +274,16 @@ describe('VCard', () => {
   test('slots have children', () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
         link,
         subtitle,
-        blurb,
+        title,
         width,
-        height,
       },
-      slots: { afterTitle: '<div>After Title</div>', beforeTitle: '<div>Before Title</div>', aboveTitle: '<div>Above Title</div>', belowBlurb: '<div>Below Blurb</div>', belowImage: '<div>Below Image</div>', aboveImage: '<div>Above Image</div>' }
+      slots: { aboveImage: '<div>Above Image</div>', aboveTitle: '<div>Above Title</div>', afterTitle: '<div>After Title</div>', beforeTitle: '<div>Before Title</div>', belowBlurb: '<div>Below Blurb</div>', belowImage: '<div>Below Image</div>' }
     })
     const aboveImage = wrapper.find('.slot.slot-above-image')
     const belowImage = wrapper.find('.slot.slot-below-image')
@@ -309,14 +309,14 @@ describe('VCard', () => {
   test('title click fires emit', async () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
         link,
         subtitle,
-        blurb,
+        title,
         width,
-        height,
       }
     })
     const _title = wrapper.find('.card-title-link')
@@ -329,14 +329,14 @@ describe('VCard', () => {
   test('image click fires emit', async () => {
     createComponent({
       props: {
-        imageSrc,
         alt,
-        title,
+        blurb,
+        height,
+        imageSrc,
         link,
         subtitle,
-        blurb,
+        title,
         width,
-        height,
       }
     })
     const img = wrapper.find('.card-image .flexible-link')

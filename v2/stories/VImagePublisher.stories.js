@@ -1,11 +1,9 @@
-import VImagePublisher from '../src/components/VImagePublisher.vue'
-import VImageGallery from '../src/components/VImageGallery.vue'
 import VImageCaption from '../src/components/VImageCaption.vue'
+import VImageGallery from '../src/components/VImageGallery.vue'
+import VImagePublisher from '../src/components/VImagePublisher.vue'
 
 
 export default {
-    title: 'Components-V2/VImagePublisher',
-    component: VImagePublisher,
     argTypes: {
         // alt: {
         //     control: { type: 'text' },
@@ -17,6 +15,8 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
+    component: VImagePublisher,
+    title: 'Components-V2/VImagePublisher',
 }
 
 const Template = (args) => ({
@@ -28,7 +28,7 @@ const Template = (args) => ({
 })
 
 const TemplateSlots = (args) => ({
-    components: { VImagePublisher, VImageCaption, VImageGallery },
+    components: { VImageCaption, VImageGallery, VImagePublisher },
     setup() {
         return { args }
     },
@@ -38,73 +38,73 @@ const TemplateSlots = (args) => ({
 export const Default = Template.bind({})
 Default.args = {
     alt: 'Fallback alt text here',
+    height: 400,
     src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
     width: 600,
-    height: 400,
 }
 export const ImageLink = Template.bind({})
 ImageLink.args = {
     alt: 'Fallback alt text here',
-    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
-    width: 600,
     height: 400,
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
     to: 'https://www.google.com',
+    width: 600,
 }
 
 export const Quality = Template.bind({})
 Quality.args = {
     alt: 'Fallback alt text here',
-    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
-    width: 300,
     height: 200,
     quality: 50,
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
+    width: 300,
 }
 
 export const FlatQuality = Template.bind({})
 FlatQuality.args = {
     alt: 'Fallback alt text here',
-    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
-    width: 300,
+    flatQuality: true,
     height: 200,
     quality: 50,
-    flatQuality: true,
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
+    width: 300,
 }
 
 export const Enlarge = Template.bind({})
 Enlarge.args = {
+    allowPreview: true,
     alt: 'Fallback alt text here',
+    height: 480,
     src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
     width: 640,
-    height: 480,
-    allowPreview: true,
 }
 
 export const SrcsetSizes = Template.bind({})
 SrcsetSizes.args = {
     alt: 'Fallback alt text here',
-    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
-    width: 200,
     height: 150,
-    sizes: [2, 2.5, 3]
+    sizes: [2, 2.5, 3],
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
+    width: 200
 }
 
 export const Vertical = Template.bind({})
 Vertical.args = {
+    allowVerticalEffect: true,
     alt: 'Fallback alt text here',
+    height: 480,
+    maxHeight: 1860,
+    maxWidth: 1395,
     src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/lorriemoore.jpg',
     width: 640,
-    height: 480,
-    maxWidth: 1395,
-    maxHeight: 1860,
-    allowVerticalEffect: true,
 }
 
 export const PreviewAndCaptionSlotAndGallerySlotandImageLink = TemplateSlots.bind({})
 PreviewAndCaptionSlotAndGallerySlotandImageLink.args = {
-    alt: 'Fallback alt text here',
-    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
-    width: 600,
-    height: 400,
     allowPreview: true,
+    alt: 'Fallback alt text here',
+    height: 400,
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
     to: 'https://www.imgLink.com',
+    width: 600,
 }

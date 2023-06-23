@@ -2,53 +2,53 @@
 import { computed } from 'vue'
 const props = defineProps({
   /**
-   * arial label for the iframe
+   * autoplay the media if possible
    */
-  iFrameArialLabel: {
-    type: String,
-    default: 'embedded media',
-  },
-  /**
-   * url of the embed media
-   */
-  url: {
-    type: String,
-    default: null,
-  },
-  /**
-   * ratio of the embed media
-   */
-  ratio: {
-    type: Array,
-    default: () => [16, 9],
+  autoPlay: {
+    default: false,
+    type: Boolean,
   },
   /**
    * show controls state
    */
   controls: {
-    type: Boolean,
     default: true,
-  },
-  /**
-   * autoplay the media if possible
-   */
-  autoPlay: {
     type: Boolean,
-    default: false,
   },
   /**
-   * set start time of the media (youtube only)
+   * arial label for the iframe
    */
-  startTime: {
+  iFrameArialLabel: {
+    default: 'embedded media',
     type: String,
-    default: '0',
   },
   /**
    * mute the media if possible
    */
   mute: {
-    type: Boolean,
     default: false,
+    type: Boolean,
+  },
+  /**
+   * ratio of the embed media
+   */
+  ratio: {
+    default: () => [16, 9],
+    type: Array,
+  },
+  /**
+   * set start time of the media (youtube only)
+   */
+  startTime: {
+    default: '0',
+    type: String,
+  },
+  /**
+   * url of the embed media
+   */
+  url: {
+    default: null,
+    type: String,
   },
 })
 const getRatio = computed(() => {

@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VImagePublisher from '../components/VImagePublisher.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -29,12 +29,12 @@ describe('VImagePublisher', () => {
   const createComponent = ({ props = {}, slots = {} } = {}) => {
 
     wrapper = mount(VImagePublisher, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
         }
       },
+      props,
       slots
     })
   }
@@ -50,10 +50,10 @@ describe('VImagePublisher', () => {
   test('the image has a link', () => {
     createComponent({
       props: {
-        src,
-        width,
         height,
-        to: 'https://www.google.com'
+        src,
+        to: 'https://www.google.com',
+        width
       }
     })
     const _link = wrapper.find('.flexible-link')
@@ -63,10 +63,10 @@ describe('VImagePublisher', () => {
   test('to have eager loading', () => {
     createComponent({
       props: {
-        src,
-        width,
         height,
-        loading: 'eager'
+        loading: 'eager',
+        src,
+        width
       }
     })
     const _img = wrapper.find('.image')
@@ -76,9 +76,9 @@ describe('VImagePublisher', () => {
   test('use local image', () => {
     createComponent({
       props: {
+        height,
         src: 'default-userEvent.jpg',
-        width,
-        height
+        width
       }
     })
     const _img = wrapper.find('.image')
@@ -88,12 +88,12 @@ describe('VImagePublisher', () => {
   test('is a vertical image effect', () => {
     createComponent({
       props: {
+        allowVerticalEffect: true,
+        height,
+        maxHeight: 3484,
+        maxWidth: 2598,
         src,
         width,
-        height,
-        maxWidth: 2598,
-        maxHeight: 3484,
-        allowVerticalEffect: true,
       }
     })
     const _img = wrapper.find('.image')
@@ -103,10 +103,10 @@ describe('VImagePublisher', () => {
   test('enable enlarge', () => {
     createComponent({
       props: {
+        allowPreview: true,
+        height,
         src,
         width,
-        height,
-        allowPreview: true,
       }
     })
     const _enlargeBtn = wrapper.find('.enlarge-button')
@@ -116,10 +116,10 @@ describe('VImagePublisher', () => {
   test('aspect ratio', () => {
     createComponent({
       props: {
-        src,
-        width,
         height,
         ratio: [6, 2],
+        src,
+        width,
       }
     })
     const _imgHolder = wrapper.find('.v-image-publisher-holder')
@@ -129,9 +129,9 @@ describe('VImagePublisher', () => {
   test('gallery button component slot', () => {
     createComponent({
       props: {
+        height,
         src,
         width,
-        height,
       },
       slots: {
         gallery: '<button class="v-image-gallery"></button>'
@@ -144,9 +144,9 @@ describe('VImagePublisher', () => {
   test('caption button component slot', () => {
     createComponent({
       props: {
+        height,
         src,
         width,
-        height,
       },
       slots: {
         caption: '<button class="v-image-caption"></button>'
@@ -159,10 +159,10 @@ describe('VImagePublisher', () => {
   test('image click fires emit', () => {
     createComponent({
       props: {
-        src,
-        width,
         height,
-        to: 'https://www.google.com'
+        src,
+        to: 'https://www.google.com',
+        width
       }
 
     })
@@ -176,10 +176,10 @@ describe('VImagePublisher', () => {
   test('image-enlarge-click fires emit', () => {
     createComponent({
       props: {
+        allowPreview: true,
+        height,
         src,
         width,
-        height,
-        allowPreview: true,
       }
 
     })
@@ -192,9 +192,9 @@ describe('VImagePublisher', () => {
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: {
+        height,
         src,
-        width,
-        height
+        width
       }
     })
     const results = await axe(wrapper.element)

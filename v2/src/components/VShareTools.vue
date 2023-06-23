@@ -4,15 +4,15 @@ const props = defineProps({
    * label prefix
    */
   label: {
-    type: String,
     default: null,
+    type: String,
   },
   /**
    * stack icons vertically
    */
   vertical: {
-    type: Boolean,
     default: false,
+    type: Boolean,
   },
 })
 </script>

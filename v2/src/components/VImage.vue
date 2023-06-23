@@ -1,150 +1,150 @@
 <script setup>
-import { ref, computed } from 'vue'
 import VFlexibleLink from './VFlexibleLink.vue'
-import ProgressSpinner from 'primevue/progressspinner'
-import Dialog from 'primevue/dialog'
 import Button from 'primevue/button'
+import Dialog from 'primevue/dialog'
+import ProgressSpinner from 'primevue/progressspinner'
+import { computed, ref } from 'vue'
 
 const props = defineProps({
   /**
-   * @nuxt/Image provider
+   * allow the user to click on the enlarge button to open a dialogue with full sized image */
+  allowPreview: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * allow the vertical effect to happen for vertical images (images that are taller than they are wide)
    */
-  provider: {
-    type: String,
-    default: 'wagtail',
+  allowVerticalEffect: {
+    default: false,
+    type: Boolean,
   },
   /**
    * alt text for the image
    */
   alt: {
-    type: String,
     default: '',
-  },
-  /**
-   * image loading type (eager or lazy)
-   */
-  loading: {
     type: String,
-    default: 'lazy',
-  },
-  /**
-   * wagtail image id
-   */
-  src: {
-    type: String,
-    default: null,
-  },
-  /**
-   * The desired width for image
-   */
-  width: {
-    type: Number,
-    default: null,
-  },
-  /**
-   * The desired height for image
-   */
-  height: {
-    type: Number,
-    default: null,
-  },
-  /**
-   * Maximum width for the image. If you know the width of the original, full-sized image, use it here. It is needed for the vertical effect
-   */
-  maxWidth: {
-    type: Number,
-    default: Infinity,
-  },
-  /**
-   * Maximum height for the image. If you know the height of the original, full-sized image, use it here. It is needed for the vertical effect
-   */
-  maxHeight: {
-    type: Number,
-    default: Infinity,
-  },
-  /**
-   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
-   */
-  sizes: {
-    type: String,
-    default: '',
   },
   /**
    * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
    * NOT WORKING
    */
   density: {
-    type: String,
     default: 'x1 x2',
+    type: String,
   },
   /**
-   * compression quality of the iamge
+   * The desired height for image
    */
-  quality: {
+  height: {
+    default: null,
     type: Number,
-    default: 80,
+  },
+  /**
+   * to help with a11y
+   */
+  isDecorative: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * image loading type (eager or lazy)
+   */
+  loading: {
+    default: 'lazy',
+    type: String,
+  },
+  /**
+   * Maximum height for the image. If you know the height of the original, full-sized image, use it here. It is needed for the vertical effect
+   */
+  maxHeight: {
+    default: Infinity,
+    type: Number,
+  },
+  /**
+   * Maximum width for the image. If you know the width of the original, full-sized image, use it here. It is needed for the vertical effect
+   */
+  maxWidth: {
+    default: Infinity,
+    type: Number,
   },
   /**
    * wagtail modifiers  (https://image.nuxtjs.org/components/nuxt-img/#modifiers
    * ONLY WORKS WITH WAGTAIL PROVIDER and only supporting 'focusZoom'
    */
   modifiers: {
-    type: Object,
     default: null,
+    type: Object,
   },
   /**
-   * allow the vertical effect to happen for vertical images (images that are taller than they are wide)
+   * @nuxt/Image provider
    */
-  allowVerticalEffect: {
-    type: Boolean,
-    default: false,
-  },
-  /**
-   * tint the grey blured background image
-   * */
-  verticalBgColor: {
+  provider: {
+    default: 'wagtail',
     type: String,
-    default: '#f1f1f1',
   },
   /**
-   *  the opacity of the tint of the grey blured background image
+   * compression quality of the iamge
    */
-  verticalBgColorOpacity: {
-    type: String,
-    default: '0.6',
-  },
-  /**
-   *  ammount of blur for the blured background image */
-  verticalBgBlur: {
-    type: String,
-    default: '3px',
-  },
-  /**
-   * allow the user to click on the enlarge button to open a dialogue with full sized image */
-  allowPreview: {
-    type: Boolean,
-    default: false,
+  quality: {
+    default: 80,
+    type: Number,
   },
   /**
    * desired ratio of the image
    */
   ratio: {
-    type: Array,
     default: () => [3, 2],
+    type: Array,
+  },
+  /**
+   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
+   */
+  sizes: {
+    default: '',
+    type: String,
+  },
+  /**
+   * wagtail image id
+   */
+  src: {
+    default: null,
+    type: String,
   },
   /**
    * address to navigate to when the image is clicked
    */
   to: {
-    type: String,
     default: null,
+    type: String,
   },
   /**
-   * to help with a11y
+   *  ammount of blur for the blured background image */
+  verticalBgBlur: {
+    default: '3px',
+    type: String,
+  },
+  /**
+   * tint the grey blured background image
+   * */
+  verticalBgColor: {
+    default: '#f1f1f1',
+    type: String,
+  },
+  /**
+   *  the opacity of the tint of the grey blured background image
    */
-  isDecorative: {
-    type: Boolean,
-    default: false,
+  verticalBgColorOpacity: {
+    default: '0.6',
+    type: String,
+  },
+  /**
+   * The desired width for image
+   */
+  width: {
+    default: null,
+    type: Number,
   },
 })
 const emit = defineEmits([

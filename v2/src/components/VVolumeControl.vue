@@ -1,23 +1,23 @@
 <script setup>
-import { ref, onUpdated } from 'vue'
 import Slider from 'primevue/slider'
+import { onUpdated, ref } from 'vue'
 
 const props = defineProps({
-  volume: {
-    type: Number,
-    default: 100,
+  disabled: {
+    default: false,
+    type: Boolean,
   },
   isMuted: {
-    type: Boolean,
     default: false,
+    type: Boolean,
   },
   showVolume: {
-    type: Boolean,
     default: false,
+    type: Boolean,
   },
-  disabled: {
-    type: Boolean,
-    default: false,
+  volume: {
+    default: 100,
+    type: Number,
   },
 })
 

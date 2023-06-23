@@ -1,8 +1,8 @@
-import { mount } from '@vue/test-utils'
 import VPerson from '../components/VPerson.vue'
-import PrimeVue from 'primevue/config'
-import { toHaveNoViolations } from 'jest-axe'
 import axe from './axe-helper'
+import { mount } from '@vue/test-utils'
+import { toHaveNoViolations } from 'jest-axe'
+import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
@@ -10,14 +10,15 @@ describe('VPerson', () => {
   let wrapper = {}
   // all props once
   const profileData = {
-    "id": 19,
-    "firstName": "Scott",
-    "lastName": "Lynch",
-    "name": "Scott Lynch",
-    "photoID": 327700,
-    "jobTitle": "Photojournalist",
     "biography": "Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.",
-    "website": "http://t.co/Np4U39BYlh",
+    "email": "scoboco@gmail.com",
+    "firstName": "Scott",
+    "id": 19,
+    "jobTitle": "Photojournalist",
+    "lastName": "Lynch",
+    "link": "https://www.sponsoredLink.com",
+    "logo": "/default-sponsor.png",
+    "name": "Scott Lynch",
     "phone_numbers": [
       {
         "phone_number": "9731231234"
@@ -26,42 +27,41 @@ describe('VPerson', () => {
         "phone_number": "2011231234"
       }
     ],
-    "email": "scoboco@gmail.com",
+    "photoID": 327700,
     "slug": "scott-lynch",
-    "url": "/staff/scott-lynch",
-    "link": "https://www.sponsoredLink.com",
-    "logo": "/default-sponsor.png",
     "socialMediaProfile": [
       {
-        "service": "instagram",
-        "profileUrl": "https://www.instagram.com/scoboco/"
+        "profileUrl": "https://www.instagram.com/scoboco/",
+        "service": "instagram"
       },
       {
-        "service": "twitter",
-        "profileUrl": "https://twitter.com/Scoboco"
+        "profileUrl": "https://twitter.com/Scoboco",
+        "service": "twitter"
       },
       {
-        "service": 'instagram',
-        "profileUrl": 'https://www.instagram.com/WNYC/'
+        "profileUrl": 'https://www.instagram.com/WNYC/',
+        "service": 'instagram'
       },
       {
-        "service": 'linkedin',
-        "profileUrl": 'https://www.linkedin.com/company/wnyc-radio/'
+        "profileUrl": 'https://www.linkedin.com/company/wnyc-radio/',
+        "service": 'linkedin'
       },
       {
-        "service": 'youtube',
-        "profileUrl": 'https://www.youtube.com/channel/UCbysmY4hyViQAAYEzOR-uCQ'
+        "profileUrl": 'https://www.youtube.com/channel/UCbysmY4hyViQAAYEzOR-uCQ',
+        "service": 'youtube'
       },
       {
         "service": 'email',
         "username": 'jchung@nypr.com'
       },
       {
-        "service": 'site',
         "label": 'My site',
-        "profileUrl": 'https://www.google.com'
+        "profileUrl": 'https://www.google.com',
+        "service": 'site'
       }
-    ]
+    ],
+    "url": "/staff/scott-lynch",
+    "website": "http://t.co/Np4U39BYlh"
   }
   const namePrefix = 'By'
   const imageSize = 100
@@ -89,13 +89,13 @@ describe('VPerson', () => {
 
   const createComponent = ({ props = {}, slots = {} } = {}) => {
     wrapper = mount(VPerson, {
-      props,
       global: {
         plugins: [PrimeVue],
         stubs: {
 
         }
       },
+      props,
       slots
     })
   }
@@ -131,7 +131,7 @@ describe('VPerson', () => {
 
   test('it renders custom prefix', async () => {
     createComponent({
-      props: { profileData, namePrefix }
+      props: { namePrefix, profileData }
     })
 
     const _name = wrapper.find('.name-link .name')
@@ -151,7 +151,7 @@ describe('VPerson', () => {
 
   test('it renders custom CTA', () => {
     createComponent({
-      props: { profileData, ctaText: 'custom cta' }
+      props: { ctaText: 'custom cta', profileData }
     })
 
     const _cta = wrapper.find('.cta')
@@ -191,7 +191,7 @@ describe('VPerson', () => {
 
   test('it loads the image eagerly', () => {
     createComponent({
-      props: { profileData, loading: 'eager' }
+      props: { loading: 'eager', profileData }
     })
 
     const _img = wrapper.find('.image')
@@ -201,7 +201,7 @@ describe('VPerson', () => {
 
   test('it loads just the image', () => {
     createComponent({
-      props: { profileData, justImage: true }
+      props: { justImage: true, profileData }
     })
 
     const _info = wrapper.find('.info')

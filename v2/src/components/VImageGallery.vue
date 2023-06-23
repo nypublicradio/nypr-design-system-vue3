@@ -3,17 +3,17 @@ import VFlexibleLink from './VFlexibleLink.vue'
 import Button from 'primevue/button'
 const props = defineProps({
   count: {
-    type: String,
     default: null,
-  },
-  label: {
     type: String,
-    default: 'View all',
   },
   galleryLink: {
-    type: String,
     default: null,
     required: true,
+    type: String,
+  },
+  label: {
+    default: 'View all',
+    type: String,
   },
 })
 

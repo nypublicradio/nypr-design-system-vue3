@@ -1,16 +1,16 @@
 <script setup>
+import Home from '~/src/components/Home.vue'
+import VCard from '~/v2/src/components/VCard.vue'
+import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
+//import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
+import VImage from '~/v2/src/components/VImage.vue'
+import VImageCaption from '~/v2/src/components/VImageCaption.vue'
+import VImageGallery from '~/v2/src/components/VImageGallery.vue'
+import VImagePublisher from '~/v2/src/components/VImagePublisher.vue'
 import VPerson from '~/v2/src/components/VPerson.vue'
 //import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
 import VShareTools from '~/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
-import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
-import VCard from '~/v2/src/components/VCard.vue'
-//import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
-import VImage from '~/v2/src/components/VImage.vue'
-import VImagePublisher from '~/v2/src/components/VImagePublisher.vue'
-import VImageCaption from '~/v2/src/components/VImageCaption.vue'
-import VImageGallery from '~/v2/src/components/VImageGallery.vue'
-import Home from '~/src/components/Home.vue'
 
 //import defaultUserPhoto from 'default-user.jpg'
 
@@ -25,15 +25,16 @@ const doSomethingOnLoad = () => {
   console.log('doSomethingOnLoad')
 }
 const profileFromArticle = {
-  id: 19,
-  firstName: 'Scott',
-  lastName: 'Lynch',
-  name: 'Scott Lynch',
-  photoID: 327700,
-  jobTitle: 'Photojournalist',
   biography:
     'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
-  website: 'http://t.co/Np4U39BYlh',
+  email: 'scoboco@gmail.com',
+  firstName: 'Scott',
+  id: 19,
+  jobTitle: 'Photojournalist',
+  lastName: 'Lynch',
+  link: 'https://www.sponsoredLink.com',
+  logo: '/default-sponsor.png',
+  name: 'Scott Lynch',
   phone_numbers: [
     {
       phone_number: '9731231234',
@@ -42,32 +43,33 @@ const profileFromArticle = {
       phone_number: '2011231234',
     },
   ],
-  email: 'scoboco@gmail.com',
+  photoID: 327700,
   slug: 'scott-lynch',
-  url: '/staff/scott-lynch',
-  link: 'https://www.sponsoredLink.com',
-  logo: '/default-sponsor.png',
   socialMediaProfile: [
     {
-      service: 'instagram',
       profileUrl: 'https://www.instagram.com/scoboco/',
+      service: 'instagram',
     },
     {
-      service: 'twitter',
       profileUrl: 'https://twitter.com/Scoboco',
+      service: 'twitter',
     },
   ],
+  url: '/staff/scott-lynch',
+  website: 'http://t.co/Np4U39BYlh',
 }
 const profileFromArticleNoPhoto = {
-  id: 19,
-  firstName: 'Scott',
-  lastName: 'Lynch',
-  name: 'Scott Lynch',
-
-  jobTitle: 'Photojournalist',
   biography:
     'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
-  website: 'http://t.co/Np4U39BYlh',
+  email: 'scoboco@gmail.com',
+  firstName: 'Scott',
+  id: 19,
+
+  jobTitle: 'Photojournalist',
+  lastName: 'Lynch',
+  link: 'https://www.sponsoredLink.com',
+  logo: '/default-sponsor.png',
+  name: 'Scott Lynch',
   phone_numbers: [
     {
       phone_number: '9731231234',
@@ -76,21 +78,19 @@ const profileFromArticleNoPhoto = {
       phone_number: '2011231234',
     },
   ],
-  email: 'scoboco@gmail.com',
   slug: 'scott-lynch',
-  url: '/staff/scott-lynch',
-  link: 'https://www.sponsoredLink.com',
-  logo: '/default-sponsor.png',
   socialMediaProfile: [
     {
-      service: 'instagram',
       profileUrl: 'https://www.instagram.com/scoboco/',
+      service: 'instagram',
     },
     {
-      service: 'twitter',
       profileUrl: 'https://twitter.com/Scoboco',
+      service: 'twitter',
     },
   ],
+  url: '/staff/scott-lynch',
+  website: 'http://t.co/Np4U39BYlh',
 }
 </script>
 
