@@ -174,7 +174,7 @@ const isExpanded = ref(false)
 let sound = null
 
 const emit = defineEmits([
-  'togglePlay',
+  'toggle-play',
   'volume-toggle-mute',
   'volume-change',
   'load-error',
@@ -320,13 +320,13 @@ const togglePlay = () => {
   }
   // Play or pause the sound.
   if (sound && sound.playing()) {
-    emit('togglePlay', false)
+    emit('toggle-play', false)
     playing.value = false
     sound.pause()
     clearDurationInterval()
   } else {
     playing.value = true
-    emit('togglePlay', true)
+    emit('toggle-play', true)
     startDurationInterval()
     sound.play()
   }

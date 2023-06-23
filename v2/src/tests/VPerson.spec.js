@@ -209,6 +209,35 @@ describe('VPerson', () => {
 
   })
 
+  test('emits', async () => {
+    createComponent({
+      props: {
+        profileData
+      }
+
+    })
+    const img = wrapper.find('.image')
+    const name = wrapper.find('.name-link')
+    const cta = wrapper.find('.cta')
+    const socialIcon = wrapper.find('.v-share-tools-item.instagram')
+
+    await img.trigger('click')
+    expect(wrapper.emitted()['image-click']).toBeTruthy()
+    expect(wrapper.emitted()['image-click']).toEqual([[profileData.url]])
+
+    await name.trigger('click')
+    expect(wrapper.emitted()['name-click']).toBeTruthy()
+    expect(wrapper.emitted()['name-click']).toEqual([[profileData.url]])
+
+    await cta.trigger('click')
+    expect(wrapper.emitted()['cta-click']).toBeTruthy()
+    expect(wrapper.emitted()['cta-click']).toEqual([[profileData.url]])
+
+    await socialIcon.trigger('click')
+    expect(wrapper.emitted()['social-follow-click']).toBeTruthy()
+    expect(wrapper.emitted()['social-follow-click']).toEqual([['instagram']])
+  })
+
   test('it passes basic accessibility tests', async () => {
     createComponent({
       props: { profileData }

@@ -234,4 +234,90 @@ describe('VPersistentPlayer', () => {
     expect(wrapper.vm.playing).toBe(true)
   })
 
+  test('emits', async () => {
+    createComponent({
+      props: {
+        title, station, titleLink, image, description, descriptionLink, file, showDownload, canMinimize, canExpand, canExpandWithSwipe, canUnexpandWithSwipe
+      }
+
+    })
+    const playBtn = wrapper.find('.play-button')
+    const volumeBtn = wrapper.find('.volume-control-icon')
+    const volumeSliderBtn = wrapper.find('.volume-control .p-slider-handle')
+    const aheadBtn = wrapper.find('.player-controls .player-ahead-15-icon')
+    const backBtn = wrapper.find('.player-controls .player-back-15-icon')
+    const downloadBtn = wrapper.find('.player-controls .download-icon')
+    const imageBtn = wrapper.find('.track-info-image-link')
+    const descriptionBtn = wrapper.find('.track-info-description-link')
+    const titleBtn = wrapper.find('.track-info-title-link')
+    const minimizeBtn = wrapper.find('.minimize-btn')
+    const expandBtn = wrapper.find('.expand-btn')
+
+    await playBtn.trigger('click')
+    expect(wrapper.emitted()['toggle-play']).toBeTruthy()
+
+    // force currentFile var to be set so the volume button becomes enabled
+    await wrapper.setProps({ currentFile: file })
+    await wrapper.setProps({ currentSeconds: 10 })
+    await wrapper.setProps({ livestream: false })
+
+    await volumeBtn.trigger('click')
+    expect(wrapper.emitted()['volume-toggle-mute']).toBeTruthy()
+
+    await volumeSliderBtn.trigger('click')
+    expect(wrapper.emitted()['volume-change']).toBeTruthy()
+
+    await aheadBtn.trigger('click')
+    expect(wrapper.emitted()['ahead-15']).toBeTruthy()
+    await backBtn.trigger('click')
+    expect(wrapper.emitted()['back-15']).toBeTruthy()
+
+    downloadBtn.trigger('click')
+    expect(wrapper.emitted()['download']).toBeTruthy()
+
+    await imageBtn.trigger('click')
+    expect(wrapper.emitted()['image-click']).toBeTruthy()
+
+    await imageBtn.trigger('click')
+    expect(wrapper.emitted()['image-click']).toBeTruthy()
+
+    await descriptionBtn.trigger('click')
+    expect(wrapper.emitted()['description-click']).toBeTruthy()
+
+    await titleBtn.trigger('click')
+    expect(wrapper.emitted()['title-click']).toBeTruthy()
+
+    await minimizeBtn.trigger('click')
+    expect(wrapper.emitted()['is-minimized']).toBeTruthy()
+
+    await expandBtn.trigger('click')
+    expect(wrapper.emitted()['is-expanded']).toBeTruthy()
+
+    // TODO: not sure how to test swipe actions
+    // await wrapper.trigger("mousedown")
+    // await wrapper.trigger("mousemove", { clientY: 200 })
+    // expect(wrapper.emitted()['swipe-up']).toBeTruthy()
+
+    // await wrapper.trigger("mousedown")
+    // await wrapper.trigger("mousemove", { clientY: -200 })
+    // expect(wrapper.emitted()['swipe-down']).toBeTruthy()
+
+    // TODO: having trouble with the progress slider tests
+    // const timelineSliderBtn = wrapper.find('.track-info .progress-control .p-slider-handle')
+    // await timelineSliderBtn.trigger("click")
+    // await timelineSliderBtn.trigger("mousedown")
+    // await timelineSliderBtn.trigger("mousemove", { clientX: 5 })
+    // expect(wrapper.emitted()['scrub-timeline-change']).toBeTruthy()
+    // await timelineSliderBtn.trigger("mouseup")
+    // expect(wrapper.emitted()['scrub-timeline-end']).toBeTruthy()
+    // expect(wrapper.emitted()['timeline-click']).toBeTruthy()
+
+    // TODO: not sure how to mock the audio element to test the following emits
+    // load-error, sounds-ended, sound-loaded, sound-looping
+
+
+
+  })
+
+
 })

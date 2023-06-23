@@ -306,7 +306,7 @@ const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
               :link="account.profileUrl"
               :username="accountNameFromUrl(account.profileUrl)"
               @share="(service) => emit('social-share-click', service)"
-              @follow="(service) => emit('cocial-follow-click', service)"
+              @follow="(service) => emit('social-follow-click', service)"
             />
           </VShareTools>
         </div>

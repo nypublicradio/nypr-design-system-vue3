@@ -296,7 +296,7 @@ const cssImageMinWidth = ref(
                   props.titleClass ? props.titleClass : '',
                 ]"
                 :to="props.link"
-                @emit-flexible-link="emit('title-click', props.link)"
+                @flexible-link-click="emit('title-click', props.link)"
               >
                 <div class="card-title-title" v-html="props.title"></div>
                 <!-- CHANGE TO SLOT AFTER TITLE -->

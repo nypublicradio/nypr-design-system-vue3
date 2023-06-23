@@ -76,8 +76,8 @@ const convertTime = (val) => {
         class="track-info-image-link"
         :to="titleLink ? titleLink : null"
         raw
-        @emit-flexible-link="emit('image-click')"
         :title="titleLink ? titleLink : null"
+        @flexible-link-click="emit('image-click')"
       >
         <VImage
           :src="image"
@@ -100,30 +100,27 @@ const convertTime = (val) => {
           <div class="track-info-livestream-station">{{ station }}</div>
         </div>
         <div class="track-info-title">
-          <div v-if="title && titleLink">
+          <div v-if="title">
             <VFlexibleLink
               class="track-info-title-link title"
-              :to="titleLink"
-              @emit-flexible-link="emit('title-click')"
-              v-html="title"
-            />
+              :to="titleLink || null"
+              @flexible-link-click="emit('title-click')"
+            >
+              <div v-html="title"></div>
+            </VFlexibleLink>
           </div>
-          <div v-if="title && !titleLink" class="title" v-html="title"></div>
         </div>
         <div v-if="description" class="track-info-description">
-          <div
-            v-if="description && !descriptionLink"
-            class="track-info-description type-body"
-            v-html="description"
-          ></div>
-
           <VFlexibleLink
-            v-if="description && descriptionLink"
             class="track-info-description-link"
-            :to="descriptionLink"
-            @emit-flexible-link="emit('description-click')"
-            v-html="description"
-          />
+            :to="descriptionLink || null"
+            @flexible-link-click="emit('description-click')"
+          >
+            <div
+              class="track-info-description type-body"
+              v-html="description"
+            ></div>
+          </VFlexibleLink>
         </div>
       </div>
       <template v-if="!livestream && currentSeconds > 0">
