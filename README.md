@@ -32,6 +32,8 @@ npm run build-theme themeName
 # TESTING 
 VSCode users, install the test helper plugin: `https://marketplace.visualstudio.com/items?itemName=ZixuanChen.vitest-explorer`
 
+All the tests can be found here: `v2/src/tests/`
+
 Vitest config found in this file: `./vitest.config.js`
 ## run Vitest tests
 ```
@@ -75,6 +77,9 @@ NOTE: be sure to build the theme to see the theme updates
 npm run build-theme themeName
 ```
 
+## Component library management
+Each component has cssvars associated with it. The can befound in the `v2/src/assets/cssvars/` directory. Each theme imports the `_cssvars.scss` file. When creating a new component, be sure to add the components cssvars to the `_cssvars.scss` file.
+
 
 ## Prime Theme View
 Prime Theme view is now included in the NUXT instance via pages/nuxt.vue
@@ -111,7 +116,7 @@ file being rendered: `src/components/Home.vue`
 Navigate to `nypr-design-system-vue3\src\assets\themes`
 Duplicate “default” folder and rename it (no spaces in name)
 Delete `.min.css` and `.min.css.map` in the new theme folder
-In the root `.env` file, change THEME to equal the new name
+In the root `.env` file, change THEME on line 1 to equal the new name
 
 ## Updating the new theme
 Make all variable changes to the `nypr-design-system-vue3/src/assets/themes/newthemename/variables.scss` file.
