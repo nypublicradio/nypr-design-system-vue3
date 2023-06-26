@@ -15,12 +15,16 @@ Only commit the `.npmrc` file with the first line to git. Your personal access t
 npm i
 ```
 
+## Selecting your theme
+In the `.env` file on line 1, update the THEME env var with the name of the theme you want to use. Just use the directory name in the themes folder. `src/assets/themes/`. This theme will be used in the Storybook and Nuxt instances
+
+
 ## Storybook
-if STORYBOOK_EDIT is set to false (default = true), it will use the compiled minified theme and not provide real time updates as you develop. This is useful when you just want to reference the storybook instance quickly because it builds way faster, and to test the minified theme build
+if STORYBOOK_EDIT env var is set to true (default = false), it will use the _theme.scss file and provide real time updates as you develop. Unfortunalty, this results is a very slow build. You are better off quickly building the theme and the currently running storybook instance will update with the changes.
 ```
 npm run storybook
 ```
-NOTE: be sure to build the theme to see the updates
+NOTE: be sure to build the theme to see the theme updates
 ```
 npm run build-theme themeName
 ```
@@ -30,13 +34,15 @@ VSCode users, install the test helper plugin: `https://marketplace.visualstudio.
 
 Vitest config found in this file: `./vitest.config.js`
 ## run Vitest tests
-update THEME env var with the name of the theme you want to use: `.env` line 1
 ```
 npm run test
 ```
+## run Vitest tests on a specific component
+```
+npm run test VComponentName
+```
 
-## run Vitest tests with coverage
-update THEME env var with the name of the theme you want to use: `.env` line 1
+## run Vitest coverage
 ```
 npm run coverage
 ```
@@ -48,24 +54,23 @@ src/assets/themes/
 src/assets/library/
 
 ## build all Themes
-this will compile all the custom themes and output a .min and a .map file in the theme folder 
+this will compile all the themes and output a .min and a .map file in the theme folder 
 ```
 npm run build-themes
 ```
 
 ## build one Theme
-this will compile all the custom themes and output a .min and a .map file in the theme folder 
+this will compile one theme and output a .min and a .map file in the theme folder 
 ```
 npm run build-theme themeName
 ```
 
 ## Nuxt instance
-update THEME env var with the name of the theme you want to use: `.env` line 1
 Manually navigate to /nuxt to view the sample `pages/nuxt.vue`
 ```
 npm run dev
 ```
-NOTE: be sure to build the theme to see the updates
+NOTE: be sure to build the theme to see the theme updates
 ```
 npm run build-theme themeName
 ```
@@ -104,13 +109,9 @@ file being rendered: `src/components/Home.vue`
 
 ## Creating a new theme
 Navigate to `nypr-design-system-vue3\src\assets\themes`
-Duplicate “radiolab” folder and rename it (no spaces in name)
+Duplicate “default” folder and rename it (no spaces in name)
 Delete `.min.css` and `.min.css.map` in the new theme folder
 In the root `.env` file, change THEME to equal the new name
-Navigate to `nypr-design-system-vue3\src\main.js`  line:51
-Add a new import for the new theme
-import './assets/themes/newthemename/_theme.scss'
-comment out the other theme imports
 
 ## Updating the new theme
 Make all variable changes to the `nypr-design-system-vue3/src/assets/themes/newthemename/variables.scss` file.
