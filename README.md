@@ -1,6 +1,6 @@
-# NODE version 14.19.0 
+# NODE version 16.14.2 
 
-## How to use in another project
+## How to start editing this project
 
 This repository is packaged as an npm package. To use in your project, add the following to the `.npmrc` file in the root directory. Replace `your_personal_access_token` with a github personal access token that has `read:packages` permission.
 
