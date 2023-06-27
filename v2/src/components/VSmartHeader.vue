@@ -70,9 +70,7 @@ watch(
   <div>
     <Transition name="v-smart-header-minimize">
       <div v-show="!isMinimized" ref="headerRef" class="v-smart-header">
-        <header>
-          <slot />
-        </header>
+        <slot />
       </div>
     </Transition>
   </div>
@@ -80,13 +78,13 @@ watch(
 
 <style lang="scss" scoped>
 .v-smart-header {
-  background-color: grey;
   position: fixed;
+  top: env(safe-area-inset-top);
   left: 0;
   top: 0;
   width: 100%;
   z-index: 999;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.36);
+  //box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.36);
 }
 //expand
 .v-smart-header-minimize-enter-active {
