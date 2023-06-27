@@ -1,6 +1,7 @@
 :root,
 [data-style-mode='light'],
 .style-mode-light {
+    color-scheme: light;
     --coolwhite: #{map-get($colors, 'coolwhite')};
     --blue: #{map-get($colors, 'blue')};
     --lightblue: #{map-get($colors, 'lightblue')};
@@ -187,9 +188,11 @@
 }
 [data-style-mode='dark'],
 .style-mode-dark {
+    color-scheme: dark;
     /* --primary-color: #{$dangerColor};
     --primary-color-rgb: #{hex2rgb($dangerColor)}; */
     --link-button-color: var(--primary-light-color);
+    --link-button-hover-color: var(--primary-light-color);
     --text-color: var(--white100);
     --text-color-secondary: var(--white300);
 

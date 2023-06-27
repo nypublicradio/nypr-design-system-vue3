@@ -2,6 +2,12 @@ import VPerson from '../src/components/VPerson.vue'
 
 export default {
     argTypes: {
+        cssvars: {
+            control: { value: {"--person-name-color": "var(--text-color)", "--person-name-decoration": "none", "--person-name-hover-decoration": "underline", "--person-name-size": "var(--font-size-9)", "--person-name-small-size": "var(--font-size-7)", "--person-name-weight": "var(--font-weight-600)",} },
+            description:"CSS variables applied to the component.",
+            type: { name: 'object' },
+            value:{"key": "value"}
+        },
         // alt: {
         //     control: { type: 'text' },
         //     type: { name: 'string' }

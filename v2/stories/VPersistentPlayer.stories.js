@@ -2,6 +2,12 @@ import VPersistentPlayer from '../src/components/VPersistentPlayer.vue'
 
 export default {
     argTypes: {
+        cssvars: {
+            control: { value: {"--persistent-player-bg":" #f1f1f1", "--persistent-player-height":" 100px", "--persistent-player-height-buffer":" 20px", "--persistent-player-live-indicator-bg":"var(--text-color)", "--persistent-player-live-indicator-color":"#fff", "--persistent-player-maximize-btn-bg":"var(--persistent-player-bg)", "--persistent-player-maximize-btn-bg-hover":"#a6a6a6", "--persistent-player-maximize-btn-color":"#000", "--persistent-player-minimize-btn-bg":"var(--persistent-player-bg)", "--persistent-player-minimize-btn-bg-hover":"#a6a6a6", "--persistent-player-minimize-btn-color":"#000", "--persistent-player-play-button-height":"40px", "--persistent-player-play-button-radius":"20px", "--persistent-player-play-button-width":"40px", "--persistent-player-text-button-color":"var(--text-color)", "--persistent-player-text-button-color-hover":"inherit", "--persistent-player-text-button-radius":"15px", "--persistent-player-title-color":"var(--text-color)", "--persistent-player-title-decoration":"none", "--persistent-player-title-hover-decoration":"underline", "--persistent-player-title-size":"var(--font-size-9)", "--persistent-player-title-weight":"400", "--persistent-player-z-index":"var(--z-index-10)"}},
+            description:"CSS variables applied to the component.",
+            type: { name: 'object' },
+            value:{"key": "value"}
+        },
         // alt: {
         //     control: { type: 'text' },
         //     type: { name: 'string' }

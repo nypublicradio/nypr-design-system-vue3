@@ -1,6 +1,7 @@
 :root,
 [data-style-mode='light'],
 .style-mode-light {
+    color-scheme: light;
     --primary-color: #{$primaryColor};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
     --primary-color-alt: #{$primaryColorAlt};
@@ -178,6 +179,7 @@
 }
 [data-style-mode='dark'],
 .style-mode-dark {
+    color-scheme: dark;
     /* --primary-color: #{$dangerColor};
     --primary-color-rgb: #{hex2rgb($dangerColor)}; */
     --link-button-color: var(--primary-light-color);

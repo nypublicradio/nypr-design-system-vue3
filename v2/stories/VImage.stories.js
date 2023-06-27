@@ -4,6 +4,12 @@ import VImageGallery from '../src/components/VImageGallery.vue'
 
 export default {
     argTypes: {
+        cssvars: {
+            control: { value: {"--v-caption-bg-color": "var(--primary-color-rgb)","--v-caption-bg-color-opacity": "0.95", "--v-image-button-padding": "8px"} },
+            description:"CSS variables applied to the component.",
+            type: { name: 'object' },
+            value:{"key": "value"}
+        },
         // alt: {
         //     control: { type: 'text' },
         //     type: { name: 'string' }

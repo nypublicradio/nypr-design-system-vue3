@@ -3,6 +3,12 @@ import VTag from '../src/components/VTag.vue'
 
 export default {
     argTypes: {
+        cssvars: {
+            control: { value: {"--v-card-bg-color": "transparent", "--v-card-border-radius": 0, "--v-card-image-radius": 0, "--v-card-padding": 0, "--v-card-title-color": "inherit", "--v-card-title-font-family": "var(--font-family-header)", "--v-card-title-font-size": "var(--font-size-13)", "--v-card-title-font-weight": "var(--font-weight-600)","--v-card-title-hover-color": "inherit", "--v-card-title-hover-text-decoration": "underline", "--v-card-title-letter-spacing": "-0.02em", "--v-card-title-line-height":" var(--font-size-13)", "--v-card-title-mobile-font-size": "var(--font-size-10)", "--v-card-title-mobile-line-height": "var(--font-size-10)", "--v-card-title-text-decoration": "inherit", "--v-card-title-transition-duration": "var(--transition-duration)"} },
+            description:"CSS variables applied to the component.",
+            type: { name: 'object' },
+            value:{"key": "value"}
+        },
         // alt: {
         //     control: { type: 'text' },
         //     type: { name: 'string' }
@@ -19,6 +25,7 @@ export default {
 
 
 const blurb = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+
 
 const Template = (args) => ({
     components: {
