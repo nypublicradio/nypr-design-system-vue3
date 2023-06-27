@@ -110,7 +110,7 @@ const props = defineProps({
    */
   src: {
     default: null,
-    type: String,
+    type: [String, Number]
   },
   /**
    * address to navigate to when the image is clicked
