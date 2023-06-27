@@ -176,6 +176,11 @@ const enlargeLoad = (target) => {
   emit('enlarge-image-load', target)
   loadedEnlargedImage.value = true
 }
+
+const handleProvider = computed(() => {
+  return isNaN(props.src) ? null : props.provider
+})
+
 </script>
 
 <template>
@@ -194,7 +199,7 @@ const enlargeLoad = (target) => {
       >
         <div v-if="isVertical" class="bg">
           <nuxt-img
-            :provider="props.provider"
+            :provider="handleProvider"
             class="blurred-bg-image"
             :src="String(props.src)"
             :width="props.width"
@@ -206,7 +211,7 @@ const enlargeLoad = (target) => {
           />
         </div>
         <nuxt-img
-          :provider="props.provider"
+          :provider="handleProvider"
           class="image native-image"
           :class="isVertical ? 'is-vertical' : ''"
           :src="String(props.src)"
@@ -250,7 +255,7 @@ const enlargeLoad = (target) => {
             :style="{ width: '95vw' }"
           >
             <nuxt-img
-              :provider="props.provider"
+              :provider="handleProvider"
               class="enlarged-image"
               :src="String(props.src)"
               style="width: 100%; height: auto"

@@ -72,7 +72,6 @@ export const localImage = Template.bind({})
 localImage.args = {
     alt: 'Fallback alt text here',
     height: 400,
-    provider: null,
     src: 'default-user.jpg',
     width: 600
 }
@@ -142,7 +141,6 @@ export const raw = Template.bind({})
 raw.args = {
     alt: 'Fallback alt text here',
     height: 400,
-    provider: null,
     src: 'https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg',
     width: 600
 }
