@@ -10,7 +10,7 @@ describe('VCard', () => {
 
   let wrapper = {}
 
-  const imageSrc = '329944'
+  const src = '329944'
   const alt = 'Alt text'
   const title = "Title with some <em>HTML</em>"
   const link = 'https=//www.google.com'
@@ -47,8 +47,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
+        src,
         subtitle,
         title,
         width,
@@ -73,8 +73,8 @@ describe('VCard', () => {
         blurb,
         height,
         imageFlexBasis: "60%",
-        imageSrc,
         link,
+        src,
         subtitle,
         title,
         width
@@ -92,8 +92,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
+        src,
         subtitle,
         title,
         titleClass: "customClass",
@@ -110,9 +110,9 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         isDecorative: true,
         link,
+        src,
         subtitle,
         title,
         width
@@ -128,9 +128,9 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
         loading: 'eager',
+        src,
         subtitle,
         title,
         width
@@ -146,8 +146,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
+        src,
         subtitle,
         title,
         truncate: 2,
@@ -165,8 +165,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
+        src,
         subtitle,
         title: null,
         width,
@@ -183,8 +183,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
+        src,
         subtitle: null,
         title,
         width,
@@ -201,8 +201,8 @@ describe('VCard', () => {
         alt,
         blurb: null,
         height,
-        imageSrc,
         link,
+        src,
         subtitle,
         title,
         width,
@@ -219,8 +219,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc: null,
         link,
+        src: null,
         subtitle,
         title,
         width,
@@ -237,8 +237,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link: null,
+        src,
         subtitle,
         title,
         width,
@@ -258,10 +258,10 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc: '329836',
         link,
         maxHeight: 3484,
         maxWidth: 2598,
+        src: '329836',
         subtitle,
         title,
         width
@@ -277,8 +277,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
+        src,
         subtitle,
         title,
         width,
@@ -312,8 +312,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
+        src,
         subtitle,
         title,
         width,
@@ -332,8 +332,8 @@ describe('VCard', () => {
         alt,
         blurb,
         height,
-        imageSrc,
         link,
+        src,
         subtitle,
         title,
         width,
@@ -343,6 +343,6 @@ describe('VCard', () => {
     img.trigger('click')
 
     expect(wrapper.emitted()['image-click']).toBeTruthy()
-    expect(wrapper.emitted()['image-click']).toEqual([[imageSrc]])
+    expect(wrapper.emitted()['image-click']).toEqual([[src]])
   })
 })
