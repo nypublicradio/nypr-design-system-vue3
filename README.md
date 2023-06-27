@@ -150,3 +150,73 @@ open this file `primeflex\styles\lib\core\_variables.scss`
 and update/add the breakpoints you want to use
 then run `npm run build:sass` to compile the new css files in the `dist-lib` directory.
 Put the new css file in your theme directory and update the `_theme.scss` file to point to the new file.
+
+
+## How to use this in a project
+1. `npm install nypr-design-system-vue3@2.0.0` 
+2. set up the nuxt.config.js file with the `@nuxt/image@rc` module and options
+```
+ modules: [
+    '@nuxt/image'
+  ],
+
+  image: {
+    dir: 'assets-shared/images',
+    wagtail: {
+      baseURL: "https://cms.demo.nypr.digital/images/",
+      screens: {
+        xs: 375,
+        sm: 576,
+        md: 768,
+        lg: 992,
+        xl: 1280,
+        xxl: 1366,
+        '2xl': 1920
+      },
+    },
+  },
+```
+3. import the css & scss files in your nuxt.config.js file (use the theme you want to use by replacing 'wnyc' with the name of the theme you want to use)
+```
+css: [
+    '@nypublicradio/nypr-design-system-vue3/src/assets/themes/wnyc/fonts/fonts.css',
+    'primeflex/primeflex.css',
+    '@nypublicradio/nypr-design-system-vue3/src/assets/themes/wnyc/wnyc.min.css',
+    'primevue/resources/primevue.min.css',
+    'primeicons/primeicons.css',
+  ],
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: `@import "@nypublicradio/nypr-design-system-vue3/src/assets/themes/wnyc/variables.scss"; @import "@nypublicradio/nypr-design-system-vue3/src/assets/themes/wnyc/_mixins.scss"; @import "~/assets/scss/global.scss";`,
+        },
+      },
+      postcss: {
+        plugins: [
+          {
+            postcssPlugin: 'internal:charset-removal',
+            AtRule: {
+              charset: (atRule) => {
+                if (atRule.name === 'charset') {
+                  atRule.remove();
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+  },
+
+  build: {
+    transpile: [
+      'primevue'
+    ]
+  },
+```
+4. import the components you want to use in your project
+```
+import VFlexibleLink from '@nypublicradio/nypr-design-system-vue3/v2/src/components/VFlexibleLink.vue'
+```
