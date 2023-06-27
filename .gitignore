@@ -8,3 +8,4 @@ nuxt.d.ts
 storybook-static
 .vscode
 coverage/
+.npmrc
