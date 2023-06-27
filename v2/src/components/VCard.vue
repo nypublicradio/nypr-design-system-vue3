@@ -385,9 +385,9 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
           letter-spacing: var(--v-card-title-letter-spacing);
           text-decoration: var(--v-card-title-text-decoration);
           &:hover {
-            color: var(--v-card-title-hover-color);
+            color: var(--v-card-title-hover-color) !important;
             .card-title-title {
-              text-decoration: var(--v-card-title-hover-text-decoration);
+              text-decoration: var(--v-card-title-hover-text-decoration) !important;
             }
           }
         }

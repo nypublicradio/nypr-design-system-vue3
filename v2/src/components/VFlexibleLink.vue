@@ -98,10 +98,10 @@ const isAnchor = computed(() => {
     transition: all var(--transition-duration);
   }
   &:hover {
-    color: var(--link-button-hover-color) !important;
+    color: var(--link-button-hover-color);
     text-decoration: var(--link-button-text-hover-decoration);
     * {
-      color: var(--link-button-hover-color) !important;
+      color: var(--link-button-hover-color);
       text-decoration: var(--link-button-text-hover-decoration);
     }
   }
