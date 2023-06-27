@@ -40,13 +40,6 @@ const props = defineProps({
     type: String,
   },
   /**
-   * wagtail image id
-   */
-  imageSrc: {
-    default: null,
-    type: String,
-  },
-  /**
    * to help with a11y
    */
   isDecorative: {
@@ -122,6 +115,13 @@ const props = defineProps({
   sizes: {
     default: null,
     type: String,
+  },
+  /**
+   * wagtail image id
+   */
+  src: {
+    default: null,
+    type: [String, Number]
   },
   /**
    * Subtitle text below the title
@@ -243,7 +243,7 @@ const cssImageMinWidth = ref(
       ]"
     >
       <div
-        v-if="props.imageSrc"
+        v-if="props.src"
         class="card-image-holder"
         :class="[
           { 'is-vertical': props.vertical },
@@ -255,7 +255,7 @@ const cssImageMinWidth = ref(
         </div>
         <VImage
           class="card-image"
-          :src="props.imageSrc"
+          :src="props.src"
           :alt="props.isDecorative ? '' : props.alt"
           :loading="props.loading"
           :width="props.width"
@@ -272,7 +272,7 @@ const cssImageMinWidth = ref(
           role="presentation"
           :to="props.link"
           :is-decorative="props.isDecorative"
-          @image-click="emit('image-click', props.imageSrc)"
+          @image-click="emit('image-click', props.src)"
         />
         <div class="slot slot-below-image">
           <slot name="belowImage"></slot>
