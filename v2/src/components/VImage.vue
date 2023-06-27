@@ -110,7 +110,7 @@ const props = defineProps({
    */
   src: {
     default: null,
-    type: [String, Number]
+    type: [String, Number],
   },
   /**
    * address to navigate to when the image is clicked
@@ -180,7 +180,6 @@ const enlargeLoad = (target) => {
 const handleProvider = computed(() => {
   return isNaN(props.src) ? null : props.provider
 })
-
 </script>
 
 <template>
@@ -285,6 +284,7 @@ const handleProvider = computed(() => {
         </template>
       </div>
     </VFlexibleLink>
+    <slot class="slot below-image" name="belowImage"></slot>
   </div>
 </template>
 

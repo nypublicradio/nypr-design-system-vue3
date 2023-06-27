@@ -5,10 +5,10 @@ import VImageGallery from '../src/components/VImageGallery.vue'
 export default {
     argTypes: {
         cssvars: {
-            control: { value: {"--v-caption-bg-color": "var(--primary-color-rgb)","--v-caption-bg-color-opacity": "0.95", "--v-image-button-padding": "8px"} },
-            description:"CSS variables applied to the component.",
+            control: { value: { "--v-caption-bg-color": "var(--primary-color-rgb)", "--v-caption-bg-color-opacity": "0.95", "--v-image-button-padding": "8px" } },
+            description: "CSS variables applied to the component.",
             type: { name: 'object' },
-            value:{"key": "value"}
+            value: { "key": "value" }
         },
         // alt: {
         //     control: { type: 'text' },
@@ -36,7 +36,7 @@ const TemplateSlots = (args) => ({
     setup() {
         return { args }
     },
-    template: '<VImage v-bind="args"> <template #caption> <VImageCaption text="This is a sample caption text <b>HTML</b>" /> </template> <template #gallery> <VImageGallery count="9" gallery-link="https://www.google.com" /> </VImage> </template>',
+    template: '<VImage v-bind="args"> <template #caption> <VImageCaption text="This is a sample caption text <b>HTML</b>" /> </template> <template #gallery> <VImageGallery count="9" gallery-link="https://www.google.com" />  </template> <template #belowImage> <p>this is a slot below the image</p> </template></VImage>',
 })
 const TemplateLink = (args) => ({
     components: { VImage },
@@ -128,8 +128,8 @@ Ratio.args = {
     src: '329944',
     width: 600,
 }
-export const PreviewAndCaptionSlotAndGallerySlotAndImageLink = TemplateSlots.bind({})
-PreviewAndCaptionSlotAndGallerySlotAndImageLink.args = {
+export const PreviewAndCaptionSlotAndGallerySlotImageLinkAndCaption = TemplateSlots.bind({})
+PreviewAndCaptionSlotAndGallerySlotImageLinkAndCaption.args = {
     allowPreview: true,
     alt: 'Fallback alt text here',
     height: 400,
