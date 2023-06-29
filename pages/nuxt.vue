@@ -11,6 +11,7 @@ import VPerson from '~/v2/src/components/VPerson.vue'
 //import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
 import VShareTools from '~/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
+import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
 import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
 import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
 
@@ -99,6 +100,10 @@ const profileFromArticleNoPhoto = {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
+      <VLoginWithEmail />
+      <Divider class="my-4" align="center">
+        <b>Or</b>
+      </Divider>
       <VLoginWithMagicLink />
       <br />
       <br />

@@ -2,7 +2,7 @@
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 const props = defineProps({
   error: {
     default: null,

@@ -1,7 +1,7 @@
 <script setup>
 import Button from 'primevue/button'
 import Message from 'primevue/message'
-import { defineProps, ref } from 'vue'
+import { ref } from 'vue'
 const client = useSupabaseClient()
 const config = useRuntimeConfig()
 
