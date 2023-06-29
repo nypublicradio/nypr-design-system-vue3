@@ -18,82 +18,8 @@ import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.
 //import defaultUserPhoto from 'default-user.jpg'
 
 const emitClick = (type, event) => {
-  //console.log('click = ', type)
-  //console.log('event = ', event)
-}
-const showImage = ref(false)
-
-const doSomethingOnLoad = () => {
-  showImage.value = true
-  console.log('doSomethingOnLoad')
-}
-const profileFromArticle = {
-  biography:
-    'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
-  email: 'scoboco@gmail.com',
-  firstName: 'Scott',
-  id: 19,
-  jobTitle: 'Photojournalist',
-  lastName: 'Lynch',
-  link: 'https://www.sponsoredLink.com',
-  logo: '/default-sponsor.png',
-  name: 'Scott Lynch',
-  phone_numbers: [
-    {
-      phone_number: '9731231234',
-    },
-    {
-      phone_number: '2011231234',
-    },
-  ],
-  photoID: 327700,
-  slug: 'scott-lynch',
-  socialMediaProfile: [
-    {
-      profileUrl: 'https://www.instagram.com/scoboco/',
-      service: 'instagram',
-    },
-    {
-      profileUrl: 'https://twitter.com/Scoboco',
-      service: 'twitter',
-    },
-  ],
-  url: '/staff/scott-lynch',
-  website: 'http://t.co/Np4U39BYlh',
-}
-const profileFromArticleNoPhoto = {
-  biography:
-    'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
-  email: 'scoboco@gmail.com',
-  firstName: 'Scott',
-  id: 19,
-
-  jobTitle: 'Photojournalist',
-  lastName: 'Lynch',
-  link: 'https://www.sponsoredLink.com',
-  logo: '/default-sponsor.png',
-  name: 'Scott Lynch',
-  phone_numbers: [
-    {
-      phone_number: '9731231234',
-    },
-    {
-      phone_number: '2011231234',
-    },
-  ],
-  slug: 'scott-lynch',
-  socialMediaProfile: [
-    {
-      profileUrl: 'https://www.instagram.com/scoboco/',
-      service: 'instagram',
-    },
-    {
-      profileUrl: 'https://twitter.com/Scoboco',
-      service: 'twitter',
-    },
-  ],
-  url: '/staff/scott-lynch',
-  website: 'http://t.co/Np4U39BYlh',
+  console.log('click = ', type)
+  console.log('event = ', event)
 }
 </script>
 

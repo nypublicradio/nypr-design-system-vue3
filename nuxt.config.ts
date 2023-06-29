@@ -28,7 +28,7 @@ export default {
           modifiers: {
             format: 'jpg',
             width: 50,
-            
+
             height: 50
           }
         }
@@ -54,7 +54,7 @@ export default {
     },
   },
 
-  //components: true,
+  components: true,
   // components: [
   //   { path: '~/src/components/', extensions: ['vue'] }
   // ],

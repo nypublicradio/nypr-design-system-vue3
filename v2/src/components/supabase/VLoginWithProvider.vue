@@ -23,16 +23,22 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
+
 const login = async () => {
+  emit('submit-click')
   const error = await client.auth.signInWithOAuth(
     { provider: props.provider },
     { redirectTo: config.supabaseAuthSignInRedirectTo }
   )
   if (error.value) {
-    console.log(error)
+    //console.log(error)
+    emit('submit-error', error)
     errorMessage.value = props.error
       ? `${props.error}: ${error}`
       : `Sorry, there was a problem creating this account. Please try again! Error message: ${error}`
+  } else {
+    emit('submit-success')
   }
 }
 

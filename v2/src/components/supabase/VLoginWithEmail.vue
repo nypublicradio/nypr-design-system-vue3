@@ -20,6 +20,8 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
+
 const client = useSupabaseClient()
 const config = useRuntimeConfig()
 
@@ -28,18 +30,22 @@ const password = ref('')
 const errorMessage = ref('')
 
 const login = async () => {
+  emit('submit-click')
   const error = await client.auth.signInWithPassword(
     { email: email.value, password: password.value },
     { redirectTo: config.supabaseAuthSignInRedirectTo }
   )
   if (error.error) {
-    console.log(error)
+    //console.log(error)
     if (error?.error?.message?.includes('Invalid login credentials')) {
+      emit('submit-error', props.error)
       errorMessage.value = props.error
     } else {
+      emit('submit-error', error)
       errorMessage.value = error
     }
   } else {
+    emit('submit-success', props.slug)
     navigateTo(`/${props.slug}`)
   }
 }

@@ -18,6 +18,9 @@ const props = defineProps({
     type: String,
   },
 })
+
+const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
+
 const client = useSupabaseClient()
 const config = useRuntimeConfig()
 
@@ -26,6 +29,7 @@ const errorMessage = ref('')
 const successMessage = ref('')
 
 const login = async () => {
+  emit('submit-click')
   const { data, error } = await client.auth.signInWithOtp(
     {
       email: email.value,
@@ -36,10 +40,12 @@ const login = async () => {
   )
   if (error) {
     //console.log(error)
+    emit('submit-error', error)
     errorMessage.value = props.error
       ? `${props.error}: ${error}`
       : `Sorry, there was a problem logging with your magic link. Please try again! Error message: ${error}`
   } else {
+    emit('submit-success')
     successMessage.value = props.success
   }
 }
