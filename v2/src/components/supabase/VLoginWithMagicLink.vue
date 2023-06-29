@@ -74,7 +74,7 @@ const login = async () => {
         type="submit"
       >
         <template #icon>
-          <slot name="icon"> </slot>
+          <slot name="icon"></slot>
         </template>
       </Button>
     </form>

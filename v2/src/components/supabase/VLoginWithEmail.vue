@@ -3,6 +3,23 @@ import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import { ref } from 'vue'
+
+const props = defineProps({
+  error: {
+    default:
+      'The email and password combination you entered is incorrect. Please try again!',
+    type: String,
+  },
+  label: {
+    default: 'Sign In With Email & Password',
+    type: String,
+  },
+  slug: {
+    default: 'dashboard',
+    type: String,
+  },
+})
+
 const client = useSupabaseClient()
 const config = useRuntimeConfig()
 
@@ -18,13 +35,12 @@ const login = async () => {
   if (error.error) {
     console.log(error)
     if (error?.error?.message?.includes('Invalid login credentials')) {
-      errorMessage.value =
-        'The email and password combination you entered is incorrect. Please try again!'
+      errorMessage.value = props.error
     } else {
       errorMessage.value = error
     }
   } else {
-    navigateTo('/dashboard')
+    navigateTo(`/${props.slug}`)
   }
 }
 </script>
@@ -52,11 +68,9 @@ const login = async () => {
         placeholder="Your password"
         required
       />
-      <Button
-        label="Sign In With Email & Password"
-        class="w-full"
-        type="submit"
-      />
+      <Button :label="props.label" class="w-full" type="submit">
+        <template #icon> <slot name="icon"></slot> </template>
+      </Button>
     </form>
   </div>
 </template>
