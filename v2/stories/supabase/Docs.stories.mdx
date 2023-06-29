@@ -1,0 +1,58 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Supabase/Docs" />
+
+<img width="100%" src="./images/heroImgSupabase.jpg" alt="NYPR Lead Image" />
+<br />
+<br />
+## Instructions to setup and use Supabase auth and our auth components
+Components are built with with [Vue3](https://vuejs.org/),
+[Nuxt3](https://nuxt.com/), [PrimeVue](https:www.primevue.com) &
+[Primeflex](https://www.primefaces.org/primeflex/). 
+
+### Package installation
+```bash
+npm install @nuxtjs/supabase --save-dev
+```
+
+### ENV vars
+Aquire the following from your Supabase project Settings/API and add them to your `.env` file
+```js
+environment=prod
+NUXT_ENV_SUPABASE_URL=https://project-url-here.supabase.co
+NUXT_ENV_SUPABASE_KEY=key-here
+NUXT_ENV_SUPABASE_AUTH_SIGN_IN_REDIRECT_TO=http://localhost:3000
+NUXT_ENV_SUPABASE_AUTH_TOKEN_NAME=token-here-auth-token
+```
+
+### Nuxt config
+Add the following to your `nuxt.config.js` file
+```js
+  modules: ['@nuxtjs/supabase'],
+  supabase: {
+    url: process.env.NUXT_ENV_SUPABASE_URL,
+    key: process.env.NUXT_ENV_SUPABASE_KEY,
+    redirect: true,
+  },
+   runtimeConfig: {
+    public: {
+      environment: process.env.environment || 'demo',
+      supabaseUrl: process.env.NUXT_ENV_SUPABASE_URL,
+      supabaseKey: process.env.NUXT_ENV_SUPABASE_KEY,
+      supabaseAuthSignInRedirectTo: process.env.NUXT_ENV_SUPABASE_AUTH_SIGN_IN_REDIRECT_TO,
+      supabaseAuthTokenName: process.env.NUXT_ENV_SUPABASE_AUTH_TOKEN_NAME,
+    }
+  },
+```
+
+### Composables
+We will need two global composables to manage our user profile and auth state. Add the following to `/composables/states.js`
+```js
+// global state for the current authorized user
+let currentUser = null
+export const useCurrentUser = () => useState( 'useCurrentUser', () => currentUser )
+
+// global state for the current authorized user's profile
+let currentUserProfile = null
+export const useCurrentUserProfile = () => useState( 'useCurrentUserProfile', () => currentUserProfile )
+```

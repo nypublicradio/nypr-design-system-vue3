@@ -9,6 +9,7 @@ module.exports = {
   webpackFinal: async (config, {
     configType
   }) => {
+
     const envTheme = process.env.STORYBOOK_THEME
     await config.module.rules.push({
       test: /\.scss$/,

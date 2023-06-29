@@ -3,9 +3,13 @@ const envTheme = process.env.VITE_VUE_APP_THEME
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default {
   modules: [
-    '@nuxt/image'
+    '@nuxt/image', '@nuxtjs/supabase'
   ],
-
+  supabase: {
+    url: process.env.NUXT_ENV_SUPABASE_URL,
+    key: process.env.NUXT_ENV_SUPABASE_KEY,
+    redirect: true,
+  },
   image: {
     dir: 'assets-shared/images',
     wagtail: {
