@@ -11,6 +11,7 @@ import VPerson from '~/v2/src/components/VPerson.vue'
 //import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
 import VShareTools from '~/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
+import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
 import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
 
 //import defaultUserPhoto from 'default-user.jpg'
@@ -98,17 +99,29 @@ const profileFromArticleNoPhoto = {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
-      <VLoginWithProvider provider="google"/>
-      <VLoginWithProvider provider="twitter" class="my-2"/>
-      <VLoginWithProvider provider="apple" class="my-2"/>
-      <VLoginWithProvider provider="google" label="This is a custom label" class="my-2"/>
-      <VLoginWithProvider provider="google" class="p-button-rounded my-2"/>
-      <VLoginWithProvider provider="google" class="p-button-outlined my-2"/>
+      <VLoginWithMagicLink />
+      <br />
+      <br />
+      <VLoginWithMagicLink class="p-button-rounded" />
+      <br />
+      <br />
+      <VLoginWithMagicLink><template #icon>XX</template></VLoginWithMagicLink>
+      <br />
+      <br />
+      <VLoginWithProvider provider="google" />
+      <VLoginWithProvider provider="twitter" class="my-2" />
+      <VLoginWithProvider provider="apple" class="my-2" />
+      <VLoginWithProvider
+        provider="google"
+        label="This is a custom label"
+        class="my-2"
+      />
+      <VLoginWithProvider provider="google" class="p-button-rounded my-2" />
+      <VLoginWithProvider provider="google" class="p-button-outlined my-2" />
 
       <VLoginWithProvider provider="google" class="p-button-rounded my-2">
         <template #icon>XX</template>
       </VLoginWithProvider>
-
     </div>
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">
