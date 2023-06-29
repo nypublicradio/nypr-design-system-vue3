@@ -128,6 +128,13 @@ const profileFromArticleNoPhoto = {
       <VLoginWithProvider provider="google" class="p-button-rounded my-2">
         <template #icon>XX</template>
       </VLoginWithProvider>
+      <p class="mb-2 text-center">
+        Don't have an account?
+        <VFlexibleLink to="/onboarding">Register here</VFlexibleLink>
+      </p>
+      <p class="mb-2 text-center">
+        <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
+      </p>
     </div>
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">
