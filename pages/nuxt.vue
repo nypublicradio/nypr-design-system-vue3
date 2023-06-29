@@ -106,8 +106,9 @@ const profileFromArticleNoPhoto = {
       <br />
       <br />
       <VLoginWithMagicLink><template #icon>XX</template></VLoginWithMagicLink>
-      <br />
-      <br />
+      <Divider class="my-4" align="center">
+        <b>Or</b>
+      </Divider>
       <VLoginWithProvider provider="google" />
       <VLoginWithProvider provider="twitter" class="my-2" />
       <VLoginWithProvider provider="apple" class="my-2" />
