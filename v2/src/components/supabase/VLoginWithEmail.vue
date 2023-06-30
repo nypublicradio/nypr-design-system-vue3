@@ -37,11 +37,10 @@ const login = async () => {
   )
   if (error.error) {
     //console.log(error)
+    emit('submit-error', error)
     if (error?.error?.message?.includes('Invalid login credentials')) {
-      emit('submit-error', props.error)
-      errorMessage.value = props.error
+      errorMessage.value = error
     } else {
-      emit('submit-error', error)
       errorMessage.value = error
     }
   } else {

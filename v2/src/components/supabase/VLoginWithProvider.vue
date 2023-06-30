@@ -9,7 +9,8 @@ const errorMessage = ref('')
 
 const props = defineProps({
   error: {
-    default: null,
+    default:
+      'Sorry, there was a problem creating this account. Please try again! Error message:',
     type: String,
   },
   label: {
@@ -34,9 +35,7 @@ const login = async () => {
   if (error.value) {
     //console.log(error)
     emit('submit-error', error)
-    errorMessage.value = props.error
-      ? `${props.error}: ${error}`
-      : `Sorry, there was a problem creating this account. Please try again! Error message: ${error}`
+    errorMessage.value = `${props.error}: ${error}`
   } else {
     emit('submit-success')
   }

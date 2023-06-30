@@ -14,6 +14,7 @@ import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
 import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
 import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
 import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
+import VSignupWithEmail from '~/v2/src/components/supabase/VSignupWithEmail.vue'
 
 //import defaultUserPhoto from 'default-user.jpg'
 
@@ -26,6 +27,19 @@ const emitClick = (type, event) => {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
+      <VSignupWithEmail>
+        <template #success>
+          <VLoginWithEmail />
+        </template>
+      </VSignupWithEmail>
+      <br />
+      <br /><br />
+      <br /><br />
+      <br /><br />
+      <br />
+      <!-- <Divider class="my-4" align="center">
+        <b>Or</b>
+      </Divider>
       <VLoginWithEmail />
       <Divider class="my-4" align="center">
         <b>Or</b>
@@ -60,7 +74,7 @@ const emitClick = (type, event) => {
       </p>
       <p class="mb-2 text-center">
         <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
-      </p>
+      </p> -->
     </div>
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">
