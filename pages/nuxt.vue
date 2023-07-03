@@ -124,7 +124,7 @@ const emitClick = (type, event) => {
         <VFlexibleLink to="/onboarding">Register here</VFlexibleLink>
       </p>
       <p class="mb-2 text-center">
-        <VFlexibleLink to="/reset-password">Forgot password?</VFlexibleLink>
+        <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
       </p>
     </div>
     <section class="pb-8">

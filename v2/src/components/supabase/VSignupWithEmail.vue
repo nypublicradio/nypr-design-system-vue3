@@ -21,7 +21,7 @@ const props = defineProps({
     type: String,
   },
   slug: {
-    default: 'dashboard',
+    default: '/dashboard',
     type: String,
   },
   success: {

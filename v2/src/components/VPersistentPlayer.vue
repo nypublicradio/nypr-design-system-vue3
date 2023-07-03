@@ -16,6 +16,13 @@ const props = defineProps({
     type: Boolean,
   },
   /**
+   * expand the player by clicking anywhere but the control buttons
+   */
+  canClickAnywhere: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * make the player expandable
    */
   canExpand: {
@@ -445,6 +452,18 @@ const toggleExpanded = (e) => {
   isExpanded.value = e
 }
 
+const handleClickAnywhere = (e) => {
+  if (props.canClickAnywhere) {
+    e.preventDefault()
+    if (props.canExpand) {
+      toggleExpanded(!isExpanded.value)
+    }
+    if (props.canMinimize) {
+      toggleMinimize(!isMinimized.value)
+    }
+  }
+}
+
 defineExpose({
   toggleMinimize,
   togglePlay,
@@ -471,30 +490,37 @@ defineExpose({
     </div>
     <Transition name="expand">
       <div v-if="!isExpanded" class="player-controls">
-        <v-track-info
-          :livestream="props.livestream"
-          :station="props.station"
-          :image="props.image"
-          :title="props.title"
-          :title-link="props.titleLink"
-          :description="props.description"
-          :description-link="props.descriptionLink"
-          :buffered="buffered"
-          :current-seconds="currentSeconds"
-          :duration-seconds="durationSeconds"
-          :hide-image-on-mobile="props.hideImageOnMobile"
-          :hide-description-on-mobile="props.hideDescriptionOnMobile"
-          :hide-time-on-mobile="props.hideTimeOnMobile"
-          :timeline-interactive="props.timelineInteractive"
-          :timeline-bottom="props.timelineBottom"
-          :timeline-top="props.timelineTop"
-          @scrub-timeline-change="scrubTimelineChange"
-          @scrub-timeline-end="scrubTimelineEnd"
-          @timeline-click="timelineClick"
-          @image-click="emit('image-click')"
-          @description-click="emit('description-click')"
-          @title-click="emit('title-click')"
-        />
+        <div
+          class="v-track-info-wrapper"
+          :class="[{ cursor: props.canClickAnywhere }]"
+          @click="handleClickAnywhere"
+        >
+          <v-track-info
+            :livestream="props.livestream"
+            :station="props.station"
+            :image="props.image"
+            :title="props.title"
+            :title-link="props.titleLink"
+            :description="props.description"
+            :description-link="props.descriptionLink"
+            :buffered="buffered"
+            :current-seconds="currentSeconds"
+            :duration-seconds="durationSeconds"
+            :hide-image-on-mobile="props.hideImageOnMobile"
+            :hide-description-on-mobile="props.hideDescriptionOnMobile"
+            :hide-time-on-mobile="props.hideTimeOnMobile"
+            :timeline-interactive="props.timelineInteractive"
+            :timeline-bottom="props.timelineBottom"
+            :timeline-top="props.timelineTop"
+            :can-expand-with-click-anywhere="props.canClickAnywhere"
+            @scrub-timeline-change="scrubTimelineChange"
+            @scrub-timeline-end="scrubTimelineEnd"
+            @timeline-click="timelineClick"
+            @image-click="emit('image-click')"
+            @description-click="emit('description-click')"
+            @title-click="emit('title-click')"
+          />
+        </div>
         <v-volume-control
           class="hideOnMobile"
           :disabled="!currentFile"
@@ -565,7 +591,7 @@ defineExpose({
           </slot>
         </Button>
         <Button
-          v-if="props.canMinimize"
+          v-if="props.canMinimize && !props.canClickAnywhere"
           title="Minimize Player"
           class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
           aria-label="minimize player"
@@ -576,7 +602,7 @@ defineExpose({
           </slot>
         </Button>
         <Button
-          v-if="props.canExpand && !isExpanded"
+          v-if="props.canExpand && !isExpanded && !props.canClickAnywhere"
           title="Expand Player"
           class="expand-btn p-button-icon-only p-button-text p-button-secondary"
           :class="{ show: isExpanded }"
@@ -719,6 +745,17 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       color: var(--persistent-player-text-button-color);
       &:hover {
         color: var(--persistent-player-text-button-color-hover) !important;
+      }
+    }
+    .v-track-info-wrapper {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      height: inherit;
+      flex: auto;
+      align-self: center;
+      &.cursor {
+        cursor: pointer;
       }
     }
   }

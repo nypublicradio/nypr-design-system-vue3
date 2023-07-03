@@ -299,6 +299,19 @@ CanUnexpandWithSwipe.args = {
     titleLink: "http://www.google.com",
 }
 
+export const CanClickAnywhere = CanExpand.bind({})
+CanClickAnywhere.args = {
+    canClickAnywhere: true,
+    canExpand: true,
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    showDownload: true,
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com",
+}
+
 export const SetVolume = Template.bind({})
 SetVolume.args = {
     description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",

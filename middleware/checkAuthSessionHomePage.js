@@ -6,6 +6,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     const currentUser = useCurrentUser()
     const config = useRuntimeConfig()
     const client = useSupabaseClient()
+    const dashboardSlug = "/dashboard"
     const user = await client.auth.getSession()
 
     // check local storage for the auth token
@@ -24,7 +25,7 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
         // redirect to dashboard if the user is logged in
         if (currentUser.value) {
-            await navigateTo('/dashboard')
+            await navigateTo(dashboardSlug)
         }
     }
 
@@ -34,6 +35,6 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     }
     // redirect to dashboard if the user is logged in
     if (currentUser.value) {
-        return navigateTo('/dashboard')
+        return navigateTo(dashboardSlug)
     }
 })

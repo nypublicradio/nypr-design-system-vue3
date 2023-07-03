@@ -15,7 +15,7 @@ const props = defineProps({
     type: String,
   },
   slug: {
-    default: 'dashboard',
+    default: '/dashboard',
     type: String,
   },
 })
@@ -45,7 +45,7 @@ const login = async () => {
     }
   } else {
     emit('submit-success', props.slug)
-    navigateTo(`/${props.slug}`)
+    navigateTo(`${props.slug}`)
   }
 }
 </script>

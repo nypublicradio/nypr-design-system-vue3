@@ -8,7 +8,6 @@ definePageMeta({
 <template>
   <div class="text-center">
     <p class="mb-2">
-      hello
       <VResetPassowrd />
     </p>
   </div>
