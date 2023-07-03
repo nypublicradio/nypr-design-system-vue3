@@ -3,10 +3,10 @@ import VPersistentPlayer from '../src/components/VPersistentPlayer.vue'
 export default {
     argTypes: {
         cssvars: {
-            control: { value: {"--persistent-player-bg":" #f1f1f1", "--persistent-player-height":" 100px", "--persistent-player-height-buffer":" 20px", "--persistent-player-live-indicator-bg":"var(--text-color)", "--persistent-player-live-indicator-color":"#fff", "--persistent-player-maximize-btn-bg":"var(--persistent-player-bg)", "--persistent-player-maximize-btn-bg-hover":"#a6a6a6", "--persistent-player-maximize-btn-color":"#000", "--persistent-player-minimize-btn-bg":"var(--persistent-player-bg)", "--persistent-player-minimize-btn-bg-hover":"#a6a6a6", "--persistent-player-minimize-btn-color":"#000", "--persistent-player-play-button-height":"40px", "--persistent-player-play-button-radius":"20px", "--persistent-player-play-button-width":"40px", "--persistent-player-text-button-color":"var(--text-color)", "--persistent-player-text-button-color-hover":"inherit", "--persistent-player-text-button-radius":"15px", "--persistent-player-title-color":"var(--text-color)", "--persistent-player-title-decoration":"none", "--persistent-player-title-hover-decoration":"underline", "--persistent-player-title-size":"var(--font-size-9)", "--persistent-player-title-weight":"400", "--persistent-player-z-index":"var(--z-index-10)"}},
-            description:"CSS variables applied to the component.",
+            control: { value: { "--persistent-player-bg": " #f1f1f1", "--persistent-player-height": " 100px", "--persistent-player-height-buffer": " 20px", "--persistent-player-live-indicator-bg": "var(--text-color)", "--persistent-player-live-indicator-color": "#fff", "--persistent-player-maximize-btn-bg": "var(--persistent-player-bg)", "--persistent-player-maximize-btn-bg-hover": "#a6a6a6", "--persistent-player-maximize-btn-color": "#000", "--persistent-player-minimize-btn-bg": "var(--persistent-player-bg)", "--persistent-player-minimize-btn-bg-hover": "#a6a6a6", "--persistent-player-minimize-btn-color": "#000", "--persistent-player-play-button-height": "40px", "--persistent-player-play-button-radius": "20px", "--persistent-player-play-button-width": "40px", "--persistent-player-text-button-color": "var(--text-color)", "--persistent-player-text-button-color-hover": "inherit", "--persistent-player-text-button-radius": "15px", "--persistent-player-title-color": "var(--text-color)", "--persistent-player-title-decoration": "none", "--persistent-player-title-hover-decoration": "underline", "--persistent-player-title-size": "var(--font-size-9)", "--persistent-player-title-weight": "400", "--persistent-player-z-index": "var(--z-index-10)" } },
+            description: "CSS variables applied to the component.",
             type: { name: 'object' },
-            value:{"key": "value"}
+            value: { "key": "value" }
         },
         // alt: {
         //     control: { type: 'text' },
@@ -83,6 +83,73 @@ WithImage.args = {
     file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
     image: "329534",
     station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
+}
+
+export const HideImageOnMobile = Template.bind({})
+HideImageOnMobile.args = {
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    hideImageOnMobile: true,
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
+}
+
+export const HideDescriptionOnMobile = Template.bind({})
+HideDescriptionOnMobile.args = {
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    hideDescriptionOnMobile: true,
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
+}
+export const HideTimeOnMobile = Template.bind({})
+HideTimeOnMobile.args = {
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    hideTimeOnMobile: true,
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
+}
+export const TimelineTop = Template.bind({})
+TimelineTop.args = {
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    hideTimeOnMobile: true,
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    timelineInteractive: false,
+    timelineTop: true,
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
+}
+export const TimelineBottom = Template.bind({})
+TimelineBottom.args = {
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    hideTimeOnMobile: true,
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    timelineBottom: true,
+    timelineInteractive: false,
+    title: "The Takeaway",
+    titleLink: "http://www.google.com"
+}
+
+export const TimelineNotInteractive = Template.bind({})
+TimelineNotInteractive.args = {
+    description: "This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre.",
+    file: "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3",
+    image: "329534",
+    station: "WNYC 93.9 FM",
+    timelineInteractive: false,
     title: "The Takeaway",
     titleLink: "http://www.google.com"
 }

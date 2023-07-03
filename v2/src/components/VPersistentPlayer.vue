@@ -65,6 +65,13 @@ const props = defineProps({
     type: String,
   },
   /**
+   * hide the description on mobile container breakpoint
+   */
+  hideDescriptionOnMobile: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * hide the download button on mobile
    */
   hideDownloadMobile: {
@@ -72,10 +79,24 @@ const props = defineProps({
     type: Boolean,
   },
   /**
+   * hide the image on mobile container breakpoint
+   */
+  hideImageOnMobile: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * hide the skip buttons on mobile
    */
   hideSkipMobile: {
     default: true,
+    type: Boolean,
+  },
+  /**
+   * hide the time on mobile container breakpoint
+   */
+  hideTimeOnMobile: {
+    default: false,
     type: Boolean,
   },
   /**
@@ -133,6 +154,27 @@ const props = defineProps({
   station: {
     default: null,
     type: String,
+  },
+  /**
+   * the timeline is at the bottom of the player
+   */
+  timelineBottom: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * the timeline is interactive
+   */
+  timelineInteractive: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * the timeline is at the top of the player
+   */
+  timelineTop: {
+    default: false,
+    type: Boolean,
   },
   /**
    * title of the audio
@@ -440,6 +482,12 @@ defineExpose({
           :buffered="buffered"
           :current-seconds="currentSeconds"
           :duration-seconds="durationSeconds"
+          :hide-image-on-mobile="props.hideImageOnMobile"
+          :hide-description-on-mobile="props.hideDescriptionOnMobile"
+          :hide-time-on-mobile="props.hideTimeOnMobile"
+          :timeline-interactive="props.timelineInteractive"
+          :timeline-bottom="props.timelineBottom"
+          :timeline-top="props.timelineTop"
           @scrub-timeline-change="scrubTimelineChange"
           @scrub-timeline-end="scrubTimelineEnd"
           @timeline-click="timelineClick"
@@ -577,7 +625,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   position: fixed;
   z-index: var(--persistent-player-z-index);
   width: 100%;
-  padding: 8px 16px 8px 8px;
+  padding: var(--persistent-player-padding);
   color: var(--text-color);
   background-color: var(--persistent-player-bg);
   transition: bottom 0.25s, height calc(var(--transition-duration) * 2);

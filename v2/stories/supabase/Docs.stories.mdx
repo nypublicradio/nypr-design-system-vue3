@@ -90,24 +90,114 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     }
 
     // check local storage for the auth token
-    const supabaseAuthToken = JSON.parse(
-        window.localStorage.getItem(config.supabaseAuthTokenName)
-    )
-    if (supabaseAuthToken) {
-        currentUser.value = supabaseAuthToken.user
-    }
+    if (process.client) {
+        const supabaseAuthToken = JSON.parse(
+            localStorage.getItem(config.supabaseAuthTokenName)
+        )
+        if (supabaseAuthToken) {
+            currentUser.value = supabaseAuthToken.user
+        }
 
-    // check supabase session for logged in user
-    if (user?.data?.session?.user) {
-        currentUser.value = user?.data?.session?.user
-    }
+        // check supabase session for logged in user
+        if (user?.data?.session?.user) {
+            currentUser.value = user?.data?.session?.user
+        }
 
-    // if the user is not authorized, redirect them to the login page
-    // if they are, get their profile data
-    if (!currentUser.value) {
-        return navigateTo('/')
-    } else if (!currentUserProfile.value) {
-        getProfile()
+        // if the user is not authorized, redirect them to the login page
+        // if they are, get their profile data
+        if (!currentUser.value) {
+            return navigateTo('/')
+        } else if (!currentUserProfile.value) {
+            getProfile()
+        }
     }
 })
+```
+
+### Login page auth code
+Add the following to your login page
+```js
+//auth
+const config = useRuntimeConfig()
+const currentUser = useCurrentUser()
+const client = useSupabaseClient()
+const user = await client.auth.getSession()
+definePageMeta({
+  layout: 'blank',
+})
+
+// check local storage for the auth token
+if (process.client) {
+  const supabaseAuthToken = JSON.parse(
+    localStorage.getItem(config.supabaseAuthTokenName)
+  )
+  if (supabaseAuthToken) {
+    currentUser.value = supabaseAuthToken.user
+  }
+
+  // check supabase session for logged in user
+  if (user?.data?.session?.user) {
+    currentUser.value = user?.data?.session?.user
+  }
+
+  // redirect to dashboard if the user is logged in
+  if (currentUser.value) {
+    await navigateTo('/dashboard')
+  }
+
+  // sometimes the supabase token doesn't get detected right away when magic links are used
+  // i don't think we should have to do this, but here we are
+  setTimeout(async () => {
+    // check if the user is logged in
+    if (user?.data?.session?.user) {
+      currentUser.value = user?.data?.session?.user
+    }
+    // redirect to dashboard if the user is logged in
+    if (currentUser.value) {
+      //console.log('currentUser setTimeout found', currentUser.value)
+      await navigateTo('/dashboard')
+    }
+  }, 1000)
+}
+
+//END auth
+```
+
+### logout page
+```js
+<template>
+  <div class="text-center">
+    <p class="mb-2">
+      You have been logged out.
+      <a href="/nuxt">Click here to return to the login page.</a>
+    </p>
+  </div>
+</template>
+
+<script setup>
+import { useCurrentUser, useCurrentUserProfile } from '~/composables/states'
+
+definePageMeta({
+  layout: 'blank',
+})
+
+// sign out from supabase
+const client = useSupabaseClient()
+const { error } = await client.auth.signOut()
+if (error) {
+  console.log('error')
+}
+
+// set the currentUser composable to null
+const currentUser = useCurrentUser()
+currentUser.value = null
+
+// set the currentUserProfile composable to null
+const currentUserProfile = useCurrentUserProfile()
+currentUserProfile.value = null
+
+// clear localStorage
+localStorage.clear()
+</script>
+
 ```

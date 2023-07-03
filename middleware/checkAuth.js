@@ -27,24 +27,36 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
         }
     }
 
-    // check local storage for the auth token
-    const supabaseAuthToken = JSON.parse(
-        window.localStorage.getItem(config.supabaseAuthTokenName)
-    )
-    if (supabaseAuthToken) {
-        currentUser.value = supabaseAuthToken.user
-    }
 
+    // check local storage for the auth token
     // check supabase session for logged in user
     if (user?.data?.session?.user) {
         currentUser.value = user?.data?.session?.user
+        // if the user is not authorized, redirect them to the login page
+        // if they are, get their profile data
+        if (!currentUser.value) {
+            return navigateTo('/nuxt')
+        } else if (!currentUserProfile.value) {
+            getProfile()
+        }
+    } else {
+        if (process.client) {
+            const supabaseAuthToken = JSON.parse(
+                localStorage.getItem(config.supabaseAuthTokenName)
+            )
+            if (supabaseAuthToken) {
+                currentUser.value = supabaseAuthToken.user
+            }
+            // if the user is not authorized, redirect them to the login page
+            // if they are, get their profile data
+            if (!currentUser.value) {
+                return navigateTo('/nuxt')
+            } else if (!currentUserProfile.value) {
+                getProfile()
+            }
+        }
     }
 
-    // if the user is not authorized, redirect them to the login page
-    // if they are, get their profile data
-    if (!currentUser.value) {
-        return navigateTo('/')
-    } else if (!currentUserProfile.value) {
-        getProfile()
-    }
+
+
 })

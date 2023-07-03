@@ -1,4 +1,6 @@
 <script setup>
+// auth
+import { useCurrentUser } from '~/composables/states'
 import Home from '~/src/components/Home.vue'
 import VCard from '~/v2/src/components/VCard.vue'
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
@@ -15,8 +17,55 @@ import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
 import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
 import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
 import VSignupWithEmail from '~/v2/src/components/supabase/VSignupWithEmail.vue'
+import { onMounted } from 'vue'
 
-//import defaultUserPhoto from 'default-user.jpg'
+definePageMeta({
+  middleware: 'check-auth-session-home-page',
+})
+// //auth
+// const config = useRuntimeConfig()
+// const currentUser = useCurrentUser()
+// const client = useSupabaseClient()
+// const user = await client.auth.getSession()
+// // definePageMeta({
+// //   layout: 'blank',
+// // })
+
+// // check local storage for the auth token
+// if (process.client) {
+//   const supabaseAuthToken = JSON.parse(
+//     localStorage.getItem(config.supabaseAuthTokenName)
+//   )
+//   if (supabaseAuthToken) {
+//     currentUser.value = supabaseAuthToken.user
+//   }
+
+//   // check supabase session for logged in user
+//   if (user?.data?.session?.user) {
+//     currentUser.value = user?.data?.session?.user
+//   }
+
+//   // redirect to dashboard if the user is logged in
+//   if (currentUser.value) {
+//     await navigateTo('/dashboard')
+//   }
+
+//   // sometimes the supabase token doesn't get detected right away when magic links are used
+//   // i don't think we should have to do this, but here we are
+//   setTimeout(async () => {
+//     // check if the user is logged in
+//     if (user?.data?.session?.user) {
+//       currentUser.value = user?.data?.session?.user
+//     }
+//     // redirect to dashboard if the user is logged in
+//     if (currentUser.value) {
+//       //console.log('currentUser setTimeout found', currentUser.value)
+//       await navigateTo('/dashboard')
+//     }
+//   }, 1000)
+// }
+
+//END auth
 
 const emitClick = (type, event) => {
   console.log('click = ', type)
@@ -37,10 +86,11 @@ const emitClick = (type, event) => {
       <br /><br />
       <br /><br />
       <br />
-      <!-- <Divider class="my-4" align="center">
+      <Divider class="my-4" align="center">
         <b>Or</b>
       </Divider>
       <VLoginWithEmail />
+      <!-- 
       <Divider class="my-4" align="center">
         <b>Or</b>
       </Divider>
@@ -68,13 +118,14 @@ const emitClick = (type, event) => {
       <VLoginWithProvider provider="google" class="p-button-rounded my-2">
         <template #icon>XX</template>
       </VLoginWithProvider>
+      -->
       <p class="mb-2 text-center">
         Don't have an account?
         <VFlexibleLink to="/onboarding">Register here</VFlexibleLink>
       </p>
       <p class="mb-2 text-center">
-        <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
-      </p> -->
+        <VFlexibleLink to="/reset-password">Forgot password?</VFlexibleLink>
+      </p>
     </div>
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">
