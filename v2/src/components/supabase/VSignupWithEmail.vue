@@ -1,5 +1,5 @@
 <script setup>
-import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
+import VLoginWithEmail from './VLoginWithEmail.vue'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'

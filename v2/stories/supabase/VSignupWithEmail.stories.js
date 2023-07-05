@@ -1,4 +1,4 @@
-import VLoginWithProvider from '../../src/components/supabase/VLoginWithProvider.vue'
+import VSignupWithEmail from '../../src/components/supabase/VSignupWithEmail.vue'
 export default {
     argTypes: {
         // alt: {
@@ -11,23 +11,23 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
-    component: VLoginWithProvider,
-    title: 'supabase/VLoginWithProvider',
+    component: VSignupWithEmail,
+    title: 'supabase/VSignupWithEmail',
 }
 
 const Template = (args) => ({
-    components: { VLoginWithProvider },
+    components: { VSignupWithEmail },
     setup() {
         return { args }
     },
-    template: '<VLoginWithProvider v-bind="args"></VLoginWithProvider>'
+    template: '<VSignupWithEmail v-bind="args"></VSignupWithEmail>'
 })
 const TemplateIcon = (args) => ({
-    components: { VLoginWithProvider },
+    components: { VSignupWithEmail },
     setup() {
         return { args }
     },
-    template: '<VLoginWithProvider v-bind="args"><template #icon>XX</template></VLoginWithProvider>'
+    template: '<VSignupWithEmail v-bind="args"><template #icon>XX</template></VSignupWithEmail>'
 })
 
 export const DefaultGoogle = Template.bind({})
@@ -35,18 +35,18 @@ DefaultGoogle.args = {
     provider: "google",
 }
 
-export const twitter = Template.bind({})
-twitter.args = {
-    provider: "twitter",
-}
-
 export const CustomLabelAndIcon = TemplateIcon.bind({})
 CustomLabelAndIcon.args = {
-    label: "Login now!",
+    label: "Signup now!",
 }
 
 export const CustomErrorText = Template.bind({})
 CustomErrorText.args = {
     error: "This is a custom error message that can't be tested in Storybook",
     provider: "google",
+}
+
+export const CustomSuccessText = Template.bind({})
+CustomSuccessText.args = {
+    success: "This is a custom success message that can't be tested in Storybook",
 }
