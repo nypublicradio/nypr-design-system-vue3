@@ -4,6 +4,7 @@ import PrimeVue from 'primevue/config'
 import { themes } from '@storybook/theming'
 import { action } from '@storybook/addon-actions'
 
+
 // darkmose styles
 import './darkmode.css'
 
@@ -53,3 +54,17 @@ export const parameters = {
     lightClass: 'style-mode-light',
   }
 }
+
+// Mock useSupabaseClient function
+const useSupabaseClient = () => {
+  return {
+    auth: { signInWithOAuth: () => { } }
+  }
+}
+const useRuntimeConfig = () => {
+  return {
+    supabaseAuthSignInRedirectTo: '/'
+  }
+}
+global.useSupabaseClient = useSupabaseClient
+global.useRuntimeConfig = useRuntimeConfig

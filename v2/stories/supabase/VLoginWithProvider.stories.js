@@ -1,5 +1,4 @@
 import VLoginWithProvider from '../../src/components/supabase/VLoginWithProvider.vue'
-
 export default {
     argTypes: {
         // alt: {
@@ -21,7 +20,7 @@ const Template = (args) => ({
     setup() {
         return { args }
     },
-    template: '<VLoginWithProvider v-bind="args"></VLoginWithProvider>',
+    template: '<VLoginWithProvider v-bind="args"></VLoginWithProvider>'
 })
 
 export const Default = Template.bind({})

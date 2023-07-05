@@ -4,6 +4,8 @@ import Message from 'primevue/message'
 import { ref } from 'vue'
 const client = useSupabaseClient()
 const config = useRuntimeConfig()
+//const client = { auth: { signInWithOAuth: () => {} } }
+//const config = { supabaseAuthSignInRedirectTo: '/' }
 
 const errorMessage = ref('')
 
