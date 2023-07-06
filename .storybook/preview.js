@@ -1,6 +1,7 @@
 
 import { setup } from '@storybook/vue3'
 import PrimeVue from 'primevue/config'
+import { VuelidatePlugin } from '@vuelidate/core'
 import { themes } from '@storybook/theming'
 import { action } from '@storybook/addon-actions'
 
@@ -11,6 +12,7 @@ import './darkmode.css'
 //enable primevue
 setup((app) => {
   app.use(PrimeVue)
+  app.use(VuelidatePlugin)
   app.component('nuxt-link', {
     props: ['to', 'target', 'raw', 'rawHover'],
     methods: {
@@ -42,6 +44,13 @@ setup((app) => {
 
 })
 
+// export const decorators = [
+//   (Story) => ({
+//     components: { Story },
+//     template: '<Story/>'
+//   }),
+// ]
+
 // dark mode setup
 export const parameters = {
   darkMode: {
@@ -58,7 +67,7 @@ export const parameters = {
 // Mock useSupabaseClient function
 const useSupabaseClient = () => {
   return {
-    auth: { signInWithOAuth: () => { } }
+    auth: { signInWithOAuth: () => { }, signInWithPassword: () => { return true } }
   }
 }
 const useRuntimeConfig = () => {
