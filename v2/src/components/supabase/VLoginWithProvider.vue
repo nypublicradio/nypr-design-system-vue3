@@ -10,11 +10,6 @@ const config = useRuntimeConfig()
 const errorMessage = ref('')
 
 const props = defineProps({
-  error: {
-    default:
-      'Sorry, there was a problem creating this account. Please try again! Error message:',
-    type: String,
-  },
   label: {
     default: null,
     type: String,
@@ -35,9 +30,8 @@ const login = async () => {
     { redirectTo: config.supabaseAuthSignInRedirectTo }
   )
   if (error.value) {
-    //console.log(error)
     emit('submit-error', error)
-    errorMessage.value = `${props.error}: ${error}`
+    errorMessage.value = error
   } else {
     emit('submit-success')
   }

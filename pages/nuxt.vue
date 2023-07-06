@@ -76,6 +76,12 @@ const emitClick = (type, event) => {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
+      <VSignupWithEmail />
+      <br />
+      <br />
+      <VLoginWithMagicLink />
+      <br />
+      <br />
       <VSignupWithEmail>
         <template #success>
           <VLoginWithEmail />
@@ -90,6 +96,13 @@ const emitClick = (type, event) => {
         <b>Or</b>
       </Divider>
       <VLoginWithEmail />
+      <p class="my-2 text-center">
+        Don't have an account?
+        <VFlexibleLink to="/onboarding">Register here</VFlexibleLink>
+      </p>
+      <p class="mb-2 text-center">
+        <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
+      </p>
       <!-- 
       <Divider class="my-4" align="center">
         <b>Or</b>
@@ -119,13 +132,6 @@ const emitClick = (type, event) => {
         <template #icon>XX</template>
       </VLoginWithProvider>
       -->
-      <p class="mb-2 text-center">
-        Don't have an account?
-        <VFlexibleLink to="/onboarding">Register here</VFlexibleLink>
-      </p>
-      <p class="mb-2 text-center">
-        <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
-      </p>
     </div>
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">

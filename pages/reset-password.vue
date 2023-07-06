@@ -6,7 +6,7 @@ definePageMeta({
 })
 </script>
 <template>
-  <div class="text-center">
+  <div class="">
     <p class="mb-2">
       <VResetPassowrd />
     </p>

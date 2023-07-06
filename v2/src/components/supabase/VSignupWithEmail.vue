@@ -1,14 +1,21 @@
 <script setup>
 import VLoginWithEmail from './VLoginWithEmail.vue'
+import { useVuelidate } from '@vuelidate/core'
+import {
+  email,
+  helpers,
+  minLength,
+  required,
+  sameAs,
+} from '@vuelidate/validators'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
-import { ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 
 const props = defineProps({
   error: {
-    default:
-      'Sorry, there was a problem creating this account. Please try signing up again! Error message:',
+    default: '',
     type: String,
   },
   errorAlreadyRegistered: {
@@ -34,76 +41,159 @@ const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 
 const client = useSupabaseClient()
 
-const email = ref('')
-const password = ref('')
-const errorMessage = ref('')
-const successMessage = ref('')
+const formData = reactive({
+  confirmPassword: null,
+  email: '',
+  password: '',
+})
 
-const login = async () => {
+const sbErrorMsg = ref('')
+const sbSuccessMsg = ref('')
+
+const rules = computed(() => {
+  return {
+    confirmPassword: {
+      required: helpers.withMessage(
+        'The password confirmation field is required',
+        required
+      ),
+      sameAs: helpers.withMessage(
+        "Passwords don't match",
+        sameAs(formData.password)
+      ),
+    },
+    email: {
+      email: helpers.withMessage('Invalid email format', email),
+      required: helpers.withMessage('The email field is required', required),
+    },
+    password: {
+      minLength: minLength(8),
+      required: helpers.withMessage('The password field is required', required),
+    },
+  }
+})
+
+const v$ = useVuelidate(rules, formData)
+
+const submitForm = async () => {
+  // clear the error message so the message re-animates on each submit
+  clearMsg(0)
   emit('submit-click')
-  clearError(0)
-  const { error } = await client.auth.signUp({
-    email: email.value,
-    password: password.value,
-  })
-  successMessage.value = props.success
-  if (error) {
-    //console.log(error)
-    emit('submit-error', error)
-    if (error.toString().includes('already registered')) {
-      errorMessage.value = props.errorAlreadyRegistered
+  v$.value.$validate()
+  if (!v$.value.$error) {
+    //success with Vuelidate
+    const sbError = await client.auth.signUp({
+      email: formData.email,
+      password: formData.password,
+    })
+    if (!sbError.error) {
+      //success with Supabase
+      emit('submit-success')
+      sbSuccessMsg.value = props.success
     } else {
-      errorMessage.value = `${props.error} ${error}`
+      // error with Supabase
+      emit('submit-error', sbError?.error?.message)
+      if (sbError?.error?.message.toString().includes('already registered')) {
+        sbErrorMsg.value = props.errorAlreadyRegistered
+      } else {
+        sbErrorMsg.value = `${props.error} ${sbError?.error?.message}`
+      }
     }
-  } else {
-    emit('submit-success')
-    successMessage.value = props.success
   }
 }
 
-const clearError = (delay = 500) => {
+const clearMsg = (delay = 500) => {
   setTimeout(() => {
-    errorMessage.value = ''
+    sbErrorMsg.value = ''
+    sbSuccessMsg.value = ''
   }, delay)
 }
 </script>
 
 <template>
   <div>
-    <template v-if="errorMessage">
-      <Message class="mb-4" severity="error" @close="clearError()">
-        {{ errorMessage }}
+    <template v-if="sbErrorMsg && sbErrorMsg !== undefined">
+      <Message class="mb-4" severity="error" @close="clearMsg()">
+        <span v-html="sbErrorMsg"></span>
       </Message>
     </template>
 
     <Transition name="fade" mode="out-in">
-      <div v-if="successMessage" key="1">
+      <div v-if="sbSuccessMsg" key="1">
         <div>
           <Message class="mb-4" severity="success">
-            {{ successMessage }}
+            <span v-html="sbSuccessMsg"></span>
           </Message>
           <slot name="success">
-            <VLoginWithEmail :slug="props.slug" />
+            <VLoginWithEmail
+              :slug="props.slug"
+              :current-email="formData.email"
+            />
           </slot>
         </div>
       </div>
       <div v-else key="2">
-        <form @submit.prevent="login">
-          <InputText
-            v-model="email"
-            class="w-full mb-2"
-            type="email"
-            placeholder="Your email"
-            required
-          />
-          <InputText
-            v-model="password"
-            class="w-full mb-2"
-            type="password"
-            placeholder="Your password"
-            required
-          />
-          <Button :label="props.label" class="w-full" type="submit">
+        <form v-if="formData" novalidate @submit.prevent="submitForm">
+          <div class="mb-2">
+            <InputText
+              v-model="formData.email"
+              type="text"
+              name="email"
+              class="w-full"
+              :class="{ 'p-invalid': v$.email.$error && v$.email.$invalid }"
+              placeholder="Your email"
+              required
+              @update="v$.email.$touch"
+            />
+            <small class="p-error">
+              <span v-for="err of v$.email.$errors" :key="err.$uid">
+                {{ err.$message }}
+              </span>
+            </small>
+          </div>
+          <div class="mb-2">
+            <InputText
+              v-model="formData.password"
+              type="password"
+              class="w-full"
+              :class="{
+                'p-invalid': v$.password.$error && v$.password.$invalid,
+              }"
+              placeholder="Your password"
+              required
+              @update="v$.password.$touch"
+            />
+            <small class="p-error">
+              <span v-for="err of v$.password.$errors" :key="err.$uid">
+                {{ err.$message }}
+              </span>
+            </small>
+          </div>
+          <div class="mb-2">
+            <InputText
+              v-model="formData.confirmPassword"
+              type="password"
+              class="w-full"
+              :class="{
+                'p-invalid':
+                  v$.confirmPassword.$error && v$.confirmPassword.$invalid,
+              }"
+              placeholder="Confirm your password"
+              required
+            />
+            <small class="p-error">
+              <span v-for="err of v$.confirmPassword.$errors" :key="err.$uid">
+                {{ err.$message }}
+              </span>
+            </small>
+          </div>
+          <Button
+            :label="props.label"
+            v-bind="{ ...$attrs }"
+            class="w-full"
+            :aria-label="`${props.label} button`"
+            type="submit"
+          >
             <template #icon> <slot name="icon"></slot> </template>
           </Button>
         </form>

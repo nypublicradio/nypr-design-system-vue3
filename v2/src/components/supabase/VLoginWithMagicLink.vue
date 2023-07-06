@@ -1,12 +1,14 @@
 <script setup>
+import { useVuelidate } from '@vuelidate/core'
+import { email, helpers, required } from '@vuelidate/validators'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
-import { ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 const props = defineProps({
   error: {
     default:
-      'Sorry, there was a problem logging with your magic link. Please try again! Error message:',
+      'Sorry, there was a problem creating your magic link. Please try again! Error message:',
     type: String,
   },
   label: {
@@ -25,57 +27,89 @@ const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 const client = useSupabaseClient()
 const config = useRuntimeConfig()
 
-const email = ref('')
-const errorMessage = ref('')
-const successMessage = ref('')
+const formData = reactive({
+  email: '',
+  password: '',
+})
 
-const login = async () => {
-  emit('submit-click')
-  const { data, error } = await client.auth.signInWithOtp(
-    {
-      email: email.value,
+const sbErrorMsg = ref('')
+const sbSuccessMsg = ref('')
+
+const rules = computed(() => {
+  return {
+    email: {
+      email: helpers.withMessage('Invalid email format', email),
+      required: helpers.withMessage('The email field is required', required),
     },
-    {
-      redirectTo: config.supabaseAuthSignInRedirectTo,
+  }
+})
+
+const v$ = useVuelidate(rules, formData)
+
+const submitForm = async () => {
+  // clear the error & success message so the message re-animates on each submit
+  sbErrorMsg.value = ''
+  sbSuccessMsg.value = ''
+  emit('submit-click')
+  v$.value.$validate()
+  if (!v$.value.$error) {
+    //success with Vuelidate
+    const sbError = await client.auth.signInWithOtp(
+      { email: formData.email },
+      { redirectTo: config.supabaseAuthSignInRedirectTo }
+    )
+    if (!sbError.error) {
+      //success with Supabase
+      emit('submit-success')
+      sbSuccessMsg.value = props.success
+    } else {
+      // error with Supabase
+      emit('submit-error', sbError?.error?.message)
+      sbErrorMsg.value = `${props.error} ${sbError?.error?.message}`
     }
-  )
-  if (error) {
-    //console.log(error)
-    emit('submit-error', error)
-    errorMessage.value = `${props.error}: ${error}`
-  } else {
-    emit('submit-success')
-    successMessage.value = props.success
   }
 }
 </script>
 
 <template>
   <div>
-    <template v-if="errorMessage">
+    <template v-if="sbErrorMsg">
       <Message class="mb-4" severity="error">
-        Sorry, there was a problem logging in to your account:
-        {{ errorMessage }}
+        <span v-html="sbErrorMsg"></span>
       </Message>
     </template>
-    <template v-if="successMessage">
+    <template v-if="sbSuccessMsg">
       <Message class="mb-4" severity="success">
-        {{ successMessage }}
+        <span v-html="sbSuccessMsg"></span>
       </Message>
     </template>
-    <form @submit.prevent="login">
-      <InputText
-        v-model="email"
-        type="email"
-        class="w-full mb-2"
-        placeholder="Your email"
-        required
-      />
+    <form
+      v-if="formData && !sbSuccessMsg"
+      novalidate
+      @submit.prevent="submitForm"
+    >
+      <div class="mb-2">
+        <InputText
+          v-model="formData.email"
+          type="text"
+          name="email"
+          class="w-full"
+          :class="{ 'p-invalid': v$.email.$error && v$.email.$invalid }"
+          placeholder="Your email"
+          required
+          @update="v$.email.$touch"
+        />
+        <small class="p-error">
+          <span v-for="err of v$.email.$errors" :key="err.$uid">
+            {{ err.$message }}
+          </span>
+        </small>
+      </div>
       <Button
         class="w-full"
-        :label="label"
+        :label="props.label"
         v-bind="{ ...$attrs }"
-        aria-label="sign in with magic link button"
+        :aria-label="`${props.label} button`"
         type="submit"
       >
         <template #icon>

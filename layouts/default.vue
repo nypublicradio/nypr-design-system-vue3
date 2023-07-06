@@ -13,10 +13,15 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
     <header>
       <VSmartHeader :hero-buffer="heroBuffer" :resume-delay="0">
         <div>
-          <ul style="background-color: antiquewhite; padding: 10px">
+          <ul
+            class="inline-flex gap-4 w-full"
+            style="background-color: antiquewhite; padding: 10px"
+          >
             <li><NuxtLink to="/nuxt">Home</NuxtLink></li>
             <li><NuxtLink to="/about">About</NuxtLink></li>
             <li><NuxtLink to="/logout">Logout</NuxtLink></li>
+            <li><NuxtLink to="/forgot-password">forgot-password</NuxtLink></li>
+            <li><NuxtLink to="/reset-password">reset-password</NuxtLink></li>
           </ul>
         </div>
       </VSmartHeader>

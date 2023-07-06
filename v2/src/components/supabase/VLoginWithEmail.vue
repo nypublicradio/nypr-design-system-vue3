@@ -7,6 +7,10 @@ import Message from 'primevue/message'
 import { computed, reactive, ref } from 'vue'
 
 const props = defineProps({
+  currentEmail: {
+    default: null,
+    type: String,
+  },
   error: {
     default:
       'The email and password combination you entered is incorrect. Please try again!',
@@ -28,7 +32,7 @@ const client = useSupabaseClient()
 const config = useRuntimeConfig()
 
 const formData = reactive({
-  email: '',
+  email: props.currentEmail || '',
   password: '',
 })
 
@@ -54,21 +58,24 @@ const submitForm = async () => {
   sbErrorMsg.value = ''
   emit('submit-click')
   v$.value.$validate()
-  const sbError = await client.auth.signInWithPassword(
-    { email: formData.email, password: formData.password },
-    { redirectTo: config.supabaseAuthSignInRedirectTo }
-  )
-  if (!v$.value.$error && !sbError.error) {
-    //success with Supabase and Vuelidate
-    emit('submit-success', props.slug)
-    navigateTo(`${props.slug}`)
-  } else {
-    // error
-    emit('submit-error', sbError?.error?.message)
-    if (sbError?.error?.message?.includes('Invalid login credentials')) {
-      sbErrorMsg.value = props.error
+  if (!v$.value.$error) {
+    //success with Vuelidate
+    const sbError = await client.auth.signInWithPassword(
+      { email: formData.email, password: formData.password },
+      { redirectTo: config.supabaseAuthSignInRedirectTo }
+    )
+    if (!sbError.error) {
+      //success with Supabase
+      emit('submit-success', props.slug)
+      navigateTo(`${props.slug}`)
     } else {
-      sbErrorMsg.value = sbError?.error?.message
+      // error with Supabase
+      emit('submit-error', sbError?.error?.message)
+      if (sbError?.error?.message?.includes('Invalid login credentials')) {
+        sbErrorMsg.value = props.error
+      } else {
+        sbErrorMsg.value = sbError?.error?.message
+      }
     }
   }
 }
@@ -79,8 +86,7 @@ const submitForm = async () => {
     <form v-if="formData" novalidate @submit.prevent="submitForm">
       <template v-if="sbErrorMsg">
         <Message class="mb-4" severity="error">
-          Sorry, there was a problem logging in to your account:
-          {{ sbErrorMsg }}
+          <span v-html="sbErrorMsg"></span>
         </Message>
       </template>
       <div class="mb-2">
@@ -108,6 +114,7 @@ const submitForm = async () => {
           :class="{ 'p-invalid': v$.password.$error && v$.password.$invalid }"
           placeholder="Your password"
           required
+          :autofocus="props.currentEmail"
           @update="v$.password.$touch"
         />
         <small class="p-error">
@@ -116,7 +123,13 @@ const submitForm = async () => {
           </span>
         </small>
       </div>
-      <Button :label="props.label" class="w-full" type="submit">
+      <Button
+        :label="props.label"
+        v-bind="{ ...$attrs }"
+        class="w-full"
+        :aria-label="`${props.label} button`"
+        type="submit"
+      >
         <template #icon> <slot name="icon"></slot> </template>
       </Button>
     </form>

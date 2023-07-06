@@ -44,9 +44,3 @@ export const CustomLabelAndIcon = TemplateIcon.bind({})
 CustomLabelAndIcon.args = {
     label: "Login now!",
 }
-
-export const CustomErrorText = Template.bind({})
-CustomErrorText.args = {
-    error: "This is a custom error message that can't be tested in Storybook",
-    provider: "google",
-}
