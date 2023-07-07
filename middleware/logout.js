@@ -6,9 +6,9 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
 
     // sign out from supabase
     const { error } = await client.auth.signOut()
-    if (error) {
-        console.log('error')
-    }
+    // if (error) {
+    //     console.log('error')
+    // }
 
     // set the currentUser composable to null
     currentUser.value = null

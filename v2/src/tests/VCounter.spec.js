@@ -38,7 +38,6 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        href,
         icon,
         text,
         value
@@ -57,7 +56,6 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        href,
         icon,
         text: "custom text",
         value,
@@ -70,7 +68,6 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        href,
         icon,
         text: null,
         value,
@@ -82,7 +79,6 @@ describe('VCounter', () => {
   test('no icon', () => {
     createComponent({
       props: {
-        href,
         href,
         icon,
         showIcon: false,
@@ -111,7 +107,6 @@ describe('VCounter', () => {
     createComponent({
       props: {
         href,
-        href,
         icon: 'pi-facebook',
         text,
         value,
@@ -124,7 +119,6 @@ describe('VCounter', () => {
   test('custom icon slot', () => {
     createComponent({
       props: {
-        href,
         href,
         icon,
         text,
@@ -139,7 +133,6 @@ describe('VCounter', () => {
   test('counter click fires emit', async () => {
     createComponent({
       props: {
-        href,
         href,
         icon,
         text,

@@ -4,10 +4,10 @@ import VTag from '../src/components/VTag.vue'
 export default {
     argTypes: {
         cssvars: {
-            control: { value: {"--v-card-bg-color": "transparent", "--v-card-border-radius": 0, "--v-card-image-radius": 0, "--v-card-padding": 0, "--v-card-title-color": "inherit", "--v-card-title-font-family": "var(--font-family-header)", "--v-card-title-font-size": "var(--font-size-13)", "--v-card-title-font-weight": "var(--font-weight-600)","--v-card-title-hover-color": "inherit", "--v-card-title-hover-text-decoration": "underline", "--v-card-title-letter-spacing": "-0.02em", "--v-card-title-line-height":" var(--font-size-13)", "--v-card-title-mobile-font-size": "var(--font-size-10)", "--v-card-title-mobile-line-height": "var(--font-size-10)", "--v-card-title-text-decoration": "inherit", "--v-card-title-transition-duration": "var(--transition-duration)"} },
-            description:"CSS variables applied to the component.",
+            control: { value: { "--v-card-bg-color": "transparent", "--v-card-border-radius": 0, "--v-card-image-radius": 0, "--v-card-padding": 0, "--v-card-title-color": "inherit", "--v-card-title-font-family": "var(--font-family-header)", "--v-card-title-font-size": "var(--font-size-13)", "--v-card-title-font-weight": "var(--font-weight-600)", "--v-card-title-hover-color": "inherit", "--v-card-title-hover-text-decoration": "underline", "--v-card-title-letter-spacing": "-0.02em", "--v-card-title-line-height": " var(--font-size-13)", "--v-card-title-mobile-font-size": "var(--font-size-10)", "--v-card-title-mobile-line-height": "var(--font-size-10)", "--v-card-title-text-decoration": "inherit", "--v-card-title-transition-duration": "var(--transition-duration)" } },
+            description: "CSS variables applied to the component.",
             type: { name: 'object' },
-            value:{"key": "value"}
+            value: { "key": "value" }
         },
         // alt: {
         //     control: { type: 'text' },
@@ -204,7 +204,6 @@ CustomeTitleClass.args = {
 export const IsNotDecrative = Template.bind({})
 IsNotDecrative.args = {
     alt: "Image alt text",
-    alt: 'alt text',
     blurb: 'When isDecrative is set to false, the text and image links aria-hidden ,tabindex and alt-text are enabled.Use to indicate decorative images with a link, where the exact same link is repeated in nearby text. e.g.A thumbnail that links to an article next to a title that links to the same article. WARNING: This will make the link unreachable by assistive software so only use this for truly redundant links.',
     height: 200,
     isDecorative: false,

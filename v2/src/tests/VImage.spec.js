@@ -176,9 +176,6 @@ describe('VImage', () => {
     expect(wrapper.emitted()['image-click']).toEqual([['https://www.google.com']])
   })
 
-  // TODO: test the image-load emit
-  // TODO: test the enlarge-image-load emit
-
   test('image-enlarge-click fires emit', () => {
     createComponent({
       props: {

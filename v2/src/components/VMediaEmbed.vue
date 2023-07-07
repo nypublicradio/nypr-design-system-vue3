@@ -52,7 +52,7 @@ const props = defineProps({
   },
 })
 const getRatio = computed(() => {
-  var percent = (100 / props.ratio[0]) * props.ratio[1]
+  const percent = (100 / props.ratio[0]) * props.ratio[1]
   return percent + '%'
 })
 

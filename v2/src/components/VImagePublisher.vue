@@ -143,6 +143,15 @@ const formatRawPublisherImageUrl = (url) => {
   return url.replace('%s/%s/%s/%s', 'raw')
 }
 
+const calcQuality = (quality, size) => {
+  if (props.flatQuality) {
+    return quality
+  } else {
+    const qual = size >= 2 ? quality - Math.round(size * 5) : quality
+    return qual >= 15 ? qual : 15
+  }
+}
+
 const srcFormatted = formatPublisherImageUrl(props.src)
 const srcRaw = formatRawPublisherImageUrl(props.src)
 
@@ -222,15 +231,6 @@ onBeforeMount(() => {
   isVertical.value =
     props.allowVerticalEffect && props.maxHeight > props.maxWidth
 })
-
-const calcQuality = (quality, size) => {
-  if (props.flatQuality) {
-    return quality
-  } else {
-    const qual = size >= 2 ? quality - Math.round(size * 5) : quality
-    return qual >= 15 ? qual : 15
-  }
-}
 
 const enlarge = () => {
   loadingEnlargedImage.value = true

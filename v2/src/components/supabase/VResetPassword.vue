@@ -88,7 +88,7 @@ const resetPassword = async () => {
   })
   pending.value = false
   if (error) {
-    console.log(error)
+    //console.log(error)
     if (error.toString().includes('8 characters')) {
       errorMessage.value = 'Password should be at least 8 characters.'
     } else {

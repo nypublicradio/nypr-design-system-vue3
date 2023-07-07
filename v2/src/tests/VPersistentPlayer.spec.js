@@ -111,7 +111,7 @@ describe('VPersistentPlayer', () => {
   test('title & image & descriptionLink has a link', () => {
     createComponent({
       props: {
-        description, descriptionLink, file, image, station, title, titleLink, titleLink
+        description, descriptionLink, file, image, station, title, titleLink
       }
     })
     const titleElm = wrapper.find('.track-info-title a')
@@ -293,7 +293,7 @@ describe('VPersistentPlayer', () => {
     await expandBtn.trigger('click')
     expect(wrapper.emitted()['is-expanded']).toBeTruthy()
 
-    // TODO: not sure how to test swipe actions
+    // Not sure how to test swipe actions
     // await wrapper.trigger("mousedown")
     // await wrapper.trigger("mousemove", { clientY: 200 })
     // expect(wrapper.emitted()['swipe-up']).toBeTruthy()
@@ -302,7 +302,7 @@ describe('VPersistentPlayer', () => {
     // await wrapper.trigger("mousemove", { clientY: -200 })
     // expect(wrapper.emitted()['swipe-down']).toBeTruthy()
 
-    // TODO: having trouble with the progress slider tests
+    // Having trouble with the progress slider tests
     // const timelineSliderBtn = wrapper.find('.track-info .progress-control .p-slider-handle')
     // await timelineSliderBtn.trigger("click")
     // await timelineSliderBtn.trigger("mousedown")
@@ -312,7 +312,7 @@ describe('VPersistentPlayer', () => {
     // expect(wrapper.emitted()['scrub-timeline-end']).toBeTruthy()
     // expect(wrapper.emitted()['timeline-click']).toBeTruthy()
 
-    // TODO: not sure how to mock the audio element to test the following emits
+    // Not sure how to mock the audio element to test the following emits
     // load-error, sounds-ended, sound-loaded, sound-looping
 
 

@@ -64,7 +64,7 @@ const icons = {
   youtube: YoutubeIcon,
 }
 
-const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
+const URL_PLACEHOLDER_PATTERN = /%URL%/g
 const SOCIAL_SERVICE_MAP = {
   email: {
     omitUrl: true,
@@ -172,7 +172,7 @@ const share = () => {
     const left = windowWidth / 2 - 600 / 2 + screenLeft
     const top = windowheight / 2 - 600 / 2 + screenTop
 
-    return { left: left, top: top }
+    return { left, top }
   }
 
   // get the position of the window

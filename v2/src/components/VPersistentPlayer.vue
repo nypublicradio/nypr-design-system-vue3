@@ -264,56 +264,9 @@ const { direction, lengthY } = useSwipe(playerRef, {
   },
   passive: true,
 })
-
-onMounted(() => {
-  // keyboard accessibility
-  window.addEventListener('keydown', (event) => {
-    switch (event.code) {
-      case 'ArrowUp':
-        if (volume.value < 100 && sound) {
-          volume.value++
-        }
-        break
-      case 'ArrowDown':
-        if (volume.value > 0 && sound) {
-          volume.value--
-        }
-        break
-      case 'ArrowLeft':
-        goBack15()
-        break
-      case 'ArrowRight':
-        goAhead15()
-        break
-    }
-  })
-
-  /*   window.addEventListener('keyup', (event) => {
-    // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.
-    var isPlayButtonActive =
-      document.getElementsByClassName('the-play-button')[0] ===
-      document.activeElement
-    if (!isPlayButtonActive) {
-      switch (event.code) {
-        case 'Space':
-          togglePlay()
-          break
-        case 'Enter':
-          togglePlay()
-          break
-      }
-    }
-  }) */
-
-  // auto play
-  props.autoPlay ? togglePlay() : null
-})
-
-onBeforeUnmount(() => {
-  // stop the audio
-  sound ? sound.unload() : null
-})
-
+const updateCurrentSeconds = () => {
+  currentSeconds.value = sound.seek()
+}
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
   return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
@@ -337,6 +290,14 @@ const goBack15 = () => {
   }
 }
 
+const startDurationInterval = () => {
+  interval = setInterval(() => {
+    updateCurrentSeconds()
+  }, 1000)
+}
+const clearDurationInterval = () => {
+  clearInterval(interval)
+}
 const togglePlay = () => {
   if (!sound || !currentFile.value === props.file) {
     // destoy old sound if one exists
@@ -396,18 +357,6 @@ const volumeChange = (e) => {
     volume.value = e
   }
 }
-const updateCurrentSeconds = () => {
-  currentSeconds.value = sound.seek()
-}
-
-const startDurationInterval = () => {
-  interval = setInterval(() => {
-    updateCurrentSeconds()
-  }, 1000)
-}
-const clearDurationInterval = () => {
-  clearInterval(interval)
-}
 
 let onceFlag = null
 let scrubWhenPaused = false
@@ -463,6 +412,55 @@ const handleClickAnywhere = (e) => {
     }
   }
 }
+
+onMounted(() => {
+  // keyboard accessibility
+  window.addEventListener('keydown', (event) => {
+    switch (event.code) {
+      case 'ArrowUp':
+        if (volume.value < 100 && sound) {
+          volume.value++
+        }
+        break
+      case 'ArrowDown':
+        if (volume.value > 0 && sound) {
+          volume.value--
+        }
+        break
+      case 'ArrowLeft':
+        goBack15()
+        break
+      case 'ArrowRight':
+        goAhead15()
+        break
+    }
+  })
+
+  /*   window.addEventListener('keyup', (event) => {
+    // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.
+    var isPlayButtonActive =
+      document.getElementsByClassName('the-play-button')[0] ===
+      document.activeElement
+    if (!isPlayButtonActive) {
+      switch (event.code) {
+        case 'Space':
+          togglePlay()
+          break
+        case 'Enter':
+          togglePlay()
+          break
+      }
+    }
+  }) */
+
+  // auto play
+  props.autoPlay ? togglePlay() : null
+})
+
+onBeforeUnmount(() => {
+  // stop the audio
+  sound ? sound.unload() : null
+})
 
 defineExpose({
   toggleMinimize,

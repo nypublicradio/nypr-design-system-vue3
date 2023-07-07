@@ -29,6 +29,7 @@ const TemplateCustomIconSlot = (args) => ({
     setup() {
         return { args }
     },
+    //# skipcq: JS-0038
     template: '<v-counter v-bind="args"><template #icon="slotProps"><i :class="`pi pi-twitter`" role="img" :aria-label="`${slotProps.props.value} ${slotProps.props.text}`" ></i></template></v-counter>',
 })
 

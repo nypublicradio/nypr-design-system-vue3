@@ -75,6 +75,13 @@ const rules = computed(() => {
 
 const v$ = useVuelidate(rules, formData)
 
+const clearMsg = (delay = 500) => {
+  setTimeout(() => {
+    sbErrorMsg.value = ''
+    sbSuccessMsg.value = ''
+  }, delay)
+}
+
 const submitForm = async () => {
   // clear the error message so the message re-animates on each submit
   clearMsg(0)
@@ -100,13 +107,6 @@ const submitForm = async () => {
       }
     }
   }
-}
-
-const clearMsg = (delay = 500) => {
-  setTimeout(() => {
-    sbErrorMsg.value = ''
-    sbSuccessMsg.value = ''
-  }, delay)
 }
 </script>
 
