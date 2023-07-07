@@ -4,6 +4,7 @@ const execSync = require('child_process').execSync
 // })
 // console.log('process.argv[2]', process.argv[2])
 const cmd = `sass --style=compressed src/assets/themes/${process.argv[2]}/_theme.scss src/assets/themes/${process.argv[2]}/${process.argv[2]}.min.css`
+//# skipcq JS-0002
 console.log(`Compiling theme ${process.argv[2]}...`)
 execSync(cmd, {
   cwd: process.cwd()

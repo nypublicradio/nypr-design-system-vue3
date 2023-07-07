@@ -207,6 +207,7 @@ if (profile.value?.email) {
 }
 // push phone numbers into new updatedSocialArr if it exist
 if (profile.value?.phone_numbers) {
+  //# skipcq JS-0042
   profile.value?.phone_numbers.map((phone) => {
     updatedSocialArr.value.push({
       profileUrl: String(phone.phone_number),

@@ -25,6 +25,7 @@ fs.readdir(baseThemePath, (err, files) => {
         fs.stat(themePath, (err, stat) => {
           if (!err && stat.isFile()) {
             const outputPath = path.join(pathToFile, `${file}.min.css`)
+            //# skipcq JS-0002
             console.log(`Compiling theme ${themePath} to ${outputPath}`)
 
             const cmd = `sass --style=compressed ${themePath} ${outputPath}`

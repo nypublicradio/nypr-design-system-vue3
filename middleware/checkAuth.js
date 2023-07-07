@@ -3,7 +3,7 @@ import {
     useCurrentUserProfile
 } from '~/composables/states'
 
-export default defineNuxtRouteMiddleware(async (to, from) => {
+export default defineNuxtRouteMiddleware(async () => {
     const currentUser = useCurrentUser()
     const currentUserProfile = useCurrentUserProfile()
     const config = useRuntimeConfig()
@@ -56,7 +56,4 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
             }
         }
     }
-
-    return
-
 })

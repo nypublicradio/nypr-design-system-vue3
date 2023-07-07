@@ -196,6 +196,7 @@ const srcset = computed(() => {
     ) {
       return ''
     }
+    //# skipcq JS-0123
     let srcset = ''
     let lastImage = false
     for (const size of props.sizes) {

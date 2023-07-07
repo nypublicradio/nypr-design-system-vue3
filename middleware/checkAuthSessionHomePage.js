@@ -2,7 +2,7 @@ import {
     useCurrentUser
 } from '~/composables/states'
 
-export default defineNuxtRouteMiddleware(async (to, from) => {
+export default defineNuxtRouteMiddleware(async () => {
     const currentUser = useCurrentUser()
     const config = useRuntimeConfig()
     const client = useSupabaseClient()
@@ -37,5 +37,4 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (currentUser.value) {
         return navigateTo(dashboardSlug)
     }
-    return
 })

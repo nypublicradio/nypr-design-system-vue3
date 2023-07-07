@@ -24,11 +24,7 @@ setup((app) => {
   // Storybook NuxtImage mock
   app.component('nuxt-img', {
     props: ['src', 'alt', 'width', 'height', 'sponsored', 'loading', 'maxWidth', 'maxHeight', 'quality', 'modifiers', 'allowVerticalEffect', 'verticalBgColor', 'verticalBgColorOpacity', 'verticalBgBlur', 'allowPreview', 'ratio'],
-    methods: {
-      // log() {
 
-      // },
-    },
     //# skipcq: JS-0038
     template: '<img :src="isNaN(src) && !src.includes(`http`) ? `/images/${src}` : src.includes(`http`) ? `${src}` : width ? `https://cms.demo.nypr.digital/images/${src}/fill-${width}x${height}-c${modifiers && modifiers.focusZoom || 0}|format-webp|webpquality-${quality}` : `https://cms.demo.nypr.digital/images/${src}/original|format-webp|webpquality-${quality}` "  :width="width" :height="height" :alt="alt" :loading="loading"/>'
   })
@@ -59,6 +55,7 @@ export const parameters = {
 // Mock useSupabaseClient function
 const useSupabaseClient = () => {
   return {
+    //# skipcq JS-0057
     auth: { signInWithOAuth: () => { }, signInWithPassword: () => { return true } }
   }
 }
