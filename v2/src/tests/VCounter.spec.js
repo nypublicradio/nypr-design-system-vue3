@@ -130,7 +130,7 @@ describe('VCounter', () => {
     expect(iconElm.classes()).toContain('pi-twitter')
   })
 
-  test('counter click fires emit', async () => {
+  test('counter click fires emit', () => {
     createComponent({
       props: {
         href,

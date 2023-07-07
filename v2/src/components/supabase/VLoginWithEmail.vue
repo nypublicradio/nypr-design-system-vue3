@@ -32,7 +32,7 @@ const client = useSupabaseClient()
 const config = useRuntimeConfig()
 
 const formData = reactive({
-  email: props.currentEmail || '',
+  email: props.currentEmail ?? '',
   password: '',
 })
 

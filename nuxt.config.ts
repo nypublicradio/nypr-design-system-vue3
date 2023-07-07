@@ -73,8 +73,8 @@ export default {
 
   runtimeConfig: {
     public: {
-      IMAGE_BASE_URL: process.env['IMAGE_BASE_URL'] || 'https://cms.prod.nypr.digital/images/',
-      environment: process.env.environment || 'demo',
+      IMAGE_BASE_URL: process.env['IMAGE_BASE_URL'] ?? 'https://cms.prod.nypr.digital/images/',
+      environment: process.env.environment ?? 'demo',
       supabaseUrl: process.env.NUXT_ENV_SUPABASE_URL,
       supabaseKey: process.env.NUXT_ENV_SUPABASE_KEY,
       supabaseAuthSignInRedirectTo: process.env.NUXT_ENV_SUPABASE_AUTH_SIGN_IN_REDIRECT_TO,

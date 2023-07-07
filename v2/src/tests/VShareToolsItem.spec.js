@@ -52,7 +52,7 @@ describe('VShareToolsItem', () => {
     expect(linkTag.attributes('href')).toBe(link)
   })
 
-  test('service prop works: site icon', async () => {
+  test('service prop works: site icon', () => {
     const service = 'site'
     createComponent({
       props: {

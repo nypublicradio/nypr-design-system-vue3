@@ -433,6 +433,9 @@ onMounted(() => {
       case 'ArrowRight':
         goAhead15()
         break
+      default:
+        /* code */
+        break
     }
   })
 

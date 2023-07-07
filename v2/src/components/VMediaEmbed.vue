@@ -53,7 +53,7 @@ const props = defineProps({
 })
 const getRatio = computed(() => {
   const percent = (100 / props.ratio[0]) * props.ratio[1]
-  return percent + '%'
+  return `${percent}%`
 })
 
 const isYoutube = computed(() => {

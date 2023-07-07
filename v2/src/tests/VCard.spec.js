@@ -306,7 +306,7 @@ describe('VCard', () => {
     expect(results).toHaveNoViolations()
   })
 
-  test('title click fires emit', async () => {
+  test('title click fires emit', () => {
     createComponent({
       props: {
         alt,
@@ -326,7 +326,7 @@ describe('VCard', () => {
     expect(wrapper.emitted()['title-click']).toEqual([[link]])
   })
 
-  test('image click fires emit', async () => {
+  test('image click fires emit', () => {
     createComponent({
       props: {
         alt,

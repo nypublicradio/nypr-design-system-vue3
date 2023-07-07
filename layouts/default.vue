@@ -5,7 +5,7 @@ import { shallowRef } from 'vue'
 const headerHeight = shallowRef(110)
 const heroBuffer = shallowRef(600)
 //cssVar
-const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
+const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
 </script>
 
 <template>

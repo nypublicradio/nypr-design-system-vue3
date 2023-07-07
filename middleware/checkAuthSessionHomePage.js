@@ -37,4 +37,5 @@ export default defineNuxtRouteMiddleware(async (to, from) => {
     if (currentUser.value) {
         return navigateTo(dashboardSlug)
     }
+    return
 })

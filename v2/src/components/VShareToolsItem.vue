@@ -105,27 +105,25 @@ const SOCIAL_SERVICE_MAP = {
 }
 
 const socialLink = computed(() => {
-  return SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username || ''
+  return SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username ?? ''
 })
 const shareBase = computed(() => {
-  return SOCIAL_SERVICE_MAP[props.service]?.shareBase || ''
+  return SOCIAL_SERVICE_MAP[props.service]?.shareBase ?? ''
 })
 const shareUrl = computed(() => {
   const utmParams = Object.entries(props.utmParameters).map(([key, value]) => {
-    return 'utm_' + key + '=' + encodeURIComponent(value)
+    return `utm_${key}=${encodeURIComponent(value)}`
   })
   let url = props.url
   if (utmParams.length > 0) {
-    url = url + '?' + utmParams.join('&')
+    url = `${url}?${utmParams.join('&')}`
   }
 
   const shareParams = Object.entries(props.shareParameters).map(
     ([key, value]) => {
-      return (
-        key +
-        '=' +
-        encodeURIComponent(value.replace(URL_PLACEHOLDER_PATTERN, url))
-      )
+      return `${key}=${encodeURIComponent(
+        value.replace(URL_PLACEHOLDER_PATTERN, url)
+      )}`
     }
   )
 
@@ -133,20 +131,20 @@ const shareUrl = computed(() => {
 
   const shouldOmitUrl = SOCIAL_SERVICE_MAP[props.service]?.omitUrl
   if (!shouldOmitUrl) {
-    const urlKey = SOCIAL_SERVICE_MAP[props.service]?.urlKey || 'url'
-    const urlParam = urlKey + '=' + encodeURIComponent(url)
+    const urlKey = SOCIAL_SERVICE_MAP[props.service]?.urlKey ?? 'url'
+    const urlParam = `${urlKey}=${encodeURIComponent(url)}`
     params = [urlParam, ...params]
   }
 
-  return shareBase.value + '?' + params.join('&')
+  return `${shareBase.value}?${params.join('&')}`
 })
 const ariaLabel = computed(() => {
   if (props.label) {
     return props.label
   } else if (props.action === 'follow') {
-    return 'Follow us on ' + props.service
+    return `Follow us on ${props.service}`
   } else if (props.action === 'share') {
-    return 'Share on ' + props.service
+    return `Share on ${props.service}`
   }
   return ''
 })

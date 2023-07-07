@@ -155,8 +155,8 @@ const calcQuality = (quality, size) => {
 const srcFormatted = formatPublisherImageUrl(props.src)
 const srcRaw = formatRawPublisherImageUrl(props.src)
 
-let isVertical = ref(false)
-let loadingEnlargedImage = ref(false)
+const isVertical = ref(false)
+const loadingEnlargedImage = ref(false)
 
 const computedWidth = computed(() => {
   return isVertical.value

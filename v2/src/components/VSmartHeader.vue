@@ -48,7 +48,7 @@ const cssHeaderHeight = shallowRef(null)
 
 onMounted(() => {
   headerHeight.value = headerRef.value.clientHeight
-  cssHeaderHeight.value = headerHeight.value + 'px'
+  cssHeaderHeight.value = `${headerHeight.value}px`
 })
 
 const isMinimized = shallowRef(false)

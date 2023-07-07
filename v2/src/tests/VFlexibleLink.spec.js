@@ -111,7 +111,7 @@ describe('VFlexibleLink', () => {
   })
 
 
-  test('counter click fires emit', async () => {
+  test('counter click fires emit', () => {
     createComponent({
       props: {
         to: toLink

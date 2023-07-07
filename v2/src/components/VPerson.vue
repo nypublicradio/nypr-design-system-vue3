@@ -240,13 +240,13 @@ const getImageSrc = computed(() => {
 })
 
 // cssvars
-const cssImageSizePx = ref(props.imageSize + 'px')
+const cssImageSizePx = ref(`${props.imageSize}px`)
 const cssImageFlexBasis = ref(
   props.imageFlexBasis ? props.imageFlexBasis : cssImageSizePx.value
 )
 const cssImageMinWidth = ref(
   props.minWidth
-    ? props.minWidth + 'px'
+    ? `${props.minWidth}px`
     : props.imageFlexBasis
     ? 'unset'
     : cssImageSizePx.value

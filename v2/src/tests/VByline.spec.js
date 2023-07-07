@@ -136,8 +136,8 @@ describe('VByline', () => {
         prefix,
       }
     })
-    expect(wrapper.text()).toContain(`:`)
-    expect(wrapper.text()).toContain(`or Peter Gibbons`)
+    expect(wrapper.text()).toContain(':')
+    expect(wrapper.text()).toContain('or Peter Gibbons')
   })
 
   test('Image Slot', () => {

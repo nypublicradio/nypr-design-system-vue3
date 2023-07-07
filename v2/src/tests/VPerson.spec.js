@@ -108,7 +108,7 @@ describe('VPerson', () => {
     }
   })
 
-  test('it renders props', async () => {
+  test('it renders props', () => {
     createComponent({
       props: { profileData }
     })
@@ -129,7 +129,7 @@ describe('VPerson', () => {
 
   })
 
-  test('it renders custom prefix', async () => {
+  test('it renders custom prefix', () => {
     createComponent({
       props: { namePrefix, profileData }
     })

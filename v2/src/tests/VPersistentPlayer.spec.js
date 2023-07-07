@@ -225,7 +225,7 @@ describe('VPersistentPlayer', () => {
     expect(wrapper.vm.muted).toBe(true)
   })
 
-  test('will auto play on load', async () => {
+  test('will auto play on load', () => {
     createComponent({
       props: {
         autoPlay, description, file, image, station, title, titleLink

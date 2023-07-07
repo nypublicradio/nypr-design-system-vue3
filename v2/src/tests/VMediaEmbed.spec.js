@@ -68,7 +68,7 @@ describe('VMediaEmbed', () => {
       }
     })
     const iframe = wrapper.find('iframe')
-    expect(iframe.classes()).toContain(`youtube-player`)
+    expect(iframe.classes()).toContain('youtube-player')
   })
 
   test('is Vimeo', () => {
@@ -78,7 +78,7 @@ describe('VMediaEmbed', () => {
       }
     })
     const iframe = wrapper.find('iframe')
-    expect(iframe.classes()).toContain(`vimeo-player`)
+    expect(iframe.classes()).toContain('vimeo-player')
   })
 
   test('is Spotify', () => {
@@ -88,7 +88,7 @@ describe('VMediaEmbed', () => {
       }
     })
     const iframe = wrapper.find('iframe')
-    expect(iframe.classes()).toContain(`spotify-player`)
+    expect(iframe.classes()).toContain('spotify-player')
   })
 
   test('is SoundCloud', () => {
@@ -98,7 +98,7 @@ describe('VMediaEmbed', () => {
       }
     })
     const iframe = wrapper.find('iframe')
-    expect(iframe.classes()).toContain(`soundcloud-player`)
+    expect(iframe.classes()).toContain('soundcloud-player')
   })
 
   //does not pass, don't know why
