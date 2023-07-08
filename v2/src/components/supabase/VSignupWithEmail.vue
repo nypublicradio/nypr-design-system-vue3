@@ -74,7 +74,7 @@ const rules = computed(() => {
 })
 
 const v$ = useVuelidate(rules, formData)
-
+// clears out the error messages after a delay
 const clearMsg = (delay = 500) => {
   setTimeout(() => {
     sbErrorMsg.value = ''

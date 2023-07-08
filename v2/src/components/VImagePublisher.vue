@@ -136,13 +136,15 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(['image-click', 'keypress', 'image-enlarge-click'])
+// method to format the url to get the publisher image
 const formatPublisherImageUrl = (url) => {
   return url.replace('%s/%s/%s/%s', '%width%/%height%/c/%quality%')
 }
+// method to format the url to get the raw image
 const formatRawPublisherImageUrl = (url) => {
   return url.replace('%s/%s/%s/%s', 'raw')
 }
-
+// method to calculate the quality of the image based on the size and if set to flat quality
 const calcQuality = (quality, size) => {
   if (props.flatQuality) {
     return quality
@@ -232,14 +234,14 @@ onBeforeMount(() => {
   isVertical.value =
     props.allowVerticalEffect && props.maxHeight > props.maxWidth
 })
-
+// method to handle the click on the enlarge button and its loading states
 const enlarge = () => {
   loadingEnlargedImage.value = true
   const img = document.getElementsByClassName('p-image-preview')
   img[0].setAttribute('alt', props.alt)
   img[0].setAttribute('src', srcRaw)
 }
-
+// method to close the enlarged image state
 const closeEnlarge = () => {
   loadingEnlargedImage.value = false
 }

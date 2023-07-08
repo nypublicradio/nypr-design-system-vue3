@@ -75,29 +75,7 @@ const submitForm = async () => {
   }
 }
 
-const password = ref('')
-const errorMessage = ref('')
-const successMessage = ref(null)
 const pending = ref(false)
-
-const resetPassword = async () => {
-  pending.value = true
-  const { error } = await client.auth.updateUser({
-    email: currentUser.value.email,
-    password: password.value,
-  })
-  pending.value = false
-  if (error) {
-    //console.log(error)
-    if (error.toString().includes('8 characters')) {
-      errorMessage.value = 'Password should be at least 8 characters.'
-    } else {
-      errorMessage.value = `${props.error} ${error}`
-    }
-  } else {
-    successMessage.value = props.success
-  }
-}
 </script>
 
 <template>

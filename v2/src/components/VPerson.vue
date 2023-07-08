@@ -219,7 +219,7 @@ if (profile.value?.phone_numbers) {
 const profileLink = ref(
   props.sponsored ? profile.value?.link : profile.value?.url
 )
-
+// extracts the name from the url
 const accountNameFromUrl = (url) => {
   return url
     ?.split('/')

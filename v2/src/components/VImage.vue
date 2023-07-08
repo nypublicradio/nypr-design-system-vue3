@@ -165,13 +165,13 @@ const computedWidth = computed(() => {
     ? Math.round(props.maxWidth / (props.maxHeight / props.height))
     : props.width
 })
-
+// method to handle the click on the enlarge button and its loading states
 const enlarge = () => {
   loadingEnlargedImage.value = true
   loadedEnlargedImage.value = false
   emit('image-enlarge-click')
 }
-
+// method called when the imamge is loaded
 const enlargeLoad = (target) => {
   emit('enlarge-image-load', target)
   loadedEnlargedImage.value = true

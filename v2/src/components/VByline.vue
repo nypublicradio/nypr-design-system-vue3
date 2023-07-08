@@ -56,6 +56,7 @@ const authorsData = Array.isArray(props.authors)
   ? props.authors
   : [props.authors]
 
+// methods to get unique key for each author, used for v-for key
 const getUniqueKey = (author) => {
   return author?.id || author?.photoID || author?.lastName
 }

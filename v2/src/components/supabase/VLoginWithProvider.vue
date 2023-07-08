@@ -22,7 +22,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
-
+// method triggered by the form submit to handle supabase login logic
 const login = async () => {
   emit('submit-click')
   const error = await client.auth.signInWithOAuth(
@@ -36,7 +36,7 @@ const login = async () => {
     emit('submit-success')
   }
 }
-
+// capitalise the first letter of a string
 const capFirstChar = (str) => {
   return str[0].toUpperCase() + str.slice(1)
 }

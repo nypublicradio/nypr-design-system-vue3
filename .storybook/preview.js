@@ -30,10 +30,7 @@ setup((app) => {
   })
   app.component('ClientOnly', {
     props: [],
-    methods: {
-      log() {
-      },
-    },
+    methods: {},
     template: '<slot></slot>',
   })
 
@@ -59,11 +56,13 @@ const useSupabaseClient = () => {
     auth: { signInWithOAuth: () => { }, signInWithPassword: () => { return true } }
   }
 }
+// Mock useRuntimeConfig function
 const useRuntimeConfig = () => {
   return {
     supabaseAuthSignInRedirectTo: '/'
   }
 }
+// Mock useCurrentUser function
 const useCurrentUser = () => {
   return {
     "id": "fc6c5a64-9b2a-4160-a737-f4561d64d60c", "aud": "authenticated", "role": "authenticated", "email": "thomasbono.com@gmail.com", "email_confirmed_at": "2023-06-30T19:50:22.593684Z", "phone": "", "confirmed_at": "2023-06-30T19:50:22.593684Z", "last_sign_in_at": "2023-07-05T23:03:06.712991962Z", "app_metadata": { "provider": "email", "providers": ["email"] }, "user_metadata": {}, "identities": [{ "id": "fc6c5a64-9b2a-4160-a737-f4561d64d60c", "user_id": "fc6c5a64-9b2a-4160-a737-f4561d64d60c", "identity_data": { "email": "thomasbono.com@gmail.com", "sub": "fc6c5a64-9b2a-4160-a737-f4561d64d60c" }, "provider": "email", "last_sign_in_at": "2023-06-30T19:50:22.591738Z", "created_at": "2023-06-30T19:50:22.591775Z", "updated_at": "2023-06-30T19:50:22.591775Z" }], "created_at": "2023-06-30T19:50:22.58882Z", "updated_at": "2023-07-05T23:03:06.716431Z"

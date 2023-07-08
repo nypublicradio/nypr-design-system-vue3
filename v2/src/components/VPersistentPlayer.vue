@@ -267,14 +267,17 @@ const { direction, lengthY } = useSwipe(playerRef, {
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
 }
+// time converter
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
   return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
 }
+// starts the download process. This will eventually be replaced with a proper download function that supports web and app
 const download = () => {
   emit('download')
   window.open(props.file, '_blank')
 }
+// makes the audio skip ahead 15 seconds
 const goAhead15 = () => {
   if (sound) {
     emit('ahead-15')
@@ -282,6 +285,7 @@ const goAhead15 = () => {
     updateCurrentSeconds()
   }
 }
+// makes the audio skip back 15 seconds
 const goBack15 = () => {
   if (sound) {
     emit('back-15')
@@ -289,7 +293,7 @@ const goBack15 = () => {
     updateCurrentSeconds()
   }
 }
-
+// the base clock interval for the audio player
 const startDurationInterval = () => {
   interval = setInterval(() => {
     updateCurrentSeconds()

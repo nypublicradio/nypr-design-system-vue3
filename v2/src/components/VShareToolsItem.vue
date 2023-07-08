@@ -148,7 +148,7 @@ const ariaLabel = computed(() => {
   }
   return ''
 })
-
+// handles the share feature
 const share = () => {
   if (!props.service) {
     return
