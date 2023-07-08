@@ -264,6 +264,7 @@ const { direction, lengthY } = useSwipe(playerRef, {
   },
   passive: true,
 })
+// method to handle update the currentSeconds with the audio playhead
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
 }
@@ -299,9 +300,11 @@ const startDurationInterval = () => {
     updateCurrentSeconds()
   }, 1000)
 }
+// clears the clock interval
 const clearDurationInterval = () => {
   clearInterval(interval)
 }
+// handle the toggle play event
 const togglePlay = () => {
   if (!sound || !currentFile.value === props.file) {
     // destoy old sound if one exists
@@ -347,13 +350,13 @@ const togglePlay = () => {
   // Change global volume init
   Howler.volume(volume.value)
 }
-
+// handle toggling the mute state
 const volumeToggleMute = (e) => {
   emit('volume-toggle-mute', e)
   muted.value = !muted.value
   sound.mute(muted.value)
 }
-
+// handle the volume change event
 const volumeChange = (e) => {
   if (sound) {
     emit('volume-change', e)
@@ -364,6 +367,7 @@ const volumeChange = (e) => {
 
 let onceFlag = null
 let scrubWhenPaused = false
+// handle the scrub end event on the timeline
 const scrubTimelineEnd = (e) => {
   emit('scrub-timeline-end', e)
   const percentUnit = durationSeconds.value / 100
@@ -376,6 +380,7 @@ const scrubTimelineEnd = (e) => {
   }
   onceFlag = null
 }
+// handle the change event on the timeline
 const scrubTimelineChange = (e) => {
   // update currentSeconds from the Slider change event, that passes the value to the Slider.
   currentSeconds.value = (e * durationSeconds.value) / 100
@@ -390,7 +395,7 @@ const scrubTimelineChange = (e) => {
     }
   }
 }
-
+// handle the click on the timeline
 const timelineClick = (e) => {
   emit('timeline-click', e)
   scrubTimelineEnd(e)
@@ -400,11 +405,12 @@ const toggleMinimize = (e) => {
   emit('is-minimized', e)
   isMinimized.value = e
 }
+// exposed method to handle the expanding toggle
 const toggleExpanded = (e) => {
   emit('is-expanded', e)
   isExpanded.value = e
 }
-
+// handles the click anywhere prop. So if the user clicks anywhere on the player, exect the buttons, the player will expand or minimize
 const handleClickAnywhere = (e) => {
   if (props.canClickAnywhere) {
     e.preventDefault()
@@ -470,6 +476,7 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
+  toggleExpanded,
   toggleMinimize,
   togglePlay,
 })
