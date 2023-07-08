@@ -154,24 +154,24 @@ const emit = defineEmits([
   'enlarge-image-load',
 ])
 
-let isVertical = ref(
+const isVertical = ref(
   props.allowVerticalEffect && props.maxHeight > props.maxWidth
 )
-let loadingEnlargedImage = ref(false)
-let loadedEnlargedImage = ref(true)
+const loadingEnlargedImage = ref(false)
+const loadedEnlargedImage = ref(true)
 
 const computedWidth = computed(() => {
   return isVertical.value
     ? Math.round(props.maxWidth / (props.maxHeight / props.height))
     : props.width
 })
-
+// method to handle the click on the enlarge button and its loading states
 const enlarge = () => {
   loadingEnlargedImage.value = true
   loadedEnlargedImage.value = false
   emit('image-enlarge-click')
 }
-
+// method called when the imamge is loaded
 const enlargeLoad = (target) => {
   emit('enlarge-image-load', target)
   loadedEnlargedImage.value = true

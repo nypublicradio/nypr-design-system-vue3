@@ -16,6 +16,13 @@ const props = defineProps({
     type: Boolean,
   },
   /**
+   * expand the player by clicking anywhere but the control buttons
+   */
+  canClickAnywhere: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * make the player expandable
    */
   canExpand: {
@@ -65,6 +72,13 @@ const props = defineProps({
     type: String,
   },
   /**
+   * hide the description on mobile container breakpoint
+   */
+  hideDescriptionOnMobile: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * hide the download button on mobile
    */
   hideDownloadMobile: {
@@ -72,10 +86,24 @@ const props = defineProps({
     type: Boolean,
   },
   /**
+   * hide the image on mobile container breakpoint
+   */
+  hideImageOnMobile: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * hide the skip buttons on mobile
    */
   hideSkipMobile: {
     default: true,
+    type: Boolean,
+  },
+  /**
+   * hide the time on mobile container breakpoint
+   */
+  hideTimeOnMobile: {
+    default: false,
     type: Boolean,
   },
   /**
@@ -133,6 +161,27 @@ const props = defineProps({
   station: {
     default: null,
     type: String,
+  },
+  /**
+   * the timeline is at the bottom of the player
+   */
+  timelineBottom: {
+    default: false,
+    type: Boolean,
+  },
+  /**
+   * the timeline is interactive
+   */
+  timelineInteractive: {
+    default: true,
+    type: Boolean,
+  },
+  /**
+   * the timeline is at the top of the player
+   */
+  timelineTop: {
+    default: false,
+    type: Boolean,
   },
   /**
    * title of the audio
@@ -215,64 +264,21 @@ const { direction, lengthY } = useSwipe(playerRef, {
   },
   passive: true,
 })
-
-onMounted(() => {
-  // keyboard accessibility
-  window.addEventListener('keydown', (event) => {
-    switch (event.code) {
-      case 'ArrowUp':
-        if (volume.value < 100 && sound) {
-          volume.value++
-        }
-        break
-      case 'ArrowDown':
-        if (volume.value > 0 && sound) {
-          volume.value--
-        }
-        break
-      case 'ArrowLeft':
-        goBack15()
-        break
-      case 'ArrowRight':
-        goAhead15()
-        break
-    }
-  })
-
-  /*   window.addEventListener('keyup', (event) => {
-    // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.
-    var isPlayButtonActive =
-      document.getElementsByClassName('the-play-button')[0] ===
-      document.activeElement
-    if (!isPlayButtonActive) {
-      switch (event.code) {
-        case 'Space':
-          togglePlay()
-          break
-        case 'Enter':
-          togglePlay()
-          break
-      }
-    }
-  }) */
-
-  // auto play
-  props.autoPlay ? togglePlay() : null
-})
-
-onBeforeUnmount(() => {
-  // stop the audio
-  sound ? sound.unload() : null
-})
-
+// method to handle update the currentSeconds with the audio playhead
+const updateCurrentSeconds = () => {
+  currentSeconds.value = sound.seek()
+}
+// time converter
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
   return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
 }
+// starts the download process. This will eventually be replaced with a proper download function that supports web and app
 const download = () => {
   emit('download')
   window.open(props.file, '_blank')
 }
+// makes the audio skip ahead 15 seconds
 const goAhead15 = () => {
   if (sound) {
     emit('ahead-15')
@@ -280,6 +286,7 @@ const goAhead15 = () => {
     updateCurrentSeconds()
   }
 }
+// makes the audio skip back 15 seconds
 const goBack15 = () => {
   if (sound) {
     emit('back-15')
@@ -287,7 +294,17 @@ const goBack15 = () => {
     updateCurrentSeconds()
   }
 }
-
+// the base clock interval for the audio player
+const startDurationInterval = () => {
+  interval = setInterval(() => {
+    updateCurrentSeconds()
+  }, 1000)
+}
+// clears the clock interval
+const clearDurationInterval = () => {
+  clearInterval(interval)
+}
+// handle the toggle play event
 const togglePlay = () => {
   if (!sound || !currentFile.value === props.file) {
     // destoy old sound if one exists
@@ -333,13 +350,13 @@ const togglePlay = () => {
   // Change global volume init
   Howler.volume(volume.value)
 }
-
+// handle toggling the mute state
 const volumeToggleMute = (e) => {
   emit('volume-toggle-mute', e)
   muted.value = !muted.value
   sound.mute(muted.value)
 }
-
+// handle the volume change event
 const volumeChange = (e) => {
   if (sound) {
     emit('volume-change', e)
@@ -347,21 +364,10 @@ const volumeChange = (e) => {
     volume.value = e
   }
 }
-const updateCurrentSeconds = () => {
-  currentSeconds.value = sound.seek()
-}
-
-const startDurationInterval = () => {
-  interval = setInterval(() => {
-    updateCurrentSeconds()
-  }, 1000)
-}
-const clearDurationInterval = () => {
-  clearInterval(interval)
-}
 
 let onceFlag = null
 let scrubWhenPaused = false
+// handle the scrub end event on the timeline
 const scrubTimelineEnd = (e) => {
   emit('scrub-timeline-end', e)
   const percentUnit = durationSeconds.value / 100
@@ -374,6 +380,7 @@ const scrubTimelineEnd = (e) => {
   }
   onceFlag = null
 }
+// handle the change event on the timeline
 const scrubTimelineChange = (e) => {
   // update currentSeconds from the Slider change event, that passes the value to the Slider.
   currentSeconds.value = (e * durationSeconds.value) / 100
@@ -388,7 +395,7 @@ const scrubTimelineChange = (e) => {
     }
   }
 }
-
+// handle the click on the timeline
 const timelineClick = (e) => {
   emit('timeline-click', e)
   scrubTimelineEnd(e)
@@ -398,12 +405,78 @@ const toggleMinimize = (e) => {
   emit('is-minimized', e)
   isMinimized.value = e
 }
+// exposed method to handle the expanding toggle
 const toggleExpanded = (e) => {
   emit('is-expanded', e)
   isExpanded.value = e
 }
+// handles the click anywhere prop. So if the user clicks anywhere on the player, exect the buttons, the player will expand or minimize
+const handleClickAnywhere = (e) => {
+  if (props.canClickAnywhere) {
+    e.preventDefault()
+    if (props.canExpand) {
+      toggleExpanded(!isExpanded.value)
+    }
+    if (props.canMinimize) {
+      toggleMinimize(!isMinimized.value)
+    }
+  }
+}
+
+onMounted(() => {
+  // keyboard accessibility
+  window.addEventListener('keydown', (event) => {
+    switch (event.code) {
+      case 'ArrowUp':
+        if (volume.value < 100 && sound) {
+          volume.value++
+        }
+        break
+      case 'ArrowDown':
+        if (volume.value > 0 && sound) {
+          volume.value--
+        }
+        break
+      case 'ArrowLeft':
+        goBack15()
+        break
+      case 'ArrowRight':
+        goAhead15()
+        break
+      default:
+        /* code */
+        break
+    }
+  })
+
+  /*   window.addEventListener('keyup', (event) => {
+    // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.
+    var isPlayButtonActive =
+      document.getElementsByClassName('the-play-button')[0] ===
+      document.activeElement
+    if (!isPlayButtonActive) {
+      switch (event.code) {
+        case 'Space':
+          togglePlay()
+          break
+        case 'Enter':
+          togglePlay()
+          break
+      }
+    }
+  }) */
+
+  // auto play
+  props.autoPlay ? togglePlay() : null
+})
+
+onBeforeUnmount(() => {
+  // stop the audio
+  sound ? sound.unload() : null
+})
 
 defineExpose({
+  toggleExpanded,
   toggleMinimize,
   togglePlay,
 })
@@ -429,24 +502,37 @@ defineExpose({
     </div>
     <Transition name="expand">
       <div v-if="!isExpanded" class="player-controls">
-        <v-track-info
-          :livestream="props.livestream"
-          :station="props.station"
-          :image="props.image"
-          :title="props.title"
-          :title-link="props.titleLink"
-          :description="props.description"
-          :description-link="props.descriptionLink"
-          :buffered="buffered"
-          :current-seconds="currentSeconds"
-          :duration-seconds="durationSeconds"
-          @scrub-timeline-change="scrubTimelineChange"
-          @scrub-timeline-end="scrubTimelineEnd"
-          @timeline-click="timelineClick"
-          @image-click="emit('image-click')"
-          @description-click="emit('description-click')"
-          @title-click="emit('title-click')"
-        />
+        <div
+          class="v-track-info-wrapper"
+          :class="[{ cursor: props.canClickAnywhere }]"
+          @click="handleClickAnywhere"
+        >
+          <v-track-info
+            :livestream="props.livestream"
+            :station="props.station"
+            :image="props.image"
+            :title="props.title"
+            :title-link="props.titleLink"
+            :description="props.description"
+            :description-link="props.descriptionLink"
+            :buffered="buffered"
+            :current-seconds="currentSeconds"
+            :duration-seconds="durationSeconds"
+            :hide-image-on-mobile="props.hideImageOnMobile"
+            :hide-description-on-mobile="props.hideDescriptionOnMobile"
+            :hide-time-on-mobile="props.hideTimeOnMobile"
+            :timeline-interactive="props.timelineInteractive"
+            :timeline-bottom="props.timelineBottom"
+            :timeline-top="props.timelineTop"
+            :can-expand-with-click-anywhere="props.canClickAnywhere"
+            @scrub-timeline-change="scrubTimelineChange"
+            @scrub-timeline-end="scrubTimelineEnd"
+            @timeline-click="timelineClick"
+            @image-click="emit('image-click')"
+            @description-click="emit('description-click')"
+            @title-click="emit('title-click')"
+          />
+        </div>
         <v-volume-control
           class="hideOnMobile"
           :disabled="!currentFile"
@@ -517,7 +603,7 @@ defineExpose({
           </slot>
         </Button>
         <Button
-          v-if="props.canMinimize"
+          v-if="props.canMinimize && !props.canClickAnywhere"
           title="Minimize Player"
           class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
           aria-label="minimize player"
@@ -528,7 +614,7 @@ defineExpose({
           </slot>
         </Button>
         <Button
-          v-if="props.canExpand && !isExpanded"
+          v-if="props.canExpand && !isExpanded && !props.canClickAnywhere"
           title="Expand Player"
           class="expand-btn p-button-icon-only p-button-text p-button-secondary"
           :class="{ show: isExpanded }"
@@ -577,7 +663,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   position: fixed;
   z-index: var(--persistent-player-z-index);
   width: 100%;
-  padding: 8px 16px 8px 8px;
+  padding: var(--persistent-player-padding);
   color: var(--text-color);
   background-color: var(--persistent-player-bg);
   transition: bottom 0.25s, height calc(var(--transition-duration) * 2);
@@ -671,6 +757,17 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       color: var(--persistent-player-text-button-color);
       &:hover {
         color: var(--persistent-player-text-button-color-hover) !important;
+      }
+    }
+    .v-track-info-wrapper {
+      display: flex;
+      gap: 12px;
+      width: 100%;
+      height: inherit;
+      flex: auto;
+      align-self: center;
+      &.cursor {
+        cursor: pointer;
       }
     }
   }

@@ -1,4 +1,6 @@
 <script setup>
+// auth
+import { useCurrentUser } from '~/composables/states'
 import Home from '~/src/components/Home.vue'
 import VCard from '~/v2/src/components/VCard.vue'
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
@@ -11,340 +13,126 @@ import VPerson from '~/v2/src/components/VPerson.vue'
 //import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
 import VShareTools from '~/v2/src/components/VShareTools.vue'
 import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
+import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
+import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
+import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
+import VSignupWithEmail from '~/v2/src/components/supabase/VSignupWithEmail.vue'
+import { onMounted } from 'vue'
 
-//import defaultUserPhoto from 'default-user.jpg'
+definePageMeta({
+  middleware: 'check-auth-session-home-page',
+})
+// //auth
+// const config = useRuntimeConfig()
+// const currentUser = useCurrentUser()
+// const client = useSupabaseClient()
+// const user = await client.auth.getSession()
+// // definePageMeta({
+// //   layout: 'blank',
+// // })
+
+// // check local storage for the auth token
+// if (process.client) {
+//   const supabaseAuthToken = JSON.parse(
+//     localStorage.getItem(config.supabaseAuthTokenName)
+//   )
+//   if (supabaseAuthToken) {
+//     currentUser.value = supabaseAuthToken.user
+//   }
+
+//   // check supabase session for logged in user
+//   if (user?.data?.session?.user) {
+//     currentUser.value = user?.data?.session?.user
+//   }
+
+//   // redirect to dashboard if the user is logged in
+//   if (currentUser.value) {
+//     await navigateTo('/dashboard')
+//   }
+
+//   // sometimes the supabase token doesn't get detected right away when magic links are used
+//   // i don't think we should have to do this, but here we are
+//   setTimeout(async () => {
+//     // check if the user is logged in
+//     if (user?.data?.session?.user) {
+//       currentUser.value = user?.data?.session?.user
+//     }
+//     // redirect to dashboard if the user is logged in
+//     if (currentUser.value) {
+//       //console.log('currentUser setTimeout found', currentUser.value)
+//       await navigateTo('/dashboard')
+//     }
+//   }, 1000)
+// }
+
+//END auth
 
 const emitClick = (type, event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
 }
-const showImage = ref(false)
-
-const doSomethingOnLoad = () => {
-  showImage.value = true
-  console.log('doSomethingOnLoad')
-}
-const profileFromArticle = {
-  biography:
-    'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
-  email: 'scoboco@gmail.com',
-  firstName: 'Scott',
-  id: 19,
-  jobTitle: 'Photojournalist',
-  lastName: 'Lynch',
-  link: 'https://www.sponsoredLink.com',
-  logo: '/default-sponsor.png',
-  name: 'Scott Lynch',
-  phone_numbers: [
-    {
-      phone_number: '9731231234',
-    },
-    {
-      phone_number: '2011231234',
-    },
-  ],
-  photoID: 327700,
-  slug: 'scott-lynch',
-  socialMediaProfile: [
-    {
-      profileUrl: 'https://www.instagram.com/scoboco/',
-      service: 'instagram',
-    },
-    {
-      profileUrl: 'https://twitter.com/Scoboco',
-      service: 'twitter',
-    },
-  ],
-  url: '/staff/scott-lynch',
-  website: 'http://t.co/Np4U39BYlh',
-}
-const profileFromArticleNoPhoto = {
-  biography:
-    'Lorem ipsum <b>dolor</b> sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
-  email: 'scoboco@gmail.com',
-  firstName: 'Scott',
-  id: 19,
-
-  jobTitle: 'Photojournalist',
-  lastName: 'Lynch',
-  link: 'https://www.sponsoredLink.com',
-  logo: '/default-sponsor.png',
-  name: 'Scott Lynch',
-  phone_numbers: [
-    {
-      phone_number: '9731231234',
-    },
-    {
-      phone_number: '2011231234',
-    },
-  ],
-  slug: 'scott-lynch',
-  socialMediaProfile: [
-    {
-      profileUrl: 'https://www.instagram.com/scoboco/',
-      service: 'instagram',
-    },
-    {
-      profileUrl: 'https://twitter.com/Scoboco',
-      service: 'twitter',
-    },
-  ],
-  url: '/staff/scott-lynch',
-  website: 'http://t.co/Np4U39BYlh',
-}
 </script>
 
 <template>
   <div class="pb-8">
-    <!--     <div style="height: 600px; text-align: center; background-color: #f1f1f1">
-      HERO BUFFER
-    </div> -->
     <div style="max-width: 1024px; margin: 0 auto">
-      <!-- <VCard
-        image-src="329944"
-        title="Title with some <em>HTML</em>"
-        link="https://www.google.com"
-        subtitle="Subtitle"
-        blurb="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-        :width="300"
-        :height="200"
-        alt="alt text"
-      /> -->
-      <!-- <div class="grid">
-        <div class="col-12 md:col-6">
-          <VCard
-            image-src="329944"
-            title="Title with some <em>HTML</em>"
-            link="https://www.google.com"
-            subtitle="Subtitle"
-            blurb="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            :width="168"
-            :height="112"
-            sizes="md:274px lg:168px"
-          />
-        </div>
-        <div class="col-12 md:col-6">
-          <VCard
-            image-src="329944"
-            title="Title with some <em>HTML</em>"
-            link="https://www.google.com"
-            subtitle="Subtitle"
-            blurb="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-            :width="168"
-            :height="112"
-            sizes="md:274px lg:18px"
-          />
-        </div>
-      </div> -->
-      <div class="grid">
-        <div class="col-12 md:col-6">
-          <!-- <VPerson
-            :profile-data="profileFromArticle"
-            vertical
-            sizes="xs:30 sm:100 md:200"
-          /> -->
-        </div>
-        <!--
-        <div class="col-12 md:col-6">
-          <VPerson
-            :profile-data="profileFromArticleNoPhoto"
-            image-fallback-path="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg"
-            sizes="xs:30 sm:100 md:200"
-          />
-        </div> -->
-        <!-- <div class="col-6">
-          <VPerson :profile-data="profileFromArticle" />
-        </div>
-        <div class="col-6">
-          <VPerson :profile-data="profileFromArticleNoPhoto" />
-        </div>
-        <div class="col-6">
-          <VPerson
-            :profile-data="profileFromArticleNoPhoto"
-            image-fallback-path="https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_640.jpg"
-          />
-        </div>
-        <div class="col-6">
-          <VPerson :profile-data="profileFromArticle" sponsored />
-        </div> -->
-      </div>
-      <div class="grid">
-        <div class="col-6">
-          <!--   <Transition name="zoom"> -->
-          <!-- v-show="showImage" -->
-          <VImage
-            src="329944"
-            alt="this is alt text"
-            :width="700"
-            :height="400"
-            sizes="xs:400px md:800px"
-            allow-preview
-            to="https://www.thomasbono.com"
-            @load="doSomethingOnLoad"
-          >
-            <template #caption>
-              <VImageCaption text="This is a sample caption text <b>HTML</b>" />
-            </template>
-            <template #gallery>
-              <VImageGallery count="9" gallery-link="https://www.google.com" />
-            </template>
-          </VImage>
-          <!-- <VImage
-            src="https://ychef.files.bbci.co.uk/1600x900/p07ryyyj.webp"
-            alt="this is alt text"
-            :width="700"
-            :height="400"
-            allow-preview
-            to="https://www.thomasbono.com"
-            @load="doSomethingOnLoad"
-          >
-          </VImage>
-          <VImage
-            src="https://cdn.shopify.com/s/files/1/0291/0214/5580/products/nhch_pManhinh2020-03-09luc10.29.52SA_33c6f18e-27a5-480f-82d5-b135439bcaa9_1946x.png?v=1595308523"
-            alt="this is alt text"
-            :width="700"
-            :height="400"
-            :max-width="1106"
-            :max-height="1658"
-            allow-preview
-            allow-vertical-effect
-            to="https://www.thomasbono.com"
-            @load="doSomethingOnLoad"
-          >
-          </VImage> -->
-          <VImagePublisher
-            src="https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg"
-            alt="this is alt text inline"
-            :width="700"
-            :height="700"
-            :ratio="[3, 2]"
-            allow-preview
-            to="https://www.thomasbono.com"
-          >
-            <template #caption>
-              <VImageCaption text="This is a sample caption text <b>HTML</b>" />
-            </template>
-            <template #gallery>
-              <VImageGallery count="9" gallery-link="https://www.google.com" />
-            </template>
-          </VImagePublisher>
-          <!--<VImagePublisher
-            src="https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg"
-            alt="this is alt text inline"
-            :width="700"
-            :height="700"
-            :ratio="[3, 2]"
-            to="https://www.thomasbono.com"
-          >
-          </VImagePublisher>
-          <VImagePublisher
-            src="https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg"
-            alt="this is alt text inline"
-            :width="700"
-            :height="700"
-            :ratio="[3, 2]"
-          >
-          </VImagePublisher> -->
-          <!--   </Transition> -->
-        </div>
-        <!-- <div class="col-6">
-          <VImage
-            src="329836"
-            alt="this is alt text"
-            :width="700"
-            :height="400"
-            :max-width="2598"
-            :max-height="3484"
-            allow-preview
-            sizes="xs:400px md:800px"
-            :allow-vertical-effect="true"
-            format="jpeg"
-            :quality="85"
-            @load="doSomethingOnLoad"
-            @click="doSomethingOnLoad"
-            @keypress="doSomethingOnLoad"
-          />
-        </div> -->
-        <!-- <div class="col-6">
-          <VImage
-            src="329944"
-            alt="this is alt text"
-            :width="400"
-            sizes="xs:400px md:800px"
-            format="jpeg"
-            :quality="85"
-            @load="doSomethingOnLoad"
-          />
-        </div> -->
-        <!-- <div class="col-6">
-          <VImage
-            src="329944"
-            alt="this is alt text"
-            :width="400"
-            :height="400"
-            sizes="xs:400px md:800px"
-            format="jpeg"
-            :quality="85"
-            :modifiers="{ focusZoom: '100' }"
-            @load="doSomethingOnLoad"
-          />
-        </div> -->
-        <!-- <div class="col-6">
-          <VImage
-            src="329944"
-            alt="this is alt text"
-            :width="400"
-            allow-preview
-            sizes="xs:400px md:800px"
-            format="jpeg"
-            :quality="85"
-            @load="doSomethingOnLoad"
-          >
-            <template #closeicon>@</template>
-          </VImage>
-        </div> -->
-        <!-- <div class="col-6">
-          <VImage
-            src="329944"
-            alt="this is alt text"
-            :width="400"
-            allow-preview
-            sizes="xs:400px md:800px"
-            format="jpeg"
-            :quality="85"
-            @load="doSomethingOnLoad"
-          >
-            <template #enlargeButton="slotProps"
-              ><Button
-                icon="pi pi-youtube"
-                aria-label="Enlarge Image"
-                @click="slotProps.enlargeFunc"
-              ></Button
-            ></template>
-          </VImage>
-        </div> -->
-      </div>
-      <!-- <VImage
-        :provider="null"
-        src="/default-sponsor.png"
-        width="400"
-        height="400"
-        :ratio="[1, 1]"
+      <VSignupWithEmail />
+      <br />
+      <br />
+      <VLoginWithMagicLink />
+      <br />
+      <br />
+      <VSignupWithEmail>
+        <template #success>
+          <VLoginWithEmail />
+        </template>
+      </VSignupWithEmail>
+      <br />
+      <br /><br />
+      <br /><br />
+      <br /><br />
+      <br />
+      <Divider class="my-4" align="center">
+        <b>Or</b>
+      </Divider>
+      <VLoginWithEmail />
+      <p class="my-2 text-center">
+        Don't have an account?
+        <VFlexibleLink to="/onboarding">Register here</VFlexibleLink>
+      </p>
+      <p class="mb-2 text-center">
+        <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
+      </p>
+      <!-- 
+      <Divider class="my-4" align="center">
+        <b>Or</b>
+      </Divider>
+      <VLoginWithMagicLink />
+      <br />
+      <br />
+      <VLoginWithMagicLink class="p-button-rounded" />
+      <br />
+      <br />
+      <VLoginWithMagicLink><template #icon>XX</template></VLoginWithMagicLink>
+      <Divider class="my-4" align="center">
+        <b>Or</b>
+      </Divider>
+      <VLoginWithProvider provider="google" />
+      <VLoginWithProvider provider="twitter" class="my-2" />
+      <VLoginWithProvider provider="apple" class="my-2" />
+      <VLoginWithProvider
+        provider="google"
+        label="This is a custom label"
+        class="my-2"
       />
-      <VImage
-        :provider="null"
-        src="/default-user.jpg"
-        width="400"
-        height="400"
-        :ratio="[1, 1]"
-      /> -->
+      <VLoginWithProvider provider="google" class="p-button-rounded my-2" />
+      <VLoginWithProvider provider="google" class="p-button-outlined my-2" />
+
+      <VLoginWithProvider provider="google" class="p-button-rounded my-2">
+        <template #icon>XX</template>
+      </VLoginWithProvider>
+      -->
     </div>
-
-    <!--  <VFlexibleLink to="https://www.google.com">go to google</VFlexibleLink>
-    <VFlexibleLink raw to="https://www.google.com"
-      ><Button label="button"></Button
-    ></VFlexibleLink> -->
-
     <section class="pb-8">
       <div class="content lg:px-8 pb-0">
         <div class="grid">

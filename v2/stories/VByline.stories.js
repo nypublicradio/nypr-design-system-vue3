@@ -135,6 +135,7 @@ const TemplateImagePerson = (args) => ({
     setup() {
         return { args }
     },
+    //# skipcq: JS-0038
     template: '<v-byline v-bind="args"> <template #images="slotProps" ><VPerson :profileData="slotProps.author" :imageSize="45" :justImage="true" :imageSrc="`https://cms.prod.nypr.digital/images/${slotProps.author.photoID}/fill-%width%x%height%|format-webp|webpquality-%quality%`"/></template></v-byline>',
 })
 

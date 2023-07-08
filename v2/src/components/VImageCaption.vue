@@ -15,7 +15,7 @@ const emit = defineEmits([
 ])
 
 const showCaption = shallowRef(false)
-
+// toggle caption state and emits
 const toggleCaption = () => {
   showCaption.value = !showCaption.value
   if (showCaption.value) {

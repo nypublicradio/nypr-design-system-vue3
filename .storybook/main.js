@@ -9,6 +9,7 @@ module.exports = {
   webpackFinal: async (config, {
     configType
   }) => {
+
     const envTheme = process.env.STORYBOOK_THEME
     await config.module.rules.push({
       test: /\.scss$/,
@@ -22,6 +23,7 @@ module.exports = {
           }
         }]
       // include: path.resolve(__dirname, '../'),
+
     })
 
     return config

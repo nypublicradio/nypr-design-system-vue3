@@ -108,7 +108,7 @@ describe('VPerson', () => {
     }
   })
 
-  test('it renders props', async () => {
+  test('it renders props', () => {
     createComponent({
       props: { profileData }
     })
@@ -123,13 +123,13 @@ describe('VPerson', () => {
     expect(_name.text()).toContain(profileData.name)
     expect(_bio.html()).toContain(profileData.biography)
     expect(_cta.text()).toContain('Read more')
-    for (var i = 0; i < _flexibleLinks.length; i++) {
+    for (let i = 0; i < _flexibleLinks.length; i++) {
       expect(_flexibleLinks.classes().toContain('flexible-link').attributes('href')).toBe(profileData.url)
     }
 
   })
 
-  test('it renders custom prefix', async () => {
+  test('it renders custom prefix', () => {
     createComponent({
       props: { namePrefix, profileData }
     })

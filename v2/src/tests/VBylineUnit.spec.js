@@ -103,7 +103,7 @@ describe('VBylineUnit', () => {
     }
   })
 
-  test('Shows org', async () => {
+  test('Shows org', () => {
     createComponent({
       props: {
         author: authorOrg
@@ -117,7 +117,7 @@ describe('VBylineUnit', () => {
     expect(orgContent.exists()).toBe(true)
   })
 
-  test('does not show org', async () => {
+  test('does not show org', () => {
     createComponent({
       props: {
         author: authorNoOrg
@@ -130,7 +130,7 @@ describe('VBylineUnit', () => {
     expect(orgContent.exists()).toBe(false)
   })
 
-  test('does not render org as a link', async () => {
+  test('does not render org as a link', () => {
     createComponent({
       props: {
         author: authorNoOrgLink

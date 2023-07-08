@@ -40,23 +40,13 @@ onUpdated(() => {
 </template>
 
 <style lang="scss" scoped>
-$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
 .progress-control {
-  width: 100%;
-
-  @container (max-width: #{$container-breakpoint-md}) {
-    position: absolute;
-    cursor: pointer;
-    min-width: 200px;
-    top: -5px;
-    margin-top: 0;
-    left: 0;
-    right: 0;
-    height: 5px;
-  }
 
   .p-slider {
     width: 100%;
+    // .p-slider-range{
+
+    // }
   }
 }
 </style>

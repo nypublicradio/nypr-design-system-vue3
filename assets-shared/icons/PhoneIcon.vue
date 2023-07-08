@@ -23,12 +23,9 @@ export default {
   name: 'PhoneIcon',
   props: {
     title: {
+      default: 'Phone',
       type: String,
-      default: 'Phone'
-    }
-  }
+    },
+  },
 }
 </script>
-
-<style lang="scss">
-</style>

@@ -121,7 +121,7 @@ const props = defineProps({
    */
   src: {
     default: null,
-    type: [String, Number]
+    type: [String, Number],
   },
   /**
    * Subtitle text below the title
@@ -198,16 +198,16 @@ const slots = useSlots()
 
 const hasDetails = computed(() => {
   return (
-    !!props.title ||
-    !!props.subtitle ||
-    !!slots.default ||
-    !!props.blurb ||
-    !!props.eyebrow
+    Boolean(props.title) ||
+    Boolean(props.subtitle) ||
+    Boolean(slots.default) ||
+    Boolean(props.blurb) ||
+    Boolean(props.eyebrow)
   )
 })
 
 // css vars
-const cssImageWidth = ref(props.width + 'px')
+const cssImageWidth = ref(`${props.width}px`)
 const cssVerticalOnMobileReverse = ref(
   props.reverse && props.verticalMobile ? 'column-reverse' : 'column'
 )
@@ -226,7 +226,7 @@ const cssImageFlexBasis = ref(
 )
 const cssImageMinWidth = ref(
   props.minWidth
-    ? props.minWidth + 'px'
+    ? `${props.minWidth}px`
     : props.imageFlexBasis
     ? 'unset'
     : cssImageWidth.value
@@ -387,7 +387,9 @@ $container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
           &:hover {
             color: var(--v-card-title-hover-color) !important;
             .card-title-title {
-              text-decoration: var(--v-card-title-hover-text-decoration) !important;
+              text-decoration: var(
+                --v-card-title-hover-text-decoration
+              ) !important;
             }
           }
         }

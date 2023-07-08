@@ -2,10 +2,10 @@
 import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
 import VSmartHeader from '~/v2/src/components/VSmartHeader.vue'
 import { shallowRef } from 'vue'
-const headerHeight = shallowRef(76)
+const headerHeight = shallowRef(110)
 const heroBuffer = shallowRef(600)
 //cssVar
-const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
+const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
 </script>
 
 <template>
@@ -13,9 +13,15 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
     <header>
       <VSmartHeader :hero-buffer="heroBuffer" :resume-delay="0">
         <div>
-          <ul style="background-color: antiquewhite; padding: 10px">
+          <ul
+            class="inline-flex gap-4 w-full"
+            style="background-color: antiquewhite; padding: 10px"
+          >
             <li><NuxtLink to="/nuxt">Home</NuxtLink></li>
             <li><NuxtLink to="/about">About</NuxtLink></li>
+            <li><NuxtLink to="/logout">Logout</NuxtLink></li>
+            <li><NuxtLink to="/forgot-password">forgot-password</NuxtLink></li>
+            <li><NuxtLink to="/reset-password">reset-password</NuxtLink></li>
           </ul>
         </div>
       </VSmartHeader>
@@ -23,11 +29,13 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
     <main>
       <slot />
     </main>
-    <!-- <VPersistentPlayer
+    <VPersistentPlayer
       data-style-mode="dark"
-      :can-minimize="true"
+      :can-expand="true"
       :show-download="true"
-      :hide-download-mobile="false"
+      :hide-download-mobile="true"
+      :can-expand-with-swipe="true"
+      :can-unexpand-with-swipe="true"
       :show-skip="true"
       :livestream="false"
       title="The Takeaway"
@@ -36,8 +44,8 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
       image="329534"
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
-    > -->
-    <!-- <template #chevronDown>
+    >
+      <!-- <template #chevronDown>
         <i class="pi pi-twitter"></i>
       </template>
       <template #chevronUp>
@@ -67,7 +75,10 @@ const cssHeaderHeight = shallowRef(headerHeight.value + 'px')
       <template #download>
         <i class="pi pi-twitter"></i>
       </template> -->
-    <!-- </VPersistentPlayer> -->
+      <template #expanded-content>
+        this is wherewe would oput anything in the expanded view
+      </template>
+    </VPersistentPlayer>
   </div>
 </template>
 

@@ -1,0 +1,214 @@
+import { Meta } from '@storybook/addon-docs';
+
+<Meta title="Supabase/Docs" />
+
+<img width="100%" src="./images/heroImgSupabase.jpg" alt="NYPR Lead Image" />
+<br />
+<br />
+## Instructions to setup and use Supabase auth and our auth components
+Components are built with with [Vue3](https://vuejs.org/),
+[Nuxt3](https://nuxt.com/), [PrimeVue](https:www.primevue.com) &
+[Primeflex](https://www.primefaces.org/primeflex/). 
+
+### Package installation
+```bash
+npm install @nuxtjs/supabase --save-dev
+npm install @vuelidate/core @vuelidate/validators
+```
+
+### ENV vars
+Aquire the following from your Supabase project Settings/API and add them to your `.env` file
+```js
+environment=prod
+NUXT_ENV_SUPABASE_URL=https://project-url-here.supabase.co
+NUXT_ENV_SUPABASE_KEY=key-here
+NUXT_ENV_SUPABASE_AUTH_SIGN_IN_REDIRECT_TO=http://localhost:3000
+NUXT_ENV_SUPABASE_AUTH_TOKEN_NAME=token-here-auth-token
+```
+
+### Nuxt config
+Add the following to your `nuxt.config.js` file
+```js
+  modules: ['@nuxtjs/supabase'],
+  supabase: {
+    url: process.env.NUXT_ENV_SUPABASE_URL,
+    key: process.env.NUXT_ENV_SUPABASE_KEY,
+    redirect: true,
+  },
+   runtimeConfig: {
+    public: {
+      environment: process.env.environment || 'demo',
+      supabaseUrl: process.env.NUXT_ENV_SUPABASE_URL,
+      supabaseKey: process.env.NUXT_ENV_SUPABASE_KEY,
+      supabaseAuthSignInRedirectTo: process.env.NUXT_ENV_SUPABASE_AUTH_SIGN_IN_REDIRECT_TO,
+      supabaseAuthTokenName: process.env.NUXT_ENV_SUPABASE_AUTH_TOKEN_NAME,
+    }
+  },
+```
+
+### Composables
+We will need two global composables to manage our user profile and auth state. Add the following to `/composables/states.js`
+```js
+// global state for the current authorized user
+let currentUser = null
+export const useCurrentUser = () => useState( 'useCurrentUser', () => currentUser )
+
+// global state for the current authorized user's profile
+let currentUserProfile = null
+export const useCurrentUserProfile = () => useState( 'useCurrentUserProfile', () => currentUserProfile )
+```
+
+### Middleware auth.js file
+Create a file called `auth.js` in your `/middleware` folder and add the following
+```js
+import {
+    useCurrentUser,
+    useCurrentUserProfile
+} from '~/composables/states'
+
+export default defineNuxtRouteMiddleware(async (to, from) => {
+    const currentUser = useCurrentUser()
+    const currentUserProfile = useCurrentUserProfile()
+    const config = useRuntimeConfig()
+    const client = useSupabaseClient()
+    const user = await client.auth.getSession()
+
+    // function that gets a user profile
+    const getProfile = async () => {
+        const {
+            data,
+            error
+        } = await client
+            .from('profiles')
+            .select('*')
+            .eq('id', currentUser.value.id)
+            .single()
+        if (error) {
+            console.error(error)
+        } else if (data) {
+            currentUserProfile.value = data
+        }
+    }
+
+    // check local storage for the auth token
+    if (process.client) {
+        const supabaseAuthToken = JSON.parse(
+            localStorage.getItem(config.supabaseAuthTokenName)
+        )
+        if (supabaseAuthToken) {
+            currentUser.value = supabaseAuthToken.user
+        }
+
+        // check supabase session for logged in user
+        if (user?.data?.session?.user) {
+            currentUser.value = user?.data?.session?.user
+        }
+
+        // if the user is not authorized, redirect them to the login page
+        // if they are, get their profile data
+        if (!currentUser.value) {
+            return navigateTo('/')
+        } else if (!currentUserProfile.value) {
+            getProfile()
+        }
+    }
+})
+```
+
+### Login page auth code
+Add the following to your login page
+```js
+//auth
+const config = useRuntimeConfig()
+const currentUser = useCurrentUser()
+const client = useSupabaseClient()
+const user = await client.auth.getSession()
+definePageMeta({
+  layout: 'blank',
+})
+
+// check local storage for the auth token
+if (process.client) {
+  const supabaseAuthToken = JSON.parse(
+    localStorage.getItem(config.supabaseAuthTokenName)
+  )
+  if (supabaseAuthToken) {
+    currentUser.value = supabaseAuthToken.user
+  }
+
+  // check supabase session for logged in user
+  if (user?.data?.session?.user) {
+    currentUser.value = user?.data?.session?.user
+  }
+
+  // redirect to dashboard if the user is logged in
+  if (currentUser.value) {
+    await navigateTo('/dashboard')
+  }
+
+  // sometimes the supabase token doesn't get detected right away when magic links are used
+  // i don't think we should have to do this, but here we are
+  setTimeout(async () => {
+    // check if the user is logged in
+    if (user?.data?.session?.user) {
+      currentUser.value = user?.data?.session?.user
+    }
+    // redirect to dashboard if the user is logged in
+    if (currentUser.value) {
+      //console.log('currentUser setTimeout found', currentUser.value)
+      await navigateTo('/dashboard')
+    }
+  }, 1000)
+}
+
+//END auth
+```
+
+### logout middleware
+```js
+import { useCurrentUser, useCurrentUserProfile } from '~/composables/states'
+
+export default defineNuxtRouteMiddleware(async (to, from) => {
+    const currentUser = useCurrentUser()
+    const client = useSupabaseClient()
+
+    // sign out from supabase
+    const { error } = await client.auth.signOut()
+    if (error) {
+        console.log('error')
+    }
+
+    // set the currentUser composable to null
+    currentUser.value = null
+
+    // set the currentUserProfile composable to null
+    const currentUserProfile = useCurrentUserProfile()
+    currentUserProfile.value = null
+
+    // clear localStorage
+    localStorage.clear()
+})
+```
+
+
+### logout page
+```js
+<template>
+  <div class="text-center">
+    <p class="mb-2">
+      You have been logged out.
+      <a href="/nuxt">Click here to return to the login page.</a>
+    </p>
+  </div>
+</template>
+
+<script setup>
+import { useCurrentUser, useCurrentUserProfile } from '~/composables/states'
+
+definePageMeta({
+  layout: 'blank',
+  middleware: 'logout',
+})
+</script>
+
+```

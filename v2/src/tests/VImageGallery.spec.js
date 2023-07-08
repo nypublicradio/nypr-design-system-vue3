@@ -35,7 +35,7 @@ describe('VImageGallery', () => {
         }
     })
 
-    test('props render', async () => {
+    test('props render', () => {
         createComponent({
             props: {
                 count,

@@ -207,6 +207,7 @@ if (profile.value?.email) {
 }
 // push phone numbers into new updatedSocialArr if it exist
 if (profile.value?.phone_numbers) {
+  //# skipcq JS-0042
   profile.value?.phone_numbers.map((phone) => {
     updatedSocialArr.value.push({
       profileUrl: String(phone.phone_number),
@@ -218,7 +219,7 @@ if (profile.value?.phone_numbers) {
 const profileLink = ref(
   props.sponsored ? profile.value?.link : profile.value?.url
 )
-
+// extracts the name from the url
 const accountNameFromUrl = (url) => {
   return url
     ?.split('/')
@@ -240,13 +241,13 @@ const getImageSrc = computed(() => {
 })
 
 // cssvars
-const cssImageSizePx = ref(props.imageSize + 'px')
+const cssImageSizePx = ref(`${props.imageSize}px`)
 const cssImageFlexBasis = ref(
   props.imageFlexBasis ? props.imageFlexBasis : cssImageSizePx.value
 )
 const cssImageMinWidth = ref(
   props.minWidth
-    ? props.minWidth + 'px'
+    ? `${props.minWidth}px`
     : props.imageFlexBasis
     ? 'unset'
     : cssImageSizePx.value

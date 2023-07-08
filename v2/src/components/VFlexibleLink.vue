@@ -36,16 +36,10 @@ const emit = defineEmits(['flexible-link-click'])
 
 const isExternal = computed(() => {
   const reg = /^https?:\/\/|mailto:|tel:/i
-  if (typeof props.to === 'string' && reg.test(props.to)) {
-    return true
-  }
-  return false
+  return typeof props.to === 'string' && reg.test(props.to)
 })
 const isAnchor = computed(() => {
-  if (props.to.charAt(0) === '#') {
-    return true
-  }
-  return false
+  return props.to.charAt(0) === '#'
 })
 </script>
 
@@ -88,9 +82,6 @@ const isAnchor = computed(() => {
   </nuxt-link>
 </template>
 <style lang="scss" scoped>
-.flexible-link {
-  width: fit-content;
-}
 .flexible-link:not(.raw):not(.null) {
   color: var(--link-button-color);
   transition: all var(--transition-duration);

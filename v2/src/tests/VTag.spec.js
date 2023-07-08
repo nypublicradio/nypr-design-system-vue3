@@ -33,7 +33,7 @@ describe('VTag', () => {
     }
   })
 
-  test('text prop works: null', async () => {
+  test('text prop works: null', () => {
     createComponent({
       props: {
         name,

@@ -32,26 +32,18 @@
 </template>
 
 <script>
-import AppIntro from './AppIntro'
-import AppTopBar from './AppTopbar'
 import AppEditor from './AppEditor'
 import AppFooter from './AppFooter'
+import AppIntro from './AppIntro'
+import AppTopBar from './AppTopbar'
 
 export default {
   components: {
-    AppTopBar: AppTopBar,
     AppEditor: AppEditor,
     AppFooter: AppFooter,
     AppIntro: AppIntro,
+    AppTopBar: AppTopBar,
   },
-  data() {
-    return {
-      sidebarActive: false,
-      theme: null,
-      initialized: false,
-    }
-  },
-  themeStyle: null,
   computed: {
     containerClass() {
       return [
@@ -66,16 +58,20 @@ export default {
       return process.env.VUE_APP_EDITOR === 'code'
     },
   },
+  data() {
+    return {
+      sidebarActive: false,
+      theme: null,
+      initialized: false,
+    }
+  },
   methods: {
-    onThemeSelect(theme) {
-      this.theme = theme
-    },
     onCompile(value) {
       if (!this.initialized) {
         this.initialized = true
       }
 
-      var styleElement = document.createElement('style')
+      const styleElement = document.createElement('style')
       styleElement.type = 'text/css'
       document.getElementsByTagName('head')[0].appendChild(styleElement)
 
@@ -86,17 +82,21 @@ export default {
       this.themeStyle = styleElement
       this.themeStyle.appendChild(document.createTextNode(value))
     },
-    onRestart() {
-      this.theme = null
-      this.initialized = false
+    onMaskClick() {
+      this.sidebarActive = false
     },
     onMenuButtonClick() {
       this.sidebarActive = true
     },
-    onMaskClick() {
-      this.sidebarActive = false
+    onRestart() {
+      this.theme = null
+      this.initialized = false
+    },
+    onThemeSelect(theme) {
+      this.theme = theme
     },
   },
+  themeStyle: null,
 }
 </script>
 

@@ -3,9 +3,13 @@ const envTheme = process.env.VITE_VUE_APP_THEME
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
 export default {
   modules: [
-    '@nuxt/image'
+    '@nuxt/image', '@nuxtjs/supabase'
   ],
-
+  supabase: {
+    url: process.env.NUXT_ENV_SUPABASE_URL,
+    key: process.env.NUXT_ENV_SUPABASE_KEY,
+    redirect: true,
+  },
   image: {
     dir: 'assets-shared/images',
     wagtail: {
@@ -24,7 +28,7 @@ export default {
           modifiers: {
             format: 'jpg',
             width: 50,
-            
+
             height: 50
           }
         }
@@ -50,7 +54,7 @@ export default {
     },
   },
 
-  //components: true,
+  components: true,
   // components: [
   //   { path: '~/src/components/', extensions: ['vue'] }
   // ],
@@ -69,7 +73,12 @@ export default {
 
   runtimeConfig: {
     public: {
-      IMAGE_BASE_URL: process.env['IMAGE_BASE_URL'] || 'https://cms.prod.nypr.digital/images/',
+      IMAGE_BASE_URL: process.env['IMAGE_BASE_URL'] ?? 'https://cms.prod.nypr.digital/images/',
+      environment: process.env.environment ?? 'demo',
+      supabaseUrl: process.env.NUXT_ENV_SUPABASE_URL,
+      supabaseKey: process.env.NUXT_ENV_SUPABASE_KEY,
+      supabaseAuthSignInRedirectTo: process.env.NUXT_ENV_SUPABASE_AUTH_SIGN_IN_REDIRECT_TO,
+      supabaseAuthTokenName: process.env.NUXT_ENV_SUPABASE_AUTH_TOKEN_NAME,
     }
   },
 

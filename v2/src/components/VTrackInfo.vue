@@ -25,6 +25,18 @@ const props = defineProps({
     default: 0,
     type: Number,
   },
+  hideDescriptionOnMobile: {
+    default: false,
+    type: Boolean,
+  },
+  hideImageOnMobile: {
+    default: false,
+    type: Boolean,
+  },
+  hideTimeOnMobile: {
+    default: false,
+    type: Boolean,
+  },
   image: {
     default: null,
     type: String,
@@ -36,6 +48,18 @@ const props = defineProps({
   station: {
     default: null,
     type: String,
+  },
+  timelineBottom: {
+    default: false,
+    type: Boolean,
+  },
+  timelineInteractive: {
+    default: true,
+    type: Boolean,
+  },
+  timelineTop: {
+    default: false,
+    type: Boolean,
   },
   title: {
     default: null,
@@ -62,7 +86,7 @@ const percentBuffered = computed(() => {
 const percentComplete = computed(() => {
   return (props.currentSeconds / props.durationSeconds) * 100
 })
-
+// converts time to desired format
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
   return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
@@ -71,7 +95,11 @@ const convertTime = (val) => {
 
 <template>
   <div class="track-info">
-    <div v-if="image" class="track-info-image">
+    <div
+      v-if="image"
+      class="track-info-image"
+      :class="[{ hideImageOnMobile: props.hideImageOnMobile }]"
+    >
       <VFlexibleLink
         class="track-info-image-link"
         :to="titleLink ? titleLink : null"
@@ -90,7 +118,16 @@ const convertTime = (val) => {
         />
       </VFlexibleLink>
     </div>
-    <div class="track-info-details">
+    <div
+      class="track-info-details"
+      :class="[
+        {
+          timelineTop: props.timelineTop,
+          timelineBottom: props.timelineBottom,
+          timelineInteractive: props.timelineInteractive,
+        },
+      ]"
+    >
       <div class="overflow-hidden">
         <div v-if="livestream" class="track-info-livestream">
           <div class="track-info-livestream-indicator">
@@ -110,7 +147,11 @@ const convertTime = (val) => {
             </VFlexibleLink>
           </div>
         </div>
-        <div v-if="description" class="track-info-description">
+        <div
+          v-if="description"
+          class="track-info-description"
+          :class="[{ hideDescriptionOnMobile: props.hideDescriptionOnMobile }]"
+        >
           <VFlexibleLink
             class="track-info-description-link"
             :to="descriptionLink || null"
@@ -131,7 +172,11 @@ const convertTime = (val) => {
           @scrub-timeline-end="emit('scrub-timeline-end', $event)"
           @timeline-click="emit('timeline-click', $event)"
         />
-        <div v-if="durationSeconds" class="track-info-time footer">
+        <div
+          v-if="durationSeconds"
+          class="track-info-time footer"
+          :class="[{ hideTimeOnMobile: props.hideTimeOnMobile }]"
+        >
           <span class="track-info-time-current">
             {{ convertTime(currentSeconds) }}
           </span>
@@ -159,8 +204,10 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   .track-info-image {
     display: block;
     // prettier-ignore
-    @container (max-width: #{$container-breakpoint-md}) {
-      display: none;
+    &.hideImageOnMobile {      
+      @container (max-width: #{$container-breakpoint-md}) {
+        display: none;
+      }
     }
     width: $track-info-image-size;
     max-width: $track-info-image-size;
@@ -219,7 +266,8 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       text-overflow: ellipsis;
       overflow: hidden;
       white-space: nowrap;
-      .title {
+      .title,
+      .title div {
         font-weight: var(--persistent-player-title-weight);
         font-size: var(--font-size-9);
         color: var(--persistent-player-title-color);
@@ -235,8 +283,10 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
-      @container (max-width: #{$container-breakpoint-md}) {
-        display: none;
+      &.hideDescriptionOnMobile {
+        @container (max-width: #{$container-breakpoint-md}) {
+          display: none;
+        }
       }
       .track-info-description-link {
         display: block;
@@ -253,15 +303,58 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       display: flex;
       gap: spacing(1);
       justify-content: flex-end;
+
       @container (max-width: #{$container-breakpoint-md}) {
         justify-content: flex-start;
       }
+
+      &.hideTimeOnMobile {
+        @container (max-width: #{$container-breakpoint-md}) {
+          display: none;
+        }
+      }
+
       .player-track-time-current {
         margin-right: spacing(1);
       }
       .player-track-time-total {
         margin-left: spacing(1);
       }
+    }
+    &.timelineBottom .progress-control {
+      //display: none;
+
+      @container (max-width: #{$container-breakpoint-md}) {
+        position: absolute;
+        cursor: pointer;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+      }
+    }
+    &.timelineTop .progress-control {
+      //display: none;
+
+      @container (max-width: #{$container-breakpoint-md}) {
+        position: absolute;
+        cursor: pointer;
+        top: -5px;
+        left: 0;
+        right: 0;
+        height: 5px;
+      }
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+.track-info-details {
+  &:not(.timelineInteractive) .progress-control {
+    pointer-events: none;
+    .p-slider-handle {
+      display: none !important;
     }
   }
 }

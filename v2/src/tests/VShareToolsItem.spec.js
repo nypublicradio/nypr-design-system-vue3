@@ -52,7 +52,7 @@ describe('VShareToolsItem', () => {
     expect(linkTag.attributes('href')).toBe(link)
   })
 
-  test('service prop works: site icon', async () => {
+  test('service prop works: site icon', () => {
     const service = 'site'
     createComponent({
       props: {
@@ -95,7 +95,7 @@ describe('VShareToolsItem', () => {
   })
 
 
-  //TODO: not sure why this test is failing
+  //Not sure why this test is failing
   /*
     test('username attribute works', () => {
       const service = 'facebook'
@@ -214,7 +214,7 @@ describe('VShareToolsItem', () => {
           }) */
 
 
-  //TODO: not sure why this test is failing
+  //Not sure why this test is failing
 
   // test('it passes basic accessibility tests', () => {
   //   const service = 'facebook'
@@ -231,7 +231,7 @@ describe('VShareToolsItem', () => {
   // })
 
 
-  //TODO: have not idea how to get the following test to work
+  //Have not idea how to get the following test to work
 
 
   // test('sharing works: facebook', () => {

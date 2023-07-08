@@ -246,7 +246,7 @@ describe('VCard', () => {
       }
     })
     const _flexibleLink = wrapper.findAll('.flexible-link')
-    for (var i = 0; i < _flexibleLink.length; i++) {
+    for (let i = 0; i < _flexibleLink.length; i++) {
       expect(_flexibleLink[i].classes()).toContain('null')
     }
   })
@@ -306,7 +306,7 @@ describe('VCard', () => {
     expect(results).toHaveNoViolations()
   })
 
-  test('title click fires emit', async () => {
+  test('title click fires emit', () => {
     createComponent({
       props: {
         alt,
@@ -326,7 +326,7 @@ describe('VCard', () => {
     expect(wrapper.emitted()['title-click']).toEqual([[link]])
   })
 
-  test('image click fires emit', async () => {
+  test('image click fires emit', () => {
     createComponent({
       props: {
         alt,
