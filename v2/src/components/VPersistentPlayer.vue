@@ -420,9 +420,9 @@ const scrollToggle = (e) => {
     window.onscroll = function () {}
   } */
   if (e) {
-    document.body.classList.add('stop-scrolling')
+    document.body.classList.add('v-persistent-player-stop-window-scrolling')
   } else {
-    document.body.classList.remove('stop-scrolling')
+    document.body.classList.remove('v-persistent-player-stop-window-scrolling')
   }
 }
 // exposed method to handle the expanding toggle
@@ -857,5 +857,11 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       }
     }
   }
+}
+</style>
+<style lang="scss">
+.v-persistent-player-stop-window-scrolling {
+  height: 100%;
+  overflow: hidden;
 }
 </style>

@@ -172,9 +172,3 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
   }
 }
 </style>
-<style lang="scss">
-.stop-scrolling {
-  height: 100%;
-  overflow: hidden;
-}
-</style>
