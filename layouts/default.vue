@@ -76,7 +76,79 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
         <i class="pi pi-twitter"></i>
       </template> -->
       <template #expanded-content>
-        this is wherewe would oput anything in the expanded view
+        <div class="p-3">
+          this is wherewe would oput anything in the expanded view
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          this is wherewe would oput anything in the expanded view
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+          <br />
+        </div>
+        <div class="expandedFooter">This is fixed to the bottom</div>
       </template>
     </VPersistentPlayer>
   </div>
@@ -87,5 +159,22 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
   main {
     padding-top: v-bind(cssHeaderHeight);
   }
+
+  .expandedFooter {
+    background-color: red;
+
+    display: block;
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+  }
+}
+</style>
+<style lang="scss">
+.stop-scrolling {
+  height: 100%;
+  overflow: hidden;
 }
 </style>

@@ -405,8 +405,29 @@ const toggleMinimize = (e) => {
   emit('is-minimized', e)
   isMinimized.value = e
 }
+
+// handle scroll blocking with js when player is expanded
+const scrollToggle = (e) => {
+  /*   if (e) {
+    // Get the current page scroll position
+    const scrollTop = window.pageYOffset ?? document.documentElement.scrollTop
+    const scrollLeft = window.pageXOffset ?? document.documentElement.scrollLeft
+    // if any scroll is attempted, set this to the previous value
+    window.onscroll = function () {
+      window.scrollTo(scrollLeft, scrollTop)
+    }
+  } else {
+    window.onscroll = function () {}
+  } */
+  if (e) {
+    document.body.classList.add('stop-scrolling')
+  } else {
+    document.body.classList.remove('stop-scrolling')
+  }
+}
 // exposed method to handle the expanding toggle
 const toggleExpanded = (e) => {
+  scrollToggle(e)
   emit('is-expanded', e)
   isExpanded.value = e
 }
@@ -663,7 +684,6 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   position: fixed;
   z-index: var(--persistent-player-z-index);
   width: 100%;
-  padding: var(--persistent-player-padding);
   color: var(--text-color);
   background-color: var(--persistent-player-bg);
   transition: bottom 0.25s, height calc(var(--transition-duration) * 2);
@@ -732,6 +752,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
     display: flex;
     align-items: center;
     gap: 16px;
+    padding: var(--persistent-player-padding);
 
     .play-button {
       min-width: var(--persistent-player-play-button-width);
