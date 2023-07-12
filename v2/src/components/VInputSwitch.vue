@@ -12,7 +12,7 @@ const props = defineProps({
     type: String,
   },
   width: {
-    default: '60px',
+    default: '50px',
     type: String,
   },
   yes: {
@@ -38,6 +38,7 @@ const pseudoElementContentNo = computed(() => {
       :data-content-yes="pseudoElementContentYes"
       :data-content-no="pseudoElementContentNo"
     ></InputSwitch>
+    <InputSwitch v-model="checked"></InputSwitch>
   </div>
 </template>
 
@@ -47,22 +48,28 @@ $paddingBuffer: 5px;
 $fontSize: v-bind(fontSize);
 $theYes: v-bind(yes);
 $theNo: v-bind(no);
+$sliderSize: var(--slider-size);
+$height: calc($sliderSize + ($paddingBuffer * 1.25));
 .p-inputswitch {
   width: $theWidth;
-  &:after {
+  height: $height;
+  width: $theWidth;
+  &:not(.p-inputswitch-checked):after {
     content: attr(data-content-no);
     right: $paddingBuffer;
   }
   &.p-inputswitch-checked:before {
     content: attr(data-content-yes);
-    left: unset;
-    right: 20px;
+    left: $paddingBuffer;
+  }
+  &.p-inputswitch-checked .p-inputswitch-slider:before {
+    left: calc($theWidth - ($sliderSize * 2) - $paddingBuffer);
   }
   &:after,
   &:before {
     color: white;
     font-weight: bold;
-    line-height: 18.48px;
+    line-height: $height;
     position: absolute;
     display: block;
     font-family: sans-serif;
@@ -70,6 +77,10 @@ $theNo: v-bind(no);
   }
   .p-inputswitch-slider {
     z-index: -1;
+    &:before {
+      width: $sliderSize;
+      height: $sliderSize;
+    }
   }
 }
 </style>
