@@ -1,4 +1,6 @@
 <script setup>
+import VInputSwitch from '../v2/src/components/VInputSwitch.vue'
+import VInputSwitchTest from '../v2/src/components/VInputSwitchTest.vue'
 // auth
 import { useCurrentUser } from '~/composables/states'
 import Home from '~/src/components/Home.vue'
@@ -76,8 +78,10 @@ const emitClick = (type, event) => {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
+      <VInputSwitchTest />
+      <VInputSwitch />
       <VSignupWithEmail />
-      <br />
+      <!-- <br />
       <br />
       <VLoginWithMagicLink />
       <br />
@@ -102,7 +106,7 @@ const emitClick = (type, event) => {
       </p>
       <p class="mb-2 text-center">
         <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
-      </p>
+      </p> -->
       <!-- 
       <Divider class="my-4" align="center">
         <b>Or</b>
