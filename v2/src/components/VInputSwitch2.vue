@@ -38,17 +38,20 @@ onMounted(() => {
 </template>
 
 <style lang="scss">
-$noWidth: v-bind(noWidth);
-$yesWidth: v-bind(yesWidth);
 $paddingBuffer: 5px;
 $fontSize: v-bind(fontSize);
 $sliderSize: var(--slider-size);
 $height: calc($sliderSize + ($paddingBuffer * 1.25));
+$noWidth: v-bind(noWidth);
+$yesWidth: v-bind(yesWidth);
+$noWidthSwitch: calc($noWidth + $sliderSize + ($paddingBuffer * 3));
+$yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3));
+
 .v-input-switch2 {
   position: relative;
   .option {
+    z-index: 999;
     pointer-events: none;
-    z-index: 1;
     position: absolute;
     top: 0;
     color: red;
@@ -59,7 +62,7 @@ $height: calc($sliderSize + ($paddingBuffer * 1.25));
     font-family: sans-serif;
     font-size: $fontSize;
     &.no {
-      left: calc($yesWidth - ($sliderSize * 2) - $paddingBuffer);
+      left: calc($noWidth + $paddingBuffer);
     }
     &.yes {
       left: $paddingBuffer;
@@ -68,10 +71,10 @@ $height: calc($sliderSize + ($paddingBuffer * 1.25));
   .p-inputswitch {
     transition: width 0.2s;
     -webkit-transition: width 0.2s;
-    width: $noWidth;
+    width: $noWidthSwitch;
     height: $height;
     &.p-inputswitch-checked {
-      width: $yesWidth;
+      width: $yesWidthSwitch;
     }
     // &:after,
     // &:before {
