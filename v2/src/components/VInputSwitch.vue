@@ -76,6 +76,9 @@ $noWidthOrig: v-bind(noWidthOrig);
 $yesWidthOrig: v-bind(yesWidthOrig);
 $noWidth: v-bind(noWidth);
 $yesWidth: v-bind(yesWidth);
+$negativeYesWidth: #{calc(
+    ($yesWidthOrig + $sliderSize + (($paddingBuffer * 2))) * -1
+  )};
 $noWidthSwitch: calc($noWidth + $sliderSize + ($paddingBuffer * 3.5));
 $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
 
@@ -101,7 +104,7 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
       left: calc($sliderSize + ($paddingBuffer * 2));
     }
     &.yes {
-      left: calc(-1 * $yesWidth);
+      left: $negativeYesWidth;
     }
   }
   .p-inputswitch {
