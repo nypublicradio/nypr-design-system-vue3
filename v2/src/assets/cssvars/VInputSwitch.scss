@@ -2,6 +2,8 @@
 [data-style-mode='light'],
 .style-mode-light {
     --slider-size: 0.825rem;
+    --padding-buffer: 5px;
+    --v-input-switch-transition-duration: var(--transition-duration);
 }
 [data-style-mode='dark'],
 .style-mode-dark {

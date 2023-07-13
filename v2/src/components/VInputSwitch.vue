@@ -11,93 +11,120 @@ const props = defineProps({
     default: 'NO',
     type: String,
   },
-  noWidth: {
-    default: null,
-    type: String,
-  },
-  width: {
-    default: '50px',
-    type: String,
+  static: {
+    default: false,
+    type: Boolean,
   },
   yes: {
     default: 'YES',
     type: String,
   },
-  yesWidth: {
-    default: null,
-    type: String,
-  },
 })
 
 const checked = ref(false)
+const noRef = ref(null)
+const yesRef = ref(null)
 
-const noWidth = ref(props.noWidth ?? props.width)
-const yesWidth = ref(props.yesWidth ?? props.width)
+const noWidthOrig = ref(null)
+const yesWidthOrig = ref(null)
+const noWidth = ref(null)
+const yesWidth = ref(null)
 
-const pseudoElementContentYes = computed(() => {
-  return props.yes
-})
-const pseudoElementContentNo = computed(() => {
-  return props.no
+function findLargestNumber(a, b) {
+  return Math.max(a, b)
+}
+
+onMounted(() => {
+  const noW = noRef.value.offsetWidth
+  const yesW = yesRef.value.offsetWidth
+  noWidthOrig.value = `${noW}px`
+  yesWidthOrig.value = `${yesW}px`
+  if (props.static) {
+    const largest = findLargestNumber(noW, yesW)
+    noWidth.value = `${largest}px`
+    yesWidth.value = `${largest}px`
+  } else {
+    noWidth.value = `${noW}px`
+    yesWidth.value = `${yesW}px`
+  }
 })
 </script>
 
 <template>
-  <div class="v-input-switch">
-    <InputSwitch
-      v-model="checked"
-      :data-content-yes="pseudoElementContentYes"
-      :data-content-no="pseudoElementContentNo"
-    ></InputSwitch>
+  <div
+    class="v-input-switch"
+    :class="[{ 'static-size': props.static }]"
+    :style="`opacity:${noWidth ? 1 : 0};`"
+  >
+    <InputSwitch v-model="checked" />
+    <div ref="noRef" :style="`opacity:${!checked ? 1 : 0};`" class="option no">
+      {{ props.no }}
+    </div>
+    <div ref="yesRef" :style="`opacity:${checked ? 1 : 0};`" class="option yes">
+      {{ props.yes }}
+    </div>
   </div>
 </template>
 
 <style lang="scss">
-$noWidth: v-bind(noWidth);
-$yesWidth: v-bind(yesWidth);
-$paddingBuffer: 5px;
+$paddingBuffer: var(--padding-buffer);
 $fontSize: v-bind(fontSize);
-$theYes: v-bind(yes);
-$theNo: v-bind(no);
 $sliderSize: var(--slider-size);
 $height: calc($sliderSize + ($paddingBuffer * 1.25));
+$noWidthOrig: v-bind(noWidthOrig);
+$yesWidthOrig: v-bind(yesWidthOrig);
+$noWidth: v-bind(noWidth);
+$yesWidth: v-bind(yesWidth);
+$noWidthSwitch: calc($noWidth + $sliderSize + ($paddingBuffer * 3.5));
+$yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
+
 .v-input-switch {
-  .p-inputswitch {
-    transition: width 0.2s;
-    -webkit-transition: width 0.2s;
-    width: $noWidth;
-    height: $height;
-    &:not(.p-inputswitch-checked):after {
-      content: attr(data-content-no);
-      right: $paddingBuffer;
+  transition: opacity var(--v-input-switch-transition-duration);
+  -webkit-transition: opacity var(--v-input-switch-transition-duration);
+  position: relative;
+  .option {
+    z-index: 999;
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    color: white;
+    font-weight: bold;
+    line-height: $height;
+    position: absolute;
+    display: block;
+    font-family: sans-serif;
+    font-size: $fontSize;
+    transition: opacity var(--v-input-switch-transition-duration);
+    -webkit-transition: opacity var(--v-input-switch-transition-duration);
+    &.no {
+      left: calc($sliderSize + ($paddingBuffer * 2));
     }
-    &.p-inputswitch-checked:before {
-      content: attr(data-content-yes);
+    &.yes {
       left: $paddingBuffer;
     }
-    &.p-inputswitch-checked .p-inputswitch-slider:before {
-      left: calc($yesWidth - ($sliderSize * 2) - $paddingBuffer);
-    }
+  }
+  .p-inputswitch {
+    transition: width var(--v-input-switch-transition-duration);
+    -webkit-transition: width var(--v-input-switch-transition-duration);
+    width: $noWidthSwitch;
+    height: $height;
     &.p-inputswitch-checked {
-      width: $yesWidth;
-    }
-    &:after,
-    &:before {
-      color: white;
-      font-weight: bold;
-      line-height: $height;
-      position: absolute;
-      display: block;
-      font-family: sans-serif;
-      font-size: $fontSize;
+      width: $yesWidthSwitch;
     }
     .p-inputswitch-slider {
-      z-index: -1;
       &:before {
         width: $sliderSize;
         height: $sliderSize;
+        transition-duration: var(--v-input-switch-transition-duration);
       }
     }
+
+    &.p-inputswitch-checked .p-inputswitch-slider:before {
+      left: calc($yesWidth);
+    }
+  }
+  &.static-size .option.no {
+    left: calc($yesWidthSwitch - $noWidthOrig - $paddingBuffer);
   }
 }
 </style>
