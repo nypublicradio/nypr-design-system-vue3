@@ -88,8 +88,8 @@ const emitClick = (type, event) => {
       <br />
       <br />
       <VInputSwitch2 />
-      <VInputSwitch2 yes="AMAZING" no="NOPE" no-width="60px" yes-width="84px" />
-      <VInputSwitch2 yes="AMAZING" no="NOPE" width="84px" />
+      <VInputSwitch2 yes="AMAZINGGGGGGGG" no="NOPERS" />
+      <VInputSwitch2 yes="AMAZINGGGGGGGG" no="STATIC" static />
       <VSignupWithEmail />
       <!-- <br />
       <br />
