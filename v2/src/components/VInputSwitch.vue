@@ -69,7 +69,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 $paddingBuffer: var(--padding-buffer);
 $fontSize: v-bind(fontSize);
 $sliderSize: var(--slider-size);
@@ -87,9 +87,8 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
   transition: opacity var(--v-input-switch-transition-duration);
   -webkit-transition: opacity var(--v-input-switch-transition-duration);
   position: relative;
+  line-height: 0;
   .options {
-    transition: left var(--v-input-switch-transition-duration);
-    -webkit-transition: left var(--v-input-switch-transition-duration);
     position: absolute;
     left: 0;
     top: 0;
@@ -97,7 +96,6 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
     border-radius: 40px;
     height: 100%;
     width: 100%;
-    z-index: 999;
     pointer-events: none;
     .option {
       position: absolute;
@@ -148,6 +146,17 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
     }
     .option.yes {
       left: $paddingBuffer;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+$yesWidth: v-bind(yesWidth);
+.v-input-switch {
+  .p-inputswitch {
+    &.p-inputswitch-checked .p-inputswitch-slider:before {
+      left: $yesWidth;
     }
   }
 }

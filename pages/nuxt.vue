@@ -78,9 +78,9 @@ const emitClick = (type, event) => {
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
       <div class="flex justify-content-center">
-        <!-- <VInputSwitch /> -->
+        <VInputSwitch />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
-        <!-- <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static /> -->
+        <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static />
       </div>
       <VSignupWithEmail />
       <!-- <br />
