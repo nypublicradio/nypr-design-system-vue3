@@ -32,8 +32,23 @@ onMounted(() => {
 <template>
   <div class="v-input-switch2">
     <InputSwitch v-model="checked" />
-    <div ref="noRef" class="option no">{{ props.no }}</div>
-    <div ref="yesRef" class="option yes">{{ props.yes }}</div>
+
+    <div
+      ref="noRef"
+      :style="`opacity:${!checked ? '1' : '0'};`"
+      class="option no"
+    >
+      {{ props.no }}
+    </div>
+
+    <div
+      v-show="checked"
+      ref="yesRef"
+      :style="`opacity:${checked ? '1' : '0'};`"
+      class="option yes"
+    >
+      {{ props.yes }}
+    </div>
   </div>
 </template>
 
@@ -44,8 +59,8 @@ $sliderSize: var(--slider-size);
 $height: calc($sliderSize + ($paddingBuffer * 1.25));
 $noWidth: v-bind(noWidth);
 $yesWidth: v-bind(yesWidth);
-$noWidthSwitch: calc($noWidth + $sliderSize + ($paddingBuffer * 3));
-$yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3));
+$noWidthSwitch: calc($noWidth + $sliderSize + ($paddingBuffer * 4));
+$yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 4));
 
 .v-input-switch2 {
   position: relative;
@@ -62,7 +77,7 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3));
     font-family: sans-serif;
     font-size: $fontSize;
     &.no {
-      left: calc($noWidth + $paddingBuffer);
+      left: calc($sliderSize + ($paddingBuffer * 2));
     }
     &.yes {
       left: $paddingBuffer;
@@ -76,18 +91,7 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3));
     &.p-inputswitch-checked {
       width: $yesWidthSwitch;
     }
-    // &:after,
-    // &:before {
-    //   color: white;
-    //   font-weight: bold;
-    //   line-height: $height;
-    //   position: absolute;
-    //   display: block;
-    //   font-family: sans-serif;
-    //   font-size: $fontSize;
-    // }
     .p-inputswitch-slider {
-      //z-index: -1;
       &:before {
         width: $sliderSize;
         height: $sliderSize;
