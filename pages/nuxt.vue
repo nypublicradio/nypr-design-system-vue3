@@ -1,6 +1,6 @@
 <script setup>
 import VInputSwitch from '../v2/src/components/VInputSwitch.vue'
-import VInputSwitchTest from '../v2/src/components/VInputSwitchTest.vue'
+import VInputSwitch2 from '../v2/src/components/VInputSwitch2.vue'
 // auth
 import { useCurrentUser } from '~/composables/states'
 import Home from '~/src/components/Home.vue'
@@ -78,8 +78,18 @@ const emitClick = (type, event) => {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
-      <VInputSwitchTest />
       <VInputSwitch />
+      <VInputSwitch yes="AMAZING" no="NOPE" no-width="60px" yes-width="84px" />
+      <VInputSwitch yes="AMAZING" no="NOPE" width="84px" />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <br />
+      <VInputSwitch2 />
+      <VInputSwitch2 yes="AMAZING" no="NOPE" no-width="60px" yes-width="84px" />
+      <VInputSwitch2 yes="AMAZING" no="NOPE" width="84px" />
       <VSignupWithEmail />
       <!-- <br />
       <br />
