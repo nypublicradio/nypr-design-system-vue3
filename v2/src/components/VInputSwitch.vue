@@ -57,10 +57,11 @@ onMounted(() => {
     :style="`opacity:${noWidth ? 1 : 0};`"
   >
     <InputSwitch v-model="checked" />
-    <div ref="noRef" :style="`opacity:${!checked ? 1 : 0};`" class="option no">
+
+    <div ref="noRef" class="option no">
       {{ props.no }}
     </div>
-    <div ref="yesRef" :style="`opacity:${checked ? 1 : 0};`" class="option yes">
+    <div ref="yesRef" class="option yes">
       {{ props.yes }}
     </div>
   </div>
@@ -94,13 +95,13 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
     display: block;
     font-family: sans-serif;
     font-size: $fontSize;
-    transition: opacity var(--v-input-switch-transition-duration);
-    -webkit-transition: opacity var(--v-input-switch-transition-duration);
+    transition: left var(--v-input-switch-transition-duration);
+    -webkit-transition: left var(--v-input-switch-transition-duration);
     &.no {
       left: calc($sliderSize + ($paddingBuffer * 2));
     }
     &.yes {
-      left: $paddingBuffer;
+      left: calc(-1 * $yesWidth);
     }
   }
   .p-inputswitch {
@@ -126,5 +127,16 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
   &.static-size .option.no {
     left: calc($yesWidthSwitch - $noWidthOrig - $paddingBuffer);
   }
+}
+
+.slide-left-enter-active,
+.slide-left-leave-active {
+  transition: all $transitionDuration ease-out;
+}
+
+.slide-left-enter,
+.slide-left-leave-to {
+  transform: translateX(100%);
+  transition: all $transitionDuration ease-in 0s;
 }
 </style>
