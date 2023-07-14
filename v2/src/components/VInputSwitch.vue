@@ -39,6 +39,7 @@ const yesWidthOrig = ref(null)
 const noWidth = ref(null)
 const yesWidth = ref(null)
 
+// simply returns the largest number
 function findLargestNumber(a, b) {
   return Math.max(a, b)
 }
@@ -60,11 +61,6 @@ onMounted(() => {
     }
   }, 10)
 })
-
-const emitTrigger = (e) => {
-  console.log('e =', e)
-  emit('click', e)
-}
 </script>
 
 <template>

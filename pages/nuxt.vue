@@ -70,7 +70,7 @@ definePageMeta({
 
 const emitClick = (event) => {
   //console.log('click = ', type)
-  console.log('event = ', event)
+  //console.log('event = ', event)
 }
 </script>
 
