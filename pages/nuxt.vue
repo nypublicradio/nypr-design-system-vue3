@@ -68,9 +68,9 @@ definePageMeta({
 
 //END auth
 
-const emitClick = (type, event) => {
+const emitClick = (event) => {
   //console.log('click = ', type)
-  //console.log('event = ', event)
+  console.log('event = ', event)
 }
 </script>
 
@@ -78,7 +78,7 @@ const emitClick = (type, event) => {
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
       <div class="flex justify-content-center">
-        <VInputSwitch />
+        <VInputSwitch @change="emitClick" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
       </div>

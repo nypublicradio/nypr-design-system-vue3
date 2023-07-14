@@ -60,6 +60,11 @@ onMounted(() => {
     }
   }, 10)
 })
+
+const emitTrigger = (e) => {
+  console.log('e =', e)
+  emit('click', e)
+}
 </script>
 
 <template>
@@ -70,12 +75,13 @@ onMounted(() => {
   >
     <InputSwitch
       v-model="checked"
-      @update:model-value="emit('update:model-value', e)"
-      @click="emit('click', e)"
-      @change="emit('change', e)"
-      @input="emit('input', e)"
-      @focus="emit('focus', e)"
-      @blur="emit('blur', e)"
+      :aria-label="`Toggle between ${props.yes} and ${props.no}`"
+      @update:model-value="emit('update:model-value', $event)"
+      @click="emit('click', $event)"
+      @change="emit('change', $event)"
+      @input="emit('input', $event)"
+      @focus="emit('focus', $event)"
+      @blur="emit('blur', $event)"
     />
 
     <div class="options">
