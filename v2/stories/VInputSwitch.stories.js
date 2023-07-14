@@ -38,6 +38,23 @@ const Template = (args) => ({
 })
 
 export const Default = Template.bind({})
-Default.args = {
+Default.args = {}
 
+export const CustomText = Template.bind({})
+CustomText.args = {
+    no: "NOPE",
+    yes: "AWSOME!"
 }
+
+export const StaticWidth = Template.bind({})
+StaticWidth.args = {
+    no: "STATIC!!!!!!!!!!!",
+    staticWidth: true,
+    yes: "WIDTH"
+}
+
+export const FontSize = Template.bind({})
+FontSize.args = {
+    fontSize: "1rem",
+}
+

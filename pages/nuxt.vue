@@ -80,7 +80,7 @@ const emitClick = (type, event) => {
       <div class="flex justify-content-center">
         <VInputSwitch />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
-        <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static />
+        <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
       </div>
       <div class="flex justify-content-center">
         <VInputSwitch font-size="1rem" />
@@ -88,7 +88,7 @@ const emitClick = (type, event) => {
         <VInputSwitch
           yes="AMAZINGGGGGGGG"
           no="STATIC"
-          static
+          static-width
           font-size="1rem"
         />
       </div>
@@ -98,7 +98,7 @@ const emitClick = (type, event) => {
         <VInputSwitch
           yes="AMAZINGGGGGGGG"
           no="STATIC"
-          static
+          static-width
           font-size="1.5rem"
         />
       </div>

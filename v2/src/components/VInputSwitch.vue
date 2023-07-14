@@ -1,6 +1,6 @@
 <script setup>
 import InputSwitch from 'primevue/inputswitch'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps({
   fontSize: {
@@ -11,7 +11,7 @@ const props = defineProps({
     default: 'NO',
     type: String,
   },
-  static: {
+  staticWidth: {
     default: false,
     type: Boolean,
   },
@@ -20,6 +20,15 @@ const props = defineProps({
     type: String,
   },
 })
+
+const emit = defineEmits([
+  'click',
+  'update:modelValue',
+  'change',
+  'input',
+  'focus',
+  'blur',
+])
 
 const checked = ref(false)
 const noRef = ref(null)
@@ -35,28 +44,39 @@ function findLargestNumber(a, b) {
 }
 
 onMounted(() => {
-  const noW = noRef.value.offsetWidth
-  const yesW = yesRef.value.offsetWidth
-  noWidthOrig.value = `${noW}px`
-  yesWidthOrig.value = `${yesW}px`
-  if (props.static) {
-    const largest = findLargestNumber(noW, yesW)
-    noWidth.value = `${largest}px`
-    yesWidth.value = `${largest}px`
-  } else {
-    noWidth.value = `${noW}px`
-    yesWidth.value = `${yesW}px`
-  }
+  // needed to add a slight delay for Storybook to "see" the cssvars
+  setTimeout(() => {
+    const noW = noRef.value.offsetWidth
+    const yesW = yesRef.value.offsetWidth
+    noWidthOrig.value = `${noW}px`
+    yesWidthOrig.value = `${yesW}px`
+    if (props.staticWidth) {
+      const largest = findLargestNumber(noW, yesW)
+      noWidth.value = `${largest}px`
+      yesWidth.value = `${largest}px`
+    } else {
+      noWidth.value = `${noW}px`
+      yesWidth.value = `${yesW}px`
+    }
+  }, 10)
 })
 </script>
 
 <template>
   <div
     class="v-input-switch"
-    :class="[{ 'static-size': props.static, checked: checked }]"
+    :class="[{ 'static-width': props.staticWidth, checked: checked }]"
     :style="`opacity:${noWidth ? 1 : 0};`"
   >
-    <InputSwitch v-model="checked" />
+    <InputSwitch
+      v-model="checked"
+      @update:model-value="emit('update:model-value', e)"
+      @click="emit('click', e)"
+      @change="emit('change', e)"
+      @input="emit('input', e)"
+      @focus="emit('focus', e)"
+      @blur="emit('blur', e)"
+    />
 
     <div class="options">
       <div ref="noRef" class="option no">
@@ -136,7 +156,7 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
       left: $yesWidth;
     }
   }
-  &.static-size .option.no {
+  &.static-width .option.no {
     left: calc($yesWidthSwitch - $noWidthOrig - $paddingBuffer);
   }
   &.checked {
