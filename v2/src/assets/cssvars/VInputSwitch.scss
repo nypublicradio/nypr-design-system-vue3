@@ -1,9 +1,10 @@
 :root,
 [data-style-mode='light'],
 .style-mode-light {
-    --slider-size: 0.825rem;
-    --padding-buffer: 5px;
+    --v-input-switch-slider-size: 0.825rem;
+    --v-input-switch-padding-buffer: 5px;
     --v-input-switch-transition-duration: var(--transition-duration);
+    --v-input-switch-border-radius: 30px;
 }
 [data-style-mode='dark'],
 .style-mode-dark {

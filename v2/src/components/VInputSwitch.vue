@@ -70,16 +70,15 @@ onMounted(() => {
 </template>
 
 <style lang="scss" scoped>
-$paddingBuffer: var(--padding-buffer);
+$paddingBuffer: var(--v-input-switch-padding-buffer);
 $fontSize: v-bind(fontSize);
-$sliderSize: var(--slider-size);
+$sliderSize: var(--v-input-switch-slider-size);
 $height: calc($sliderSize + ($paddingBuffer * 1.25));
 $noWidthOrig: v-bind(noWidthOrig);
 $yesWidthOrig: v-bind(yesWidthOrig);
 $noWidth: v-bind(noWidth);
 $yesWidth: v-bind(yesWidth);
 $negativeYesWidth: #{calc(($yesWidthOrig + (($paddingBuffer * 2))) * -1)};
-//$negativeYesWidth: -146px;
 $noWidthSwitch: calc($noWidth + $sliderSize + ($paddingBuffer * 3.5));
 $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
 
@@ -153,8 +152,17 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
 
 <style lang="scss">
 $yesWidth: v-bind(yesWidth);
+$sliderSize: var(--v-input-switch-slider-size);
 .v-input-switch {
   .p-inputswitch {
+    .p-inputswitch-slider {
+      border-radius: var(--v-input-switch-border-radius);
+      &:before {
+        width: $sliderSize;
+        height: $sliderSize;
+        margin-top: calc(($sliderSize / 2) * -1);
+      }
+    }
     &.p-inputswitch-checked .p-inputswitch-slider:before {
       left: $yesWidth;
     }
