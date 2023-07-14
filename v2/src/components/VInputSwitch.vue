@@ -1,6 +1,6 @@
 <script setup>
 import InputSwitch from 'primevue/inputswitch'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
 const props = defineProps({
   fontSize: {
@@ -11,7 +11,7 @@ const props = defineProps({
     default: 'NO',
     type: String,
   },
-  static: {
+  staticWidth: {
     default: false,
     type: Boolean,
   },
@@ -20,6 +20,15 @@ const props = defineProps({
     type: String,
   },
 })
+
+const emit = defineEmits([
+  'click',
+  'update:modelValue',
+  'change',
+  'input',
+  'focus',
+  'blur',
+])
 
 const checked = ref(false)
 const noRef = ref(null)
@@ -30,51 +39,68 @@ const yesWidthOrig = ref(null)
 const noWidth = ref(null)
 const yesWidth = ref(null)
 
+// simply returns the largest number
 function findLargestNumber(a, b) {
   return Math.max(a, b)
 }
 
 onMounted(() => {
-  const noW = noRef.value.offsetWidth
-  const yesW = yesRef.value.offsetWidth
-  noWidthOrig.value = `${noW}px`
-  yesWidthOrig.value = `${yesW}px`
-  if (props.static) {
-    const largest = findLargestNumber(noW, yesW)
-    noWidth.value = `${largest}px`
-    yesWidth.value = `${largest}px`
-  } else {
-    noWidth.value = `${noW}px`
-    yesWidth.value = `${yesW}px`
-  }
+  // needed to add a slight delay for Storybook to "see" the cssvars
+  setTimeout(() => {
+    const noW = noRef.value.offsetWidth
+    const yesW = yesRef.value.offsetWidth
+    noWidthOrig.value = `${noW}px`
+    yesWidthOrig.value = `${yesW}px`
+    if (props.staticWidth) {
+      const largest = findLargestNumber(noW, yesW)
+      noWidth.value = `${largest}px`
+      yesWidth.value = `${largest}px`
+    } else {
+      noWidth.value = `${noW}px`
+      yesWidth.value = `${yesW}px`
+    }
+  }, 10)
 })
 </script>
 
 <template>
   <div
     class="v-input-switch"
-    :class="[{ 'static-size': props.static }]"
+    :class="[{ 'static-width': props.staticWidth, checked: checked }]"
     :style="`opacity:${noWidth ? 1 : 0};`"
   >
-    <InputSwitch v-model="checked" />
-    <div ref="noRef" :style="`opacity:${!checked ? 1 : 0};`" class="option no">
-      {{ props.no }}
-    </div>
-    <div ref="yesRef" :style="`opacity:${checked ? 1 : 0};`" class="option yes">
-      {{ props.yes }}
+    <InputSwitch
+      v-model="checked"
+      :aria-label="`Toggle between ${props.yes} and ${props.no}`"
+      @update:model-value="emit('update:model-value', $event)"
+      @click="emit('click', $event)"
+      @change="emit('change', $event)"
+      @input="emit('input', $event)"
+      @focus="emit('focus', $event)"
+      @blur="emit('blur', $event)"
+    />
+
+    <div class="options">
+      <div ref="noRef" class="option no">
+        {{ props.no }}
+      </div>
+      <div ref="yesRef" class="option yes">
+        {{ props.yes }}
+      </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
-$paddingBuffer: var(--padding-buffer);
+<style lang="scss" scoped>
+$paddingBuffer: var(--v-input-switch-padding-buffer);
 $fontSize: v-bind(fontSize);
-$sliderSize: var(--slider-size);
+$sliderSize: var(--v-input-switch-slider-size);
 $height: calc($sliderSize + ($paddingBuffer * 1.25));
 $noWidthOrig: v-bind(noWidthOrig);
 $yesWidthOrig: v-bind(yesWidthOrig);
 $noWidth: v-bind(noWidth);
 $yesWidth: v-bind(yesWidth);
+$negativeYesWidth: #{calc(($yesWidthOrig + (($paddingBuffer * 2))) * -1)};
 $noWidthSwitch: calc($noWidth + $sliderSize + ($paddingBuffer * 3.5));
 $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
 
@@ -82,25 +108,34 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
   transition: opacity var(--v-input-switch-transition-duration);
   -webkit-transition: opacity var(--v-input-switch-transition-duration);
   position: relative;
-  .option {
-    z-index: 999;
-    pointer-events: none;
+  line-height: 0;
+  .options {
     position: absolute;
+    left: 0;
     top: 0;
-    color: white;
-    font-weight: bold;
-    line-height: $height;
-    position: absolute;
-    display: block;
-    font-family: sans-serif;
-    font-size: $fontSize;
-    transition: opacity var(--v-input-switch-transition-duration);
-    -webkit-transition: opacity var(--v-input-switch-transition-duration);
-    &.no {
-      left: calc($sliderSize + ($paddingBuffer * 2));
-    }
-    &.yes {
-      left: $paddingBuffer;
+    overflow: hidden;
+    border-radius: 40px;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    .option {
+      position: absolute;
+      top: 0;
+      color: white;
+      font-weight: bold;
+      line-height: $height;
+      position: absolute;
+      display: block;
+      font-family: sans-serif;
+      font-size: $fontSize;
+      transition: left var(--v-input-switch-transition-duration);
+      -webkit-transition: left var(--v-input-switch-transition-duration);
+      &.no {
+        left: calc($sliderSize + ($paddingBuffer * 2));
+      }
+      &.yes {
+        left: $negativeYesWidth;
+      }
     }
   }
   .p-inputswitch {
@@ -120,11 +155,39 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
     }
 
     &.p-inputswitch-checked .p-inputswitch-slider:before {
-      left: calc($yesWidth);
+      left: $yesWidth;
     }
   }
-  &.static-size .option.no {
+  &.static-width .option.no {
     left: calc($yesWidthSwitch - $noWidthOrig - $paddingBuffer);
+  }
+  &.checked {
+    .option.no {
+      left: calc($yesWidth + ($paddingBuffer * 2) + ($sliderSize * 2));
+    }
+    .option.yes {
+      left: $paddingBuffer;
+    }
+  }
+}
+</style>
+
+<style lang="scss">
+$yesWidth: v-bind(yesWidth);
+$sliderSize: var(--v-input-switch-slider-size);
+.v-input-switch {
+  .p-inputswitch {
+    .p-inputswitch-slider {
+      border-radius: var(--v-input-switch-border-radius);
+      &:before {
+        width: $sliderSize;
+        height: $sliderSize;
+        margin-top: calc(($sliderSize / 2) * -1);
+      }
+    }
+    &.p-inputswitch-checked .p-inputswitch-slider:before {
+      left: $yesWidth;
+    }
   }
 }
 </style>

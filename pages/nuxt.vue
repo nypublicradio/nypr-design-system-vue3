@@ -68,7 +68,7 @@ definePageMeta({
 
 //END auth
 
-const emitClick = (type, event) => {
+const emitClick = (event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
 }
@@ -77,10 +77,30 @@ const emitClick = (type, event) => {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
-      <div class="flex">
-        <VInputSwitch />
+      <div class="flex justify-content-center">
+        <VInputSwitch @change="emitClick" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
-        <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static />
+        <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
+      </div>
+      <div class="flex justify-content-center">
+        <VInputSwitch font-size="1rem" />
+        <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" font-size="1rem" />
+        <VInputSwitch
+          yes="AMAZINGGGGGGGG"
+          no="STATIC"
+          static-width
+          font-size="1rem"
+        />
+      </div>
+      <div class="flex justify-content-center">
+        <VInputSwitch font-size="1.5rem" />
+        <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" font-size="1.5rem" />
+        <VInputSwitch
+          yes="AMAZINGGGGGGGG"
+          no="STATIC"
+          static-width
+          font-size="1.5rem"
+        />
       </div>
       <VSignupWithEmail />
       <!-- <br />
@@ -277,6 +297,10 @@ const emitClick = (type, event) => {
 </template>
 
 <style lang="scss">
+:root {
+  //--slider-size: 1.5rem;
+  //--v-input-switch-border-radius: 5px;
+}
 @import '../src/App.scss';
 .dark-mode-section {
   padding: 3rem 0;
