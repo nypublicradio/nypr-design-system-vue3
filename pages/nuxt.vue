@@ -189,7 +189,7 @@ const emitClick = (event) => {
 
             <div class="mb-8" />
 
-            <h1 class="h1">H1 Header Text</h1>
+            <h1 class="h1">H1 Heading Text</h1>
             <h2 class="h2">H2 Header Text</h2>
             <h3 class="h3">H3 Header Text</h3>
             <h4 class="h4">H4 Header Text</h4>
@@ -301,7 +301,7 @@ const emitClick = (event) => {
 .color-box {
   width: 200px;
   height: 200px;
-  background-color: var(--primary-light-color);
+  background: $backgroundGradient1;
 }
 :root {
   //--slider-size: 1.5rem;

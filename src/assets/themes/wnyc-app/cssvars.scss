@@ -5,6 +5,7 @@
 
     --background: #{map-get($colors, 'background')};
     --background2: #{map-get($colors, 'background2')};
+    --background3: #{map-get($colors, 'background3')};
     --stroke: #{map-get($colors, 'stroke')};
     --night: #{map-get($colors, 'night')};
     --red: #{map-get($colors, 'red')};
@@ -127,6 +128,7 @@
 
     --background: #{map-get($colors-dark-mode, 'background')};
     --background2: #{map-get($colors-dark-mode, 'background2')};
+    --background3: #{map-get($colors-dark-mode, 'background3')};
     --stroke: #{map-get($colors-dark-mode, 'stroke')};
     --night: #{map-get($colors-dark-mode, 'night')};
     --red: #{map-get($colors-dark-mode, 'red')};
