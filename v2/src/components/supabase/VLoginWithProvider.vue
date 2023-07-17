@@ -53,7 +53,7 @@ const capFirstChar = (str) => {
     </template>
     <Button
       class="w-full"
-      :label="props.label || `Sign in with ${capFirstChar(props.provider)}`"
+      :label="props.label ?? `Sign in with ${capFirstChar(props.provider)}`"
       v-bind="{ ...$attrs }"
       :aria-label="`${props.provider} login button`"
       @click="login"

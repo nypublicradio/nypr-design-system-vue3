@@ -109,13 +109,14 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
   -webkit-transition: opacity var(--v-input-switch-transition-duration);
   position: relative;
   line-height: 0;
+  display: inline-block;
   .options {
     position: absolute;
     left: 0;
     top: 0;
     overflow: hidden;
     border-radius: 40px;
-    height: 100%;
+    height: $height;
     width: 100%;
     pointer-events: none;
     .option {
@@ -130,6 +131,9 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
       font-size: $fontSize;
       transition: left var(--v-input-switch-transition-duration);
       -webkit-transition: left var(--v-input-switch-transition-duration);
+      font-smooth: always;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       &.no {
         left: calc($sliderSize + ($paddingBuffer * 2));
       }

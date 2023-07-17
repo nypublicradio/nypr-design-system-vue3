@@ -77,19 +77,20 @@ const emitClick = (event) => {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
-      <div class="flex justify-content-center">
+      <!-- <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" /> -->
+      <div class="flex justify-content-center gap-3 mb-3">
         <VInputSwitch @change="emitClick" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
       </div>
-      <div class="flex justify-content-center">
-        <VInputSwitch font-size="1rem" />
-        <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" font-size="1rem" />
+      <div class="flex justify-content-center gap-3 mb-3">
+        <VInputSwitch font-size="0.95rem" />
+        <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" font-size="0.95rem" />
         <VInputSwitch
           yes="AMAZINGGGGGGGG"
           no="STATIC"
           static-width
-          font-size="1rem"
+          font-size="0.95rem"
         />
       </div>
       <div class="flex justify-content-center">
