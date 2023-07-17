@@ -16,6 +16,7 @@
     --black: #{map-get($colors, 'black')};
     --info: #{map-get($colors, 'info')};
     --secondary: #{map-get($colors, 'secondary')};
+    --link: #{map-get($colors, 'link')};
 
     --primary-color: #{map-get($colors, 'red')};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
@@ -139,9 +140,11 @@
     --black: #{map-get($colors-dark-mode, 'black')};
     --info: #{map-get($colors-dark-mode, 'info')};
     --secondary: #{map-get($colors-dark-mode, 'secondary')};
+    --link: #{map-get($colors-dark-mode, 'link')};
 
     --shade-000: var(--background);
 
     --text-color: var(--text-color-on-dark);
-    --link-button-hover-color: var(--primary-light-color);
+    --link-button-color: var(--link);
+    --link-button-hover-color: #{scale-color(map-get($colors, 'link'), $lightness: 20%)};
 }

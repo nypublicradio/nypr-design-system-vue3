@@ -3,6 +3,7 @@ import VInputSwitch from '../v2/src/components/VInputSwitch.vue'
 // auth
 import { useCurrentUser } from '~/composables/states'
 import Home from '~/src/components/Home.vue'
+import TwitterIcon from '~/v2/src/assets/icons/TwitterIcon.vue'
 import VCard from '~/v2/src/components/VCard.vue'
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
 //import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
@@ -78,6 +79,7 @@ const emitClick = (event) => {
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
       <div class="color-box"></div>
+      <TwitterIcon />
       <div class="flex justify-content-center gap-3 mb-3">
         <VInputSwitch @change="emitClick" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
@@ -281,6 +283,7 @@ const emitClick = (event) => {
               >
             </h1>
             <div data-style-mode="dark" class="dark-mode-section">
+              <TwitterIcon />
               <div class="content">
                 <v-flexible-link to="https://www.google.com"
                   >google dark</v-flexible-link
@@ -298,6 +301,9 @@ const emitClick = (event) => {
 </template>
 
 <style lang="scss">
+.o-icon path {
+  fill: var(--night);
+}
 .color-box {
   width: 200px;
   height: 200px;

@@ -18,9 +18,17 @@
     border-width: 2px;
 }
 
+.p-inputswitch .option {
+    font-weight: var(--font-weight-700);
+}
 .p-inputswitch .p-inputswitch-slider {
     background: var(--background2);
-    box-shadow: none;
+    box-shadow: none !important;
+}
+
+.p-error {
+    font-family: var(--font-family-header);
+    font-weight: var(--font-weight-500);
 }
 //wrapping in BODY adds spesificity to the selectors, so they override the default theme.
 body {

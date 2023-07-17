@@ -1,5 +1,5 @@
 html {
-    font-size: 14px;
+    font-size: 1rem;
     height: 100%;
 }
 
@@ -19,7 +19,6 @@ body {
     );
     background-color: var(--shade-000);
     color: var(--text-color);
-    font-size: 14px;
     padding: 0;
     margin: 0;
     min-height: 100%;
@@ -31,9 +30,9 @@ body {
     }
 }
 
-a {
-    text-decoration: none;
-}
+// a {
+//     text-decoration: none;
+// }
 
 h1,
 h2,
@@ -43,8 +42,6 @@ h5,
 h6 {
     margin: 1.5rem 0 1rem 0;
     font-family: inherit;
-    font-weight: 600;
-    line-height: 1.2;
     color: inherit;
 
     &:first-child {
@@ -52,135 +49,8 @@ h6 {
     }
 }
 
-h1 {
-    font-size: 2.5rem;
-}
-
-h2 {
-    font-size: 2rem;
-}
-
-h3 {
-    font-size: 1.75rem;
-}
-
-h4 {
-    font-size: 1.5rem;
-}
-
-h5 {
-    font-size: 1.25rem;
-}
-
-h6 {
-    font-size: 1rem;
-}
-
 p {
-    line-height: 1.5;
     margin: 0 0 1rem 0;
-}
-
-.p-toast.p-toast-topright {
-    z-index: 10000;
-    top: 90px;
-    right: 28px;
-}
-
-.layout-intro {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    width: 100%;
-    flex-direction: column;
-    color: rgba(255, 255, 255, 0.8);
-    z-index: 1000;
-    position: fixed;
-    left: 0;
-    top: 0;
-    background-image: linear-gradient(-225deg, #ac32e4 0%, #7918f2 48%, #4801ff 100%);
-
-    .intro-title {
-        font-weight: 300;
-        animation: fadeInDown 1s;
-
-        i {
-            font-size: 1.75rem;
-        }
-    }
-
-    .theme-options {
-        display: flex;
-        align-items: center;
-        margin: 0 auto;
-    }
-
-    .theme-option {
-        padding: 2rem;
-
-        a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            background-color: transparent;
-            box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
-                0 1px 10px 0 rgba(0, 0, 0, 0.12);
-            border: 0 none;
-            transition: transform 0.3s;
-
-            &:hover {
-                transform: scale(1.1);
-            }
-
-            img {
-                width: 50px;
-            }
-        }
-
-        &.theme-option {
-            animation: fadeInUp 1s;
-
-            &.theme-option-leave {
-                animation: fadeOut 1s forwards;
-            }
-        }
-    }
-}
-
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translate3d(0, 50%, 0);
-    }
-
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translate3d(0, -50%, 0);
-    }
-
-    to {
-        opacity: 1;
-        transform: translate3d(0, 0, 0);
-    }
-}
-
-@keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-
-    to {
-        opacity: 0;
-    }
 }
 
 .layout-wrapper {

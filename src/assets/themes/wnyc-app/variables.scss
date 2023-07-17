@@ -17,6 +17,7 @@ $colors: (
     'black': #000000,
     'info': #1b908b,
     'secondary': #999999,
+    'link': #2b6f99,
 );
 
 $colors-dark-mode: (
@@ -33,6 +34,7 @@ $colors-dark-mode: (
     'black': #ffffff,
     'info': #1b908b,
     'secondary': #999999,
+    'link': #3588bb,
 );
 
 $backgroundGradient1: linear-gradient(
@@ -111,7 +113,7 @@ $scaleLG: 1.25 !default;
 $focusOutlineColor: $primaryLightColor !default;
 $focusOutline: 0 none !default;
 $focusOutlineOffset: 0 !default;
-$focusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
+$focusShadow: 0 0 0.2rem 0.2rem $focusOutlineColor !default;
 
 //action icons
 $actionIconWidth: 1rem !default;
@@ -212,7 +214,7 @@ $secondaryButtonHoverBorderColor: scale-color($secondaryButtonBg, $lightness: -1
 $secondaryButtonActiveBg: scale-color($secondaryButtonBg, $lightness: -20%) !default;
 $secondaryButtonTextActiveColor: $secondaryButtonTextColor !default;
 $secondaryButtonActiveBorderColor: scale-color($secondaryButtonBg, $lightness: -20%) !default;
-$secondaryButtonFocusShadow: 0 0 0 0.2rem scale-color($secondaryButtonBg, $lightness: 60%) !default;
+$secondaryButtonFocusShadow: 0 0 0.2rem 0.2rem scale-color($secondaryButtonBg, $lightness: 60%) !default;
 
 $infoButtonBg: map-get($colors, 'info') !default;
 $infoButtonTextColor: #ffffff !default;
@@ -223,7 +225,7 @@ $infoButtonHoverBorderColor: scale-color($infoButtonBg, $lightness: -10%) !defau
 $infoButtonActiveBg: scale-color($infoButtonBg, $lightness: -20%) !default;
 $infoButtonTextActiveColor: $infoButtonTextColor !default;
 $infoButtonActiveBorderColor: scale-color($infoButtonBg, $lightness: -20%) !default;
-$infoButtonFocusShadow: 0 0 0 0.2rem scale-color($infoButtonBg, $lightness: 60%) !default;
+$infoButtonFocusShadow: 0 0 0.2rem 0.2rem scale-color($infoButtonBg, $lightness: 60%) !default;
 
 $successButtonBg: map-get($colors, 'success') !default;
 $successButtonTextColor: #ffffff !default;
@@ -234,7 +236,7 @@ $successButtonHoverBorderColor: scale-color($successButtonBg, $lightness: -10%) 
 $successButtonActiveBg: scale-color($successButtonBg, $lightness: -20%) !default;
 $successButtonTextActiveColor: $successButtonTextColor !default;
 $successButtonActiveBorderColor: scale-color($successButtonBg, $lightness: -20%) !default;
-$successButtonFocusShadow: 0 0 0 0.2rem scale-color($successButtonBg, $lightness: 60%) !default;
+$successButtonFocusShadow: 0 0 0.2rem 0.2rem scale-color($successButtonBg, $lightness: 60%) !default;
 
 $warningButtonBg: map-get($colors, 'yellow') !default;
 $warningButtonTextColor: #212529 !default;
@@ -245,7 +247,7 @@ $warningButtonHoverBorderColor: scale-color($warningButtonBg, $lightness: -10%) 
 $warningButtonActiveBg: scale-color($warningButtonBg, $lightness: -20%) !default;
 $warningButtonTextActiveColor: $warningButtonTextColor !default;
 $warningButtonActiveBorderColor: scale-color($warningButtonBg, $lightness: -20%) !default;
-$warningButtonFocusShadow: 0 0 0 0.2rem scale-color($warningButtonBg, $lightness: 60%) !default;
+$warningButtonFocusShadow: 0 0 0.2rem 0.2rem scale-color($warningButtonBg, $lightness: 60%) !default;
 
 $helpButtonBg: map-get($colors, 'indigo') !default;
 $helpButtonTextColor: #ffffff !default;
@@ -256,7 +258,7 @@ $helpButtonHoverBorderColor: scale-color($helpButtonBg, $lightness: -10%) !defau
 $helpButtonActiveBg: scale-color($helpButtonBg, $lightness: -20%) !default;
 $helpButtonTextActiveColor: $helpButtonTextColor !default;
 $helpButtonActiveBorderColor: scale-color($helpButtonBg, $lightness: -20%) !default;
-$helpButtonFocusShadow: 0 0 0 0.2rem scale-color($helpButtonBg, $lightness: 60%) !default;
+$helpButtonFocusShadow: 0 0 0.2rem 0.2rem scale-color($helpButtonBg, $lightness: 60%) !default;
 
 $dangerButtonBg: map-get($colors, 'error') !default;
 $dangerButtonTextColor: #ffffff !default;
@@ -267,12 +269,12 @@ $dangerButtonHoverBorderColor: scale-color($dangerButtonBg, $lightness: -10%) !d
 $dangerButtonActiveBg: scale-color($dangerButtonBg, $lightness: -20%) !default;
 $dangerButtonTextActiveColor: $dangerButtonTextColor !default;
 $dangerButtonActiveBorderColor: scale-color($dangerButtonBg, $lightness: -20%) !default;
-$dangerButtonFocusShadow: 0 0 0 0.2rem scale-color($dangerButtonBg, $lightness: 60%) !default;
+$dangerButtonFocusShadow: 0 0 0.2rem 0.2rem scale-color($dangerButtonBg, $lightness: 60%) !default;
 
-$linkButtonColor: $primaryDarkerColor !default;
-$linkButtonHoverColor: $primaryColor !default;
+$linkButtonColor: map-get($colors, 'link') !default;
+$linkButtonHoverColor: scale-color(map-get($colors, 'link'), $lightness: 20%) !default;
 $linkButtonTextHoverDecoration: underline !default;
-$linkButtonFocusShadow: 0 0 0 0.2rem $focusOutlineColor !default;
+$linkButtonFocusShadow: 0 0 0.2rem 0.2rem scale-color(map-get($colors, 'link'), $lightness: 60%) !default;
 
 //checkbox
 $checkboxWidth: 14px !default;

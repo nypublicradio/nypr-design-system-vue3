@@ -99,7 +99,7 @@ const isAnchor = computed(() => {
   &:focus {
     outline: var(--focus-outline);
     outline-offset: var(--focus-outline-offset);
-    box-shadow: var(--focus-shadow);
+    box-shadow: var(--link-button-focus-shadow);
   }
 }
 .flexible-link.null {
