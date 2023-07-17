@@ -77,7 +77,7 @@ const emitClick = (event) => {
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
-      <!-- <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" /> -->
+      <div class="color-box"></div>
       <div class="flex justify-content-center gap-3 mb-3">
         <VInputSwitch @change="emitClick" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
@@ -298,6 +298,11 @@ const emitClick = (event) => {
 </template>
 
 <style lang="scss">
+.color-box {
+  width: 200px;
+  height: 200px;
+  background-color: var(--primary-light-color);
+}
 :root {
   //--slider-size: 1.5rem;
   //--v-input-switch-border-radius: 5px;
@@ -305,7 +310,7 @@ const emitClick = (event) => {
 @import '../src/App.scss';
 .dark-mode-section {
   padding: 3rem 0;
-  background-color: #000;
+  background-color: var(--shade-000);
   .content {
     padding: 1rem 2rem;
   }

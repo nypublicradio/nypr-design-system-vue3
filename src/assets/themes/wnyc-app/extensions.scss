@@ -1,0 +1,23 @@
+/* Customizations to the designer theme should be defined here */
+.p-inputtext:enabled:focus {
+    box-shadow: none !important;
+}
+.p-inputtext::placeholder {
+    color: var(--secondary);
+}
+.p-inputtext.p-invalid.p-component {
+    border-width: 2px;
+}
+.p-inputswitch .p-inputswitch-slider {
+    background: var(--background2);
+    box-shadow: none;
+}
+//wrapping in BODY adds spesificity to the selectors, so they override the default theme.
+body {
+}
+:root,
+[data-style-mode='default'] {
+    --persistent-player-height: 100px;
+}
+[data-style-mode='dark'] {
+}

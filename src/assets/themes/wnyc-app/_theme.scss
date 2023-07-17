@@ -1,0 +1,16 @@
+@charset "UTF-8";
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:string';
+// this version of primeflex is a custom build with the xs breakpoint set to 375px
+@import '../../library/primeflex.min';
+@import '../../library/_config.imports';
+@import './variables';
+//@import './fonts/fonts.scss';
+@import '../../designer/_components';
+@import '../../../../v2/src/assets/cssvars/_cssvars';
+@import './cssvars';
+@import './base';
+@import './typography';
+@import './transitions';
+@import './extensions';

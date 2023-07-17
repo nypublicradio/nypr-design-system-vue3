@@ -4,7 +4,7 @@ import { onMounted, ref } from 'vue'
 
 const props = defineProps({
   fontSize: {
-    default: '0.75rem',
+    default: '0.70rem',
     type: String,
   },
   no: {
@@ -122,12 +122,12 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
     .option {
       position: absolute;
       top: 0;
-      color: white;
+      color: var(--v-input-switch-text-color);
       font-weight: bold;
       line-height: $height;
       position: absolute;
       display: block;
-      font-family: sans-serif;
+      font-family: var(--font-family);
       font-size: $fontSize;
       transition: left var(--v-input-switch-transition-duration);
       -webkit-transition: left var(--v-input-switch-transition-duration);
@@ -139,6 +139,7 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
       }
       &.yes {
         left: $negativeYesWidth;
+        color: var(--v-input-switch-text-yes-color);
       }
     }
   }
@@ -182,15 +183,23 @@ $sliderSize: var(--v-input-switch-slider-size);
 .v-input-switch {
   .p-inputswitch {
     .p-inputswitch-slider {
+      outline: 1px solid var(--v-input-switch-border-color);
       border-radius: var(--v-input-switch-border-radius);
       &:before {
         width: $sliderSize;
         height: $sliderSize;
         margin-top: calc(($sliderSize / 2) * -1);
+        outline: 1px solid var(--v-input-switch-border-color);
       }
     }
-    &.p-inputswitch-checked .p-inputswitch-slider:before {
-      left: $yesWidth;
+    &.p-inputswitch-checked {
+      .p-inputswitch-slider {
+        outline: none;
+        &:before {
+          left: $yesWidth;
+          outline: none;
+        }
+      }
     }
   }
 }
