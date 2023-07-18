@@ -83,9 +83,11 @@ const options = ref([
   { icon: markRaw(TwitterIcon), value: 'Saved' },
 ])
 const value = ref({ value: 'Home' })
-
+/**
+ * handles the menu click
+ */
 const menuClick = (event) => {
-  console.log('value = ', value.value)
+  //console.log('value = ', value.value)
 }
 </script>
 
