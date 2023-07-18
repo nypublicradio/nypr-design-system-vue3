@@ -15,7 +15,8 @@ $colors: (
     'success': #5cb85c,
     'error': #ff0000,
     'black': #000000,
-    'info': #1b908b,
+    'info': #70c5f6,
+    'purple': #7b4ee2,
     'secondary': #999999,
     'link': #2b6f99,
 );
@@ -32,7 +33,8 @@ $colors-dark-mode: (
     'success': #71c171,
     'error': #fd5757,
     'black': #ffffff,
-    'info': #1b908b,
+    'info': #70c5f6,
+    'purple': #7b4ee2,
     'secondary': #999999,
     'link': #3588bb,
 );
@@ -58,7 +60,7 @@ $highlightFocusBg: darken($primaryColor, 0.08) !default;
 //reused color variables
 $shade000: map-get($colors, 'background') !default; //surface
 $shade100: map-get($colors, 'background2') !default; //header background
-$shade200: #dde1e6 !default; //hover background
+$shade200: map-get($colors, 'secondary') !default; //hover background
 $shade300: map-get($colors, 'stroke') !default; //border, divider
 $shade400: map-get($colors, 'stroke') !default; //input border
 $shade500: map-get($colors, 'night') !default; //input icon
@@ -86,7 +88,7 @@ $fontWeight-800: 800 !default;
 $fontWeight-900: 900 !default;
 
 $textColor: $shade700 !default;
-$textSecondaryColor: $shade600 !default;
+$textSecondaryColor: $shade200 !default;
 $textColorOnDark: map-get($colors-dark-mode, 'night') !default;
 $borderRadius: 8px !default;
 $transitionDuration: 0.25s !default;
@@ -205,9 +207,9 @@ $plainButtonTextColor: $textSecondaryColor !default;
 $plainButtonHoverBgColor: $shade200 !default;
 $plainButtonActiveBgColor: $shade300 !default;
 
-$secondaryButtonBg: map-get($colors, 'secondary') !default;
-$secondaryButtonTextColor: #ffffff !default;
-$secondaryButtonBorder: 1px solid $secondaryButtonBg !default;
+$secondaryButtonBg: #ffffff !default;
+$secondaryButtonTextColor: map-get($colors, 'night') !default;
+$secondaryButtonBorder: 1px solid map-get($colors, 'stroke') !default;
 $secondaryButtonHoverBg: scale-color($secondaryButtonBg, $lightness: -10%) !default;
 $secondaryButtonTextHoverColor: $secondaryButtonTextColor !default;
 $secondaryButtonHoverBorderColor: scale-color($secondaryButtonBg, $lightness: -10%) !default;

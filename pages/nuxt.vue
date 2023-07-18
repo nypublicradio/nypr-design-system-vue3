@@ -3,6 +3,7 @@ import VInputSwitch from '../v2/src/components/VInputSwitch.vue'
 // auth
 import { useCurrentUser } from '~/composables/states'
 import Home from '~/src/components/Home.vue'
+import FacebookIcon from '~/v2/src/assets/icons/FacebookIcon.vue'
 import TwitterIcon from '~/v2/src/assets/icons/TwitterIcon.vue'
 import VCard from '~/v2/src/components/VCard.vue'
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
@@ -19,6 +20,7 @@ import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
 import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
 import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
 import VSignupWithEmail from '~/v2/src/components/supabase/VSignupWithEmail.vue'
+import TabMenu from 'primevue/tabmenu'
 import { onMounted } from 'vue'
 
 definePageMeta({
@@ -73,15 +75,45 @@ const emitClick = (event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
 }
+
+const options = ref([
+  { icon: markRaw(FacebookIcon), value: 'Home' },
+  { icon: markRaw(TwitterIcon), value: 'Live' },
+  { icon: markRaw(FacebookIcon), value: 'Browse' },
+  { icon: markRaw(TwitterIcon), value: 'Saved' },
+])
+const value = ref({ value: 'Home' })
+
+const menuClick = (event) => {
+  console.log('value = ', value.value)
+}
 </script>
 
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
+      <div class="card flex justify-content-center">
+        <SelectButton
+          v-model="value"
+          class="bottom-menu"
+          :options="options"
+          option-label="value"
+          data-key="value"
+          aria-labelledby="custom"
+          unselectable
+          @click="menuClick"
+        >
+          <template #option="slotProps">
+            <component :is="slotProps.option.icon"></component>
+            {{ slotProps.option.value }}
+          </template>
+        </SelectButton>
+      </div>
+
       <div class="color-box"></div>
       <TwitterIcon />
       <div class="flex justify-content-center gap-3 mb-3">
-        <VInputSwitch @change="emitClick" />
+        <VInputSwitch static-width @change="emitClick" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
       </div>
@@ -303,6 +335,20 @@ const emitClick = (event) => {
 <style lang="scss">
 .o-icon path {
   fill: var(--night);
+}
+.p-highlight .o-icon path {
+  fill: var(--white);
+}
+.bottom-menu {
+  .p-button {
+    border-radius: 0;
+    border: none;
+    background-color: var(--night-500);
+    color: var(--white);
+    .o-icon path {
+      fill: var(--white);
+    }
+  }
 }
 .color-box {
   width: 200px;

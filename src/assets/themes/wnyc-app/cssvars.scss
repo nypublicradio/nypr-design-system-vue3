@@ -15,8 +15,10 @@
     --error: #{map-get($colors, 'error')};
     --black: #{map-get($colors, 'black')};
     --info: #{map-get($colors, 'info')};
+    --purple: #{map-get($colors, 'purple')};
     --secondary: #{map-get($colors, 'secondary')};
     --link: #{map-get($colors, 'link')};
+    --white: #ffffff;
 
     --primary-color: #{map-get($colors, 'red')};
     --primary-color-rgb: #{hex2rgb($primaryColor)};
@@ -139,6 +141,7 @@
     --error: #{map-get($colors-dark-mode, 'error')};
     --black: #{map-get($colors-dark-mode, 'black')};
     --info: #{map-get($colors-dark-mode, 'info')};
+    --purple: #{map-get($colors-dark-mode, 'purple')};
     --secondary: #{map-get($colors-dark-mode, 'secondary')};
     --link: #{map-get($colors-dark-mode, 'link')};
 
