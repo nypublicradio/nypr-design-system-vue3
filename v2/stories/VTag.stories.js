@@ -3,10 +3,10 @@ import VTag from '../src/components/VTag.vue'
 export default {
     argTypes: {
         cssvars: {
-            control: { value: {"--tag-bg":" var(--primary-color)", "--tag-border":" solid 1px var(--primary-color)", "--tag-border-radius":" 40px", "--tag-font-size":" 1rem", "--tag-font-weight":" normal", "--tag-hover-bg":" var(--primary-dark-color)", "--tag-hover-text-color":" var(--white)", "--tag-letter-spacing":" 0.03rem", "--tag-padding":" 2px 10px", "--tag-text-color":" var(--white)",} },
-            description:"CSS variables applied to the component.",
+            control: { value: { "--tag-bg": " var(--primary-color)", "--tag-border": " solid 1px var(--primary-color)", "--tag-border-radius": " 40px", "--tag-font-size": " 1rem", "--tag-font-weight": " normal", "--tag-hover-bg": " var(--primary-dark-color)", "--tag-hover-text-color": " var(--white)", "--tag-letter-spacing": " 0.03rem", "--tag-padding": " 2px 10px", "--tag-text-color": " var(--white)", } },
+            description: "CSS variables applied to the component.",
             type: { name: 'object' },
-            value:{"key": "value"}
+            value: { "key": "value" }
         },
         // alt: {
         //     control: { type: 'text' },
@@ -39,4 +39,12 @@ Default.args = {
 export const NoLink = Template.bind({})
 NoLink.args = {
     name: 'news',
+}
+
+export const CustomColors = Template.bind({})
+CustomColors.args = {
+    color: 'var(--yellow-500)',
+    name: 'local news',
+    slug: 'https://www.google.com',
+    textColor: 'var(--night-500)',
 }

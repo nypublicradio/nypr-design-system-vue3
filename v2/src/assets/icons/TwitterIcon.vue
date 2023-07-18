@@ -25,8 +25,8 @@ export default {
   name: 'TwitterIcon',
   props: {
     title: {
-      type: String,
       default: 'Twitter',
+      type: String,
     },
   },
 }

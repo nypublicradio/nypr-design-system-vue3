@@ -3,6 +3,8 @@ import VInputSwitch from '../v2/src/components/VInputSwitch.vue'
 // auth
 import { useCurrentUser } from '~/composables/states'
 import Home from '~/src/components/Home.vue'
+import FacebookIcon from '~/v2/src/assets/icons/FacebookIcon.vue'
+import TwitterIcon from '~/v2/src/assets/icons/TwitterIcon.vue'
 import VCard from '~/v2/src/components/VCard.vue'
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
 //import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
@@ -18,6 +20,7 @@ import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
 import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
 import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
 import VSignupWithEmail from '~/v2/src/components/supabase/VSignupWithEmail.vue'
+import TabMenu from 'primevue/tabmenu'
 import { onMounted } from 'vue'
 
 definePageMeta({
@@ -72,14 +75,47 @@ const emitClick = (event) => {
   //console.log('click = ', type)
   //console.log('event = ', event)
 }
+
+const options = ref([
+  { icon: markRaw(FacebookIcon), value: 'Home' },
+  { icon: markRaw(TwitterIcon), value: 'Live' },
+  { icon: markRaw(FacebookIcon), value: 'Browse' },
+  { icon: markRaw(TwitterIcon), value: 'Saved' },
+])
+const value = ref({ value: 'Home' })
+/**
+ * handles the menu click
+ */
+const menuClick = (event) => {
+  //console.log('value = ', value.value)
+}
 </script>
 
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
-      <!-- <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" /> -->
+      <div class="card flex justify-content-center">
+        <SelectButton
+          v-model="value"
+          class="bottom-menu"
+          :options="options"
+          option-label="value"
+          data-key="value"
+          aria-labelledby="custom"
+          unselectable
+          @click="menuClick"
+        >
+          <template #option="slotProps">
+            <component :is="slotProps.option.icon"></component>
+            {{ slotProps.option.value }}
+          </template>
+        </SelectButton>
+      </div>
+
+      <div class="color-box"></div>
+      <TwitterIcon />
       <div class="flex justify-content-center gap-3 mb-3">
-        <VInputSwitch @change="emitClick" />
+        <VInputSwitch static-width @change="emitClick" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
       </div>
@@ -189,7 +225,7 @@ const emitClick = (event) => {
 
             <div class="mb-8" />
 
-            <h1 class="h1">H1 Header Text</h1>
+            <h1 class="h1">H1 Heading Text</h1>
             <h2 class="h2">H2 Header Text</h2>
             <h3 class="h3">H3 Header Text</h3>
             <h4 class="h4">H4 Header Text</h4>
@@ -281,6 +317,7 @@ const emitClick = (event) => {
               >
             </h1>
             <div data-style-mode="dark" class="dark-mode-section">
+              <TwitterIcon />
               <div class="content">
                 <v-flexible-link to="https://www.google.com"
                   >google dark</v-flexible-link
@@ -298,6 +335,28 @@ const emitClick = (event) => {
 </template>
 
 <style lang="scss">
+.o-icon path {
+  fill: var(--night);
+}
+.p-highlight .o-icon path {
+  fill: var(--white);
+}
+.bottom-menu {
+  .p-button {
+    border-radius: 0;
+    border: none;
+    background-color: var(--night-500);
+    color: var(--white);
+    .o-icon path {
+      fill: var(--white);
+    }
+  }
+}
+.color-box {
+  width: 200px;
+  height: 200px;
+  background: $backgroundGradient1;
+}
 :root {
   //--slider-size: 1.5rem;
   //--v-input-switch-border-radius: 5px;
@@ -305,7 +364,7 @@ const emitClick = (event) => {
 @import '../src/App.scss';
 .dark-mode-section {
   padding: 3rem 0;
-  background-color: #000;
+  background-color: var(--shade-000);
   .content {
     padding: 1rem 2rem;
   }
