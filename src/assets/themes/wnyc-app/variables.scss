@@ -6,7 +6,7 @@ $page-gutter-padding: 32px;
 $colors: (
     'background': #ffffff,
     'background2': #f5f5f5,
-    'background3': #92afd2,
+    'background3': #bdbdbd,
     'stroke': #eaeaea,
     'night': #101012,
     'red': #de1e3d,
@@ -66,7 +66,7 @@ $shade400: map-get($colors, 'stroke') !default; //input border
 $shade500: map-get($colors, 'night') !default; //input icon
 $shade600: map-get($colors, 'night') !default; //text secondary color
 $shade700: map-get($colors, 'night') !default; //text color
-$shade800: #21272a !default; //unused
+$shade800: map-get($colors, 'background3') !default; //unused
 $shade900: #121619 !default; //unused
 
 //global

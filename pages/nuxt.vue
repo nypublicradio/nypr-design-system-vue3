@@ -76,12 +76,6 @@ const emitClick = (event) => {
   //console.log('event = ', event)
 }
 
-const options = ref([
-  { icon: markRaw(FacebookIcon), value: 'Home' },
-  { icon: markRaw(TwitterIcon), value: 'Live' },
-  { icon: markRaw(FacebookIcon), value: 'Browse' },
-  { icon: markRaw(TwitterIcon), value: 'Saved' },
-])
 const value = ref({ value: 'Home' })
 /**
  * handles the menu click
@@ -89,33 +83,18 @@ const value = ref({ value: 'Home' })
 const menuClick = (event) => {
   //console.log('value = ', value.value)
 }
+
+const switchData = ref(false)
 </script>
 
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
-      <div class="card flex justify-content-center">
-        <SelectButton
-          v-model="value"
-          class="bottom-menu"
-          :options="options"
-          option-label="value"
-          data-key="value"
-          aria-labelledby="custom"
-          unselectable
-          @click="menuClick"
-        >
-          <template #option="slotProps">
-            <component :is="slotProps.option.icon"></component>
-            {{ slotProps.option.value }}
-          </template>
-        </SelectButton>
-      </div>
-
       <div class="color-box"></div>
       <TwitterIcon />
       <div class="flex justify-content-center gap-3 mb-3">
-        <VInputSwitch static-width @change="emitClick" />
+        {{ switchData }}
+        <VInputSwitch v-model:data.sync="switchData" static-width />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
       </div>
@@ -139,33 +118,29 @@ const menuClick = (event) => {
           font-size="1.5rem"
         />
       </div>
-      <VSignupWithEmail />
+      <!-- <VSignupWithEmail /> -->
       <!-- <br />
       <br />
       <VLoginWithMagicLink />
       <br />
-      <br />
+      <br /> -->
       <VSignupWithEmail>
         <template #success>
           <VLoginWithEmail />
         </template>
       </VSignupWithEmail>
-      <br />
-      <br /><br />
-      <br /><br />
-      <br /><br />
-      <br />
+      <!-- 
       <Divider class="my-4" align="center">
         <b>Or</b>
       </Divider>
-      <VLoginWithEmail />
+      <VLoginWithEmail /> -->
       <p class="my-2 text-center">
         Don't have an account?
         <VFlexibleLink to="/onboarding">Register here</VFlexibleLink>
       </p>
       <p class="mb-2 text-center">
         <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
-      </p> -->
+      </p>
       <!-- 
       <Divider class="my-4" align="center">
         <b>Or</b>
@@ -341,17 +316,7 @@ const menuClick = (event) => {
 .p-highlight .o-icon path {
   fill: var(--white);
 }
-.bottom-menu {
-  .p-button {
-    border-radius: 0;
-    border: none;
-    background-color: var(--night-500);
-    color: var(--white);
-    .o-icon path {
-      fill: var(--white);
-    }
-  }
-}
+
 .color-box {
   width: 200px;
   height: 200px;

@@ -3,6 +3,10 @@ import InputSwitch from 'primevue/inputswitch'
 import { onMounted, ref } from 'vue'
 
 const props = defineProps({
+  data: {
+    default: false,
+    type: Boolean,
+  },
   fontSize: {
     default: '0.70rem',
     type: String,
@@ -30,7 +34,7 @@ const emit = defineEmits([
   'blur',
 ])
 
-const checked = ref(false)
+const checked = ref(props.data)
 const noRef = ref(null)
 const yesRef = ref(null)
 
@@ -72,7 +76,7 @@ onMounted(() => {
     <InputSwitch
       v-model="checked"
       :aria-label="`Toggle between ${props.yes} and ${props.no}`"
-      @update:model-value="emit('update:model-value', $event)"
+      @update:model-value="emit('update:data', $event)"
       @click="emit('click', $event)"
       @change="emit('change', $event)"
       @input="emit('input', $event)"

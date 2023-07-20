@@ -34,20 +34,3 @@
 .p-button {
     font-weight: var(--font-weight-700);
 }
-//wrapping in BODY adds spesificity to the selectors, so they override the default theme.
-body {
-}
-:root,
-[data-style-mode='light'],
-.style-mode-light {
-    --persistent-player-height: 100px;
-    //tag
-    --tag-border-radius: 4px;
-    --tag-font-weight: var(--font-weight-600);
-    --tag-font-size: 10px;
-    --tag-padding: 1px 6px 1px 6px;
-    --tag-border: none;
-}
-[data-style-mode='dark'],
-.style-mode-dark {
-}
