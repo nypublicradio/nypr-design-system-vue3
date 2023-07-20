@@ -27,7 +27,7 @@ const props = defineProps({
 
 const emit = defineEmits([
   'click',
-  'update:modelValue',
+  'update:data',
   'change',
   'input',
   'focus',

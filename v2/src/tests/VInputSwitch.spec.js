@@ -58,10 +58,10 @@ describe('VInputSwitch', () => {
 
     await switchButton.trigger('click')
     expect(wrapper.emitted()['click']).toBeTruthy()
-    expect(wrapper.emitted()['update:model-value']).toBeTruthy()
+    expect(wrapper.emitted()['update:data']).toBeTruthy()
     expect(wrapper.emitted()['change']).toBeTruthy()
     expect(wrapper.emitted()['input']).toBeTruthy()
-    expect(wrapper.emitted()['update:model-value']).toEqual([[true]])
+    expect(wrapper.emitted()['update:data']).toEqual([[true]])
   })
 
   test('static width class exists', () => {
