@@ -6,7 +6,7 @@ $page-gutter-padding: 32px;
 $colors: (
     'background': #ffffff,
     'background2': #f5f5f5,
-    'background3': #bdbdbd,
+    'background3': #e8e8e8,
     'stroke': #eaeaea,
     'night': #101012,
     'red': #de1e3d,
@@ -23,8 +23,8 @@ $colors: (
 
 $colors-dark-mode: (
     'background': #1b223c,
-    'background2': #ffffff1a,
-    'background3': #244873,
+    'background2': #1b223c,
+    'background3': #ffffff1a,
     'stroke': #1b223c,
     'night': #ffffff,
     'red': #de1e3d,
@@ -38,7 +38,6 @@ $colors-dark-mode: (
     'secondary': #999999,
     'link': #3588bb,
 );
-
 $backgroundGradient1: linear-gradient(
     to bottom,
     map-get($colors-dark-mode, 'background'),

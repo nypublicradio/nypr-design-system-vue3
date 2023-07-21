@@ -84,7 +84,9 @@ const menuClick = (event) => {
   //console.log('value = ', value.value)
 }
 
-const switchData = ref(false)
+const switchData = ref({
+  switch: false,
+})
 </script>
 
 <template>
@@ -93,8 +95,8 @@ const switchData = ref(false)
       <div class="color-box"></div>
       <TwitterIcon />
       <div class="flex justify-content-center gap-3 mb-3">
-        {{ switchData }}
-        <VInputSwitch v-model:data.sync="switchData" static-width />
+        {{ switchData.switch }}
+        <VInputSwitch v-model:data.sync="switchData.switch" static-width />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
       </div>

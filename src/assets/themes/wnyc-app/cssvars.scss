@@ -129,7 +129,7 @@
 .style-mode-dark {
     color-scheme: dark;
 
-    --background: #{map-get($colors-dark-mode, 'background')};
+    --background: #{$backgroundGradient1};
     --background2: #{map-get($colors-dark-mode, 'background2')};
     --background3: #{map-get($colors-dark-mode, 'background3')};
     --stroke: #{map-get($colors-dark-mode, 'stroke')};
@@ -146,6 +146,7 @@
     --link: #{map-get($colors-dark-mode, 'link')};
 
     --shade-000: var(--background);
+    --shade-400: #{map-get($colors-dark-mode, 'background')};
 
     --text-color: var(--text-color-on-dark);
     --link-button-color: var(--link);
