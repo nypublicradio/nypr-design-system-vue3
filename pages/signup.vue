@@ -25,7 +25,12 @@ onMounted(() => {})
         :client="useSupabaseClient()"
         :config="useRuntimeConfig()"
       >
-        <template #aboveSubmit></template>
+        <template #aboveSubmit>
+          <p>
+            By proceeding to create your account, you are agreeing to New York
+            Public Radio’s Terms of Service and Privacy Policy
+          </p>
+        </template>
         <template #belowSubmit>
           <div class="mt-6">
             <p class="my-2 text-center">Already have an account yet?</p>

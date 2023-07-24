@@ -256,6 +256,7 @@ const submitForm = async () => {
               </span>
             </small>
           </div>
+          <slot name="aboveSubmit"></slot>
           <Button
             :label="props.label"
             v-bind="{ ...$attrs }"
