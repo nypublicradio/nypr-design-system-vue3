@@ -14,6 +14,14 @@ import Message from 'primevue/message'
 import { computed, reactive, ref } from 'vue'
 
 const props = defineProps({
+  client: {
+    default: null,
+    type: Object,
+  },
+  config: {
+    default: null,
+    type: Object,
+  },
   error: {
     default: '',
     type: String,
@@ -39,11 +47,19 @@ const props = defineProps({
 
 const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 
-const client = useSupabaseClient()
+const innerClient = ref(props.client)
+const innerConfig = ref(props.config)
+// fallback incase the parent component doesn't pass in the client and config
+if (!props.client && !props.config) {
+  innerClient.value = useSupabaseClient()
+  innerConfig.value = useRuntimeConfig()
+}
 
 const formData = reactive({
   confirmPassword: null,
   email: '',
+  firstname: '',
+  lastname: '',
   password: '',
 })
 
@@ -65,6 +81,12 @@ const rules = computed(() => {
     email: {
       email: helpers.withMessage('Invalid email format', email),
       required: helpers.withMessage('The email field is required', required),
+    },
+    firstname: {
+      required: helpers.withMessage('Please add your first name', required),
+    },
+    lastname: {
+      required: helpers.withMessage('Please add your last name', required),
     },
     password: {
       minLength: minLength(8),
@@ -89,7 +111,7 @@ const submitForm = async () => {
   v$.value.$validate()
   if (!v$.value.$error) {
     //success with Vuelidate
-    const sbError = await client.auth.signUp({
+    const sbError = await innerClient.value.auth.signUp({
       email: formData.email,
       password: formData.password,
     })
@@ -113,7 +135,7 @@ const submitForm = async () => {
 <template>
   <div>
     <template v-if="sbErrorMsg && sbErrorMsg !== undefined">
-      <Message class="mb-4" severity="error" @close="clearMsg()">
+      <Message class="mb-4" severity="warning" @close="clearMsg()">
         <span v-html="sbErrorMsg"></span>
       </Message>
     </template>
@@ -128,13 +150,56 @@ const submitForm = async () => {
             <VLoginWithEmail
               :slug="props.slug"
               :current-email="formData.email"
+              :client="innerClient"
+              :config="innerConfig"
             />
           </slot>
         </div>
       </div>
       <div v-else key="2">
         <form v-if="formData" novalidate @submit.prevent="submitForm">
-          <div class="mb-2">
+          <div class="flex flex-column gap-2 mb-4">
+            <label for="first_name">First name</label>
+            <InputText
+              v-model="formData.firstname"
+              type="text"
+              name="first_name"
+              class="w-full"
+              :class="{
+                'p-invalid': v$.firstname.$error && v$.firstname.$invalid,
+              }"
+              placeholder="Your first name"
+              required
+              @update="v$.firstname.$touch"
+            />
+            <small class="p-error">
+              <span v-for="err of v$.firstname.$errors" :key="err.$uid">
+                {{ err.$message }}
+              </span>
+            </small>
+          </div>
+          <div class="flex flex-column gap-2 mb-4">
+            <label for="last_name">Last name</label>
+            <InputText
+              v-model="formData.lastname"
+              type="text"
+              name="last_name"
+              class="w-full"
+              :class="{
+                'p-invalid': v$.lastname.$error && v$.lastname.$invalid,
+              }"
+              placeholder="Your last name"
+              required
+              @update="v$.lastname.$touch"
+            />
+            <small class="p-error">
+              <span v-for="err of v$.lastname.$errors" :key="err.$uid">
+                {{ err.$message }}
+              </span>
+            </small>
+          </div>
+          <div class="flex flex-column gap-2 mb-4">
+            <label for="email">Emial</label>
             <InputText
               v-model="formData.email"
               type="text"
@@ -151,10 +216,12 @@ const submitForm = async () => {
               </span>
             </small>
           </div>
-          <div class="mb-2">
+          <div class="flex flex-column gap-2 mb-4">
+            <label for="password">Emial</label>
             <InputText
               v-model="formData.password"
               type="password"
+              name="password"
               class="w-full"
               :class="{
                 'p-invalid': v$.password.$error && v$.password.$invalid,
@@ -169,10 +236,12 @@ const submitForm = async () => {
               </span>
             </small>
           </div>
-          <div class="mb-2">
+          <div class="flex flex-column gap-2 mb-4">
+            <label for="confirm_password">Emial</label>
             <InputText
               v-model="formData.confirmPassword"
               type="password"
+              name="confirm_password"
               class="w-full"
               :class="{
                 'p-invalid':

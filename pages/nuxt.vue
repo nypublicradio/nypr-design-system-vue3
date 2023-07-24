@@ -120,15 +120,24 @@ const switchData = ref({
           font-size="1.5rem"
         />
       </div>
-      <!-- <VSignupWithEmail /> -->
+      <VLoginWithEmail
+        :client="useSupabaseClient()"
+        :config="useRuntimeConfig()"
+      />
       <!-- <br />
       <br />
       <VLoginWithMagicLink />
       <br />
       <br /> -->
-      <VSignupWithEmail>
+      <VSignupWithEmail
+        :client="useSupabaseClient()"
+        :config="useRuntimeConfig()"
+      >
         <template #success>
-          <VLoginWithEmail />
+          <VLoginWithEmail
+            :client="useSupabaseClient()"
+            :config="useRuntimeConfig()"
+          />
         </template>
       </VSignupWithEmail>
       <!-- 

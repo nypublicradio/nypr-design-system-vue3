@@ -34,3 +34,17 @@
 .p-button {
     font-weight: var(--font-weight-700);
 }
+
+form {
+    label {
+        font-family: 'ff-meta-web-pro';
+        font-size: 0.813rem;
+    }
+}
+
+.p-message {
+    font-family: 'ff-meta-web-pro';
+    font-size: 0.813rem;
+    border: none !important;
+    border-radius: 0;
+}

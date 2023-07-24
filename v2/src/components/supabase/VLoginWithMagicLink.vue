@@ -6,6 +6,14 @@ import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import { computed, reactive, ref } from 'vue'
 const props = defineProps({
+  client: {
+    default: null,
+    type: Object,
+  },
+  config: {
+    default: null,
+    type: Object,
+  },
   error: {
     default:
       'Sorry, there was a problem creating your magic link. Please try again! Error message:',
@@ -24,8 +32,14 @@ const props = defineProps({
 
 const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 
-const client = useSupabaseClient()
-const config = useRuntimeConfig()
+const innerClient = ref(props.client)
+const innerConfig = ref(props.config)
+
+// fallback incase the parent component doesn't pass in the client and config
+if (!props.client && !props.config) {
+  innerClient.value = useSupabaseClient()
+  innerConfig.value = useRuntimeConfig()
+}
 
 const formData = reactive({
   email: '',
@@ -54,9 +68,9 @@ const submitForm = async () => {
   v$.value.$validate()
   if (!v$.value.$error) {
     //success with Vuelidate
-    const sbError = await client.auth.signInWithOtp(
+    const sbError = await innerClient.value.auth.signInWithOtp(
       { email: formData.email },
-      { redirectTo: config.supabaseAuthSignInRedirectTo }
+      { redirectTo: innerConfig.value.supabaseAuthSignInRedirectTo }
     )
     if (!sbError.error) {
       //success with Supabase
