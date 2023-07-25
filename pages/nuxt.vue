@@ -96,7 +96,7 @@ const switchData = ref({
       <TwitterIcon />
       <div class="flex justify-content-center gap-3 mb-3">
         {{ switchData.switch }}
-        <VInputSwitch v-model:data.sync="switchData.switch" static-width />
+        <VInputSwitch v-model:data="switchData.switch" static-width />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
         <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
       </div>
