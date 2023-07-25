@@ -33,7 +33,7 @@ const props = defineProps({
     type: String,
   },
   label: {
-    default: 'Create Account With Email & Password',
+    default: 'Sign up with email',
     type: String,
   },
   slug: {

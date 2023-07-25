@@ -24,7 +24,7 @@ const props = defineProps({
     type: String,
   },
   label: {
-    default: 'Sign In With Email & Password',
+    default: 'Log in with email',
     type: String,
   },
   slug: {
@@ -144,7 +144,6 @@ const submitForm = async () => {
         class="w-full"
         :aria-label="`${props.label} button`"
         type="submit"
-        rounded
       >
         <template #icon> <slot name="icon"></slot> </template>
       </Button>

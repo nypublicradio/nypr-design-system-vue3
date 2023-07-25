@@ -20,7 +20,7 @@ const props = defineProps({
     type: String,
   },
   label: {
-    default: 'Sign in with Magic Link',
+    default: 'Log in with magic link',
     type: String,
   },
   success: {
