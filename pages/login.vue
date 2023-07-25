@@ -1,19 +1,6 @@
 <script setup>
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
 import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
-import { computed, onMounted, ref } from 'vue'
-
-const props = defineProps({
-  //   propVar: {
-  //     type: Boolean,
-  //     default: false,
-  //   },
-})
-
-//const emit = defineEmits(["change", "click"]);
-
-// lifecycle hooks
-onMounted(() => {})
 </script>
 
 <template>
