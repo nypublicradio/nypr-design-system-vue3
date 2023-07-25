@@ -150,6 +150,6 @@
     --shade-400: #{map-get($colors-dark-mode, 'background')};
 
     --text-color: var(--text-color-on-dark);
-    --link-button-color-: #{var(--text-color-on-dark)};
+    --link-button-color: var(--text-color-on-dark);
     --link-button-hover-color: #{scale-color(map-get($colors, 'link'), $lightness: 70%)};
 }
