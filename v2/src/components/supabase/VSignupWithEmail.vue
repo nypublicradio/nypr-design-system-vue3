@@ -11,9 +11,18 @@ import {
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
+import Password from 'primevue/password'
 import { computed, reactive, ref } from 'vue'
 
 const props = defineProps({
+  client: {
+    default: null,
+    type: Object,
+  },
+  config: {
+    default: null,
+    type: Object,
+  },
   error: {
     default: '',
     type: String,
@@ -39,36 +48,59 @@ const props = defineProps({
 
 const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 
-const client = useSupabaseClient()
+const innerClient = ref(props.client)
+const innerConfig = ref(props.config)
+// fallback incase the parent component doesn't pass in the client and config
+if (!props.client && !props.config) {
+  innerClient.value = useSupabaseClient()
+  innerConfig.value = useRuntimeConfig()
+}
 
 const formData = reactive({
-  confirmPassword: null,
+  confirmEmail: null,
   email: '',
+  firstname: '',
+  lastname: '',
   password: '',
 })
 
 const sbErrorMsg = ref('')
 const sbSuccessMsg = ref('')
 
+const hasAtleastOneNumber = helpers.withMessage(
+  'Must contain at least one number',
+  (value) => /\d/.test(value)
+)
+
 const rules = computed(() => {
   return {
-    confirmPassword: {
+    confirmEmail: {
       required: helpers.withMessage(
-        'The password confirmation field is required',
+        'The email confirmation field is required ',
         required
       ),
       sameAs: helpers.withMessage(
-        "Passwords don't match",
-        sameAs(formData.password)
+        "Email addresses don't match",
+        sameAs(formData.email)
       ),
     },
     email: {
       email: helpers.withMessage('Invalid email format', email),
       required: helpers.withMessage('The email field is required', required),
     },
+    firstname: {
+      required: helpers.withMessage('Please add your first name', required),
+    },
+    lastname: {
+      required: helpers.withMessage('Please add your last name', required),
+    },
     password: {
+      hasAtleastOneNumber,
       minLength: minLength(8),
-      required: helpers.withMessage('The password field is required', required),
+      required: helpers.withMessage(
+        'This password field is required',
+        required
+      ),
     },
   }
 })
@@ -89,7 +121,7 @@ const submitForm = async () => {
   v$.value.$validate()
   if (!v$.value.$error) {
     //success with Vuelidate
-    const sbError = await client.auth.signUp({
+    const sbError = await innerClient.value.auth.signUp({
       email: formData.email,
       password: formData.password,
     })
@@ -113,7 +145,7 @@ const submitForm = async () => {
 <template>
   <div>
     <template v-if="sbErrorMsg && sbErrorMsg !== undefined">
-      <Message class="mb-4" severity="error" @close="clearMsg()">
+      <Message class="mb-3" severity="warning" @close="clearMsg()">
         <span v-html="sbErrorMsg"></span>
       </Message>
     </template>
@@ -121,81 +153,138 @@ const submitForm = async () => {
     <Transition name="fade" mode="out-in">
       <div v-if="sbSuccessMsg" key="1">
         <div>
-          <Message class="mb-4" severity="success">
+          <Message class="mb-3" severity="success">
             <span v-html="sbSuccessMsg"></span>
           </Message>
           <slot name="success">
             <VLoginWithEmail
               :slug="props.slug"
               :current-email="formData.email"
+              :client="innerClient"
+              :config="innerConfig"
             />
           </slot>
         </div>
       </div>
       <div v-else key="2">
         <form v-if="formData" novalidate @submit.prevent="submitForm">
-          <div class="mb-2">
-            <InputText
-              v-model="formData.email"
-              type="text"
-              name="email"
-              class="w-full"
-              :class="{ 'p-invalid': v$.email.$error && v$.email.$invalid }"
-              placeholder="Your email"
-              required
-              @update="v$.email.$touch"
-            />
-            <small class="p-error">
-              <span v-for="err of v$.email.$errors" :key="err.$uid">
-                {{ err.$message }}
-              </span>
-            </small>
+          <div class="grid mb-2">
+            <div class="flex flex-column gap-2 col-6">
+              <label for="first_name">First name</label>
+              <InputText
+                v-model="formData.firstname"
+                type="text"
+                name="first_name"
+                class="w-full"
+                :class="{
+                  'p-invalid': v$.firstname.$error && v$.firstname.$invalid,
+                }"
+                placeholder="Your first name"
+                required
+                @update="v$.firstname.$touch"
+              />
+              <small class="p-error">
+                <span v-for="err of v$.firstname.$errors" :key="err.$uid">
+                  {{ err.$message }} <br />
+                </span>
+              </small>
+            </div>
+            <div class="flex flex-column gap-2 col-6">
+              <label for="last_name">Last name</label>
+              <InputText
+                v-model="formData.lastname"
+                type="text"
+                name="last_name"
+                class="w-full"
+                :class="{
+                  'p-invalid': v$.lastname.$error && v$.lastname.$invalid,
+                }"
+                placeholder="Your last name"
+                required
+                @update="v$.lastname.$touch"
+              />
+              <small class="p-error">
+                <span v-for="err of v$.lastname.$errors" :key="err.$uid">
+                  {{ err.$message }} <br />
+                </span>
+              </small>
+            </div>
           </div>
-          <div class="mb-2">
-            <InputText
-              v-model="formData.password"
-              type="password"
-              class="w-full"
-              :class="{
-                'p-invalid': v$.password.$error && v$.password.$invalid,
-              }"
-              placeholder="Your password"
-              required
-              @update="v$.password.$touch"
-            />
-            <small class="p-error">
-              <span v-for="err of v$.password.$errors" :key="err.$uid">
-                {{ err.$message }}
-              </span>
-            </small>
+          <div class="grid mb-2">
+            <div class="flex flex-column gap-2 col-12 md:col-6">
+              <label for="email">Emial</label>
+              <InputText
+                v-model="formData.email"
+                type="text"
+                name="email"
+                class="w-full"
+                :class="{ 'p-invalid': v$.email.$error && v$.email.$invalid }"
+                placeholder="Your email"
+                required
+                @update="v$.email.$touch"
+              />
+              <small class="p-error">
+                <span v-for="err of v$.email.$errors" :key="err.$uid">
+                  {{ err.$message }} <br />
+                </span>
+              </small>
+            </div>
+            <div class="flex flex-column gap-2 col-12 md:col-6">
+              <label for="confirm_email">Confirm email</label>
+              <InputText
+                v-model="formData.confirmEmail"
+                type="email"
+                name="confirm_email"
+                class="w-full"
+                :class="{
+                  'p-invalid':
+                    v$.confirmEmail.$error && v$.confirmEmail.$invalid,
+                }"
+                placeholder="Confirm your email"
+                required
+              />
+              <small class="p-error">
+                <span v-for="err of v$.confirmEmail.$errors" :key="err.$uid">
+                  {{ err.$message }} <br />
+                </span>
+              </small>
+            </div>
           </div>
-          <div class="mb-2">
-            <InputText
-              v-model="formData.confirmPassword"
-              type="password"
-              class="w-full"
-              :class="{
-                'p-invalid':
-                  v$.confirmPassword.$error && v$.confirmPassword.$invalid,
-              }"
-              placeholder="Confirm your password"
-              required
-            />
-            <small class="p-error">
-              <span v-for="err of v$.confirmPassword.$errors" :key="err.$uid">
-                {{ err.$message }}
-              </span>
-            </small>
+          <div class="grid mb-2">
+            <div class="flex flex-column gap-2 col-12 md:col-6">
+              <label for="password">Password</label>
+              <Password
+                v-model="formData.password"
+                type="password"
+                name="password"
+                input-style="width: 100%"
+                :class="{
+                  'p-invalid': v$.password.$error && v$.password.$invalid,
+                }"
+                placeholder="Your password"
+                required
+                toggle-mask
+                :feedback="false"
+                @update="v$.password.$touch"
+              />
+              <small class="p-error">
+                <span v-for="err of v$.password.$errors" :key="err.$uid">
+                  {{ err.$message }}<br />
+                </span>
+              </small>
+            </div>
           </div>
+          <slot name="aboveSubmit" />
           <Button
             :label="props.label"
             v-bind="{ ...$attrs }"
-            class="w-full"
+            class="w-full mt-3"
             :aria-label="`${props.label} button`"
             type="submit"
           >
             <template #icon> <slot name="icon"></slot> </template>
           </Button>
+          <slot name="belowSubmit" />
         </form>
       </div>
     </Transition>

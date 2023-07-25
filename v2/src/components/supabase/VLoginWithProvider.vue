@@ -2,14 +2,18 @@
 import Button from 'primevue/button'
 import Message from 'primevue/message'
 import { ref } from 'vue'
-const client = useSupabaseClient()
-const config = useRuntimeConfig()
-//const client = { auth: { signInWithOAuth: () => {} } }
-//const config = { supabaseAuthSignInRedirectTo: '/' }
 
 const errorMessage = ref('')
 
 const props = defineProps({
+  client: {
+    default: null,
+    type: Object,
+  },
+  config: {
+    default: null,
+    type: Object,
+  },
   label: {
     default: null,
     type: String,
@@ -21,13 +25,22 @@ const props = defineProps({
   },
 })
 
+const innerClient = ref(props.client)
+const innerConfig = ref(props.config)
+
+// fallback incase the parent component doesn't pass in the client and config
+if (!props.client && !props.config) {
+  innerClient.value = useSupabaseClient()
+  innerConfig.value = useRuntimeConfig()
+}
+
 const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 // method triggered by the form submit to handle supabase login logic
 const login = async () => {
   emit('submit-click')
-  const error = await client.auth.signInWithOAuth(
+  const error = await innerClient.value.auth.signInWithOAuth(
     { provider: props.provider },
-    { redirectTo: config.supabaseAuthSignInRedirectTo }
+    { redirectTo: innerConfig.value.supabaseAuthSignInRedirectTo }
   )
   if (error.value) {
     emit('submit-error', error)

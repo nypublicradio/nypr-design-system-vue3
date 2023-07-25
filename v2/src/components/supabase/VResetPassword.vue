@@ -6,6 +6,10 @@ import { useCurrentUser } from '~/composables/states'
 import InputText from 'primevue/inputtext'
 
 const props = defineProps({
+  client: {
+    default: null,
+    type: Object,
+  },
   error: {
     default: 'Error message:',
     type: String,
@@ -28,7 +32,12 @@ const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 
 const currentUser = useCurrentUser()
 
-const client = useSupabaseClient()
+const innerClient = ref(props.client)
+
+// fallback incase the parent component doesn't pass in the client and config
+if (!props.client) {
+  innerClient.value = useSupabaseClient()
+}
 
 const formData = reactive({
   password: '',
@@ -55,7 +64,7 @@ const submitForm = async () => {
   v$.value.$validate()
   if (!v$.value.$error) {
     //success with Vuelidate
-    const sbError = await client.auth.updateUser({
+    const sbError = await innerClient.value.auth.updateUser({
       email: currentUser.value.email,
       password: formData.password,
     })
@@ -104,7 +113,7 @@ const pending = ref(false)
           />
           <small class="p-error">
             <span v-for="err of v$.password.$errors" :key="err.$uid">
-              {{ err.$message }}
+              {{ err.$message }} <br />
             </span>
           </small>
         </div>

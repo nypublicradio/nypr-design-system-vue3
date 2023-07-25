@@ -7,13 +7,20 @@ import Message from 'primevue/message'
 import { computed, reactive, ref } from 'vue'
 
 const props = defineProps({
+  client: {
+    default: null,
+    type: Object,
+  },
+  config: {
+    default: null,
+    type: Object,
+  },
   currentEmail: {
     default: null,
     type: String,
   },
   error: {
-    default:
-      'The email and password combination you entered is incorrect. Please try again!',
+    default: 'There was an error logging in',
     type: String,
   },
   label: {
@@ -28,8 +35,14 @@ const props = defineProps({
 
 const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 
-const client = useSupabaseClient()
-const config = useRuntimeConfig()
+const innerClient = ref(props.client)
+const innerConfig = ref(props.config)
+
+// fallback incase the parent component doesn't pass in the client and config
+if (!props.client && !props.config) {
+  innerClient.value = useSupabaseClient()
+  innerConfig.value = useRuntimeConfig()
+}
 
 const formData = reactive({
   email: props.currentEmail ?? '',
@@ -42,11 +55,11 @@ const rules = computed(() => {
   return {
     email: {
       email: helpers.withMessage('Invalid email format', email),
-      required: helpers.withMessage('The email field is required', required),
+      required: helpers.withMessage('This field is required', required),
     },
     password: {
       minLength: minLength(8),
-      required: helpers.withMessage('The password field is required', required),
+      required: helpers.withMessage('This field is required', required),
     },
   }
 })
@@ -60,9 +73,9 @@ const submitForm = async () => {
   v$.value.$validate()
   if (!v$.value.$error) {
     //success with Vuelidate
-    const sbError = await client.auth.signInWithPassword(
+    const sbError = await innerClient.value.auth.signInWithPassword(
       { email: formData.email, password: formData.password },
-      { redirectTo: config.supabaseAuthSignInRedirectTo }
+      { redirectTo: innerConfig.value.supabaseAuthSignInRedirectTo }
     )
     if (!sbError.error) {
       //success with Supabase
@@ -85,11 +98,12 @@ const submitForm = async () => {
   <div>
     <form v-if="formData" novalidate @submit.prevent="submitForm">
       <template v-if="sbErrorMsg">
-        <Message class="mb-4" severity="error">
+        <Message severity="warn" :sticky="false">
           <span v-html="sbErrorMsg"></span>
         </Message>
       </template>
-      <div class="mb-2">
+      <div class="flex flex-column gap-2 mb-4">
+        <label for="email">Emial</label>
         <InputText
           v-model="formData.email"
           type="text"
@@ -102,11 +116,12 @@ const submitForm = async () => {
         />
         <small class="p-error">
           <span v-for="err of v$.email.$errors" :key="err.$uid">
-            {{ err.$message }}
+            {{ err.$message }} <br />
           </span>
         </small>
       </div>
-      <div class="mb-2">
+      <div class="flex flex-column gap-2 mb-5">
+        <label for="password">Passowrd</label>
         <InputText
           v-model="formData.password"
           type="password"
@@ -119,7 +134,7 @@ const submitForm = async () => {
         />
         <small class="p-error">
           <span v-for="err of v$.password.$errors" :key="err.$uid">
-            {{ err.$message }}
+            {{ err.$message }} <br />
           </span>
         </small>
       </div>
@@ -129,9 +144,11 @@ const submitForm = async () => {
         class="w-full"
         :aria-label="`${props.label} button`"
         type="submit"
+        rounded
       >
         <template #icon> <slot name="icon"></slot> </template>
       </Button>
+      <slot name="belowSubmit"></slot>
     </form>
   </div>
 </template>
