@@ -88,6 +88,7 @@
 
     --font-family: #{$fontFamily};
     --font-family-header: #{$fontFamilyHeader};
+    --font-family-tisa: #{$fontFamilyTisa};
     --text-color: #{$textColor};
     --text-color-on-dark: #{$textColorOnDark};
     --text-color-secondary: #{$primaryColorAlt};
@@ -149,6 +150,6 @@
     --shade-400: #{map-get($colors-dark-mode, 'background')};
 
     --text-color: var(--text-color-on-dark);
-    --link-button-color: var(--link);
-    --link-button-hover-color: #{scale-color(map-get($colors, 'link'), $lightness: 20%)};
+    --link-button-color-: #{var(--text-color-on-dark)};
+    --link-button-hover-color: #{scale-color(map-get($colors, 'link'), $lightness: 70%)};
 }
