@@ -26,9 +26,16 @@ onMounted(() => {})
         :config="useRuntimeConfig()"
       >
         <template #aboveSubmit>
-          <p>
+          <p class="font-meta">
             By proceeding to create your account, you are agreeing to New York
-            Public Radio’s Terms of Service and Privacy Policy
+            Public Radio’s
+            <VFlexibleLink to="/terms" style="color: inherit"
+              >Terms of Service</VFlexibleLink
+            >
+            and
+            <VFlexibleLink to="/privacy" style="color: inherit"
+              >Privacy Policy</VFlexibleLink
+            >
           </p>
         </template>
         <template #belowSubmit>
@@ -37,11 +44,11 @@ onMounted(() => {})
             <Button
               class="w-full"
               rounded
-              label="Sign up"
+              label="Login"
               severity="secondary"
               @click="
                 () => {
-                  navigateTo('/signup')
+                  navigateTo('/login')
                 }
               "
             />
@@ -54,5 +61,7 @@ onMounted(() => {})
 
 <style lang="scss" scoped>
 .signup {
+  background: var(--background2);
+  padding: 3rem 1.25rem;
 }
 </style>

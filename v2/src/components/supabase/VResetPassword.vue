@@ -113,7 +113,7 @@ const pending = ref(false)
           />
           <small class="p-error">
             <span v-for="err of v$.password.$errors" :key="err.$uid">
-              {{ err.$message }}
+              {{ err.$message }} <br />
             </span>
           </small>
         </div>

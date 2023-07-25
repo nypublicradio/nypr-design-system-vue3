@@ -115,7 +115,7 @@ const submitForm = async () => {
         />
         <small class="p-error">
           <span v-for="err of v$.email.$errors" :key="err.$uid">
-            {{ err.$message }}
+            {{ err.$message }} <br />
           </span>
         </small>
       </div>
