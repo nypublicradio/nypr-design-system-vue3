@@ -121,18 +121,16 @@ const submitForm = async () => {
   v$.value.$validate()
   if (!v$.value.$error) {
     //success with Vuelidate
-    const sbError = await innerClient.value.auth.signUp(
-      {
-        email: formData.email,
-        password: formData.password,
-      },
-      {
+    const sbError = await innerClient.value.auth.signUp({
+      email: formData.email,
+      options: {
         data: {
           first_name: formData.firstname,
-          last_name: formData.lastname,
+          last_name: formData.last,
         },
-      }
-    )
+      },
+      password: formData.password,
+    })
     if (!sbError.error) {
       //success with Supabase
       emit('submit-success')
