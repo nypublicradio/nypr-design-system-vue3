@@ -126,7 +126,7 @@ const submitForm = async () => {
       options: {
         data: {
           first_name: formData.firstname,
-          last_name: formData.last,
+          last_name: formData.lastname,
         },
       },
       password: formData.password,
