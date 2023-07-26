@@ -111,7 +111,7 @@ const submitForm = async () => {
           name="email"
           class="w-full"
           :class="{ 'p-invalid': v$.email.$error && v$.email.$invalid }"
-          placeholder="Your email"
+          placeholder="you@email.com"
           required
           @update="v$.email.$touch"
         />
@@ -128,7 +128,7 @@ const submitForm = async () => {
           type="password"
           class="w-full"
           :class="{ 'p-invalid': v$.password.$error && v$.password.$invalid }"
-          placeholder="Your password"
+          placeholder="Enter your password"
           required
           :autofocus="props.currentEmail"
           @update="v$.password.$touch"

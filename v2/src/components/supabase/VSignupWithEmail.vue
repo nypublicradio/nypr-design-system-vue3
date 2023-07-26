@@ -225,7 +225,7 @@ const submitForm = async () => {
                 name="email"
                 class="w-full"
                 :class="{ 'p-invalid': v$.email.$error && v$.email.$invalid }"
-                placeholder="Your email"
+                placeholder="you@email.com"
                 required
                 @update="v$.email.$touch"
               />
@@ -267,7 +267,7 @@ const submitForm = async () => {
                 :class="{
                   'p-invalid': v$.password.$error && v$.password.$invalid,
                 }"
-                placeholder="Your password"
+                placeholder="Create a password"
                 required
                 toggle-mask
                 :feedback="false"
