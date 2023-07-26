@@ -5,6 +5,7 @@ import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
 import { computed, reactive, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const props = defineProps({
   client: {
@@ -32,9 +33,9 @@ const props = defineProps({
     type: String,
   },
 })
-
 const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 
+const router = useRouter()
 const innerClient = ref(props.client)
 const innerConfig = ref(props.config)
 
@@ -80,7 +81,7 @@ const submitForm = async () => {
     if (!sbError.error) {
       //success with Supabase
       emit('submit-success', props.slug)
-      navigateTo(`${props.slug}`)
+      router.push(`${props.slug}`)
     } else {
       // error with Supabase
       emit('submit-error', sbError?.error?.message)
@@ -98,7 +99,7 @@ const submitForm = async () => {
   <div>
     <form v-if="formData" novalidate @submit.prevent="submitForm">
       <template v-if="sbErrorMsg">
-        <Message severity="warn" :sticky="false">
+        <Message severity="warn" :sticky="false" :closable="false">
           <span v-html="sbErrorMsg"></span>
         </Message>
       </template>

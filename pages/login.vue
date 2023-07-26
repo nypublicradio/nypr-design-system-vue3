@@ -1,6 +1,8 @@
 <script setup>
 import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
 import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
+import { useRouter } from 'vue-router'
+const router = useRouter()
 </script>
 
 <template>
@@ -28,7 +30,7 @@ import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
               severity="secondary"
               @click="
                 () => {
-                  navigateTo('/signup')
+                  router.push('/signup')
                 }
               "
             />
