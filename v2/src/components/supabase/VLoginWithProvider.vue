@@ -58,7 +58,7 @@ const capFirstChar = (str) => {
 <template>
   <div>
     <template v-if="errorMessage">
-      <Message class="mb-4" severity="error">
+      <Message class="mb-4" severity="error" :closable="false">
         Sorry, there was a problem logging in to your
         {{ capFirstChar(props.provider) }} account:
         {{ errorMessage }}

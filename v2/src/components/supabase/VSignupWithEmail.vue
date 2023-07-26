@@ -68,7 +68,7 @@ const sbErrorMsg = ref('')
 const sbSuccessMsg = ref('')
 
 const hasAtleastOneNumber = helpers.withMessage(
-  'Must contain at least one number',
+  'Must contain at least 1 number',
   (value) => /\d/.test(value)
 )
 
@@ -263,7 +263,6 @@ const submitForm = async () => {
                 v-model="formData.password"
                 type="password"
                 name="password"
-                input-style="width: 100%"
                 :class="{
                   'p-invalid': v$.password.$error && v$.password.$invalid,
                 }"
@@ -277,6 +276,9 @@ const submitForm = async () => {
                 <span v-for="err of v$.password.$errors" :key="err.$uid">
                   {{ err.$message }}<br />
                 </span>
+                <p v-if="!v$.password.$errors.length > 0">
+                  must be at least 8 characters and 1 number
+                </p>
               </small>
             </div>
           </div>

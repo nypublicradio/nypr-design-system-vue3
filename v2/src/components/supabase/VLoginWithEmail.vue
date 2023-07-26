@@ -98,11 +98,6 @@ const submitForm = async () => {
 <template>
   <div>
     <form v-if="formData" novalidate @submit.prevent="submitForm">
-      <template v-if="sbErrorMsg">
-        <Message severity="warn" :sticky="false" :closable="false">
-          <span v-html="sbErrorMsg"></span>
-        </Message>
-      </template>
       <div class="flex flex-column gap-2 mb-4">
         <label for="email">Emial</label>
         <InputText
@@ -139,6 +134,11 @@ const submitForm = async () => {
           </span>
         </small>
       </div>
+      <template v-if="sbErrorMsg">
+        <Message severity="error" :sticky="false" :closable="false">
+          <span v-html="sbErrorMsg"></span>
+        </Message>
+      </template>
       <Button
         :label="props.label"
         v-bind="{ ...$attrs }"
