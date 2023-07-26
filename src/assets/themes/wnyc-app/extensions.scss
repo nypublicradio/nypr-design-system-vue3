@@ -47,4 +47,19 @@ form {
     font-size: 0.813rem;
     border: none !important;
     border-radius: 0;
+    .p-message-wrapper {
+        justify-content: center;
+        .p-message-text {
+            font-size: 14px;
+        }
+        .p-message-icon {
+            width: 1.25rem;
+            height: 1.25rem;
+        }
+    }
+    .p-message-close.p-link {
+        margin-left: unset;
+        width: 30px;
+        height: 30px;
+    }
 }

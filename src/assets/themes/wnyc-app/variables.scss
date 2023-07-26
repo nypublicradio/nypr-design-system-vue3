@@ -7,6 +7,7 @@ $colors: (
     'background': #ffffff,
     'background2': #f5f5f5,
     'background3': #e8e8e8,
+    'background4': #333333,
     'dark-blue': #1b223c,
     'blue': #244873,
     'stroke': #eaeaea,
@@ -27,6 +28,7 @@ $colors-dark-mode: (
     'background': #1b223c,
     'background2': #1b223c,
     'background3': #ffffff1a,
+    'background4': #333333,
     'stroke': #1b223c,
     'night': #ffffff,
     'red': #de1e3d,
@@ -643,22 +645,22 @@ $toastTitleFontWeight: 700 !default;
 $toastDetailMargin: $inlineSpacing 0 0 0 !default;
 
 //severities
-$infoMessageBg: #cdf2fb !default;
+$infoMessageBg: map-get($colors, 'background4') !default;
 $infoMessageBorder: solid scale-color($infoMessageBg, $lightness: -50%) !default;
-$infoMessageTextColor: scale-color($infoMessageBg, $lightness: -75%) !default;
-$infoMessageIconColor: scale-color($infoMessageBg, $lightness: -75%) !default;
-$successMessageBg: #d7f8d3 !default;
+$infoMessageTextColor: #ffffff !default;
+$infoMessageIconColor: #ffffff !default;
+$successMessageBg: map-get($colors, 'background4') !default;
 $successMessageBorder: solid scale-color($successMessageBg, $lightness: -50%) !default;
-$successMessageTextColor: scale-color($successMessageBg, $lightness: -75%) !default;
-$successMessageIconColor: scale-color($successMessageBg, $lightness: -75%) !default;
-$warningMessageBg: map-get($colors, 'night') !default;
+$successMessageTextColor: map-get($colors-dark-mode, 'success') !default;
+$successMessageIconColor: map-get($colors-dark-mode, 'success') !default;
+$warningMessageBg: map-get($colors, 'background4') !default;
 $warningMessageBorder: solid scale-color($warningMessageBg, $lightness: -50%) !default;
-$warningMessageTextColor: #ffffff !default;
-$warningMessageIconColor: #ffffff !default;
-$errorMessageBg: #fdded2 !default;
+$warningMessageTextColor: map-get($colors, 'yellow') !default;
+$warningMessageIconColor: map-get($colors, 'yellow') !default;
+$errorMessageBg: map-get($colors, 'background4') !default;
 $errorMessageBorder: solid scale-color($errorMessageBg, $lightness: -50%) !default;
-$errorMessageTextColor: scale-color($errorMessageBg, $lightness: -75%) !default;
-$errorMessageIconColor: scale-color($errorMessageBg, $lightness: -75%) !default;
+$errorMessageTextColor: map-get($colors-dark-mode, 'error') !default;
+$errorMessageIconColor: map-get($colors-dark-mode, 'error') !default;
 
 //overlays
 $overlayContentBorder: 0 none !default;
