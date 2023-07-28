@@ -20,7 +20,7 @@ const props = defineProps({
     type: String,
   },
   label: {
-    default: 'Log in with magic link',
+    default: 'Send magic link',
     type: String,
   },
   success: {
@@ -88,12 +88,12 @@ const submitForm = async () => {
 <template>
   <div>
     <template v-if="sbErrorMsg">
-      <Message class="mb-4" severity="error">
+      <Message class="mb-4" severity="error" :closable="false">
         <span v-html="sbErrorMsg"></span>
       </Message>
     </template>
     <template v-if="sbSuccessMsg">
-      <Message class="mb-4" severity="success">
+      <Message class="mb-4" severity="success" :closable="false">
         <span v-html="sbSuccessMsg"></span>
       </Message>
     </template>
