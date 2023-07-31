@@ -20,6 +20,7 @@ import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
 import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
 import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
 import VSignupWithEmail from '~/v2/src/components/supabase/VSignupWithEmail.vue'
+import VUploadImage from '~/v2/src/components/supabase/VUploadImage.vue'
 import TabMenu from 'primevue/tabmenu'
 import { onMounted } from 'vue'
 
@@ -87,57 +88,37 @@ const menuClick = (event) => {
 const switchData = ref({
   switch: false,
 })
+
+const client = useSupabaseClient()
+const config = useRuntimeConfig()
 </script>
 
 <template>
   <div class="pb-8">
     <div style="max-width: 1024px; margin: 0 auto">
-      <div class="color-box"></div>
-      <TwitterIcon />
-      <div class="flex justify-content-center gap-3 mb-3">
-        {{ switchData.switch }}
-        <VInputSwitch v-model:data="switchData.switch" static-width />
-        <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" />
-        <VInputSwitch yes="AMAZINGGGGGGGG" no="STATIC" static-width />
-      </div>
-      <div class="flex justify-content-center gap-3 mb-3">
-        <VInputSwitch font-size="0.95rem" />
-        <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" font-size="0.95rem" />
-        <VInputSwitch
-          yes="AMAZINGGGGGGGG"
-          no="STATIC"
-          static-width
-          font-size="0.95rem"
-        />
-      </div>
-      <div class="flex justify-content-center">
-        <VInputSwitch font-size="1.5rem" />
-        <VInputSwitch yes="AMAZINGGGGGGGG" no="NOPERS" font-size="1.5rem" />
-        <VInputSwitch
-          yes="AMAZINGGGGGGGG"
-          no="STATIC"
-          static-width
-          font-size="1.5rem"
-        />
-      </div>
-      <VLoginWithEmail
-        :client="useSupabaseClient()"
-        :config="useRuntimeConfig()"
-      />
+      <VUploadImage :client="client" :config="config">
+        <template #above-button>
+          <p class="mb-3">You have not added a profile photo yet.</p>
+        </template>
+        <template #below-button>
+          <p class="mt-4">
+            <em>
+              Image files must be less than 1MB in size, and should ideally be a
+              square. Jpg, png, webp, and gif files are accepted.
+            </em>
+          </p>
+        </template>
+      </VUploadImage>
+      <VLoginWithProvider provider="google" />
+      <VLoginWithEmail :client="client" :config="config" />
       <!-- <br />
       <br />
       <VLoginWithMagicLink />
       <br />
       <br /> -->
-      <VSignupWithEmail
-        :client="useSupabaseClient()"
-        :config="useRuntimeConfig()"
-      >
+      <VSignupWithEmail :client="client" :config="config">
         <template #success>
-          <VLoginWithEmail
-            :client="useSupabaseClient()"
-            :config="useRuntimeConfig()"
-          />
+          <VLoginWithEmail :client="client" :config="config" />
         </template>
       </VSignupWithEmail>
       <!-- 

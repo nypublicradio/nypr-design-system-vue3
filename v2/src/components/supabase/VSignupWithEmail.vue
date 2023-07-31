@@ -59,8 +59,7 @@ if (!props.client && !props.config) {
 const formData = reactive({
   confirmEmail: null,
   email: '',
-  firstname: '',
-  lastname: '',
+  name: '',
   password: '',
 })
 
@@ -88,11 +87,8 @@ const rules = computed(() => {
       email: helpers.withMessage('Invalid email format', email),
       required: helpers.withMessage('The email field is required', required),
     },
-    firstname: {
-      required: helpers.withMessage('Please add your first name', required),
-    },
-    lastname: {
-      required: helpers.withMessage('Please add your last name', required),
+    name: {
+      required: helpers.withMessage('Please add your name', required),
     },
     password: {
       hasAtleastOneNumber,
@@ -125,8 +121,7 @@ const submitForm = async () => {
       email: formData.email,
       options: {
         data: {
-          first_name: formData.firstname,
-          last_name: formData.lastname,
+          name: formData.name,
         },
       },
       password: formData.password,
@@ -175,42 +170,22 @@ const submitForm = async () => {
       <div v-else key="2">
         <form v-if="formData" novalidate @submit.prevent="submitForm">
           <div class="grid mb-2">
-            <div class="flex flex-column gap-2 col-6">
-              <label for="first_name">First name</label>
+            <div class="flex flex-column gap-2 col-12">
+              <label for="first_name">Name</label>
               <InputText
-                v-model="formData.firstname"
+                v-model="formData.name"
                 type="text"
                 name="first_name"
                 class="w-full"
                 :class="{
-                  'p-invalid': v$.firstname.$error && v$.firstname.$invalid,
+                  'p-invalid': v$.name.$error && v$.name.$invalid,
                 }"
-                placeholder="Your first name"
+                placeholder="Your name"
                 required
-                @update="v$.firstname.$touch"
+                @update="v$.name.$touch"
               />
               <small class="p-error">
-                <span v-for="err of v$.firstname.$errors" :key="err.$uid">
-                  {{ err.$message }} <br />
-                </span>
-              </small>
-            </div>
-            <div class="flex flex-column gap-2 col-6">
-              <label for="last_name">Last name</label>
-              <InputText
-                v-model="formData.lastname"
-                type="text"
-                name="last_name"
-                class="w-full"
-                :class="{
-                  'p-invalid': v$.lastname.$error && v$.lastname.$invalid,
-                }"
-                placeholder="Your last name"
-                required
-                @update="v$.lastname.$touch"
-              />
-              <small class="p-error">
-                <span v-for="err of v$.lastname.$errors" :key="err.$uid">
+                <span v-for="err of v$.name.$errors" :key="err.$uid">
                   {{ err.$message }} <br />
                 </span>
               </small>
@@ -257,7 +232,7 @@ const submitForm = async () => {
             </div>
           </div>
           <div class="grid mb-2">
-            <div class="flex flex-column gap-2 col-12 md:col-6">
+            <div class="flex flex-column gap-2 col-12">
               <label for="password">Password</label>
               <Password
                 v-model="formData.password"
