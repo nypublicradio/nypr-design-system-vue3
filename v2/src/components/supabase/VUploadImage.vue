@@ -56,6 +56,8 @@ const props = defineProps({
   },
 })
 
+const emit = defineEmits(['image-uploaded'])
+
 const innerClient = ref(props.client)
 const innerConfig = ref(props.config)
 // fallback incase the parent component doesn't pass in the client and config
@@ -94,16 +96,17 @@ const uploadImage = async (event) => {
       .from(props.table)
       .upsert({
         avatar_image_url: imageUrl.value,
-        id: currentUser.value.id,
+        id: props.currentUser.id,
         updated_at: new Date().toISOString(),
       })
-      .match({ id: currentUser.value.id })
+      .match({ id: props.currentUser.id })
     if (error) {
-      console.log(error)
+      //console.log(error)
       errorMessage.value = `Error: ${error}`
     } else {
       successMessage.value = props.success
-      currentUserProfile.value.avatar_image_url = imageUrl.value
+      props.currentUserProfile.avatar_image_url = imageUrl.value
+      emit('image-uploaded', imageUrl.value)
     }
   } catch (error) {
     errorMessage.value = `Error: ${error}`
@@ -118,23 +121,23 @@ const deleteImage = async () => {
     .from('profiles')
     .upsert({
       avatar_image_url: null,
-      id: currentUser.value.id,
+      id: props.currentUser.id,
       updated_at: new Date().toISOString(),
     })
-    .match({ id: currentUser.value.id })
+    .match({ id: props.currentUser.id })
   if (error) {
-    console.log(error)
+    //console.log(error)
     errorMessage.value = `Error: ${error}`
   } else {
     successMessage.value = 'Success! Your file has been deleted.'
     imageUrl.value = null
-    currentUserProfile.value.avatar_image_url = null
+    props.currentUserProfile.avatar_image_url = null
   }
 }
 </script>
 
 <template>
-  <div class="upload-image">
+  <div class="upload-image flex flex-column align-items-center">
     <ProgressSpinner v-if="uploading" class="inline-block mb-4" />
     <img
       v-else-if="imageUrl"
@@ -154,10 +157,10 @@ const deleteImage = async () => {
         :auto="true"
         @uploader="uploadImage"
       />
-      <Button v-if="imageUrl" class="p-button-danger ml-3" @click="deleteImage">
-        Remove Image
-      </Button>
     </div>
+    <Button v-if="imageUrl" class="p-button-danger mt-4" @click="deleteImage">
+      Remove Image
+    </Button>
     <slot name="below-button"></slot>
 
     <template v-if="errorMessage">
@@ -173,10 +176,12 @@ const deleteImage = async () => {
   </div>
 </template>
 
-<style lang="scss">
-.upload-image img {
-  height: 150px;
-  width: 150px;
-  border-radius: 50%;
+<style lang="scss" scoped>
+.upload-image {
+  img {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+  }
 }
 </style>
