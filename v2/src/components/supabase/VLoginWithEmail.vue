@@ -99,7 +99,7 @@ const submitForm = async () => {
   <div>
     <form v-if="formData" novalidate @submit.prevent="submitForm">
       <div class="flex flex-column gap-2 mb-4">
-        <label for="email">Emial</label>
+        <label for="email">Email</label>
         <InputText
           v-model="formData.email"
           type="text"
@@ -117,7 +117,7 @@ const submitForm = async () => {
         </small>
       </div>
       <div class="flex flex-column gap-2 mb-5">
-        <label for="password">Passowrd</label>
+        <label for="password">Password</label>
         <InputText
           v-model="formData.password"
           type="password"

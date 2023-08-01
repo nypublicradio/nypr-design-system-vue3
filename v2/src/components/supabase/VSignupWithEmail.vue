@@ -193,7 +193,7 @@ const submitForm = async () => {
           </div>
           <div class="grid mb-2">
             <div class="flex flex-column gap-2 col-12 md:col-6">
-              <label for="email">Emial</label>
+              <label for="email">Email</label>
               <InputText
                 v-model="formData.email"
                 type="text"
