@@ -793,6 +793,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
     }
   }
   .expanded-view {
+    padding-top: env(safe-area-inset-top);
     position: relative;
     height: inherit;
     .expanded-content-holder {
