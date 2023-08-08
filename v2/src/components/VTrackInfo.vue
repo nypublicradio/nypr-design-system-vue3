@@ -269,7 +269,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       .title,
       .title div {
         font-weight: var(--persistent-player-title-weight);
-        font-size: var(--font-size-9);
+        font-size: var(--persistent-player-title-size);
         color: var(--persistent-player-title-color);
         line-height: 1;
         text-overflow: ellipsis;

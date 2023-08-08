@@ -79,9 +79,9 @@ watch(
 <style lang="scss" scoped>
 .v-smart-header {
   position: fixed;
-  top: env(safe-area-inset-top);
   left: 0;
   top: 0;
+  top: env(safe-area-inset-top) !important;
   width: 100%;
   z-index: 999;
   //box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.36);
