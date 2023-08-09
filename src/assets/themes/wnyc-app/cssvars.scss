@@ -6,6 +6,9 @@
     --background: #{map-get($colors, 'background')};
     --background2: #{map-get($colors, 'background2')};
     --background3: #{map-get($colors, 'background3')};
+    --background4: #{map-get($colors, 'background4')};
+    --dark-blue: #{map-get($colors, 'dark-blue')};
+    --blue: #{map-get($colors, 'blue')};
     --stroke: #{map-get($colors, 'stroke')};
     --night: #{map-get($colors, 'night')};
     --red: #{map-get($colors, 'red')};
@@ -133,6 +136,9 @@
     --background: #{$backgroundGradient1};
     --background2: #{map-get($colors-dark-mode, 'background2')};
     --background3: #{map-get($colors-dark-mode, 'background3')};
+    --background4: #{map-get($colors-dark-mode, 'background4')};
+    --dark-blue: #{map-get($colors-dark-mode, 'dark-blue')};
+    --blue: #{map-get($colors-dark-mode, 'blue')};
     --stroke: #{map-get($colors-dark-mode, 'stroke')};
     --night: #{map-get($colors-dark-mode, 'night')};
     --red: #{map-get($colors-dark-mode, 'red')};
