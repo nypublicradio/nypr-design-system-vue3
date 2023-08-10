@@ -169,14 +169,14 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
     }
   }
   &.static-width .option.no {
-    left: calc($yesWidthSwitch - $noWidthOrig - $paddingBuffer);
+    left: calc($yesWidthSwitch - $noWidthOrig - ($paddingBuffer * 2));
   }
   &.checked {
     .option.no {
       left: calc($yesWidth + ($paddingBuffer * 2) + ($sliderSize * 2));
     }
     .option.yes {
-      left: $paddingBuffer;
+      left: $paddingBuffer * 2;
     }
   }
 }

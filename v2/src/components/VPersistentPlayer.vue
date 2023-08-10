@@ -243,6 +243,7 @@ const emit = defineEmits([
   'is-expanded',
   'swipe-up',
   'swipe-down',
+  'is-loading',
 ])
 
 //swipe setup
@@ -311,6 +312,7 @@ const togglePlay = () => {
     sound ? sound.unload() : null
     currentFile.value = props.file
     loading.value = true
+    emit('is-loading', true)
     sound = new Howl({
       html5: true,
       onend: function () {
@@ -326,6 +328,7 @@ const togglePlay = () => {
       onload: function () {
         emit('sound-loaded')
         loading.value = false
+        emit('is-loading', false)
         durationSeconds.value = sound.duration()
       },
       onloaderror: function (id, errorCode) {
