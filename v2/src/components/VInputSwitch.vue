@@ -176,7 +176,7 @@ $yesWidthSwitch: calc($yesWidth + $sliderSize + ($paddingBuffer * 3.5));
       left: calc($yesWidth + ($paddingBuffer * 2) + ($sliderSize * 2));
     }
     .option.yes {
-      left: $paddingBuffer * 2;
+      left: calc($paddingBuffer * 2);
     }
   }
 }
