@@ -141,6 +141,18 @@ const props = defineProps({
     default: false,
     type: Boolean,
   },
+  marquee: {
+    default: false,
+    type: Boolean,
+  },
+  marqueeDelay: {
+    default: '3s',
+    type: String,
+  },
+  marqueeSpeed: {
+    default: '20s',
+    type: String,
+  },
   /**
    * show the download button
    */
@@ -549,6 +561,9 @@ defineExpose({
             :timeline-bottom="props.timelineBottom"
             :timeline-top="props.timelineTop"
             :can-expand-with-click-anywhere="props.canClickAnywhere"
+            :marquee="props.marquee"
+            :marquee-speed="props.marqueeSpeed"
+            :marquee-delay="props.marqueeDelay"
             @scrub-timeline-change="scrubTimelineChange"
             @scrub-timeline-end="scrubTimelineEnd"
             @timeline-click="timelineClick"

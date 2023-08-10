@@ -45,6 +45,18 @@ const props = defineProps({
     default: false,
     type: Boolean,
   },
+  marquee: {
+    default: false,
+    type: Boolean,
+  },
+  marqueeDelay: {
+    default: '3s',
+    type: String,
+  },
+  marqueeSpeed: {
+    default: '20s',
+    type: String,
+  },
   station: {
     default: null,
     type: String,
@@ -157,8 +169,25 @@ const convertTime = (val) => {
             :to="descriptionLink || null"
             @flexible-link-click="emit('description-click')"
           >
+            <div v-if="props.marquee" class="track-info-description-marquee">
+              <div>
+                <div class="news-message">
+                  <div
+                    class="content"
+                    v-html="`${description}&nbsp;&nbsp;-&nbsp;&nbsp;`"
+                  ></div>
+                </div>
+                <div class="news-message">
+                  <div
+                    class="content"
+                    v-html="`${description}&nbsp;&nbsp;-&nbsp;&nbsp;`"
+                  ></div>
+                </div>
+              </div>
+            </div>
             <div
-              class="track-info-description type-body"
+              v-else
+              class="track-info-description"
               v-html="description"
             ></div>
           </VFlexibleLink>
@@ -296,6 +325,34 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
         text-decoration: none;
         &:hover {
           text-decoration: none;
+        }
+        .track-info-description-marquee {
+          overflow-x: hidden;
+          div {
+            display: flex;
+            flex-wrap: nowrap;
+            white-space: nowrap;
+            min-width: 100%;
+            .news-message {
+              display: flex;
+              flex-shrink: 0;
+              align-items: center;
+              animation: slide-left v-bind(marqueeSpeed) linear infinite;
+              animation-delay: v-bind(marqueeDelay);
+              .content {
+              }
+              @keyframes slide-left {
+                from {
+                  -webkit-transform: translateX(0);
+                  transform: translateX(0);
+                }
+                to {
+                  -webkit-transform: translateX(-100%);
+                  transform: translateX(-100%);
+                }
+              }
+            }
+          }
         }
       }
     }
