@@ -53,9 +53,13 @@ const props = defineProps({
     default: '3s',
     type: String,
   },
-  marqueeSpeed: {
-    default: '20s',
+  marqueeLoops: {
+    default: '1',
     type: String,
+  },
+  marqueeSpeed: {
+    default: 0.1,
+    type: Number,
   },
   station: {
     default: null,
@@ -103,6 +107,11 @@ const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
   return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
 }
+
+const getMarqueeSpeed = computed(() => {
+  const length = props.description.length
+  return `${length * props.marqueeSpeed}s`
+})
 </script>
 
 <template>
@@ -337,7 +346,8 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
               display: flex;
               flex-shrink: 0;
               align-items: center;
-              animation: slide-left v-bind(marqueeSpeed) linear infinite;
+              animation: slide-left v-bind(getMarqueeSpeed) linear
+                v-bind(marqueeLoops);
               animation-delay: v-bind(marqueeDelay);
               .content {
               }
