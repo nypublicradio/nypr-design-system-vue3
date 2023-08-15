@@ -109,7 +109,7 @@ const config = useRuntimeConfig()
           </p>
         </template>
       </VUploadImage>
-      <VLoginWithProvider provider="google" />
+      <VLoginWithProvider :client="client" :config="config" provider="google" />
       <VLoginWithEmail :client="client" :config="config" />
       <!-- <br />
       <br />

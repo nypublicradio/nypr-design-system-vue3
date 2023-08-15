@@ -15,6 +15,7 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@capacitor/browser": "^5.0.6",
     "@nuxt/image": "rc",
     "@nuxtjs/supabase": "^0.3.7",
     "@vuelidate/core": "^2.0.3",
