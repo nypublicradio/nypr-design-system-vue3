@@ -29,7 +29,7 @@ const props = defineProps({
     type: String,
   },
   slug: {
-    default: '/dashboard',
+    default: '/confirm',
     type: String,
   },
 })
@@ -75,8 +75,8 @@ const submitForm = async () => {
   if (!v$.value.$error) {
     //success with Vuelidate
     const sbError = await innerClient.value.auth.signInWithPassword(
-      { email: formData.email, password: formData.password },
-      { redirectTo: innerConfig.value.supabaseAuthSignInRedirectTo }
+      { email: formData.email, password: formData.password }
+      //{ redirectTo: innerConfig.value.supabaseAuthSignInRedirectTo }
     )
     if (!sbError.error) {
       //success with Supabase

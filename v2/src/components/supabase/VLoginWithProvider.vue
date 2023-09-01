@@ -40,20 +40,13 @@ const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 const login = async () => {
   emit('submit-click')
   const res = await innerClient.value.auth.signInWithOAuth({
-    options: {
-      skipBrowserRedirect: true,
-    },
     provider: props.provider,
   })
-
-  const redirectUrl = await res.data.url
-
   if (res.error) {
     emit('submit-error', res.error)
     errorMessage.value = res.error
   } else {
     emit('submit-success')
-    await Browser.open({ url: redirectUrl })
   }
 }
 // capitalise the first letter of a string

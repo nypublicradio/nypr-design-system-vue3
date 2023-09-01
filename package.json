@@ -17,7 +17,7 @@
   "dependencies": {
     "@capacitor/browser": "^5.0.6",
     "@nuxt/image": "rc",
-    "@nuxtjs/supabase": "^0.3.7",
+    "@nuxtjs/supabase": "^1.0.2",
     "@vuelidate/core": "^2.0.3",
     "@vuelidate/validators": "^2.0.3",
     "@vueuse/core": "^10.1.2",
