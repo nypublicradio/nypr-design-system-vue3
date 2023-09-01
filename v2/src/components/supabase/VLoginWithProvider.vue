@@ -38,13 +38,13 @@ const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
 // method triggered by the form submit to handle supabase login logic
 const login = async () => {
   emit('submit-click')
-  const error = await innerClient.value.auth.signInWithOAuth(
+  const res = await innerClient.value.auth.signInWithOAuth(
     { provider: props.provider },
-    { redirectTo: innerConfig.value.supabaseAuthSignInRedirectTo }
+    //{ redirectTo: innerConfig.value.supabaseAuthSignInRedirectTo }
   )
-  if (error.value) {
-    emit('submit-error', error)
-    errorMessage.value = error
+   if (res.error) {
+    emit('submit-error', res.error)
+    errorMessage.value = res.error
   } else {
     emit('submit-success')
   }
