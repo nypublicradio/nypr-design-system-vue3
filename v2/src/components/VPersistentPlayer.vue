@@ -260,6 +260,8 @@ const emit = defineEmits([
   'swipe-up',
   'swipe-down',
   'is-loading',
+  'duration',
+  'current-duration',
 ])
 
 //swipe setup
@@ -284,6 +286,7 @@ const { direction, lengthY } = useSwipe(playerRef, {
 // method to handle update the currentSeconds with the audio playhead
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
+  emit('current-duration', currentSeconds.value)
 }
 // time converter
 const convertTime = (val) => {
@@ -346,6 +349,7 @@ const togglePlay = () => {
         loading.value = false
         emit('is-loading', false)
         durationSeconds.value = sound.duration()
+        emit('duration', durationSeconds.value)
       },
       onloaderror: function (id, errorCode) {
         emit('load-error', [id, errorCode])
