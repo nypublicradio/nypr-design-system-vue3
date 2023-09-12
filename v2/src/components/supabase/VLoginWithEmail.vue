@@ -125,6 +125,7 @@ const submitForm = async () => {
           :class="{ 'p-invalid': v$.password.$error && v$.password.$invalid }"
           placeholder="Enter your password"
           required
+          toggle-mask
           :autofocus="props.currentEmail"
           @update="v$.password.$touch"
         />

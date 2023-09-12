@@ -46,7 +46,12 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
+const emit = defineEmits([
+  'submit-click',
+  'submit-error',
+  'submit-success',
+  'login-success',
+])
 
 const innerClient = ref(props.client)
 const innerConfig = ref(props.config)
@@ -163,6 +168,7 @@ const submitForm = async () => {
               :current-email="formData.email"
               :client="innerClient"
               :config="innerConfig"
+              @submit-success="emit('login-success', $event)"
             />
           </slot>
         </div>
