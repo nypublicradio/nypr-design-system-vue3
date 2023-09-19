@@ -3,7 +3,7 @@ import Button from 'primevue/button'
 import FileUpload from 'primevue/fileupload'
 import Message from 'primevue/message'
 import ProgressSpinner from 'primevue/progressspinner'
-import { ref, shallowRef } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 const props = defineProps({
   accept: {
     default: 'image/*',
