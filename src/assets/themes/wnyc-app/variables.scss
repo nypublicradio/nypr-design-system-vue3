@@ -186,7 +186,7 @@ $passwordMediumBg: #f0c135 !default;
 $passwordStrongBg: #207f3b !default;
 
 //button
-$buttonPadding: 0.75rem 1rem !default;
+$buttonPadding: 0.5rem 1rem !default;
 $buttonIconOnlyWidth: 2.357rem !default;
 $buttonIconOnlyPadding: 0.25rem 0 !default;
 $buttonBg: $primaryColor !default;
@@ -204,7 +204,7 @@ $roundedButtonBorderRadius: 2rem !default;
 $textButtonHoverBgOpacity: 0.04 !default;
 $textButtonActiveBgOpacity: 0.16 !default;
 $outlinedButtonBorder: 1px solid !default;
-$plainButtonTextColor: $textSecondaryColor !default;
+$plainButtonTextColor: $textColor !default;
 $plainButtonHoverBgColor: $shade200 !default;
 $plainButtonActiveBgColor: $shade300 !default;
 
@@ -642,7 +642,7 @@ $toastMargin: 0 0 1rem 0 !default;
 $toastPadding: 1rem !default;
 $toastBorderWidth: 0 0 0 6px !default;
 $toastShadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12) !default;
-$toastOpacity: 0.9 !default;
+$toastOpacity: 1 !default;
 $toastTitleFontWeight: 700 !default;
 $toastDetailMargin: $inlineSpacing 0 0 0 !default;
 
@@ -674,12 +674,12 @@ $overlayContainerShadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3p
 $dialogHeaderBg: $shade000 !default;
 $dialogHeaderBorder: 0 none !default;
 $dialogHeaderTextColor: $shade700 !default;
-$dialogHeaderFontWeight: 600 !default;
-$dialogHeaderFontSize: 1.25rem !default;
-$dialogHeaderPadding: 0.75rem !default;
-$dialogContentPadding: 0 0.75rem 1rem 0.75rem !default;
+$dialogHeaderFontWeight: 500 !default;
+$dialogHeaderFontSize: 1rem !default;
+$dialogHeaderPadding: 1.25rem !default;
+$dialogContentPadding: 0 1.25rem 1.25rem 1.25rem !default;
 $dialogFooterBorder: 0 none !default;
-$dialogFooterPadding: 0 0.75rem 0.75rem 0.75rem !default;
+$dialogFooterPadding: 0 1.25rem 1.25rem 1.25rem !default;
 
 //confirmpopup
 $confirmPopupContentPadding: $panelContentPadding !default;

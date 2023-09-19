@@ -4,6 +4,7 @@ import { email, helpers, minLength, required } from '@vuelidate/validators'
 import Button from 'primevue/button'
 import InputText from 'primevue/inputtext'
 import Message from 'primevue/message'
+import Password from 'primevue/password'
 import { computed, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
@@ -118,9 +119,10 @@ const submitForm = async () => {
       </div>
       <div class="flex flex-column gap-2 mb-5">
         <label for="password">Password</label>
-        <InputText
+        <Password
           v-model="formData.password"
           type="password"
+          name="password"
           class="w-full"
           :class="{ 'p-invalid': v$.password.$error && v$.password.$invalid }"
           placeholder="Enter your password"

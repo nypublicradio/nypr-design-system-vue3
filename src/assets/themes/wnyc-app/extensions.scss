@@ -69,3 +69,16 @@ form {
         width: 100%;
     }
 }
+
+.p-dialog .p-dialog-header {
+    padding: 1.5rem;
+    .p-dialog-header-icon,
+    .p-dialog-header-icon .p-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+}
+
+.p-dialog .p-dialog-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
