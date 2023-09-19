@@ -128,6 +128,7 @@ const submitForm = async () => {
           placeholder="Enter your password"
           required
           toggle-mask
+          :feedback="false"
           :autofocus="props.currentEmail"
           @update="v$.password.$touch"
         />

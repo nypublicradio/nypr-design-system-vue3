@@ -21,7 +21,7 @@ $colors: (
     'info': #70c5f6,
     'purple': #7b4ee2,
     'secondary': #999999,
-    'link': #2b6f99,
+    'link': #2b6f99
 );
 
 $colors-dark-mode: (
@@ -42,9 +42,9 @@ $colors-dark-mode: (
     'info': #70c5f6,
     'purple': #7b4ee2,
     'secondary': #999999,
-    'link': #3588bb,
+    'link': #3588bb
 );
-$backgroundGradient1: linear-gradient(to bottom, map-get($colors, 'dark-blue'), map-get($colors, 'blue'));
+$backgroundGradient1: linear-gradient(to top, #234670ff, #1c233eff);
 
 //primary color variables
 $primaryColor: map-get($colors, 'red') !default;
@@ -94,9 +94,15 @@ $textColorOnDark: map-get($colors-dark-mode, 'night') !default;
 $borderRadius: 8px !default;
 $transitionDuration: 0.25s !default;
 $transitionEase: ease-in-out !default;
-$formElementTransition: background-color $transitionDuration, color $transitionDuration,
-    border-color $transitionDuration, box-shadow $transitionDuration !default;
-$actionIconTransition: background-color $transitionDuration, color $transitionDuration, box-shadow $transitionDuration !default;
+$formElementTransition:
+    background-color $transitionDuration,
+    color $transitionDuration,
+    border-color $transitionDuration,
+    box-shadow $transitionDuration !default;
+$actionIconTransition:
+    background-color $transitionDuration,
+    color $transitionDuration,
+    box-shadow $transitionDuration !default;
 $listItemTransition: box-shadow $transitionDuration !default;
 $primeIconFont: 'primeicons';
 $primeIconFontSize: 1rem !default;
@@ -176,7 +182,9 @@ $inputListHeaderBorder: 0 none !default;
 $inputOverlayBg: $inputListBg !default;
 $inputOverlayHeaderBg: $inputListHeaderBg !default;
 $inputOverlayBorder: 0 none !default;
-$inputOverlayShadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14),
+$inputOverlayShadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
     0 1px 10px 0 rgba(0, 0, 0, 0.12) !default;
 
 //password
@@ -198,7 +206,10 @@ $buttonHoverBorderColor: $primaryDarkColor !default;
 $buttonActiveBg: $primaryDarkerColor !default;
 $buttonTextActiveColor: $primaryTextColor !default;
 $buttonActiveBorderColor: $primaryDarkerColor !default;
-$raisedButtonShadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
+$raisedButtonShadow:
+    0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 2px 2px 0 rgba(0, 0, 0, 0.14),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12) !default;
 $roundedButtonBorderRadius: 2rem !default;
 
 $textButtonHoverBgOpacity: 0.04 !default;
@@ -502,7 +513,10 @@ $cardSubTitleFontWeight: 400 !default;
 $cardSubTitleColor: $shade600 !default;
 $cardContentPadding: 1rem 0 !default;
 $cardFooterPadding: 1rem 0 0 0 !default;
-$cardShadow: 0 2px 1px -1px rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14), 0 1px 3px 0 rgba(0, 0, 0, 0.12) !default;
+$cardShadow:
+    0 2px 1px -1px rgba(0, 0, 0, 0.2),
+    0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12) !default;
 
 //editor
 $editorToolbarBg: $panelHeaderBg !default;
@@ -641,7 +655,10 @@ $toastMessageTextMargin: 0 0 0 1rem !default;
 $toastMargin: 0 0 1rem 0 !default;
 $toastPadding: 1rem !default;
 $toastBorderWidth: 0 0 0 6px !default;
-$toastShadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12) !default;
+$toastShadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12) !default;
 $toastOpacity: 1 !default;
 $toastTitleFontWeight: 700 !default;
 $toastDetailMargin: $inlineSpacing 0 0 0 !default;
@@ -667,7 +684,9 @@ $errorMessageIconColor: map-get($colors-dark-mode, 'error') !default;
 //overlays
 $overlayContentBorder: 0 none !default;
 $overlayContentBg: $panelContentBg !default;
-$overlayContainerShadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14),
+$overlayContainerShadow:
+    0px 11px 15px -7px rgba(0, 0, 0, 0.2),
+    0px 24px 38px 3px rgba(0, 0, 0, 0.14),
     0px 9px 46px 8px rgba(0, 0, 0, 0.12) !default;
 
 //dialog
@@ -742,7 +761,10 @@ $submenuHeaderBorderRadius: 0 !default;
 $submenuHeaderFontWeight: 600 !default;
 $overlayMenuBg: $menuBg !default;
 $overlayMenuBorder: 0 none !default;
-$overlayMenuShadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12) !default;
+$overlayMenuShadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0 4px 5px 0 rgba(0, 0, 0, 0.14),
+    0 1px 10px 0 rgba(0, 0, 0, 0.12) !default;
 $verticalMenuPadding: 0.25rem 0 !default;
 $menuSeparatorMargin: 0.25rem 0 !default;
 
