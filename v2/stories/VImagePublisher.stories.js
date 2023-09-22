@@ -32,7 +32,7 @@ const TemplateSlots = (args) => ({
     setup() {
         return { args }
     },
-    template: '<VImagePublisher v-bind="args"> <template #caption> <VImageCaption text="This is a sample caption text <b>HTML</b>" /> </template> <template #gallery> <VImageGallery count="9" gallery-link="https://www.google.com" /> </VImagePublisher> </template>',
+    template: '<VImagePublisher v-bind="args"> <template #belowImage>This is Content below the image</template> <template #caption> <VImageCaption text="This is a sample caption text <b>HTML</b>" /> </template> <template #gallery> <VImageGallery count="9" gallery-link="https://www.google.com" /> </VImagePublisher> </template>',
 })
 
 export const Default = Template.bind({})

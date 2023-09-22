@@ -336,6 +336,7 @@ const closeEnlarge = () => {
         <slot class="slot gallery" name="gallery"></slot>
       </div>
     </VFlexibleLink>
+    <slot class="slot below-image" name="belowImage"></slot>
   </div>
 </template>
 
