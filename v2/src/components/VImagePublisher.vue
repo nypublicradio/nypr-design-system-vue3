@@ -356,6 +356,7 @@ const closeEnlarge = () => {
       height: 100%;
       top: 0;
       object-fit: cover;
+      display: block;
       &.is-vertical {
         margin: auto;
         display: block;

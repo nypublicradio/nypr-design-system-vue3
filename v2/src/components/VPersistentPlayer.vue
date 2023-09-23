@@ -179,6 +179,13 @@ const props = defineProps({
     type: String,
   },
   /**
+   * the swipe speed threshhold to trigger the swipe action
+   */
+  swipeThreshold: {
+    default: 0.5,
+    type: Number,
+  },
+  /**
    * the timeline is at the bottom of the player
    */
   timelineBottom: {
@@ -266,23 +273,113 @@ const emit = defineEmits([
 
 //swipe setup
 const playerRef = ref(null)
-const { direction, lengthY } = useSwipe(playerRef, {
-  onSwipe() {
+
+// prevents the body from scrolling when the dropdown is open
+function preventScrollOnTouch(event) {
+  event.preventDefault()
+}
+const supportSwipe =
+  (props.canExpand && props.canExpandWithSwipe) ||
+  (props.canExpand && props.canUnexpandWithSwipe)
+
+if (supportSwipe) {
+  let touchstartY = 0
+  let touchendY = 0
+  let touchPrevY = 0
+  let touchCurrentY = 0
+  let touchstartTime = 0
+  let touchendTime = 0
+  const swipeThreshold = props.swipeThreshold
+  let isDraggingDown = false
+
+  // handles the detection of the direction of the drag movment
+  function handleSwipeDirection() {
+    const tempBool = isDraggingDown
+    if (touchCurrentY < touchPrevY) {
+      isDraggingDown = true
+    }
+    if (touchCurrentY > touchPrevY) {
+      isDraggingDown = false
+    }
+    //reset the touchstartY and touchstartTime if the direction changes
+    if (tempBool !== isDraggingDown) {
+      touchstartY = touchCurrentY
+      touchstartTime = new Date().getTime()
+    }
+  }
+
+  // handles the swipe ended logic
+  function handleSwipe() {
+    const distance = Math.abs(touchendY - touchstartY)
+    const time = touchendTime - touchstartTime
+    const velocity = distance / time
+    // console.log('________________________________________________________')
+    // console.log('distance', distance)
+    // console.log('time', time)
+    // console.log('velocity', velocity)
+    // console.log('swipeThreshold', swipeThreshold)
+    // console.log('isDraggingDown', isDraggingDown)
+    // console.log('touchendY', touchendY)
+    // console.log('touchstartY', touchstartY)
     if (props.canExpand && props.canExpandWithSwipe) {
-      if (direction.value === 'up' && lengthY.value > 100) {
-        isExpanded.value = true
-        emit('swipe-up')
+      if (!isDraggingDown) {
+        if (velocity > swipeThreshold) {
+          //console.log('EXPAND')
+          playerRef.value.removeEventListener(
+            'touchmove',
+            preventScrollOnTouch,
+            {
+              passive: false,
+            }
+          )
+          isExpanded.value = true
+          emit('swipe-up')
+        }
       }
     }
     if (props.canExpand && props.canUnexpandWithSwipe) {
-      if (direction.value === 'down' && lengthY.value < -100) {
-        isExpanded.value = false
-        emit('swipe-down')
+      if (isDraggingDown) {
+        if (velocity > swipeThreshold) {
+          //console.log('UNEXPAND')
+          playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+            passive: false,
+          })
+          isExpanded.value = false
+          emit('swipe-down')
+        }
       }
     }
-  },
-  passive: true,
+  }
+
+  const swipe = useSwipe(playerRef, {
+    onSwipe() {
+      touchCurrentY = swipe.lengthY.value
+
+      handleSwipeDirection()
+      touchPrevY = touchCurrentY
+    },
+    onSwipeEnd() {
+      touchendY = swipe.lengthY.value
+      touchendTime = new Date().getTime()
+      handleSwipe()
+    },
+    onSwipeStart() {
+      touchstartY = swipe.lengthY.value
+      touchstartTime = new Date().getTime()
+    },
+    passive: true,
+  })
+}
+// initially set touchmove prevent default on the playerRef
+onMounted(() => {
+  if (supportSwipe) {
+    playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+      passive: false,
+    })
+  }
 })
+// END swipe
+
 // method to handle update the currentSeconds with the audio playhead
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
@@ -431,21 +528,14 @@ const toggleMinimize = (e) => {
 
 // handle scroll blocking with js when player is expanded
 const scrollToggle = (e) => {
-  /*   if (e) {
-    // Get the current page scroll position
-    const scrollTop = window.pageYOffset ?? document.documentElement.scrollTop
-    const scrollLeft = window.pageXOffset ?? document.documentElement.scrollLeft
-    // if any scroll is attempted, set this to the previous value
-    window.onscroll = function () {
-      window.scrollTo(scrollLeft, scrollTop)
-    }
-  } else {
-    window.onscroll = function () {}
-  } */
   if (e) {
-    document.body.classList.add('v-persistent-player-stop-window-scrolling')
+    playerRef.value.removeEventListener('touchmove', preventScrollOnTouch, {
+      passive: false,
+    })
   } else {
-    document.body.classList.remove('v-persistent-player-stop-window-scrolling')
+    playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+      passive: false,
+    })
   }
 }
 // exposed method to handle the expanding toggle
@@ -544,6 +634,7 @@ defineExpose({
         <slot v-else name="chevronUp"><i class="pi pi-chevron-up"></i></slot>
       </Button>
     </div>
+
     <Transition name="expand">
       <div v-if="!isExpanded" class="player-controls">
         <div
@@ -673,6 +764,7 @@ defineExpose({
         </Button>
       </div>
     </Transition>
+
     <Transition name="expand-delay">
       <div v-if="isExpanded" class="expanded-view">
         <div class="expanded-content-holder">
@@ -829,6 +921,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
         top: 0;
         background-color: var(--persistent-player-bg);
         padding: 5px 0;
+        z-index: 1;
       }
       position: relative;
       overflow-y: auto;
