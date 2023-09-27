@@ -138,22 +138,36 @@ const deleteImage = async () => {
 const uploadLabel = computed(() => {
   return imageUrl.value ? 'Upload new image' : props.label
 })
+
+const fileUpload = ref(null)
+function triggerFileUpload() {
+  let fileInput = fileUpload.value.$el.querySelector('input[type="file"]')
+  let clickEvent = new MouseEvent('click', {
+    bubbles: true,
+    cancelable: true,
+    view: window,
+  })
+  fileInput.dispatchEvent(clickEvent)
+}
 </script>
 
 <template>
   <div class="upload-image flex flex-column align-items-center">
     <ProgressSpinner v-if="uploading" class="inline-block mb-4" />
-    <img
+    <Button
       v-else-if="imageUrl"
-      :src="imageUrl"
-      alt="profile photo"
-      class="mb-4"
-    />
+      rounded
+      text
+      class="mb-4 p-0 border-circle"
+      @click="triggerFileUpload"
+    >
+      <img :src="imageUrl" alt="profile photo" />
+    </Button>
     <template v-if="errorMessage">
       <Message
         :sticky="false"
         :life="5000"
-        class="mt-0 text-only"
+        class="mt-0 text-only error"
         severity="error"
       >
         <div class="text-center" v-html="errorMessage"></div>
@@ -178,6 +192,7 @@ const uploadLabel = computed(() => {
     />
     <div class="flex w-full">
       <FileUpload
+        ref="fileUpload"
         :class="[{ 'p-button-secondary': imageUrl }]"
         class="w-full"
         mode="basic"
@@ -214,6 +229,18 @@ const uploadLabel = computed(() => {
   }
   .p-fileupload {
     width: 100%;
+  }
+}
+</style>
+<style lang="scss">
+.upload-image {
+  .p-fileupload {
+    width: 100%;
+    .p-button:hover {
+      color: var(--night-500);
+      background: #fff;
+      border: 1px solid var(--stroke-500);
+    }
   }
 }
 </style>
