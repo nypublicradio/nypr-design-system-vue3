@@ -268,9 +268,9 @@ describe('VPersistentPlayer', () => {
     expect(wrapper.emitted()['volume-change']).toBeTruthy()
 
     await aheadBtn.trigger('click')
-    expect(wrapper.emitted()['ahead-15']).toBeTruthy()
+    expect(wrapper.emitted()['skip-ahead']).toBeTruthy()
     await backBtn.trigger('click')
-    expect(wrapper.emitted()['back-15']).toBeTruthy()
+    expect(wrapper.emitted()['skip-back']).toBeTruthy()
 
     downloadBtn.trigger('click')
     expect(wrapper.emitted()['download']).toBeTruthy()
