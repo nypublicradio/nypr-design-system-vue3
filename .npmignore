@@ -1,6 +1,6 @@
 .gitignore
 .circleci/
-.npmrc
+
 # Dev stuff
 
 .eslintrc.js

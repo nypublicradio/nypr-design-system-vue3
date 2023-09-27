@@ -172,6 +172,20 @@ const props = defineProps({
     type: Boolean,
   },
   /**
+   * skip ahead time
+   */
+  skipAheadTime: {
+    default: 15,
+    type: Number,
+  },
+  /**
+   * skip back time
+   */
+  skipBackTime: {
+    default: 15,
+    type: Number,
+  },
+  /**
    * radio station name
    */
   station: {
@@ -250,8 +264,8 @@ const emit = defineEmits([
   'volume-toggle-mute',
   'volume-change',
   'load-error',
-  'ahead-15',
-  'back-15',
+  'skip-ahead',
+  'skip-back',
   'scrub-timeline-change',
   'scrub-timeline-end',
   'download',
@@ -395,19 +409,21 @@ const download = () => {
   emit('download')
   window.open(props.file, '_blank')
 }
-// makes the audio skip ahead 15 seconds
-const goAhead15 = () => {
+// makes the audio skip ahead props.skipAheadTime seconds
+const skipAhead = () => {
   if (sound) {
-    emit('ahead-15')
-    sound.seek(sound.seek() + 15)
+    emit('skip-ahead')
+    sound.seek(sound.seek() + props.skipAheadTime)
     updateCurrentSeconds()
   }
 }
-// makes the audio skip back 15 seconds
-const goBack15 = () => {
+// makes the audio skip back props.skipBackTime seconds
+const skipBack = () => {
   if (sound) {
-    emit('back-15')
-    sound.seek() > 15 ? sound.seek(sound.seek() - 15) : sound.seek(0.1)
+    emit('skip-back')
+    sound.seek() > props.skipBackTime
+      ? sound.seek(sound.seek() - props.skipBackTime)
+      : sound.seek(0.1)
     updateCurrentSeconds()
   }
 }
@@ -572,10 +588,10 @@ onMounted(() => {
         }
         break
       case 'ArrowLeft':
-        goBack15()
+        skipBack()
         break
       case 'ArrowRight':
-        goAhead15()
+        skipAhead()
         break
       default:
         /* code */
@@ -610,6 +626,8 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
+  skipAhead,
+  skipBack,
   toggleExpanded,
   toggleMinimize,
   togglePlay,
@@ -689,11 +707,11 @@ defineExpose({
         </v-volume-control>
         <Button
           v-if="props.showSkip && !props.livestream"
-          title="Go Back 15 Seconds"
+          :title="`Go Back ${props.skipBackTime} Seconds`"
           class="player-back-15-icon p-button-icon-only p-button-text p-button-secondary"
           :class="{ [`hideOnMobile`]: props.hideSkipMobile }"
-          aria-label="go back 15 seconds"
-          @click="goBack15"
+          :aria-label="`go back ${props.skipBackTime} seconds`"
+          @click="skipBack"
         >
           <slot name="prev"><i class="pi pi-replay"></i></slot>
         </Button>
@@ -716,11 +734,11 @@ defineExpose({
         </Button>
         <Button
           v-if="props.showSkip && !props.livestream"
-          title="Go Ahead 15 Seconds"
+          :title="`Go Ahead ${props.skipAheadTime} Seconds`"
           class="player-ahead-15-icon p-button-icon-only p-button-text p-button-secondary"
           :class="{ [`hideOnMobile`]: props.hideSkipMobile }"
-          aria-label="go ahead 15 seconds"
-          @click="goAhead15"
+          :aria-label="`go ahead ${props.skipAheadTime} seconds`"
+          @click="skipAhead"
         >
           <slot name="skip">
             <i class="pi pi-refresh"></i>
