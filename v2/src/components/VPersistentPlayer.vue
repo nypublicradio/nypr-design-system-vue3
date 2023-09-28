@@ -455,6 +455,7 @@ const togglePlay = () => {
           sound.play()
         } else {
           sound.unload()
+          playing.value = false
         }
       },
       onload: function () {

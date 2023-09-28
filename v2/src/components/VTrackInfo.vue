@@ -109,7 +109,7 @@ const convertTime = (val) => {
 }
 
 const getMarqueeSpeed = computed(() => {
-  const length = props.description.length
+  const length = props.description?.length
   return `${length * props.marqueeSpeed}s`
 })
 </script>
