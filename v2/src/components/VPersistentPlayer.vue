@@ -431,6 +431,7 @@ const skipBack = () => {
 const startDurationInterval = () => {
   interval = setInterval(() => {
     updateCurrentSeconds()
+    console.log('updaintg')
   }, 1000)
 }
 // clears the clock interval
@@ -456,6 +457,11 @@ const togglePlay = () => {
         } else {
           sound.unload()
           playing.value = false
+          emit('toggle-play', false)
+          // without the timeout, the timeline will not update and disapear on the last tick
+          setTimeout(() => {
+            clearDurationInterval()
+          }, 1100)
         }
       },
       onload: function () {
