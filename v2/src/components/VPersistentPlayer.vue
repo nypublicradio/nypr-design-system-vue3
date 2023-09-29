@@ -431,7 +431,7 @@ const skipBack = () => {
 const startDurationInterval = () => {
   interval = setInterval(() => {
     updateCurrentSeconds()
-    console.log('updaintg')
+    //console.log('updaintg')
   }, 1000)
 }
 // clears the clock interval
