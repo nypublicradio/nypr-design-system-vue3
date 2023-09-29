@@ -1,4 +1,4 @@
-import VImage from '../components/VImage.vue'
+import VImageWagtail from '../components/VImageWagtail.vue'
 import axe from './axe-helper'
 import { mount } from '@vue/test-utils'
 import { toHaveNoViolations } from 'jest-axe'
@@ -6,7 +6,7 @@ import PrimeVue from 'primevue/config'
 
 expect.extend(toHaveNoViolations)
 
-describe('VImage', () => {
+describe('VImageWagtail', () => {
   let wrapper = {}
   const provider = 'wagtail'
   const alt = ''
@@ -31,7 +31,7 @@ describe('VImage', () => {
 
   const createComponent = ({ props = {}, slots = {} } = {}) => {
 
-    wrapper = mount(VImage, {
+    wrapper = mount(VImageWagtail, {
       global: {
         plugins: [PrimeVue],
         stubs: {
