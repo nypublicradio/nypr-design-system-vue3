@@ -1,7 +1,7 @@
 <script setup>
 import VImagePublisher from './VImagePublisher.vue'
 import VImageWagtail from './VImageWagtail.vue'
-import { computed } from 'vue'
+import { isPublisherSrc } from './helpers.js'
 
 const props = defineProps({
   src: {
@@ -9,13 +9,12 @@ const props = defineProps({
     type: String,
   },
 })
-
-const isPublisherSrc = computed(() => {
-  return props.src.includes('media.wnyc.org')
-})
 </script>
 
 <template>
-  <VImagePublisher v-if="isPublisherSrc" v-bind="{ ...$props, ...$attrs }" />
+  <VImagePublisher
+    v-if="isPublisherSrc(props.src)"
+    v-bind="{ ...$props, ...$attrs }"
+  />
   <VImageWagtail v-else v-bind="{ ...$props, ...$attrs }" />
 </template>

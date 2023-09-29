@@ -80,13 +80,6 @@ const props = defineProps({
     default: () => [3, 2],
     type: Array,
   },
-  /** * List of display densities to generate sizes for in the srcset */
-  sizes: {
-    default() {
-      return [2, 3]
-    },
-    type: Array,
-  },
   /** * An image url template string with tokens to replace for width and height
    * * e.g. "https://source.unsplash.com/random/%width%x%height%"
    * A plain image url here will also 'work' but you won't get additional sizes
@@ -94,6 +87,13 @@ const props = defineProps({
   src: {
     default: null,
     type: String,
+  },
+  /** * List of display densities to generate sizes for in the srcset */
+  srcset: {
+    default() {
+      return [2, 3]
+    },
+    type: Array,
   },
   /**
    * address to navigate to when the image is clicked
@@ -201,7 +201,7 @@ const srcset = computed(() => {
     //# skipcq JS-0123
     let srcset = ''
     let lastImage = false
-    for (const size of props.sizes) {
+    for (const size of props.srcset) {
       /* continue if it is NOT the lastImage and the image has more pixels than its rendered area */
       if (!lastImage && props.maxWidth > computedWidth.value) {
         let width = Math.round(computedWidth.value * size)
@@ -214,7 +214,7 @@ const srcset = computed(() => {
           lastImage = true
         }
         // if we are on the last size in the arraym set lastImage to true
-        if (props.sizes.length - 1 === props.sizes.indexOf(size)) {
+        if (props.srcset.length - 1 === props.srcset.indexOf(size)) {
           lastImage = true
         }
         const url = template

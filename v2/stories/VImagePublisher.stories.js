@@ -83,8 +83,8 @@ export const SrcsetSizes = Template.bind({})
 SrcsetSizes.args = {
     alt: 'Fallback alt text here',
     height: 150,
-    sizes: [2, 2.5, 3],
     src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
+    srcset: [2, 2.5, 3],
     width: 200
 }
 
