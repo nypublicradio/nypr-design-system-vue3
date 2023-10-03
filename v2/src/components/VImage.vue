@@ -14,13 +14,18 @@ const props = defineProps({
 <template>
   <VImagePublisher
     v-if="isPublisherSrc(props.src)"
+    :key="props.src"
     v-bind="{ ...$props, ...$attrs }"
   >
     <template v-for="(value, name) in $slots" #[name]="data">
       <slot :name="name" v-bind="data"></slot>
     </template>
   </VImagePublisher>
-  <VImageWagtail v-else v-bind="{ ...$props, ...$attrs }">
+  <VImageWagtail
+    v-else
+    :key="`${props.src}Wagtail`"
+    v-bind="{ ...$props, ...$attrs }"
+  >
     <template v-for="(value, name) in $slots" #[name]="data">
       <slot :name="name" v-bind="data"></slot>
     </template>
