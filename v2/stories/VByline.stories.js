@@ -121,6 +121,13 @@ const Template = (args) => ({
     },
     template: '<v-byline v-bind="args" />',
 })
+const TemplateBlockLinks = (args) => ({
+    components: { VByline },
+    setup() {
+        return { args }
+    },
+    template: '<v-byline v-bind="args" isBlockLinks />',
+})
 
 
 const TemplateImage = (args) => ({
@@ -158,6 +165,10 @@ const TemplateAfterNameSlot = (args) => ({
 
 export const Default = Template.bind({})
 Default.args = {
+    authors: authorsArray
+}
+export const BlockLinks = TemplateBlockLinks.bind({})
+BlockLinks.args = {
     authors: authorsArray
 }
 export const DefaultDataAsObject = Template.bind({})

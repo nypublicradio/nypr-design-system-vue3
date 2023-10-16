@@ -31,6 +31,13 @@ const props = defineProps({
     type: String,
   },
   /**
+   * to stop the author links from being clickable
+   */
+  isBlockLinks: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * prefix text
    */
   prefix: {
@@ -81,6 +88,7 @@ const getUniqueKey = (author) => {
         <v-byline-unit
           class="v-byline-unit"
           :author="author || null"
+          :is-block-links="props.isBlockLinks"
           @name-click="($event) => emit('name-click', $event)"
           @organization-click="($event) => emit('organization-click', $event)"
         />

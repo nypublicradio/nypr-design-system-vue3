@@ -5,6 +5,10 @@ const props = defineProps({
     default: null,
     type: Object,
   },
+  isBlockLinks: {
+    default: false,
+    type: Boolean,
+  },
 })
 const emit = defineEmits(['name-click', 'organization-click'])
 </script>
@@ -14,6 +18,7 @@ const emit = defineEmits(['name-click', 'organization-click'])
     <VFlexibleLink
       :to="props.author?.url || null"
       class="v-byline-author-name"
+      :style="`pointer-events: ${props.isBlockLinks ? 'none' : 'auto'}`"
       @click="
         () =>
           emit('name-click', {
@@ -29,7 +34,9 @@ const emit = defineEmits(['name-click', 'organization-click'])
       <VFlexibleLink
         :to="props.author?.organizationUrl || null"
         class="v-byline-contributing-org"
-        style="display: inline"
+        :style="`display: inline; pointer-events: ${
+          props.isBlockLinks ? 'none' : 'auto'
+        }`"
         @click="
           () =>
             emit('organization-click', {
