@@ -165,6 +165,20 @@ const computedWidth = computed(() => {
     ? Math.round(props.maxWidth / (props.maxHeight / props.height))
     : props.width
 })
+const computedEnlargeWidth = computed(() => {
+  const modalFramePaddingOffset = 84
+  return window.innerWidth * window.devicePixelRatio > props.maxWidth
+    ? props.maxWidth
+    : (window.innerWidth - modalFramePaddingOffset) * window.devicePixelRatio
+})
+const computedEnlargeHeight = computed(() => {
+  const originalWidth = props.maxWidth
+  const originalHeight = props.maxHeight
+  const newWidth = computedEnlargeWidth.value / window.devicePixelRatio
+  const originalRatio = originalWidth / originalHeight
+
+  return Math.round((newWidth / originalRatio) * window.devicePixelRatio)
+})
 // method to handle the click on the enlarge button and its loading states
 const enlarge = () => {
   loadingEnlargedImage.value = true
@@ -250,6 +264,7 @@ const handleProvider = computed(() => {
             v-model:visible="loadingEnlargedImage"
             modal
             dismissable-mask
+            :draggable="false"
             header=" "
             :style="{ width: '95vw' }"
           >
@@ -260,7 +275,9 @@ const handleProvider = computed(() => {
               style="width: 100%; height: auto"
               :alt="props.isDecorative ? '' : props.alt"
               loading="eager"
-              :quality="100"
+              :quality="70"
+              :width="computedEnlargeWidth"
+              :height="computedEnlargeHeight"
               :modifiers="props.modifiers"
               @load="enlargeLoad($event.target)"
             />
@@ -268,19 +285,21 @@ const handleProvider = computed(() => {
               ><slot class="slot close-icon" name="closeicon"></slot
             ></template>
           </Dialog>
-          <ProgressSpinner
-            v-if="loadingEnlargedImage && !loadedEnlargedImage"
-            style="
-              z-index: 1102;
-              position: fixed;
-              top: 0;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              margin: auto;
-            "
-            stroke-width="6"
-          />
+          <Teleport to="body">
+            <ProgressSpinner
+              v-if="loadingEnlargedImage && !loadedEnlargedImage"
+              style="
+                z-index: 1102;
+                position: fixed;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+              "
+              stroke-width="6"
+            />
+          </Teleport>
         </template>
       </div>
     </VFlexibleLink>

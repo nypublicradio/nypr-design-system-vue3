@@ -117,6 +117,8 @@ Enlarge.args = {
     allowPreview: true,
     alt: 'Fallback alt text here',
     height: 400,
+    maxHeight: 1600,
+    maxWidth: 2560,
     src: '329944',
     width: 600,
 }
