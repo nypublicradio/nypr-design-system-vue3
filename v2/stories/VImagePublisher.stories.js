@@ -42,6 +42,13 @@ Default.args = {
     src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
     width: 600,
 }
+export const Responsive = Template.bind({})
+Responsive.args = {
+    alt: 'Fallback alt text here',
+    maxHeight: 1240,
+    maxWidth: 1860,
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
+}
 export const ImageLink = Template.bind({})
 ImageLink.args = {
     alt: 'Fallback alt text here',

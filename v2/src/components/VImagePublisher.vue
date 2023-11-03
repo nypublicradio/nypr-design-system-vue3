@@ -3,7 +3,7 @@ import VFlexibleLink from './VFlexibleLink.vue'
 import Button from 'primevue/button'
 import Image from 'primevue/image'
 import ProgressSpinner from 'primevue/progressspinner'
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, nextTick, onBeforeMount, onMounted, ref } from 'vue'
 
 /** * Responsive image component, generates a srcset with multiple image sizes for different display densities. */
 
@@ -22,6 +22,13 @@ const props = defineProps({
   alt: {
     default: '',
     type: String,
+  },
+  /**
+   * desired default image
+   */
+  defaultWidth: {
+    default: 7686,
+    type: Number,
   },
   /** * bool to NOT use the variable quality calc based on sizes */
   flatQuality: {
@@ -91,7 +98,7 @@ const props = defineProps({
   /** * List of display densities to generate sizes for in the srcset */
   srcset: {
     default() {
-      return [2, 3]
+      return [1, 2]
     },
     type: Array,
   },
@@ -153,39 +160,65 @@ const calcQuality = (quality, size) => {
     return qual >= 15 ? qual : 15
   }
 }
-
+const refThisImg = ref(null)
+const thisWidth = ref(null)
 const srcFormatted = formatPublisherImageUrl(props.src)
 const srcRaw = formatRawPublisherImageUrl(props.src)
 
 const isVertical = ref(false)
 const loadingEnlargedImage = ref(false)
 
-const computedWidth = computed(() => {
+const getDimensions = () => {
+  const hRatio = Number(props.ratio[0])
+  const vRatio = Number(props.ratio[1])
+
+  if (props.width) {
+    return {
+      height: props.height,
+      width: isVertical.value
+        ? Math.round(props.maxWidth / (props.maxHeight / props.height))
+        : props.width,
+    }
+  } else {
+    console.log('thisWidth.value =  ', thisWidth.value)
+    let theWidth = thisWidth.value
+
+    if (props.maxWidth && props.maxWidth < theWidth) {
+      theWidth = props.maxWidth
+    }
+    return {
+      height: Math.round((theWidth * vRatio) / hRatio),
+      width: theWidth,
+    }
+  }
+}
+
+const computedWidth = () => {
   return isVertical.value
     ? Math.round(props.maxWidth / (props.maxHeight / props.height))
     : props.width
-})
+}
 
-const computedSrc = computed(() => {
+const computedSrc = () => {
   const template = srcFormatted
 
   return template
     ? template
-        .replace(props.widthToken, computedWidth.value)
-        .replace(props.heightToken, props.height)
+        .replace(props.widthToken, getDimensions().width)
+        .replace(props.heightToken, getDimensions().height)
         .replace(props.qualityToken, props.quality)
     : undefined
-})
+}
 
-const computedSrcBg = computed(() => {
+const computedSrcBg = () => {
   const template = srcFormatted
   return template
     ? template
-        .replace(props.widthToken, props.width)
-        .replace(props.heightToken, props.height)
+        .replace(props.widthToken, getDimensions().width)
+        .replace(props.heightToken, getDimensions().height)
         .replace(props.qualityToken, 15)
     : undefined
-})
+}
 
 const srcset = computed(() => {
   const template = srcFormatted
@@ -203,9 +236,9 @@ const srcset = computed(() => {
     let lastImage = false
     for (const size of props.srcset) {
       /* continue if it is NOT the lastImage and the image has more pixels than its rendered area */
-      if (!lastImage && props.maxWidth > computedWidth.value) {
-        let width = Math.round(computedWidth.value * size)
-        let height = Math.round(props.height * size)
+      if (!lastImage && props.maxWidth > getDimensions().width) {
+        let width = Math.round(getDimensions().width * size)
+        let height = Math.round(getDimensions().height * size)
 
         /* the image no longer has enough resolution to support the next srcset, use its maximum size and make it the last on the srcset list */
         if (width > props.maxWidth || height > props.maxHeight) {
@@ -245,10 +278,19 @@ const enlarge = () => {
 const closeEnlarge = () => {
   loadingEnlargedImage.value = false
 }
+
+onMounted(() => {
+  thisWidth.value =
+    refThisImg.value.offsetWidth != 0
+      ? refThisImg.value.offsetWidth
+      : typeof window === 'undefined'
+      ? props.defaultWidth
+      : window.innerWidth
+})
 </script>
 
 <template>
-  <div class="v-image-publisher">
+  <div ref="refThisImg" class="v-image-publisher">
     <VFlexibleLink
       raw
       :to="props.to"
@@ -263,9 +305,9 @@ const closeEnlarge = () => {
       >
         <div v-if="isVertical" class="bg">
           <img
-            :src="computedSrcBg"
-            :width="width"
-            :height="height"
+            :src="computedSrcBg()"
+            :width="getDimensions().width"
+            :height="getDimensions().height"
             :alt="props.isDecorative ? '' : props.alt + '-blurred-bg'"
             :loading="loading"
           />
@@ -277,10 +319,10 @@ const closeEnlarge = () => {
             image-class="prime-img-class"
             image-style="width: 100%; height: auto;"
             :srcset="srcset"
-            :src="computedSrc"
-            :width="computedWidth"
-            :height="height"
-            :style="[isVertical ? `width:${computedWidth}px;` : '']"
+            :src="computedSrc()"
+            :width="getDimensions().width"
+            :height="getDimensions().height"
+            :style="[isVertical ? `width:${getDimensions().width}px;` : '']"
             :alt="props.isDecorative ? '' : props.alt"
             :preview="allowPreview"
             :loading="loading"
@@ -324,9 +366,9 @@ const closeEnlarge = () => {
           class="image native-image prime-img-class"
           :class="isVertical ? 'is-vertical' : ''"
           :srcset="srcset"
-          :src="computedSrc"
-          :width="computedWidth"
-          :height="height"
+          :src="computedSrc()"
+          :width="getDimensions().width"
+          :height="getDimensions().height"
           :style="[isVertical ? `width:auto;` : '']"
           :alt="props.isDecorative ? '' : props.alt"
           :loading="loading"
