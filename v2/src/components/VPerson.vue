@@ -98,6 +98,13 @@ const props = defineProps({
     type: String,
   },
   /**
+   * remove all links beccause this is on a staff page
+   */
+  onStaffPage: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * API responseof the user/author's data
    */
   profileData: {
@@ -217,7 +224,11 @@ if (profile.value?.phone_numbers) {
 }
 
 const profileLink = ref(
-  props.sponsored ? profile.value?.link : profile.value?.url
+  props.onStaffPage
+    ? undefined
+    : props.sponsored
+    ? profile.value?.link
+    : profile.value?.url
 )
 // extracts the name from the url
 const accountNameFromUrl = (url) => {
@@ -294,6 +305,7 @@ const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
           <VFlexibleLink
             v-if="props.showName"
             class="name-link"
+            :class="props.onStaffPage ? 'no-hover' : ''"
             :to="profileLink"
             @click="emit('name-click', profileLink)"
           >
@@ -324,7 +336,7 @@ const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
           <slot name="slot-below-bio" />
         </div>
         <VFlexibleLink
-          v-if="showCta"
+          v-if="showCta && !props.onStaffPage"
           :to="profileLink"
           class="cta"
           @click="emit('cta-click', profileLink)"
@@ -402,6 +414,10 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
           }
           &:hover {
             text-decoration: var(--person-name-hover-decoration);
+          }
+          &.no-hover {
+            text-decoration: none;
+            pointer-events: none;
           }
         }
       }
