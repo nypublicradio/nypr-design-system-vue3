@@ -1,4 +1,4 @@
-import { defineNuxtPlugin } from "#app"
+import { defineNuxtPlugin } from "#imports"
 import Accordion from 'primevue/accordion/accordion.esm.js'
 import AccordionTab from 'primevue/accordiontab/accordiontab.esm.js'
 import AutoComplete from 'primevue/autocomplete/autocomplete.esm.js'
