@@ -633,11 +633,15 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
+  scrubTimelineChange,
+  scrubTimelineEnd,
   skipAhead,
   skipBack,
+  timelineClick,
   toggleExpanded,
   toggleMinimize,
   togglePlay,
+
 })
 </script>
 
