@@ -637,11 +637,11 @@ defineExpose({
   scrubTimelineEnd,
   skipAhead,
   skipBack,
+  sound,
   timelineClick,
   toggleExpanded,
   toggleMinimize,
   togglePlay,
-
 })
 </script>
 
