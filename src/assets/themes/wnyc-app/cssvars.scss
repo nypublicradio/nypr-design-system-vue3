@@ -21,6 +21,14 @@
     --purple: #{map-get($colors, 'purple')};
     --secondary: #{map-get($colors, 'secondary')};
     --link: #{map-get($colors, 'link')};
+
+    --teal-lake: #{map-get($colors, 'teal-lake')};
+    --electric-violet: #{map-get($colors, 'electric-violet')};
+    --honolulu-blue: #{map-get($colors, 'honolulu-blue')};
+    --berry: #{map-get($colors, 'berry')};
+    --spanish-orange: #{map-get($colors, 'spanish-orange')};
+    --sea-green: #{map-get($colors, 'sea-green')};
+
     --white: #ffffff;
 
     --primary-color: #{map-get($colors, 'red')};
@@ -151,6 +159,12 @@
     --purple: #{map-get($colors-dark-mode, 'purple')};
     --secondary: #{map-get($colors-dark-mode, 'secondary')};
     --link: #{map-get($colors-dark-mode, 'link')};
+    --teal-lake: #{map-get($colors-dark-mode, 'teal-lake')};
+    --electric-violet: #{map-get($colors-dark-mode, 'electric-violet')};
+    --honolulu-blue: #{map-get($colors-dark-mode, 'honolulu-blue')};
+    --berry: #{map-get($colors-dark-mode, 'berry')};
+    --spanish-orange: #{map-get($colors-dark-mode, 'spanish-orange')};
+    --sea-green: #{map-get($colors-dark-mode, 'sea-green')};
 
     --shade-000: var(--background);
     --shade-400: #{map-get($colors-dark-mode, 'background')};

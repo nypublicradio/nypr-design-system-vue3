@@ -1,9 +1,9 @@
 <script setup>
-import VFlexibleLink from './VFlexibleLink.vue'
-import Button from 'primevue/button'
-import Image from 'primevue/image'
-import ProgressSpinner from 'primevue/progressspinner'
-import { computed, nextTick, onBeforeMount, onMounted, ref } from 'vue'
+import VFlexibleLink from "./VFlexibleLink.vue"
+import Button from "primevue/button"
+import Image from "primevue/image"
+import ProgressSpinner from "primevue/progressspinner"
+import { computed, nextTick, onBeforeMount, onMounted, ref } from "vue"
 
 /** * Responsive image component, generates a srcset with multiple image sizes for different display densities. */
 
@@ -20,7 +20,7 @@ const props = defineProps({
   },
   /* alt text prop */
   alt: {
-    default: '',
+    default: "",
     type: String,
   },
   /**
@@ -43,7 +43,7 @@ const props = defineProps({
   },
   /** * Substring or regex within the url to be replaced with height values. */
   heightToken: {
-    default: '%height%',
+    default: "%height%",
     type: [String, RegExp],
   },
   /**
@@ -55,7 +55,7 @@ const props = defineProps({
   },
   /* loading image prop */
   loading: {
-    default: 'lazy',
+    default: "lazy",
     type: String,
   },
   /** * Maximum height for the image. Generated sizes will be clipped to fit the max dimensions. * If you know the height of the original, full-sized image, use it here.
@@ -77,7 +77,7 @@ const props = defineProps({
   },
   /** * Substring or regex within the url to control jpg compression quality. */
   qualityToken: {
-    default: '%quality%',
+    default: "%quality%",
     type: [String, RegExp],
   },
   /**
@@ -112,21 +112,21 @@ const props = defineProps({
   /**
    *  ammount of blur for the blured background image */
   verticalBgBlur: {
-    default: '3px',
+    default: "3px",
     type: String,
   },
   /**
    * tint the grey blured background image
    * */
   verticalBgColor: {
-    default: '#f1f1f1',
+    default: "#f1f1f1",
     type: String,
   },
   /**
    *  the opacity of the tint of the grey blured background image
    */
   verticalBgColorOpacity: {
-    default: '0.6',
+    default: "0.6",
     type: String,
   },
   /** * The desired width for the 1x sized image.
@@ -138,18 +138,18 @@ const props = defineProps({
   },
   /** * Substring or regex within the urlto be replaced with width values. */
   widthToken: {
-    default: '%width%',
+    default: "%width%",
     type: [String, RegExp],
   },
 })
-const emit = defineEmits(['image-click', 'keypress', 'image-enlarge-click'])
+const emit = defineEmits(["image-click", "keypress", "image-enlarge-click"])
 // method to format the url to get the publisher image
 const formatPublisherImageUrl = (url) => {
-  return url.replace('%s/%s/%s/%s', '%width%/%height%/c/%quality%')
+  return url.replace("%s/%s/%s/%s", "%width%/%height%/c/%quality%")
 }
 // method to format the url to get the raw image
 const formatRawPublisherImageUrl = (url) => {
-  return url.replace('%s/%s/%s/%s', 'raw')
+  return url.replace("%s/%s/%s/%s", "raw")
 }
 // method to calculate the quality of the image based on the size and if set to flat quality
 const calcQuality = (quality, size) => {
@@ -180,7 +180,7 @@ const getDimensions = () => {
         : props.width,
     }
   } else {
-    console.log('thisWidth.value =  ', thisWidth.value)
+    //console.log('thisWidth.value =  ', thisWidth.value)
     let theWidth = thisWidth.value
 
     if (props.maxWidth && props.maxWidth < theWidth) {
@@ -226,13 +226,12 @@ const srcset = computed(() => {
     // If this is just a plain string with no tokens,
     // we don't need to generate a srcset
     if (
-      template ===
-      template.replace(props.widthToken, '').replace(props.heightToken, '')
+      template === template.replace(props.widthToken, "").replace(props.heightToken, "")
     ) {
-      return ''
+      return ""
     }
     //# skipcq JS-0123
-    let srcset = ''
+    let srcset = ""
     let lastImage = false
     for (const size of props.srcset) {
       /* continue if it is NOT the lastImage and the image has more pixels than its rendered area */
@@ -254,7 +253,7 @@ const srcset = computed(() => {
           .replace(props.widthToken, width)
           .replace(props.heightToken, height)
           .replace(props.qualityToken, calcQuality(props.quality, size))
-        srcset += `${url} ${size}x${!lastImage ? ',' : ''} `
+        srcset += `${url} ${size}x${!lastImage ? "," : ""} `
       }
     }
     return srcset
@@ -264,15 +263,14 @@ const srcset = computed(() => {
 })
 
 onBeforeMount(() => {
-  isVertical.value =
-    props.allowVerticalEffect && props.maxHeight > props.maxWidth
+  isVertical.value = props.allowVerticalEffect && props.maxHeight > props.maxWidth
 })
 // method to handle the click on the enlarge button and its loading states
 const enlarge = () => {
   loadingEnlargedImage.value = true
-  const img = document.getElementsByClassName('p-image-preview')
-  img[0].setAttribute('alt', props.alt)
-  img[0].setAttribute('src', srcRaw)
+  const img = document.getElementsByClassName("p-image-preview")
+  img[0].setAttribute("alt", props.alt)
+  img[0].setAttribute("src", srcRaw)
 }
 // method to close the enlarged image state
 const closeEnlarge = () => {
@@ -283,7 +281,7 @@ onMounted(() => {
   thisWidth.value =
     refThisImg.value.offsetWidth != 0
       ? refThisImg.value.offsetWidth
-      : typeof window === 'undefined'
+      : typeof window === "undefined"
       ? props.defaultWidth
       : window.innerWidth
 })
@@ -336,9 +334,7 @@ onMounted(() => {
                   icon="pi pi-clone"
                   class="p-button-sm enlarge-button"
                   aria-label="Enlarge Image"
-                  @click.prevent="
-                    emit('image-enlarge-click', $event.target.value)
-                  "
+                  @click.prevent="emit('image-enlarge-click', $event.target.value)"
                 ></Button>
               </ClientOnly>
             </template>
@@ -429,7 +425,7 @@ onMounted(() => {
       left: 0;
       overflow: hidden;
       &:after {
-        content: '';
+        content: "";
         background-color: v-bind(verticalBgColor);
         width: 100%;
         height: 100%;
