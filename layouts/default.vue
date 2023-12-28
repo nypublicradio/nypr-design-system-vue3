@@ -48,6 +48,9 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
     >
+      <template #play>
+        <i class="pi pi-twitter"></i>
+      </template>
       <!-- file="https://fm939.wnyc.org/wnycfm" -->
       <template #expanded-content>
         <div class="p-3">

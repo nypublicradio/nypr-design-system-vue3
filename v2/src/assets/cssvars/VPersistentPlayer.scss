@@ -20,9 +20,12 @@
     --persistent-player-text-button-color-hover: inherit;
     --persistent-player-text-button-radius: 15px;
 
-    --persistent-player-play-button-width: 40px;
-    --persistent-player-play-button-height: 40px;
-    --persistent-player-play-button-radius: 20px;
+    --persistent-player-button-width: 40px;
+    --persistent-player-button-height: 40px;
+    --persistent-player-button-radius: 20px;
+    --persistent-player-button-color: var(--text-color);
+    --persistent-player-button-bg-color: #000;
+    --persistent-player-button-color-hover: inherit;
 
     --persistent-player-title-size: var(--font-size-9);
     --persistent-player-title-weight: 400;
@@ -39,7 +42,7 @@
     --persistent-player-maximize-btn-color: #fff;
     --persistent-player-live-indicator-bg: #fff;
     --persistent-player-live-indicator-color: #000;
-    --persistent-player-text-button-color: #d9d9d9;
-    --persistent-player-text-button-color-hover: #fff;
+    --persistent-player-button-bg-color: #fff;
+    --persistent-player-button-color-hover: #f1f1f1;
     --persistent-player-title-color: var(--text-color);
 }
