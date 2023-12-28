@@ -514,13 +514,13 @@ const volumeToggleMute = (e) => {
   sound.mute(muted.value)
 }
 // handle the volume change event
-const volumeChange = (e) => {
-  if (sound) {
-    emit('volume-change', e)
-    sound.volume(e / 100)
-    volume.value = e
-  }
-}
+// const volumeChange = (e) => {
+//   if (sound) {
+//     emit('volume-change', e)
+//     sound.volume(e / 100)
+//     volume.value = e
+//   }
+// }
 
 let onceFlag = null
 let scrubWhenPaused = false
@@ -580,6 +580,7 @@ const toggleExpanded = (e) => {
   scrollToggle(e)
   emit('is-expanded', e)
   isExpanded.value = e
+
 }
 // handles the click anywhere prop. So if the user clicks anywhere on the player, exect the buttons, the player will expand or minimize
 const handleClickAnywhere = (e) => {
@@ -599,20 +600,14 @@ onMounted(() => {
   window.addEventListener('keydown', (event) => {
     switch (event.code) {
       case 'ArrowUp':
-        if (volume.value < 100 && sound) {
-          volume.value++
+        if ($mediaPlayerRef.value && $mediaPlayerRef.value.volume < 1) {
+          $mediaPlayerRef.value.volume += 0.1
         }
         break
       case 'ArrowDown':
-        if (volume.value > 0 && sound) {
-          volume.value--
+         if ($mediaPlayerRef.value && $mediaPlayerRef.value.volume > 0) {
+           $mediaPlayerRef.value.volume -= 0.1
         }
-        break
-      case 'ArrowLeft':
-        skipBack()
-        break
-      case 'ArrowRight':
-        skipAhead()
         break
       default:
         /* code */
@@ -620,30 +615,35 @@ onMounted(() => {
     }
   })
 
-  /*   window.addEventListener('keyup', (event) => {
-    // checks to see if the play-button is focused/active element, because then, hitting the Space or Enter key will toggle play by simulating a click as a normal browser feature... thus, we can bypass the following keyup event listeners in that case.
-    var isPlayButtonActive =
-      document.getElementsByClassName('the-play-button')[0] ===
-      document.activeElement
-    if (!isPlayButtonActive) {
-      switch (event.code) {
-        case 'Space':
-          togglePlay()
-          break
-        case 'Enter':
-          togglePlay()
-          break
-      }
-    }
-  }) */
 
-  // auto play
-  props.autoPlay ? togglePlay() : null
+  const instance = document.querySelector("media-player");
+  if (instance) {
+    // Read
+    const { playing, paused, seeking, canPlay,volume } = instance.state;
+
+    //subscribe to state changess
+    instance.subscribe(({ playing }) => {
+      console.log("is playing = ", playing)
+    });
+    instance.subscribe(({ paused }) => {
+      console.log("is paused = ", paused)
+    });
+    instance.subscribe(({ seeking }) => {
+      console.log("is seeking = ", seeking)
+    });
+    instance.subscribe(({ canPlay }) => {
+      console.log("canPlay = ", canPlay)
+    });
+    instance.subscribe(({ volume }) => {
+      console.log("volume = ", volume)
+      emit('volume-change', volume)
+    });
+  }
 })
 
 onBeforeUnmount(() => {
-  // stop the audio
-  sound ? sound.unload() : null
+  // destroy the audio
+  $mediaPlayerRef.value?.destroy();
 })
 
 defineExpose({
@@ -678,13 +678,19 @@ defineExpose({
       </Button>
     </div>
     <Transition name="expand">
-      <div v-if="!isExpanded" class="player-controls">
+      <div v-show="!isExpanded" class="player-controls">
         <media-player
           class="media-player"
           :title="props.title"
           :src="props.file"
+          :autoplay="props.autoPlay"
           view-type="audio"
-          stream-type="ll-live:dvr"
+          load="eager"
+          :audio-track-change="audioTrackChange"
+          :volume-change="volumeChange"
+          :stream-type="props.livestream ? 'live:dvr' : 'on-demand'"
+          :loop="props.loop"
+          poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
           crossorigin
           ref="$mediaPlayerRef"
         >

@@ -32,6 +32,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
     </main>
     <VNewPersistentPlayer
       data-style-mode="dark"
+      :auto-play="true"
       :can-expand="true"
       :show-download="true"
       :hide-download-mobile="true"
@@ -46,6 +47,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
     >
+      <!-- file="https://fm939.wnyc.org/wnycfm" -->
       <template #expanded-content>
         <div class="p-3">
           this is wherewe would oput anything in the expanded view
