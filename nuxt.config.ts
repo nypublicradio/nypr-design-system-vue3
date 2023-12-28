@@ -41,7 +41,8 @@ export default {
     `~/src/assets/themes/${envTheme}/fonts/fonts.css`,
     `~/src/assets/themes/${envTheme}/${envTheme}.min.css`,
     'primevue/resources/primevue.min.css',
-    'primeicons/primeicons.css'
+    'primeicons/primeicons.css',
+    'vidstack/player/styles/default/theme.css'
   ],
 
   vite: {
