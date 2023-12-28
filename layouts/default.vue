@@ -40,6 +40,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
       :can-unexpand-with-swipe="true"
       :show-skip="true"
       :livestream="false"
+      :volume="1"
       title="The Takeaway"
       station="WNYC 93.9 FM"
       title-link="http://www.google.com"

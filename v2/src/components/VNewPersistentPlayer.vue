@@ -251,7 +251,7 @@ const props = defineProps({
    * volume state
    */
   volume: {
-    default: 100,
+    default: 1,
     type: Number,
   },
 })
@@ -507,50 +507,14 @@ const togglePlay = () => {
   // Change global volume init
   Howler.volume(volume.value)
 }
-// handle toggling the mute state
-const volumeToggleMute = (e) => {
-  emit('volume-toggle-mute', e)
-  muted.value = !muted.value
-  sound.mute(muted.value)
-}
-// handle the volume change event
-// const volumeChange = (e) => {
-//   if (sound) {
-//     emit('volume-change', e)
-//     sound.volume(e / 100)
-//     volume.value = e
-//   }
-// }
 
-let onceFlag = null
-let scrubWhenPaused = false
 // handle the scrub end event on the timeline
 const scrubTimelineEnd = (e) => {
-  emit('scrub-timeline-end', e)
-  const percentUnit = durationSeconds.value / 100
-  sound.seek(e * percentUnit)
-  if (!scrubWhenPaused && !playing.value) {
-    togglePlay()
-  } else {
-    // to update the time
-    updateCurrentSeconds()
-  }
-  onceFlag = null
+
 }
 // handle the change event on the timeline
 const scrubTimelineChange = (e) => {
-  // update currentSeconds from the Slider change event, that passes the value to the Slider.
-  currentSeconds.value = (e * durationSeconds.value) / 100
-  if (!onceFlag) {
-    emit('scrub-timeline-change', e)
-    onceFlag = true
-    if (playing.value) {
-      togglePlay()
-      scrubWhenPaused = false
-    } else {
-      scrubWhenPaused = true
-    }
-  }
+
 }
 // handle the click on the timeline
 const timelineClick = (e) => {
@@ -582,7 +546,7 @@ const toggleExpanded = (e) => {
   isExpanded.value = e
 
 }
-// handles the click anywhere prop. So if the user clicks anywhere on the player, exect the buttons, the player will expand or minimize
+// handles the click anywhere prop. So if the user clicks anywhere on the player, except the buttons, the player will expand or minimize
 const handleClickAnywhere = (e) => {
   if (props.canClickAnywhere) {
     e.preventDefault()
@@ -619,17 +583,28 @@ onMounted(() => {
   const instance = document.querySelector("media-player");
   if (instance) {
     // Read
-    const { playing, paused, seeking, canPlay,volume } = instance.state;
+    const { playing, paused, seeking, canPlay,volume,muted } = instance.state;
 
     //subscribe to state changess
     instance.subscribe(({ playing }) => {
       console.log("is playing = ", playing)
+      if (playing) {
+        emit('toggle-play', true)
+      }
     });
     instance.subscribe(({ paused }) => {
       console.log("is paused = ", paused)
+      if (paused) {
+        emit('toggle-play', false)
+      }
     });
     instance.subscribe(({ seeking }) => {
       console.log("is seeking = ", seeking)
+      emit('scrub-timeline-change', $mediaPlayerRef.value.currentTime)
+      if ($mediaPlayerRef.value && !seeking) {
+        emit('scrub-timeline-end', $mediaPlayerRef.value.currentTime)
+        console.log("$mediaPlayerRef.value.currentTime = ", $mediaPlayerRef.value.currentTime)
+      }
     });
     instance.subscribe(({ canPlay }) => {
       console.log("canPlay = ", canPlay)
@@ -637,6 +612,10 @@ onMounted(() => {
     instance.subscribe(({ volume }) => {
       console.log("volume = ", volume)
       emit('volume-change', volume)
+    });
+    instance.subscribe(({ muted }) => {
+      console.log("muted = ", muted)
+      emit('volume-toggle-mute', muted)
     });
   }
 })
@@ -686,8 +665,7 @@ defineExpose({
           :autoplay="props.autoPlay"
           view-type="audio"
           load="eager"
-          :audio-track-change="audioTrackChange"
-          :volume-change="volumeChange"
+          :volume="props.volume"
           :stream-type="props.livestream ? 'live:dvr' : 'on-demand'"
           :loop="props.loop"
           poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
