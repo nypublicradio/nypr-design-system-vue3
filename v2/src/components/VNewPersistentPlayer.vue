@@ -10,7 +10,7 @@ import 'vidstack/player/ui';
 
 import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } from 'vidstack';
 import type { MediaPlayerElement } from 'vidstack/elements';
-import { defineCustomElement, MediaControlsElement,MediaControlsGroupElement, MediaPlayButtonElement, MediaToggleButtonElement, MediaSliderElement } from 'vidstack/elements';
+import { defineCustomElement, MediaControlsElement,MediaControlsGroupElement, MediaPlayButtonElement, MediaToggleButtonElement, MediaSliderElement, MediaLiveButtonElement } from 'vidstack/elements';
 
 import VImage from "./VImage.vue"
 import VFlexibleLink from "./VFlexibleLink.vue"
@@ -1149,6 +1149,47 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
       .media-slider[data-dragging] .media-slider-thumb {
         box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 0.4);
+      }
+
+      // live button
+      .media-live-button {
+        width: 40px;
+        height: 16px;
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        /* Browser resets. */
+        padding: 0;
+        user-select: none;
+        appearance: none;
+        background: none;
+        outline: none;
+        border: none;
+      }
+
+      .media-live-button-text {
+        background-color: #8a8a8a;
+        border-radius: 2px;
+        color: #161616;
+        font-family: sans-serif;
+        font-size: 9px;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        padding: 0px 4px;
+        transition: color 0.3s ease;
+      }
+
+      .media-live-button[data-focus] {
+        box-shadow: var(--media-focus-ring, 0 0 0 3px rgb(78 156 246));
+      }
+
+      .media-live-button[data-edge] {
+        cursor: unset;
+      }
+
+      .media-live-button[data-edge] .media-live-button-text {
+        background-color: var(--red, #dc2626);
+        color: var(--media-live-button-edge-color, #f5f5f5);
       }
     }
   }

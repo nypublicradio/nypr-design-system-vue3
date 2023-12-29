@@ -123,11 +123,17 @@ const getMarqueeSpeed = computed(() => {
       ]"
     >
       <div class="overflow-hidden">
-        <div v-if="livestream" class="track-info-livestream">
-          <div class="track-info-livestream-indicator">
+        <div
+          v-if="livestream"
+          class="track-info-livestream flex gap-1 align-content-center"
+        >
+          <media-live-button class="media-live-button">
+            <span class="media-live-button-text">LIVE</span>
+          </media-live-button>
+          <!-- <div class="track-info-livestream-indicator">
             <span class="track-info-livestream-indicator-text">Live</span>
             <span class="track-info-livestream-indicator-dot pulse" />
-          </div>
+          </div> -->
           <div class="track-info-livestream-station">{{ station }}</div>
         </div>
         <div class="track-info-title">
@@ -204,7 +210,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       height: 16px;
       line-height: 16px;
       display: flex;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
       .track-info-livestream-indicator {
         display: flex;
         align-items: center;
@@ -229,8 +235,8 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       }
       .track-info-livestream-station {
         font-family: var(--font-family);
-        font-size: 12px;
-        font-weight: 700;
+        font-size: 10px;
+        font-weight: 400;
       }
     }
     .track-info-title {

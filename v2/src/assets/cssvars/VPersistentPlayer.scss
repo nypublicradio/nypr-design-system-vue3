@@ -1,7 +1,8 @@
 :root,
 [data-style-mode='light'],
 .style-mode-light {
-    --persistent-player-height: 100px;
+    --persistent-player-image-size: 60px;
+    --persistent-player-height: 60px;
     --persistent-player-padding: 8px 16px 8px 8px;
     --persistent-player-height-buffer: 20px;
     --persistent-player-bg: #f1f1f1;
@@ -27,11 +28,18 @@
     --persistent-player-button-bg-color: #000;
     --persistent-player-button-color-hover: inherit;
 
-    --persistent-player-title-size: var(--font-size-9);
-    --persistent-player-title-weight: 400;
+    --persistent-player-title-size: var(--font-size-6);
+    --persistent-player-title-weight: 600;
     --persistent-player-title-color: var(--text-color);
     --persistent-player-title-decoration: none;
     --persistent-player-title-hover-decoration: underline;
+
+    --persistent-player-desc-size: var(--font-size-5);
+    --persistent-player-desc-weight: 400;
+    --persistent-player-desc-color: var(--text-color);
+
+    --persistent-player-slider-bg: var(--stroke);
+    --persistent-player-slider-progress: #000;
 }
 [data-style-mode='dark'],
 .style-mode-dark {
@@ -45,4 +53,5 @@
     --persistent-player-button-bg-color: #fff;
     --persistent-player-button-color-hover: #f1f1f1;
     --persistent-player-title-color: var(--text-color);
+    --persistent-player-desc-color: var(--text-color);
 }
