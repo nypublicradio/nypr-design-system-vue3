@@ -144,7 +144,12 @@ const getMarqueeSpeed = computed(() => {
         <div
           v-if="description"
           class="track-info-description"
-          :class="[{ hideDescriptionOnMobile: props.hideDescriptionOnMobile }]"
+          :class="[
+            {
+              hideDescriptionOnMobile: props.hideDescriptionOnMobile,
+              marquee: props.marquee,
+            },
+          ]"
         >
           <VFlexibleLink
             class="track-info-description-link"
@@ -246,7 +251,11 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       }
     }
     .track-info-description {
+      position: relative;
       display: block;
+      font-weight: var(--persistent-player-desc-weight);
+      font-size: var(--persistent-player-desc-size);
+      color: var(--persistent-player-desc-color);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -254,6 +263,19 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
         @container (max-width: #{$container-breakpoint-md}) {
           display: none;
         }
+      }
+      &.marquee {
+        -webkit-mask-image: linear-gradient(90deg, #000 94%, transparent);
+        mask-image: linear-gradient(90deg, #000 94%, transparent);
+        // &:after {
+        //   content: "";
+        //   position: absolute;
+        //   right: 0;
+        //   top: 0;
+        //   width: 1rem;
+        //   height: 100%;
+        //   background-color: red;
+        // }
       }
       .track-info-description-link {
         display: block;

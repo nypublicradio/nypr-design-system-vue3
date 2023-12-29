@@ -41,6 +41,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
       :can-click-anywhere="true"
       :show-skip="true"
       :livestream="false"
+      :marquee="true"
       :volume="1"
       title="The Takeaway"
       station="WNYC 93.9 FM"

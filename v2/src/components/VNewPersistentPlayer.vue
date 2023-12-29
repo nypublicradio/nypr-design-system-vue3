@@ -21,14 +21,6 @@ import { useSwipe } from '@vueuse/core'
 import { Howl, Howler } from 'howler'
 import Button from 'primevue/button'
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
-import { defineAsyncComponent } from 'vue'
-
-// defineCustomElement(MediaControlsGroupElement);
-// defineCustomElement(MediaControlsElement);
-//defineCustomElement(MediaPlayButtonElement);
-//const mediaPlayButton = defineAsyncComponent(() => import('vidstack/elements').then(mod => mod.MediaPlayButtonElement))
-// defineCustomElement(MediaToggleButtonElement);
-// defineCustomElement(MediaSliderElement);
 
 const props = defineProps({
   /**
@@ -577,8 +569,7 @@ const handleClickAnywhere = (e) => {
   }
 }
 
-onMounted(async () => {
-
+onMounted(async() => {
   // keyboard accessibility
   window.addEventListener('keydown', (event) => {
     switch (event.code) {
@@ -679,113 +670,111 @@ defineExpose({
     </div>
     <Transition name="expand">
       <div v-show="!isExpanded" class="player-controls">
-        <ClientOnly>
-          <media-player
-            class="media-player"
-            :title="props.title"
-            :src="props.file"
-            :autoplay="props.autoPlay"
-            view-type="audio"
-            load="eager"
-            :volume="props.volume"
-            :stream-type="props.livestream ? 'live:dvr' : 'on-demand'"
-            :loop="props.loop"
-            poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
-            crossorigin
-            ref="$mediaPlayerRef"
-          >
-            <media-provider></media-provider>
+        <media-player
+          class="media-player"
+          :title="props.title"
+          :src="props.file"
+          :autoplay="props.autoPlay"
+          view-type="audio"
+          load="eager"
+          :volume="props.volume"
+          :stream-type="props.livestream ? 'live:dvr' : 'on-demand'"
+          :loop="props.loop"
+          poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
+          crossorigin
+          ref="$mediaPlayerRef"
+        >
+          <media-provider></media-provider>
 
-            <media-controls>
-              <div class="flex w-full">
+          <media-controls>
+            <div class="flex w-full">
+              <div
+                v-if="image"
+                class="track-info-image flex-none"
+                :class="[{ hideImageOnMobile: props.hideImageOnMobile }]"
+              >
                 <div
-                  v-if="image"
-                  class="track-info-image flex-none"
-                  :class="[{ hideImageOnMobile: props.hideImageOnMobile }]"
+                  :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
+                  @click="handleClickAnywhere"
                 >
+                  <VFlexibleLink
+                    class="track-info-image-link"
+                    :to="titleLink ? titleLink : null"
+                    raw
+                    :title="titleLink ? titleLink : null"
+                    @flexible-link-click="emit('image-click')"
+                  >
+                    <VImage
+                      :src="image"
+                      :width="props.imageSize"
+                      :height="props.imageSize"
+                      :sizes="`xs:${props.imageSize * 2}px`"
+                      :alt-text="title"
+                      :ratio="[1, 1]"
+                      role="presentation"
+                    />
+                  </VFlexibleLink>
+                </div>
+              </div>
+              <div class="w-full">
+                <media-controls-group>
                   <div
+                    class="flex flex-column h-full justify-content-between"
                     :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
                     @click="handleClickAnywhere"
                   >
-                    <VFlexibleLink
-                      class="track-info-image-link"
-                      :to="titleLink ? titleLink : null"
-                      raw
-                      :title="titleLink ? titleLink : null"
-                      @flexible-link-click="emit('image-click')"
-                    >
-                      <VImage
-                        :src="image"
-                        :width="props.imageSize"
-                        :height="props.imageSize"
-                        :sizes="`xs:${props.imageSize * 2}px`"
-                        :alt-text="title"
-                        :ratio="[1, 1]"
-                        role="presentation"
+                    <div class="flex h-full align-items-center gap-2 px-2">
+                      <v-track-info
+                        :livestream="props.livestream"
+                        :station="props.station"
+                        :title="props.title"
+                        :title-link="props.titleLink"
+                        :description="props.description"
+                        :description-link="props.descriptionLink"
+                        :buffered="buffered"
+                        :current-seconds="currentSeconds"
+                        :duration-seconds="durationSeconds"
+                        :hide-image-on-mobile="props.hideImageOnMobile"
+                        :hide-description-on-mobile="props.hideDescriptionOnMobile"
+                        :hide-time-on-mobile="props.hideTimeOnMobile"
+                        :timeline-interactive="props.timelineInteractive"
+                        :timeline-bottom="props.timelineBottom"
+                        :timeline-top="props.timelineTop"
+                        :can-expand-with-click-anywhere="props.canClickAnywhere"
+                        :marquee="props.marquee"
+                        :marquee-speed="props.marqueeSpeed"
+                        :marquee-delay="props.marqueeDelay"
+                        :marquee-loops="props.marqueeLoops"
+                        @scrub-timeline-change="scrubTimelineChange"
+                        @scrub-timeline-end="scrubTimelineEnd"
+                        @timeline-click="timelineClick"
+                        @description-click="emit('description-click')"
+                        @title-click="emit('title-click')"
                       />
-                    </VFlexibleLink>
-                  </div>
-                </div>
-                <div class="w-full">
-                  <media-controls-group>
-                    <div
-                      class="flex flex-column h-full justify-content-between"
-                      :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
-                      @click="handleClickAnywhere"
-                    >
-                      <div class="flex h-full align-items-center gap-2 px-2">
-                        <v-track-info
-                          :livestream="props.livestream"
-                          :station="props.station"
-                          :title="props.title"
-                          :title-link="props.titleLink"
-                          :description="props.description"
-                          :description-link="props.descriptionLink"
-                          :buffered="buffered"
-                          :current-seconds="currentSeconds"
-                          :duration-seconds="durationSeconds"
-                          :hide-image-on-mobile="props.hideImageOnMobile"
-                          :hide-description-on-mobile="props.hideDescriptionOnMobile"
-                          :hide-time-on-mobile="props.hideTimeOnMobile"
-                          :timeline-interactive="props.timelineInteractive"
-                          :timeline-bottom="props.timelineBottom"
-                          :timeline-top="props.timelineTop"
-                          :can-expand-with-click-anywhere="props.canClickAnywhere"
-                          :marquee="props.marquee"
-                          :marquee-speed="props.marqueeSpeed"
-                          :marquee-delay="props.marqueeDelay"
-                          :marquee-loops="props.marqueeLoops"
-                          @scrub-timeline-change="scrubTimelineChange"
-                          @scrub-timeline-end="scrubTimelineEnd"
-                          @timeline-click="timelineClick"
-                          @description-click="emit('description-click')"
-                          @title-click="emit('title-click')"
-                        />
-                        <media-play-button class="media-button flex-none">
-                          <media-icon type="play" class="play-icon">
-                            <slot name="play"><i class="pi pi-play"></i></slot>
-                          </media-icon>
-                          <media-icon type="pause" class="pause-icon">
-                            <slot name="pause"><i class="pi pi-pause"></i></slot>
-                          </media-icon>
-                        </media-play-button>
-                      </div>
-
-                      <media-time-slider class="media-slider">
-                        <div class="media-slider-track">
-                          <div class="media-slider-track-fill media-slider-track"></div>
-                          <div class="media-slider-progress media-slider-track"></div>
-                        </div>
-                        <div class="media-slider-thumb"></div>
-                      </media-time-slider>
+                      <media-play-button class="media-button flex-none">
+                        <media-icon type="play" class="play-icon">
+                          <slot name="play"><i class="pi pi-play"></i></slot>
+                        </media-icon>
+                        <media-icon type="pause" class="pause-icon">
+                          <slot name="pause"><i class="pi pi-pause"></i></slot>
+                        </media-icon>
+                      </media-play-button>
                     </div>
-                  </media-controls-group>
-                </div>
+
+                    <media-time-slider class="media-slider">
+                      <div class="media-slider-track">
+                        <div class="media-slider-track-fill media-slider-track"></div>
+                        <div class="media-slider-progress media-slider-track"></div>
+                      </div>
+                      <div class="media-slider-thumb"></div>
+                    </media-time-slider>
+                  </div>
+                </media-controls-group>
               </div>
-            </media-controls>
-            <!-- <media-audio-layout small-when="never"></media-audio-layout> -->
-          </media-player>
-        </ClientOnly>
+            </div>
+          </media-controls>
+          <!-- <media-audio-layout small-when="never"></media-audio-layout> -->
+        </media-player>
       </div>
     </Transition>
 
@@ -1011,11 +1000,15 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   --persistent-player-button-bg-color: #000;
   --persistent-player-button-color-hover: inherit;
 
-  --persistent-player-title-size: var(--font-size-9);
-  --persistent-player-title-weight: 400;
+  --persistent-player-title-size: var(--font-size-6);
+  --persistent-player-title-weight: 600;
   --persistent-player-title-color: var(--text-color);
   --persistent-player-title-decoration: none;
   --persistent-player-title-hover-decoration: underline;
+
+  --persistent-player-desc-size: var(--font-size-5);
+  --persistent-player-desc-weight: 400;
+  --persistent-player-desc-color: var(--text-color);
 
   --persistent-player-slider-bg: var(--stroke);
   --persistent-player-slider-progress: #000;
@@ -1032,6 +1025,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   --persistent-player-button-bg-color: #fff;
   --persistent-player-button-color-hover: #f1f1f1;
   --persistent-player-title-color: var(--text-color);
+  --persistent-player-desc-color: var(--text-color);
 }
 
 .persistent-player {
