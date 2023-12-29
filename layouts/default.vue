@@ -38,6 +38,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
       :hide-download-mobile="true"
       :can-expand-with-swipe="true"
       :can-unexpand-with-swipe="true"
+      :can-click-anywhere="true"
       :show-skip="true"
       :livestream="false"
       :volume="1"

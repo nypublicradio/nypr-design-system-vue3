@@ -1,8 +1,8 @@
 <script setup>
-import VFlexibleLink from './VFlexibleLink.vue'
-import VImage from './VImage.vue'
-import VProgressScrubber from './VProgressScrubber.vue'
-import { computed } from 'vue'
+import VFlexibleLink from "./VFlexibleLink.vue"
+import VImage from "./VImage.vue"
+import VProgressScrubber from "./VProgressScrubber.vue"
+import { computed } from "vue"
 
 const props = defineProps({
   buffered: {
@@ -37,10 +37,6 @@ const props = defineProps({
     default: false,
     type: Boolean,
   },
-  image: {
-    default: null,
-    type: String,
-  },
   livestream: {
     default: false,
     type: Boolean,
@@ -50,11 +46,11 @@ const props = defineProps({
     type: Boolean,
   },
   marqueeDelay: {
-    default: '3s',
+    default: "3s",
     type: String,
   },
   marqueeLoops: {
-    default: '1',
+    default: "1",
     type: String,
   },
   marqueeSpeed: {
@@ -88,12 +84,12 @@ const props = defineProps({
 })
 
 const emit = defineEmits([
-  'scrub-timeline-change',
-  'scrub-timeline-end',
-  'image-click',
-  'title-click',
-  'description-click',
-  'timeline-click',
+  "scrub-timeline-change",
+  "scrub-timeline-end",
+  "image-click",
+  "title-click",
+  "description-click",
+  "timeline-click",
 ])
 
 const percentBuffered = computed(() => {
@@ -105,7 +101,7 @@ const percentComplete = computed(() => {
 // converts time to desired format
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
-  return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
+  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss
 }
 
 const getMarqueeSpeed = computed(() => {
@@ -116,29 +112,6 @@ const getMarqueeSpeed = computed(() => {
 
 <template>
   <div class="track-info">
-    <div
-      v-if="image"
-      class="track-info-image"
-      :class="[{ hideImageOnMobile: props.hideImageOnMobile }]"
-    >
-      <VFlexibleLink
-        class="track-info-image-link"
-        :to="titleLink ? titleLink : null"
-        raw
-        :title="titleLink ? titleLink : null"
-        @flexible-link-click="emit('image-click')"
-      >
-        <VImage
-          :src="image"
-          :width="84"
-          :height="84"
-          sizes="xs:168px"
-          :alt-text="title"
-          :ratio="[1, 1]"
-          role="presentation"
-        />
-      </VFlexibleLink>
-    </div>
     <div
       class="track-info-details"
       :class="[
@@ -194,44 +167,16 @@ const getMarqueeSpeed = computed(() => {
                 </div>
               </div>
             </div>
-            <div
-              v-else
-              class="track-info-description"
-              v-html="description"
-            ></div>
+            <div v-else class="track-info-description" v-html="description"></div>
           </VFlexibleLink>
         </div>
       </div>
-      <template v-if="!livestream && currentSeconds > 0">
-        <VProgressScrubber
-          class="pl-0 md:pl-1"
-          :progress="percentComplete"
-          @scrub-timeline-change="emit('scrub-timeline-change', $event)"
-          @scrub-timeline-end="emit('scrub-timeline-end', $event)"
-          @timeline-click="emit('timeline-click', $event)"
-        />
-        <div
-          v-if="durationSeconds"
-          class="track-info-time footer"
-          :class="[{ hideTimeOnMobile: props.hideTimeOnMobile }]"
-        >
-          <span class="track-info-time-current">
-            {{ convertTime(currentSeconds) }}
-          </span>
-          <span class="track-info-time-separator">/</span>
-          <span class="track-info-time-total">
-            {{ convertTime(durationSeconds) }}
-          </span>
-        </div>
-        <span v-else class="track-info-time-separator">&nbsp;</span>
-      </template>
     </div>
   </div>
 </template>
 
 <style lang="scss" scoped>
-$track-info-image-size: 84px;
-$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
+$container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 .track-info {
   display: flex;
   gap: 12px;
@@ -239,22 +184,6 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   height: inherit;
   flex: auto;
   align-self: center;
-  .track-info-image {
-    display: block;
-    // prettier-ignore
-    &.hideImageOnMobile {      
-      @container (max-width: #{$container-breakpoint-md}) {
-        display: none;
-      }
-    }
-    width: $track-info-image-size;
-    max-width: $track-info-image-size;
-    height: $track-info-image-size;
-    //flex: 1 0 $track-info-image-size;
-    .image-with-caption {
-      width: $track-info-image-size;
-    }
-  } // track-info-image
   .track-info-details {
     width: 0;
     flex-grow: 1;
@@ -346,8 +275,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
               display: flex;
               flex-shrink: 0;
               align-items: center;
-              animation: slide-left v-bind(getMarqueeSpeed) linear
-                v-bind(marqueeLoops);
+              animation: slide-left v-bind(getMarqueeSpeed) linear v-bind(marqueeLoops);
               animation-delay: v-bind(marqueeDelay);
               .content {
               }

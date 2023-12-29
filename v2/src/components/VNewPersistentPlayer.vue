@@ -12,7 +12,8 @@ import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } 
 import type { MediaPlayerElement } from 'vidstack/elements';
 import { defineCustomElement, MediaControlsElement,MediaControlsGroupElement, MediaPlayButtonElement, MediaToggleButtonElement, MediaSliderElement } from 'vidstack/elements';
 
-import VImage from "~/v2/src/components/VImage.vue"
+import VImage from "./VImage.vue"
+import VFlexibleLink from "./VFlexibleLink.vue"
 import soundAnimGif from '../assets/images/audioAnim.gif'
 import VTrackInfo from './VTrackInfo.vue'
 import VVolumeControl from './VVolumeControl.vue'
@@ -20,10 +21,12 @@ import { useSwipe } from '@vueuse/core'
 import { Howl, Howler } from 'howler'
 import Button from 'primevue/button'
 import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import { defineAsyncComponent } from 'vue'
 
 // defineCustomElement(MediaControlsGroupElement);
 // defineCustomElement(MediaControlsElement);
-// defineCustomElement(MediaPlayButtonElement);
+//defineCustomElement(MediaPlayButtonElement);
+//const mediaPlayButton = defineAsyncComponent(() => import('vidstack/elements').then(mod => mod.MediaPlayButtonElement))
 // defineCustomElement(MediaToggleButtonElement);
 // defineCustomElement(MediaSliderElement);
 
@@ -132,6 +135,13 @@ const props = defineProps({
   image: {
     default: null,
     type: String,
+  },
+  /**
+   * left image representing the audio
+   */
+  imageSize: {
+    default: 60,
+    type: Number,
   },
   /**
    * loading state
@@ -555,6 +565,7 @@ const toggleExpanded = (e) => {
 }
 // handles the click anywhere prop. So if the user clicks anywhere on the player, except the buttons, the player will expand or minimize
 const handleClickAnywhere = (e) => {
+  console.log('anywhere click')
   if (props.canClickAnywhere) {
     e.preventDefault()
     if (props.canExpand) {
@@ -566,7 +577,8 @@ const handleClickAnywhere = (e) => {
   }
 }
 
-onMounted(async() => {
+onMounted(async () => {
+
   // keyboard accessibility
   window.addEventListener('keydown', (event) => {
     switch (event.code) {
@@ -685,44 +697,93 @@ defineExpose({
             <media-provider></media-provider>
 
             <media-controls>
-              <div class="flex">
-                <div>image</div>
-                <div>
+              <div class="flex w-full">
+                <div
+                  v-if="image"
+                  class="track-info-image flex-none"
+                  :class="[{ hideImageOnMobile: props.hideImageOnMobile }]"
+                >
+                  <div
+                    :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
+                    @click="handleClickAnywhere"
+                  >
+                    <VFlexibleLink
+                      class="track-info-image-link"
+                      :to="titleLink ? titleLink : null"
+                      raw
+                      :title="titleLink ? titleLink : null"
+                      @flexible-link-click="emit('image-click')"
+                    >
+                      <VImage
+                        :src="image"
+                        :width="props.imageSize"
+                        :height="props.imageSize"
+                        :sizes="`xs:${props.imageSize * 2}px`"
+                        :alt-text="title"
+                        :ratio="[1, 1]"
+                        role="presentation"
+                      />
+                    </VFlexibleLink>
+                  </div>
+                </div>
+                <div class="w-full">
                   <media-controls-group>
-                    <media-play-button class="media-button">
-                      <media-icon type="play" class="play-icon">
-                        <slot name="play"><i class="pi pi-play"></i></slot>
-                      </media-icon>
-                      <media-icon type="pause" class="pause-icon">
-                        <slot name="pause"><i class="pi pi-pause"></i></slot>
-                      </media-icon>
-                    </media-play-button>
-                    <media-time-slider class="media-slider">
-                      <div class="media-slider-track">
-                        <div class="media-slider-track-fill media-slider-track"></div>
-                        <div class="media-slider-progress media-slider-track"></div>
+                    <div
+                      class="flex flex-column h-full justify-content-between"
+                      :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
+                      @click="handleClickAnywhere"
+                    >
+                      <div class="flex h-full align-items-center gap-2 px-2">
+                        <v-track-info
+                          :livestream="props.livestream"
+                          :station="props.station"
+                          :title="props.title"
+                          :title-link="props.titleLink"
+                          :description="props.description"
+                          :description-link="props.descriptionLink"
+                          :buffered="buffered"
+                          :current-seconds="currentSeconds"
+                          :duration-seconds="durationSeconds"
+                          :hide-image-on-mobile="props.hideImageOnMobile"
+                          :hide-description-on-mobile="props.hideDescriptionOnMobile"
+                          :hide-time-on-mobile="props.hideTimeOnMobile"
+                          :timeline-interactive="props.timelineInteractive"
+                          :timeline-bottom="props.timelineBottom"
+                          :timeline-top="props.timelineTop"
+                          :can-expand-with-click-anywhere="props.canClickAnywhere"
+                          :marquee="props.marquee"
+                          :marquee-speed="props.marqueeSpeed"
+                          :marquee-delay="props.marqueeDelay"
+                          :marquee-loops="props.marqueeLoops"
+                          @scrub-timeline-change="scrubTimelineChange"
+                          @scrub-timeline-end="scrubTimelineEnd"
+                          @timeline-click="timelineClick"
+                          @description-click="emit('description-click')"
+                          @title-click="emit('title-click')"
+                        />
+                        <media-play-button class="media-button flex-none">
+                          <media-icon type="play" class="play-icon">
+                            <slot name="play"><i class="pi pi-play"></i></slot>
+                          </media-icon>
+                          <media-icon type="pause" class="pause-icon">
+                            <slot name="pause"><i class="pi pi-pause"></i></slot>
+                          </media-icon>
+                        </media-play-button>
                       </div>
-                      <div class="media-slider-thumb"></div>
-                    </media-time-slider>
+
+                      <media-time-slider class="media-slider">
+                        <div class="media-slider-track">
+                          <div class="media-slider-track-fill media-slider-track"></div>
+                          <div class="media-slider-progress media-slider-track"></div>
+                        </div>
+                        <div class="media-slider-thumb"></div>
+                      </media-time-slider>
+                    </div>
                   </media-controls-group>
-                  <div class="media-controls-spacer"></div>
-                  <media-controls-group>Center Controls Group</media-controls-group>
-                  <div class="media-controls-spacer"></div>
-                  <media-controls-group>Bottom Controls Group</media-controls-group>
                 </div>
               </div>
             </media-controls>
-            <!-- <media-controls>
-            <MediaPlayButton class="media-button">
-              <media-icon type="play" class="play-icon">play</media-icon>
-              <media-icon type="pause" class="pause-icon">pause</media-icon>
-            </MediaPlayButton>
-            <media-scrubber class="media-scrubber"></media-scrubber>
-            <media-time class="media-time" type="current"></media-time>
-            <media-time class="media-time" type="duration"></media-time>
-            <media-volume class="media-button"></media-volume>
-            <media-fullscreen-button class="media-button"></media-fullscreen-button>
-          </media-controls> -->
+            <!-- <media-audio-layout small-when="never"></media-audio-layout> -->
           </media-player>
         </ClientOnly>
       </div>
@@ -768,7 +829,6 @@ defineExpose({
 
 <style lang="scss">
 $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
-
 .persistent-player {
   container-type: inline-size;
   bottom: 0;
@@ -845,7 +905,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     align-items: center;
     gap: 16px;
     //padding: var(--persistent-player-padding);
-    padding-top: 20px;
+    //padding-top: 20px;
   }
 
   .minimize-btn,
@@ -920,10 +980,12 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 }
 </style>
 <style lang="scss">
+$container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 :root,
 [data-style-mode="light"],
 .style-mode-light {
-  --persistent-player-height: 100px;
+  --persistent-player-image-size: 60px;
+  --persistent-player-height: 60px;
   --persistent-player-padding: 8px 16px 8px 8px;
   --persistent-player-height-buffer: 20px;
   --persistent-player-bg: #f1f1f1;
@@ -954,6 +1016,9 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   --persistent-player-title-color: var(--text-color);
   --persistent-player-title-decoration: none;
   --persistent-player-title-hover-decoration: underline;
+
+  --persistent-player-slider-bg: var(--stroke);
+  --persistent-player-slider-progress: #000;
 }
 [data-style-mode="dark"],
 .style-mode-dark {
@@ -971,103 +1036,126 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
 .persistent-player {
   .media-player {
-    .media-button {
-      display: inline-flex;
-      position: relative;
-      justify-content: center;
-      align-items: center;
-      width: var(--persistent-player-button-width);
-      height: var(--persistent-player-button-height);
-      color: var(--persistent-player-button-color);
-      border-radius: var(--persistent-player-button-radius);
-      margin-right: 2.5px;
-      background: var(--persistent-player-button-bg-color);
-      cursor: pointer;
-      * {
+    media-controls {
+      // override inline pointer-events: none which stops the image click
+      pointer-events: auto !important;
+      width: 100%;
+      .track-info-image {
+        display: block;
+        // prettier-ignore
+        &.hideImageOnMobile {      
+      @container (max-width: #{$container-breakpoint-md}) {
+        display: none;
+          }
+        }
+        width: var(--persistent-player-image-size);
+        max-width: var(--persistent-player-image-size);
+        height: var(--persistent-player-image-size);
+        //flex: 1 0 var(--persistent-player-image-size);
+        .image-with-caption {
+          width: var(--persistent-player-image-size);
+        }
+      }
+
+      // BUTTONS
+      .media-button {
+        display: inline-flex;
+        position: relative;
+        justify-content: center;
+        align-items: center;
+        width: var(--persistent-player-button-width);
+        height: var(--persistent-player-button-height);
         color: var(--persistent-player-button-color);
-        fill: var(--persistent-player-button-color);
+        border-radius: var(--persistent-player-button-radius);
+        margin-right: 2.5px;
+        background: var(--persistent-player-button-bg-color);
+        cursor: pointer;
+        * {
+          color: var(--persistent-player-button-color);
+          fill: var(--persistent-player-button-color);
+        }
       }
-    }
 
-    @media (hover: hover) and (pointer: fine) {
-      .media-button:hover {
-        background: var(--persistent-player-button-color-hover);
+      @media (hover: hover) and (pointer: fine) {
+        .media-button:hover {
+          background: var(--persistent-player-button-color-hover);
+        }
       }
-    }
 
-    .media-button[data-paused] .pause-icon,
-    .media-button:not([data-paused]) .play-icon {
-      display: none;
-    }
+      .media-button[data-paused] .pause-icon,
+      .media-button:not([data-paused]) .play-icon {
+        display: none;
+      }
 
-    .media-slider {
-      display: inline-flex;
-      align-items: center;
-      width: 100%;
-      height: 40px;
-      position: relative;
-      contain: layout style;
-      outline: none;
-      pointer-events: auto;
-      cursor: pointer;
-      user-select: none;
-      touch-action: none;
-      max-width: 72px;
-      /** Prevent thumb flowing out of slider (15px = thumb width). */
-      margin: 0 calc(15px / 2);
-      -webkit-user-select: none;
-      -webkit-tap-highlight-color: transparent;
-    }
+      // SLIDERS
+      .media-slider {
+        display: inline-flex;
+        align-items: center;
+        width: 100%;
+        height: 2px;
+        position: relative;
+        contain: layout style;
+        outline: none;
+        pointer-events: auto;
+        cursor: pointer;
+        user-select: none;
+        touch-action: none;
+        /** Prevent thumb flowing out of slider (15px = thumb width). */
+        //margin: 0 calc(15px / 2);
+        -webkit-user-select: none;
+        -webkit-tap-highlight-color: transparent;
+      }
 
-    .media-slider[data-focus] .media-slider-track {
-      box-shadow: var(--media-focus-ring, 0 0 0 3px rgb(78 156 246));
-    }
+      .media-slider[data-focus] .media-slider-track {
+        box-shadow: var(--media-focus-ring, 0 0 0 3px rgb(78 156 246));
+      }
 
-    .media-slider-track {
-      z-index: 0;
-      position: absolute;
-      width: 100%;
-      height: 5px;
-      top: 50%;
-      left: 0;
-      border-radius: 1px;
-      transform: translateY(-50%) translateZ(0);
-      background-color: rgb(255 255 255 / 0.3);
-      contain: strict;
-    }
+      .media-slider-track {
+        z-index: 0;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        top: 50%;
+        left: 0;
+        //border-radius: 1px;
+        transform: translateY(-50%) translateZ(0);
+        background-color: var(--persistent-player-slider-bg);
+        contain: strict;
+      }
 
-    .media-slider-track-fill {
-      z-index: 2; /** above track. */
-      background-color: #f5f5f5;
-      width: var(--slider-fill, 0%);
-      will-change: width;
-    }
+      .media-slider-track-fill {
+        z-index: 2; /** above track. */
+        background-color: var(--persistent-player-slider-progress);
+        width: var(--slider-fill, 0%);
+        will-change: width;
+      }
 
-    .media-slider-thumb {
-      position: absolute;
-      top: 50%;
-      left: var(--slider-fill);
-      opacity: 0;
-      contain: layout size style;
-      width: 15px;
-      height: 15px;
-      border: 1px solid #cacaca;
-      border-radius: 9999px;
-      background-color: #fff;
-      transform: translate(-50%, -50%) translateZ(0);
-      transition: opacity 0.15s ease-in;
-      pointer-events: none;
-      will-change: left;
-      z-index: 2; /** above track fill. */
-    }
+      .media-slider-thumb {
+        position: absolute;
+        top: 50%;
+        left: var(--slider-fill);
+        opacity: 0;
+        contain: layout size style;
+        width: 15px;
+        height: 15px;
+        border: 1px solid #cacaca;
+        border-radius: 9999px;
+        background-color: #fff;
+        transform: translate(-50%, -50%) translateZ(0);
+        transition: opacity 0.15s ease-in;
+        pointer-events: none;
+        will-change: left;
+        z-index: 2; /** above track fill. */
+      }
 
-    .media-slider[data-active] .media-slider-thumb {
-      opacity: 1;
-      transition: opacity 0.2s ease-in;
-    }
+      .media-slider[data-active] .media-slider-thumb {
+        opacity: 1;
+        transition: opacity 0.2s ease-in;
+      }
 
-    .media-slider[data-dragging] .media-slider-thumb {
-      box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 0.4);
+      .media-slider[data-dragging] .media-slider-thumb {
+        box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 0.4);
+      }
     }
   }
 }
