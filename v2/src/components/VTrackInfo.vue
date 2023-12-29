@@ -211,28 +211,6 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       line-height: 16px;
       display: flex;
       margin-bottom: 4px;
-      .track-info-livestream-indicator {
-        display: flex;
-        align-items: center;
-        background: var(--persistent-player-live-indicator-bg);
-        color: var(--persistent-player-live-indicator-color);
-        border-radius: 44px;
-        padding: 6px;
-        margin-right: 8px;
-        .track-info-livestream-indicator-text {
-          font-size: 10px;
-          font-weight: 900;
-          text-transform: uppercase;
-          letter-spacing: 2px;
-        }
-        .track-info-livestream-indicator-dot {
-          background-color: #e74f4f;
-          border-radius: 8px;
-          height: 8px;
-          width: 8px;
-          margin-left: 2px;
-        }
-      }
       .track-info-livestream-station {
         font-family: var(--font-family);
         font-size: 10px;
@@ -273,15 +251,6 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       &.marquee {
         -webkit-mask-image: linear-gradient(90deg, #000 94%, transparent);
         mask-image: linear-gradient(90deg, #000 94%, transparent);
-        // &:after {
-        //   content: "";
-        //   position: absolute;
-        //   right: 0;
-        //   top: 0;
-        //   width: 1rem;
-        //   height: 100%;
-        //   background-color: red;
-        // }
       }
       .track-info-description-link {
         display: block;

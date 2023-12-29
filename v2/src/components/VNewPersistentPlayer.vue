@@ -1,26 +1,33 @@
 <script setup lang="ts">
-
-import 'vidstack/player/styles/default/layouts/audio.css';
-import 'vidstack/player/styles/default/layouts/video.css';
+import "vidstack/player/styles/default/layouts/audio.css"
+import "vidstack/player/styles/default/layouts/video.css"
 
 // Register elements.
-import 'vidstack/player';
-import 'vidstack/player/layouts';
-import 'vidstack/player/ui';
+import "vidstack/player"
+import "vidstack/player/layouts"
+import "vidstack/player/ui"
 
-import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } from 'vidstack';
-import type { MediaPlayerElement } from 'vidstack/elements';
-import { defineCustomElement, MediaControlsElement,MediaControlsGroupElement, MediaPlayButtonElement, MediaToggleButtonElement, MediaSliderElement, MediaLiveButtonElement } from 'vidstack/elements';
+//import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } from 'vidstack';
+import type { MediaPlayerElement } from "vidstack/elements"
+import {
+  defineCustomElement,
+  MediaControlsElement,
+  MediaControlsGroupElement,
+  MediaPlayButtonElement,
+  MediaToggleButtonElement,
+  MediaSliderElement,
+  MediaLiveButtonElement,
+} from "vidstack/elements"
 
 import VImage from "./VImage.vue"
 import VFlexibleLink from "./VFlexibleLink.vue"
-import soundAnimGif from '../assets/images/audioAnim.gif'
-import VTrackInfo from './VTrackInfo.vue'
-import VVolumeControl from './VVolumeControl.vue'
-import { useSwipe } from '@vueuse/core'
-import { Howl, Howler } from 'howler'
-import Button from 'primevue/button'
-import { nextTick, onBeforeUnmount, onMounted, ref } from 'vue'
+import soundAnimGif from "../assets/images/audioAnim.gif"
+import VTrackInfo from "./VTrackInfo.vue"
+import VVolumeControl from "./VVolumeControl.vue"
+import { useSwipe } from "@vueuse/core"
+import { Howl, Howler } from "howler"
+import Button from "primevue/button"
+import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 
 const props = defineProps({
   /**
@@ -150,13 +157,6 @@ const props = defineProps({
     type: Boolean,
   },
   /**
-   * to render a livestream view (LIVE indicator and no progress bar)
-   */
-  livestream: {
-    default: false,
-    type: Boolean,
-  },
-  /**
    * loop the audio when complete
    */
   loop: {
@@ -168,11 +168,11 @@ const props = defineProps({
     type: Boolean,
   },
   marqueeDelay: {
-    default: '3s',
+    default: "3s",
     type: String,
   },
   marqueeLoops: {
-    default: '1',
+    default: "1",
     type: String,
   },
   marqueeSpeed: {
@@ -282,34 +282,34 @@ const isExpanded = ref(false)
 let sound = null
 
 const emit = defineEmits([
-  'toggle-play',
-  'volume-toggle-mute',
-  'volume-change',
-  'load-error',
-  'skip-ahead',
-  'skip-back',
-  'scrub-timeline-change',
-  'scrub-timeline-end',
-  'download',
-  'image-click',
-  'description-click',
-  'title-click',
-  'sound-ended',
-  'sound-loaded',
-  'sound-looping',
-  'timeline-click',
-  'is-minimized',
-  'is-expanded',
-  'swipe-up',
-  'swipe-down',
-  'is-loading',
-  'duration',
-  'current-duration',
+  "toggle-play",
+  "volume-toggle-mute",
+  "volume-change",
+  "load-error",
+  "skip-ahead",
+  "skip-back",
+  "scrub-timeline-change",
+  "scrub-timeline-end",
+  "download",
+  "image-click",
+  "description-click",
+  "title-click",
+  "sound-ended",
+  "sound-loaded",
+  "sound-looping",
+  "timeline-click",
+  "is-minimized",
+  "is-expanded",
+  "swipe-up",
+  "swipe-down",
+  "is-loading",
+  "duration",
+  "current-duration",
 ])
 
 //swipe setup
 const playerRef = ref(null)
-const $mediaPlayerRef = ref<MediaPlayerElement>();
+const $mediaPlayerRef = ref<MediaPlayerElement>()
 
 // prevents the body from scrolling when the dropdown is open
 function preventScrollOnTouch(event) {
@@ -362,15 +362,11 @@ if (supportSwipe) {
       if (!isDraggingDown) {
         if (velocity > swipeThreshold) {
           //console.log('EXPAND')
-          playerRef.value.removeEventListener(
-            'touchmove',
-            preventScrollOnTouch,
-            {
-              passive: false,
-            }
-          )
+          playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
+            passive: false,
+          })
           isExpanded.value = true
-          emit('swipe-up')
+          emit("swipe-up")
         }
       }
     }
@@ -378,11 +374,11 @@ if (supportSwipe) {
       if (isDraggingDown) {
         if (velocity > swipeThreshold) {
           //console.log('UNEXPAND')
-          playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+          playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
             passive: false,
           })
           isExpanded.value = false
-          emit('swipe-down')
+          emit("swipe-down")
         }
       }
     }
@@ -410,7 +406,7 @@ if (supportSwipe) {
 // initially set touchmove prevent default on the playerRef
 onMounted(() => {
   if (supportSwipe) {
-    playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+    playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
       passive: false,
     })
   }
@@ -420,22 +416,22 @@ onMounted(() => {
 // method to handle update the currentSeconds with the audio playhead
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
-  emit('current-duration', currentSeconds.value)
+  emit("current-duration", currentSeconds.value)
 }
 // time converter
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
-  return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
+  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss
 }
 // starts the download process. This will eventually be replaced with a proper download function that supports web and app
 const download = () => {
-  emit('download')
-  window.open(props.file, '_blank')
+  emit("download")
+  window.open(props.file, "_blank")
 }
 // makes the audio skip ahead props.skipAheadTime seconds
 const skipAhead = () => {
   if (sound) {
-    emit('skip-ahead')
+    emit("skip-ahead")
     sound.seek(sound.seek() + props.skipAheadTime)
     updateCurrentSeconds()
   }
@@ -443,7 +439,7 @@ const skipAhead = () => {
 // makes the audio skip back props.skipBackTime seconds
 const skipBack = () => {
   if (sound) {
-    emit('skip-back')
+    emit("skip-back")
     sound.seek() > props.skipBackTime
       ? sound.seek(sound.seek() - props.skipBackTime)
       : sound.seek(0.1)
@@ -468,19 +464,19 @@ const togglePlay = () => {
     sound ? sound.unload() : null
     currentFile.value = props.file
     loading.value = true
-    emit('is-loading', true)
+    emit("is-loading", true)
     sound = new Howl({
       html5: true,
       onend: function () {
-        emit('sound-ended')
+        emit("sound-ended")
         if (props.loop) {
-          emit('sound-looping')
+          emit("sound-looping")
           sound.seek(0.1)
           sound.play()
         } else {
           sound.unload()
           playing.value = false
-          emit('toggle-play', false)
+          emit("toggle-play", false)
           // without the timeout, the timeline will not update and disapear on the last tick
           setTimeout(() => {
             clearDurationInterval()
@@ -488,14 +484,14 @@ const togglePlay = () => {
         }
       },
       onload: function () {
-        emit('sound-loaded')
+        emit("sound-loaded")
         loading.value = false
-        emit('is-loading', false)
+        emit("is-loading", false)
         durationSeconds.value = sound.duration()
-        emit('duration', durationSeconds.value)
+        emit("duration", durationSeconds.value)
       },
       onloaderror: function (id, errorCode) {
-        emit('load-error', [id, errorCode])
+        emit("load-error", [id, errorCode])
       },
       preload: true,
       src: [props.file],
@@ -503,13 +499,13 @@ const togglePlay = () => {
   }
   // Play or pause the sound.
   if (sound && sound.playing()) {
-    emit('toggle-play', false)
+    emit("toggle-play", false)
     playing.value = false
     sound.pause()
     clearDurationInterval()
   } else {
     playing.value = true
-    emit('toggle-play', true)
+    emit("toggle-play", true)
     startDurationInterval()
     sound.play()
   }
@@ -518,32 +514,28 @@ const togglePlay = () => {
 }
 
 // handle the scrub end event on the timeline
-const scrubTimelineEnd = (e) => {
-
-}
+const scrubTimelineEnd = (e) => {}
 // handle the change event on the timeline
-const scrubTimelineChange = (e) => {
-
-}
+const scrubTimelineChange = (e) => {}
 // handle the click on the timeline
 const timelineClick = (e) => {
-  emit('timeline-click', e)
+  emit("timeline-click", e)
   scrubTimelineEnd(e)
 }
 // exposed method to handle the minimize toggle
 const toggleMinimize = (e) => {
-  emit('is-minimized', e)
+  emit("is-minimized", e)
   isMinimized.value = e
 }
 
 // handle scroll blocking with js when player is expanded
 const scrollToggle = (e) => {
   if (e) {
-    playerRef.value.removeEventListener('touchmove', preventScrollOnTouch, {
+    playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
       passive: false,
     })
   } else {
-    playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+    playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
       passive: false,
     })
   }
@@ -551,13 +543,12 @@ const scrollToggle = (e) => {
 // exposed method to handle the expanding toggle
 const toggleExpanded = (e) => {
   scrollToggle(e)
-  emit('is-expanded', e)
+  emit("is-expanded", e)
   isExpanded.value = e
-
 }
 // handles the click anywhere prop. So if the user clicks anywhere on the player, except the buttons, the player will expand or minimize
 const handleClickAnywhere = (e) => {
-  console.log('anywhere click')
+  console.log("anywhere click")
   if (props.canClickAnywhere) {
     e.preventDefault()
     if (props.canExpand) {
@@ -569,18 +560,20 @@ const handleClickAnywhere = (e) => {
   }
 }
 
-onMounted(async() => {
+const isLive = ref(false)
+
+onMounted(async () => {
   // keyboard accessibility
-  window.addEventListener('keydown', (event) => {
+  window.addEventListener("keydown", (event) => {
     switch (event.code) {
-      case 'ArrowUp':
+      case "ArrowUp":
         if ($mediaPlayerRef.value && $mediaPlayerRef.value.volume < 1) {
           $mediaPlayerRef.value.volume += 0.1
         }
         break
-      case 'ArrowDown':
-         if ($mediaPlayerRef.value && $mediaPlayerRef.value.volume > 0) {
-           $mediaPlayerRef.value.volume -= 0.1
+      case "ArrowDown":
+        if ($mediaPlayerRef.value && $mediaPlayerRef.value.volume > 0) {
+          $mediaPlayerRef.value.volume -= 0.1
         }
         break
       default:
@@ -590,51 +583,58 @@ onMounted(async() => {
   })
 
   await nextTick()
-  const instance = document.querySelector("media-player");
+  const instance = document.querySelector("media-player")
   if (instance) {
     // Read
-    const { playing, paused, seeking, canPlay,volume,muted } = instance.state;
+    const { playing, paused, seeking, canPlay, volume, muted, live } = instance.state
 
     //subscribe to state changess
     instance.subscribe(({ playing }) => {
       console.log("is playing = ", playing)
       if (playing) {
-        emit('toggle-play', true)
+        emit("toggle-play", true)
       }
-    });
+    })
     instance.subscribe(({ paused }) => {
       console.log("is paused = ", paused)
       if (paused) {
-        emit('toggle-play', false)
+        emit("toggle-play", false)
       }
-    });
+    })
     instance.subscribe(({ seeking }) => {
       console.log("is seeking = ", seeking)
-      if($mediaPlayerRef.value){
-        emit('scrub-timeline-change', $mediaPlayerRef.value.currentTime)
+      if ($mediaPlayerRef.value) {
+        emit("scrub-timeline-change", $mediaPlayerRef.value.currentTime)
         if ($mediaPlayerRef.value && !seeking) {
-          emit('scrub-timeline-end', $mediaPlayerRef.value.currentTime)
-          console.log("$mediaPlayerRef.value.currentTime = ", $mediaPlayerRef.value.currentTime)
+          emit("scrub-timeline-end", $mediaPlayerRef.value.currentTime)
+          console.log(
+            "$mediaPlayerRef.value.currentTime = ",
+            $mediaPlayerRef.value.currentTime
+          )
         }
       }
-    });
+    })
     instance.subscribe(({ canPlay }) => {
       console.log("canPlay = ", canPlay)
-    });
+    })
     instance.subscribe(({ volume }) => {
       console.log("volume = ", volume)
-      emit('volume-change', volume)
-    });
+      emit("volume-change", volume)
+    })
     instance.subscribe(({ muted }) => {
       console.log("muted = ", muted)
-      emit('volume-toggle-mute', muted)
-    });
+      emit("volume-toggle-mute", muted)
+    })
+    instance.subscribe(({ live }) => {
+      console.log("live = ", live)
+      isLive.value = live
+    })
   }
 })
 
 onBeforeUnmount(() => {
   // destroy the audio
-  $mediaPlayerRef.value?.destroy();
+  $mediaPlayerRef.value?.destroy()
 })
 
 defineExpose({
@@ -678,7 +678,7 @@ defineExpose({
           view-type="audio"
           load="eager"
           :volume="props.volume"
-          :stream-type="props.livestream ? 'live:dvr' : 'on-demand'"
+          :stream-type="isLive ? 'live:dvr' : 'on-demand'"
           :loop="props.loop"
           poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
           crossorigin
@@ -725,7 +725,7 @@ defineExpose({
                   >
                     <div class="flex h-full align-items-center gap-2 px-2">
                       <v-track-info
-                        :livestream="props.livestream"
+                        :livestream="isLive"
                         :station="props.station"
                         :title="props.title"
                         :title-link="props.titleLink"
