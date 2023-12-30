@@ -1,11 +1,11 @@
 <script setup>
-import soundAnimGif from '../assets/images/audioAnim.gif'
-import VTrackInfo from './VTrackInfo.vue'
-import VVolumeControl from './VVolumeControl.vue'
-import { useSwipe } from '@vueuse/core'
-import { Howl, Howler } from 'howler'
-import Button from 'primevue/button'
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import soundAnimGif from "../assets/images/audioAnim.gif"
+import VTrackInfo from "./VTrackInfo.vue"
+import VVolumeControl from "./VVolumeControl.vue"
+import { useSwipe } from "@vueuse/core"
+import { Howl, Howler } from "howler"
+import Button from "primevue/button"
+import { onBeforeUnmount, onMounted, ref } from "vue"
 
 const props = defineProps({
   /**
@@ -146,11 +146,11 @@ const props = defineProps({
     type: Boolean,
   },
   marqueeDelay: {
-    default: '3s',
+    default: "3s",
     type: String,
   },
   marqueeLoops: {
-    default: '1',
+    default: "1",
     type: String,
   },
   marqueeSpeed: {
@@ -260,29 +260,29 @@ const isExpanded = ref(false)
 let sound = null
 
 const emit = defineEmits([
-  'toggle-play',
-  'volume-toggle-mute',
-  'volume-change',
-  'load-error',
-  'skip-ahead',
-  'skip-back',
-  'scrub-timeline-change',
-  'scrub-timeline-end',
-  'download',
-  'image-click',
-  'description-click',
-  'title-click',
-  'sound-ended',
-  'sound-loaded',
-  'sound-looping',
-  'timeline-click',
-  'is-minimized',
-  'is-expanded',
-  'swipe-up',
-  'swipe-down',
-  'is-loading',
-  'duration',
-  'current-duration',
+  "toggle-play",
+  "volume-toggle-mute",
+  "volume-change",
+  "load-error",
+  "skip-ahead",
+  "skip-back",
+  "scrub-timeline-change",
+  "scrub-timeline-end",
+  "download",
+  "image-click",
+  "description-click",
+  "title-click",
+  "sound-ended",
+  "sound-loaded",
+  "sound-looping",
+  "timeline-click",
+  "is-minimized",
+  "is-expanded",
+  "swipe-up",
+  "swipe-down",
+  "is-loading",
+  "duration",
+  "current-duration",
 ])
 
 //swipe setup
@@ -339,15 +339,11 @@ if (supportSwipe) {
       if (!isDraggingDown) {
         if (velocity > swipeThreshold) {
           //console.log('EXPAND')
-          playerRef.value.removeEventListener(
-            'touchmove',
-            preventScrollOnTouch,
-            {
-              passive: false,
-            }
-          )
+          playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
+            passive: false,
+          })
           isExpanded.value = true
-          emit('swipe-up')
+          emit("swipe-up")
         }
       }
     }
@@ -355,11 +351,11 @@ if (supportSwipe) {
       if (isDraggingDown) {
         if (velocity > swipeThreshold) {
           //console.log('UNEXPAND')
-          playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+          playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
             passive: false,
           })
           isExpanded.value = false
-          emit('swipe-down')
+          emit("swipe-down")
         }
       }
     }
@@ -387,7 +383,7 @@ if (supportSwipe) {
 // initially set touchmove prevent default on the playerRef
 onMounted(() => {
   if (supportSwipe) {
-    playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+    playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
       passive: false,
     })
   }
@@ -397,22 +393,22 @@ onMounted(() => {
 // method to handle update the currentSeconds with the audio playhead
 const updateCurrentSeconds = () => {
   currentSeconds.value = sound.seek()
-  emit('current-duration', currentSeconds.value)
+  emit("current-duration", currentSeconds.value)
 }
 // time converter
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
-  return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
+  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss
 }
 // starts the download process. This will eventually be replaced with a proper download function that supports web and app
 const download = () => {
-  emit('download')
-  window.open(props.file, '_blank')
+  emit("download")
+  window.open(props.file, "_blank")
 }
 // makes the audio skip ahead props.skipAheadTime seconds
 const skipAhead = () => {
   if (sound) {
-    emit('skip-ahead')
+    emit("skip-ahead")
     sound.seek(sound.seek() + props.skipAheadTime)
     updateCurrentSeconds()
   }
@@ -420,7 +416,7 @@ const skipAhead = () => {
 // makes the audio skip back props.skipBackTime seconds
 const skipBack = () => {
   if (sound) {
-    emit('skip-back')
+    emit("skip-back")
     sound.seek() > props.skipBackTime
       ? sound.seek(sound.seek() - props.skipBackTime)
       : sound.seek(0.1)
@@ -445,19 +441,19 @@ const togglePlay = () => {
     sound ? sound.unload() : null
     currentFile.value = props.file
     loading.value = true
-    emit('is-loading', true)
+    emit("is-loading", true)
     sound = new Howl({
       html5: true,
       onend: function () {
-        emit('sound-ended')
+        emit("sound-ended")
         if (props.loop) {
-          emit('sound-looping')
+          emit("sound-looping")
           sound.seek(0.1)
           sound.play()
         } else {
           sound.unload()
           playing.value = false
-          emit('toggle-play', false)
+          emit("toggle-play", false)
           // without the timeout, the timeline will not update and disapear on the last tick
           setTimeout(() => {
             clearDurationInterval()
@@ -465,14 +461,14 @@ const togglePlay = () => {
         }
       },
       onload: function () {
-        emit('sound-loaded')
+        emit("sound-loaded")
         loading.value = false
-        emit('is-loading', false)
+        emit("is-loading", false)
         durationSeconds.value = sound.duration()
-        emit('duration', durationSeconds.value)
+        emit("duration", durationSeconds.value)
       },
       onloaderror: function (id, errorCode) {
-        emit('load-error', [id, errorCode])
+        emit("load-error", [id, errorCode])
       },
       preload: true,
       src: [props.file],
@@ -480,13 +476,13 @@ const togglePlay = () => {
   }
   // Play or pause the sound.
   if (sound && sound.playing()) {
-    emit('toggle-play', false)
+    emit("toggle-play", false)
     playing.value = false
     sound.pause()
     clearDurationInterval()
   } else {
     playing.value = true
-    emit('toggle-play', true)
+    emit("toggle-play", true)
     startDurationInterval()
     sound.play()
   }
@@ -495,14 +491,14 @@ const togglePlay = () => {
 }
 // handle toggling the mute state
 const volumeToggleMute = (e) => {
-  emit('volume-toggle-mute', e)
+  emit("volume-toggle-mute", e)
   muted.value = !muted.value
   sound.mute(muted.value)
 }
 // handle the volume change event
 const volumeChange = (e) => {
   if (sound) {
-    emit('volume-change', e)
+    emit("volume-change", e)
     sound.volume(e / 100)
     volume.value = e
   }
@@ -512,7 +508,7 @@ let onceFlag = null
 let scrubWhenPaused = false
 // handle the scrub end event on the timeline
 const scrubTimelineEnd = (e) => {
-  emit('scrub-timeline-end', e)
+  emit("scrub-timeline-end", e)
   const percentUnit = durationSeconds.value / 100
   sound.seek(e * percentUnit)
   if (!scrubWhenPaused && !playing.value) {
@@ -528,7 +524,7 @@ const scrubTimelineChange = (e) => {
   // update currentSeconds from the Slider change event, that passes the value to the Slider.
   currentSeconds.value = (e * durationSeconds.value) / 100
   if (!onceFlag) {
-    emit('scrub-timeline-change', e)
+    emit("scrub-timeline-change", e)
     onceFlag = true
     if (playing.value) {
       togglePlay()
@@ -540,23 +536,23 @@ const scrubTimelineChange = (e) => {
 }
 // handle the click on the timeline
 const timelineClick = (e) => {
-  emit('timeline-click', e)
+  emit("timeline-click", e)
   scrubTimelineEnd(e)
 }
 // exposed method to handle the minimize toggle
 const toggleMinimize = (e) => {
-  emit('is-minimized', e)
+  emit("is-minimized", e)
   isMinimized.value = e
 }
 
 // handle scroll blocking with js when player is expanded
 const scrollToggle = (e) => {
   if (e) {
-    playerRef.value.removeEventListener('touchmove', preventScrollOnTouch, {
+    playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
       passive: false,
     })
   } else {
-    playerRef.value.addEventListener('touchmove', preventScrollOnTouch, {
+    playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
       passive: false,
     })
   }
@@ -564,7 +560,7 @@ const scrollToggle = (e) => {
 // exposed method to handle the expanding toggle
 const toggleExpanded = (e) => {
   scrollToggle(e)
-  emit('is-expanded', e)
+  emit("is-expanded", e)
   isExpanded.value = e
 }
 // handles the click anywhere prop. So if the user clicks anywhere on the player, exect the buttons, the player will expand or minimize
@@ -582,22 +578,22 @@ const handleClickAnywhere = (e) => {
 
 onMounted(() => {
   // keyboard accessibility
-  window.addEventListener('keydown', (event) => {
+  window.addEventListener("keydown", (event) => {
     switch (event.code) {
-      case 'ArrowUp':
+      case "ArrowUp":
         if (volume.value < 100 && sound) {
           volume.value++
         }
         break
-      case 'ArrowDown':
+      case "ArrowDown":
         if (volume.value > 0 && sound) {
           volume.value--
         }
         break
-      case 'ArrowLeft':
+      case "ArrowLeft":
         skipBack()
         break
-      case 'ArrowRight':
+      case "ArrowRight":
         skipAhead()
         break
       default:
@@ -716,6 +712,7 @@ defineExpose({
             <slot name="volumeOff"></slot>
           </template>
         </v-volume-control>
+
         <Button
           v-if="props.showSkip && !props.livestream"
           :title="`Go Back ${props.skipBackTime} Seconds`"
@@ -733,15 +730,9 @@ defineExpose({
           :aria-label="playing ? 'Pause button' : 'Play button'"
           @click="togglePlay"
         >
-          <slot v-if="!playing && !loading" name="play"
-            ><i class="pi pi-play"></i
-          ></slot>
-          <slot v-if="playing && !loading" name="pause"
-            ><i class="pi pi-pause"></i
-          ></slot>
-          <slot v-if="loading" name="loading"
-            ><i class="pi pi-spin pi-spinner"></i
-          ></slot>
+          <slot v-if="!playing && !loading" name="play"><i class="pi pi-play"></i></slot>
+          <slot v-if="playing && !loading" name="pause"><i class="pi pi-pause"></i></slot>
+          <slot v-if="loading" name="loading"><i class="pi pi-spin pi-spinner"></i></slot>
         </Button>
         <Button
           v-if="props.showSkip && !props.livestream"
@@ -822,7 +813,7 @@ defineExpose({
 </template>
 
 <style lang="scss" scoped>
-$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
+$container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
 .persistent-player {
   container-type: inline-size;
@@ -841,8 +832,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
   justify-content: center;
   &.minimized {
     bottom: calc(
-      calc(var(--persistent-player-height) * -1) -
-        var(--persistent-player-height-buffer)
+      calc(var(--persistent-player-height) * -1) - var(--persistent-player-height-buffer)
     );
   }
   &.expanded {
@@ -1000,9 +990,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
       text-decoration: var(--persistent-player-title-decoration) !important;
 
       &:hover {
-        text-decoration: var(
-          --persistent-player-title-hover-decoration
-        ) !important;
+        text-decoration: var(--persistent-player-title-hover-decoration) !important;
         color: var(--persistent-player-text-button-color-hover) !important;
       }
     }

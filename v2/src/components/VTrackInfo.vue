@@ -1,18 +1,8 @@
 <script setup>
 import VFlexibleLink from "./VFlexibleLink.vue"
-import VImage from "./VImage.vue"
-import VProgressScrubber from "./VProgressScrubber.vue"
 import { computed } from "vue"
 
 const props = defineProps({
-  buffered: {
-    default: 0,
-    type: Number,
-  },
-  currentSeconds: {
-    default: 0,
-    type: Number,
-  },
   description: {
     default: null,
     type: String,
@@ -21,15 +11,7 @@ const props = defineProps({
     default: null,
     type: String,
   },
-  durationSeconds: {
-    default: 0,
-    type: Number,
-  },
   hideDescriptionOnMobile: {
-    default: false,
-    type: Boolean,
-  },
-  hideImageOnMobile: {
     default: false,
     type: Boolean,
   },
@@ -61,18 +43,6 @@ const props = defineProps({
     default: null,
     type: String,
   },
-  timelineBottom: {
-    default: false,
-    type: Boolean,
-  },
-  timelineInteractive: {
-    default: true,
-    type: Boolean,
-  },
-  timelineTop: {
-    default: false,
-    type: Boolean,
-  },
   title: {
     default: null,
     type: String,
@@ -83,26 +53,7 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits([
-  "scrub-timeline-change",
-  "scrub-timeline-end",
-  "image-click",
-  "title-click",
-  "description-click",
-  "timeline-click",
-])
-
-const percentBuffered = computed(() => {
-  return (props.buffered / props.durationSeconds) * 100
-})
-const percentComplete = computed(() => {
-  return (props.currentSeconds / props.durationSeconds) * 100
-})
-// converts time to desired format
-const convertTime = (val) => {
-  const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
-  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss
-}
+const emit = defineEmits(["title-click", "description-click"])
 
 const getMarqueeSpeed = computed(() => {
   const length = props.description?.length
@@ -112,19 +63,10 @@ const getMarqueeSpeed = computed(() => {
 
 <template>
   <div class="track-info">
-    <div
-      class="track-info-details"
-      :class="[
-        {
-          timelineTop: props.timelineTop,
-          timelineBottom: props.timelineBottom,
-          timelineInteractive: props.timelineInteractive,
-        },
-      ]"
-    >
+    <div class="track-info-details">
       <div class="overflow-hidden">
         <div
-          v-if="livestream"
+          v-if="props.livestream"
           class="track-info-livestream flex gap-1 align-content-center"
         >
           <media-live-button class="media-live-button">
@@ -140,7 +82,7 @@ const getMarqueeSpeed = computed(() => {
           <div v-if="title">
             <VFlexibleLink
               class="track-info-title-link title"
-              :to="titleLink || null"
+              :to="props.titleLink || null"
               @flexible-link-click="emit('title-click')"
             >
               <div v-html="title"></div>
@@ -148,7 +90,7 @@ const getMarqueeSpeed = computed(() => {
           </div>
         </div>
         <div
-          v-if="description"
+          v-if="props.description"
           class="track-info-description"
           :class="[
             {
@@ -159,7 +101,7 @@ const getMarqueeSpeed = computed(() => {
         >
           <VFlexibleLink
             class="track-info-description-link"
-            :to="descriptionLink || null"
+            :to="props.descriptionLink || null"
             @flexible-link-click="emit('description-click')"
           >
             <div v-if="props.marquee" class="track-info-description-marquee">
@@ -167,18 +109,26 @@ const getMarqueeSpeed = computed(() => {
                 <div class="news-message">
                   <div
                     class="content"
-                    v-html="`${description}&nbsp;&nbsp;-&nbsp;&nbsp;`"
+                    v-html="`${props.description}&nbsp;&nbsp;-&nbsp;&nbsp;`"
                   ></div>
                 </div>
                 <div class="news-message">
                   <div
                     class="content"
-                    v-html="`${description}&nbsp;&nbsp;-&nbsp;&nbsp;`"
+                    v-html="`${props.description}&nbsp;&nbsp;-&nbsp;&nbsp;`"
                   ></div>
                 </div>
               </div>
             </div>
-            <div v-else class="track-info-description" v-html="description"></div>
+            <div v-else class="track-info-description" v-html="props.description"></div>
+            <div
+              class="media-time-group track-info-time"
+              :class="[{ hideTimeOnMobile: props.hideTimeOnMobile }]"
+            >
+              <media-time class="media-time" type="current"></media-time>
+              <div class="media-time-divider">/</div>
+              <media-time class="media-time" type="duration"></media-time>
+            </div>
           </VFlexibleLink>
         </div>
       </div>
@@ -293,48 +243,14 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     }
     .track-info-time {
       display: flex;
-      gap: spacing(1);
-      justify-content: flex-end;
-
-      @container (max-width: #{$container-breakpoint-md}) {
-        justify-content: flex-start;
-      }
-
+      gap: 0.25rem;
+      font-size: var(--persistent-player-time-size);
+      color: var(--persistent-player-time-color);
+      font-weight: var(--persistent-player-time-weight);
       &.hideTimeOnMobile {
         @container (max-width: #{$container-breakpoint-md}) {
           display: none;
         }
-      }
-
-      .player-track-time-current {
-        margin-right: spacing(1);
-      }
-      .player-track-time-total {
-        margin-left: spacing(1);
-      }
-    }
-    &.timelineBottom .progress-control {
-      //display: none;
-
-      @container (max-width: #{$container-breakpoint-md}) {
-        position: absolute;
-        cursor: pointer;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        height: 5px;
-      }
-    }
-    &.timelineTop .progress-control {
-      //display: none;
-
-      @container (max-width: #{$container-breakpoint-md}) {
-        position: absolute;
-        cursor: pointer;
-        top: -5px;
-        left: 0;
-        right: 0;
-        height: 5px;
       }
     }
   }
@@ -343,11 +259,5 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
 <style lang="scss">
 .track-info-details {
-  &:not(.timelineInteractive) .progress-control {
-    pointer-events: none;
-    .p-slider-handle {
-      display: none !important;
-    }
-  }
 }
 </style>

@@ -40,6 +40,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
       :can-unexpand-with-swipe="true"
       :can-click-anywhere="true"
       :show-skip="false"
+      :hide-time-on-mobile="true"
       :marquee="true"
       :volume="1"
       title="The Takeaway"

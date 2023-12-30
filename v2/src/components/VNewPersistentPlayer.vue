@@ -297,7 +297,6 @@ const emit = defineEmits([
   "sound-ended",
   "sound-loaded",
   "sound-looping",
-  "timeline-click",
   "is-minimized",
   "is-expanded",
   "swipe-up",
@@ -350,14 +349,6 @@ if (supportSwipe) {
     const distance = Math.abs(touchendY - touchstartY)
     const time = touchendTime - touchstartTime
     const velocity = distance / time
-    // console.log('________________________________________________________')
-    // console.log('distance', distance)
-    // console.log('time', time)
-    // console.log('velocity', velocity)
-    // console.log('swipeThreshold', swipeThreshold)
-    // console.log('isDraggingDown', isDraggingDown)
-    // console.log('touchendY', touchendY)
-    // console.log('touchstartY', touchstartY)
     if (props.canExpand && props.canExpandWithSwipe) {
       if (!isDraggingDown) {
         if (velocity > swipeThreshold) {
@@ -513,15 +504,6 @@ const togglePlay = () => {
   Howler.volume(volume.value)
 }
 
-// handle the scrub end event on the timeline
-const scrubTimelineEnd = (e) => {}
-// handle the change event on the timeline
-const scrubTimelineChange = (e) => {}
-// handle the click on the timeline
-const timelineClick = (e) => {
-  emit("timeline-click", e)
-  scrubTimelineEnd(e)
-}
 // exposed method to handle the minimize toggle
 const toggleMinimize = (e) => {
   emit("is-minimized", e)
@@ -562,6 +544,8 @@ const handleClickAnywhere = (e) => {
 
 const isLive = ref(false)
 const isPlayable = ref(false)
+const isPlaying = ref(false)
+const isPaused = ref(false)
 
 onMounted(async () => {
   // keyboard accessibility
@@ -595,12 +579,14 @@ onMounted(async () => {
       if (playing) {
         emit("toggle-play", true)
       }
+      isPlaying.value = playing
     })
     instance.subscribe(({ paused }) => {
       console.log("is paused = ", paused)
       if (paused) {
         emit("toggle-play", false)
       }
+      isPaused.value = paused
     })
     instance.subscribe(({ seeking }) => {
       console.log("is seeking = ", seeking)
@@ -640,12 +626,9 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
-  scrubTimelineChange,
-  scrubTimelineEnd,
   skipAhead,
   skipBack,
   sound,
-  timelineClick,
   toggleExpanded,
   toggleMinimize,
   togglePlay,
@@ -701,9 +684,9 @@ defineExpose({
                 >
                   <VFlexibleLink
                     class="track-info-image-link"
-                    :to="titleLink ? titleLink : null"
+                    :to="props.titleLink ? props.titleLink : null"
                     raw
-                    :title="titleLink ? titleLink : null"
+                    :title="props.titleLink ? props.titleLink : null"
                     @flexible-link-click="emit('image-click')"
                   >
                     <VImage
@@ -711,7 +694,7 @@ defineExpose({
                       :width="props.imageSize"
                       :height="props.imageSize"
                       :sizes="`xs:${props.imageSize * 2}px`"
-                      :alt-text="title"
+                      :alt-text="props.title"
                       :ratio="[1, 1]"
                       role="presentation"
                     />
@@ -728,16 +711,24 @@ defineExpose({
                         :buffered="buffered"
                         :current-seconds="currentSeconds"
                         :duration-seconds="durationSeconds"
-                        @scrub-timeline-change="scrubTimelineChange"
-                        @scrub-timeline-end="scrubTimelineEnd"
-                        @timeline-click="timelineClick"
                         @description-click="emit('description-click')"
                         @title-click="emit('title-click')"
                         :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
                         @click="handleClickAnywhere"
                       />
+                      <media-mute-button class="volume-btn media-button flex-none">
+                        <div type="mute" class="mute-icon">
+                          <slot name="mute"><i class="pi pi-volume-off"></i></slot>
+                        </div>
+                        <div type="volume-low" class="volume-low-icon">
+                          <slot name="volume-low"><i class="pi pi-volume-down"></i></slot>
+                        </div>
+                        <div type="volume-high" class="volume-high-icon">
+                          <slot name="volume-high"><i class="pi pi-volume-up"></i></slot>
+                        </div>
+                      </media-mute-button>
                       <media-seek-button
-                        v-if="$props.showSkip"
+                        v-if="props.showSkip"
                         class="media-button flex-none"
                         seconds="10"
                       >
@@ -745,7 +736,7 @@ defineExpose({
                       </media-seek-button>
                       <media-play-button
                         class="media-button flex-none"
-                        :data-disabled="!isPlayable ? null : ''"
+                        :data-disabled="isPlayable ? null : ''"
                       >
                         <media-icon type="play" class="play-icon">
                           <slot v-if="!isPlayable" name="loading">
@@ -758,7 +749,7 @@ defineExpose({
                         </media-icon>
                       </media-play-button>
                       <media-seek-button
-                        v-if="$props.showSkip"
+                        v-if="props.showSkip"
                         class="media-button flex-none"
                         seconds="10"
                       >
@@ -1015,6 +1006,10 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   --persistent-player-desc-weight: 400;
   --persistent-player-desc-color: var(--text-color);
 
+  --persistent-player-time-size: var(--font-size-4);
+  --persistent-player-time-weight: 400;
+  --persistent-player-time-color: var(--text-color);
+
   --persistent-player-slider-bg: var(--stroke);
   --persistent-player-slider-progress: #000;
 }
@@ -1031,6 +1026,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   --persistent-player-button-color-hover: #f1f1f1;
   --persistent-player-title-color: var(--text-color);
   --persistent-player-desc-color: var(--text-color);
+  --persistent-player-time-color: var(--text-color);
 }
 
 .persistent-player {
@@ -1195,6 +1191,13 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       .media-live-button[data-edge] .media-live-button-text {
         background-color: var(--red, #dc2626);
         color: var(--media-live-button-edge-color, #f5f5f5);
+      }
+
+      //volume button
+      .media-button:not([data-muted]) .mute-icon,
+      .media-button:not([data-state="low"]) .volume-low-icon,
+      .media-button:not([data-state="high"]) .volume-high-icon {
+        display: none;
       }
     }
   }
