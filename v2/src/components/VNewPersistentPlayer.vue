@@ -561,6 +561,7 @@ const handleClickAnywhere = (e) => {
 }
 
 const isLive = ref(false)
+const isPlayable = ref(false)
 
 onMounted(async () => {
   // keyboard accessibility
@@ -616,6 +617,7 @@ onMounted(async () => {
     })
     instance.subscribe(({ canPlay }) => {
       console.log("canPlay = ", canPlay)
+      isPlayable.value = canPlay
     })
     instance.subscribe(({ volume }) => {
       console.log("volume = ", volume)
@@ -718,11 +720,7 @@ defineExpose({
               </div>
               <div class="w-full">
                 <media-controls-group>
-                  <div
-                    class="flex flex-column h-full justify-content-between"
-                    :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
-                    @click="handleClickAnywhere"
-                  >
+                  <div class="flex flex-column h-full justify-content-between">
                     <div class="flex h-full align-items-center gap-2 px-2">
                       <v-track-info
                         v-bind="{ ...$props, ...$attrs }"
@@ -735,15 +733,37 @@ defineExpose({
                         @timeline-click="timelineClick"
                         @description-click="emit('description-click')"
                         @title-click="emit('title-click')"
+                        :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
+                        @click="handleClickAnywhere"
                       />
-                      <media-play-button class="media-button flex-none">
+                      <media-seek-button
+                        v-if="$props.showSkip"
+                        class="media-button flex-none"
+                        seconds="10"
+                      >
+                        <slot name="skipBack"><i class="pi pi-undo"></i></slot>
+                      </media-seek-button>
+                      <media-play-button
+                        class="media-button flex-none"
+                        :data-disabled="!isPlayable ? null : ''"
+                      >
                         <media-icon type="play" class="play-icon">
-                          <slot name="play"><i class="pi pi-play"></i></slot>
+                          <slot v-if="!isPlayable" name="loading">
+                            <i class="pi pi-spin pi-spinner"></i>
+                          </slot>
+                          <slot v-else name="play"><i class="pi pi-play"></i></slot>
                         </media-icon>
                         <media-icon type="pause" class="pause-icon">
                           <slot name="pause"><i class="pi pi-pause"></i></slot>
                         </media-icon>
                       </media-play-button>
+                      <media-seek-button
+                        v-if="$props.showSkip"
+                        class="media-button flex-none"
+                        seconds="10"
+                      >
+                        <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
+                      </media-seek-button>
                     </div>
 
                     <media-time-slider class="media-slider">
