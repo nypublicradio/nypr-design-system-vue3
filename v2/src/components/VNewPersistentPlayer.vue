@@ -757,7 +757,7 @@ defineExpose({
                       </media-seek-button>
                     </div>
 
-                    <media-time-slider class="media-slider">
+                    <media-time-slider class="media-slider thin-disabled">
                       <div class="media-slider-track">
                         <div class="media-slider-track-fill media-slider-track"></div>
                         <div class="media-slider-progress media-slider-track"></div>
@@ -1087,7 +1087,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
         display: inline-flex;
         align-items: center;
         width: 100%;
-        height: 2px;
+        height: 40px;
         position: relative;
         contain: layout style;
         outline: none;
@@ -1096,7 +1096,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
         user-select: none;
         touch-action: none;
         /** Prevent thumb flowing out of slider (15px = thumb width). */
-        //margin: 0 calc(15px / 2);
+        margin: 0 calc(15px / 2);
         -webkit-user-select: none;
         -webkit-tap-highlight-color: transparent;
       }
@@ -1109,20 +1109,27 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
         z-index: 0;
         position: absolute;
         width: 100%;
-        height: 2px;
+        height: 5px;
         top: 50%;
         left: 0;
-        //border-radius: 1px;
+        border-radius: 1px;
         transform: translateY(-50%) translateZ(0);
         background-color: var(--persistent-player-slider-bg);
         contain: strict;
       }
 
       .media-slider-track-fill {
-        z-index: 2; /** above track. */
+        z-index: 2; /** above progress. */
         background-color: var(--persistent-player-slider-progress);
         width: var(--slider-fill, 0%);
         will-change: width;
+      }
+
+      .media-slider-progress {
+        z-index: 1; /** above track. */
+        width: var(--slider-progress, 0%);
+        will-change: width;
+        background-color: var(--persistent-player-slider-progress);
       }
 
       .media-slider-thumb {
@@ -1150,6 +1157,19 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
       .media-slider[data-dragging] .media-slider-thumb {
         box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 0.4);
+      }
+
+      // thin disabled slider
+      .thin-disabled {
+        &.media-slider {
+          pointer-events: none;
+          height: 2px;
+          margin: 0;
+          .media-slider-track {
+            height: 2px;
+            border-radius: 0;
+          }
+        }
       }
 
       // live button
