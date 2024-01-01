@@ -6,6 +6,7 @@ import "vidstack/player/styles/default/layouts/video.css"
 import "vidstack/player"
 import "vidstack/player/layouts"
 import "vidstack/player/ui"
+import { MediaRemoteControl } from "vidstack"
 
 //import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } from 'vidstack';
 import type { MediaPlayerElement } from "vidstack/elements"
@@ -140,6 +141,13 @@ const props = defineProps({
    */
   imageSize: {
     default: 60,
+    type: Number,
+  },
+  /**
+   * left image representing the audio
+   */
+  imageSizeExpanded: {
+    default: 144,
     type: Number,
   },
   /**
@@ -542,10 +550,12 @@ const handleClickAnywhere = (e) => {
   }
 }
 
+const remote = new MediaRemoteControl()
+const playButtonRef = ref(null)
 const isLive = ref(false)
 const isPlayable = ref(false)
 const isPlaying = ref(false)
-const isPaused = ref(false)
+const isPaused = ref(true)
 
 onMounted(async () => {
   // keyboard accessibility
@@ -618,6 +628,9 @@ onMounted(async () => {
       isLive.value = live
     })
   }
+  remote.setTarget($mediaPlayerRef.value)
+  const player = remote.getPlayer()
+  console.log("player = ", player)
 })
 
 onBeforeUnmount(() => {
@@ -667,6 +680,7 @@ defineExpose({
           :loop="props.loop"
           poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
           crossorigin
+          :preferNativeHLS="true"
           ref="$mediaPlayerRef"
         >
           <media-provider></media-provider>
@@ -674,7 +688,7 @@ defineExpose({
           <media-controls>
             <div class="flex w-full">
               <div
-                v-if="image"
+                v-if="props.image"
                 class="track-info-image flex-none"
                 :class="[{ hideImageOnMobile: props.hideImageOnMobile }]"
               >
@@ -690,7 +704,7 @@ defineExpose({
                     @flexible-link-click="emit('image-click')"
                   >
                     <VImage
-                      :src="image"
+                      :src="props.image"
                       :width="props.imageSize"
                       :height="props.imageSize"
                       :sizes="`xs:${props.imageSize * 2}px`"
@@ -735,6 +749,7 @@ defineExpose({
                         <slot name="skipBack"><i class="pi pi-undo"></i></slot>
                       </media-seek-button>
                       <media-play-button
+                        ref="playButtonRef"
                         class="media-button flex-none"
                         :data-disabled="isPlayable ? null : ''"
                       >
@@ -790,7 +805,7 @@ defineExpose({
         <div class="expanded-content-holder">
           <div class="header">
             <slot name="expanded-header">
-              <div class="flex">
+              <div class="flex flex-column">
                 <Button
                   class="unexpand-btn p-button-icon-only p-button-text p-button-secondary"
                   @click="toggleExpanded(!isExpanded)"
@@ -800,6 +815,76 @@ defineExpose({
                   </slot>
                 </Button>
                 <div class="header-content">
+                  <section class="expanded-player flex flex-column gap-3 px-3">
+                    <!--   <pre class="text-xs">{{ currentEpisode }}</pre> -->
+                    <VImage
+                      :src="props.image"
+                      :alt="`${props.title} show image`"
+                      :width="props.imageSizeExpanded"
+                      :height="props.imageSizeExpanded"
+                      :sizes="`xs:${props.imageSize * 2}px`"
+                      class="show-image m-auto"
+                      :ratio="[1, 1]"
+                      role="presentation"
+                    />
+
+                    <div v-if="!isLive" class="flex flex-column gap-2">
+                      <div class="live flex gap-2 align-items-center">
+                        <media-live-button class="media-live-button">
+                          <span class="media-live-button-text">LIVE</span>
+                        </media-live-button>
+                        <div class="text-sm">{{ props.station }}</div>
+                      </div>
+                      <slot name="expanded-player-title"></slot>
+                    </div>
+
+                    <div v-else>
+                      <slot name="expanded-player-title"></slot>
+                    </div>
+                    <!--
+                    <div v-if="!isLive" class="progress-holder">
+                      <AudioScrubber />
+                    </div>-->
+
+                    <div class="m-auto">
+                      <media-controls>
+                        <media-controls-group>
+                          <media-seek-button
+                            v-if="props.showSkip"
+                            class="media-button flex-none"
+                            seconds="10"
+                          >
+                            <slot name="skipBack"><i class="pi pi-undo"></i></slot>
+                          </media-seek-button>
+                          <media-play-button
+                            ref="playButtonRef"
+                            class="media-button flex-none"
+                            :data-disabled="isPlayable ? null : ''"
+                            @click="isPaused ? remote.play() : remote.pause()"
+                          >
+                            <media-icon v-if="isPaused" type="play" class="play-icon">
+                              <slot v-if="!isPlayable" name="loading">
+                                <i class="pi pi-spin pi-spinner"></i>
+                              </slot>
+                              <slot v-else name="play"
+                                ><i class="pi pi-play">wtf</i></slot
+                              >
+                            </media-icon>
+                            <media-icon v-else type="pause" class="pause-icon">
+                              <slot name="pause"><i class="pi pi-pause"></i></slot>
+                            </media-icon>
+                          </media-play-button>
+                          <media-seek-button
+                            v-if="props.showSkip"
+                            class="media-button flex-none"
+                            seconds="10"
+                          >
+                            <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
+                          </media-seek-button>
+                        </media-controls-group>
+                      </media-controls>
+                    </div>
+                  </section>
                   <slot name="header-content"></slot>
                 </div>
               </div>
@@ -1030,196 +1115,215 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 }
 
 .persistent-player {
-  .media-player {
-    media-controls {
-      // override inline pointer-events: none which stops the image click
-      pointer-events: auto !important;
-      width: 100%;
-      .track-info-image {
-        display: block;
-        // prettier-ignore
-        &.hideImageOnMobile {      
+  // .media-player {
+  media-controls {
+    // override inline pointer-events: none which stops the image click
+    pointer-events: auto !important;
+    width: 100%;
+  }
+  .track-info-image {
+    display: block;
+    // prettier-ignore
+    &.hideImageOnMobile {      
       @container (max-width: #{$container-breakpoint-md}) {
         display: none;
           }
         }
-        width: var(--persistent-player-image-size);
-        max-width: var(--persistent-player-image-size);
-        height: var(--persistent-player-image-size);
-        //flex: 1 0 var(--persistent-player-image-size);
-        .image-with-caption {
-          width: var(--persistent-player-image-size);
-        }
-      }
+    width: var(--persistent-player-image-size);
+    max-width: var(--persistent-player-image-size);
+    height: var(--persistent-player-image-size);
+    //flex: 1 0 var(--persistent-player-image-size);
+    .image-with-caption {
+      width: var(--persistent-player-image-size);
+    }
+  }
 
-      // BUTTONS
-      .media-button {
-        display: inline-flex;
-        position: relative;
-        justify-content: center;
-        align-items: center;
-        width: var(--persistent-player-button-width);
-        height: var(--persistent-player-button-height);
-        color: var(--persistent-player-button-color);
-        border-radius: var(--persistent-player-button-radius);
-        margin-right: 2.5px;
-        background: var(--persistent-player-button-bg-color);
-        cursor: pointer;
-        * {
-          color: var(--persistent-player-button-color);
-          fill: var(--persistent-player-button-color);
-        }
-      }
-
-      @media (hover: hover) and (pointer: fine) {
-        .media-button:hover {
-          background: var(--persistent-player-button-color-hover);
-        }
-      }
-
-      .media-button[data-paused] .pause-icon,
-      .media-button:not([data-paused]) .play-icon {
-        display: none;
-      }
-
-      // SLIDERS
-      .media-slider {
-        display: inline-flex;
-        align-items: center;
-        width: 100%;
-        height: 40px;
-        position: relative;
-        contain: layout style;
-        outline: none;
-        pointer-events: auto;
-        cursor: pointer;
-        user-select: none;
-        touch-action: none;
-        /** Prevent thumb flowing out of slider (15px = thumb width). */
-        margin: 0 calc(15px / 2);
-        -webkit-user-select: none;
-        -webkit-tap-highlight-color: transparent;
-      }
-
-      .media-slider[data-focus] .media-slider-track {
-        box-shadow: var(--media-focus-ring, 0 0 0 3px rgb(78 156 246));
-      }
-
-      .media-slider-track {
-        z-index: 0;
-        position: absolute;
-        width: 100%;
-        height: 5px;
-        top: 50%;
-        left: 0;
-        border-radius: 1px;
-        transform: translateY(-50%) translateZ(0);
-        background-color: var(--persistent-player-slider-bg);
-        contain: strict;
-      }
-
-      .media-slider-track-fill {
-        z-index: 2; /** above progress. */
-        background-color: var(--persistent-player-slider-progress);
-        width: var(--slider-fill, 0%);
-        will-change: width;
-      }
-
-      .media-slider-progress {
-        z-index: 1; /** above track. */
-        width: var(--slider-progress, 0%);
-        will-change: width;
-        background-color: var(--persistent-player-slider-progress);
-      }
-
-      .media-slider-thumb {
-        position: absolute;
-        top: 50%;
-        left: var(--slider-fill);
-        opacity: 0;
-        contain: layout size style;
-        width: 15px;
-        height: 15px;
-        border: 1px solid #cacaca;
-        border-radius: 9999px;
-        background-color: #fff;
-        transform: translate(-50%, -50%) translateZ(0);
-        transition: opacity 0.15s ease-in;
-        pointer-events: none;
-        will-change: left;
-        z-index: 2; /** above track fill. */
-      }
-
-      .media-slider[data-active] .media-slider-thumb {
-        opacity: 1;
-        transition: opacity 0.2s ease-in;
-      }
-
-      .media-slider[data-dragging] .media-slider-thumb {
-        box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 0.4);
-      }
-
-      // thin disabled slider
-      .thin-disabled {
-        &.media-slider {
-          pointer-events: none;
-          height: 2px;
-          margin: 0;
-          .media-slider-track {
-            height: 2px;
-            border-radius: 0;
-          }
-        }
-      }
-
-      // live button
-      .media-live-button {
-        width: 40px;
-        height: 16px;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        /* Browser resets. */
-        padding: 0;
-        user-select: none;
-        appearance: none;
-        background: none;
-        outline: none;
-        border: none;
-      }
-
-      .media-live-button-text {
-        background-color: #8a8a8a;
-        border-radius: 2px;
-        color: #161616;
-        font-family: sans-serif;
-        font-size: 9px;
-        font-weight: 900;
-        letter-spacing: 1.5px;
-        padding: 0px 4px;
-        transition: color 0.3s ease;
-      }
-
-      .media-live-button[data-focus] {
-        box-shadow: var(--media-focus-ring, 0 0 0 3px rgb(78 156 246));
-      }
-
-      .media-live-button[data-edge] {
-        cursor: unset;
-      }
-
-      .media-live-button[data-edge] .media-live-button-text {
-        background-color: var(--red, #dc2626);
-        color: var(--media-live-button-edge-color, #f5f5f5);
-      }
-
-      //volume button
-      .media-button:not([data-muted]) .mute-icon,
-      .media-button:not([data-state="low"]) .volume-low-icon,
-      .media-button:not([data-state="high"]) .volume-high-icon {
-        display: none;
+  // secondary button override
+  @mixin secondary-button {
+    background: none;
+    * {
+      color: var(--text-color);
+      fill: var(--text-color);
+    }
+    &:hover {
+      * {
+        color: var(--persistent-player-button-color-hover);
+        fill: var(--persistent-player-button-color-hover);
       }
     }
   }
+
+  // BUTTONS
+  .media-button {
+    display: inline-flex;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    width: var(--persistent-player-button-width);
+    height: var(--persistent-player-button-height);
+    color: var(--persistent-player-button-color);
+    border-radius: var(--persistent-player-button-radius);
+    margin-right: 2.5px;
+    background: var(--persistent-player-button-bg-color);
+    cursor: pointer;
+    * {
+      color: var(--persistent-player-button-color);
+      fill: var(--persistent-player-button-color);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .media-button:hover {
+      background: var(--persistent-player-button-color-hover);
+    }
+  }
+
+  .media-button[data-paused] .pause-icon,
+  .media-button:not([data-paused]) .play-icon {
+    display: none;
+  }
+
+  // SLIDERS
+  .media-slider {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    position: relative;
+    contain: layout style;
+    outline: none;
+    pointer-events: auto;
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+    /** Prevent thumb flowing out of slider (15px = thumb width). */
+    margin: 0 calc(15px / 2);
+    -webkit-user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .media-slider[data-focus] .media-slider-track {
+    box-shadow: var(--media-focus-ring, 0 0 0 3px rgb(78 156 246));
+  }
+
+  .media-slider-track {
+    z-index: 0;
+    position: absolute;
+    width: 100%;
+    height: 5px;
+    top: 50%;
+    left: 0;
+    border-radius: 1px;
+    transform: translateY(-50%) translateZ(0);
+    background-color: var(--persistent-player-slider-bg);
+    contain: strict;
+  }
+
+  .media-slider-track-fill {
+    z-index: 2; /** above progress. */
+    background-color: var(--persistent-player-slider-progress);
+    width: var(--slider-fill, 0%);
+    will-change: width;
+  }
+
+  .media-slider-progress {
+    z-index: 1; /** above track. */
+    width: var(--slider-progress, 0%);
+    will-change: width;
+    background-color: var(--persistent-player-slider-progress);
+  }
+
+  .media-slider-thumb {
+    position: absolute;
+    top: 50%;
+    left: var(--slider-fill);
+    opacity: 0;
+    contain: layout size style;
+    width: 15px;
+    height: 15px;
+    border: 1px solid #cacaca;
+    border-radius: 9999px;
+    background-color: #fff;
+    transform: translate(-50%, -50%) translateZ(0);
+    transition: opacity 0.15s ease-in;
+    pointer-events: none;
+    will-change: left;
+    z-index: 2; /** above track fill. */
+  }
+
+  .media-slider[data-active] .media-slider-thumb {
+    opacity: 1;
+    transition: opacity 0.2s ease-in;
+  }
+
+  .media-slider[data-dragging] .media-slider-thumb {
+    box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 0.4);
+  }
+
+  // thin disabled slider
+  .thin-disabled {
+    &.media-slider {
+      pointer-events: none;
+      height: 2px;
+      margin: 0;
+      .media-slider-track {
+        height: 2px;
+        border-radius: 0;
+      }
+    }
+  }
+
+  // live button
+  .media-live-button {
+    width: 40px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    /* Browser resets. */
+    padding: 0;
+    user-select: none;
+    appearance: none;
+    background: none;
+    outline: none;
+    border: none;
+  }
+
+  .media-live-button-text {
+    background-color: #8a8a8a;
+    border-radius: 2px;
+    color: #161616;
+    font-family: sans-serif;
+    font-size: 9px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    padding: 0px 4px;
+    transition: color 0.3s ease;
+  }
+
+  .media-live-button[data-focus] {
+    box-shadow: var(--media-focus-ring, 0 0 0 3px var(--primary-color));
+  }
+
+  .media-live-button[data-edge] {
+    cursor: unset;
+  }
+
+  .media-live-button[data-edge] .media-live-button-text {
+    background-color: var(--red, #dc2626);
+    color: var(--media-live-button-edge-color, #f5f5f5);
+  }
+
+  //volume button
+  .media-button:not([data-muted]) .mute-icon,
+  .media-button:not([data-state="low"]) .volume-low-icon,
+  .media-button:not([data-state="high"]) .volume-high-icon {
+    display: none;
+  }
+  .media-button.volume-btn {
+    @include secondary-button;
+  }
+  //   }
+  // }
 }
 </style>

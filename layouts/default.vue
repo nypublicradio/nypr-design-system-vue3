@@ -32,7 +32,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
     </main>
     <VNewPersistentPlayer
       data-style-mode="dark"
-      :auto-play="true"
+      :auto-play="false"
       :can-expand="true"
       :show-download="true"
       :hide-download-mobile="true"
@@ -57,7 +57,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
       <!-- file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3" -->
       <template #expanded-content>
         <div class="p-3">
-          this is wherewe would oput anything in the expanded view
+          this is where we would put anything in the expanded view
           <br />
           <br />
           <br />
