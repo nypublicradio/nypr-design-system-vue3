@@ -668,124 +668,170 @@ defineExpose({
     </div>
     <Transition name="expand">
       <div v-show="!isExpanded" class="player-controls">
-        <media-player
-          class="media-player"
-          :title="props.title"
-          :src="props.file"
-          :autoplay="props.autoPlay"
-          view-type="audio"
-          load="eager"
-          :volume="props.volume"
-          :stream-type="isLive ? 'live:dvr' : 'on-demand'"
-          :loop="props.loop"
-          poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
-          crossorigin
-          :preferNativeHLS="true"
-          ref="$mediaPlayerRef"
-        >
-          <media-provider></media-provider>
+        <Teleport :disabled="!isExpanded" to="#expandedViewPlayer">
+          <media-player
+            class="media-player"
+            :title="props.title"
+            :src="props.file"
+            :autoplay="props.autoPlay"
+            view-type="audio"
+            load="eager"
+            :volume="props.volume"
+            :stream-type="isLive ? 'live:dvr' : 'on-demand'"
+            :loop="props.loop"
+            poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
+            crossorigin
+            :preferNativeHLS="true"
+            ref="$mediaPlayerRef"
+          >
+            <media-provider></media-provider>
 
-          <media-controls>
-            <div class="flex w-full">
-              <div
-                v-if="props.image"
-                class="track-info-image flex-none"
-                :class="[{ hideImageOnMobile: props.hideImageOnMobile }]"
-              >
+            <media-controls>
+              <div v-if="!isExpanded" class="flex w-full">
                 <div
-                  :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
-                  @click="handleClickAnywhere"
+                  v-if="props.image"
+                  class="track-info-image flex-none"
+                  :class="[{ hideImageOnMobile: props.hideImageOnMobile }]"
                 >
-                  <VFlexibleLink
-                    class="track-info-image-link"
-                    :to="props.titleLink ? props.titleLink : null"
-                    raw
-                    :title="props.titleLink ? props.titleLink : null"
-                    @flexible-link-click="emit('image-click')"
+                  <div
+                    :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
+                    @click="handleClickAnywhere"
                   >
-                    <VImage
-                      :src="props.image"
-                      :width="props.imageSize"
-                      :height="props.imageSize"
-                      :sizes="`xs:${props.imageSize * 2}px`"
-                      :alt-text="props.title"
-                      :ratio="[1, 1]"
-                      role="presentation"
-                    />
-                  </VFlexibleLink>
+                    <VFlexibleLink
+                      class="track-info-image-link"
+                      :to="props.titleLink ? props.titleLink : null"
+                      raw
+                      :title="props.titleLink ? props.titleLink : null"
+                      @flexible-link-click="emit('image-click')"
+                    >
+                      <VImage
+                        :src="props.image"
+                        :width="props.imageSize"
+                        :height="props.imageSize"
+                        :sizes="`xs:${props.imageSize * 2}px`"
+                        :alt-text="props.title"
+                        :ratio="[1, 1]"
+                        role="presentation"
+                      />
+                    </VFlexibleLink>
+                  </div>
+                </div>
+                <div class="w-full">
+                  <media-controls-group>
+                    <div class="flex flex-column h-full justify-content-between">
+                      <div class="flex h-full align-items-center gap-2 px-2">
+                        <v-track-info
+                          v-bind="{ ...$props, ...$attrs }"
+                          :livestream="isLive"
+                          :buffered="buffered"
+                          :current-seconds="currentSeconds"
+                          :duration-seconds="durationSeconds"
+                          @description-click="emit('description-click')"
+                          @title-click="emit('title-click')"
+                          :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
+                          @click="handleClickAnywhere"
+                        />
+                        <media-mute-button class="volume-btn media-button flex-none">
+                          <div type="mute" class="mute-icon">
+                            <slot name="mute"><i class="pi pi-volume-off"></i></slot>
+                          </div>
+                          <div type="volume-low" class="volume-low-icon">
+                            <slot name="volume-low"
+                              ><i class="pi pi-volume-down"></i
+                            ></slot>
+                          </div>
+                          <div type="volume-high" class="volume-high-icon">
+                            <slot name="volume-high"
+                              ><i class="pi pi-volume-up"></i
+                            ></slot>
+                          </div>
+                        </media-mute-button>
+                        <media-seek-button
+                          v-if="props.showSkip"
+                          class="media-button flex-none"
+                          :seconds="props.skipBackTime"
+                        >
+                          <slot name="skipBack"><i class="pi pi-undo"></i></slot>
+                        </media-seek-button>
+                        <media-play-button
+                          ref="playButtonRef"
+                          class="media-button flex-none"
+                          :data-disabled="isPlayable ? null : ''"
+                        >
+                          <media-icon type="play" class="play-icon">
+                            <slot v-if="!isPlayable" name="loading">
+                              <i class="pi pi-spin pi-spinner"></i>
+                            </slot>
+                            <slot v-else name="play"><i class="pi pi-play"></i></slot>
+                          </media-icon>
+                          <media-icon type="pause" class="pause-icon">
+                            <slot name="pause"><i class="pi pi-pause"></i></slot>
+                          </media-icon>
+                        </media-play-button>
+                        <media-seek-button
+                          v-if="props.showSkip"
+                          class="media-button flex-none"
+                          :seconds="props.skipAheadTime"
+                        >
+                          <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
+                        </media-seek-button>
+                      </div>
+
+                      <media-time-slider class="media-slider thin-disabled">
+                        <div class="media-slider-track">
+                          <div class="media-slider-track-fill media-slider-track"></div>
+                          <div class="media-slider-progress media-slider-track"></div>
+                        </div>
+                        <div class="media-slider-thumb"></div>
+                      </media-time-slider>
+                    </div>
+                  </media-controls-group>
                 </div>
               </div>
-              <div class="w-full">
-                <media-controls-group>
-                  <div class="flex flex-column h-full justify-content-between">
-                    <div class="flex h-full align-items-center gap-2 px-2">
-                      <v-track-info
-                        v-bind="{ ...$props, ...$attrs }"
-                        :livestream="isLive"
-                        :buffered="buffered"
-                        :current-seconds="currentSeconds"
-                        :duration-seconds="durationSeconds"
-                        @description-click="emit('description-click')"
-                        @title-click="emit('title-click')"
-                        :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
-                        @click="handleClickAnywhere"
-                      />
-                      <media-mute-button class="volume-btn media-button flex-none">
-                        <div type="mute" class="mute-icon">
-                          <slot name="mute"><i class="pi pi-volume-off"></i></slot>
-                        </div>
-                        <div type="volume-low" class="volume-low-icon">
-                          <slot name="volume-low"><i class="pi pi-volume-down"></i></slot>
-                        </div>
-                        <div type="volume-high" class="volume-high-icon">
-                          <slot name="volume-high"><i class="pi pi-volume-up"></i></slot>
-                        </div>
-                      </media-mute-button>
-                      <media-seek-button
-                        v-if="props.showSkip"
-                        class="media-button flex-none"
-                        seconds="10"
-                      >
-                        <slot name="skipBack"><i class="pi pi-undo"></i></slot>
-                      </media-seek-button>
-                      <media-play-button
-                        ref="playButtonRef"
-                        class="media-button flex-none"
-                        :data-disabled="isPlayable ? null : ''"
-                      >
-                        <media-icon type="play" class="play-icon">
-                          <slot v-if="!isPlayable" name="loading">
-                            <i class="pi pi-spin pi-spinner"></i>
-                          </slot>
-                          <slot v-else name="play"><i class="pi pi-play"></i></slot>
-                        </media-icon>
-                        <media-icon type="pause" class="pause-icon">
-                          <slot name="pause"><i class="pi pi-pause"></i></slot>
-                        </media-icon>
-                      </media-play-button>
-                      <media-seek-button
-                        v-if="props.showSkip"
-                        class="media-button flex-none"
-                        seconds="10"
-                      >
-                        <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
-                      </media-seek-button>
-                    </div>
-
-                    <media-time-slider class="media-slider thin-disabled">
-                      <div class="media-slider-track">
-                        <div class="media-slider-track-fill media-slider-track"></div>
-                        <div class="media-slider-progress media-slider-track"></div>
-                      </div>
-                      <div class="media-slider-thumb"></div>
-                    </media-time-slider>
+              <div v-show="isExpanded" class="px-2" id="expandedControls">
+                <media-time-slider class="media-slider expanded-slider">
+                  <div class="media-slider-track">
+                    <div class="media-slider-track-fill media-slider-track"></div>
+                    <div class="media-slider-progress media-slider-track"></div>
                   </div>
-                </media-controls-group>
+                  <div class="media-slider-thumb"></div>
+                </media-time-slider>
+                <div class="expanded-buttons flex gap-2 justify-content-center">
+                  <media-seek-button
+                    v-if="props.showSkip"
+                    class="media-button flex-none"
+                    :seconds="props.skipBackTime"
+                  >
+                    <slot name="skipBack"><i class="pi pi-undo"></i></slot>
+                  </media-seek-button>
+                  <media-play-button
+                    ref="playButtonRef"
+                    class="media-button flex-none"
+                    :data-disabled="isPlayable ? null : ''"
+                  >
+                    <media-icon type="play" class="play-icon">
+                      <slot v-if="!isPlayable" name="loading">
+                        <i class="pi pi-spin pi-spinner"></i>
+                      </slot>
+                      <slot v-else name="play"><i class="pi pi-play"></i></slot>
+                    </media-icon>
+                    <media-icon type="pause" class="pause-icon">
+                      <slot name="pause"><i class="pi pi-pause"></i></slot>
+                    </media-icon>
+                  </media-play-button>
+                  <media-seek-button
+                    v-if="props.showSkip"
+                    class="media-button flex-none"
+                    :seconds="props.skipAheadTime"
+                  >
+                    <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
+                  </media-seek-button>
+                </div>
               </div>
-            </div>
-          </media-controls>
-          <!-- <media-audio-layout small-when="never"></media-audio-layout> -->
-        </media-player>
+            </media-controls>
+            <!-- <media-audio-layout small-when="never"></media-audio-layout> -->
+          </media-player>
+        </Teleport>
       </div>
     </Transition>
 
@@ -801,7 +847,7 @@ defineExpose({
     </Button>
 
     <Transition name="expand-delay">
-      <div v-if="isExpanded" class="expanded-view">
+      <div v-show="isExpanded" class="expanded-view">
         <div class="expanded-content-holder">
           <div class="header">
             <slot name="expanded-header">
@@ -814,6 +860,7 @@ defineExpose({
                     <i class="pi pi-chevron-down" />
                   </slot>
                 </Button>
+                <slot name="header-content"></slot>
                 <div class="header-content">
                   <section class="expanded-player flex flex-column gap-3 px-3">
                     <!--   <pre class="text-xs">{{ currentEpisode }}</pre> -->
@@ -828,64 +875,22 @@ defineExpose({
                       role="presentation"
                     />
 
-                    <div v-if="!isLive" class="flex flex-column gap-2">
+                    <div v-if="isLive" class="flex flex-column gap-2">
                       <div class="live flex gap-2 align-items-center">
                         <media-live-button class="media-live-button">
                           <span class="media-live-button-text">LIVE</span>
                         </media-live-button>
                         <div class="text-sm">{{ props.station }}</div>
                       </div>
-                      <slot name="expanded-player-title"></slot>
+                      <slot name="expanded-player-title">{{ props.title }}</slot>
                     </div>
 
                     <div v-else>
-                      <slot name="expanded-player-title"></slot>
-                    </div>
-                    <!--
-                    <div v-if="!isLive" class="progress-holder">
-                      <AudioScrubber />
-                    </div>-->
-
-                    <div class="m-auto">
-                      <media-controls>
-                        <media-controls-group>
-                          <media-seek-button
-                            v-if="props.showSkip"
-                            class="media-button flex-none"
-                            seconds="10"
-                          >
-                            <slot name="skipBack"><i class="pi pi-undo"></i></slot>
-                          </media-seek-button>
-                          <media-play-button
-                            ref="playButtonRef"
-                            class="media-button flex-none"
-                            :data-disabled="isPlayable ? null : ''"
-                            @click="isPaused ? remote.play() : remote.pause()"
-                          >
-                            <media-icon v-if="isPaused" type="play" class="play-icon">
-                              <slot v-if="!isPlayable" name="loading">
-                                <i class="pi pi-spin pi-spinner"></i>
-                              </slot>
-                              <slot v-else name="play"
-                                ><i class="pi pi-play">wtf</i></slot
-                              >
-                            </media-icon>
-                            <media-icon v-else type="pause" class="pause-icon">
-                              <slot name="pause"><i class="pi pi-pause"></i></slot>
-                            </media-icon>
-                          </media-play-button>
-                          <media-seek-button
-                            v-if="props.showSkip"
-                            class="media-button flex-none"
-                            seconds="10"
-                          >
-                            <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
-                          </media-seek-button>
-                        </media-controls-group>
-                      </media-controls>
+                      <slot name="expanded-player-title">{{ props.title }}</slot>
                     </div>
                   </section>
-                  <slot name="header-content"></slot>
+
+                  <div id="expandedViewPlayer"></div>
                 </div>
               </div>
             </slot>
@@ -899,6 +904,7 @@ defineExpose({
 
 <style lang="scss">
 $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
+
 .persistent-player {
   container-type: inline-size;
   bottom: 0;
@@ -914,15 +920,18 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   &.minimized {
     bottom: calc(
       calc(var(--persistent-player-height) * -1) - var(--persistent-player-height-buffer)
     );
   }
+
   &.expanded {
     bottom: 0;
     height: 100%;
   }
+
   .maximize-btn-holder {
     position: absolute;
     display: block;
@@ -948,6 +957,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       transition: top 0.1s;
       -webkit-transition: top 0.1s;
       color: var(--persistent-player-maximize-btn-color);
+
       &.show {
         transition: top 0.5s;
         -webkit-transition: top 0.5s;
@@ -989,6 +999,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     background-color: var(--persistent-player-minimize-btn-bg);
     color: var(--persistent-player-minimize-btn-color);
     z-index: 100;
+
     .pi {
       font-size: 0.7rem;
     }
@@ -998,6 +1009,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     padding-top: env(safe-area-inset-top);
     position: relative;
     height: inherit;
+
     .expanded-content-holder {
       .header {
         position: sticky;
@@ -1006,37 +1018,45 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
         padding: 5px 0;
         z-index: 1;
       }
+
       position: relative;
       overflow-y: auto;
       overflow-x: hidden;
       height: inherit;
     }
   }
+
   .hideOnMobile {
     @container (max-width: #{$container-breakpoint-md}) {
       display: none;
     }
   }
 }
+
 //expand-delay
 .expand-delay-enter-active {
   transition: opacity calc(var(--transition-duration) * 2) ease-out;
 }
+
 .expand-delay-leave-active {
   transition: opacity calc(var(--transition-duration) * 2) ease-in;
 }
+
 .expand-delay-enter-from,
 .expand-delay-leave-to {
   opacity: 0;
 }
+
 //expand
 .expand-enter-active {
   transition: opacity calc(var(--transition-duration) * 2) ease-out;
   transition-delay: calc(var(--transition-duration) * 2.25);
 }
+
 .expand-leave-active {
   transition: opacity 0s ease-in;
 }
+
 .expand-enter-from,
 .expand-leave-to {
   opacity: 0;
@@ -1051,6 +1071,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 </style>
 <style lang="scss">
 $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
+
 :root,
 [data-style-mode="light"],
 .style-mode-light {
@@ -1097,7 +1118,9 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
   --persistent-player-slider-bg: var(--stroke);
   --persistent-player-slider-progress: #000;
+  --persistent-player-slider-buffer: #00000040;
 }
+
 [data-style-mode="dark"],
 .style-mode-dark {
   --persistent-player-bg: #2f2f2f;
@@ -1121,17 +1144,21 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     pointer-events: auto !important;
     width: 100%;
   }
+
   .track-info-image {
     display: block;
+
     // prettier-ignore
-    &.hideImageOnMobile {      
+    &.hideImageOnMobile {
       @container (max-width: #{$container-breakpoint-md}) {
         display: none;
-          }
-        }
+      }
+    }
+
     width: var(--persistent-player-image-size);
     max-width: var(--persistent-player-image-size);
     height: var(--persistent-player-image-size);
+
     //flex: 1 0 var(--persistent-player-image-size);
     .image-with-caption {
       width: var(--persistent-player-image-size);
@@ -1141,10 +1168,12 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   // secondary button override
   @mixin secondary-button {
     background: none;
+
     * {
       color: var(--text-color);
       fill: var(--text-color);
     }
+
     &:hover {
       * {
         color: var(--persistent-player-button-color-hover);
@@ -1166,6 +1195,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     margin-right: 2.5px;
     background: var(--persistent-player-button-bg-color);
     cursor: pointer;
+
     * {
       color: var(--persistent-player-button-color);
       fill: var(--persistent-player-button-color);
@@ -1220,17 +1250,19 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   }
 
   .media-slider-track-fill {
-    z-index: 2; /** above progress. */
+    z-index: 2;
+    /** above progress. */
     background-color: var(--persistent-player-slider-progress);
     width: var(--slider-fill, 0%);
     will-change: width;
   }
 
   .media-slider-progress {
-    z-index: 1; /** above track. */
+    z-index: 1;
+    /** above track. */
     width: var(--slider-progress, 0%);
     will-change: width;
-    background-color: var(--persistent-player-slider-progress);
+    background-color: var(--persistent-player-slider-buffer);
   }
 
   .media-slider-thumb {
@@ -1248,7 +1280,8 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     transition: opacity 0.15s ease-in;
     pointer-events: none;
     will-change: left;
-    z-index: 2; /** above track fill. */
+    z-index: 2;
+    /** above track fill. */
   }
 
   .media-slider[data-active] .media-slider-thumb {
@@ -1266,6 +1299,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       pointer-events: none;
       height: 2px;
       margin: 0;
+
       .media-slider-track {
         height: 2px;
         border-radius: 0;
@@ -1320,10 +1354,14 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   .media-button:not([data-state="high"]) .volume-high-icon {
     display: none;
   }
+
   .media-button.volume-btn {
     @include secondary-button;
   }
-  //   }
-  // }
+
+  .expanded-view {
+    #expandedViewPlayer {
+    }
+  }
 }
 </style>
