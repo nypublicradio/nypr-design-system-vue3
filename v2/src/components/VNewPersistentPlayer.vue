@@ -14,7 +14,7 @@ import type { MediaPlayerElement } from "vidstack/elements"
 import VImage from "./VImage.vue"
 import VFlexibleLink from "./VFlexibleLink.vue"
 import soundAnimGif from "../assets/images/audioAnim.gif"
-import VTrackInfo from "./VTrackInfo.vue"
+import VNewTrackInfo from "./VNewTrackInfo.vue"
 import { useSwipe } from "@vueuse/core"
 import Button from "primevue/button"
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
@@ -667,7 +667,7 @@ defineExpose({
                   <media-controls-group>
                     <div class="flex flex-column h-full justify-content-between">
                       <div class="flex h-full align-items-center gap-2 px-2">
-                        <v-track-info
+                        <VNewTrackInfo
                           v-bind="{ ...$props, ...$attrs }"
                           :livestream="isLive"
                           :buffered="buffered"
