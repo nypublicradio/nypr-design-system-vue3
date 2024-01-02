@@ -446,7 +446,7 @@ const toggleExpanded = async (e) => {
   }
 }
 
-//
+// exposed method to handle the skip ahead
 const skipAhead = () => {
   if ($mediaPlayerRef.value) {
     $mediaPlayerRef.value.seek(String(props.skipAheadTime))
@@ -454,7 +454,7 @@ const skipAhead = () => {
   }
 }
 
-// exposed method to handle the skip back toggle
+// exposed method to handle the skip back
 const skipBack = () => {
   if ($mediaPlayerRef.value) {
     $mediaPlayerRef.value.seek(`-${String(props.skipAheadTime)}`)
