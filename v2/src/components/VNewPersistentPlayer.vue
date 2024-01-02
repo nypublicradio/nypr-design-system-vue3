@@ -403,104 +403,18 @@ onMounted(() => {
 })
 // END swipe
 
-// method to handle update the currentSeconds with the audio playhead
-const updateCurrentSeconds = () => {
-  currentSeconds.value = sound.seek()
-  emit("current-duration", currentSeconds.value)
-}
-// time converter
-const convertTime = (val) => {
-  const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
-  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss
-}
-// starts the download process. This will eventually be replaced with a proper download function that supports web and app
-const download = () => {
-  emit("download")
-  window.open(props.file, "_blank")
-}
-// makes the audio skip ahead props.skipAheadTime seconds
-const skipAhead = () => {
-  if (sound) {
-    emit("skip-ahead")
-    sound.seek(sound.seek() + props.skipAheadTime)
-    updateCurrentSeconds()
-  }
-}
-// makes the audio skip back props.skipBackTime seconds
-const skipBack = () => {
-  if (sound) {
-    emit("skip-back")
-    sound.seek() > props.skipBackTime
-      ? sound.seek(sound.seek() - props.skipBackTime)
-      : sound.seek(0.1)
-    updateCurrentSeconds()
-  }
-}
-// the base clock interval for the audio player
-const startDurationInterval = () => {
-  interval = setInterval(() => {
-    updateCurrentSeconds()
-    //console.log('updaintg')
-  }, 1000)
-}
-// clears the clock interval
-const clearDurationInterval = () => {
-  clearInterval(interval)
-}
 // handle the toggle play event
 const togglePlay = () => {
-  if (!sound || !currentFile.value === props.file) {
-    // destoy old sound if one exists
-    sound ? sound.unload() : null
-    currentFile.value = props.file
-    loading.value = true
-    emit("is-loading", true)
-    sound = new Howl({
-      html5: true,
-      onend: function () {
-        emit("sound-ended")
-        if (props.loop) {
-          emit("sound-looping")
-          sound.seek(0.1)
-          sound.play()
-        } else {
-          sound.unload()
-          playing.value = false
-          emit("toggle-play", false)
-          // without the timeout, the timeline will not update and disapear on the last tick
-          setTimeout(() => {
-            clearDurationInterval()
-          }, 1100)
-        }
-      },
-      onload: function () {
-        emit("sound-loaded")
-        loading.value = false
-        emit("is-loading", false)
-        durationSeconds.value = sound.duration()
-        emit("duration", durationSeconds.value)
-      },
-      onloaderror: function (id, errorCode) {
-        //emit("load-error", [id, errorCode])
-      },
-      preload: true,
-      src: [props.file],
-    })
-  }
   // Play or pause the sound.
-  if (sound && sound.playing()) {
+  if ($mediaPlayerRef.value && isPlaying.value) {
     emit("toggle-play", false)
-    playing.value = false
-    sound.pause()
-    clearDurationInterval()
+    isPlaying.value = false
+    $mediaPlayerRef.value.pause()
   } else {
-    playing.value = true
+    isPlaying.value = true
     emit("toggle-play", true)
-    startDurationInterval()
-    sound.play()
+    $mediaPlayerRef.value.play()
   }
-  // Change global volume init
-  Howler.volume(volume.value)
 }
 
 // exposed method to handle the minimize toggle
@@ -654,9 +568,6 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
-  skipAhead,
-  skipBack,
-  sound,
   toggleExpanded,
   toggleMinimize,
   togglePlay,

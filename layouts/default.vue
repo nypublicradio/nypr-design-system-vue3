@@ -8,6 +8,8 @@ const heroBuffer = shallowRef(600)
 //cssVar
 const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
 
+const playerRef = ref(null)
+
 const audioSrc = ref(
   "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
 )
@@ -35,7 +37,9 @@ const audioSrc = ref(
       <slot />
     </main>
     <Button label="switch" @click="audioSrc = 'https://fm939.wnyc.org/wnycfm'" />
+    <Button label="toggle play" @click="playerRef.togglePlay()" />
     <VNewPersistentPlayer
+      ref="playerRef"
       data-style-mode="dark"
       :auto-play="true"
       :can-expand="true"
