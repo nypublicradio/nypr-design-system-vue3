@@ -6,19 +6,10 @@ import "vidstack/player/styles/default/layouts/video.css"
 import "vidstack/player"
 import "vidstack/player/layouts"
 import "vidstack/player/ui"
-import { MediaRemoteControl } from "vidstack"
+//import { MediaRemoteControl } from "vidstack"
 
 //import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } from 'vidstack';
 import type { MediaPlayerElement } from "vidstack/elements"
-import {
-  defineCustomElement,
-  MediaControlsElement,
-  MediaControlsGroupElement,
-  MediaPlayButtonElement,
-  MediaToggleButtonElement,
-  MediaSliderElement,
-  MediaLiveButtonElement,
-} from "vidstack/elements"
 
 import VImage from "./VImage.vue"
 import VFlexibleLink from "./VFlexibleLink.vue"
@@ -293,7 +284,7 @@ const emit = defineEmits([
   "toggle-play",
   "volume-toggle-mute",
   "volume-change",
-  "load-error",
+  "error",
   "skip-ahead",
   "skip-back",
   "scrub-timeline-change",
@@ -490,7 +481,7 @@ const togglePlay = () => {
         emit("duration", durationSeconds.value)
       },
       onloaderror: function (id, errorCode) {
-        emit("load-error", [id, errorCode])
+        //emit("load-error", [id, errorCode])
       },
       preload: true,
       src: [props.file],
@@ -531,10 +522,20 @@ const scrollToggle = (e) => {
   }
 }
 // exposed method to handle the expanding toggle
-const toggleExpanded = (e) => {
+const toggleExpanded = async (e) => {
   scrollToggle(e)
   emit("is-expanded", e)
   isExpanded.value = e
+
+  // hack for the teleported audio player to not pause when the player is teleported
+  await nextTick()
+  if (isPlaying.value) {
+    setTimeout(() => {
+      $mediaPlayerRef.value?.play()
+    }, 1)
+  } else {
+    $mediaPlayerRef.value?.pause()
+  }
 }
 // handles the click anywhere prop. So if the user clicks anywhere on the player, except the buttons, the player will expand or minimize
 const handleClickAnywhere = (e) => {
@@ -550,12 +551,13 @@ const handleClickAnywhere = (e) => {
   }
 }
 
-const remote = new MediaRemoteControl()
+//const remote = new MediaRemoteControl()
 const playButtonRef = ref(null)
 const isLive = ref(false)
 const isPlayable = ref(false)
 const isPlaying = ref(false)
 const isPaused = ref(true)
+const playerError = ref("")
 
 onMounted(async () => {
   // keyboard accessibility
@@ -581,7 +583,16 @@ onMounted(async () => {
   const instance = document.querySelector("media-player")
   if (instance) {
     // Read
-    const { playing, paused, seeking, canPlay, volume, muted, live } = instance.state
+    const {
+      playing,
+      paused,
+      seeking,
+      canPlay,
+      volume,
+      muted,
+      live,
+      error,
+    } = instance.state
 
     //subscribe to state changess
     instance.subscribe(({ playing }) => {
@@ -627,10 +638,14 @@ onMounted(async () => {
       console.log("live = ", live)
       isLive.value = live
     })
+    instance.subscribe(({ error }) => {
+      console.log("error = ", error)
+      playerError.value = error
+      emit("error", error)
+    })
   }
-  remote.setTarget($mediaPlayerRef.value)
-  const player = remote.getPlayer()
-  console.log("player = ", player)
+  // remote.setTarget($mediaPlayerRef.value)
+  // const player = remote.getPlayer()
 })
 
 onBeforeUnmount(() => {
@@ -666,6 +681,7 @@ defineExpose({
         <slot v-else name="chevronUp"><i class="pi pi-chevron-up"></i></slot>
       </Button>
     </div>
+
     <Transition name="expand">
       <div v-show="!isExpanded" class="player-controls">
         <Teleport :disabled="!isExpanded" to="#expandedViewPlayer">
@@ -1072,71 +1088,6 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 <style lang="scss">
 $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
-:root,
-[data-style-mode="light"],
-.style-mode-light {
-  --persistent-player-image-size: 60px;
-  --persistent-player-height: 60px;
-  --persistent-player-padding: 8px 16px 8px 8px;
-  --persistent-player-height-buffer: 20px;
-  --persistent-player-bg: #f1f1f1;
-  --persistent-player-minimize-btn-color: #000;
-  --persistent-player-minimize-btn-bg: var(--persistent-player-bg);
-  --persistent-player-minimize-btn-bg-hover: #a6a6a6;
-  --persistent-player-maximize-btn-color: #000;
-  --persistent-player-maximize-btn-bg: var(--persistent-player-bg);
-  --persistent-player-maximize-btn-bg-hover: #a6a6a6;
-  --persistent-player-z-index: var(--z-index-10);
-
-  --persistent-player-live-indicator-bg: var(--text-color);
-  --persistent-player-live-indicator-color: #fff;
-
-  --persistent-player-text-button-color: var(--text-color);
-  --persistent-player-text-button-color-hover: inherit;
-  --persistent-player-text-button-radius: 15px;
-
-  --persistent-player-button-width: 40px;
-  --persistent-player-button-height: 40px;
-  --persistent-player-button-radius: 20px;
-  --persistent-player-button-color: var(--text-color);
-  --persistent-player-button-bg-color: #000;
-  --persistent-player-button-color-hover: inherit;
-
-  --persistent-player-title-size: var(--font-size-6);
-  --persistent-player-title-weight: 600;
-  --persistent-player-title-color: var(--text-color);
-  --persistent-player-title-decoration: none;
-  --persistent-player-title-hover-decoration: underline;
-
-  --persistent-player-desc-size: var(--font-size-5);
-  --persistent-player-desc-weight: 400;
-  --persistent-player-desc-color: var(--text-color);
-
-  --persistent-player-time-size: var(--font-size-4);
-  --persistent-player-time-weight: 400;
-  --persistent-player-time-color: var(--text-color);
-
-  --persistent-player-slider-bg: var(--stroke);
-  --persistent-player-slider-progress: #000;
-  --persistent-player-slider-buffer: #00000040;
-}
-
-[data-style-mode="dark"],
-.style-mode-dark {
-  --persistent-player-bg: #2f2f2f;
-  --persistent-player-minimize-btn-bg: var(--persistent-player-bg);
-  --persistent-player-minimize-btn-color: #fff;
-  --persistent-player-maximize-btn-bg: var(--persistent-player-bg);
-  --persistent-player-maximize-btn-color: #fff;
-  --persistent-player-live-indicator-bg: #fff;
-  --persistent-player-live-indicator-color: #000;
-  --persistent-player-button-bg-color: #fff;
-  --persistent-player-button-color-hover: #f1f1f1;
-  --persistent-player-title-color: var(--text-color);
-  --persistent-player-desc-color: var(--text-color);
-  --persistent-player-time-color: var(--text-color);
-}
-
 .persistent-player {
   // .media-player {
   media-controls {
@@ -1357,11 +1308,6 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
   .media-button.volume-btn {
     @include secondary-button;
-  }
-
-  .expanded-view {
-    #expandedViewPlayer {
-    }
   }
 }
 </style>

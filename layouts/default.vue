@@ -7,6 +7,10 @@ const headerHeight = shallowRef(110)
 const heroBuffer = shallowRef(600)
 //cssVar
 const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
+
+const audioSrc = ref(
+  "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+)
 </script>
 
 <template>
@@ -30,9 +34,10 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
     <main>
       <slot />
     </main>
+    <Button label="switch" @click="audioSrc = 'https://fm939.wnyc.org/wnycfm'" />
     <VNewPersistentPlayer
       data-style-mode="dark"
-      :auto-play="false"
+      :auto-play="true"
       :can-expand="true"
       :show-download="true"
       :hide-download-mobile="true"
@@ -48,7 +53,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
       title-link="http://www.google.com"
       image="329534"
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
-      file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+      :file="audioSrc"
     >
       <!-- <template #play>
         <i class="pi pi-twitter"></i>
