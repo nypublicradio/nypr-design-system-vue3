@@ -38,16 +38,18 @@ const audioSrc = ref(
     </main>
     <Button label="switch" @click="audioSrc = 'https://fm939.wnyc.org/wnycfm'" />
     <Button label="toggle play" @click="playerRef.togglePlay()" />
+    <Button label="mute" @click="playerRef.toggleMute()" />
     <VNewPersistentPlayer
       ref="playerRef"
       data-style-mode="dark"
       :auto-play="true"
-      :can-expand="true"
+      :can-expand="false"
+      :can-minimize="true"
       :show-download="true"
       :hide-download-mobile="true"
       :can-expand-with-swipe="true"
       :can-unexpand-with-swipe="true"
-      :can-click-anywhere="true"
+      :can-click-anywhere="false"
       :show-skip="true"
       :hide-time-on-mobile="true"
       :marquee="true"

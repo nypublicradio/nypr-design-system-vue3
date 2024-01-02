@@ -15,9 +15,7 @@ import VImage from "./VImage.vue"
 import VFlexibleLink from "./VFlexibleLink.vue"
 import soundAnimGif from "../assets/images/audioAnim.gif"
 import VTrackInfo from "./VTrackInfo.vue"
-import VVolumeControl from "./VVolumeControl.vue"
 import { useSwipe } from "@vueuse/core"
-import { Howl, Howler } from "howler"
 import Button from "primevue/button"
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 
@@ -451,6 +449,25 @@ const toggleExpanded = async (e) => {
     $mediaPlayerRef.value?.pause()
   }
 }
+
+const skipAhead = () => {
+  if ($mediaPlayerRef.value) {
+    $mediaPlayerRef.value.seek(String(props.skipAheadTime))
+    emit("skip-ahead", $mediaPlayerRef.value.currentTime)
+  }
+}
+const skipBack = () => {
+  if ($mediaPlayerRef.value) {
+    $mediaPlayerRef.value.seek(`-${String(props.skipAheadTime)}`)
+    emit("skip-back", $mediaPlayerRef.value.currentTime)
+  }
+}
+const toggleMute = () => {
+  if ($mediaPlayerRef.value) {
+    $mediaPlayerRef.value.muted = !$mediaPlayerRef.value.muted
+  }
+}
+
 // handles the click anywhere prop. So if the user clicks anywhere on the player, except the buttons, the player will expand or minimize
 const handleClickAnywhere = (e) => {
   console.log("anywhere click")
@@ -568,6 +585,9 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
+  toggleMute,
+  skipAhead,
+  skipBack,
   toggleExpanded,
   toggleMinimize,
   togglePlay,
@@ -588,7 +608,7 @@ defineExpose({
         aria-label="maximize player"
         @click="toggleMinimize(!isMinimized)"
       >
-        <img v-if="playing" :src="soundAnimGif" alt="sounds wave animation" />
+        <img v-if="isPlaying" :src="soundAnimGif" alt="sounds wave animation" />
         <slot v-else name="chevronUp"><i class="pi pi-chevron-up"></i></slot>
       </Button>
     </div>
@@ -761,6 +781,18 @@ defineExpose({
         </Teleport>
       </div>
     </Transition>
+
+    <Button
+      v-if="props.canMinimize && !props.canClickAnywhere"
+      title="Minimize Player"
+      class="minimize-btn p-button-icon-only p-button-text p-button-secondary"
+      aria-label="minimize player"
+      @click="toggleMinimize(!isMinimized)"
+    >
+      <slot name="chevronDown">
+        <i class="pi pi-chevron-down"></i>
+      </slot>
+    </Button>
 
     <Button
       v-if="props.canExpand && !isExpanded && !props.canClickAnywhere"
