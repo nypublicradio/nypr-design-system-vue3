@@ -1,3 +1,4 @@
+import vue from '@vitejs/plugin-vue';
 /* eslint-disable perfectionist/sort-objects */
 const envTheme = process.env.VITE_VUE_APP_THEME
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
@@ -50,6 +51,13 @@ export default {
       preprocessorOptions: {
         scss: {
           additionalData: `@import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`
+        },
+      },
+    },
+    vue: {
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('media-'),
         },
       },
     },

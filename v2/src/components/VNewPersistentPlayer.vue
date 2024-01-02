@@ -1,23 +1,26 @@
 <script setup lang="ts">
-import "vidstack/player/styles/default/layouts/audio.css"
-import "vidstack/player/styles/default/layouts/video.css"
-
 // Register elements.
 import "vidstack/player"
 import "vidstack/player/layouts"
+import "vidstack/player/styles/default/layouts/audio.css"
 import "vidstack/player/ui"
 //import { MediaRemoteControl } from "vidstack"
 
 //import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } from 'vidstack';
-import type { MediaPlayerElement } from "vidstack/elements"
+//import type { MediaPlayerElement } from "vidstack/elements"
 
-import VImage from "./VImage.vue"
-import VFlexibleLink from "./VFlexibleLink.vue"
 import soundAnimGif from "../assets/images/audioAnim.gif"
+import VFlexibleLink from "./VFlexibleLink.vue"
+import VImage from "./VImage.vue"
 import VNewTrackInfo from "./VNewTrackInfo.vue"
 import { useSwipe } from "@vueuse/core"
 import Button from "primevue/button"
+//import { MediaPlayerElement, defineCustomElement } from "vidstack/elements"
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
+
+import type { MediaPlayerElement } from "vidstack/elements"
+
+//defineCustomElement(MediaPlayerElement)
 
 const props = defineProps({
   /**
@@ -262,17 +265,6 @@ const props = defineProps({
   },
 })
 
-//const remote = new MediaRemoteControl()
-const playButtonRef = ref(null)
-const isLive = ref(false)
-const isPlayable = ref(false)
-const isPlaying = ref(false)
-const isPaused = ref(true)
-const playerError = ref("")
-
-const isMinimized = ref(false)
-const isExpanded = ref(false)
-
 const emit = defineEmits([
   "toggle-play",
   "volume-toggle-mute",
@@ -301,6 +293,17 @@ const emit = defineEmits([
 //swipe setup
 const playerRef = ref(null)
 const $mediaPlayerRef = ref<MediaPlayerElement>()
+
+//const remote = new MediaRemoteControl()
+const playButtonRef = ref(null)
+const isLive = ref(false)
+const isPlayable = ref(false)
+const isPlaying = ref(false)
+const isPaused = ref(true)
+const playerError = ref("")
+
+const isMinimized = ref(false)
+const isExpanded = ref(false)
 
 // prevents the body from scrolling when the dropdown is open
 function preventScrollOnTouch(event) {
@@ -554,11 +557,11 @@ onBeforeUnmount(() => {
 })
 
 defineExpose({
-  toggleMute,
   skipAhead,
   skipBack,
   toggleExpanded,
   toggleMinimize,
+  toggleMute,
   togglePlay,
 })
 </script>
@@ -586,6 +589,7 @@ defineExpose({
       <div v-show="!isExpanded" class="player-controls">
         <Teleport :disabled="!isExpanded" to="#expandedViewPlayer">
           <media-player
+            ref="$mediaPlayerRef"
             class="media-player"
             :title="props.title"
             :src="props.file"
@@ -597,8 +601,8 @@ defineExpose({
             :loop="props.loop"
             poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
             crossorigin
-            :preferNativeHLS="true"
-            ref="$mediaPlayerRef"
+            keep-alive
+            :prefer-native-h-l-s="true"
           >
             <media-provider></media-provider>
 
@@ -639,9 +643,9 @@ defineExpose({
                         <VNewTrackInfo
                           v-bind="{ ...$props, ...$attrs }"
                           :livestream="isLive"
+                          :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
                           @description-click="emit('description-click')"
                           @title-click="emit('title-click')"
-                          :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
                           @click="handleClickAnywhere"
                         />
                         <media-mute-button class="volume-btn media-button flex-none">
@@ -845,8 +849,6 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   -webkit-transition: bottom 0.25s, height calc(var(--transition-duration) * 2);
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
   &.minimized {
     bottom: calc(
       calc(var(--persistent-player-height) * -1) - var(--persistent-player-height-buffer)
