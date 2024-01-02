@@ -261,22 +261,17 @@ const props = defineProps({
     type: Number,
   },
 })
-let interval = null
-const currentSeconds = ref(0)
-const durationSeconds = ref(0)
 
-const buffered = ref(0)
-const volume = ref(props.volume)
-
-const loading = ref(props.isLoading)
-const playing = ref(null)
-const muted = ref(props.isMuted)
-const currentFile = ref(null)
+//const remote = new MediaRemoteControl()
+const playButtonRef = ref(null)
+const isLive = ref(false)
+const isPlayable = ref(false)
+const isPlaying = ref(false)
+const isPaused = ref(true)
+const playerError = ref("")
 
 const isMinimized = ref(false)
 const isExpanded = ref(false)
-
-let sound = null
 
 const emit = defineEmits([
   "toggle-play",
@@ -482,14 +477,6 @@ const handleClickAnywhere = (e) => {
   }
 }
 
-//const remote = new MediaRemoteControl()
-const playButtonRef = ref(null)
-const isLive = ref(false)
-const isPlayable = ref(false)
-const isPlaying = ref(false)
-const isPaused = ref(true)
-const playerError = ref("")
-
 onMounted(async () => {
   // keyboard accessibility
   window.addEventListener("keydown", (event) => {
@@ -670,9 +657,6 @@ defineExpose({
                         <VNewTrackInfo
                           v-bind="{ ...$props, ...$attrs }"
                           :livestream="isLive"
-                          :buffered="buffered"
-                          :current-seconds="currentSeconds"
-                          :duration-seconds="durationSeconds"
                           @description-click="emit('description-click')"
                           @title-click="emit('title-click')"
                           :class="[{ 'cursor-pointer': props.canClickAnywhere }]"
