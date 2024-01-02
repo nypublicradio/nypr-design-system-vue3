@@ -735,7 +735,7 @@ defineExpose({
                   </media-controls-group>
                 </div>
               </div>
-              <div v-show="isExpanded" class="px-2" id="expandedControls">
+              <div v-show="isExpanded" id="expandedControls">
                 <media-time-slider class="media-slider expanded-slider">
                   <div class="media-slider-track">
                     <div class="media-slider-track-fill media-slider-track"></div>
@@ -819,40 +819,41 @@ defineExpose({
                     <i class="pi pi-chevron-down" />
                   </slot>
                 </Button>
-                <slot name="header-content"></slot>
-                <div class="header-content">
-                  <section class="expanded-player flex flex-column gap-3 px-3">
-                    <!--   <pre class="text-xs">{{ currentEpisode }}</pre> -->
-                    <VImage
-                      :src="props.image"
-                      :alt="`${props.title} show image`"
-                      :width="props.imageSizeExpanded"
-                      :height="props.imageSizeExpanded"
-                      :sizes="`xs:${props.imageSize * 2}px`"
-                      class="show-image m-auto"
-                      :ratio="[1, 1]"
-                      role="presentation"
-                    />
-
-                    <div v-if="isLive" class="flex flex-column gap-2">
-                      <div class="live flex gap-2 align-items-center">
-                        <media-live-button class="media-live-button">
-                          <span class="media-live-button-text">LIVE</span>
-                        </media-live-button>
-                        <div class="text-sm">{{ props.station }}</div>
-                      </div>
-                      <slot name="expanded-player-title">{{ props.title }}</slot>
-                    </div>
-
-                    <div v-else>
-                      <slot name="expanded-player-title">{{ props.title }}</slot>
-                    </div>
-                  </section>
-
-                  <div id="expandedViewPlayer"></div>
-                </div>
               </div>
             </slot>
+            <div class="flex flex-column">
+              <slot name="header-content"></slot>
+
+              <div class="expanded-player flex flex-column gap-3">
+                <!--   <pre class="text-xs">{{ currentEpisode }}</pre> -->
+                <VImage
+                  :src="props.image"
+                  :alt="`${props.title} show image`"
+                  :width="props.imageSizeExpanded"
+                  :height="props.imageSizeExpanded"
+                  :sizes="`xs:${props.imageSize * 2}px`"
+                  class="show-image m-auto"
+                  :ratio="[1, 1]"
+                  role="presentation"
+                />
+
+                <div v-if="isLive" class="flex flex-column gap-2">
+                  <div class="live flex gap-2 align-items-center">
+                    <media-live-button class="media-live-button">
+                      <span class="media-live-button-text">LIVE</span>
+                    </media-live-button>
+                    <div class="text-sm">{{ props.station }}</div>
+                  </div>
+                  <slot name="expanded-player-title">{{ props.title }}</slot>
+                </div>
+
+                <div v-else>
+                  <slot name="expanded-player-title">{{ props.title }}</slot>
+                </div>
+              </div>
+
+              <div id="expandedViewPlayer"></div>
+            </div>
           </div>
           <slot name="expanded-content"></slot>
         </div>
@@ -939,14 +940,6 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     }
   }
 
-  .player-controls {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    //padding: var(--persistent-player-padding);
-    //padding-top: 20px;
-  }
-
   .minimize-btn,
   .expand-btn {
     position: absolute;
@@ -982,12 +975,6 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       overflow-y: auto;
       overflow-x: hidden;
       height: inherit;
-    }
-  }
-
-  .hideOnMobile {
-    @container (max-width: #{$container-breakpoint-md}) {
-      display: none;
     }
   }
 }
