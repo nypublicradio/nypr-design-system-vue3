@@ -41,7 +41,8 @@ export default {
     `~/src/assets/themes/${envTheme}/fonts/fonts.css`,
     `~/src/assets/themes/${envTheme}/${envTheme}.min.css`,
     'primevue/resources/primevue.min.css',
-    'primeicons/primeicons.css'
+    'primeicons/primeicons.css',
+    'vidstack/player/styles/default/theme.css'
   ],
 
   vite: {
@@ -49,6 +50,14 @@ export default {
       preprocessorOptions: {
         scss: {
           additionalData: `@import "~/src/assets/themes/${envTheme}/variables.scss"; @import "~/src/assets/themes/${envTheme}/_mixins.scss";`
+        },
+      },
+    },
+    // added for VidStack players
+    vue: {
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('media-'),
         },
       },
     },

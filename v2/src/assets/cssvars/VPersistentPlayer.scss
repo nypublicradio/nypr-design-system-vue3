@@ -1,7 +1,8 @@
 :root,
 [data-style-mode='light'],
 .style-mode-light {
-    --persistent-player-height: 100px;
+    --persistent-player-image-size: 60px;
+    --persistent-player-height: 60px;
     --persistent-player-padding: 8px 16px 8px 8px;
     --persistent-player-height-buffer: 20px;
     --persistent-player-bg: #f1f1f1;
@@ -20,16 +21,32 @@
     --persistent-player-text-button-color-hover: inherit;
     --persistent-player-text-button-radius: 15px;
 
-    --persistent-player-play-button-width: 40px;
-    --persistent-player-play-button-height: 40px;
-    --persistent-player-play-button-radius: 20px;
+    --persistent-player-button-width: 40px;
+    --persistent-player-button-height: 40px;
+    --persistent-player-button-radius: 20px;
+    --persistent-player-button-color: var(--text-color);
+    --persistent-player-button-bg-color: #000;
+    --persistent-player-button-color-hover: inherit;
 
-    --persistent-player-title-size: var(--font-size-9);
-    --persistent-player-title-weight: 400;
+    --persistent-player-title-size: var(--font-size-6);
+    --persistent-player-title-weight: 600;
     --persistent-player-title-color: var(--text-color);
     --persistent-player-title-decoration: none;
     --persistent-player-title-hover-decoration: underline;
+
+    --persistent-player-desc-size: var(--font-size-5);
+    --persistent-player-desc-weight: 400;
+    --persistent-player-desc-color: var(--text-color);
+
+    --persistent-player-time-size: var(--font-size-4);
+    --persistent-player-time-weight: 400;
+    --persistent-player-time-color: var(--text-color);
+
+    --persistent-player-slider-bg: var(--stroke);
+    --persistent-player-slider-progress: #000;
+    --persistent-player-slider-buffer: #00000040;
 }
+
 [data-style-mode='dark'],
 .style-mode-dark {
     --persistent-player-bg: #2f2f2f;
@@ -39,7 +56,9 @@
     --persistent-player-maximize-btn-color: #fff;
     --persistent-player-live-indicator-bg: #fff;
     --persistent-player-live-indicator-color: #000;
-    --persistent-player-text-button-color: #d9d9d9;
-    --persistent-player-text-button-color-hover: #fff;
+    --persistent-player-button-bg-color: #fff;
+    --persistent-player-button-color-hover: #f1f1f1;
     --persistent-player-title-color: var(--text-color);
+    --persistent-player-desc-color: var(--text-color);
+    --persistent-player-time-color: var(--text-color);
 }

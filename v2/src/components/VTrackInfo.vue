@@ -1,8 +1,8 @@
 <script setup>
-import VFlexibleLink from './VFlexibleLink.vue'
-import VImage from './VImage.vue'
-import VProgressScrubber from './VProgressScrubber.vue'
-import { computed } from 'vue'
+import VFlexibleLink from "./VFlexibleLink.vue"
+import VImage from "./VImage.vue"
+import VProgressScrubber from "./VProgressScrubber.vue"
+import { computed } from "vue"
 
 const props = defineProps({
   buffered: {
@@ -50,11 +50,11 @@ const props = defineProps({
     type: Boolean,
   },
   marqueeDelay: {
-    default: '3s',
+    default: "3s",
     type: String,
   },
   marqueeLoops: {
-    default: '1',
+    default: "1",
     type: String,
   },
   marqueeSpeed: {
@@ -88,12 +88,12 @@ const props = defineProps({
 })
 
 const emit = defineEmits([
-  'scrub-timeline-change',
-  'scrub-timeline-end',
-  'image-click',
-  'title-click',
-  'description-click',
-  'timeline-click',
+  "scrub-timeline-change",
+  "scrub-timeline-end",
+  "image-click",
+  "title-click",
+  "description-click",
+  "timeline-click",
 ])
 
 const percentBuffered = computed(() => {
@@ -105,7 +105,7 @@ const percentComplete = computed(() => {
 // converts time to desired format
 const convertTime = (val) => {
   const hhmmss = new Date(val * 1000).toISOString().substr(11, 8)
-  return hhmmss.indexOf('00:') === 0 ? hhmmss.substr(3) : hhmmss
+  return hhmmss.indexOf("00:") === 0 ? hhmmss.substr(3) : hhmmss
 }
 
 const getMarqueeSpeed = computed(() => {
@@ -194,11 +194,7 @@ const getMarqueeSpeed = computed(() => {
                 </div>
               </div>
             </div>
-            <div
-              v-else
-              class="track-info-description"
-              v-html="description"
-            ></div>
+            <div v-else class="track-info-description" v-html="description"></div>
           </VFlexibleLink>
         </div>
       </div>
@@ -231,7 +227,7 @@ const getMarqueeSpeed = computed(() => {
 
 <style lang="scss" scoped>
 $track-info-image-size: 84px;
-$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
+$container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 .track-info {
   display: flex;
   gap: 12px;
@@ -346,8 +342,7 @@ $container-breakpoint-md: useBreakpointOrFallback('md', 768px);
               display: flex;
               flex-shrink: 0;
               align-items: center;
-              animation: slide-left v-bind(getMarqueeSpeed) linear
-                v-bind(marqueeLoops);
+              animation: slide-left v-bind(getMarqueeSpeed) linear v-bind(marqueeLoops);
               animation-delay: v-bind(marqueeDelay);
               .content {
               }

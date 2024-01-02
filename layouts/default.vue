@@ -1,11 +1,18 @@
 <script setup>
-import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
-import VSmartHeader from '~/v2/src/components/VSmartHeader.vue'
-import { shallowRef } from 'vue'
+import VNewPersistentPlayer from "~/v2/src/components/VNewPersistentPlayer.vue"
+import VPersistentPlayer from "~/v2/src/components/VPersistentPlayer.vue"
+import VSmartHeader from "~/v2/src/components/VSmartHeader.vue"
+import { shallowRef } from "vue"
 const headerHeight = shallowRef(110)
 const heroBuffer = shallowRef(600)
 //cssVar
 const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
+
+const playerRef = ref(null)
+
+const audioSrc = ref(
+  "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+)
 </script>
 
 <template>
@@ -29,55 +36,39 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
     <main>
       <slot />
     </main>
-    <VPersistentPlayer
+    <Button label="switch" @click="audioSrc = 'https://fm939.wnyc.org/wnycfm'" />
+    <Button label="toggle play" @click="playerRef.togglePlay()" />
+    <Button label="mute" @click="playerRef.toggleMute()" />
+    <VNewPersistentPlayer
+      ref="playerRef"
       data-style-mode="dark"
+      :auto-play="true"
       :can-expand="true"
+      :can-minimize="false"
       :show-download="true"
       :hide-download-mobile="true"
       :can-expand-with-swipe="true"
       :can-unexpand-with-swipe="true"
+      :can-click-anywhere="true"
       :show-skip="true"
-      :livestream="false"
+      :hide-time-on-mobile="true"
+      :marquee="true"
+      :volume="1"
       title="The Takeaway"
       station="WNYC 93.9 FM"
       title-link="http://www.google.com"
       image="329534"
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
-      file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
+      :file="audioSrc"
     >
-      <!-- <template #chevronDown>
-        <i class="pi pi-twitter"></i>
-      </template>
-      <template #chevronUp>
-        <i class="pi pi-facebook"></i>
-      </template>
-      <template #volumeOn>
-        <i class="pi pi-twitter"></i>
-      </template>
-      <template #volumeOff>
-        <i class="pi pi-facebook"></i>
-      </template>
-      <template #prev>
-        <i class="pi pi-twitter"></i>
-      </template>
-      <template #play>
-        <i class="pi pi-twitter"></i>
-      </template>
-      <template #pause>
-        <i class="pi pi-facebook"></i>
-      </template>
-      <template #loading>
-        <i class="pi pi-spin pi-spinner"></i>
-      </template>
-      <template #skip>
-        <i class="pi pi-twitter"></i>
-      </template>
-      <template #download>
+      <!-- <template #play>
         <i class="pi pi-twitter"></i>
       </template> -->
+      <!-- file="https://fm939.wnyc.org/wnycfm" -->
+      <!-- file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3" -->
       <template #expanded-content>
         <div class="p-3">
-          this is wherewe would oput anything in the expanded view
+          this is where we would put anything in the expanded view
           <br />
           <br />
           <br />
@@ -150,7 +141,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
         </div>
         <div class="expandedFooter">This is fixed to the bottom</div>
       </template>
-    </VPersistentPlayer>
+    </VNewPersistentPlayer>
   </div>
 </template>
 
