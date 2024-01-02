@@ -310,63 +310,64 @@ const supportSwipe =
   (props.canExpand && props.canExpandWithSwipe) ||
   (props.canExpand && props.canUnexpandWithSwipe)
 
+// swipe setup
+let touchstartY = 0
+let touchendY = 0
+let touchPrevY = 0
+let touchCurrentY = 0
+let touchstartTime = 0
+let touchendTime = 0
+const swipeThreshold = props.swipeThreshold
+let isDraggingDown = false
+
+// handles the detection of the direction of the drag movment
+function handleSwipeDirection() {
+  const tempBool = isDraggingDown
+  if (touchCurrentY < touchPrevY) {
+    isDraggingDown = true
+  }
+  if (touchCurrentY > touchPrevY) {
+    isDraggingDown = false
+  }
+  //reset the touchstartY and touchstartTime if the direction changes
+  if (tempBool !== isDraggingDown) {
+    touchstartY = touchCurrentY
+    touchstartTime = new Date().getTime()
+  }
+}
+
+// handles the swipe ended logic
+function handleSwipe() {
+  const distance = Math.abs(touchendY - touchstartY)
+  const time = touchendTime - touchstartTime
+  const velocity = distance / time
+  if (props.canExpand && props.canExpandWithSwipe) {
+    if (!isDraggingDown) {
+      if (velocity > swipeThreshold) {
+        //console.log('EXPAND')
+        playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
+          passive: false,
+        })
+        isExpanded.value = true
+        emit("swipe-up")
+      }
+    }
+  }
+  if (props.canExpand && props.canUnexpandWithSwipe) {
+    if (isDraggingDown) {
+      if (velocity > swipeThreshold) {
+        //console.log('UNEXPAND')
+        playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
+          passive: false,
+        })
+        isExpanded.value = false
+        emit("swipe-down")
+      }
+    }
+  }
+}
+
 if (supportSwipe) {
-  let touchstartY = 0
-  let touchendY = 0
-  let touchPrevY = 0
-  let touchCurrentY = 0
-  let touchstartTime = 0
-  let touchendTime = 0
-  const swipeThreshold = props.swipeThreshold
-  let isDraggingDown = false
-
-  // handles the detection of the direction of the drag movment
-  function handleSwipeDirection() {
-    const tempBool = isDraggingDown
-    if (touchCurrentY < touchPrevY) {
-      isDraggingDown = true
-    }
-    if (touchCurrentY > touchPrevY) {
-      isDraggingDown = false
-    }
-    //reset the touchstartY and touchstartTime if the direction changes
-    if (tempBool !== isDraggingDown) {
-      touchstartY = touchCurrentY
-      touchstartTime = new Date().getTime()
-    }
-  }
-
-  // handles the swipe ended logic
-  function handleSwipe() {
-    const distance = Math.abs(touchendY - touchstartY)
-    const time = touchendTime - touchstartTime
-    const velocity = distance / time
-    if (props.canExpand && props.canExpandWithSwipe) {
-      if (!isDraggingDown) {
-        if (velocity > swipeThreshold) {
-          //console.log('EXPAND')
-          playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
-            passive: false,
-          })
-          isExpanded.value = true
-          emit("swipe-up")
-        }
-      }
-    }
-    if (props.canExpand && props.canUnexpandWithSwipe) {
-      if (isDraggingDown) {
-        if (velocity > swipeThreshold) {
-          //console.log('UNEXPAND')
-          playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
-            passive: false,
-          })
-          isExpanded.value = false
-          emit("swipe-down")
-        }
-      }
-    }
-  }
-
   const swipe = useSwipe(playerRef, {
     onSwipe() {
       touchCurrentY = swipe.lengthY.value
@@ -445,18 +446,23 @@ const toggleExpanded = async (e) => {
   }
 }
 
+//
 const skipAhead = () => {
   if ($mediaPlayerRef.value) {
     $mediaPlayerRef.value.seek(String(props.skipAheadTime))
     emit("skip-ahead", $mediaPlayerRef.value.currentTime)
   }
 }
+
+// exposed method to handle the skip back toggle
 const skipBack = () => {
   if ($mediaPlayerRef.value) {
     $mediaPlayerRef.value.seek(`-${String(props.skipAheadTime)}`)
     emit("skip-back", $mediaPlayerRef.value.currentTime)
   }
 }
+
+// exposed method to handle the mute toggle
 const toggleMute = () => {
   if ($mediaPlayerRef.value) {
     $mediaPlayerRef.value.muted = !$mediaPlayerRef.value.muted
@@ -465,7 +471,7 @@ const toggleMute = () => {
 
 // handles the click anywhere prop. So if the user clicks anywhere on the player, except the buttons, the player will expand or minimize
 const handleClickAnywhere = (e) => {
-  console.log("anywhere click")
+  //console.log("anywhere click")
   if (props.canClickAnywhere) {
     e.preventDefault()
     if (props.canExpand) {
@@ -500,64 +506,40 @@ onMounted(async () => {
   await nextTick()
   const instance = document.querySelector("media-player")
   if (instance) {
-    // Read
-    const {
-      playing,
-      paused,
-      seeking,
-      canPlay,
-      volume,
-      muted,
-      live,
-      error,
-    } = instance.state
-
     //subscribe to state changess
     instance.subscribe(({ playing }) => {
-      console.log("is playing = ", playing)
       if (playing) {
         emit("toggle-play", true)
       }
       isPlaying.value = playing
     })
     instance.subscribe(({ paused }) => {
-      console.log("is paused = ", paused)
       if (paused) {
         emit("toggle-play", false)
       }
       isPaused.value = paused
     })
     instance.subscribe(({ seeking }) => {
-      console.log("is seeking = ", seeking)
       if ($mediaPlayerRef.value) {
         emit("scrub-timeline-change", $mediaPlayerRef.value.currentTime)
         if ($mediaPlayerRef.value && !seeking) {
           emit("scrub-timeline-end", $mediaPlayerRef.value.currentTime)
-          console.log(
-            "$mediaPlayerRef.value.currentTime = ",
-            $mediaPlayerRef.value.currentTime
-          )
         }
       }
     })
     instance.subscribe(({ canPlay }) => {
-      console.log("canPlay = ", canPlay)
       isPlayable.value = canPlay
     })
     instance.subscribe(({ volume }) => {
-      console.log("volume = ", volume)
       emit("volume-change", volume)
     })
     instance.subscribe(({ muted }) => {
-      console.log("muted = ", muted)
       emit("volume-toggle-mute", muted)
     })
     instance.subscribe(({ live }) => {
-      console.log("live = ", live)
       isLive.value = live
     })
     instance.subscribe(({ error }) => {
-      console.log("error = ", error)
       playerError.value = error
       emit("error", error)
     })

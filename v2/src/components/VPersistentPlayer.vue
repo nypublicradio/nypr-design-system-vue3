@@ -296,71 +296,65 @@ const supportSwipe =
   (props.canExpand && props.canExpandWithSwipe) ||
   (props.canExpand && props.canUnexpandWithSwipe)
 
+// swipe setup
+
+let touchstartY = 0
+let touchendY = 0
+let touchPrevY = 0
+let touchCurrentY = 0
+let touchstartTime = 0
+let touchendTime = 0
+const swipeThreshold = props.swipeThreshold
+let isDraggingDown = false
+
+// handles the detection of the direction of the drag movment
+function handleSwipeDirection() {
+  const tempBool = isDraggingDown
+  if (touchCurrentY < touchPrevY) {
+    isDraggingDown = true
+  }
+  if (touchCurrentY > touchPrevY) {
+    isDraggingDown = false
+  }
+  //reset the touchstartY and touchstartTime if the direction changes
+  if (tempBool !== isDraggingDown) {
+    touchstartY = touchCurrentY
+    touchstartTime = new Date().getTime()
+  }
+}
+
+// handles the swipe ended logic
+function handleSwipe() {
+  const distance = Math.abs(touchendY - touchstartY)
+  const time = touchendTime - touchstartTime
+  const velocity = distance / time
+  if (props.canExpand && props.canExpandWithSwipe) {
+    if (!isDraggingDown) {
+      if (velocity > swipeThreshold) {
+        //console.log('EXPAND')
+        playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
+          passive: false,
+        })
+        isExpanded.value = true
+        emit("swipe-up")
+      }
+    }
+  }
+  if (props.canExpand && props.canUnexpandWithSwipe) {
+    if (isDraggingDown) {
+      if (velocity > swipeThreshold) {
+        //console.log('UNEXPAND')
+        playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
+          passive: false,
+        })
+        isExpanded.value = false
+        emit("swipe-down")
+      }
+    }
+  }
+}
+
 if (supportSwipe) {
-  let touchstartY = 0
-  let touchendY = 0
-  let touchPrevY = 0
-  let touchCurrentY = 0
-  let touchstartTime = 0
-  let touchendTime = 0
-  const swipeThreshold = props.swipeThreshold
-  let isDraggingDown = false
-
-  // handles the detection of the direction of the drag movment
-  function handleSwipeDirection() {
-    const tempBool = isDraggingDown
-    if (touchCurrentY < touchPrevY) {
-      isDraggingDown = true
-    }
-    if (touchCurrentY > touchPrevY) {
-      isDraggingDown = false
-    }
-    //reset the touchstartY and touchstartTime if the direction changes
-    if (tempBool !== isDraggingDown) {
-      touchstartY = touchCurrentY
-      touchstartTime = new Date().getTime()
-    }
-  }
-
-  // handles the swipe ended logic
-  function handleSwipe() {
-    const distance = Math.abs(touchendY - touchstartY)
-    const time = touchendTime - touchstartTime
-    const velocity = distance / time
-    // console.log('________________________________________________________')
-    // console.log('distance', distance)
-    // console.log('time', time)
-    // console.log('velocity', velocity)
-    // console.log('swipeThreshold', swipeThreshold)
-    // console.log('isDraggingDown', isDraggingDown)
-    // console.log('touchendY', touchendY)
-    // console.log('touchstartY', touchstartY)
-    if (props.canExpand && props.canExpandWithSwipe) {
-      if (!isDraggingDown) {
-        if (velocity > swipeThreshold) {
-          //console.log('EXPAND')
-          playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
-            passive: false,
-          })
-          isExpanded.value = true
-          emit("swipe-up")
-        }
-      }
-    }
-    if (props.canExpand && props.canUnexpandWithSwipe) {
-      if (isDraggingDown) {
-        if (velocity > swipeThreshold) {
-          //console.log('UNEXPAND')
-          playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
-            passive: false,
-          })
-          isExpanded.value = false
-          emit("swipe-down")
-        }
-      }
-    }
-  }
-
   const swipe = useSwipe(playerRef, {
     onSwipe() {
       touchCurrentY = swipe.lengthY.value
