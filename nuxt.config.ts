@@ -1,4 +1,3 @@
-import vue from '@vitejs/plugin-vue';
 /* eslint-disable perfectionist/sort-objects */
 const envTheme = process.env.VITE_VUE_APP_THEME
 // https://v3.nuxtjs.org/docs/directory-structure/nuxt.config
@@ -54,6 +53,7 @@ export default {
         },
       },
     },
+    // added for VidStack players
     vue: {
       template: {
         compilerOptions: {
