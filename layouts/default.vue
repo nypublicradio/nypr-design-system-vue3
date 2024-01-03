@@ -36,7 +36,14 @@ const audioSrc = ref(
     <main>
       <slot />
     </main>
-    <Button label="switch" @click="audioSrc = 'https://fm939.wnyc.org/wnycfm'" />
+    <Button label="switch stream" @click="audioSrc = 'https://fm939.wnyc.org/wnycfm'" />
+    <Button
+      label="switch file"
+      @click="
+        audioSrc =
+          'https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3'
+      "
+    />
     <Button label="toggle play" @click="playerRef.togglePlay()" />
     <Button label="mute" @click="playerRef.toggleMute()" />
     <VNewPersistentPlayer

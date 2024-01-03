@@ -286,6 +286,7 @@ const emit = defineEmits([
   "swipe-up",
   "swipe-down",
   "is-loading",
+  "is-live",
   "duration",
   "current-duration",
 ])
@@ -532,7 +533,7 @@ onMounted(async () => {
     })
     instance.subscribe(({ canPlay }) => {
       isPlayable.value = canPlay
-      emit("is-loading", canPlay)
+      emit("is-loading", !canPlay)
     })
     instance.subscribe(({ volume }) => {
       emit("volume-change", volume)
@@ -542,6 +543,7 @@ onMounted(async () => {
     })
     instance.subscribe(({ live }) => {
       isLive.value = live
+      emit("is-live", live)
     })
     instance.subscribe(({ error }) => {
       playerError.value = error
@@ -604,7 +606,6 @@ defineExpose({
             view-type="audio"
             load="eager"
             :volume="props.volume"
-            :stream-type="isLive ? 'live:dvr' : 'on-demand'"
             :loop="props.loop"
             poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
             crossorigin
