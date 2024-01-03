@@ -532,6 +532,7 @@ onMounted(async () => {
     })
     instance.subscribe(({ canPlay }) => {
       isPlayable.value = canPlay
+      emit("is-loading", canPlay)
     })
     instance.subscribe(({ volume }) => {
       emit("volume-change", volume)
@@ -545,6 +546,12 @@ onMounted(async () => {
     instance.subscribe(({ error }) => {
       playerError.value = error
       emit("error", error)
+    })
+    instance.subscribe(({ duration }) => {
+      emit("duration", duration)
+    })
+    instance.subscribe(({ currentTime }) => {
+      emit("current-duration", currentTime)
     })
   }
   // remote.setTarget($mediaPlayerRef.value)
