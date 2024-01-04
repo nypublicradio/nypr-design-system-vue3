@@ -53,6 +53,7 @@ const audioSrc = ref(
       :can-expand="true"
       :can-minimize="false"
       :show-download="true"
+      :show-volume="true"
       :hide-download-mobile="true"
       :can-expand-with-swipe="true"
       :can-unexpand-with-swipe="true"

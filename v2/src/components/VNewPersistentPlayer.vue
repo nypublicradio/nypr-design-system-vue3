@@ -194,6 +194,13 @@ const props = defineProps({
     type: Boolean,
   },
   /**
+   * show the skip buttons
+   */
+  showVolume: {
+    default: false,
+    type: Boolean,
+  },
+  /**
    * skip ahead time
    */
   skipAheadTime: {
@@ -658,21 +665,33 @@ defineExpose({
                           @title-click="emit('title-click')"
                           @click="handleClickAnywhere"
                         />
-                        <media-mute-button class="volume-btn media-button flex-none">
-                          <div type="mute" class="mute-icon">
-                            <slot name="mute"><i class="pi pi-volume-off"></i></slot>
-                          </div>
-                          <div type="volume-low" class="volume-low-icon">
-                            <slot name="volume-low"
-                              ><i class="pi pi-volume-down"></i
-                            ></slot>
-                          </div>
-                          <div type="volume-high" class="volume-high-icon">
-                            <slot name="volume-high"
-                              ><i class="pi pi-volume-up"></i
-                            ></slot>
-                          </div>
-                        </media-mute-button>
+                        <div class="flex gap-1" v-if="props.showVolume">
+                          <media-volume-slider
+                            class="media-slider volume-slider flex-none"
+                          >
+                            <div class="media-slider-track">
+                              <div
+                                class="media-slider-track-fill media-slider-track"
+                              ></div>
+                            </div>
+                            <div class="media-slider-thumb"></div>
+                          </media-volume-slider>
+                          <media-mute-button class="volume-btn media-button flex-none">
+                            <div type="mute" class="mute-icon">
+                              <slot name="mute"><i class="pi pi-volume-off"></i></slot>
+                            </div>
+                            <div type="volume-low" class="volume-low-icon">
+                              <slot name="volume-low"
+                                ><i class="pi pi-volume-down"></i
+                              ></slot>
+                            </div>
+                            <div type="volume-high" class="volume-high-icon">
+                              <slot name="volume-high"
+                                ><i class="pi pi-volume-up"></i
+                              ></slot>
+                            </div>
+                          </media-mute-button>
+                        </div>
                         <media-seek-button
                           v-if="props.showSkip"
                           class="media-button flex-none"
@@ -954,6 +973,9 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       overflow-x: hidden;
       height: inherit;
     }
+    #expandedControls {
+      min-height: 85px;
+    }
   }
 }
 
@@ -1089,6 +1111,9 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     //margin: 0 calc(15px / 2);
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
+    &.volume-slider {
+      width: 72px;
+    }
   }
 
   .media-slider[data-focus] .media-slider-track {
