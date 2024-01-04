@@ -305,6 +305,7 @@ const playerError = ref("")
 
 const isMinimized = ref(false)
 const isExpanded = ref(false)
+const isMounted = ref(false)
 
 // prevents the body from scrolling when the dropdown is open
 function preventScrollOnTouch(event) {
@@ -393,6 +394,7 @@ if (supportSwipe) {
 }
 // initially set touchmove prevent default on the playerRef
 onMounted(() => {
+  isMounted.value = true
   if (supportSwipe) {
     playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
       passive: false,
@@ -596,7 +598,7 @@ defineExpose({
 
     <Transition name="expand">
       <div v-show="!isExpanded" class="player-controls">
-        <Teleport :disabled="!isExpanded" to="#expandedViewPlayer">
+        <Teleport :disabled="!isExpanded" v-if="isMounted" to="#expandedViewPlayer">
           <media-player
             ref="$mediaPlayerRef"
             class="media-player"
@@ -802,7 +804,7 @@ defineExpose({
             <div class="flex flex-column">
               <slot name="header-content"></slot>
 
-              <div class="expanded-player flex flex-column gap-3">
+              <div class="flex flex-column gap-3">
                 <!--   <pre class="text-xs">{{ currentEpisode }}</pre> -->
                 <VImage
                   :src="props.image"
@@ -1084,7 +1086,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     user-select: none;
     touch-action: none;
     /** Prevent thumb flowing out of slider (15px = thumb width). */
-    margin: 0 calc(15px / 2);
+    //margin: 0 calc(15px / 2);
     -webkit-user-select: none;
     -webkit-tap-highlight-color: transparent;
   }
@@ -1097,13 +1099,13 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     z-index: 0;
     position: absolute;
     width: 100%;
-    height: 5px;
+    height: 6px;
     top: 50%;
     left: 0;
-    border-radius: 1px;
+    border-radius: 3px;
     transform: translateY(-50%) translateZ(0);
     background-color: var(--persistent-player-slider-bg);
-    contain: strict;
+    //contain: strict;
   }
 
   .media-slider-track-fill {
@@ -1126,13 +1128,13 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     position: absolute;
     top: 50%;
     left: var(--slider-fill);
-    opacity: 0;
+    //opacity: 0;
     contain: layout size style;
     width: 15px;
     height: 15px;
-    border: 1px solid #cacaca;
+    border: 1px solid var(--persistent-player-slider-thumb-border);
     border-radius: 9999px;
-    background-color: #fff;
+    background-color: var(--persistent-player-slider-thumb-bg);
     transform: translate(-50%, -50%) translateZ(0);
     transition: opacity 0.15s ease-in;
     pointer-events: none;
@@ -1147,10 +1149,11 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   }
 
   .media-slider[data-dragging] .media-slider-thumb {
-    box-shadow: 0 0 0 3px hsla(0, 0%, 100%, 0.4);
+    box-shadow: 0 0 0 3px var(--persistent-player-slider-thumb-shadow);
   }
 
   // thin disabled slider
+
   .thin-disabled {
     &.media-slider {
       pointer-events: none;
@@ -1160,6 +1163,9 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       .media-slider-track {
         height: 2px;
         border-radius: 0;
+      }
+      .media-slider-thumb {
+        opacity: 0;
       }
     }
   }

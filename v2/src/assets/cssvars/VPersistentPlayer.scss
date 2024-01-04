@@ -45,6 +45,10 @@
     --persistent-player-slider-bg: var(--stroke);
     --persistent-player-slider-progress: #000;
     --persistent-player-slider-buffer: #00000040;
+
+    --persistent-player-slider-thumb-bg: var(--stroke);
+    --persistent-player-slider-thumb-border: #cacaca;
+    --persistent-player-slider-thumb-shadow: hsla(0, 0%, 100%, 0.4);
 }
 
 [data-style-mode='dark'],
