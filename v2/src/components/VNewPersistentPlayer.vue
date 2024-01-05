@@ -453,7 +453,7 @@ const toggleExpanded = async (e) => {
   if (isPlaying.value) {
     setTimeout(() => {
       $mediaPlayerRef.value?.play()
-    }, 1)
+    }, 10)
   } else {
     $mediaPlayerRef.value?.pause()
   }
@@ -461,18 +461,12 @@ const toggleExpanded = async (e) => {
 
 // exposed method to handle the skip ahead
 const skipAhead = () => {
-  if ($mediaPlayerRef.value) {
-    $mediaPlayerRef.value.seek(String(props.skipAheadTime))
-    emit("skip-ahead", $mediaPlayerRef.value.currentTime)
-  }
+  emit("skip-ahead", $mediaPlayerRef.value.currentTime)
 }
 
 // exposed method to handle the skip back
 const skipBack = () => {
-  if ($mediaPlayerRef.value) {
-    $mediaPlayerRef.value.seek(`-${String(props.skipAheadTime)}`)
-    emit("skip-back", $mediaPlayerRef.value.currentTime)
-  }
+  emit("skip-back", $mediaPlayerRef.value.currentTime)
 }
 
 // exposed method to handle the mute toggle
@@ -710,7 +704,8 @@ defineExpose({
                         <media-seek-button
                           v-if="props.showSkip"
                           class="media-button flex-none"
-                          :seconds="props.skipBackTime"
+                          :seconds="`-${props.skipAheadTime}`"
+                          @click="skipBack"
                         >
                           <slot name="skipBack"><i class="pi pi-undo"></i></slot>
                         </media-seek-button>
@@ -732,7 +727,8 @@ defineExpose({
                         <media-seek-button
                           v-if="props.showSkip"
                           class="media-button flex-none"
-                          :seconds="props.skipAheadTime"
+                          :seconds="`+${props.skipAheadTime}`"
+                          @click="skipAhead"
                         >
                           <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
                         </media-seek-button>
@@ -752,6 +748,7 @@ defineExpose({
                   </media-controls-group>
                 </div>
               </div>
+              <!-- What the controls looks like in the expanded view -->
               <div v-show="isExpanded" id="expandedControls">
                 <media-time-slider class="media-slider expanded-slider">
                   <div class="media-slider-track">
@@ -760,6 +757,12 @@ defineExpose({
                   </div>
                   <div class="media-slider-thumb"></div>
                 </media-time-slider>
+                <div
+                  class="media-time-group track-info-time flex justify-content-between w-full -mt-3"
+                >
+                  <media-time class="media-time" type="current"></media-time>
+                  <media-time class="media-time" type="duration"></media-time>
+                </div>
                 <div class="expanded-buttons flex gap-2 justify-content-center">
                   <media-seek-button
                     v-if="props.showSkip"
@@ -838,7 +841,7 @@ defineExpose({
                 </Button>
               </div>
             </slot>
-            <div class="flex flex-column">
+            <div class="flex flex-column header-top">
               <slot name="header-content"></slot>
 
               <div class="flex flex-column gap-3">
@@ -1263,6 +1266,11 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
   .media-button.volume-btn {
     @include secondary-button;
+  }
+
+  // time
+  .media-time {
+    font-size: 0.75rem;
   }
 }
 </style>

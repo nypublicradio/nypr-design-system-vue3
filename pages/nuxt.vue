@@ -1,31 +1,30 @@
 <script setup>
-import VInputSwitch from '../v2/src/components/VInputSwitch.vue'
+import VInputSwitch from "../v2/src/components/VInputSwitch.vue"
 // auth
-import { useCurrentUser } from '~/composables/states'
-import Home from '~/src/components/Home.vue'
-import FacebookIcon from '~/v2/src/assets/icons/FacebookIcon.vue'
-import TwitterIcon from '~/v2/src/assets/icons/TwitterIcon.vue'
-import VCard from '~/v2/src/components/VCard.vue'
-import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
+import { useCurrentUser } from "~/composables/states"
+import Home from "~/src/components/Home.vue"
+import FacebookIcon from "~/v2/src/assets/icons/FacebookIcon.vue"
+import TwitterIcon from "~/v2/src/assets/icons/TwitterIcon.vue"
+import VCard from "~/v2/src/components/VCard.vue"
+import VFlexibleLink from "~/v2/src/components/VFlexibleLink.vue"
 //import VImageWithCaption from '~/v2/src/components/VImageWithCaption.vue'
-import VImage from '~/v2/src/components/VImage.vue'
-import VImageCaption from '~/v2/src/components/VImageCaption.vue'
-import VImageGallery from '~/v2/src/components/VImageGallery.vue'
-import VImagePublisher from '~/v2/src/components/VImagePublisher.vue'
-import VPerson from '~/v2/src/components/VPerson.vue'
-//import VPersistentPlayer from '~/v2/src/components/VPersistentPlayer.vue'
-import VShareTools from '~/v2/src/components/VShareTools.vue'
-import VShareToolsItem from '~/v2/src/components/VShareToolsItem.vue'
-import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
-import VLoginWithMagicLink from '~/v2/src/components/supabase/VLoginWithMagicLink.vue'
-import VLoginWithProvider from '~/v2/src/components/supabase/VLoginWithProvider.vue'
-import VSignupWithEmail from '~/v2/src/components/supabase/VSignupWithEmail.vue'
-import VUploadImage from '~/v2/src/components/supabase/VUploadImage.vue'
-import TabMenu from 'primevue/tabmenu'
-import { onMounted } from 'vue'
+import VImage from "~/v2/src/components/VImage.vue"
+import VImageCaption from "~/v2/src/components/VImageCaption.vue"
+import VImageGallery from "~/v2/src/components/VImageGallery.vue"
+import VImagePublisher from "~/v2/src/components/VImagePublisher.vue"
+import VPerson from "~/v2/src/components/VPerson.vue"
+import VShareTools from "~/v2/src/components/VShareTools.vue"
+import VShareToolsItem from "~/v2/src/components/VShareToolsItem.vue"
+import VLoginWithEmail from "~/v2/src/components/supabase/VLoginWithEmail.vue"
+import VLoginWithMagicLink from "~/v2/src/components/supabase/VLoginWithMagicLink.vue"
+import VLoginWithProvider from "~/v2/src/components/supabase/VLoginWithProvider.vue"
+import VSignupWithEmail from "~/v2/src/components/supabase/VSignupWithEmail.vue"
+import VUploadImage from "~/v2/src/components/supabase/VUploadImage.vue"
+import TabMenu from "primevue/tabmenu"
+import { onMounted } from "vue"
 
 definePageMeta({
-  middleware: 'check-auth-session-home-page',
+  middleware: "check-auth-session-home-page",
 })
 // //auth
 // const config = useRuntimeConfig()
@@ -77,7 +76,7 @@ const emitClick = (event) => {
   //console.log('event = ', event)
 }
 
-const value = ref({ value: 'Home' })
+const value = ref({ value: "Home" })
 /**
  * handles the menu click
  */
@@ -103,8 +102,8 @@ const config = useRuntimeConfig()
         <template #below-button>
           <p class="mt-4">
             <em>
-              Image files must be less than 1MB in size, and should ideally be a
-              square. Jpg, png, webp, and gif files are accepted.
+              Image files must be less than 1MB in size, and should ideally be a square.
+              Jpg, png, webp, and gif files are accepted.
             </em>
           </p>
         </template>
@@ -174,21 +173,13 @@ const config = useRuntimeConfig()
               >
             </h1>
             <v-share-tools>
-              <v-share-tools-item
-                service="site"
-                link="https://www.sample.com"
-              />
+              <v-share-tools-item service="site" link="https://www.sample.com" />
               <v-share-tools-item service="facebook" username="gothamist" />
               <v-share-tools-item service="twitter" username="gothamist" />
               <v-share-tools-item service="instagram" username="gothamist" />
-              <v-share-tools-item
-                service="youtube"
-                username="UCY_2VeS5Q9_sMZRhtvF0c5Q"
-              />
+              <v-share-tools-item service="youtube" username="UCY_2VeS5Q9_sMZRhtvF0c5Q" />
             </v-share-tools>
-            <v-flexible-link to="https://www.google.com"
-              >google</v-flexible-link
-            >
+            <v-flexible-link to="https://www.google.com">google</v-flexible-link>
 
             <div class="mb-8" />
 
@@ -219,9 +210,9 @@ const config = useRuntimeConfig()
                     @tag-click="(e) => emitClick('tag', e)"
                   >
                     <p>
-                      All Of It with Alison Stewart is a live daily conversation
-                      about culture and the culture in and around New York City.
-                      Follow All Of It on
+                      All Of It with Alison Stewart is a live daily conversation about
+                      culture and the culture in and around New York City. Follow All Of
+                      It on
                       <a
                         href="https://www.instagram.com/allofitwnyc/?hl=en"
                         target="_blank"
@@ -249,22 +240,10 @@ const config = useRuntimeConfig()
                   <div class="col-12 lg:col-3">
                     <p class="text-sm">Connect with the show!</p>
                     <v-share-tools>
-                      <v-share-tools-item
-                        service="site"
-                        link="https://www.sample.com"
-                      />
-                      <v-share-tools-item
-                        service="facebook"
-                        username="gothamist"
-                      />
-                      <v-share-tools-item
-                        service="twitter"
-                        username="gothamist"
-                      />
-                      <v-share-tools-item
-                        service="instagram"
-                        username="gothamist"
-                      />
+                      <v-share-tools-item service="site" link="https://www.sample.com" />
+                      <v-share-tools-item service="facebook" username="gothamist" />
+                      <v-share-tools-item service="twitter" username="gothamist" />
+                      <v-share-tools-item service="instagram" username="gothamist" />
                       <v-share-tools-item
                         service="youtube"
                         username="UCY_2VeS5Q9_sMZRhtvF0c5Q"
@@ -286,9 +265,7 @@ const config = useRuntimeConfig()
             <div data-style-mode="dark" class="dark-mode-section">
               <TwitterIcon />
               <div class="content">
-                <v-flexible-link to="https://www.google.com"
-                  >google dark</v-flexible-link
-                >
+                <v-flexible-link to="https://www.google.com">google dark</v-flexible-link>
               </div>
               <ClientOnly>
                 <home />
@@ -318,7 +295,7 @@ const config = useRuntimeConfig()
   //--slider-size: 1.5rem;
   //--v-input-switch-border-radius: 5px;
 }
-@import '../src/App.scss';
+@import "../src/App.scss";
 .dark-mode-section {
   padding: 3rem 0;
   background-color: var(--shade-000);

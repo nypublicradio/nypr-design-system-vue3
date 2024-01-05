@@ -121,15 +121,15 @@ const getMarqueeSpeed = computed(() => {
               </div>
             </div>
             <div v-else class="track-info-description" v-html="props.description"></div>
-            <div
-              class="media-time-group track-info-time"
-              :class="[{ hideTimeOnMobile: props.hideTimeOnMobile }]"
-            >
-              <media-time class="media-time" type="current"></media-time>
-              <div class="media-time-divider">/</div>
-              <media-time class="media-time" type="duration"></media-time>
-            </div>
           </VFlexibleLink>
+        </div>
+        <div
+          class="media-time-group track-info-time"
+          :class="[{ hideTimeOnMobile: props.hideTimeOnMobile }]"
+        >
+          <media-time class="media-time" type="current"></media-time>
+          <div class="media-time-divider">/</div>
+          <media-time class="media-time" type="duration"></media-time>
         </div>
       </div>
     </div>

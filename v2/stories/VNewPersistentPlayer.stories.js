@@ -1,4 +1,4 @@
-import VPersistentPlayer from '../src/components/VPersistentPlayer.vue'
+import VNewPersistentPlayer from '../src/components/VNewPersistentPlayer.vue'
 
 export default {
     argTypes: {
@@ -18,40 +18,40 @@ export default {
         //     options: ['small', 'medium', 'large'],
         // },
     },
-    component: VPersistentPlayer,
-    title: 'Components-V2/VPersistentPlayer',
+    component: VNewPersistentPlayer,
+    title: 'Components-V2/VNewPersistentPlayer',
 }
 
 const Template = (args) => ({
-    components: { VPersistentPlayer },
+    components: { VNewPersistentPlayer },
     setup() {
         return { args }
     },
     template: '<v-persistent-player v-bind="args" style="position:relative;" />',
 })
 const TemplateCustomIcons = (args) => ({
-    components: { VPersistentPlayer },
+    components: { VNewPersistentPlayer },
     setup() {
         return { args }
     },
     template: '<v-persistent-player v-bind="args" style="position:relative;" ><template #chevronDown> <i class="pi pi-twitter"></ > </template > <template #chevronUp> <i class="pi pi-facebook"></i> </template> <template #volumeOn> <i class="pi pi-twitter"></i> </template> <template #volumeOff> <i class="pi pi-facebook"></i> </template> <template #prev> <i class="pi pi-twitter"></i> </template> <template #play> <i class="pi pi-twitter"></i> </template> <template #pause> <i class="pi pi-facebook"></i> </template> <template #loading> <i class="pi pi-spin pi-spinner"></i> </template> <template #skip> <i class="pi pi-twitter"></i> </template> <template #download> <i class="pi pi-twitter"></i> </template></v-persistent-player> ',
 })
 const TemplateCanExpand = (args) => ({
-    components: { VPersistentPlayer },
+    components: { VNewPersistentPlayer },
     setup() {
         return { args }
     },
     template: '<v-persistent-player v-bind="args" style="position:relative;" ><template #expanded-content>Slotted content here</template></v-persistent-player> ',
 })
 const TemplateCanExpandCustomButtonIcon = (args) => ({
-    components: { VPersistentPlayer },
+    components: { VNewPersistentPlayer },
     setup() {
         return { args }
     },
     template: '<v-persistent-player v-bind="args" style="position:relative;"><template #expanded-content>Slotted content here</template><template #unexpanded-button-icon><i class="pi pi-facebook" /></template></v-persistent-player> ',
 })
 const TemplateCanExpandCustomHeaderContent = (args) => ({
-    components: { VPersistentPlayer },
+    components: { VNewPersistentPlayer },
     setup() {
         return { args }
     },

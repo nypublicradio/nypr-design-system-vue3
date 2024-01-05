@@ -1,6 +1,5 @@
 <script setup>
 import VNewPersistentPlayer from "~/v2/src/components/VNewPersistentPlayer.vue"
-import VPersistentPlayer from "~/v2/src/components/VPersistentPlayer.vue"
 import VSmartHeader from "~/v2/src/components/VSmartHeader.vue"
 import { shallowRef } from "vue"
 const headerHeight = shallowRef(110)
@@ -70,7 +69,7 @@ const audioSrc = ref(
       :can-unexpand-with-swipe="true"
       :can-click-anywhere="true"
       :show-skip="true"
-      :hide-time-on-mobile="true"
+      :hide-time-on-mobile="false"
       :marquee="true"
       :volume="1"
       title="The Takeaway"
