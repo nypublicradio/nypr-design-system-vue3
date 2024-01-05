@@ -44,6 +44,17 @@ const audioSrc = ref(
           'https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3'
       "
     />
+    <Button
+      label="switch WNYC HLS"
+      @click="audioSrc = 'https://hls-live.wnyc.org/wnycfm32-hls/playlist.m3u8'"
+    />
+    <Button
+      label="switch Other HLS"
+      @click="
+        audioSrc =
+          'https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8'
+      "
+    />
     <Button label="toggle play" @click="playerRef.togglePlay()" />
     <Button label="mute" @click="playerRef.toggleMute()" />
     <VNewPersistentPlayer

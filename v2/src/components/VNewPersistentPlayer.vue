@@ -564,6 +564,21 @@ onMounted(async () => {
     instance.subscribe(({ currentTime }) => {
       emit("current-duration", currentTime)
     })
+
+    // Fired when we begin downloading the hls.js library.
+    instance.addEventListener("hls-lib-load-start", (event) => {
+      console.log("HLS loadStart = ", event)
+    })
+
+    // Fired when the hls.js library has loaded.
+    instance.addEventListener("hls-lib-loaded", (event) => {
+      console.log("HLS lOADED = ", event)
+    })
+
+    // Fired when the hls.js library fails to download.
+    instance.addEventListener("hls-lib-load-error", (event) => {
+      console.log("HLS error = ", event)
+    })
   }
   // remote.setTarget($mediaPlayerRef.value)
   // const player = remote.getPlayer()
@@ -723,7 +738,10 @@ defineExpose({
                         </media-seek-button>
                       </div>
 
-                      <media-time-slider class="media-slider thin-disabled">
+                      <media-time-slider
+                        v-if="!isLive"
+                        class="media-slider thin-disabled"
+                      >
                         <div class="media-slider-track">
                           <div class="media-slider-track-fill media-slider-track"></div>
                           <div class="media-slider-progress media-slider-track"></div>
