@@ -7,7 +7,7 @@ export default {
                 value: {
                     "--persistent-player-bg": "#f1f1f1",
                     "--persistent-player-button-bg-color": "#000",
-                    "--persistent-player-button-color": "var(--text-color)",
+                    "--persistent-player-button-color": "#fff",
                     "--persistent-player-button-color-hover": "inherit",
                     "--persistent-player-button-height": "40px",
                     "--persistent-player-button-radius": "20px",

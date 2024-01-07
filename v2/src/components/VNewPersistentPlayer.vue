@@ -633,7 +633,11 @@ defineExpose({
             <media-provider></media-provider>
 
             <media-controls>
-              <div v-if="!isExpanded" class="flex w-full">
+              <div
+                v-if="!isExpanded"
+                class="flex w-full"
+                :style="`height:${props.imageSize}px`"
+              >
                 <div
                   v-if="props.image"
                   class="track-info-image flex-none"
