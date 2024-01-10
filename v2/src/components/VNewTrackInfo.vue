@@ -124,6 +124,7 @@ const getMarqueeSpeed = computed(() => {
           </VFlexibleLink>
         </div>
         <div
+          v-if="!props.livestream"
           class="media-time-group track-info-time"
           :class="[{ hideTimeOnMobile: props.hideTimeOnMobile }]"
         >

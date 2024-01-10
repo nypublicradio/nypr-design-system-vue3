@@ -730,17 +730,19 @@ defineExpose({
                             </div>
                           </media-mute-button>
                         </div>
-                        <media-seek-button
-                          v-if="props.showSkip"
-                          class="media-button flex-none"
-                          :seconds="`-${props.skipAheadTime}`"
-                          @click="skipBack"
-                        >
-                          <slot name="skipBack"><i class="pi pi-undo"></i></slot>
-                        </media-seek-button>
+                        <Transition name="skipBtnL">
+                          <media-seek-button
+                            v-if="props.showSkip && !isLive && isPlayable"
+                            class="media-button flex-none"
+                            :seconds="`-${props.skipAheadTime}`"
+                            @click="skipBack"
+                          >
+                            <slot name="skipBack"><i class="pi pi-undo"></i></slot>
+                          </media-seek-button>
+                        </Transition>
                         <media-play-button
                           ref="playButtonRef"
-                          class="media-button flex-none"
+                          class="media-button flex-none z-1"
                           :data-disabled="isPlayable ? null : ''"
                         >
                           <media-icon type="play" class="play-icon">
@@ -753,14 +755,16 @@ defineExpose({
                             <slot name="pause"><i class="pi pi-pause"></i></slot>
                           </media-icon>
                         </media-play-button>
-                        <media-seek-button
-                          v-if="props.showSkip"
-                          class="media-button flex-none"
-                          :seconds="`+${props.skipAheadTime}`"
-                          @click="skipAhead"
-                        >
-                          <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
-                        </media-seek-button>
+                        <Transition name="skipBtnR">
+                          <media-seek-button
+                            v-if="props.showSkip && !isLive && isPlayable"
+                            class="media-button flex-none"
+                            :seconds="`+${props.skipAheadTime}`"
+                            @click="skipAhead"
+                          >
+                            <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
+                          </media-seek-button>
+                        </Transition>
                       </div>
 
                       <media-time-slider
@@ -779,7 +783,10 @@ defineExpose({
               </div>
               <!-- What the controls looks like in the expanded view -->
               <div v-show="isExpanded" id="expandedControls">
-                <media-time-slider class="media-slider expanded-slider">
+                <media-time-slider
+                  v-if="!isLive && isPlayable"
+                  class="media-slider expanded-slider"
+                >
                   <div class="media-slider-track">
                     <div class="media-slider-track-fill media-slider-track"></div>
                     <div class="media-slider-progress media-slider-track"></div>
@@ -787,6 +794,7 @@ defineExpose({
                   <div class="media-slider-thumb"></div>
                 </media-time-slider>
                 <div
+                  v-if="!isLive && isPlayable"
                   class="media-time-group track-info-time flex justify-content-between w-full -mt-3"
                 >
                   <media-time class="media-time" type="current"></media-time>
@@ -794,7 +802,7 @@ defineExpose({
                 </div>
                 <div class="expanded-buttons flex gap-2 justify-content-center">
                   <media-seek-button
-                    v-if="props.showSkip"
+                    v-if="props.showSkip && !isLive && isPlayable"
                     class="media-button flex-none"
                     :seconds="props.skipBackTime"
                   >
@@ -816,7 +824,7 @@ defineExpose({
                     </media-icon>
                   </media-play-button>
                   <media-seek-button
-                    v-if="props.showSkip"
+                    v-if="props.showSkip && !isLive && isPlayable"
                     class="media-button flex-none"
                     :seconds="props.skipAheadTime"
                   >
@@ -889,7 +897,7 @@ defineExpose({
 
               <div v-if="isLive" class="flex flex-column gap-2">
                 <div class="live flex gap-2 align-items-center">
-                  <media-live-button class="media-live-button">
+                  <media-live-button data-edge class="media-live-button">
                     <span class="media-live-button-text">LIVE</span>
                   </media-live-button>
                   <div class="text-sm">{{ props.station }}</div>
@@ -1060,6 +1068,47 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 .expand-enter-from,
 .expand-leave-to {
   opacity: 0;
+}
+
+//skipBtnR
+.skipBtnR-enter-active {
+  transition: opacity calc(var(--transition-duration) * 2) ease-out,
+    transform calc(var(--transition-duration) * 2) ease-out;
+  transition-delay: calc(var(--transition-duration) * 2.25);
+}
+
+.skipBtnR-leave-active {
+  transition: opacity 0s ease-in, transform 0s ease-in;
+}
+
+.skipBtnR-enter-from {
+  opacity: 0;
+  transform: scale(0.8) translateX(-60px);
+}
+
+.skipBtnR-leave-to {
+  opacity: 0;
+  transform: scale(1) translateX(0);
+}
+//skipBtnL
+.skipBtnL-enter-active {
+  transition: opacity calc(var(--transition-duration) * 2) ease-out,
+    transform calc(var(--transition-duration) * 2) ease-out;
+  transition-delay: calc(var(--transition-duration) * 2.25);
+}
+
+.skipBtnL-leave-active {
+  transition: opacity 0s ease-in, transform 0s ease-in;
+}
+
+.skipBtnL-enter-from {
+  opacity: 0;
+  transform: scale(0.8) translateX(60px);
+}
+
+.skipBtnL-leave-to {
+  opacity: 0;
+  transform: scale(1) translateX(0);
 }
 </style>
 

@@ -9,9 +9,7 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
 
 const playerRef = ref(null)
 
-const audioSrc = ref(
-  "https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3"
-)
+const audioSrc = ref("https://fm939.wnyc.org/wnycfm")
 </script>
 
 <template>
