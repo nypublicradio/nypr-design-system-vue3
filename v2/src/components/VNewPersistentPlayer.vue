@@ -180,7 +180,7 @@ const props = defineProps({
     type: Number,
   },
   nativeHLS: {
-    default: true,
+    default: false,
     type: Boolean,
   },
   /**
@@ -1026,6 +1026,9 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     #expandedControls {
       min-height: 85px;
     }
+  }
+  video {
+    display: none;
   }
 }
 
