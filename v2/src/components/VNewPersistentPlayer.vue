@@ -179,6 +179,10 @@ const props = defineProps({
     default: 0.1,
     type: Number,
   },
+  nativeHLS: {
+    default: true,
+    type: Boolean,
+  },
   /**
    * show the download button
    */
@@ -219,6 +223,10 @@ const props = defineProps({
    */
   station: {
     default: null,
+    type: String,
+  },
+  streamType: {
+    default: "unknown",
     type: String,
   },
   /**
@@ -277,17 +285,15 @@ const emit = defineEmits([
   "volume-toggle-mute",
   "volume-change",
   "error",
+  "hls-error",
   "skip-ahead",
   "skip-back",
   "scrub-timeline-change",
   "scrub-timeline-end",
-  "download",
   "image-click",
   "description-click",
   "title-click",
-  "sound-ended",
-  "sound-loaded",
-  "sound-looping",
+  "ended",
   "is-minimized",
   "is-expanded",
   "swipe-up",
@@ -558,20 +564,38 @@ onMounted(async () => {
     instance.subscribe(({ currentTime }) => {
       emit("current-duration", currentTime)
     })
+    instance.subscribe(({ ended }) => {
+      emit("ended", ended)
+    })
 
     // Fired when we begin downloading the hls.js library.
     instance.addEventListener("hls-lib-load-start", (event) => {
-      console.log("HLS loadStart = ", event)
+      console.log("HLS library loadStart = ", event)
     })
 
     // Fired when the hls.js library has loaded.
     instance.addEventListener("hls-lib-loaded", (event) => {
-      console.log("HLS lOADED = ", event)
+      console.log("HLS library lOADED = ", event)
     })
 
     // Fired when the hls.js library fails to download.
     instance.addEventListener("hls-lib-load-error", (event) => {
-      console.log("HLS error = ", event)
+      console.log("HLS library error = ", event)
+    })
+    // Fired when we begin downloading the hls audio.
+    instance.addEventListener("hls-audio-track-loading", (event) => {
+      console.log("HLS audio loadStart = ", event)
+    })
+
+    // Fired when the hls audio has loaded.
+    instance.addEventListener("hls-audio-track-loaded", (event) => {
+      console.log("HLS audio lOADED = ", event)
+    })
+
+    // Fired when the hls audio fails to download.
+    instance.addEventListener("hls-error", (event) => {
+      console.log("HLS audio error = ", event)
+      emit("hls-error", event)
     })
   }
   // remote.setTarget($mediaPlayerRef.value)
@@ -625,9 +649,10 @@ defineExpose({
             load="eager"
             :volume="props.volume"
             :loop="props.loop"
+            :stream-type="props.streamType"
             poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
             keep-alive
-            :prefer-native-h-l-s="true"
+            :prefer-native-h-l-s="props.nativeHLS"
             controls
           >
             <media-provider></media-provider>
