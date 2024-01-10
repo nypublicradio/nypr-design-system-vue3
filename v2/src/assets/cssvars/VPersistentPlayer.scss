@@ -25,8 +25,9 @@
     --persistent-player-button-height: 40px;
     --persistent-player-button-radius: 20px;
     --persistent-player-button-color: #fff;
+    --persistent-player-button-color-hover: #fff;
     --persistent-player-button-bg-color: #000;
-    --persistent-player-button-color-hover: inherit;
+    --persistent-player-button-bg-color-hover: inherit;
 
     --persistent-player-title-size: var(--font-size-6);
     --persistent-player-title-weight: 600;
@@ -60,8 +61,9 @@
     --persistent-player-maximize-btn-color: #fff;
     --persistent-player-live-indicator-bg: #fff;
     --persistent-player-live-indicator-color: #000;
+    --persistent-player-button-color: #000;
     --persistent-player-button-bg-color: #fff;
-    --persistent-player-button-color-hover: #f1f1f1;
+    --persistent-player-button-bg-color-hover: #f1f1f1;
     --persistent-player-title-color: var(--text-color);
     --persistent-player-desc-color: var(--text-color);
     --persistent-player-time-color: var(--text-color);

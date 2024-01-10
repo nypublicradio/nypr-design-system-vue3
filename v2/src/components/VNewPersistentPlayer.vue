@@ -366,7 +366,7 @@ function handleSwipe() {
         playerRef.value.removeEventListener("touchmove", preventScrollOnTouch, {
           passive: false,
         })
-        isExpanded.value = true
+        toggleExpanded(true)
         emit("swipe-up")
       }
     }
@@ -378,7 +378,7 @@ function handleSwipe() {
         playerRef.value.addEventListener("touchmove", preventScrollOnTouch, {
           passive: false,
         })
-        isExpanded.value = false
+        toggleExpanded(false)
         emit("swipe-down")
       }
     }
@@ -457,7 +457,7 @@ const toggleExpanded = async (e) => {
   // hack for the teleported audio player to not pause when the player is teleported
   await nextTick()
   if (isPlaying.value) {
-    setTimeout(() => {
+    setTimeout(async () => {
       $mediaPlayerRef.value?.play()
     }, 10)
   } else {
@@ -870,40 +870,41 @@ defineExpose({
                 </Button>
               </div>
             </slot>
-            <div class="flex flex-column header-top">
-              <slot name="header-content"></slot>
+          </div>
+          <div class="flex flex-column header-top">
+            <slot name="header-content"></slot>
 
-              <div class="flex flex-column gap-3">
-                <!--   <pre class="text-xs">{{ currentEpisode }}</pre> -->
-                <VImage
-                  :src="props.image"
-                  :alt="`${props.title} show image`"
-                  :width="props.imageSizeExpanded"
-                  :height="props.imageSizeExpanded"
-                  :sizes="`xs:${props.imageSize * 2}px`"
-                  class="show-image m-auto"
-                  :ratio="[1, 1]"
-                  role="presentation"
-                />
+            <div class="flex flex-column gap-3">
+              <!--   <pre class="text-xs">{{ currentEpisode }}</pre> -->
+              <VImage
+                :src="props.image"
+                :alt="`${props.title} show image`"
+                :width="props.imageSizeExpanded"
+                :height="props.imageSizeExpanded"
+                :sizes="`xs:${props.imageSize * 2}px`"
+                class="show-image m-auto"
+                :ratio="[1, 1]"
+                role="presentation"
+              />
 
-                <div v-if="isLive" class="flex flex-column gap-2">
-                  <div class="live flex gap-2 align-items-center">
-                    <media-live-button class="media-live-button">
-                      <span class="media-live-button-text">LIVE</span>
-                    </media-live-button>
-                    <div class="text-sm">{{ props.station }}</div>
-                  </div>
-                  <slot name="expanded-player-title">{{ props.title }}</slot>
+              <div v-if="isLive" class="flex flex-column gap-2">
+                <div class="live flex gap-2 align-items-center">
+                  <media-live-button class="media-live-button">
+                    <span class="media-live-button-text">LIVE</span>
+                  </media-live-button>
+                  <div class="text-sm">{{ props.station }}</div>
                 </div>
-
-                <div v-else>
-                  <slot name="expanded-player-title">{{ props.title }}</slot>
-                </div>
+                <slot name="expanded-player-title">{{ props.title }}</slot>
               </div>
 
-              <div id="expandedViewPlayer"></div>
+              <div v-else>
+                <slot name="expanded-player-title">{{ props.title }}</slot>
+              </div>
             </div>
+
+            <div id="expandedViewPlayer"></div>
           </div>
+
           <slot name="expanded-content"></slot>
         </div>
       </div>
@@ -1138,7 +1139,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
   @media (hover: hover) and (pointer: fine) {
     .media-button:hover {
-      background: var(--persistent-player-button-color-hover);
+      background: var(--persistent-player-button-bg-color-hover);
     }
   }
 
