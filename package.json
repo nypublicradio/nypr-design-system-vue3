@@ -23,7 +23,7 @@
     "@vueuse/core": "^10.1.2",
     "autoprefixer": "^10.4.14",
     "core-js": "^3.6.5",
-    "hls.js": "^1.4.14",
+    "hls.js": "^1.5.0",
     "primeflex": "^3.3.1",
     "primeicons": "^6.0.1",
     "primevue": "^3.30.1",
