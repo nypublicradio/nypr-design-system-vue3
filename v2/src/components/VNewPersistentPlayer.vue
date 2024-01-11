@@ -653,7 +653,6 @@ defineExpose({
             poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
             keep-alive
             :prefer-native-h-l-s="props.nativeHLS"
-            controls
           >
             <media-provider></media-provider>
 
