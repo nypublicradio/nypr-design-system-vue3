@@ -154,7 +154,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     justify-content: center;
     gap: 6px;
     line-height: normal;
-    &* {
+    * {
       line-height: normal;
     }
     .track-info-livestream {

@@ -48,8 +48,7 @@ const audioSrc = ref("https://fm939.wnyc.org/wnycfm")
     <Button
       label="switch Other HLS"
       @click="
-        audioSrc =
-          'https://stream.mux.com/VZtzUzGRv02OhRnZCxcNg49OilvolTqdnFLEqBsTwaxU.m3u8'
+        audioSrc = 'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8'
       "
     />
     <Button label="toggle play" @click="playerRef.togglePlay()" />

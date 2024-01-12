@@ -4,6 +4,7 @@ import "vidstack/player"
 import "vidstack/player/layouts"
 import "vidstack/player/styles/default/layouts/audio.css"
 import "vidstack/player/ui"
+
 //import { MediaRemoteControl } from "vidstack"
 
 //import { isHLSProvider, type MediaCanPlayEvent, type MediaProviderChangeEvent } from 'vidstack';
@@ -654,10 +655,11 @@ defineExpose({
             keep-alive
             :preferNativeHLS="props.nativeHLS"
             :controls="false"
+            playsinline
           >
-            <media-provider></media-provider>
+            <media-provider :controls="false" playsinline></media-provider>
 
-            <media-controls>
+            <media-controls data-visible>
               <div
                 v-if="!isExpanded"
                 class="flex w-full"
