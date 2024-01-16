@@ -194,6 +194,11 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      * {
+        font-weight: var(--persistent-player-desc-weight);
+        font-size: var(--persistent-player-desc-size);
+        color: var(--persistent-player-desc-color);
+      }
       &.hideDescriptionOnMobile {
         @container (max-width: #{$container-breakpoint-md}) {
           display: none;
