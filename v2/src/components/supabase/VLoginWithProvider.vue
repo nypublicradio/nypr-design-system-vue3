@@ -24,8 +24,11 @@ const props = defineProps({
     required: true,
     type: String,
   },
+  redirectUrl: {
+    default: "http://localhost:3000",
+    type: String,
+  },
 })
-const runTimeConfig = useRuntimeConfig()
 const innerClient = ref(props.client)
 const innerConfig = ref(props.config)
 
@@ -41,7 +44,7 @@ const login = async () => {
   emit("submit-click")
   const res = await innerClient.value.auth.signInWithOAuth({
     options: {
-      redirectTo: runTimeConfig.public.supabaseAuthSignInRedirectTo,
+      redirectTo: props.redirectUrl,
     },
     provider: props.provider,
   })

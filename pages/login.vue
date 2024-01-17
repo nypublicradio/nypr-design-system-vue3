@@ -1,13 +1,21 @@
 <script setup>
-import VFlexibleLink from '~/v2/src/components/VFlexibleLink.vue'
-import VLoginWithEmail from '~/v2/src/components/supabase/VLoginWithEmail.vue'
-import { useRouter } from 'vue-router'
+import VFlexibleLink from "~/v2/src/components/VFlexibleLink.vue"
+import VLoginWithEmail from "~/v2/src/components/supabase/VLoginWithEmail.vue"
+import { useRouter } from "vue-router"
 const router = useRouter()
 </script>
 
 <template>
   <div>
     <section class="login">
+      <VLoginWithProvider
+        :client="useSupabaseClient()"
+        :config="useRuntimeConfig()"
+        provider="google"
+        label="Log in with Google"
+        severity="secondary"
+        class="center my-3"
+      />
       <VLoginWithEmail
         label="Log in"
         :client="useSupabaseClient()"
@@ -16,9 +24,7 @@ const router = useRouter()
         <template #belowSubmit>
           <div class="mt-4">
             <p class="text-center">
-              <VFlexibleLink to="/forgot-password"
-                >Forgot password?</VFlexibleLink
-              >
+              <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>
             </p>
           </div>
           <div class="mt-6">
