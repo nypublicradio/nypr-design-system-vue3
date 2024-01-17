@@ -1,10 +1,10 @@
 <script setup>
-import { Browser } from '@capacitor/browser'
-import Button from 'primevue/button'
-import Message from 'primevue/message'
-import { ref } from 'vue'
+import { Browser } from "@capacitor/browser"
+import Button from "primevue/button"
+import Message from "primevue/message"
+import { ref } from "vue"
 
-const errorMessage = ref('')
+const errorMessage = ref("")
 
 const props = defineProps({
   client: {
@@ -25,7 +25,7 @@ const props = defineProps({
     type: String,
   },
 })
-
+const runTimeConfig = useRuntimeConfig()
 const innerClient = ref(props.client)
 const innerConfig = ref(props.config)
 
@@ -35,18 +35,21 @@ if (!props.client && !props.config) {
   innerConfig.value = useRuntimeConfig()
 }
 
-const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
+const emit = defineEmits(["submit-click", "submit-error", "submit-success"])
 // method triggered by the form submit to handle supabase login logic
 const login = async () => {
-  emit('submit-click')
+  emit("submit-click")
   const res = await innerClient.value.auth.signInWithOAuth({
+    options: {
+      redirectTo: runTimeConfig.public.supabaseAuthSignInRedirectTo,
+    },
     provider: props.provider,
   })
   if (res.error) {
-    emit('submit-error', res.error)
+    emit("submit-error", res.error)
     errorMessage.value = res.error
   } else {
-    emit('submit-success')
+    emit("submit-success")
   }
 }
 // capitalise the first letter of a string
