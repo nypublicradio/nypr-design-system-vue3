@@ -1,6 +1,7 @@
 <script setup>
 import VFlexibleLink from "~/v2/src/components/VFlexibleLink.vue"
 import VLoginWithEmail from "~/v2/src/components/supabase/VLoginWithEmail.vue"
+import VLoginWithProvider from "~/v2/src/components/supabase/VLoginWithProvider.vue"
 import { useRouter } from "vue-router"
 const router = useRouter()
 </script>

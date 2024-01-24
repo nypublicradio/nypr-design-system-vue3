@@ -735,7 +735,7 @@ defineExpose({
                           <media-seek-button
                             v-if="props.showSkip && !isLive && isPlayable"
                             class="media-button flex-none"
-                            :seconds="`-${props.skipAheadTime}`"
+                            :seconds="-props.skipBackTime"
                             @click="skipBack"
                           >
                             <slot name="skipBack"><i class="pi pi-undo"></i></slot>
@@ -760,7 +760,7 @@ defineExpose({
                           <media-seek-button
                             v-if="props.showSkip && !isLive && isPlayable"
                             class="media-button flex-none"
-                            :seconds="`+${props.skipAheadTime}`"
+                            :seconds="props.skipAheadTime"
                             @click="skipAhead"
                           >
                             <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
@@ -805,7 +805,8 @@ defineExpose({
                   <media-seek-button
                     v-if="props.showSkip && !isLive && isPlayable"
                     class="media-button flex-none"
-                    :seconds="props.skipBackTime"
+                    :seconds="-props.skipBackTime"
+                    @click="skipBack"
                   >
                     <slot name="skipBack"><i class="pi pi-undo"></i></slot>
                   </media-seek-button>
@@ -828,6 +829,7 @@ defineExpose({
                     v-if="props.showSkip && !isLive && isPlayable"
                     class="media-button flex-none"
                     :seconds="props.skipAheadTime"
+                    @click="skipAhead"
                   >
                     <slot name="skipAhead"><i class="pi pi-refresh"></i></slot>
                   </media-seek-button>
