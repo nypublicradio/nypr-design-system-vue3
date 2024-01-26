@@ -56,7 +56,7 @@ const audioSrc = ref("https://fm939.wnyc.org/wnycfm")
     <VNewPersistentPlayer
       ref="playerRef"
       data-style-mode="dark"
-      :auto-play="true"
+      :auto-play="false"
       :can-expand="true"
       :can-minimize="false"
       :show-download="true"

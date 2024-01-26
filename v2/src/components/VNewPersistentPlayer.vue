@@ -20,6 +20,7 @@ import Button from "primevue/button"
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 
 import type { MediaPlayerElement } from "vidstack/elements"
+import type { MediaStreamType } from "vidstack"
 
 //defineCustomElement(MediaPlayerElement)
 
@@ -181,7 +182,7 @@ const props = defineProps({
     type: Number,
   },
   nativeHLS: {
-    default: false,
+    default: true,
     type: Boolean,
   },
   /**
@@ -227,7 +228,7 @@ const props = defineProps({
     type: String,
   },
   streamType: {
-    default: "unknown",
+    default: "live:dvr",
     type: String,
   },
   /**
@@ -650,8 +651,7 @@ defineExpose({
             load="eager"
             :volume="props.volume"
             :loop="props.loop"
-            :streamType="props.streamType"
-            poster="https://i.natgeofe.com/n/4cebbf38-5df4-4ed0-864a-4ebeb64d33a4/NationalGeographic_1468962_3x2.jpg?w=1638&h=1092"
+            :stream-type="props.streamType as MediaStreamType | undefined"
             keep-alive
             :preferNativeHLS="props.nativeHLS"
             playsinline
@@ -675,9 +675,9 @@ defineExpose({
                   >
                     <VFlexibleLink
                       class="track-info-image-link"
-                      :to="props.titleLink ? props.titleLink : null"
+                      :to="props.titleLink ?? null"
                       raw
-                      :title="props.titleLink ? props.titleLink : null"
+                      :title="props.titleLink ?? null"
                       @flexible-link-click="emit('image-click')"
                     >
                       <VImage
