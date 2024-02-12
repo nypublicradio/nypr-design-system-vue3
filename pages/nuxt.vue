@@ -127,7 +127,7 @@ const config = useRuntimeConfig()
       <VLoginWithEmail /> -->
       <p class="my-2 text-center">
         Don't have an account?
-        <VFlexibleLink to="/onboarding">Register here</VFlexibleLink>
+        <VFlexibleLink to="/nuxt">Register here</VFlexibleLink>
       </p>
       <p class="mb-2 text-center">
         <VFlexibleLink to="/forgot-password">Forgot password?</VFlexibleLink>

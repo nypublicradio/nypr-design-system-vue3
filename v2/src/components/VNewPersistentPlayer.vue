@@ -228,7 +228,7 @@ const props = defineProps({
     type: String,
   },
   streamType: {
-    default: "live:dvr",
+    default: "unknown",
     type: String,
   },
   /**
@@ -477,6 +477,24 @@ const skipBack = () => {
   emit("skip-back", $mediaPlayerRef.value.currentTime)
 }
 
+// cast to google
+const castToGoogleCast = async () => {
+  try {
+    await $mediaPlayerRef.value.requestGoogleCast()
+  } catch (e) {
+    // Throws if not supported or the dialog is cancelled.
+  }
+}
+
+// cast to apple air play
+const castToAirPlay = async () => {
+  try {
+    await $mediaPlayerRef.value.requestAirPlay()
+  } catch (e) {
+    // Throws if not supported or the dialog is cancelled.
+  }
+}
+
 // exposed method to handle the mute toggle
 const toggleMute = () => {
   if ($mediaPlayerRef.value) {
@@ -616,6 +634,8 @@ defineExpose({
   toggleMinimize,
   toggleMute,
   togglePlay,
+  castToGoogleCast,
+  castToAirPlay,
 })
 </script>
 

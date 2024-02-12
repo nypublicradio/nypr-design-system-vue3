@@ -28,7 +28,7 @@
     "primeicons": "^6.0.1",
     "primevue": "^3.30.1",
     "prop-types": "^15.8.1",
-    "vidstack": "^1.9.8",
+    "vidstack": "^1.10.5",
     "yup": "^1.2.0"
   },
   "devDependencies": {
