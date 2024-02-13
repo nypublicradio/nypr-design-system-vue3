@@ -12,8 +12,8 @@ const playerRef = ref(null)
 
 const audioSrc = ref("https://fm939.wnyc.org/wnycfm")
 
-const castToGoogleCast = () => {
-  console.log("castToGoogleCast")
+const castToGoogleCastHack = () => {
+  console.log("castToGoogleCastHack")
   const playerCastButton = document.getElementById("castBtn")
   playerCastButton.click()
 }
@@ -83,6 +83,8 @@ const castToGoogleCast = () => {
       image="329534"
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       :file="audioSrc"
+      platform="ios"
+      :show-cast="true"
     >
       <!-- <template #play>
         <i class="pi pi-twitter"></i>
@@ -98,7 +100,7 @@ const castToGoogleCast = () => {
             rounded
             aria-label="Google Cast"
             class="cast-btn"
-            @click="castToGoogleCast"
+            @click="castToGoogleCastHack"
           >
             <GoogleCastIcon />
           </Button>

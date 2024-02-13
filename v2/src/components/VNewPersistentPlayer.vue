@@ -188,8 +188,22 @@ const props = defineProps({
   /**
    * show the download button
    */
+  platform: {
+    default: "android",
+    type: String,
+  },
+  /**
+   * show the download button
+   */
   showDownload: {
     default: false,
+    type: Boolean,
+  },
+  /**
+   * show the cast button
+   */
+  showCast: {
+    default: true,
     type: Boolean,
   },
   /**
@@ -483,6 +497,7 @@ const castToGoogleCast = async () => {
     console.log("request google cast")
     await $mediaPlayerRef.value.requestGoogleCast()
   } catch (e) {
+    console.log("error casting to google cast", e)
     // Throws if not supported or the dialog is cancelled.
   }
 }
@@ -492,7 +507,18 @@ const castToAirPlay = async () => {
     console.log("request airplay")
     await $mediaPlayerRef.value.requestAirPlay()
   } catch (e) {
+    console.log("error casting to air play", e)
     // Throws if not supported or the dialog is cancelled.
+  }
+}
+
+const handleCast = () => {
+  if ($mediaPlayerRef.value) {
+    if (props.platform === "android") {
+      castToGoogleCast()
+    } else {
+      castToAirPlay()
+    }
   }
 }
 
@@ -820,17 +846,6 @@ defineExpose({
               </div>
               <!-- What the controls looks like in the expanded view -->
               <div v-show="isExpanded" id="expandedControls">
-                <Button
-                  severity="secondary"
-                  text
-                  rounded
-                  aria-label="Google Cast"
-                  class="cast-btn"
-                  id="castBtn"
-                  @click="castToGoogleCast"
-                >
-                  <GoogleCastIcon />
-                </Button>
                 <media-time-slider
                   v-if="!isLive && isPlayable"
                   class="media-slider expanded-slider"
@@ -917,7 +932,7 @@ defineExpose({
         <div class="expanded-content-holder">
           <div class="header">
             <slot name="expanded-header">
-              <div class="flex flex-column">
+              <div class="flex justify-content-between">
                 <Button
                   class="unexpand-btn p-button-icon-only p-button-text p-button-secondary"
                   @click="toggleExpanded(!isExpanded)"
@@ -925,6 +940,18 @@ defineExpose({
                   <slot name="unexpanded-button-icon">
                     <i class="pi pi-chevron-down" />
                   </slot>
+                </Button>
+                <Button
+                  v-if="props.showCast"
+                  id="castBtn"
+                  severity="secondary"
+                  text
+                  rounded
+                  aria-label="Google Cast"
+                  class="cast-btn header-cast-btn"
+                  @click="handleCast"
+                >
+                  <GoogleCastIcon />
                 </Button>
               </div>
             </slot>
@@ -1084,14 +1111,9 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     }
     #expandedControls {
       min-height: 85px;
-      .cast-btn {
-        display: none;
-        position: absolute;
-        padding: 0.5rem;
-        right: 0.5rem;
-        top: -201px;
-        z-index: 2;
-      }
+    }
+    .cast-btn {
+      padding: 0.5rem;
     }
   }
   video {
