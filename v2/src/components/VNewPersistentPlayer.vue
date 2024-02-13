@@ -479,6 +479,7 @@ const skipBack = () => {
 
 // cast to google
 const castToGoogleCast = async () => {
+  console.log("castToGoogleCast")
   try {
     await $mediaPlayerRef.value.requestGoogleCast()
   } catch (e) {
@@ -488,6 +489,7 @@ const castToGoogleCast = async () => {
 
 // cast to apple air play
 const castToAirPlay = async () => {
+  console.log("castToAirPlay")
   try {
     await $mediaPlayerRef.value.requestAirPlay()
   } catch (e) {
