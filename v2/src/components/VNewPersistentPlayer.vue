@@ -20,7 +20,6 @@ import Button from "primevue/button"
 import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
 
 import type { MediaPlayerElement } from "vidstack/elements"
-import type { MediaStreamType } from "vidstack"
 
 //defineCustomElement(MediaPlayerElement)
 
@@ -479,18 +478,17 @@ const skipBack = () => {
 
 // cast to google
 const castToGoogleCast = async () => {
-  console.log("castToGoogleCast")
   try {
+    console.log("request google cast")
     await $mediaPlayerRef.value.requestGoogleCast()
   } catch (e) {
     // Throws if not supported or the dialog is cancelled.
   }
 }
-
 // cast to apple air play
 const castToAirPlay = async () => {
-  console.log("castToAirPlay")
   try {
+    console.log("request airplay")
     await $mediaPlayerRef.value.requestAirPlay()
   } catch (e) {
     // Throws if not supported or the dialog is cancelled.
@@ -619,9 +617,9 @@ onMounted(async () => {
       console.log("HLS audio error = ", event)
       emit("hls-error", event)
     })
+    // remote.setTarget($mediaPlayerRef.value)
+    // const player = remote.getPlayer()
   }
-  // remote.setTarget($mediaPlayerRef.value)
-  // const player = remote.getPlayer()
 })
 
 onBeforeUnmount(() => {
@@ -673,7 +671,7 @@ defineExpose({
             load="eager"
             :volume="props.volume"
             :loop="props.loop"
-            :stream-type="props.streamType as MediaStreamType | undefined"
+            :streamType="props.streamType"
             keep-alive
             :preferNativeHLS="props.nativeHLS"
             playsinline
