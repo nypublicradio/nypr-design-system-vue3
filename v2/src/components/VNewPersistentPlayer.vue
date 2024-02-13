@@ -11,6 +11,7 @@ import "vidstack/player/ui"
 //import type { MediaPlayerElement } from "vidstack/elements"
 
 import soundAnimGif from "../assets/images/audioAnim.gif"
+import GoogleCastIcon from "../assets/icons/GoogleCastIcon"
 import VFlexibleLink from "./VFlexibleLink.vue"
 import VImage from "./VImage.vue"
 import VNewTrackInfo from "./VNewTrackInfo.vue"
@@ -617,6 +618,22 @@ onMounted(async () => {
       console.log("HLS audio error = ", event)
       emit("hls-error", event)
     })
+    // add google cast event listener
+    instance.addEventListener("provider-setup", (event) => {
+      const provider = event.detail
+      if (provider?.type === "google-cast") {
+        // Google Cast remote player.
+        provider.player
+        // Google Cast context.
+        provider.cast
+        // Google Cast session.
+        provider.session
+        // Google Cast media info.
+        provider.media
+        // Whether the session belongs to this provider.
+        provider.hasActiveSession
+      }
+    })
     // remote.setTarget($mediaPlayerRef.value)
     // const player = remote.getPlayer()
   }
@@ -634,8 +651,7 @@ defineExpose({
   toggleMinimize,
   toggleMute,
   togglePlay,
-  castToGoogleCast,
-  castToAirPlay,
+  $mediaPlayerRef,
 })
 </script>
 
@@ -804,6 +820,17 @@ defineExpose({
               </div>
               <!-- What the controls looks like in the expanded view -->
               <div v-show="isExpanded" id="expandedControls">
+                <Button
+                  severity="secondary"
+                  text
+                  rounded
+                  aria-label="Google Cast"
+                  class="cast-btn"
+                  id="castBtn"
+                  @click="castToGoogleCast"
+                >
+                  <GoogleCastIcon />
+                </Button>
                 <media-time-slider
                   v-if="!isLive && isPlayable"
                   class="media-slider expanded-slider"
@@ -1057,6 +1084,14 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     }
     #expandedControls {
       min-height: 85px;
+      .cast-btn {
+        display: none;
+        position: absolute;
+        padding: 0.5rem;
+        right: 0.5rem;
+        top: -201px;
+        z-index: 2;
+      }
     }
   }
   video {
@@ -1376,6 +1411,10 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
   // time
   .media-time {
     font-size: 0.75rem;
+  }
+
+  .vds-google-cast {
+    display: none;
   }
 }
 </style>

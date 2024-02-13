@@ -1,4 +1,5 @@
 <script setup>
+import GoogleCastIcon from "~/v2/src/assets/icons/GoogleCastIcon"
 import VNewPersistentPlayer from "~/v2/src/components/VNewPersistentPlayer.vue"
 import VSmartHeader from "~/v2/src/components/VSmartHeader.vue"
 import { shallowRef } from "vue"
@@ -10,6 +11,12 @@ const cssHeaderHeight = shallowRef(`${headerHeight.value}px`)
 const playerRef = ref(null)
 
 const audioSrc = ref("https://fm939.wnyc.org/wnycfm")
+
+const castToGoogleCast = () => {
+  console.log("castToGoogleCast")
+  const playerCastButton = document.getElementById("castBtn")
+  playerCastButton.click()
+}
 </script>
 
 <template>
@@ -33,6 +40,7 @@ const audioSrc = ref("https://fm939.wnyc.org/wnycfm")
     <main>
       <slot />
     </main>
+
     <Button label="switch stream" @click="audioSrc = 'https://fm939.wnyc.org/wnycfm'" />
     <Button
       label="switch file"
@@ -83,6 +91,17 @@ const audioSrc = ref("https://fm939.wnyc.org/wnycfm")
       <!-- file="https://chrt.fm/track/53A61E/pdst.fm/e/www.podtrac.com/pts/redirect.mp3/audio.wnyc.org/radiolab_podcast/radiolab_podcast031822_stress.mp3" -->
       <template #expanded-content>
         <div class="p-3">
+          <Button
+            id="castBtn"
+            severity="secondary"
+            text
+            rounded
+            aria-label="Google Cast"
+            class="cast-btn"
+            @click="castToGoogleCast"
+          >
+            <GoogleCastIcon />
+          </Button>
           this is where we would put anything in the expanded view
           <br />
           <br />
