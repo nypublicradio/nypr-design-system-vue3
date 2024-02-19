@@ -118,7 +118,7 @@ describe('VCard', () => {
         width
       }
     })
-    const _img = wrapper.find('.card-image .v-image-holder .image')
+    const _img = wrapper.find('.v-image-holder .image')
     expect(_img.attributes('alt')).toBe('')
   })
 
@@ -136,7 +136,7 @@ describe('VCard', () => {
         width
       }
     })
-    const _img = wrapper.find('.card-image .v-image-holder .image')
+    const _img = wrapper.find('.v-image-holder .image')
     expect(_img.attributes('loading')).toBe('eager')
   })
 
@@ -267,7 +267,7 @@ describe('VCard', () => {
         width
       }
     })
-    const _img = wrapper.find('.card-image .v-image-holder .image')
+    const _img = wrapper.find('.v-image-holder .image')
     expect(_img.classes()).toContain('is-vertical')
   })
 
@@ -339,7 +339,7 @@ describe('VCard', () => {
         width,
       }
     })
-    const img = wrapper.find('.card-image .flexible-link')
+    const img = wrapper.find('.flexible-link')
     img.trigger('click')
 
     expect(wrapper.emitted()['image-click']).toBeTruthy()
