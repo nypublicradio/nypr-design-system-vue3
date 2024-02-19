@@ -1,9 +1,11 @@
 <script setup>
-import VImagePublisher from './VImagePublisher.vue'
-import VImageWagtail from './VImageWagtail.vue'
-import { isPublisherSrc } from './helpers.js'
+import VImageRender from "./VImageRender.vue"
 
 const props = defineProps({
+  clientOnly: {
+    default: false,
+    type: Boolean,
+  },
   src: {
     default: null,
     type: String,
@@ -12,22 +14,16 @@ const props = defineProps({
 </script>
 
 <template>
-  <VImagePublisher
-    v-if="isPublisherSrc(props.src)"
-    :key="props.src"
-    v-bind="{ ...$props, ...$attrs }"
-  >
+  <VImageRender v-if="!clientOnly" v-bind="{ ...$props, ...$attrs }">
     <template v-for="(value, name) in $slots" #[name]="data">
       <slot :name="name" v-bind="data"></slot>
     </template>
-  </VImagePublisher>
-  <VImageWagtail
-    v-else
-    :key="`${props.src}Wagtail`"
-    v-bind="{ ...$props, ...$attrs }"
-  >
-    <template v-for="(value, name) in $slots" #[name]="data">
-      <slot :name="name" v-bind="data"></slot>
-    </template>
-  </VImageWagtail>
+  </VImageRender>
+  <ClientOnly v-else>
+    <VImageRender v-bind="{ ...$props, ...$attrs }">
+      <template v-for="(value, name) in $slots" #[name]="data">
+        <slot :name="name" v-bind="data"></slot>
+      </template>
+    </VImageRender>
+  </ClientOnly>
 </template>

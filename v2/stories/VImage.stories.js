@@ -38,7 +38,7 @@ const TemplateSlots = (args) => ({
     setup() {
         return { args }
     },
-    template: '<VImage v-bind="args"> <template #belowImage>This is Content below the image</template></VImage> </template>',
+    template: '<VImage v-bind="args"> <template #belowImage>This is Content below the image</template></VImage>',
 })
 
 export const WagtailImage = Template.bind({})
@@ -48,10 +48,34 @@ WagtailImage.args = {
     src: '329944',
     width: 600,
 }
+export const WagtailImageClientOnly = Template.bind({})
+WagtailImageClientOnly.args = {
+    alt: 'Fallback alt text here',
+    clientOnly: true,
+    height: 400,
+    src: '329944',
+    width: 600
+}
+export const WagtailImageSlot = TemplateSlots.bind({})
+WagtailImageSlot.args = {
+    alt: 'Fallback alt text here',
+    height: 400,
+    src: '329944',
+    width: 600,
+}
 
 export const PublisherImageSrc = Template.bind({})
 PublisherImageSrc.args = {
     alt: 'Fallback alt text here',
+    height: 400,
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/09/twelfth_night_photo_for_nypl.jpg',
+    width: 600,
+}
+
+export const PublisherImageSrcClientOnly = Template.bind({})
+PublisherImageSrcClientOnly.args = {
+    alt: 'Fallback alt text here',
+    clientOnly: true,
     height: 400,
     src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/09/twelfth_night_photo_for_nypl.jpg',
     width: 600,

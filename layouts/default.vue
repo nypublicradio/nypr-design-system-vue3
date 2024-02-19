@@ -83,7 +83,7 @@ const castToGoogleCastHack = () => {
       image="329534"
       description="This week, people in Tulsa filed a lawsuit demanding reparations for victims and descendants of the Tulsa Race Massacre."
       :file="audioSrc"
-      platform="ios"
+      platform="android"
       :show-cast="true"
     >
       <!-- <template #play>

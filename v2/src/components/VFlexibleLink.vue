@@ -1,7 +1,14 @@
 <script setup>
-import { computed } from 'vue'
+import { computed } from "vue"
 
 const props = defineProps({
+  /**
+   * prefetch nuxtlink prop
+   */
+  prefetch: {
+    default: false,
+    type: Boolean,
+  },
   /**
    * pass through and not render link visuals
    */
@@ -13,14 +20,14 @@ const props = defineProps({
    * raw hover style
    */
   rawHover: {
-    default: 'none',
+    default: "none",
     type: String,
   },
   /**
    * link target value
    */
   target: {
-    default: '_blank',
+    default: "_blank",
     type: String,
   },
   /**
@@ -32,14 +39,14 @@ const props = defineProps({
   },
 })
 
-const emit = defineEmits(['flexible-link-click'])
+const emit = defineEmits(["flexible-link-click"])
 
 const isExternal = computed(() => {
   const reg = /^https?:\/\/|mailto:|tel:/i
-  return typeof props.to === 'string' && reg.test(props.to)
+  return typeof props.to === "string" && reg.test(props.to)
 })
 const isAnchor = computed(() => {
-  return props.to.charAt(0) === '#'
+  return props.to.charAt(0) === "#"
 })
 </script>
 
@@ -75,6 +82,7 @@ const isAnchor = computed(() => {
     class="flexible-link internal"
     :class="{ ['raw']: raw }"
     :to="to"
+    :prefetch="prefetch"
     v-bind="{ ...$attrs }"
     @click="emit('flexible-link-click', to)"
   >
