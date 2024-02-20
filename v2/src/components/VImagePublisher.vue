@@ -277,7 +277,8 @@ const closeEnlarge = () => {
   loadingEnlargedImage.value = false
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await nextTick()
   thisWidth.value =
     refThisImg.value.offsetWidth != 0
       ? refThisImg.value.offsetWidth
