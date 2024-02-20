@@ -168,6 +168,7 @@ const srcRaw = formatRawPublisherImageUrl(props.src)
 const isVertical = ref(false)
 const loadingEnlargedImage = ref(false)
 
+// method to get the dimensions of the image
 const getDimensions = () => {
   const hRatio = Number(props.ratio[0])
   const vRatio = Number(props.ratio[1])
@@ -192,13 +193,7 @@ const getDimensions = () => {
     }
   }
 }
-
-const computedWidth = () => {
-  return isVertical.value
-    ? Math.round(props.maxWidth / (props.maxHeight / props.height))
-    : props.width
-}
-
+// method to calculate the src of the image
 const computedSrc = () => {
   const template = srcFormatted
 
@@ -209,7 +204,7 @@ const computedSrc = () => {
         .replace(props.qualityToken, props.quality)
     : undefined
 }
-
+// method to calculate the src of the background blur image
 const computedSrcBg = () => {
   const template = srcFormatted
   return template
@@ -219,7 +214,7 @@ const computedSrcBg = () => {
         .replace(props.qualityToken, 15)
     : undefined
 }
-
+// method to calculate the srcset of the image
 const srcset = computed(() => {
   const template = srcFormatted
   if (template) {
@@ -279,8 +274,10 @@ const closeEnlarge = () => {
 
 onMounted(async () => {
   await nextTick()
+  // await needed for the Safari lazy issue
+  //sets the width to the image width if it is not 0, if it is 0 it sets it to the window width
   thisWidth.value =
-    refThisImg.value.offsetWidth != 0
+    refThisImg.value.offsetWidth !== 0
       ? refThisImg.value.offsetWidth
       : typeof window === "undefined"
       ? props.defaultWidth
