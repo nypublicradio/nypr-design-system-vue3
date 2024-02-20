@@ -1,9 +1,9 @@
 <script setup>
-import VFlexibleLink from './VFlexibleLink.vue'
-import Button from 'primevue/button'
-import Dialog from 'primevue/dialog'
-import ProgressSpinner from 'primevue/progressspinner'
-import { computed, ref } from 'vue'
+import VFlexibleLink from "./VFlexibleLink.vue"
+import Button from "primevue/button"
+import Dialog from "primevue/dialog"
+import ProgressSpinner from "primevue/progressspinner"
+import { computed, ref } from "vue"
 
 const props = defineProps({
   /**
@@ -23,7 +23,7 @@ const props = defineProps({
    * alt text for the image
    */
   alt: {
-    default: '',
+    default: "",
     type: String,
   },
   /**
@@ -31,7 +31,7 @@ const props = defineProps({
    * NOT WORKING
    */
   density: {
-    default: 'x1 x2',
+    default: "x1 x2",
     type: String,
   },
   /**
@@ -52,7 +52,7 @@ const props = defineProps({
    * image loading type (eager or lazy)
    */
   loading: {
-    default: 'lazy',
+    default: "lazy",
     type: String,
   },
   /**
@@ -81,7 +81,7 @@ const props = defineProps({
    * @nuxt/Image provider
    */
   provider: {
-    default: 'wagtail',
+    default: "wagtail",
     type: String,
   },
   /**
@@ -102,7 +102,7 @@ const props = defineProps({
    * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
    */
   sizes: {
-    default: '',
+    default: "",
     type: String,
   },
   /**
@@ -122,21 +122,21 @@ const props = defineProps({
   /**
    *  ammount of blur for the blured background image */
   verticalBgBlur: {
-    default: '3px',
+    default: "3px",
     type: String,
   },
   /**
    * tint the grey blured background image
    * */
   verticalBgColor: {
-    default: '#f1f1f1',
+    default: "#f1f1f1",
     type: String,
   },
   /**
    *  the opacity of the tint of the grey blured background image
    */
   verticalBgColorOpacity: {
-    default: '0.6',
+    default: "0.6",
     type: String,
   },
   /**
@@ -148,15 +148,13 @@ const props = defineProps({
   },
 })
 const emit = defineEmits([
-  'image-click',
-  'image-enlarge-click',
-  'image-load',
-  'enlarge-image-load',
+  "image-click",
+  "image-enlarge-click",
+  "image-load",
+  "enlarge-image-load",
 ])
 
-const isVertical = ref(
-  props.allowVerticalEffect && props.maxHeight > props.maxWidth
-)
+const isVertical = ref(props.allowVerticalEffect && props.maxHeight > props.maxWidth)
 const loadingEnlargedImage = ref(false)
 const loadedEnlargedImage = ref(true)
 
@@ -183,11 +181,11 @@ const computedEnlargeHeight = computed(() => {
 const enlarge = () => {
   loadingEnlargedImage.value = true
   loadedEnlargedImage.value = false
-  emit('image-enlarge-click')
+  emit("image-enlarge-click")
 }
 // method called when the imamge is loaded
 const enlargeLoad = (target) => {
-  emit('enlarge-image-load', target)
+  emit("enlarge-image-load", target)
   loadedEnlargedImage.value = true
 }
 
@@ -206,10 +204,7 @@ const handleProvider = computed(() => {
       style="width: auto"
       @click="props.to ? emit('image-click', props.to) : null"
     >
-      <div
-        class="v-image-holder"
-        :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`"
-      >
+      <div class="v-image-holder" :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`">
         <div v-if="isVertical" class="bg">
           <nuxt-img
             :provider="handleProvider"
@@ -311,9 +306,10 @@ const handleProvider = computed(() => {
 .v-image {
   line-height: 0;
   position: relative;
-  overflow: hidden;
+
   .v-image-holder {
     position: relative;
+    overflow: hidden;
     .image {
       position: relative;
       width: 100%;
@@ -346,7 +342,7 @@ const handleProvider = computed(() => {
       left: 0;
       overflow: hidden;
       &:after {
-        content: '';
+        content: "";
         background-color: v-bind(verticalBgColor);
         width: 100%;
         height: 100%;
