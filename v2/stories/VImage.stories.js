@@ -38,11 +38,18 @@ const TemplateSlots = (args) => ({
     setup() {
         return { args }
     },
-    template: '<VImage v-bind="args"> <template #belowImage>This is Content below the image</template></VImage> </template>',
+    template: '<VImage v-bind="args"> <template #belowImage>This is Content below the image</template></VImage>',
 })
 
 export const WagtailImage = Template.bind({})
 WagtailImage.args = {
+    alt: 'Fallback alt text here',
+    height: 400,
+    src: '329944',
+    width: 600,
+}
+export const WagtailImageSlot = TemplateSlots.bind({})
+WagtailImageSlot.args = {
     alt: 'Fallback alt text here',
     height: 400,
     src: '329944',

@@ -1,7 +1,7 @@
 <script setup>
-import VImagePublisher from './VImagePublisher.vue'
-import VImageWagtail from './VImageWagtail.vue'
-import { isPublisherSrc } from './helpers.js'
+import VImagePublisher from "./VImagePublisher.vue"
+import VImageWagtail from "./VImageWagtail.vue"
+import { isPublisherSrc } from "./helpers.js"
 
 const props = defineProps({
   src: {
@@ -21,11 +21,7 @@ const props = defineProps({
       <slot :name="name" v-bind="data"></slot>
     </template>
   </VImagePublisher>
-  <VImageWagtail
-    v-else
-    :key="`${props.src}Wagtail`"
-    v-bind="{ ...$props, ...$attrs }"
-  >
+  <VImageWagtail v-else :key="`${props.src}Wagtail`" v-bind="{ ...$props, ...$attrs }">
     <template v-for="(value, name) in $slots" #[name]="data">
       <slot :name="name" v-bind="data"></slot>
     </template>
