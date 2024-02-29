@@ -38,7 +38,7 @@ const props = defineProps({
    * image format (webp, avif, jpeg, jpg, png, gif and svg)
    */
   format: {
-    default: "jpeg",
+    default: "webp",
     type: String,
   },
   /**
