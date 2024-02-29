@@ -51,7 +51,7 @@ Default.args = {
     alt: 'Fallback alt text here',
     height: 400,
     src: '329944',
-    width: 600,
+    width: 600
 }
 export const DefaultWithLink = TemplateLink.bind({})
 DefaultWithLink.args = {

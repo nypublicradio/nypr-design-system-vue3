@@ -35,6 +35,13 @@ const props = defineProps({
     type: String,
   },
   /**
+   * image format (webp, avif, jpeg, jpg, png, gif and svg)
+   */
+  format: {
+    default: "jpeg",
+    type: String,
+  },
+  /**
    * The desired height for image
    */
   height: {
@@ -207,6 +214,7 @@ const handleProvider = computed(() => {
       <div class="v-image-holder" :style="`aspect-ratio:${ratio[0]} / ${ratio[1]}`">
         <div v-if="isVertical" class="bg">
           <nuxt-img
+            :format="props.format"
             :provider="handleProvider"
             class="blurred-bg-image"
             :src="String(props.src)"
@@ -219,6 +227,7 @@ const handleProvider = computed(() => {
           />
         </div>
         <nuxt-img
+          :format="props.format"
           :provider="handleProvider"
           class="image native-image"
           :class="isVertical ? 'is-vertical' : ''"
@@ -264,6 +273,7 @@ const handleProvider = computed(() => {
             :style="{ width: '95vw' }"
           >
             <nuxt-img
+              :format="props.format"
               :provider="handleProvider"
               class="enlarged-image"
               :src="String(props.src)"
