@@ -1,12 +1,12 @@
 <script setup>
-import { useVuelidate } from '@vuelidate/core'
-import { email, helpers, minLength, required } from '@vuelidate/validators'
-import Button from 'primevue/button'
-import InputText from 'primevue/inputtext'
-import Message from 'primevue/message'
-import Password from 'primevue/password'
-import { computed, reactive, ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { useVuelidate } from "@vuelidate/core"
+import { email, helpers, minLength, required } from "@vuelidate/validators"
+import Button from "primevue/button"
+import InputText from "primevue/inputtext"
+import Message from "primevue/message"
+import Password from "primevue/password"
+import { computed, reactive, ref } from "vue"
+import { useRouter } from "vue-router"
 
 const props = defineProps({
   client: {
@@ -22,19 +22,19 @@ const props = defineProps({
     type: String,
   },
   error: {
-    default: 'There was an error logging in',
+    default: "There was an error logging in",
     type: String,
   },
   label: {
-    default: 'Log in with email',
+    default: "Log in with email",
     type: String,
   },
   slug: {
-    default: '/confirm',
+    default: "/confirm",
     type: String,
   },
 })
-const emit = defineEmits(['submit-click', 'submit-error', 'submit-success'])
+const emit = defineEmits(["submit-click", "submit-error", "submit-success"])
 
 const router = useRouter()
 const innerClient = ref(props.client)
@@ -47,21 +47,21 @@ if (!props.client && !props.config) {
 }
 
 const formData = reactive({
-  email: props.currentEmail ?? '',
-  password: '',
+  email: props.currentEmail ?? "",
+  password: "",
 })
 
-const sbErrorMsg = ref('')
+const sbErrorMsg = ref("")
 
 const rules = computed(() => {
   return {
     email: {
-      email: helpers.withMessage('Invalid email format', email),
-      required: helpers.withMessage('This field is required', required),
+      email: helpers.withMessage("Invalid email format", email),
+      required: helpers.withMessage("This field is required", required),
     },
     password: {
       minLength: minLength(8),
-      required: helpers.withMessage('This field is required', required),
+      required: helpers.withMessage("This field is required", required),
     },
   }
 })
@@ -70,8 +70,8 @@ const v$ = useVuelidate(rules, formData)
 
 const submitForm = async () => {
   // clear the error message so the message re-animates on each submit
-  sbErrorMsg.value = ''
-  emit('submit-click')
+  sbErrorMsg.value = ""
+  emit("submit-click")
   v$.value.$validate()
   if (!v$.value.$error) {
     //success with Vuelidate
@@ -81,12 +81,12 @@ const submitForm = async () => {
     )
     if (!sbError.error) {
       //success with Supabase
-      emit('submit-success', props.slug)
+      emit("submit-success", props.slug)
       router.push(`${props.slug}`)
     } else {
       // error with Supabase
-      emit('submit-error', sbError?.error?.message)
-      if (sbError?.error?.message?.includes('Invalid login credentials')) {
+      emit("submit-error", sbError?.error?.message)
+      if (sbError?.error?.message?.includes("Invalid login credentials")) {
         sbErrorMsg.value = props.error
       } else {
         sbErrorMsg.value = sbError?.error?.message
@@ -103,7 +103,7 @@ const submitForm = async () => {
         <label for="email">Email</label>
         <InputText
           v-model="formData.email"
-          type="text"
+          type="email"
           name="email"
           class="w-full"
           :class="{ 'p-invalid': v$.email.$error && v$.email.$invalid }"
