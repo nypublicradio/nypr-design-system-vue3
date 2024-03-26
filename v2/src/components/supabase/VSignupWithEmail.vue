@@ -1,18 +1,12 @@
 <script setup>
-import VLoginWithEmail from './VLoginWithEmail.vue'
-import { useVuelidate } from '@vuelidate/core'
-import {
-  email,
-  helpers,
-  minLength,
-  required,
-  sameAs,
-} from '@vuelidate/validators'
-import Button from 'primevue/button'
-import InputText from 'primevue/inputtext'
-import Message from 'primevue/message'
-import Password from 'primevue/password'
-import { computed, reactive, ref } from 'vue'
+import VLoginWithEmail from "./VLoginWithEmail.vue"
+import { useVuelidate } from "@vuelidate/core"
+import { email, helpers, minLength, required, sameAs } from "@vuelidate/validators"
+import Button from "primevue/button"
+import InputText from "primevue/inputtext"
+import Message from "primevue/message"
+import Password from "primevue/password"
+import { computed, reactive, ref } from "vue"
 
 const props = defineProps({
   client: {
@@ -24,7 +18,7 @@ const props = defineProps({
     type: Object,
   },
   error: {
-    default: '',
+    default: "",
     type: String,
   },
   errorAlreadyRegistered: {
@@ -33,24 +27,24 @@ const props = defineProps({
     type: String,
   },
   label: {
-    default: 'Sign up with email',
+    default: "Sign up with email",
     type: String,
   },
   slug: {
-    default: '/dashboard',
+    default: "/dashboard",
     type: String,
   },
   success: {
-    default: 'Success! You may now sign in now with your email and password.',
+    default: "Success! You may now sign in now with your email and password.",
     type: String,
   },
 })
 
 const emit = defineEmits([
-  'submit-click',
-  'submit-error',
-  'submit-success',
-  'login-success',
+  "submit-click",
+  "submit-error",
+  "submit-success",
+  "login-success",
 ])
 
 const innerClient = ref(props.client)
@@ -63,16 +57,16 @@ if (!props.client && !props.config) {
 
 const formData = reactive({
   confirmEmail: null,
-  email: '',
-  name: '',
-  password: '',
+  email: "",
+  name: "",
+  password: "",
 })
 
-const sbErrorMsg = ref('')
-const sbSuccessMsg = ref('')
+const sbErrorMsg = ref("")
+const sbSuccessMsg = ref("")
 
 const hasAtleastOneNumber = helpers.withMessage(
-  'Must contain at least 1 number',
+  "Must contain at least 1 number",
   (value) => /\d/.test(value)
 )
 
@@ -80,28 +74,22 @@ const rules = computed(() => {
   return {
     confirmEmail: {
       required: helpers.withMessage(
-        'The email confirmation field is required ',
+        "The email confirmation field is required ",
         required
       ),
-      sameAs: helpers.withMessage(
-        "Email addresses don't match",
-        sameAs(formData.email)
-      ),
+      sameAs: helpers.withMessage("Email addresses don't match", sameAs(formData.email)),
     },
     email: {
-      email: helpers.withMessage('Invalid email format', email),
-      required: helpers.withMessage('The email field is required', required),
+      email: helpers.withMessage("Invalid email format", email),
+      required: helpers.withMessage("The email field is required", required),
     },
     name: {
-      required: helpers.withMessage('Please add your name', required),
+      required: helpers.withMessage("Please add your name", required),
     },
     password: {
       hasAtleastOneNumber,
       minLength: minLength(8),
-      required: helpers.withMessage(
-        'This password field is required',
-        required
-      ),
+      required: helpers.withMessage("This password field is required", required),
     },
   }
 })
@@ -110,15 +98,15 @@ const v$ = useVuelidate(rules, formData)
 // clears out the error messages after a delay
 const clearMsg = (delay = 500) => {
   setTimeout(() => {
-    sbErrorMsg.value = ''
-    sbSuccessMsg.value = ''
+    sbErrorMsg.value = ""
+    sbSuccessMsg.value = ""
   }, delay)
 }
 
 const submitForm = async () => {
   // clear the error message so the message re-animates on each submit
   clearMsg(0)
-  emit('submit-click')
+  emit("submit-click")
   v$.value.$validate()
   if (!v$.value.$error) {
     //success with Vuelidate
@@ -133,12 +121,12 @@ const submitForm = async () => {
     })
     if (!sbError.error) {
       //success with Supabase
-      emit('submit-success')
+      emit("submit-success")
       sbSuccessMsg.value = props.success
     } else {
       // error with Supabase
-      emit('submit-error', sbError?.error?.message)
-      if (sbError?.error?.message.toString().includes('already registered')) {
+      emit("submit-error", sbError?.error?.message)
+      if (sbError?.error?.message.toString().includes("already registered")) {
         sbErrorMsg.value = props.errorAlreadyRegistered
       } else {
         sbErrorMsg.value = `${props.error} ${sbError?.error?.message}`
@@ -202,7 +190,7 @@ const submitForm = async () => {
               <label for="email">Email</label>
               <InputText
                 v-model="formData.email"
-                type="text"
+                type="email"
                 name="email"
                 class="w-full"
                 :class="{ 'p-invalid': v$.email.$error && v$.email.$invalid }"
@@ -224,8 +212,7 @@ const submitForm = async () => {
                 name="confirm_email"
                 class="w-full"
                 :class="{
-                  'p-invalid':
-                    v$.confirmEmail.$error && v$.confirmEmail.$invalid,
+                  'p-invalid': v$.confirmEmail.$error && v$.confirmEmail.$invalid,
                 }"
                 placeholder="Confirm your email"
                 required

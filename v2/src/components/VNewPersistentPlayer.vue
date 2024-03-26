@@ -124,6 +124,13 @@ const props = defineProps({
     type: Boolean,
   },
   /**
+   * hide the time on mobile container breakpoint
+   */
+  hlsConfig: {
+    default: {},
+    type: Object,
+  },
+  /**
    * left image representing the audio
    */
   image: {
@@ -660,6 +667,14 @@ onMounted(async () => {
         provider.hasActiveSession
       }
     })
+
+    instance.addEventListener("provider-change", (event) => {
+      const provider = event.detail
+      if (provider?.type === "hls") {
+        provider.config = props.hlsConfig
+      }
+    })
+
     // remote.setTarget($mediaPlayerRef.value)
     // const player = remote.getPlayer()
   }
