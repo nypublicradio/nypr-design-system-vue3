@@ -1,6 +1,6 @@
 <script setup>
-import InputSwitch from 'primevue/inputswitch'
-import { onMounted, ref } from 'vue'
+import InputSwitch from "primevue/inputswitch"
+import { onMounted, ref, watchEffect } from "vue"
 
 const props = defineProps({
   data: {
@@ -8,11 +8,11 @@ const props = defineProps({
     type: Boolean,
   },
   fontSize: {
-    default: '0.70rem',
+    default: "0.70rem",
     type: String,
   },
   no: {
-    default: 'NO',
+    default: "NO",
     type: String,
   },
   staticWidth: {
@@ -20,22 +20,15 @@ const props = defineProps({
     type: Boolean,
   },
   yes: {
-    default: 'YES',
+    default: "YES",
     type: String,
   },
 })
 
-const emit = defineEmits([
-  'click',
-  'update:data',
-  'update:model-value',
-  'change',
-  'input',
-  'focus',
-  'blur',
-])
+const emit = defineEmits(["click", "update:data", "change", "input", "focus", "blur"])
 
 const checked = ref(props.data)
+
 const noRef = ref(null)
 const yesRef = ref(null)
 
@@ -66,6 +59,10 @@ onMounted(() => {
     }
   }, 10)
 })
+
+watchEffect(() => {
+  checked.value = props.data
+})
 </script>
 
 <template>
@@ -77,12 +74,12 @@ onMounted(() => {
     <InputSwitch
       v-model="checked"
       :aria-label="`Toggle between ${props.yes} and ${props.no}`"
-      @update:model-value="emit('update:data', $event)"
-      @click="emit('click', $event)"
-      @change="emit('change', $event)"
-      @input="emit('input', $event)"
-      @focus="emit('focus', $event)"
-      @blur="emit('blur', $event)"
+      @update:model-value="emit('update:data', checked)"
+      @click="emit('click', checked)"
+      @change="emit('change', checked)"
+      @input="emit('input', checked)"
+      @focus="emit('focus', checked)"
+      @blur="emit('blur', checked)"
     />
 
     <div class="options">
