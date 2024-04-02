@@ -480,9 +480,9 @@ const toggleExpanded = async (e) => {
   // hack for the teleported audio player to not pause when the player is teleported
   await nextTick()
   if (isPlaying.value) {
-    setTimeout(async () => {
+    setTimeout(() => {
       $mediaPlayerRef.value?.play()
-    }, 10)
+    }, 2)
   } else {
     $mediaPlayerRef.value?.pause()
   }
