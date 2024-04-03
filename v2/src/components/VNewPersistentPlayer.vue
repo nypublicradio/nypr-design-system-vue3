@@ -518,6 +518,7 @@ const castToGoogleCast = async () => {
     await $mediaPlayerRef.value.requestGoogleCast()
   } catch (e) {
     console.log("error casting to google cast", e)
+    emit("error", e)
     // Throws if not supported or the dialog is cancelled.
   }
 }
@@ -528,6 +529,7 @@ const castToAirPlay = async () => {
     await $mediaPlayerRef.value.requestAirPlay()
   } catch (e) {
     console.log("error casting to air play", e)
+    emit("error", e)
     // Throws if not supported or the dialog is cancelled.
   }
 }
@@ -648,6 +650,7 @@ onMounted(async () => {
     // Fired when the hls.js library fails to download.
     instance.addEventListener("hls-lib-load-error", (event) => {
       console.log("HLS library error = ", event)
+      emit("hls-error", event)
     })
     // Fired when we begin downloading the hls audio.
     instance.addEventListener("hls-audio-track-loading", (event) => {
