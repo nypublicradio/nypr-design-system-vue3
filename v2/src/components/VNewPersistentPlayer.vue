@@ -489,7 +489,7 @@ const toggleExpanded = async (e) => {
     clearTimeout(timeOutPlay)
     timeOutPlay = setTimeout(() => {
       $mediaPlayerRef.value?.play()
-    }, delay + 100)
+    }, delay + 2)
   }
   clearTimeout(timeOutMove)
   timeOutMove = setTimeout(() => {
