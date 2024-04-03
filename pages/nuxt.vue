@@ -289,7 +289,7 @@ const config = useRuntimeConfig()
 .color-box {
   width: 200px;
   height: 200px;
-  background: $backgroundGradient1;
+  //background: $backgroundGradient1;
 }
 :root {
   //--slider-size: 1.5rem;
