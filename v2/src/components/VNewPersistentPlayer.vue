@@ -474,8 +474,8 @@ const scrollToggle = (e) => {
 
 const defaultPlayerLocationRef = ref(null)
 const expandedPlayerLocationRef = ref(null)
-let toPlay = null
-let toMove = null
+let timeOutPlay = null
+let timeOutMove = null
 // exposed method to handle the expanding toggle
 const toggleExpanded = async (e) => {
   scrollToggle(e)
@@ -486,13 +486,13 @@ const toggleExpanded = async (e) => {
   // hack for the audio player to not pause when the player is appended to the expanded player and back.
   const delay = e ? 255 : 490
   if (isPlaying.value) {
-    clearTimeout(toPlay)
-    toPlay = setTimeout(() => {
+    clearTimeout(timeOutPlay)
+    timeOutPlay = setTimeout(() => {
       $mediaPlayerRef.value?.play()
     }, delay + 100)
   }
-  clearTimeout(toMove)
-  toMove = setTimeout(() => {
+  clearTimeout(timeOutMove)
+  timeOutMove = setTimeout(() => {
     if (e) {
       expandedPlayerLocationRef.value.appendChild($mediaPlayerRef.value)
     } else {
