@@ -1,37 +1,37 @@
 <script setup>
-import VFlexibleLink from './VFlexibleLink.vue'
-import VImage from './VImage.vue'
-import VShareTools from './VShareTools.vue'
-import VShareToolsItem from './VShareToolsItem.vue'
-import { computed, ref } from 'vue'
+import VFlexibleLink from "./VFlexibleLink.vue"
+import VImage from "./VImage.vue"
+import VShareTools from "./VShareTools.vue"
+import VShareToolsItem from "./VShareToolsItem.vue"
+import { computed, ref } from "vue"
 
 const props = defineProps({
   /**
    * fflex-align for the image and content
    */
   alignItems: {
-    default: 'flex-start',
+    default: "flex-start",
     type: String,
   },
   /**
    * alt text for the image
    */
   alt: {
-    default: 'Profile Image',
+    default: "Profile Image",
     type: String,
   },
   /**
    * show/hide CTA button
    */
   ctaText: {
-    default: 'Read more',
+    default: "Read more",
     type: String,
   },
   /**
    * flex-direction for the image and content
    */
   flexDirection: {
-    default: 'row',
+    default: "row",
     type: String,
   },
   /**
@@ -45,7 +45,7 @@ const props = defineProps({
    * at what percentage the image starts to scale down
    */
   imageFlexBasis: {
-    default: '20%',
+    default: "20%",
     type: String,
   },
   /**
@@ -80,7 +80,7 @@ const props = defineProps({
    * image loading type (eager or lazy)
    */
   loading: {
-    default: 'lazy',
+    default: "lazy",
     type: String,
   },
   /**
@@ -115,7 +115,7 @@ const props = defineProps({
    * border radius for the image
    */
   radius: {
-    default: '50%',
+    default: "50%",
     type: String,
   },
   /**
@@ -184,20 +184,20 @@ const props = defineProps({
 })
 
 const emit = defineEmits([
-  'image-click',
-  'name-click',
-  'cta-click',
-  'social-share-click',
-  'social-follow-click',
+  "image-click",
+  "name-click",
+  "cta-click",
+  "social-share-click",
+  "social-follow-click",
 ])
 
 const profile = ref(props.profileData)
 
 const updatedSocialArr = ref([])
-const email = { profileUrl: String(profile.value?.email), service: 'email' }
+const email = { profileUrl: String(profile.value?.email), service: "email" }
 const website = {
   profileUrl: profile.value?.website,
-  service: 'site',
+  service: "site",
 }
 
 // push original social array into new updatedSocialArr if it exist
@@ -218,7 +218,7 @@ if (profile.value?.phone_numbers) {
   profile.value?.phone_numbers.map((phone) => {
     updatedSocialArr.value.push({
       profileUrl: String(phone.phone_number),
-      service: 'phone',
+      service: "phone",
     })
   })
 }
@@ -233,8 +233,8 @@ const profileLink = ref(
 // extracts the name from the url
 const accountNameFromUrl = (url) => {
   return url
-    ?.split('/')
-    .filter((str) => str !== '')
+    ?.split("/")
+    .filter((str) => str !== "")
     .slice(-1)[0]
 }
 
@@ -248,7 +248,7 @@ const getImageSrc = computed(() => {
     ? String(profile.value.photoID)
     : props.imageFallbackPath
     ? props.imageFallbackPath
-    : 'default-user.jpg'
+    : "default-user.jpg"
 })
 
 // cssvars
@@ -260,13 +260,13 @@ const cssImageMinWidth = ref(
   props.minWidth
     ? `${props.minWidth}px`
     : props.imageFlexBasis
-    ? 'unset'
+    ? "unset"
     : cssImageSizePx.value
 )
 
 const cssRadius = ref(props.radius)
 const cssImageRatio = ref(`${props.imageRatio[0]} / ${props.imageRatio[1]}`)
-const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
+const cssContainerType = ref(props.justImage ? "unset" : "inline-size")
 </script>
 
 <template>
@@ -274,10 +274,7 @@ const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
     <div
       v-if="profile"
       class="author-profile"
-      :class="[
-        { verticalMobile: props.verticalMobile },
-        { vertical: props.vertical },
-      ]"
+      :class="[{ verticalMobile: props.verticalMobile }, { vertical: props.vertical }]"
       :style="`align-items: ${props.alignItems};`"
     >
       <div class="profile">
@@ -312,15 +309,16 @@ const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
             <div class="name">{{ props.namePrefix }} {{ profile.name }}</div>
           </VFlexibleLink>
           <VShareTools v-if="updatedSocialArr && props.showSocial">
-            <VShareToolsItem
-              v-for="account in updatedSocialArr"
-              :key="account.id"
-              :service="account.service"
-              :link="account.profileUrl"
-              :username="accountNameFromUrl(account.profileUrl)"
-              @share="(service) => emit('social-share-click', service)"
-              @follow="(service) => emit('social-follow-click', service)"
-            />
+            <template v-for="account in updatedSocialArr" :key="account.id">
+              <VShareToolsItem
+                v-if="account.profileUrl"
+                :service="account.service"
+                :link="account.profileUrl"
+                :username="accountNameFromUrl(account.profileUrl)"
+                @share="(service) => emit('social-share-click', service)"
+                @follow="(service) => emit('social-follow-click', service)"
+              />
+            </template>
           </VShareTools>
         </div>
         <div class="slot slot-above-bio">
@@ -352,9 +350,9 @@ const cssContainerType = ref(props.justImage ? 'unset' : 'inline-size')
 </template>
 
 <style lang="scss" scoped>
-$container-breakpoint-xs: useBreakpointOrFallback('xs', 375px);
-$container-breakpoint-sm: useBreakpointOrFallback('sm', 576px);
-$container-breakpoint-md: useBreakpointOrFallback('md', 768px);
+$container-breakpoint-xs: useBreakpointOrFallback("xs", 375px);
+$container-breakpoint-sm: useBreakpointOrFallback("sm", 576px);
+$container-breakpoint-md: useBreakpointOrFallback("md", 768px);
 
 @mixin verticalStyles {
   flex-direction: column;
