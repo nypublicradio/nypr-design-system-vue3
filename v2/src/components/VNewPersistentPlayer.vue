@@ -959,6 +959,7 @@ defineExpose({
               <div class="flex justify-content-between">
                 <Button
                   class="unexpand-btn p-button-icon-only p-button-text p-button-secondary"
+                  aria-label="close expanded player"
                   @click="toggleExpanded(!isExpanded)"
                 >
                   <slot name="unexpanded-button-icon">
