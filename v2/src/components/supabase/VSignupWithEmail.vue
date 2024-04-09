@@ -35,7 +35,7 @@ const props = defineProps({
     type: String,
   },
   success: {
-    default: "Success! You may now sign in now with your email and password.",
+    default: "Success! You may now sign in with your email and password.",
     type: String,
   },
 })
