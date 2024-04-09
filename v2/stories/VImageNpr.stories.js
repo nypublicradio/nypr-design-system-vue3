@@ -37,5 +37,6 @@ Default.args = {
     alt: 'Fallback alt text here',
 
     src: 'https://media.npr.org/assets/img/2024/04/08/carol-shields-prize2024_wide-4f0474711babaa8e9ac925869263d6f73b3fb1ff.jpg?s={width}&c={quality}&f={format}',
+    srcSq: 'https://media.npr.org/assets/img/2024/04/08/carol-shields-prize2024_sq-2d7bee7b007d14dde13ab7be8405c7ddcc8f6e4e.jpg?s={width}&c={quality}&f={format}',
     width: 400
 }

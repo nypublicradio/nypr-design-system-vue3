@@ -102,7 +102,7 @@ const props = defineProps({
    * desired ratio of the image
    */
   ratio: {
-    default: () => [3, 2],
+    default: () => [16, 9],
     type: Array,
   },
   /**
@@ -113,11 +113,18 @@ const props = defineProps({
     type: String,
   },
   /**
-   * wagtail image id
+   * NPR image url wide
    */
   src: {
     default: null,
-    type: [String, Number],
+    type: String,
+  },
+  /**
+   * NPR image url square
+   */
+  srcSq: {
+    default: null,
+    type: String,
   },
   /**
    * address to navigate to when the image is clicked
@@ -161,12 +168,12 @@ const emit = defineEmits([
   "enlarge-image-load",
 ])
 
-const theRatio = computed(() => {
-  return props.ratio[0] / props.ratio[1]
-})
-
 const theSrc = computed(() => {
-  return props.src
+  let src = props.src
+  if (props.ratio[0] === props.ratio[1]) {
+    src = props.srcSq
+  }
+  return src
     .replace("{width}", props.width)
     .replace("{quality}", props.quality)
     .replace("{format}", props.format)
