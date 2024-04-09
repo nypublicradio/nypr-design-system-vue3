@@ -5,16 +5,13 @@ export const cmsSources = {
 }
 
 export const getCmsSource = (src) => {
-
-  switch (src) {
-    case src.includes('media.npr.org'):
-      return cmsSources.NPR
-    case src.includes('media.wnyc.org'):
-      return cmsSources.PUBLISHER
-    case src.includes('nypr.digital'):
-      return cmsSources.WAGTAIL
-    default:
-      return cmsSources.WAGTAIL
-
+  if (src.includes('media.npr.org')) {
+    return cmsSources.NPR
+  } else if (src.includes('media.wnyc.org')) {
+    return cmsSources.PUBLISHER
+  } else if (src.includes('nypr.digital')) {
+    return cmsSources.WAGTAIL
+  } else {
+    return cmsSources.WAGTAIL
   }
 }
