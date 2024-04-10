@@ -174,7 +174,6 @@ PreviewAndCaptionSlotAndGallerySlotImageLinkAndCaption.args = {
     allowPreview: true,
     alt: 'Fallback alt text here',
     height: 400,
-    src: '329944',
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
     srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 600

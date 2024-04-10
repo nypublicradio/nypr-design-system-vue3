@@ -4,6 +4,7 @@ export const cmsSources = {
   WAGTAIL: 'wagtail',
 }
 
+// determines the CMS source of an image
 export const getCmsSource = (src) => {
   if (src.includes('media.npr.org')) {
     return cmsSources.NPR
