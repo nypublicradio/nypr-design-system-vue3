@@ -77,14 +77,6 @@ const props = defineProps({
     type: Number,
   },
   /**
-   * wagtail modifiers  (https://image.nuxtjs.org/components/nuxt-img/#modifiers
-   * ONLY WORKS WITH WAGTAIL PROVIDER and only supporting 'focusZoom'
-   */
-  modifiers: {
-    default: null,
-    type: Object,
-  },
-  /**
    * @nuxt/Image provider
    */
   provider: {
@@ -104,13 +96,6 @@ const props = defineProps({
   ratio: {
     default: () => [16, 9],
     type: Array,
-  },
-  /**
-   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
-   */
-  sizes: {
-    default: "",
-    type: String,
   },
   /**
    * NPR image url wide
@@ -171,10 +156,21 @@ const emit = defineEmits([
 const theSrc = computed(() => {
   let src = props.src
   if (props.ratio[0] === props.ratio[1]) {
-    src = props.srcSq
+    src = props.srcSq ?? props.src
   }
   return src
     .replace("{width}", props.width)
+    .replace("{quality}", props.quality)
+    .replace("{format}", props.format)
+})
+
+const theSrcFull = computed(() => {
+  let src = props.src
+  if (props.ratio[0] === props.ratio[1]) {
+    src = props.srcSq ?? props.src
+  }
+  return src
+    .replace("s={width}", props.maxWidth !== Infinity ? `s=${props.maxWidth}` : "")
     .replace("{quality}", props.quality)
     .replace("{format}", props.format)
 })
@@ -240,7 +236,6 @@ const handleProvider = computed(() => {
             :height="props.height"
             quality="15"
             :alt="props.isDecorative ? '' : props.alt + '-blurred-bg'"
-            :modifiers="props.modifiers"
             :loading="props.loading"
           />
         </div>
@@ -252,7 +247,6 @@ const handleProvider = computed(() => {
           :src="theSrc"
           :width="computedWidth"
           :height="props.height"
-          :sizes="props.sizes"
           :densities="props.density"
           :style="[
             isVertical
@@ -262,7 +256,6 @@ const handleProvider = computed(() => {
           :alt="props.isDecorative ? '' : props.alt"
           :quality="String(props.quality)"
           :loading="loading"
-          :modifiers="props.modifiers"
           @load="emit('image-load', $event.target)"
         />
         <slot class="slot caption" name="caption"></slot>
@@ -294,14 +287,13 @@ const handleProvider = computed(() => {
               :format="props.format"
               :provider="handleProvider"
               class="enlarged-image"
-              :src="theSrc"
+              :src="theSrcFull"
               style="width: 100%; height: auto"
               :alt="props.isDecorative ? '' : props.alt"
               loading="eager"
               :quality="70"
               :width="computedEnlargeWidth"
               :height="computedEnlargeHeight"
-              :modifiers="props.modifiers"
               @load="enlargeLoad($event.target)"
             />
             <template #closeicon
