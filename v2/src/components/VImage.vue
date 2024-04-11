@@ -16,7 +16,6 @@ const cmsSource = getCmsSource(props.src)
 
 <template>
   <div>
-    {{ cmsSource }}
     <VImagePublisher
       v-if="cmsSource === cmsSources.PUBLISHER"
       :key="`${props.src}Publisher`"
