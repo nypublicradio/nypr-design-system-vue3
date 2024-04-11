@@ -60,12 +60,28 @@ export const PublisherImageSrc = Template.bind({})
 PublisherImageSrc.args = {
     alt: 'Fallback alt text here',
     height: 400,
-    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/09/twelfth_night_photo_for_nypl.jpg',
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
     width: 600,
 }
 
 export const PublisherImageSrcSlot = TemplateSlots.bind({})
 PublisherImageSrcSlot.args = {
+    alt: 'Fallback alt text here',
+    height: 400,
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/06/JuneteenthJeremyDaniel.jpg',
+    width: 600,
+}
+
+export const NprImageSrc = Template.bind({})
+NprImageSrc.args = {
+    alt: 'Fallback alt text here',
+    height: 400,
+    src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/09/twelfth_night_photo_for_nypl.jpg',
+    width: 600,
+}
+
+export const NprImageSrcSlot = TemplateSlots.bind({})
+NprImageSrcSlot.args = {
     alt: 'Fallback alt text here',
     height: 400,
     src: 'https://media.wnyc.org/i/%s/%s/%s/%s/2023/09/twelfth_night_photo_for_nypl.jpg',
