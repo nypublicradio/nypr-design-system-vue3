@@ -154,22 +154,14 @@ const emit = defineEmits([
 ])
 
 const theSrc = computed(() => {
-  let src = props.src
-  if (props.ratio[0] === props.ratio[1]) {
-    src = props.srcSq ?? props.src
-  }
-  return src
+  return props.src
     .replace("{width}", props.width)
     .replace("{quality}", props.quality)
     .replace("{format}", props.format)
 })
 
 const theSrcFull = computed(() => {
-  let src = props.src
-  if (props.ratio[0] === props.ratio[1]) {
-    src = props.srcSq ?? props.src
-  }
-  return src
+  return props.src
     .replace("s={width}", props.maxWidth !== Infinity ? `s=${props.maxWidth}` : "")
     .replace("{quality}", props.quality)
     .replace("{format}", props.format)

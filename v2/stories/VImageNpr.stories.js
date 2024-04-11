@@ -61,7 +61,6 @@ Default.args = {
     maxHeight: 1384,
     maxWidth: 2461,
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 400
 }
 export const DefaultSquare = Template.bind({})
@@ -70,8 +69,7 @@ DefaultSquare.args = {
     maxHeight: 1384,
     maxWidth: 2461,
     ratio: [1, 1],
-    src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
+    src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
     width: 400
 }
 
@@ -82,7 +80,6 @@ DefaultWithLink.args = {
     maxHeight: 1384,
     maxWidth: 2461,
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 400
 }
 
@@ -93,7 +90,6 @@ EagerLoading.args = {
     maxHeight: 1384,
     maxWidth: 2461,
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 400
 }
 
@@ -104,7 +100,6 @@ Quality.args = {
     maxWidth: 2461,
     quality: 1,
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 400
 }
 
@@ -116,7 +111,6 @@ VerticalEffect.args = {
     maxHeight: 2461,
     maxWidth: 1384,
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     verticalBgBlur: '10px',
     verticalBgColor: '#000000',
     verticalBgColorOpacity: '0.8',
@@ -128,7 +122,6 @@ Enlarge.args = {
     allowPreview: true,
     alt: 'Fallback alt text here',
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 600,
 }
 
@@ -138,7 +131,6 @@ EnlargeCustomSize.args = {
     alt: 'Fallback alt text here',
     maxWidth: 1000,
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 600,
 }
 
@@ -147,7 +139,6 @@ RatioSquare.args = {
     alt: 'Fallback alt text here',
     ratio: [1, 1],
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 600,
 }
 
@@ -156,7 +147,6 @@ RatioWide.args = {
     alt: 'Fallback alt text here',
     ratio: [16, 9],
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 600,
 }
 
@@ -165,7 +155,6 @@ RatioCustomUsingWide.args = {
     alt: 'Fallback alt text here',
     ratio: [4, 1],
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 600,
 }
 
@@ -175,6 +164,5 @@ PreviewAndCaptionSlotAndGallerySlotImageLinkAndCaption.args = {
     alt: 'Fallback alt text here',
     height: 400,
     src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
-    srcSq: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_sq-7b82fa6f41a1d3b3aa15bc9ca21a8212cca64ed6.jpg?s={width}&c={quality}&f={format}',
     width: 600
 }
