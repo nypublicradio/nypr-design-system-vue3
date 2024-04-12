@@ -208,7 +208,7 @@ const handleProvider = computed(() => {
 </script>
 
 <template>
-  <div class="v-image">
+  <div class="v-image-npr">
     <VFlexibleLink
       raw
       :to="props.to"
@@ -315,7 +315,7 @@ const handleProvider = computed(() => {
 </template>
 
 <style lang="scss" scoped>
-.v-image {
+.v-image-npr {
   line-height: 0;
   position: relative;
 

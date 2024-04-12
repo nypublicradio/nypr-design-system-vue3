@@ -15,35 +15,33 @@ const cmsSource = getCmsSource(props.src)
 </script>
 
 <template>
-  <div>
-    <VImagePublisher
-      v-if="cmsSource === cmsSources.PUBLISHER"
-      :key="`${props.src}Publisher`"
-      v-bind="{ ...$props, ...$attrs }"
-    >
-      <template v-for="(value, name) in $slots" #[name]="data">
-        <slot :name="name" v-bind="data"></slot>
-      </template>
-    </VImagePublisher>
+  <VImagePublisher
+    v-if="cmsSource === cmsSources.PUBLISHER"
+    :key="`${props.src}Publisher`"
+    v-bind="{ ...$props, ...$attrs }"
+  >
+    <template v-for="(value, name) in $slots" #[name]="data">
+      <slot :name="name" v-bind="data"></slot>
+    </template>
+  </VImagePublisher>
 
-    <VImageWagtail
-      v-if="cmsSource === cmsSources.WAGTAIL"
-      :key="`${props.src}Wagtail`"
-      v-bind="{ ...$props, ...$attrs }"
-    >
-      <template v-for="(value, name) in $slots" #[name]="data">
-        <slot :name="name" v-bind="data"></slot>
-      </template>
-    </VImageWagtail>
+  <VImageWagtail
+    v-if="cmsSource === cmsSources.WAGTAIL"
+    :key="`${props.src}Wagtail`"
+    v-bind="{ ...$props, ...$attrs }"
+  >
+    <template v-for="(value, name) in $slots" #[name]="data">
+      <slot :name="name" v-bind="data"></slot>
+    </template>
+  </VImageWagtail>
 
-    <VImageNpr
-      v-if="cmsSource === cmsSources.NPR"
-      :key="`${props.src}Npr`"
-      v-bind="{ ...$props, ...$attrs }"
-    >
-      <template v-for="(value, name) in $slots" #[name]="data">
-        <slot :name="name" v-bind="data"></slot>
-      </template>
-    </VImageNpr>
-  </div>
+  <VImageNpr
+    v-if="cmsSource === cmsSources.NPR"
+    :key="`${props.src}Npr`"
+    v-bind="{ ...$props, ...$attrs }"
+  >
+    <template v-for="(value, name) in $slots" #[name]="data">
+      <slot :name="name" v-bind="data"></slot>
+    </template>
+  </VImageNpr>
 </template>
