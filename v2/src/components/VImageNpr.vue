@@ -143,7 +143,7 @@ const props = defineProps({
    */
   width: {
     default: null,
-    type: Number,
+    type: [Number, String],
   },
 })
 const emit = defineEmits([
