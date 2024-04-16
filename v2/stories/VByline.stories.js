@@ -55,7 +55,7 @@ const authorsArray = [
         "photoID": 327474,
         "slug": "jaclyn-jeffrey-wilensky",
         "socialMediaProfile": [],
-        "url": "/staff/jaclyn-jeffrey-wilensky",
+        "url": "",
         "website": ""
     },
     {

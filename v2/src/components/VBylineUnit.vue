@@ -1,5 +1,5 @@
 <script setup>
-import VFlexibleLink from './VFlexibleLink.vue'
+import VFlexibleLink from "./VFlexibleLink.vue"
 const props = defineProps({
   author: {
     default: null,
@@ -10,14 +10,14 @@ const props = defineProps({
     type: Boolean,
   },
 })
-const emit = defineEmits(['name-click', 'organization-click'])
+const emit = defineEmits(["name-click", "organization-click"])
 </script>
 
 <template>
   <div>
     <VFlexibleLink
       :to="props.author?.url || null"
-      class="v-byline-author-name"
+      class="v-byline-author-name inline"
       :style="`pointer-events: ${props.isBlockLinks ? 'none' : 'auto'}`"
       @click="
         () =>
