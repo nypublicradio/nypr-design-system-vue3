@@ -3,6 +3,7 @@ import VImageNpr from "./VImageNpr.vue"
 import VImagePublisher from "./VImagePublisher.vue"
 import VImageWagtail from "./VImageWagtail.vue"
 import { cmsSources, getCmsSource } from "./helpers.js"
+import { ref, watch } from "vue"
 
 const props = defineProps({
   src: {
@@ -10,8 +11,15 @@ const props = defineProps({
     type: String,
   },
 })
+const cmsSource = ref(getCmsSource(props.src))
 
-const cmsSource = getCmsSource(props.src)
+// Watch the 'src' prop for changes and update 'cmsSource' accordingly
+watch(
+  () => props.src,
+  (newSrc) => {
+    cmsSource.value = getCmsSource(newSrc)
+  }
+)
 </script>
 
 <template>
