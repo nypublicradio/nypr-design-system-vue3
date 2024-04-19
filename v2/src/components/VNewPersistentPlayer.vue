@@ -834,6 +834,7 @@ defineExpose({
                         ref="playButtonRef"
                         class="media-button flex-none z-1"
                         :data-disabled="isPlayable ? null : ''"
+                        :aria-label="isPlaying ? 'pause button' : 'play button'"
                       >
                         <media-icon type="play" class="play-icon">
                           <slot v-if="!isPlayable" name="loading">
