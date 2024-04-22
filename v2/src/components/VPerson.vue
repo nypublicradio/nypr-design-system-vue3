@@ -238,9 +238,6 @@ const accountNameFromUrl = (url) => {
     .slice(-1)[0]
 }
 
-const isWagtailImage = computed(() => {
-  return profile.value.photoID && !props.sponsored && !props.imageFallbackPath
-})
 const getImageSrc = computed(() => {
   return props.sponsored
     ? profile.value.logo
@@ -281,7 +278,6 @@ const cssContainerType = ref(props.justImage ? "unset" : "inline-size")
         <div class="author-image">
           <VImage
             :src="getImageSrc"
-            :provider="isWagtailImage ? 'wagtail' : null"
             :width="props.imageSize"
             :height="props.imageSize"
             :sizes="props.sizes"
