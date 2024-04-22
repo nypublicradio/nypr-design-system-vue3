@@ -565,6 +565,12 @@ const handleClickAnywhere = (e) => {
   }
 }
 
+const jumpToTime = (time: number) => {
+  if ($mediaPlayerRef.value) {
+    $mediaPlayerRef.value.currentTime = time
+  }
+}
+
 onMounted(async () => {
   // keyboard accessibility
   window.addEventListener("keydown", (event) => {
@@ -708,6 +714,7 @@ defineExpose({
   toggleMinimize,
   toggleMute,
   togglePlay,
+  jumpToTime,
   $mediaPlayerRef,
 })
 </script>
