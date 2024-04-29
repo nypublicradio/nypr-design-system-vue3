@@ -485,19 +485,15 @@ const toggleExpanded = async (e) => {
 
   // hack for the audio player to not pause when the player is appended to the expanded player and back.
   const delay = e ? 255 : 490
-  if (isPlaying.value) {
-    clearTimeout(timeOutPlay)
-    timeOutPlay = setTimeout(() => {
-      $mediaPlayerRef.value?.play()
-    }, delay + 2)
-  }
   clearTimeout(timeOutMove)
-  timeOutMove = setTimeout(() => {
+  timeOutMove = setTimeout(async () => {
     if (e) {
       expandedPlayerLocationRef.value.appendChild($mediaPlayerRef.value)
     } else {
       defaultPlayerLocationRef.value.appendChild($mediaPlayerRef.value)
     }
+    await nextTick()
+    isPlaying.value ? $mediaPlayerRef.value?.play() : null
   }, delay)
 }
 
