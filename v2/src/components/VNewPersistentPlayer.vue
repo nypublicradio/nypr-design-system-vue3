@@ -18,7 +18,7 @@ import VNewTrackInfo from "./VNewTrackInfo.vue"
 import { useSwipe } from "@vueuse/core"
 import Button from "primevue/button"
 //import { MediaPlayerElement, defineCustomElement } from "vidstack/elements"
-import { nextTick, onBeforeUnmount, onMounted, ref } from "vue"
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from "vue"
 
 import type { MediaPlayerElement } from "vidstack/elements"
 
@@ -343,6 +343,9 @@ const isMinimized = ref(false)
 const isExpanded = ref(false)
 const isMounted = ref(false)
 
+// expanded player content scrolling container
+const expandedContentHolder = ref(null)
+
 // prevents the body from scrolling when the dropdown is open
 function preventScrollOnTouch(event) {
   event.preventDefault()
@@ -472,30 +475,40 @@ const scrollToggle = (e) => {
   }
 }
 
-const defaultPlayerLocationRef = ref(null)
-const expandedPlayerLocationRef = ref(null)
-let timeOutPlay = null
-let timeOutMove = null
 // exposed method to handle the expanding toggle
-const toggleExpanded = async (e) => {
+const toggleExpanded = (e) => {
   scrollToggle(e)
   emit("is-expanded", e)
   isExpanded.value = e
-  await nextTick()
+}
+
+const defaultPlayerLocationRef = ref(null)
+const expandedPlayerLocationRef = ref(null)
+let timeOutMove = null
+watch(isExpanded, (e) => {
+  // set expanded contetn scroll position to top
+  expandedContentHolder.value.scrollTop = 0
 
   // hack for the audio player to not pause when the player is appended to the expanded player and back.
+  // track if playing on expand toggle
+  const isPlayingDuringToggle = isPlaying.value
+
   const delay = e ? 255 : 490
   clearTimeout(timeOutMove)
-  timeOutMove = setTimeout(async () => {
+  timeOutMove = setTimeout(() => {
     if (e) {
       expandedPlayerLocationRef.value.appendChild($mediaPlayerRef.value)
     } else {
       defaultPlayerLocationRef.value.appendChild($mediaPlayerRef.value)
     }
-    await nextTick()
-    isPlaying.value ? $mediaPlayerRef.value?.play() : null
+
+    setTimeout(() => {
+      if (isPlayingDuringToggle) {
+        $mediaPlayerRef.value?.play()
+      }
+    }, 500)
   }, delay)
-}
+})
 
 // exposed method to handle the skip ahead
 const skipAhead = () => {
@@ -957,7 +970,7 @@ defineExpose({
 
     <Transition name="expand-delay">
       <div v-show="isExpanded" class="expanded-view">
-        <div class="expanded-content-holder">
+        <div ref="expandedContentHolder" class="expanded-content-holder">
           <div class="header">
             <slot name="expanded-header">
               <div class="flex justify-content-between">
