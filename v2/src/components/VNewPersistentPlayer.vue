@@ -848,7 +848,7 @@ defineExpose({
                       </Transition>
                       <media-play-button
                         ref="playButtonRef"
-                        class="media-button media-button-play flex-none z-1"
+                        class="media-button flex-none z-1"
                         :data-disabled="isPlayable ? null : ''"
                         :aria-label="isPlaying ? 'pause button' : 'play button'"
                       >
@@ -904,7 +904,9 @@ defineExpose({
                 <media-time class="media-time" type="current"></media-time>
                 <media-time class="media-time" type="duration"></media-time>
               </div>
-              <div class="expanded-buttons flex gap-2 justify-content-center">
+              <div
+                class="expanded-buttons flex gap-2 justify-content-center align-items-center"
+              >
                 <media-seek-button
                   v-if="props.showSkip && !isLive && isPlayable"
                   class="media-button flex-none"
@@ -915,7 +917,7 @@ defineExpose({
                 </media-seek-button>
                 <media-play-button
                   ref="playButtonRef"
-                  class="media-button flex-none"
+                  class="media-button media-button-expanded-play flex-none"
                   :data-disabled="isPlayable ? null : ''"
                 >
                   <media-icon type="play" class="play-icon">
@@ -1306,7 +1308,7 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
       color: var(--persistent-player-button-color);
       fill: var(--persistent-player-button-color);
     }
-    &.media-button-play {
+    &.media-button-expanded-play {
       width: calc(var(--persistent-player-button-width) * 1.3);
       height: calc(var(--persistent-player-button-height) * 1.3);
     }
