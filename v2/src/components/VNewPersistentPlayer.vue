@@ -848,7 +848,7 @@ defineExpose({
                       </Transition>
                       <media-play-button
                         ref="playButtonRef"
-                        class="media-button flex-none z-1"
+                        class="media-button media-button-play flex-none z-1"
                         :data-disabled="isPlayable ? null : ''"
                         :aria-label="isPlaying ? 'pause button' : 'play button'"
                       >
@@ -1305,6 +1305,10 @@ $container-breakpoint-md: useBreakpointOrFallback("md", 768px);
     * {
       color: var(--persistent-player-button-color);
       fill: var(--persistent-player-button-color);
+    }
+    &.media-button-play {
+      width: calc(var(--persistent-player-button-width) * 1.3);
+      height: calc(var(--persistent-player-button-height) * 1.3);
     }
   }
 
