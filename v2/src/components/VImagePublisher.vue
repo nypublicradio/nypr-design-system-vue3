@@ -289,7 +289,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div ref="refThisImg" class="v-image-publisher">
+  <div ref="refThisImg" class="v-image v-image-publisher">
     <VFlexibleLink
       raw
       :to="props.to"

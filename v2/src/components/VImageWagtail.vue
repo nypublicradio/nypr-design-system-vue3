@@ -202,7 +202,7 @@ const handleProvider = computed(() => {
 </script>
 
 <template>
-  <div class="v-image">
+  <div class="v-image v-image-wagtail">
     <VFlexibleLink
       raw
       :to="props.to"

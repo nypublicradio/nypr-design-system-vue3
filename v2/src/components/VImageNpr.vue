@@ -208,7 +208,7 @@ const handleProvider = computed(() => {
 </script>
 
 <template>
-  <div class="v-image-npr">
+  <div class="v-image v-image-npr">
     <VFlexibleLink
       raw
       :to="props.to"
