@@ -445,14 +445,28 @@ onMounted(() => {
 // handle the toggle play event
 const togglePlay = () => {
   // Play or pause the sound.
-  if ($mediaPlayerRef.value && isPlaying.value) {
-    emit("toggle-play", false)
-    isPlaying.value = false
-    $mediaPlayerRef.value.pause()
-  } else {
-    isPlaying.value = true
-    emit("toggle-play", true)
+  if ($mediaPlayerRef.value && isPlayable.value) {
+    if (isPlaying.value) {
+      emit("toggle-play", false)
+      isPlaying.value = false
+      $mediaPlayerRef.value.pause()
+    } else {
+      isPlaying.value = true
+      emit("toggle-play", true)
+      $mediaPlayerRef.value.play()
+    }
+  }
+}
+// exposed method to handle the play
+const play = () => {
+  if ($mediaPlayerRef.value && isPlayable.value) {
     $mediaPlayerRef.value.play()
+  }
+}
+// exposed method to handle the pause
+const pause = () => {
+  if ($mediaPlayerRef.value && isPlayable.value) {
+    $mediaPlayerRef.value.pause()
   }
 }
 
@@ -725,6 +739,8 @@ defineExpose({
   togglePlay,
   jumpToTime,
   $mediaPlayerRef,
+  play,
+  pause,
 })
 </script>
 
