@@ -60,7 +60,7 @@ Default.args = {
     alt: 'Fallback alt text here',
     maxHeight: 1384,
     maxWidth: 2461,
-    src: 'https://media.npr.org/assets/img/2024/04/09/ap24100143830851_wide-36aa32c7db11f0b773a9e5dfbb9d80581ea76f24.jpg?s={width}&c={quality}&f={format}',
+    src: 'https://npr.brightspotcdn.com/dims3/default/strip/false/crop/3133x3133+784+0/resize/{width}/quality/{quality}/format/{format}/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2F53%2F7a%2Ffd948ca847c1913f3dfd12992c42%2Fgettyimages-865814046.jpg',
     width: 400
 }
 export const DefaultSquare = Template.bind({})
