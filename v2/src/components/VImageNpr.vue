@@ -27,18 +27,10 @@ const props = defineProps({
     type: String,
   },
   /**
-   * nuxt/image sizes attribute for responsive images (https://image.nuxtjs.org/components/nuxt-img/#sizes)
-   * NOT WORKING
-   */
-  density: {
-    default: "x1 x2",
-    type: String,
-  },
-  /**
    * image format (webp, avif, jpeg, jpg, png, gif and svg)
    */
   format: {
-    default: "webp",
+    default: "jpg",
     type: String,
   },
   /**
@@ -110,6 +102,13 @@ const props = defineProps({
   srcSq: {
     default: null,
     type: String,
+  },
+  /** * List of display densities to generate sizes for in the srcset */
+  srcset: {
+    default() {
+      return [1, 2]
+    },
+    type: Array,
   },
   /**
    * address to navigate to when the image is clicked
@@ -205,6 +204,65 @@ const enlargeLoad = (target) => {
 const handleProvider = computed(() => {
   return isNaN(props.src) ? null : props.provider
 })
+
+const getDimensions = () => {
+  const hRatio = Number(props.ratio[0])
+  const vRatio = Number(props.ratio[1])
+
+  if (props.width) {
+    return {
+      height: props.height,
+      width: isVertical.value
+        ? Math.round(props.maxWidth / (props.maxHeight / props.height))
+        : props.width,
+    }
+  } else {
+    //console.log('thisWidth.value =  ', thisWidth.value)
+    let theWidth = thisWidth.value
+
+    if (props.maxWidth && props.maxWidth < theWidth) {
+      theWidth = props.maxWidth
+    }
+    return {
+      height: Math.round((theWidth * vRatio) / hRatio),
+      width: theWidth,
+    }
+  }
+}
+
+const srcset = computed(() => {
+  console.log("srcset = ", props.src)
+  const template = props.src
+  if (template) {
+    //# skipcq JS-0123
+    let srcset = ""
+    let lastImage = false
+    for (const size of props.srcset) {
+      /* continue if it is NOT the lastImage and the image has more pixels than its rendered area */
+      if (!lastImage && props.maxWidth > getDimensions().width) {
+        let width = Math.round(getDimensions().width * size)
+
+        /* the image no longer has enough resolution to support the next srcset, use its maximum size and make it the last on the srcset list */
+        if (width > props.maxWidth) {
+          width = props.maxWidth
+          lastImage = true
+        }
+        // if we are on the last size in the arraym set lastImage to true
+        if (props.srcset.length - 1 === props.srcset.indexOf(size)) {
+          lastImage = true
+        }
+        const url = template
+          .replace("{width}", width)
+          .replace("{quality}", props.quality)
+          .replace("{format}", props.format)
+        srcset += `${url} ${size}x${!lastImage ? "," : ""} `
+      }
+    }
+    return srcset
+  } else {
+    return undefined
+  }
+})
 </script>
 
 <template>
@@ -231,23 +289,20 @@ const handleProvider = computed(() => {
             :loading="props.loading"
           />
         </div>
-        <nuxt-img
-          :format="props.format"
-          :provider="handleProvider"
+        <img
           class="image native-image"
           :class="isVertical ? 'is-vertical' : ''"
           :src="theSrc"
           :width="computedWidth"
           :height="props.height"
-          :densities="props.density"
           :style="[
             isVertical
               ? `aspect-ratio:${props.maxWidth} / ${props.maxHeight}; object-fit: contain;`
               : '',
           ]"
           :alt="props.isDecorative ? '' : props.alt"
-          :quality="String(props.quality)"
           :loading="loading"
+          :srcset="srcset"
           @load="emit('image-load', $event.target)"
         />
         <slot class="slot caption" name="caption"></slot>
