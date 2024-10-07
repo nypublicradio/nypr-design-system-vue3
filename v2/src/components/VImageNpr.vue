@@ -231,7 +231,6 @@ const getDimensions = () => {
 }
 
 const srcset = computed(() => {
-  console.log("srcset = ", props.src)
   const template = props.src
   if (template) {
     //# skipcq JS-0123
