@@ -1,6 +1,6 @@
 <script setup>
 import VFlexibleLink from "./VFlexibleLink.vue"
-import { computed, defineEmits, defineProps } from "vue"
+import { computed, defineProps } from "vue"
 const props = defineProps({
   author: {
     default: null,
