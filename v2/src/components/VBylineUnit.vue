@@ -1,5 +1,6 @@
 <script setup>
 import VFlexibleLink from "./VFlexibleLink.vue"
+import { computed, defineEmits, defineProps } from "vue"
 const props = defineProps({
   author: {
     default: null,
@@ -11,6 +12,11 @@ const props = defineProps({
   },
 })
 const emit = defineEmits(["name-click", "organization-click"])
+const authorName = computed(() =>
+  props.author?.firstName
+    ? `${props.author?.firstName} ${props.author?.lastName}`
+    : props.author?.name
+)
 </script>
 
 <template>
@@ -22,12 +28,12 @@ const emit = defineEmits(["name-click", "organization-click"])
       @click="
         () =>
           emit('name-click', {
-            text: `${props.author?.firstName} ${props.author?.lastName}`,
+            text: authorName,
             url: props.author?.url,
           })
       "
     >
-      {{ props.author?.firstName }} {{ props.author?.lastName }}
+      {{ authorName }}
     </VFlexibleLink>
     <template v-if="props.author?.organization">
       <span class="v-byline-parens">&nbsp;(</span>
