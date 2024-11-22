@@ -15,6 +15,10 @@ import SiteIcon from '../assets/icons/SiteIcon.vue'
 import SpotifyIcon from '../assets/icons/SpotifyIcon.vue'
 import TwitterIcon from '../assets/icons/TwitterIcon.vue'
 import YoutubeIcon from '../assets/icons/YoutubeIcon.vue'
+import BlueskyIcon from '../assets/icons/BlueskyIcon.vue'
+import TikTikIcon from '../assets/icons/TikTokIcon.vue'
+import MastodonIcon from '../assets/icons/MastodonIcon.vue'
+import LinkIcon from '../assets/icons/LinkIcon.vue'
 
 const props = defineProps({
   action: {
@@ -65,6 +69,10 @@ const icons = {
   twitter: TwitterIcon,
   youtube: YoutubeIcon,
   site: SiteIcon,
+  bluesky: BlueskyIcon,
+  tiktok: TikTikIcon,
+  mastodon: MastodonIcon,
+  homepage: LinkIcon,
 }
 
 const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
@@ -105,10 +113,20 @@ const SOCIAL_SERVICE_MAP = {
     shareBase: 'tel:',
     omitUrl: true,
   },
+  bluesky: {
+    profileBase: 'https://bsky.app/profile/',
+    shareBase: 'https://bsky.app/intent/compose',
+    urlKey: 'text',
+  },
+  tiktok: {
+    profileBase: 'https://www.tiktok.com/@',
+  },
 }
 
 const socialLink = computed(() => {
-  return SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username || ''
+  return props.link ??
+  SOCIAL_SERVICE_MAP[props.service]?.profileBase + props.username ??
+   ''
 })
 const shareBase = computed(() => {
   return SOCIAL_SERVICE_MAP[props.service]?.shareBase || ''
