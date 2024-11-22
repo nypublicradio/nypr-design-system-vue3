@@ -2,13 +2,10 @@
 import { computed } from 'vue'
 
 import AudioIcon from '../assets/icons/AudioIcon.vue'
-// eslint-disable-next-line import/no-duplicates
 import EmailIcon from '../assets/icons/EmailIcon.vue'
 import FacebookIcon from '../assets/icons/FacebookIcon.vue'
 import InstagramIcon from '../assets/icons/InstagramIcon.vue'
 import LinkedinIcon from '../assets/icons/LinkedinIcon.vue'
-// eslint-disable-next-line import/no-duplicates
-import NewsletterIcon from '../assets/icons/EmailIcon.vue'
 import PhoneIcon from '../assets/icons/PhoneIcon.vue'
 import RedditIcon from '../assets/icons/RedditIcon.vue'
 import SiteIcon from '../assets/icons/SiteIcon.vue'
@@ -77,7 +74,7 @@ const icons = {
   homepage: LinkIcon,
 }
 
-const URL_PLACEHOLDER_PATTERN = new RegExp('%URL%', 'g')
+const URL_PLACEHOLDER_PATTERN = /%URL%/g
 const SOCIAL_SERVICE_MAP = {
   spotify: {
     profileBase: 'https://open.spotify.com/playlist/',
@@ -140,20 +137,16 @@ const shareBase = computed(() => {
 })
 const shareUrl = computed(() => {
   const utmParams = Object.entries(props.utmParameters).map(([key, value]) => {
-    return 'utm_' + key + '=' + encodeURIComponent(value)
+    return `utm_${key}=${encodeURIComponent(value)}`
   })
   let url = props.url
   if (utmParams.length > 0) {
-    url = url + '?' + utmParams.join('&')
+    url = `${url}?${utmParams.join('&')}`
   }
 
   const shareParams = Object.entries(props.shareParameters).map(
     ([key, value]) => {
-      return (
-        key +
-        '=' +
-        encodeURIComponent(value.replace(URL_PLACEHOLDER_PATTERN, url))
-      )
+      return `${key}=${encodeURIComponent(value.replace(URL_PLACEHOLDER_PATTERN, url))}`
     }
   )
 
@@ -162,23 +155,24 @@ const shareUrl = computed(() => {
   const shouldOmitUrl = SOCIAL_SERVICE_MAP[props.service]?.omitUrl
   if (!shouldOmitUrl) {
     const urlKey = SOCIAL_SERVICE_MAP[props.service]?.urlKey || 'url'
-    const urlParam = urlKey + '=' + encodeURIComponent(url)
+    const urlParam = `${urlKey}=${encodeURIComponent(url)}`
     params = [urlParam, ...params]
   }
 
-  return shareBase.value + '?' + params.join('&')
+  return `${shareBase.value}?${params.join('&')}`
 })
 const ariaLabel = computed(() => {
   if (props.label) {
     return props.label
   } else if (props.action === 'follow') {
-    return 'Follow us on ' + props.service
+    return `Follow us on ${props.service}`
   } else if (props.action === 'share') {
-    return 'Share on ' + props.service
+    return `Share on ${props.service}`
   }
   return ''
 })
 
+// create share popup
 const share = () => {
   if (!props.service) {
     return
@@ -200,7 +194,7 @@ const share = () => {
     const left = windowWidth / 2 - 600 / 2 + screenLeft
     const top = windowheight / 2 - 600 / 2 + screenTop
 
-    return { left: left, top: top }
+    return { left, top }
   }
 
   // get the position of the window
