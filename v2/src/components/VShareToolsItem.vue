@@ -16,7 +16,8 @@ import SpotifyIcon from '../assets/icons/SpotifyIcon.vue'
 import TwitterIcon from '../assets/icons/TwitterIcon.vue'
 import YoutubeIcon from '../assets/icons/YoutubeIcon.vue'
 import BlueskyIcon from '../assets/icons/BlueskyIcon.vue'
-import TikTikIcon from '../assets/icons/TikTokIcon.vue'
+import ThreadsIcon from '../assets/icons/ThreadsIcon.vue'
+import TikTokIcon from '../assets/icons/TikTokIcon.vue'
 import MastodonIcon from '../assets/icons/MastodonIcon.vue'
 import LinkIcon from '../assets/icons/LinkIcon.vue'
 
@@ -70,7 +71,8 @@ const icons = {
   youtube: YoutubeIcon,
   site: SiteIcon,
   bluesky: BlueskyIcon,
-  tiktok: TikTikIcon,
+  tiktok: TikTokIcon,
+  threads: ThreadsIcon,
   mastodon: MastodonIcon,
   homepage: LinkIcon,
 }
@@ -116,6 +118,11 @@ const SOCIAL_SERVICE_MAP = {
   bluesky: {
     profileBase: 'https://bsky.app/profile/',
     shareBase: 'https://bsky.app/intent/compose',
+    urlKey: 'text',
+  },
+  threads: {
+    profileBase: 'https://threads.net/@',
+    shareBase: 'https://threads.net/intent/post',
     urlKey: 'text',
   },
   tiktok: {

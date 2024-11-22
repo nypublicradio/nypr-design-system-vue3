@@ -33,6 +33,7 @@ const Template = (args) => ({
             <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" />
             <v-share-tools-item service="bluesky" username="npr.org" />
             <v-share-tools-item service="mastodon" link="https://mstdn.social/@NPR" />
+            <v-share-tools-item service="threads" username="npr" />
             <v-share-tools-item service="tiktok" username="npr" />
             <v-share-tools-item service="phone" link="tel:19731231234" />
             <v-share-tools-item service="email" link="mailto:sample@gmail.com" />
@@ -53,6 +54,7 @@ const TemplateShare = (args) => ({
             <v-share-tools-item service="facebook" username="WNYC" action="share" url="https://www.gothamist.com" />
             <v-share-tools-item service="twitter" username="WNYC" action="share" url="https://www.gothamist.com" />
             <v-share-tools-item service="bluesky" username="WNYC" action="share" url="https://www.gothamist.com" />
+            <v-share-tools-item service="threads" username="WNYC" action="share" url="https://www.gothamist.com" />
             <v-share-tools-item service="instagram" username="WNYC" action="share" url="https://www.gothamist.com" />
             <v-share-tools-item service="youtube" username="UCbysmY4hyViQAAYEzOR-uCQ" action="share" url="https://www.gothamist.com" />
             <v-share-tools-item service="email"  :share-parameters="{ body: 'Title of artice' + ' - %URL%' }" action="share" url="https://www.gothamist.com" />
